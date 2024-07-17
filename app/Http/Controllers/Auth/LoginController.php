@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Models\OauthAccessToken;
-use App\Models\User;
 use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Meter;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Laravel\Passport\Passport;
+use App\Models\OauthAccessToken;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -21,7 +22,8 @@ class LoginController extends Controller
 
         if($usr == null){
             $message = "User does not exist";
-            return error($message);
+            $code = 401;
+            return error($message, $code);
         }
 
         Passport::tokensExpireIn(Carbon::now()->addMinutes(20));
@@ -29,15 +31,18 @@ class LoginController extends Controller
 
         if (!auth()->attempt($credentials)) {
             $message = "Meter No or Password Incorrect";
-            return error($message);
+            $code = 422;
+            return error($message, $code);
         }
 
         flush_token();
 
         $token = auth()->user()->createToken('API Token')->accessToken;
-
+        $meter = meter();
         $user = user();
         $user['token'] = $token;
+        $user['meter'] = $meter;
+
 
         return response()->json([
             'status' => true,

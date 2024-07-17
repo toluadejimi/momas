@@ -15,6 +15,7 @@ class RegisterController extends Controller
         if($usr == null){
 
 
+            
 
         }
 
@@ -26,8 +27,18 @@ class RegisterController extends Controller
 
 
 
-        $usr = User::where('meterNo', $request->meterNo)->first() ?? null;
+        $usr = User::where('email', $request->email)->first() ?? null;
         if($usr == null){
+
+
+            $usr = new User();
+            $usr->first_name = $request->first_name;
+            $usr->last_name = $request->last_name;
+            $usr->meterNo = $request->meterNo;
+            $usr->password = $request->password;
+            $usr->first_name = $request->first_name;
+
+
 
 
         }

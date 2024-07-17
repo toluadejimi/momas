@@ -1,21 +1,22 @@
 <?php
 
 
-use App\Models\Dyaccount;
-use App\Models\Setting;
-use App\Models\Transaction;
 use App\Models\User;
+use App\Models\Meter;
+use App\Models\Setting;
 use App\Models\Terminal;
-use App\Models\Webaccount;
+use App\Models\Dyaccount;
 use App\Models\TidConfig;
+use App\Models\Webaccount;
+use App\Models\Transaction;
 use App\Models\VirtualAccount;
-use Illuminate\Database\QueryException;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Mail;
 use Laravel\Passport\Passport;
 use App\Models\OauthAccessToken;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Database\QueryException;
 
 
 function getPaginate($paginate = 20)
@@ -30,19 +31,18 @@ function paginateLinks($data)
 
 
 
-
-
 if (!function_exists('error')) {
 
-    function error($message)
+    function error($message, $code)
     {
-
         return response()->json([
             'status' => false,
             'message' => $message,
-        ], 500);
+        ], $code);
     }
 }
+
+
 
 if (!function_exists('user')) {
 
@@ -52,6 +52,21 @@ if (!function_exists('user')) {
         return $user;
     }
 }
+
+
+if (!function_exists('meter')) {
+
+    function meter()
+    {
+        $meter = Meter::where('user_id', Auth::id())->first()->makeHidden(['created_at', 'updated_at']) ?? [];
+
+        return $meter;
+    }
+}
+
+
+
+
 
 if (!function_exists('flush_token')) {
 
