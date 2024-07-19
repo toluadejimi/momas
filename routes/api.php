@@ -1,23 +1,29 @@
 <?php
 
-use App\Http\Controllers\Admin\BankController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\StoredataController;
-use App\Http\Controllers\Admin\TerminalController;
-use App\Http\Controllers\Admin\TransactionController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Agents\AuthController;
-use App\Http\Controllers\Agents\BillsController;
-use App\Http\Controllers\Agents\PosTransactionController;
-use App\Http\Controllers\Agents\TransferController;
-use App\Http\Controllers\Agents\VirtualAccountController;
-use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Feature\FeatureController;
+use App\Http\Controllers\Profile\ProfileController;
+use App\Models\Feature;
 
     Route::post('login', [LoginController::class, 'login']);
+    Route::post('check-email', [RegisterController::class, 'check_user']);
+    Route::post('validate-email', [RegisterController::class, 'validate_email']);
+    Route::post('register', [RegisterController::class, 'register']);
+
+    
+
+    
+
+    
 
     Route::group(['middleware' => ['auth:api', 'acess']], function () {
+
+        Route::post('balance', [ProfileController::class, 'balance']);
+        Route::post('features', [FeatureController::class, 'features']);
+
+        
 
 
     });

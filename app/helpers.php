@@ -19,15 +19,6 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\QueryException;
 
 
-function getPaginate($paginate = 20)
-{
-    return $paginate;
-}
-
-function paginateLinks($data)
-{
-    return $data->appends(request()->all())->links();
-}
 
 
 
@@ -42,14 +33,39 @@ if (!function_exists('error')) {
     }
 }
 
+if (!function_exists('success')) {
+
+    function success($message)
+    {
+        return response()->json([
+            'status' => true,
+            'message' => $message,
+        ], 200);
+    }
+}
 
 
 if (!function_exists('user')) {
 
     function user()
     {
-        $user = User::where('id', Auth::id())->first()->makeHidden(['created_at', 'updated_at']);;
+        $user = User::where('id', Auth::id())->first()->makeHidden(['created_at', 'updated_at']);
         return $user;
+    }
+}
+
+
+if (!function_exists('validate_code')) {
+
+    function validate_code($code, $email)
+    {
+        $get_code =  User::where('email', $email)->first()->code;
+        if($get_code == $code){
+            $vv = User::where('email', $email)->where('code', $code)->update(['status' => 1]);
+            return 0;
+        }else{
+            return 3;
+        }
     }
 }
 
@@ -58,8 +74,15 @@ if (!function_exists('meter')) {
 
     function meter()
     {
-        $meter = Meter::where('user_id', Auth::id())->first()->makeHidden(['created_at', 'updated_at']) ?? [];
 
+        $ck_meter =  Meter::where('user_id', Auth::id())->first() ?? null;
+
+        if($ck_meter == null){
+            return [];
+        }
+    
+
+        $meter = Meter::where('user_id', Auth::id())->first()->makeHidden(['created_at', 'updated_at']) ?? [];
         return $meter;
     }
 }
@@ -88,23 +111,24 @@ if (!function_exists('send_email')) {
 
     function send_email($email, $sms_code)
     {
+        $first_name = User::where('email', $email)->first()->first_name;
         $data = array(
-            'fromsender' => 'noreply@enkpay.com', 'MOMASPAY',
+            'fromsender' => 'noreply@momaspay.bplux.store', 'MOMASPAY',
             'subject' => "One Time Password",
             'toreceiver' => $email,
             'sms_code' => $sms_code,
+            'user' => $first_name,
+
         );
 
-        Mail::send('emails.otpcode', ["data1" => $data], function ($message) use ($data) {
+        Mail::send('emails.email', ["data1" => $data], function ($message) use ($data) {
             $message->from($data['fromsender']);
             $message->to($data['toreceiver']);
             $message->subject($data['subject']);
         });
 
-        return response()->json([
-            'status' => true,
-            'message' => "OTP Code has been sent successfully to $email",
-        ], 200);
+      
+        return 0;
 
     }
 }
