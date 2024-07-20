@@ -74,15 +74,6 @@ Route::group(['prefix'=>'admin'], function(){
     Route::any('update_setting', [AdminController::class, 'update_setting']);
 
 
-
-
-
-
-
-
-
-
-
     Route::post('/generateSecret', [LoginSecurityController::class, 'generate2faSecret'])->name('generate2faSecret');
     Route::post('/enable2fa', [LoginSecurityController::class, 'enable2fa'])->name('enable2fa');
     Route::post('/disable2fa', [LoginSecurityController::class, 'disable2fa'])->name('disable2fa');

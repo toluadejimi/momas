@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Feature;
 
 use App\Http\Controllers\Controller;
 use App\Models\Feature;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 
 class FeatureController extends Controller
 {
-    
+
 
     public function features(){
 
@@ -20,6 +21,27 @@ class FeatureController extends Controller
             'feature' => $feature
 
         ]);
+
+    }
+
+
+    public function promotion(){
+
+        $slider = Slider::all();
+
+        foreach($slider as $data){
+            $slide = [];
+            $slide['url'] = url('')."/public/assets/img/".$data->image.".png";
+            $slide['link'] = $data->link;
+            $slides[] = $slide;
+        }
+
+        return response()->json([
+            'status' => true,
+            'promo' => $slides
+        ]);
+
+
 
     }
 }
