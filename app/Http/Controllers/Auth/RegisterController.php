@@ -36,6 +36,7 @@ class RegisterController extends Controller
 
             $sms_code = random_int(0000, 9999);
             $email = $request->email;
+            User::where('email', $request->email)->update(['code' => $sms_code]);
             $user = send_email($email, $sms_code);
 
             if($user == 0){
