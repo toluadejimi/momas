@@ -27,7 +27,7 @@ class RegisterController extends Controller
                 $message = "OTP Code has been sent successfully to $email";
                 return  success($message);
             }
-            
+
         }
 
 
@@ -43,14 +43,14 @@ class RegisterController extends Controller
                 $message = "OTP Code has been sent successfully to $email";
                 return success($message);
             }
-            
+
 
         }
 
         if($usr->status == 2){
 
             $code = 422;
-            $message = "User Already exust with email, Please login";
+            $message = "User Already exist with email, Please login";
             return  error($code, $message);
 
         }
@@ -98,6 +98,9 @@ class RegisterController extends Controller
 
                 'first_name' =>  $request->first_name,
                 'last_name' =>  $request->last_name,
+                'address' =>  $request->address,
+                'city' =>  $request->city,
+                'state' =>  $request->state,
                 'phone' =>  $request->phone,
                 'meterNo' =>  $request->meterNo,
                 'status' =>  2,
@@ -106,7 +109,7 @@ class RegisterController extends Controller
             ]);
 
 
-            $message = "Account Registred Successffuly";
+            $message = "Account Registered Successfully";
             return success($message);
 
         }
