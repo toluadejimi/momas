@@ -5,12 +5,11 @@ namespace App\Http\Controllers\Meter;
 use App\Http\Controllers\Controller;
 use App\Models\Meter;
 use App\Models\User;
-use http\Env\Response;
 use Illuminate\Http\Request;
 
 class MeterController extends Controller
 {
-    public function validate(request $request)
+    public function validate_meter(request $request)
     {
 
         $user = User::where('meterNo', $request->meterNo)->first() ?? null;
@@ -21,7 +20,7 @@ class MeterController extends Controller
             error($message, $code);
         }
 
-        $meter_type = Meter::where('meterNo', $request->meterNo)->first()->meterType;
+        $meter_type = Meter::where('meterNo', $request->meterNo)->first()->payType;
 
         $data['customer_name'] = $user->first_name. " ".$user->last_name;
         $data['address'] = $user->address. ", ".$user->city. ", ".$user->state;

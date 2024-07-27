@@ -13,7 +13,7 @@ Route::post('check-email', [RegisterController::class, 'check_user']);
 Route::post('validate-email', [RegisterController::class, 'validate_email']);
 Route::post('register', [RegisterController::class, 'register']);
 
-Route::post('validate', [MeterController::class, 'validate']);
+Route::post('validate', [MeterController::class, 'validate_meter']);
 
 
 Route::group(['middleware' => ['auth:api', 'acess']], function () {
