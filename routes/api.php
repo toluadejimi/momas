@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Bills\BillsController;
+use App\Http\Controllers\Estate\EstateController;
 use App\Http\Controllers\Feature\FeatureController;
 use App\Http\Controllers\Meter\MeterController;
 use App\Http\Controllers\Profile\ProfileController;
@@ -28,6 +29,22 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::post('buy-airtime', [BillsController::class, 'buy_airtime']);
     Route::get('get-data', [BillsController::class, 'get_data']);
     Route::post('buy-data', [BillsController::class, 'buy_data']);
+
+
+    //Estate
+    Route::get('get-estate', [EstateController::class, 'get_estate']);
+    Route::post('generate-token', [EstateController::class, 'estate_token']);
+    Route::post('approve-token', [EstateController::class, 'approve_token']);
+    Route::post('disapprove-token', [EstateController::class, 'disapprove_token']);
+    Route::post('delete-token', [EstateController::class, 'delete_token']);
+    Route::post('set-default', [EstateController::class, 'set_default_estate']);
+
+
+
+
+
+
+
 
 
 

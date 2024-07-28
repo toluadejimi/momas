@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Models\Token;
 use App\Models\User;
 use App\Models\Meter;
 use App\Models\Setting;
@@ -170,7 +171,6 @@ if (!function_exists('send_email')) {
             'toreceiver' => $email,
             'sms_code' => $sms_code,
             'user' => $first_name,
-
         );
 
         Mail::send('emails.email', ["data1" => $data], function ($message) use ($data) {
@@ -181,6 +181,63 @@ if (!function_exists('send_email')) {
 
 
         return 0;
+
+    }
+}
+
+
+
+
+if (!function_exists('send_token_email')) {
+
+    function send_token_email($email, $token_code, $estate, $valid_date)
+    {
+
+
+
+        $data = array(
+            'fromsender' => 'noreply@momaspay.bplux.store', 'MOMASPAY',
+            'subject' => "Pass Token",
+            'toreceiver' => $email,
+            'token_code' => $token_code,
+            'estate' => $estate,
+            'valid_date' => $valid_date,
+
+
+        );
+
+        Mail::send('emails.token', ["data1" => $data], function ($message) use ($data) {
+            $message->from($data['fromsender']);
+            $message->to($data['toreceiver']);
+            $message->subject($data['subject']);
+        });
+
+        return 0;
+
+    }
+}
+
+
+
+if (!function_exists('generate_token')) {
+
+    function generate_token($user_id, $visitor, $email, $valid_date)
+    {
+
+        $get_token = random_int(000000, 999999);
+        $tok = new Token();
+        $tok->user_id = $user_id;
+        $tok->token = $get_token;
+        $tok->visitor = $visitor;
+        $tok->email = $email;
+        $tok->valid_date = $valid_date;
+
+        $tok->save();
+
+        $data['status'] = true;
+        $data['token'] = $get_token;
+
+        return $data;
 
     }
 }
