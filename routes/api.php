@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Bills\BillsController;
 use App\Http\Controllers\Feature\FeatureController;
 use App\Http\Controllers\Meter\MeterController;
 use App\Http\Controllers\Profile\ProfileController;
@@ -21,6 +22,16 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::post('balance', [ProfileController::class, 'balance']);
     Route::get('features', [FeatureController::class, 'features']);
     Route::get('promotion', [FeatureController::class, 'promotion']);
+
+
+    //Bills
+    Route::post('buy-airtime', [BillsController::class, 'buy_airtime']);
+    Route::get('get-data', [BillsController::class, 'get_data']);
+    Route::post('buy-data', [BillsController::class, 'buy_data']);
+
+
+
+
 
 
 });
