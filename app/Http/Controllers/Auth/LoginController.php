@@ -38,11 +38,22 @@ class LoginController extends Controller
 
         flush_token();
 
+
+        $fl = Setting::where('id', 1)->first();
+        $flkey['flutterwave_secret'] = $fl->flutterwave_secret;
+        $flkey['flutterwave_public'] = $fl->flutterwave_public;
+        $pkkey['paystack_secret'] = $fl->paystack_secret;
+        $pkkey['paystack_public'] = $fl->paystack_public;
+
+
         $token = auth()->user()->createToken('API Token')->accessToken;
         $meter = meter();
         $user = user();
         $user['token'] = $token;
         $user['meter'] = $meter;
+        $user['flutterwave_keys'] =  $flkey;
+        $user['paystack_keys'] =  $pkkey;
+
 
 
         return response()->json([
