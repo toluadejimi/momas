@@ -15,7 +15,6 @@ Route::post('login', [LoginController::class, 'login']);
 Route::post('check-email', [RegisterController::class, 'check_user']);
 Route::post('validate-email', [RegisterController::class, 'validate_email']);
 Route::post('register', [RegisterController::class, 'register']);
-
 Route::post('validate', [MeterController::class, 'validate_meter']);
 
 
