@@ -60,6 +60,7 @@ class EstateController extends Controller
            }
         }
 
+        $usr = User::where('id', Auth::id())->first();
         $data['token'] = $tok;
         $data['name'] = $usr->first_name." ".$usr->last_name;
         $data['address'] = $usr->address." ".$usr->city." ".$usr->state;
