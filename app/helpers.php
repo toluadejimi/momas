@@ -234,10 +234,7 @@ if (!function_exists('generate_token')) {
 
         $tok->save();
 
-        $data['status'] = true;
-        $data['token'] = $get_token;
-
-        return $data;
+        return $get_token;
 
     }
 }
