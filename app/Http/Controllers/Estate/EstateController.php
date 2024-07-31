@@ -41,7 +41,7 @@ class EstateController extends Controller
         if($can_send == 1){
 
             $usr = User::where('id', Auth::id())->first();
-            $token_code = $tok['token'];
+            $token_code = $tok;
             $estate = Estate::where('id', $estate_id)->first()->title ?? null;
             $send = send_token_email($email, $token_code, $estate, $valid_date);
             $data['token'] = $send;
