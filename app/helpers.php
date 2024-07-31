@@ -196,7 +196,7 @@ if (!function_exists('send_token_email')) {
 
 
         $data = array(
-            'fromsender' => 'noreply@momaspay.bplux.store', 'MOMASPAY',
+            'fromsender' => 'support@tomitechltd.com', 'MOMASPAY',
             'subject' => "Pass Token",
             'toreceiver' => $email,
             'token_code' => $token_code,
