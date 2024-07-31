@@ -7,6 +7,7 @@ use App\Http\Controllers\Estate\EstateController;
 use App\Http\Controllers\Feature\FeatureController;
 use App\Http\Controllers\Meter\MeterController;
 use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Service\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -38,6 +39,12 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::post('disapprove-token', [EstateController::class, 'disapprove_token']);
     Route::post('delete-token', [EstateController::class, 'delete_token']);
     Route::post('set-default', [EstateController::class, 'set_default_estate']);
+
+
+    //Services
+    Route::get('get-service', [ServiceController::class, 'get_estate']);
+
+
 
 
 

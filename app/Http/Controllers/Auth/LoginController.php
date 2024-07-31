@@ -59,5 +59,33 @@ class LoginController extends Controller
 
 
 
+
+
+
+
+
+
     }
+
+
+
+    public function get_user(request $request)
+    {
+
+        $token = auth()->user()->createToken('API Token')->accessToken;
+        $meter = meter();
+        $user = user();
+        $user['token'] = $token;
+        $user['meter'] = $meter;
+
+        return response()->json([
+            'status' => true,
+            'user' => $user
+        ]);
+
+
+
+    }
+
+
 }

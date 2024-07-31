@@ -110,10 +110,14 @@ class EstateController extends Controller
 
     public function set_default_estate(request $request){
 
+
+        $name = Estate::where('id', $request->estate_id)->first()->title;
         User::where('id', Auth::id())->update([
             'estate_id' => $request->estate_id,
             'address' => $request->address,
             'hno' => $request->hno,
+            'estate_name' => $name,
+
 
         ]);
 

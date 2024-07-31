@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Bills;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BillsController extends Controller
 {
 
     public function buy_airtime(request $request)
     {
-
 
         $token = token();
         $databody = array(
@@ -21,7 +21,6 @@ class BillsController extends Controller
 
         $body = json_encode($databody);
         $curl = curl_init();
-
 
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://test.enkpay.com/api/buy-ng-airtime',
