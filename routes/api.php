@@ -23,7 +23,9 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::post('balance', [ProfileController::class, 'balance']);
     Route::get('features', [FeatureController::class, 'features']);
     Route::get('promotion', [FeatureController::class, 'promotion']);
-    Route::get('get-user', [LoginController::class, 'get_user']);
+    Route::get('getUser', [LoginController::class, 'get_user']);
+
+
 
     //Bills
     Route::post('buy-airtime', [BillsController::class, 'buy_airtime']);

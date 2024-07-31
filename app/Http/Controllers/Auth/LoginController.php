@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Setting;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Meter;
@@ -72,11 +73,22 @@ class LoginController extends Controller
     public function get_user(request $request)
     {
 
+        $fl = Setting::where('id', 1)->first();
+        $flkey['flutterwave_secret'] = $fl->flutterwave_secret;
+        $flkey['flutterwave_public'] = $fl->flutterwave_public;
+        $pkkey['paystack_secret'] = $fl->paystack_secret;
+        $pkkey['paystack_public'] = $fl->paystack_public;
+
+
         $token = auth()->user()->createToken('API Token')->accessToken;
         $meter = meter();
         $user = user();
         $user['token'] = $token;
         $user['meter'] = $meter;
+        $user['flutterwave_keys'] =  $flkey;
+        $user['paystack_keys'] =  $pkkey;
+
+
 
         return response()->json([
             'status' => true,
