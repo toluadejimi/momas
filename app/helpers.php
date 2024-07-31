@@ -212,7 +212,7 @@ if (!function_exists('send_token_email')) {
             $message->subject($data['subject']);
         });
 
-        return 0;
+        return $token_code;
 
     }
 }
