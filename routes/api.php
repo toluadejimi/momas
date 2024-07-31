@@ -26,8 +26,6 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::get('promotion', [FeatureController::class, 'promotion']);
     Route::get('get-user', [LoginController::class, 'get_user']);
 
-
-
     //Bills
     Route::post('buy-airtime', [BillsController::class, 'buy_airtime']);
     Route::get('get-data', [BillsController::class, 'get_data']);
