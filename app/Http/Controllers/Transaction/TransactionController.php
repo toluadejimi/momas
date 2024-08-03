@@ -183,19 +183,32 @@ class TransactionController extends Controller
         $flsecret = $fl->flutterwave_secret;
         $flkey['flutterwave_public'] = $fl->flutterwave_public;
         $transactionId = $request->transaction_id;
-        $flw = new \Flutterwave\Rave($flsecret); // Set `PUBLIC_KEY` as an environment variable
-        $transactions = new \Flutterwave\Transactions();
-        $response = $transactions->verifyTransaction(['id' => $transactionId]);
-        if ($response['data']['status'] === "successful") {
 
-            return response()->json([
-                'status' => true,
-                'message' => "Payment Approved"
-            ], 200);
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.flutterwave.com/v3/transactions/$transactionId/verify",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'Accept: application/json',
+                'Content-Type: application/json',
+                'Authorization: Bearer ' . $flsecret,
+            ),
+        ));
 
-        } else {
-            // Inform the customer their payment was unsuccessful
-        }
+        $var = curl_exec($curl);
+        curl_close($curl);
+        $var = json_decode($var);
+
+        dd($var);
+
+
+
 
     }
 }
