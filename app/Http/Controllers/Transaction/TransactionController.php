@@ -38,7 +38,7 @@ class TransactionController extends Controller
     public function make_payment(request $request)
     {
 
-        if($request == 'flutterwave'){
+        if($request->pay_type == 'flutterwave'){
 
             $trx_id = "FUND".random_int(0000000, 9999999);
             $email = Auth::user()->email;
@@ -58,7 +58,7 @@ class TransactionController extends Controller
         }
 
 
-        if($request == 'paystack'){
+        if($request->pay_type == 'paystack'){
             $trx_id = "FUND".random_int(0000000, 9999999);
             $email = Auth::user()->email;
             $trx =  new Transaction();
@@ -75,7 +75,7 @@ class TransactionController extends Controller
         }
 
 
-        if($request == 'remita'){
+        if($request->pay_type == 'remita'){
             $trx_id = "FUND".random_int(0000000, 9999999);
             $email = Auth::user()->email;
             $trx =  new Transaction();
@@ -92,7 +92,7 @@ class TransactionController extends Controller
         }
 
 
-        if($request == 'wallet'){
+        if($request->pay_type == 'wallet'){
             $trx_id = "FUND".random_int(0000000, 9999999);
             $email = Auth::user()->email;
 
