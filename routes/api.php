@@ -8,6 +8,7 @@ use App\Http\Controllers\Feature\FeatureController;
 use App\Http\Controllers\Meter\MeterController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Service\ServiceController;
+use App\Http\Controllers\Transaction\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -24,6 +25,14 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::get('features', [FeatureController::class, 'features']);
     Route::get('promotion', [FeatureController::class, 'promotion']);
     Route::get('getUser', [LoginController::class, 'get_user']);
+
+
+
+
+
+
+    //Fund Wallet
+    Route::get('pay', [TransactionController::class, 'make_payment']);
 
 
 

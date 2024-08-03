@@ -4,9 +4,9 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TerminalController;
-use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Agents\TransferController;
 use App\Http\Controllers\LoginSecurityController;
+use App\Http\Controllers\Transaction\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,20 +20,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {return view('login');});
+//Route::get('/', function () {return view('login');}
 
-Route::get('login', [AuthController::class, 'login_form'])->name('login');
-
-
-Route::get('reset-pin', [App\Http\Controllers\Agents\AuthController::class, 'reset_pin']);
-Route::get('reset-password', [App\Http\Controllers\Agents\AuthController::class, 'reset_password']);
-
-
-Route::post('reset-pin-now', [App\Http\Controllers\Agents\AuthController::class, 'reset_pin_now']);
-Route::post('reset-password-now', [App\Http\Controllers\Agents\AuthController::class, 'reset_password_now']);
-
-
-Route::get('success', [App\Http\Controllers\Agents\AuthController::class, 'success']);
+Route::any('pay-flutter', [TransactionController::class, 'flutter_payment']);
 
 
 
@@ -43,6 +32,8 @@ Route::any('auth_login', [AuthController::class, 'login']);
 Route::any('resend_code', [AuthController::class, 'resend_code']);
 Route::any('verify_code', [AuthController::class, 'verify_code']);
 Route::get('code', [AuthController::class, 'code']);
+
+
 
 
 
