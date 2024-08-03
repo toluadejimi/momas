@@ -204,8 +204,29 @@ class TransactionController extends Controller
         $var = curl_exec($curl);
         curl_close($curl);
         $var = json_decode($var);
+        $status = $var->status ?? null;
 
-        dd($var);
+        $ck_transaction = Transaction::where('trx_id', $var->data->tx_ref)->first()->status ?? null;
+
+        if($ck_transaction == null){
+
+            if($status == 'success'){
+                Transaction::where('trx_id', $var->data->tx_ref)->update(['status'=> 2]);
+                return response()->json([
+                    'status' => true,
+                    'message' => "Transaction Approved"
+                ]);
+            }
+
+        }
+
+
+        return response()->json([
+            'status' => false,
+            'message' => "Transaction already approved"
+        ]);
+
+
 
 
 
