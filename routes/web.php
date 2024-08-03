@@ -23,6 +23,10 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/', function () {return view('login');}
 
 Route::any('pay-flutter', [TransactionController::class, 'flutter_payment']);
+Route::any('payment-check', [TransactionController::class, 'flutter_verify']);
+
+
+
 
 
 

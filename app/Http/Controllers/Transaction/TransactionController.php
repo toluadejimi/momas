@@ -174,4 +174,28 @@ class TransactionController extends Controller
 
 
     }
+
+
+    public function flutter_verify(request $request)
+    {
+
+        $fl = Setting::where('id', 1)->first();
+        $flsecret = $fl->flutterwave_secret;
+        $flkey['flutterwave_public'] = $fl->flutterwave_public;
+        $transactionId = $request->transaction_id;
+        $flw = new \Flutterwave\Rave($flsecret); // Set `PUBLIC_KEY` as an environment variable
+        $transactions = new \Flutterwave\Transactions();
+        $response = $transactions->verifyTransaction(['id' => $transactionId]);
+        if ($response['data']['status'] === "successful") {
+
+            return response()->json([
+                'status' => true,
+                'message' => "Payment Approved"
+            ], 200);
+
+        } else {
+            // Inform the customer their payment was unsuccessful
+        }
+
+    }
 }
