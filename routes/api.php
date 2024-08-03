@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
 
 
     //Fund Wallet
-    Route::get('pay', [TransactionController::class, 'make_payment']);
+    Route::post('pay', [TransactionController::class, 'make_payment']);
 
 
 
