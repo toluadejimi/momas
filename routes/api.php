@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
 
     //Services
     Route::get('service-properties', [ServiceController::class, 'service_properties']);
-    Route::get('service-search', [ServiceController::class, 'service_search']);
+    Route::post('service-search', [ServiceController::class, 'service_search']);
 
 
 
