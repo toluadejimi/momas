@@ -27,6 +27,10 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::get('getUser', [LoginController::class, 'get_user']);
 
 
+    //Services
+    Route::get('service-properties', [ServiceController::class, 'service_properties']);
+
+
 
 
 

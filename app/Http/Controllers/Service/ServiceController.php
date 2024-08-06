@@ -3,9 +3,49 @@
 namespace App\Http\Controllers\Service;
 
 use App\Http\Controllers\Controller;
+use App\Models\Estate;
+use App\Models\Job;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
-    //
+    public function service_properties(request $request)
+    {
+
+        $data['estate'] = Estate::where('status', 1)->get()->makeHidden(['created_at', 'updated_at']);
+        $data['service'] = Service::where('status', 1)->get()->makeHidden(['created_at', 'updated_at']);
+
+        return response()->json([
+            'status' => true,
+            'data' => $data
+
+        ], 200);
+
+
+    }
+
+    public function service_search(request $request)
+    {
+      $jobs =   Job::where('estate_id', $request->estate_id)->where('service_id', $request->service_id)->get() ?? null;
+      if($jobs == null){
+
+          $code = 401;
+          $message = "Service Nor Available";
+          return error($message, $code);
+
+      }
+
+
+
+
+
+        return response()->json([
+            'status' => true,
+            'data' => $data
+
+        ], 200);
+
+
+    }
 }
