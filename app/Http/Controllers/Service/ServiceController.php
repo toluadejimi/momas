@@ -37,7 +37,7 @@ class ServiceController extends Controller
 
       if(isEmpty($jobs)){
 
-          $code = 401;
+          $code = 404;
           $message = "Service not available in your estate";
           return error($message, $code);
       }
