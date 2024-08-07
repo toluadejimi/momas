@@ -29,18 +29,13 @@ class ServiceController extends Controller
     public function service_search(request $request)
     {
       $jobs =   Job::where('estate_id', $request->estate_id)->where('service_id', $request->service_id)->get()->makeHidden(['created_at', 'updated_at']) ?? null;
+
       if($jobs == null){
           $code = 401;
           $message = "Service Nor Available";
           return error($message, $code);
       }
 
-      if(isEmpty($jobs)){
-
-          $code = 422;
-          $message = "Service not available in your estate";
-          return error($message, $code);
-      }
 
 
         return response()->json([
