@@ -30,6 +30,11 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     //Services
     Route::get('service-properties', [ServiceController::class, 'service_properties']);
     Route::post('service-search', [ServiceController::class, 'service_search']);
+    Route::post('get-comment', [ServiceController::class, 'get_comment']);
+    Route::post('save-comment', [ServiceController::class, 'save_comment']);
+
+
+
 
 
 

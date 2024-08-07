@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Service;
 use App\Http\Controllers\Controller;
 use App\Models\Estate;
 use App\Models\Job;
+use App\Models\Rating;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use function PHPUnit\Framework\isEmpty;
 
 class ServiceController extends Controller
@@ -36,12 +38,55 @@ class ServiceController extends Controller
           return error($message, $code);
       }
 
-
-
         return response()->json([
             'status' => true,
             'data' => $jobs
 
+        ], 200);
+
+
+    }
+
+
+
+    public function get_comment(request $request)
+    {
+
+//        $data['professional_name'] = Job::where('job_id', $request->job_id)->first()->proffessional_name ?? null;
+//        $data['rating'] = Rating::where('job_id', $request->job_id)->max('count');
+//        $data['service_title'] = Job::where('job_id', $request->job_id)->first()->service_title ?? null;
+//        $data['professional_phone'] = Job::where('job_id', $request->job_id)->first()->professional_phone ?? null;
+//        $data['comment'] = Rating::where('job_id', $request->job_id)->get();
+
+
+        $data =  Rating::where('job_id', $request->job_id)->get();
+        $rate =  Rating::where('job_id', $request->job_id)->max('count');
+        Job::where('id', $request->job_id)->update(['rating' => $rate]) ?? null;
+
+
+        return response()->json([
+            'status' => true,
+            'comment' => $data,
+        ], 200);
+
+
+    }
+
+
+
+    public function save_comment(request $request)
+    {
+        $rate = new Rating();
+        $rate->user_id = Auth::id();
+        $rate->user_name = Auth::user()->first_name;
+        $rate->count = $request->rate;
+        $rate->comment = $request->comment;
+        $rate->job_id = $request->job_id;
+        $rate->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => "Comment successfully saved"
         ], 200);
 
 
