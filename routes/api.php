@@ -17,6 +17,8 @@ Route::post('check-email', [RegisterController::class, 'check_user']);
 Route::post('validate-email', [RegisterController::class, 'validate_email']);
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('validate', [MeterController::class, 'validate_meter']);
+Route::get('cable-plan', [BillsController::class, 'get_cable_plan']);
+
 
 
 Route::group(['middleware' => ['auth:api', 'acess']], function () {
@@ -50,7 +52,6 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::post('buy-airtime', [BillsController::class, 'buy_airtime']);
     Route::get('get-data', [BillsController::class, 'get_data']);
     Route::post('buy-data', [BillsController::class, 'buy_data']);
-    Route::get('cable-plan', [BillsController::class, 'get_cable_plan']);
     Route::post('buy-cable', [BillsController::class, 'buy_cable']);
     Route::post('validate-cable', [BillsController::class, 'validate_cable']);
 
