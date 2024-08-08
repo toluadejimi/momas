@@ -50,6 +50,12 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::post('buy-airtime', [BillsController::class, 'buy_airtime']);
     Route::get('get-data', [BillsController::class, 'get_data']);
     Route::post('buy-data', [BillsController::class, 'buy_data']);
+    Route::get('cable-plan', [BillsController::class, 'get_cable_plan']);
+    Route::post('buy-cable', [BillsController::class, 'buy_cable']);
+    Route::post('validate-cable', [BillsController::class, 'validate_cable']);
+
+
+
 
 
     //Estate
