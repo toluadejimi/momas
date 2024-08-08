@@ -46,7 +46,6 @@ class BillsController extends Controller
         $status = $var->status ?? null;
 
 
-
         if ($status == true) {
 
             $message = "Airtime Purchase successful";
@@ -56,7 +55,7 @@ class BillsController extends Controller
 
         if ($status == false) {
 
-            if($var->message = "Insufficient Funds, Fund your main wallet"){
+            if ($var->message = "Insufficient Funds, Fund your main wallet") {
                 $message = "Airtime Purchase not successful, Try again later";
                 $code = 422;
                 return error($message, $code);
@@ -64,8 +63,6 @@ class BillsController extends Controller
 
 
         }
-
-
 
 
     }
@@ -76,9 +73,7 @@ class BillsController extends Controller
 
 
         $token = token();
-        $databody = array(
-
-        );
+        $databody = array();
 
         $body = json_encode($databody);
         $curl = curl_init();
@@ -112,7 +107,7 @@ class BillsController extends Controller
 
             $message = "Airtime Purchase successful";
             return response()->json([
-               'status' => true,
+                'status' => true,
                 'mtn_data' => $var->mtn_data,
                 'glo_data' => $var->glo_data,
                 'airtel_data' => $var->airtel_data,
@@ -126,15 +121,13 @@ class BillsController extends Controller
     }
 
 
-
     public function get_cable_plan(request $request)
+
     {
 
 
         $token = token();
-        $databody = array(
-
-        );
+        $databody = array();
 
         $body = json_encode($databody);
         $curl = curl_init();
@@ -172,187 +165,184 @@ class BillsController extends Controller
             ]);
 
         }
-
     }
 
 
+        public function validate_cable(request $request)
+        {
+            $token = token();
+            $databody = array(
 
-    public function validate_cable(request $request)
-    {
-        $token = token();
-        $databody = array(
+                'serviceid' => $request->decoder_type,
+                'biller_code' => $request->decoder_no
 
-            'serviceid' => $request->decoder_type,
-            'biller_code' => $request->decoder_no
+            );
 
-        );
+            $body = json_encode($databody);
+            $curl = curl_init();
 
-        $body = json_encode($databody);
-        $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://test.enkpay.com/api/validate-cable',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+                CURLOPT_POSTFIELDS => $body,
+                CURLOPT_HTTPHEADER => array(
+                    'Accept: application/json',
+                    'Content-Type: application/json',
+                    'Authorization: Bearer ' . $token,
+                ),
+            ));
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://test.enkpay.com/api/validate-cable',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_POSTFIELDS => $body,
-            CURLOPT_HTTPHEADER => array(
-                'Accept: application/json',
-                'Content-Type: application/json',
-                'Authorization: Bearer ' . $token,
-            ),
-        ));
-
-        $var = curl_exec($curl);
-
-
-        curl_close($curl);
-        $var = json_decode($var);
-        $status = $var->status ?? null;
-
-        if ($status == true) {
-            return response()->json([
-                'status' => true,
-                'data' => $var->data,
-
-            ]);
-
-        }
-
-    }
+            $var = curl_exec($curl);
 
 
-    public function buy_cable(request $request)
-    {
+            curl_close($curl);
+            $var = json_decode($var);
+            $status = $var->status ?? null;
 
-        $token = token();
-        $databody = array(
-            "service_id" => $request->service_id,
-            "amount" => $request->amount,
-            "phone" => $request->phone,
-        );
+            if ($status == true) {
+                return response()->json([
+                    'status' => true,
+                    'data' => $var->data,
 
-        $body = json_encode($databody);
-        $curl = curl_init();
+                ]);
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://test.enkpay.com/api/buy-ng-airtime',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => $body,
-            CURLOPT_HTTPHEADER => array(
-                'Accept: application/json',
-                'Content-Type: application/json',
-                'Authorization: Bearer ' . $token,
-            ),
-        ));
-
-        $var = curl_exec($curl);
-
-        curl_close($curl);
-        $var = json_decode($var);
-        $status = $var->status ?? null;
-
-
-
-        if ($status == true) {
-
-            $message = "Airtime Purchase successful";
-            return success($message);
+            }
 
         }
 
-        if ($status == false) {
 
-            if($var->message = "Insufficient Funds, Fund your main wallet"){
-                $message = "Airtime Purchase not successful, Try again later";
-                $code = 422;
-                return error($message, $code);
+        public
+        function buy_cable(request $request)
+        {
+
+            $token = token();
+            $databody = array(
+                "service_id" => $request->service_id,
+                "amount" => $request->amount,
+                "phone" => $request->phone,
+            );
+
+            $body = json_encode($databody);
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://test.enkpay.com/api/buy-ng-airtime',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => $body,
+                CURLOPT_HTTPHEADER => array(
+                    'Accept: application/json',
+                    'Content-Type: application/json',
+                    'Authorization: Bearer ' . $token,
+                ),
+            ));
+
+            $var = curl_exec($curl);
+
+            curl_close($curl);
+            $var = json_decode($var);
+            $status = $var->status ?? null;
+
+
+            if ($status == true) {
+
+                $message = "Airtime Purchase successful";
+                return success($message);
+
+            }
+
+            if ($status == false) {
+
+                if ($var->message = "Insufficient Funds, Fund your main wallet") {
+                    $message = "Airtime Purchase not successful, Try again later";
+                    $code = 422;
+                    return error($message, $code);
+                }
+
+
             }
 
 
         }
 
 
+        public
+        function buy_data(request $request)
+        {
+
+            $token = token();
+            $databody = array(
+                "service_id" => $request->service_id,
+                "amount" => $request->amount,
+                "phone" => $request->phone,
+                "variation_code" => $request->variation_code,
+                "variation_amount" => $request->amount,
+
+            );
+
+            $body = json_encode($databody);
+            $curl = curl_init();
 
 
-    }
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://test.enkpay.com/api/buy-data',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => $body,
+                CURLOPT_HTTPHEADER => array(
+                    'Accept: application/json',
+                    'Content-Type: application/json',
+                    'Authorization: Bearer ' . $token,
+                ),
+            ));
+
+            $var = curl_exec($curl);
+            curl_close($curl);
+            $var = json_decode($var);
+            $status = $var->status ?? null;
+
+            if ($status == true) {
+                $message = "Data Purchase successful";
+                return success($message);
+
+            }
+
+            if ($status == false) {
+
+                if ($var->message = "Insufficient Funds, Fund your main wallet") {
+                    $message = "Data Purchase not successful, Try again later";
+                    $code = 422;
+                    return error($message, $code);
+                }
 
 
-
-
-
-
-    public function buy_data(request $request)
-    {
-
-        $token = token();
-        $databody = array(
-            "service_id" => $request->service_id,
-            "amount" => $request->amount,
-            "phone" => $request->phone,
-            "variation_code" => $request->variation_code,
-            "variation_amount" => $request->amount,
-
-        );
-
-        $body = json_encode($databody);
-        $curl = curl_init();
-
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://test.enkpay.com/api/buy-data',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => $body,
-            CURLOPT_HTTPHEADER => array(
-                'Accept: application/json',
-                'Content-Type: application/json',
-                'Authorization: Bearer ' . $token,
-            ),
-        ));
-
-        $var = curl_exec($curl);
-        curl_close($curl);
-        $var = json_decode($var);
-        $status = $var->status ?? null;
-
-        if ($status == true) {
-            $message = "Data Purchase successful";
-            return success($message);
-
-        }
-
-        if ($status == false) {
-
-            if($var->message = "Insufficient Funds, Fund your main wallet"){
-                $message = "Data Purchase not successful, Try again later";
-                $code = 422;
-                return error($message, $code);
             }
 
 
         }
-
-
-
-
-    }
 
 
 
 }
+
+
+
+
+
+
