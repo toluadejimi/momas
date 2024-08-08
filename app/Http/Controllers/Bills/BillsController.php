@@ -157,8 +157,6 @@ class BillsController extends Controller
         ));
 
         $var = curl_exec($curl);
-
-
         curl_close($curl);
         $var = json_decode($var);
         $status = $var->status ?? null;
