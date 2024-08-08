@@ -217,67 +217,88 @@ class BillsController extends Controller
         }
 
 
-        public
-        function buy_cable(request $request)
-        {
 
-            $token = token();
+    public function buy_cable(request $request)
+    {
+
+        $token = token();
+
+        if($request->quantity != null){
+
             $databody = array(
-                "service_id" => $request->service_id,
-                "amount" => $request->amount,
-                "phone" => $request->phone,
+
+                'billersCode' => $request->decoder_no,
+                'variation_code' => $request->variation_code,
+                'amount' => $request->amount,
+                'phone' => Auth::user()->phone,
+                'quantity' => $request->quantity,
+
             );
-
-            $body = json_encode($databody);
-            $curl = curl_init();
-
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://test.enkpay.com/api/buy-ng-airtime',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => $body,
-                CURLOPT_HTTPHEADER => array(
-                    'Accept: application/json',
-                    'Content-Type: application/json',
-                    'Authorization: Bearer ' . $token,
-                ),
-            ));
-
-            $var = curl_exec($curl);
-
-            curl_close($curl);
-            $var = json_decode($var);
-            $status = $var->status ?? null;
-
-
-            if ($status == true) {
-
-                $message = "Airtime Purchase successful";
-                return success($message);
-
-            }
-
-            if ($status == false) {
-
-                if ($var->message = "Insufficient Funds, Fund your main wallet") {
-                    $message = "Airtime Purchase not successful, Try again later";
-                    $code = 422;
-                    return error($message, $code);
-                }
-
-
-            }
-
 
         }
 
 
-        public
+        if($request->subscription_type != null){
+
+            $databody = array(
+
+                'billersCode' => $request->decoder_no,
+                'variation_code' => $request->variation_code,
+                'amount' => $request->amount,
+                'phone' => Auth::user()->phone,
+                'subscription_type' => $request->subscription_type,
+
+            );
+
+        }
+
+
+
+
+
+
+        $body = json_encode($databody);
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://test.enkpay.com/api/buy-cable',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $body,
+            CURLOPT_HTTPHEADER => array(
+                'Accept: application/json',
+                'Content-Type: application/json',
+                'Authorization: Bearer ' . $token,
+            ),
+        ));
+
+        $var = curl_exec($curl);
+        dd($var);
+
+        curl_close($curl);
+        $var = json_decode($var);
+
+
+        $status = $var->status ?? null;
+
+        if ($status == true) {
+            return response()->json([
+                'status' => true,
+                'data' => $var->data,
+
+            ]);
+
+        }
+
+    }
+
+
+    public
         function buy_data(request $request)
         {
 
