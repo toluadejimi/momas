@@ -162,9 +162,12 @@ class TransactionController extends Controller
             $trx->trx_id = $trx_id;
             $trx->save();
 
-            $url = url('')."/payment?ref=$trx_id&status=success";
-            return redirect($url);
-        }
+                return response()->json([
+                    'status' => "success",
+                    'ref' => $trx_id,
+                ], 200);
+
+            }
 
 
     }
