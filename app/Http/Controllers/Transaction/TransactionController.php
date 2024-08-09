@@ -39,7 +39,6 @@ class TransactionController extends Controller
     {
 
         if($request->pay_type == 'flutterwave'){
-
             $trx_id = "FUND".random_int(0000000, 9999999);
             $email = Auth::user()->email;
             $trx =  new Transaction();
@@ -54,13 +53,10 @@ class TransactionController extends Controller
                 'url' => url('')."/pay-flutter?amount=$request->amount&trx_id=$trx_id&email=$email"
             ], 200);
 
-
         }
 
 
         if($request->pay_type == 'paystack'){
-
-
             $fl = Setting::where('id', 1)->first();
             $flkey['flutterwave_secret'] = $fl->flutterwave_secret;
             $flkey['flutterwave_public'] = $fl->flutterwave_public;
@@ -166,10 +162,8 @@ class TransactionController extends Controller
             $trx->trx_id = $trx_id;
             $trx->save();
 
-            return response()->json([
-                'status' => true,
-                'message' => "Payment Approved"
-            ], 200);
+            $url = url('')."/payment?ref=$trx_id&status=success";
+            return redirect($url);
         }
 
 
@@ -204,28 +198,24 @@ class TransactionController extends Controller
         $var = curl_exec($curl);
         curl_close($curl);
         $var = json_decode($var);
+
         $status = $var->status ?? null;
+        $ref = $var->data->tx_ref ?? null;
 
         $ck_transaction = Transaction::where('trx_id', $var->data->tx_ref)->first()->status ?? null;
-
         if($ck_transaction == null){
 
             if($status == 'success'){
                 Transaction::where('trx_id', $var->data->tx_ref)->update(['status'=> 2]);
-                return response()->json([
-                    'status' => true,
-                    'message' => "Transaction Approved"
-                ]);
+                $ref = $var->data->tx_ref;
+                $url = url('')."/payment?ref=$ref&status=success";
+                return redirect($url);
             }
 
         }
 
-
-        return response()->json([
-            'status' => false,
-            'message' => "Transaction already approved"
-        ]);
-
+        $url = url('')."/payment?ref=$ref&status=failure";
+        return redirect($url);
 
 
 
