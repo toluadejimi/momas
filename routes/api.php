@@ -57,6 +57,18 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::post('buy-cable', [BillsController::class, 'buy_cable']);
 
 
+    //
+    Route::post('buy-meter', [MeterController::class, 'buy_meter_token']);
+    Route::post('buy-meter-others', [MeterController::class, 'pay_for_others_meter_token']);
+    Route::post('reprint-token', [MeterController::class, 'reprint_meter_token']);
+    Route::post('get-token', [MeterController::class, 'get_token']);
+
+
+
+
+
+
+
 
 
 

@@ -224,12 +224,14 @@ if (!function_exists('generate_token')) {
     function generate_token($user_id, $visitor, $email, $valid_date)
     {
 
+        $usr = User::where('id', Auth::id())->first();
         $get_token = random_int(000000, 999999);
         $tok = new Token();
         $tok->user_id = $user_id;
         $tok->token = $get_token;
         $tok->visitor = $visitor;
         $tok->email = $email;
+        $tok->address = $usr->address." ".$usr->city." ".$usr->state;
         $tok->valid_date = $valid_date;
 
         $tok->save();

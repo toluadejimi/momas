@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Auth;
 class TransactionController extends Controller
 {
 
-
-
     public function flutter_payment(request $request)
     {
 
