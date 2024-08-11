@@ -37,7 +37,7 @@ class TransactionController extends Controller
     {
 
         if($request->pay_type == 'flutterwave'){
-            $trx_id = "FUND".random_int(0000000, 9999999);
+            $trx_id = "TRX".random_int(0000000, 9999999);
             $email = Auth::user()->email;
 
 
@@ -65,7 +65,7 @@ class TransactionController extends Controller
             $pkkey['paystack_public'] = $fl->paystack_public;
 
 
-            $trx_id = "FUND".random_int(0000000, 9999999);
+            $trx_id = "TRX".random_int(0000000, 9999999);
             $email = Auth::user()->email;
 
 
@@ -127,7 +127,7 @@ class TransactionController extends Controller
 
 
         if($request->pay_type == 'remita'){
-            $trx_id = "FUND".random_int(0000000, 9999999);
+            $trx_id = "TRX".random_int(0000000, 9999999);
             $email = Auth::user()->email;
             $trx =  new Transaction();
             $trx->user_id = Auth::id();
@@ -145,7 +145,7 @@ class TransactionController extends Controller
 
 
         if($request->pay_type == 'wallet'){
-            $trx_id = "FUND".random_int(0000000, 9999999);
+            $trx_id = "TRX".random_int(0000000, 9999999);
             $email = Auth::user()->email;
 
 
@@ -178,8 +178,11 @@ class TransactionController extends Controller
 
     public function all_transactions(request $request){
 
-
-
+        $trx = Transaction::where('user_id', Auth::id())->take(1000)->get();
+        return response()->json([
+            'status' => true,
+            'data' => $trx,
+        ], 200);
 
     }
 
