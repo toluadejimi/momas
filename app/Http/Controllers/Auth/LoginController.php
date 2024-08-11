@@ -115,6 +115,23 @@ class LoginController extends Controller
     }
 
 
+    public function reset_password(request $request)
+    {
+        $email = $request->email;
+
+        if($request->password != $request->confirm_password){
+            $code = 422;
+            $message = "Password does not match";
+            return error($message, $code);
+        }
+        User::where('email', $email)->update(['password' => bcrypt($request->password)]);
+
+        return response()->json([
+            'status' => true,
+            'message' => "Password successfully updated"
+        ], 200);
+
+    }
 
     public function get_user(request $request)
     {
