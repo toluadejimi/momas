@@ -32,16 +32,19 @@ class TransactionController extends Controller
 
     }
 
-    
+
     public function make_payment(request $request)
     {
 
         if($request->pay_type == 'flutterwave'){
             $trx_id = "FUND".random_int(0000000, 9999999);
             $email = Auth::user()->email;
+
+
             $trx =  new Transaction();
             $trx->user_id = Auth::id();
             $trx->pay_type = "flutterwave";
+            $trx->service_type = "fund";
             $trx->amount = $request->amount;
             $trx->trx_id = $trx_id;
             $trx->save();
@@ -102,6 +105,7 @@ class TransactionController extends Controller
                 $trx->pay_type = "paystack";
                 $trx->amount = $request->amount;
                 $trx->trx_id = $trx_id;
+                $trx->service_type = "fund";
                 $trx->save();
 
                 return response()->json([
@@ -110,7 +114,6 @@ class TransactionController extends Controller
                 ], 200);
 
             }
-
 
 
             $code = 422;
@@ -129,6 +132,7 @@ class TransactionController extends Controller
             $trx =  new Transaction();
             $trx->user_id = Auth::id();
             $trx->pay_type = "remita";
+            $trx->service_type = "fund";
             $trx->amount = $request->amount;
             $trx->trx_id = $trx_id;
             $trx->save();
@@ -157,6 +161,7 @@ class TransactionController extends Controller
             $trx->user_id = Auth::id();
             $trx->pay_type = "wallet";
             $trx->amount = $request->amount;
+            $trx->service_type = "fund";
             $trx->trx_id = $trx_id;
             $trx->save();
 
@@ -166,6 +171,14 @@ class TransactionController extends Controller
                 ], 200);
 
             }
+
+
+    }
+
+
+    public function all_transactions(request $request){
+
+
 
 
     }

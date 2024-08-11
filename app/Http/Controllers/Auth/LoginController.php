@@ -24,7 +24,7 @@ class LoginController extends Controller
 
             if ($usr == null) {
                 $message = "User does not exist";
-                $code = 401;
+                $code = 404;
                 return error($message, $code);
             }
 
@@ -72,7 +72,7 @@ class LoginController extends Controller
 
             if ($usr == null) {
                 $message = "User does not exist";
-                $code = 401;
+                $code = 404;
                 return error($message, $code);
             }
 
