@@ -32,7 +32,7 @@ class TransactionController extends Controller
 
     }
 
-
+    
     public function make_payment(request $request)
     {
 

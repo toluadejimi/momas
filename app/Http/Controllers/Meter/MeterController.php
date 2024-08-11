@@ -49,6 +49,8 @@ class MeterController extends Controller
         $meterType = $request->meterType;
         $trx = $request->trxref;
         $date = date('ymd');
+        $dater = date('d-m-y');
+
 
 
         $percentage = 2.5 / 100;
@@ -83,12 +85,19 @@ class MeterController extends Controller
         curl_close($curl);
         $var = json_decode($var);
 
-        dd($var, $url);
+        $data['full_name'] =  Auth::user()->first_name." ".Auth::user()->last_name;
+        $data['address'] =  Auth::user()->address.",".Auth::user()->city.",".Auth::user()->state;
+        $data['service'] =  "MOMAS";
+        $data['order_id'] =  $trx;
+        $data['token'] =  "3394848484884884848";
+        $data['amount'] =  $amount;
+        $data['date'] =  $dater;
 
 
-
-        $status = $var->status;
-
+        return response()->json([
+            'status'=> true,
+            'data' => $data
+        ], 200);
 
 
 
@@ -108,6 +117,8 @@ class MeterController extends Controller
         $date = date('ymd');
         $percentage = 2.5 / 100;
         $final_amount = $percentage * $amount;
+        $dater = date('d-m-y');
+
 
         $databody = array(
         );
@@ -137,7 +148,20 @@ class MeterController extends Controller
         curl_close($curl);
         $var = json_decode($var);
 
-        dd($var, $url);
+
+        $data['full_name'] =  Auth::user()->first_name." ".Auth::user()->last_name;
+        $data['address'] =  Auth::user()->address.",".Auth::user()->city.",".Auth::user()->state;
+        $data['service'] =  "MOMAS";
+        $data['order_id'] =  $trx;
+        $data['token'] =  "3394848484884884848";
+        $data['amount'] =  $amount;
+        $data['date'] =  $dater;
+
+
+        return response()->json([
+            'status'=> true,
+            'data' => $data
+        ], 200);
 
 
 
@@ -171,8 +195,6 @@ class MeterController extends Controller
         $data['full_name'] =  Auth::user()->first_name." ".Auth::user()->last_name;
         $data['address'] =  Auth::user()->address.",".Auth::user()->city.",".Auth::user()->state;
         $data['service'] =  "Reprint";
-
-
 
 
         return response()->json([

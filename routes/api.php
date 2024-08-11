@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('login', [LoginController::class, 'login']);
+
+Route::get('support', [LoginController::class, 'support']);
+
+
+
+
 Route::post('check-email', [RegisterController::class, 'check_user']);
 Route::post('validate-email', [RegisterController::class, 'validate_email']);
 Route::post('register', [RegisterController::class, 'register']);

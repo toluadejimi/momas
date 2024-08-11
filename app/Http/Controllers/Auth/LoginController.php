@@ -17,64 +17,99 @@ class LoginController extends Controller
     public function login(request $request)
     {
 
-        $credentials = request(['meterNo', 'password']);
+        if($request->email == null) {
+            $credentials = request(['meterNo', 'password']);
 
-        $usr = User::where('meterNo', $request->meterNo)->first() ?? null;
+            $usr = User::where('meterNo', $request->meterNo)->first() ?? null;
 
-        if($usr == null){
-            $message = "User does not exist";
-            $code = 401;
-            return error($message, $code);
+            if ($usr == null) {
+                $message = "User does not exist";
+                $code = 401;
+                return error($message, $code);
+            }
+
+            Passport::tokensExpireIn(Carbon::now()->addMinutes(20));
+            Passport::refreshTokensExpireIn(Carbon::now()->addMinutes(20));
+
+            if (!auth()->attempt($credentials)) {
+                $message = "Meter No or Password Incorrect";
+                $code = 422;
+                return error($message, $code);
+            }
+
+            flush_token();
+
+
+            $fl = Setting::where('id', 1)->first();
+            $flkey['flutterwave_secret'] = $fl->flutterwave_secret;
+            $flkey['flutterwave_public'] = $fl->flutterwave_public;
+            $pkkey['paystack_secret'] = $fl->paystack_secret;
+            $pkkey['paystack_public'] = $fl->paystack_public;
+
+
+            $token = auth()->user()->createToken('API Token')->accessToken;
+            $meter = meter();
+            $user = user();
+            $user['token'] = $token;
+            $user['meter'] = $meter;
+            $user['flutterwave_keys'] = $flkey;
+            $user['paystack_keys'] = $pkkey;
+
+
+            return response()->json([
+                'status' => true,
+                'user' => $user
+            ]);
+
+
         }
 
-        Passport::tokensExpireIn(Carbon::now()->addMinutes(20));
-        Passport::refreshTokensExpireIn(Carbon::now()->addMinutes(20));
 
-        if (!auth()->attempt($credentials)) {
-            $message = "Meter No or Password Incorrect";
-            $code = 422;
-            return error($message, $code);
+        if($request->meterNo == null) {
+            $credentials = request(['email', 'password']);
+
+            $usr = User::where('email', $request->email)->first() ?? null;
+
+            if ($usr == null) {
+                $message = "User does not exist";
+                $code = 401;
+                return error($message, $code);
+            }
+
+            Passport::tokensExpireIn(Carbon::now()->addMinutes(20));
+            Passport::refreshTokensExpireIn(Carbon::now()->addMinutes(20));
+
+            if (!auth()->attempt($credentials)) {
+                $message = "Email No or Password Incorrect";
+                $code = 422;
+                return error($message, $code);
+            }
+
+            flush_token();
+
+
+            $fl = Setting::where('id', 1)->first();
+            $flkey['flutterwave_secret'] = $fl->flutterwave_secret;
+            $flkey['flutterwave_public'] = $fl->flutterwave_public;
+            $pkkey['paystack_secret'] = $fl->paystack_secret;
+            $pkkey['paystack_public'] = $fl->paystack_public;
+
+
+            $token = auth()->user()->createToken('API Token')->accessToken;
+            $meter = meter();
+            $user = user();
+            $user['token'] = $token;
+            $user['meter'] = $meter;
+
+
+
+            return response()->json([
+                'status' => true,
+                'user' => $user
+            ]);
+
+
         }
-
-        flush_token();
-
-
-        $fl = Setting::where('id', 1)->first();
-        $flkey['flutterwave_secret'] = $fl->flutterwave_secret;
-        $flkey['flutterwave_public'] = $fl->flutterwave_public;
-        $pkkey['paystack_secret'] = $fl->paystack_secret;
-        $pkkey['paystack_public'] = $fl->paystack_public;
-
-
-        $token = auth()->user()->createToken('API Token')->accessToken;
-        $meter = meter();
-        $user = user();
-        $user['token'] = $token;
-        $user['meter'] = $meter;
-        $user['flutterwave_keys'] =  $flkey;
-        $user['paystack_keys'] =  $pkkey;
-
-
-
-        return response()->json([
-            'status' => true,
-            'user' => $user
-        ]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }
@@ -104,6 +139,27 @@ class LoginController extends Controller
         return response()->json([
             'status' => true,
             'user' => $user
+        ]);
+
+
+
+    }
+
+
+    public function support(request $request)
+    {
+
+
+        $set = Setting::where('id', 1)->first();
+
+        $user['payment_support'] = $set->payment_support;
+        $user['meter_support'] = $set->meter_support;
+        $user['general_support'] = $set->general_support;
+
+
+        return response()->json([
+            'status' => true,
+            'data' => $user
         ]);
 
 
