@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', [LoginController::class, 'login']);
 Route::post('reset-password', [LoginController::class, 'reset_password']);
+Route::post('delete-user', [LoginController::class, 'delete_user']);
+
+
+
 
 
 Route::get('support', [LoginController::class, 'support']);

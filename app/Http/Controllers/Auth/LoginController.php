@@ -21,6 +21,12 @@ class LoginController extends Controller
             $credentials = request(['meterNo', 'password']);
 
             $usr = User::where('meterNo', $request->meterNo)->first() ?? null;
+            $status = User::where('meterNo', $request->meterNo)->first()->status ?? null;
+            if($status == 9){
+                $message = "User does not exist";
+                $code = 401;
+                return error($message, $code);
+            }
 
             if ($usr == null) {
                 $message = "User does not exist";
@@ -69,6 +75,12 @@ class LoginController extends Controller
             $credentials = request(['email', 'password']);
 
             $usr = User::where('email', $request->email)->first() ?? null;
+            $status = User::where('email', $request->email)->first()->status ?? null;
+            if($status == 9){
+                $message = "User does not exist";
+                $code = 401;
+                return error($message, $code);
+            }
 
             if ($usr == null) {
                 $message = "User does not exist";
@@ -115,6 +127,18 @@ class LoginController extends Controller
     }
 
 
+
+    public function delete_user(request $request)
+    {
+        User::where('email', $request->email)->update(['status' => 9]);
+
+        return response()->json([
+            'status' => true,
+            'message' => "User Deleted successfully"
+        ], 200);
+
+
+    }
     public function reset_password(request $request)
     {
         $email = $request->email;
