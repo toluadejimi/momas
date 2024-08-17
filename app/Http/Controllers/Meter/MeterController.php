@@ -86,7 +86,7 @@ class MeterController extends Controller
         $var = json_decode($var);
 
 
-        dd($var);
+        dd($var, $request->ip());
 
         $data['full_name'] =  Auth::user()->first_name." ".Auth::user()->last_name;
         $data['address'] =  Auth::user()->address.",".Auth::user()->city.",".Auth::user()->state;
