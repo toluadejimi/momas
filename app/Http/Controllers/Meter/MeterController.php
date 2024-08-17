@@ -85,6 +85,9 @@ class MeterController extends Controller
         curl_close($curl);
         $var = json_decode($var);
 
+
+        dd($var);
+
         $data['full_name'] =  Auth::user()->first_name." ".Auth::user()->last_name;
         $data['address'] =  Auth::user()->address.",".Auth::user()->city.",".Auth::user()->state;
         $data['service'] =  "MOMAS";
@@ -147,6 +150,8 @@ class MeterController extends Controller
         $var = curl_exec($curl);
         curl_close($curl);
         $var = json_decode($var);
+
+
 
 
         $data['full_name'] =  Auth::user()->first_name." ".Auth::user()->last_name;
