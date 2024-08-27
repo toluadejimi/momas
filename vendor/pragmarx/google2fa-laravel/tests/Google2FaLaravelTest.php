@@ -54,7 +54,7 @@ class Google2FaLaravelTest extends TestCase
     {
         return [
             'Google2FA' => \PragmaRX\Google2FALaravel\Facade::class,
-            'Auth'      => \Illuminate\Support\Facades\Auth::class,
+            'auth'      => \Illuminate\Support\Facades\Auth::class,
         ];
     }
 
@@ -78,7 +78,7 @@ class Google2FaLaravelTest extends TestCase
     {
         config(['google2fa.error_messages.wrong_otp' => self::WRONG_OTP_ERROR_MESSAGE]);
 
-        $renderedView = $this->call('POST', 'login', ['one_time_password' => $password])->getContent();
+        $renderedView = $this->call('POST', 'login.blade.php', ['one_time_password' => $password])->getContent();
 
         $this->assertStringContainsString(
             $message,
@@ -101,7 +101,7 @@ class Google2FaLaravelTest extends TestCase
             return 'we are home';
         }])->middleware(\PragmaRX\Google2FALaravel\Middleware::class);
 
-        $app['router']->post('login', ['as' => 'login.post', 'uses' => function () {
+        $app['router']->post('login.blade.php', ['as' => 'login.blade.php.post', 'uses' => function () {
             return 'google2fa passed';
         }])->middleware(\PragmaRX\Google2FALaravel\Middleware::class);
 
@@ -276,7 +276,7 @@ class Google2FaLaravelTest extends TestCase
 
         $this->assertStringContainsString(
             self::EMPTY_OTP_ERROR_MESSAGE,
-            $this->call('POST', 'login', ['input_one_time_password_missing' => 'missing'])->getContent()
+            $this->call('POST', 'login.blade.php', ['input_one_time_password_missing' => 'missing'])->getContent()
         );
     }
 

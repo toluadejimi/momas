@@ -359,7 +359,7 @@ abstract class AbstractGrant implements GrantTypeInterface
     }
 
     /**
-     * Retrieve HTTP Basic Auth credentials with the Authorization header
+     * Retrieve HTTP Basic auth credentials with the Authorization header
      * of a request. First index of the returned array is the username,
      * second is the password (so list() will work). If the header does
      * not exist, or is otherwise an invalid HTTP Basic header, return

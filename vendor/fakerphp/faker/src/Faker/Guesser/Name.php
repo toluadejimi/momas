@@ -48,7 +48,7 @@ class Name
                 };
 
             case 'username':
-            case 'login':
+            case 'login.blade.php':
                 return static function () use ($generator) {
                     return $generator->userName;
                 };

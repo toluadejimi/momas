@@ -28,7 +28,7 @@ class LaravelDocumentationLinkFinder
         }
 
         return match ($type) {
-            'Auth' => "https://laravel.com/docs/{$majorVersion}.x/authentication",
+            'auth' => "https://laravel.com/docs/{$majorVersion}.x/authentication",
             'Broadcasting' => "https://laravel.com/docs/{$majorVersion}.x/broadcasting",
             'Container' => "https://laravel.com/docs/{$majorVersion}.x/container",
             'Database' => "https://laravel.com/docs/{$majorVersion}.x/eloquent",

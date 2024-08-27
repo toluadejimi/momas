@@ -130,8 +130,8 @@ class Stream
      *
      * Extract a path from a URI and actually connect to an SSH server if appropriate
      *
-     * If "notification" is set as a context parameter the message code for successful login is
-     * NET_SSH2_MSG_USERAUTH_SUCCESS. For a failed login it's NET_SSH2_MSG_USERAUTH_FAILURE.
+     * If "notification" is set as a context parameter the message code for successful login.blade.php is
+     * NET_SSH2_MSG_USERAUTH_SUCCESS. For a failed login.blade.php it's NET_SSH2_MSG_USERAUTH_FAILURE.
      *
      * @param string $path
      * @return string

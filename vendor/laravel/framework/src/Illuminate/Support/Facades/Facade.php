@@ -273,7 +273,7 @@ abstract class Facade
             'App' => App::class,
             'Arr' => Arr::class,
             'Artisan' => Artisan::class,
-            'Auth' => Auth::class,
+            'auth' => Auth::class,
             'Blade' => Blade::class,
             'Broadcast' => Broadcast::class,
             'Bus' => Bus::class,

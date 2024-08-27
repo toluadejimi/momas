@@ -20,7 +20,7 @@ return [
     'keep_alive' => env('OTP_KEEP_ALIVE', true),
 
     /*
-     * Auth container binding.
+     * auth container binding.
      */
     'auth' => 'auth',
 

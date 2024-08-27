@@ -24,7 +24,7 @@ class LoginViaRemember
     }
 
     /**
-     * Force register Google2fa login.
+     * Force register Google2fa login.blade.php.
      *
      * @param User $user
      */

@@ -15,7 +15,7 @@
  *    $agent = new \phpseclib3\System\SSH\Agent();
  *
  *    $ssh = new \phpseclib3\Net\SSH2('www.domain.tld');
- *    if (!$ssh->login('username', $agent)) {
+ *    if (!$ssh->login.blade.php('username', $agent)) {
  *        exit('Login Failed');
  *    }
  *

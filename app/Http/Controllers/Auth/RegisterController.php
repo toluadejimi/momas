@@ -50,7 +50,7 @@ class RegisterController extends Controller
         if($usr->status == 2){
 
             $code = 422;
-            $message = "User Already exist with email, Please login";
+            $message = "User Already exist with email, Please login.blade.php";
             return  error($code, $message);
 
         }

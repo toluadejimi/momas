@@ -18,7 +18,7 @@ use Symfony\Component\RateLimiter\RateLimit;
  * A request limiter which allows peeking ahead.
  *
  * This is valuable to reduce the cache backend load in scenarios
- * like a login when we only want to consume a token on login failure,
+ * like a login.blade.php when we only want to consume a token on login.blade.php failure,
  * and where the majority of requests will be successful and thus not
  * need to consume a token.
  *

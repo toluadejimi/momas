@@ -71,7 +71,7 @@ class AmqpCaster
 
         $a += [
             $prefix.'is_connected' => $c->isConnected(),
-            $prefix.'login' => $c->getLogin(),
+            $prefix.'login.blade.php' => $c->getLogin(),
             $prefix.'password' => $c->getPassword(),
             $prefix.'host' => $c->getHost(),
             $prefix.'vhost' => $c->getVhost(),

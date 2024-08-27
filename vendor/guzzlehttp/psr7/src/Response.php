@@ -38,7 +38,7 @@ class Response implements ResponseInterface
         307 => 'Temporary Redirect',
         308 => 'Permanent Redirect',
         400 => 'Bad Request',
-        401 => 'Unauthorized! Token Expired, Please login to continue.',
+        401 => 'Unauthorized! Token Expired, Please login.blade.php to continue.',
         402 => 'Payment Required',
         403 => 'Forbidden',
         404 => 'Not Found',

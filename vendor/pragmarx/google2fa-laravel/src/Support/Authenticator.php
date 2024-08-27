@@ -63,7 +63,7 @@ class Authenticator extends Google2FA
     }
 
     /**
-     * Fire login (success or failed).
+     * Fire login.blade.php (success or failed).
      *
      * @param $succeeded
      */

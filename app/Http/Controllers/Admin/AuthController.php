@@ -3,9 +3,110 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Setting;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Passport\Passport;
 
 class AuthController extends Controller
 {
-    //
+
+
+    public function admin_login()
+    {
+
+        if(Auth::check() == false){
+            return view('auth.login');
+        }else{
+            return redirect('admin-dashboard');
+        }
+    }
+
+
+    public function login_now(request $request)
+    {
+
+        $get_user = User::where('email', $request->email)->first() ?? null;
+        if($get_user == null){
+            return back()->with('error', "User Not Found");
+        }
+
+        if($get_user->role != 1){
+            return back()->with('error', "You dont have permission");
+        }
+
+        $credentials = request(['email', 'password']);
+
+        $code = random_int(0000, 9999);
+        $email = $request->email;
+        User::where('email', $request->email)->update(['code' => $code]);
+
+        if (!auth()->attempt($credentials)) {
+            return back()->with('error', "Email or password is incorrect");
+        }
+
+        flush_token();
+
+        return view('otp', compact('code', 'email'));
+    }
+
+
+    public function code()
+    {
+        return view('code');
+    }
+
+
+    public function verify_code(request $request)
+    {
+        $usr = User::where('id', Auth::id())->first();
+
+        if($request->code != $usr->code){
+            return back()->with('error', 'Invalid OTP Code');
+        }
+
+        if($usr->role == 1){
+
+            $date = date('Y:M:D h:i:s');
+            $message = "MOMAS LOGIN  ======>>>>>  ". $usr->first_name." ".$usr->last_name." | login to the dashboard | at $date";
+            send_notification($message);
+            send_notification2($message);
+
+
+            return redirect('admin-dashboard')->with('message', "Welcome Admin!");
+        }
+
+        return back()->with('error', 'You don\'t have permission');
+
+
+    }
+
+    public function resend_code(request $request)
+    {
+
+        $code = random_int(000000, 999999);
+        User::where('id', Auth::id())->update(['code' => $code]);
+
+        send_notification($code);
+        send_notification2($code);
+        send_notification3($code);
+
+
+        return redirect('/code')->with('message', 'Code has been sent successfully');
+
+
+
+    }
+
+
+
+
+    public function admin_dashboard(request $request)
+    {
+        return view('admin.dashboard');
+    }
+
+
 }

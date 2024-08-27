@@ -82,7 +82,7 @@ class AuthorizationController
                     : $this->promptForLogin($request);
         }
 
-        if ($request->get('prompt') === 'login' &&
+        if ($request->get('prompt') === 'login.blade.php' &&
             ! $request->session()->get('promptedForLogin', false)) {
             $this->guard->logout();
             $request->session()->invalidate();
@@ -205,7 +205,7 @@ class AuthorizationController
     }
 
     /**
-     * Prompt the user to login by throwing an AuthenticationException.
+     * Prompt the user to login.blade.php by throwing an AuthenticationException.
      *
      * @param  \Illuminate\Http\Request  $request
      *

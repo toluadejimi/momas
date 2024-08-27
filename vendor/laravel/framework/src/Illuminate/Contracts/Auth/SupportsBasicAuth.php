@@ -5,7 +5,7 @@ namespace Illuminate\Contracts\Auth;
 interface SupportsBasicAuth
 {
     /**
-     * Attempt to authenticate using HTTP Basic Auth.
+     * Attempt to authenticate using HTTP Basic auth.
      *
      * @param  string  $field
      * @param  array  $extraConditions
@@ -14,7 +14,7 @@ interface SupportsBasicAuth
     public function basic($field = 'email', $extraConditions = []);
 
     /**
-     * Perform a stateless HTTP Basic login attempt.
+     * Perform a stateless HTTP Basic login.blade.php attempt.
      *
      * @param  string  $field
      * @param  array  $extraConditions

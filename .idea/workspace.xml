@@ -5,9 +5,212 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df462c8f-229d-4527-915f-ee2aade1fa51" name="Changes" comment="pusgggghhh">
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/css/app.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/css/icons.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/fonts/materialdesignicons-webfont.eot?" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/fonts/materialdesignicons-webfont.eot?v=7.4.47" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/fonts/materialdesignicons-webfont.ttf?v=7.4.47" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/fonts/materialdesignicons-webfont.woff2?v=7.4.47" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/fonts/materialdesignicons-webfont.woff?v=7.4.47" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/auth-images.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/auth-images.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/gallery/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/gallery/10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/gallery/11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/gallery/12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/gallery/2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/gallery/3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/gallery/4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/gallery/5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/gallery/6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/gallery/7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/gallery/8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/gallery/9.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/landing/bg-pattern.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/logo-dark.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/logo-light.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/logo-sm.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/products/bag.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/products/headphone.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/products/leather-jacket.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/products/shoes.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/products/watch.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/small/bg-faqs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/small/img-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/small/img-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/small/img-3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/small/img-4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/small/img-5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/small/img-6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/small/img-7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/small/img-8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/small/img-9.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/small/responsive.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/small/user-image.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/svg/404-error.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/svg/429-error.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/svg/500-error.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/svg/503-error.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/svg/card-bg.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/svg/coming-soon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/svg/confirmation-email.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/svg/logout.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/svg/maintenance-1.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/svg/offline.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/users/profile.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/users/user-10.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/users/user-11.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/users/user-12.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/users/user-13.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/users/user-14.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/users/user-15.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/users/user-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/users/user-3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/users/user-4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/users/user-5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/users/user-6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/users/user-7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/users/user-8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/users/user-9.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/images/users/user.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/analytics-dashboard.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/apexcharts-area.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/apexcharts-bar.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/apexcharts-boxplot.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/apexcharts-bubble.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/apexcharts-candlestick.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/apexcharts-column.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/apexcharts-funnel.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/apexcharts-heatmap.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/apexcharts-line.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/apexcharts-mixed.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/apexcharts-pie.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/apexcharts-polararea.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/apexcharts-radar.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/apexcharts-radialbar.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/apexcharts-range-area.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/apexcharts-scatter.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/apexcharts-timeline.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/apexcharts-treemap.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/canada-map.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/coming-soon.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/crm-dashboard.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/datatable.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/demo.calendar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/ecommerce-dashboard.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/form-picker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/glightbox.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/google-maps-init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/iraq-map.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/quilljs.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/russia-map.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/simple-datatables.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/spain-map.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/us-lcc-en-map.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/us-merc-en-map.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/us-mill-en-map.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/vector-maps.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/widgets.init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/apexcharts/apexcharts.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/bootstrap/js/bootstrap.bundle.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-buttons/js/buttons.colVis.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-buttons/js/buttons.flash.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-buttons/js/buttons.html5.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-buttons/js/buttons.print.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-buttons/js/dataTables.buttons.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-keytable-bs5/css/keyTable.bootstrap5.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-keytable-bs5/js/keyTable.bootstrap5.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-keytable/js/dataTables.keyTable.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-responsive/js/dataTables.responsive.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-select-bs5/js/select.bootstrap5.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-select/js/dataTables.select.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net/js/jquery.dataTables.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/feather-icons/feather.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/flatpickr/flatpickr.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/flatpickr/flatpickr.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/fullcalendar/index.global.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/glightbox/css/glightbox.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/glightbox/js/glightbox.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/gmaps/gmaps.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/jquery-countdown/jquery.countdown.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/jquery.counterup/jquery.counterup.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/jquery/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/jsvectormap/css/jsvectormap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/jsvectormap/js/jsvectormap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/jsvectormap/maps/world-merc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/moment/min/moment.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/node-waves/waves.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/quill/quill.bubble.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/quill/quill.core.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/quill/quill.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/quill/quill.snow.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/simple-datatables/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/simple-datatables/umd/simple-datatables.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/simplebar/simplebar.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/ass/libs/waypoints/lib/jquery.waypoints.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuthController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/helpers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Meter/MeterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Meter/MeterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Acess.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/Acess.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/google2fa.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/google2fa.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/addUser.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin-dashboard.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/all-transactions.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/allUsers.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/allterminals.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/code.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/flutter-pay.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/login.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/new-terminal.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/set-2fa.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/setting.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/fakerphp/faker/src/Faker/Guesser/Name.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/fakerphp/faker/src/Faker/Guesser/Name.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/Response.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/Response.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Auth/AuthManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Auth/AuthManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Auth/SessionGuard.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Auth/SessionGuard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Contracts/Auth/SupportsBasicAuth.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Contracts/Auth/SupportsBasicAuth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/Facades/Auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/Facades/Auth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Translation/lang/en/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Translation/lang/en/auth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/View/Compilers/Concerns/CompilesAuthorizations.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/View/Compilers/Concerns/CompilesAuthorizations.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/laravel/passport/src/Console/ClientCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/laravel/passport/src/Console/ClientCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/laravel/passport/src/Http/Controllers/AuthorizationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/laravel/passport/src/Http/Controllers/AuthorizationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/laravel/passport/src/PassportServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/laravel/passport/src/PassportServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/laravel/sanctum/src/Http/Middleware/AuthenticateSession.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/laravel/sanctum/src/Http/Middleware/AuthenticateSession.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/league/oauth2-server/src/Grant/AbstractGrant.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/league/oauth2-server/src/Grant/AbstractGrant.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/league/oauth2-server/src/Repositories/AuthCodeRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/league/oauth2-server/src/Repositories/AuthCodeRepositoryInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/phpseclib/phpseclib/phpseclib/Net/SFTP.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/phpseclib/phpseclib/phpseclib/Net/SFTP.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/phpseclib/phpseclib/phpseclib/Net/SFTP/Stream.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/phpseclib/phpseclib/phpseclib/Net/SFTP/Stream.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/phpseclib/phpseclib/phpseclib/Net/SSH2.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/phpseclib/phpseclib/phpseclib/Net/SSH2.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/phpseclib/phpseclib/phpseclib/System/SSH/Agent.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/phpseclib/phpseclib/phpseclib/System/SSH/Agent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/pragmarx/google2fa-laravel/src/Listeners/LoginViaRemember.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/pragmarx/google2fa-laravel/src/Listeners/LoginViaRemember.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/pragmarx/google2fa-laravel/src/Support/Authenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/pragmarx/google2fa-laravel/src/Support/Authenticator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/pragmarx/google2fa-laravel/src/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/pragmarx/google2fa-laravel/src/config/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/pragmarx/google2fa-laravel/tests/Google2FaLaravelTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/pragmarx/google2fa-laravel/tests/Google2FaLaravelTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/ramsey/uuid/src/Rfc4122/UuidV2.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/ramsey/uuid/src/Rfc4122/UuidV2.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/spatie/laravel-ignition/src/Support/LaravelDocumentationLinkFinder.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/spatie/laravel-ignition/src/Support/LaravelDocumentationLinkFinder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/RateLimiter/PeekableRequestRateLimiterInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/http-foundation/RateLimiter/PeekableRequestRateLimiterInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/var-dumper/Caster/AmqpCaster.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/var-dumper/Caster/AmqpCaster.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,6 +363,10 @@
       <path value="$PROJECT_DIR$/vendor/pragmarx/google2fa" />
       <path value="$PROJECT_DIR$/vendor/simplesoftwareio/simple-qrcode" />
       <path value="$PROJECT_DIR$/vendor/bacon/bacon-qr-code" />
+      <path value="$PROJECT_DIR$/vendor/php-http/guzzle7-adapter" />
+      <path value="$PROJECT_DIR$/vendor/flutterwavedev/flutterwave-v3" />
+      <path value="$PROJECT_DIR$/vendor/php-http/promise" />
+      <path value="$PROJECT_DIR$/vendor/php-http/httplug" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -174,22 +381,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Applications/XAMPP/xamppfiles/htdocs/project/momas",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Applications/XAMPP/xamppfiles/htdocs/project/momas/resources/views/emails&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/emails" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/Http/Controllers" />
     </key>
@@ -245,334 +455,29 @@
       <workItem from="1721147637007" duration="394000" />
       <workItem from="1721148227467" duration="5592000" />
       <workItem from="1721210325132" duration="254000" />
-    </task>
-    <task id="LOCAL-00108" summary="pusgggg">
-      <option name="closed" value="true" />
-      <created>1718350059927</created>
-      <option name="number" value="00108" />
-      <option name="presentableId" value="LOCAL-00108" />
-      <option name="project" value="LOCAL" />
-      <updated>1718350059927</updated>
-    </task>
-    <task id="LOCAL-00109" summary="pusgggg">
-      <option name="closed" value="true" />
-      <created>1719418039803</created>
-      <option name="number" value="00109" />
-      <option name="presentableId" value="LOCAL-00109" />
-      <option name="project" value="LOCAL" />
-      <updated>1719418039803</updated>
-    </task>
-    <task id="LOCAL-00110" summary="pusgggg">
-      <option name="closed" value="true" />
-      <created>1719418267432</created>
-      <option name="number" value="00110" />
-      <option name="presentableId" value="LOCAL-00110" />
-      <option name="project" value="LOCAL" />
-      <updated>1719418267432</updated>
-    </task>
-    <task id="LOCAL-00111" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1719418575723</created>
-      <option name="number" value="00111" />
-      <option name="presentableId" value="LOCAL-00111" />
-      <option name="project" value="LOCAL" />
-      <updated>1719418575723</updated>
-    </task>
-    <task id="LOCAL-00112" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1719419299789</created>
-      <option name="number" value="00112" />
-      <option name="presentableId" value="LOCAL-00112" />
-      <option name="project" value="LOCAL" />
-      <updated>1719419299790</updated>
-    </task>
-    <task id="LOCAL-00113" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720526422387</created>
-      <option name="number" value="00113" />
-      <option name="presentableId" value="LOCAL-00113" />
-      <option name="project" value="LOCAL" />
-      <updated>1720526422387</updated>
-    </task>
-    <task id="LOCAL-00114" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720532475115</created>
-      <option name="number" value="00114" />
-      <option name="presentableId" value="LOCAL-00114" />
-      <option name="project" value="LOCAL" />
-      <updated>1720532475115</updated>
-    </task>
-    <task id="LOCAL-00115" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720533770125</created>
-      <option name="number" value="00115" />
-      <option name="presentableId" value="LOCAL-00115" />
-      <option name="project" value="LOCAL" />
-      <updated>1720533770129</updated>
-    </task>
-    <task id="LOCAL-00116" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720533846009</created>
-      <option name="number" value="00116" />
-      <option name="presentableId" value="LOCAL-00116" />
-      <option name="project" value="LOCAL" />
-      <updated>1720533846009</updated>
-    </task>
-    <task id="LOCAL-00117" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720534175918</created>
-      <option name="number" value="00117" />
-      <option name="presentableId" value="LOCAL-00117" />
-      <option name="project" value="LOCAL" />
-      <updated>1720534175918</updated>
-    </task>
-    <task id="LOCAL-00118" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720534807066</created>
-      <option name="number" value="00118" />
-      <option name="presentableId" value="LOCAL-00118" />
-      <option name="project" value="LOCAL" />
-      <updated>1720534807066</updated>
-    </task>
-    <task id="LOCAL-00119" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720534818250</created>
-      <option name="number" value="00119" />
-      <option name="presentableId" value="LOCAL-00119" />
-      <option name="project" value="LOCAL" />
-      <updated>1720534818250</updated>
-    </task>
-    <task id="LOCAL-00120" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720534858317</created>
-      <option name="number" value="00120" />
-      <option name="presentableId" value="LOCAL-00120" />
-      <option name="project" value="LOCAL" />
-      <updated>1720534858317</updated>
-    </task>
-    <task id="LOCAL-00121" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720537970591</created>
-      <option name="number" value="00121" />
-      <option name="presentableId" value="LOCAL-00121" />
-      <option name="project" value="LOCAL" />
-      <updated>1720537970592</updated>
-    </task>
-    <task id="LOCAL-00122" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720621143908</created>
-      <option name="number" value="00122" />
-      <option name="presentableId" value="LOCAL-00122" />
-      <option name="project" value="LOCAL" />
-      <updated>1720621143908</updated>
-    </task>
-    <task id="LOCAL-00123" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720621542095</created>
-      <option name="number" value="00123" />
-      <option name="presentableId" value="LOCAL-00123" />
-      <option name="project" value="LOCAL" />
-      <updated>1720621542095</updated>
-    </task>
-    <task id="LOCAL-00124" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720621778019</created>
-      <option name="number" value="00124" />
-      <option name="presentableId" value="LOCAL-00124" />
-      <option name="project" value="LOCAL" />
-      <updated>1720621778019</updated>
-    </task>
-    <task id="LOCAL-00125" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720621928683</created>
-      <option name="number" value="00125" />
-      <option name="presentableId" value="LOCAL-00125" />
-      <option name="project" value="LOCAL" />
-      <updated>1720621928683</updated>
-    </task>
-    <task id="LOCAL-00126" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720633134384</created>
-      <option name="number" value="00126" />
-      <option name="presentableId" value="LOCAL-00126" />
-      <option name="project" value="LOCAL" />
-      <updated>1720633134384</updated>
-    </task>
-    <task id="LOCAL-00127" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720633525273</created>
-      <option name="number" value="00127" />
-      <option name="presentableId" value="LOCAL-00127" />
-      <option name="project" value="LOCAL" />
-      <updated>1720633525273</updated>
-    </task>
-    <task id="LOCAL-00128" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720639998490</created>
-      <option name="number" value="00128" />
-      <option name="presentableId" value="LOCAL-00128" />
-      <option name="project" value="LOCAL" />
-      <updated>1720639998490</updated>
-    </task>
-    <task id="LOCAL-00129" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720640151328</created>
-      <option name="number" value="00129" />
-      <option name="presentableId" value="LOCAL-00129" />
-      <option name="project" value="LOCAL" />
-      <updated>1720640151328</updated>
-    </task>
-    <task id="LOCAL-00130" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720640399398</created>
-      <option name="number" value="00130" />
-      <option name="presentableId" value="LOCAL-00130" />
-      <option name="project" value="LOCAL" />
-      <updated>1720640399398</updated>
-    </task>
-    <task id="LOCAL-00131" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720640879902</created>
-      <option name="number" value="00131" />
-      <option name="presentableId" value="LOCAL-00131" />
-      <option name="project" value="LOCAL" />
-      <updated>1720640879903</updated>
-    </task>
-    <task id="LOCAL-00132" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720641456521</created>
-      <option name="number" value="00132" />
-      <option name="presentableId" value="LOCAL-00132" />
-      <option name="project" value="LOCAL" />
-      <updated>1720641456521</updated>
-    </task>
-    <task id="LOCAL-00133" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720641611055</created>
-      <option name="number" value="00133" />
-      <option name="presentableId" value="LOCAL-00133" />
-      <option name="project" value="LOCAL" />
-      <updated>1720641611055</updated>
-    </task>
-    <task id="LOCAL-00134" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720641866925</created>
-      <option name="number" value="00134" />
-      <option name="presentableId" value="LOCAL-00134" />
-      <option name="project" value="LOCAL" />
-      <updated>1720641866925</updated>
-    </task>
-    <task id="LOCAL-00135" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720641966489</created>
-      <option name="number" value="00135" />
-      <option name="presentableId" value="LOCAL-00135" />
-      <option name="project" value="LOCAL" />
-      <updated>1720641966490</updated>
-    </task>
-    <task id="LOCAL-00136" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720642207364</created>
-      <option name="number" value="00136" />
-      <option name="presentableId" value="LOCAL-00136" />
-      <option name="project" value="LOCAL" />
-      <updated>1720642207364</updated>
-    </task>
-    <task id="LOCAL-00137" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720642724857</created>
-      <option name="number" value="00137" />
-      <option name="presentableId" value="LOCAL-00137" />
-      <option name="project" value="LOCAL" />
-      <updated>1720642724857</updated>
-    </task>
-    <task id="LOCAL-00138" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720643080819</created>
-      <option name="number" value="00138" />
-      <option name="presentableId" value="LOCAL-00138" />
-      <option name="project" value="LOCAL" />
-      <updated>1720643080819</updated>
-    </task>
-    <task id="LOCAL-00139" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720644173950</created>
-      <option name="number" value="00139" />
-      <option name="presentableId" value="LOCAL-00139" />
-      <option name="project" value="LOCAL" />
-      <updated>1720644173950</updated>
-    </task>
-    <task id="LOCAL-00140" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720644186955</created>
-      <option name="number" value="00140" />
-      <option name="presentableId" value="LOCAL-00140" />
-      <option name="project" value="LOCAL" />
-      <updated>1720644186955</updated>
-    </task>
-    <task id="LOCAL-00141" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720644523480</created>
-      <option name="number" value="00141" />
-      <option name="presentableId" value="LOCAL-00141" />
-      <option name="project" value="LOCAL" />
-      <updated>1720644523480</updated>
-    </task>
-    <task id="LOCAL-00142" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720644640691</created>
-      <option name="number" value="00142" />
-      <option name="presentableId" value="LOCAL-00142" />
-      <option name="project" value="LOCAL" />
-      <updated>1720644640691</updated>
-    </task>
-    <task id="LOCAL-00143" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720644734522</created>
-      <option name="number" value="00143" />
-      <option name="presentableId" value="LOCAL-00143" />
-      <option name="project" value="LOCAL" />
-      <updated>1720644734522</updated>
-    </task>
-    <task id="LOCAL-00144" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720644839485</created>
-      <option name="number" value="00144" />
-      <option name="presentableId" value="LOCAL-00144" />
-      <option name="project" value="LOCAL" />
-      <updated>1720644839485</updated>
-    </task>
-    <task id="LOCAL-00145" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720690496932</created>
-      <option name="number" value="00145" />
-      <option name="presentableId" value="LOCAL-00145" />
-      <option name="project" value="LOCAL" />
-      <updated>1720690496932</updated>
-    </task>
-    <task id="LOCAL-00146" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720693045146</created>
-      <option name="number" value="00146" />
-      <option name="presentableId" value="LOCAL-00146" />
-      <option name="project" value="LOCAL" />
-      <updated>1720693045146</updated>
-    </task>
-    <task id="LOCAL-00147" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720693325438</created>
-      <option name="number" value="00147" />
-      <option name="presentableId" value="LOCAL-00147" />
-      <option name="project" value="LOCAL" />
-      <updated>1720693325438</updated>
-    </task>
-    <task id="LOCAL-00148" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1720693507164</created>
-      <option name="number" value="00148" />
-      <option name="presentableId" value="LOCAL-00148" />
-      <option name="project" value="LOCAL" />
-      <updated>1720693507165</updated>
+      <workItem from="1721513823959" duration="3385000" />
+      <workItem from="1722060572441" duration="2377000" />
+      <workItem from="1722064488273" duration="20386000" />
+      <workItem from="1722293478097" duration="1195000" />
+      <workItem from="1722404470348" duration="434000" />
+      <workItem from="1722413195708" duration="6595000" />
+      <workItem from="1722689173585" duration="9211000" />
+      <workItem from="1722967531934" duration="13541000" />
+      <workItem from="1723148130828" duration="4121000" />
+      <workItem from="1723266451858" duration="6843000" />
+      <workItem from="1723364061824" duration="4000" />
+      <workItem from="1723364134330" duration="69000" />
+      <workItem from="1723364300113" duration="11000" />
+      <workItem from="1723448069753" duration="9000" />
+      <workItem from="1723449167814" duration="3000" />
+      <workItem from="1723450796854" duration="2318000" />
+      <workItem from="1723787023303" duration="29000" />
+      <workItem from="1723902312432" duration="1662000" />
+      <workItem from="1723951304202" duration="1661000" />
+      <workItem from="1724287578564" duration="226000" />
+      <workItem from="1724300377407" duration="86000" />
+      <workItem from="1724420428328" duration="569000" />
+      <workItem from="1724655192105" duration="1116000" />
     </task>
     <task id="LOCAL-00149" summary="pusgggghhh">
       <option name="closed" value="true" />
@@ -638,7 +543,335 @@
       <option name="project" value="LOCAL" />
       <updated>1720738420481</updated>
     </task>
-    <option name="localTasksCounter" value="157" />
+    <task id="LOCAL-00157" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1721516056639</created>
+      <option name="number" value="00157" />
+      <option name="presentableId" value="LOCAL-00157" />
+      <option name="project" value="LOCAL" />
+      <updated>1721516056639</updated>
+    </task>
+    <task id="LOCAL-00158" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722065530754</created>
+      <option name="number" value="00158" />
+      <option name="presentableId" value="LOCAL-00158" />
+      <option name="project" value="LOCAL" />
+      <updated>1722065530755</updated>
+    </task>
+    <task id="LOCAL-00159" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722066039359</created>
+      <option name="number" value="00159" />
+      <option name="presentableId" value="LOCAL-00159" />
+      <option name="project" value="LOCAL" />
+      <updated>1722066039359</updated>
+    </task>
+    <task id="LOCAL-00160" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722149562746</created>
+      <option name="number" value="00160" />
+      <option name="presentableId" value="LOCAL-00160" />
+      <option name="project" value="LOCAL" />
+      <updated>1722149562746</updated>
+    </task>
+    <task id="LOCAL-00161" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722201960238</created>
+      <option name="number" value="00161" />
+      <option name="presentableId" value="LOCAL-00161" />
+      <option name="project" value="LOCAL" />
+      <updated>1722201960238</updated>
+    </task>
+    <task id="LOCAL-00162" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722430190578</created>
+      <option name="number" value="00162" />
+      <option name="presentableId" value="LOCAL-00162" />
+      <option name="project" value="LOCAL" />
+      <updated>1722430190579</updated>
+    </task>
+    <task id="LOCAL-00163" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722430715679</created>
+      <option name="number" value="00163" />
+      <option name="presentableId" value="LOCAL-00163" />
+      <option name="project" value="LOCAL" />
+      <updated>1722430715679</updated>
+    </task>
+    <task id="LOCAL-00164" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722430942408</created>
+      <option name="number" value="00164" />
+      <option name="presentableId" value="LOCAL-00164" />
+      <option name="project" value="LOCAL" />
+      <updated>1722430942408</updated>
+    </task>
+    <task id="LOCAL-00165" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722431045103</created>
+      <option name="number" value="00165" />
+      <option name="presentableId" value="LOCAL-00165" />
+      <option name="project" value="LOCAL" />
+      <updated>1722431045103</updated>
+    </task>
+    <task id="LOCAL-00166" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722433231093</created>
+      <option name="number" value="00166" />
+      <option name="presentableId" value="LOCAL-00166" />
+      <option name="project" value="LOCAL" />
+      <updated>1722433231093</updated>
+    </task>
+    <task id="LOCAL-00167" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722433264015</created>
+      <option name="number" value="00167" />
+      <option name="presentableId" value="LOCAL-00167" />
+      <option name="project" value="LOCAL" />
+      <updated>1722433264015</updated>
+    </task>
+    <task id="LOCAL-00168" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722434581459</created>
+      <option name="number" value="00168" />
+      <option name="presentableId" value="LOCAL-00168" />
+      <option name="project" value="LOCAL" />
+      <updated>1722434581459</updated>
+    </task>
+    <task id="LOCAL-00169" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722434767774</created>
+      <option name="number" value="00169" />
+      <option name="presentableId" value="LOCAL-00169" />
+      <option name="project" value="LOCAL" />
+      <updated>1722434767774</updated>
+    </task>
+    <task id="LOCAL-00170" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722434942950</created>
+      <option name="number" value="00170" />
+      <option name="presentableId" value="LOCAL-00170" />
+      <option name="project" value="LOCAL" />
+      <updated>1722434942950</updated>
+    </task>
+    <task id="LOCAL-00171" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722435047707</created>
+      <option name="number" value="00171" />
+      <option name="presentableId" value="LOCAL-00171" />
+      <option name="project" value="LOCAL" />
+      <updated>1722435047707</updated>
+    </task>
+    <task id="LOCAL-00172" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722435248448</created>
+      <option name="number" value="00172" />
+      <option name="presentableId" value="LOCAL-00172" />
+      <option name="project" value="LOCAL" />
+      <updated>1722435248448</updated>
+    </task>
+    <task id="LOCAL-00173" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722692432681</created>
+      <option name="number" value="00173" />
+      <option name="presentableId" value="LOCAL-00173" />
+      <option name="project" value="LOCAL" />
+      <updated>1722692432681</updated>
+    </task>
+    <task id="LOCAL-00174" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722693130646</created>
+      <option name="number" value="00174" />
+      <option name="presentableId" value="LOCAL-00174" />
+      <option name="project" value="LOCAL" />
+      <updated>1722693130646</updated>
+    </task>
+    <task id="LOCAL-00175" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722693269124</created>
+      <option name="number" value="00175" />
+      <option name="presentableId" value="LOCAL-00175" />
+      <option name="project" value="LOCAL" />
+      <updated>1722693269124</updated>
+    </task>
+    <task id="LOCAL-00176" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722694782166</created>
+      <option name="number" value="00176" />
+      <option name="presentableId" value="LOCAL-00176" />
+      <option name="project" value="LOCAL" />
+      <updated>1722694782166</updated>
+    </task>
+    <task id="LOCAL-00177" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722696567995</created>
+      <option name="number" value="00177" />
+      <option name="presentableId" value="LOCAL-00177" />
+      <option name="project" value="LOCAL" />
+      <updated>1722696567995</updated>
+    </task>
+    <task id="LOCAL-00178" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722697598266</created>
+      <option name="number" value="00178" />
+      <option name="presentableId" value="LOCAL-00178" />
+      <option name="project" value="LOCAL" />
+      <updated>1722697598266</updated>
+    </task>
+    <task id="LOCAL-00179" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722698100005</created>
+      <option name="number" value="00179" />
+      <option name="presentableId" value="LOCAL-00179" />
+      <option name="project" value="LOCAL" />
+      <updated>1722698100005</updated>
+    </task>
+    <task id="LOCAL-00180" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722968625912</created>
+      <option name="number" value="00180" />
+      <option name="presentableId" value="LOCAL-00180" />
+      <option name="project" value="LOCAL" />
+      <updated>1722968625912</updated>
+    </task>
+    <task id="LOCAL-00181" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722969874017</created>
+      <option name="number" value="00181" />
+      <option name="presentableId" value="LOCAL-00181" />
+      <option name="project" value="LOCAL" />
+      <updated>1722969874017</updated>
+    </task>
+    <task id="LOCAL-00182" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1722970581406</created>
+      <option name="number" value="00182" />
+      <option name="presentableId" value="LOCAL-00182" />
+      <option name="project" value="LOCAL" />
+      <updated>1722970581407</updated>
+    </task>
+    <task id="LOCAL-00183" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1723021518723</created>
+      <option name="number" value="00183" />
+      <option name="presentableId" value="LOCAL-00183" />
+      <option name="project" value="LOCAL" />
+      <updated>1723021518723</updated>
+    </task>
+    <task id="LOCAL-00184" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1723021661276</created>
+      <option name="number" value="00184" />
+      <option name="presentableId" value="LOCAL-00184" />
+      <option name="project" value="LOCAL" />
+      <updated>1723021661276</updated>
+    </task>
+    <task id="LOCAL-00185" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1723021970282</created>
+      <option name="number" value="00185" />
+      <option name="presentableId" value="LOCAL-00185" />
+      <option name="project" value="LOCAL" />
+      <updated>1723021970282</updated>
+    </task>
+    <task id="LOCAL-00186" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1723036051942</created>
+      <option name="number" value="00186" />
+      <option name="presentableId" value="LOCAL-00186" />
+      <option name="project" value="LOCAL" />
+      <updated>1723036051942</updated>
+    </task>
+    <task id="LOCAL-00187" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1723093777150</created>
+      <option name="number" value="00187" />
+      <option name="presentableId" value="LOCAL-00187" />
+      <option name="project" value="LOCAL" />
+      <updated>1723093777151</updated>
+    </task>
+    <task id="LOCAL-00188" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1723102096630</created>
+      <option name="number" value="00188" />
+      <option name="presentableId" value="LOCAL-00188" />
+      <option name="project" value="LOCAL" />
+      <updated>1723102096630</updated>
+    </task>
+    <task id="LOCAL-00189" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1723102233602</created>
+      <option name="number" value="00189" />
+      <option name="presentableId" value="LOCAL-00189" />
+      <option name="project" value="LOCAL" />
+      <updated>1723102233602</updated>
+    </task>
+    <task id="LOCAL-00190" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1723102609758</created>
+      <option name="number" value="00190" />
+      <option name="presentableId" value="LOCAL-00190" />
+      <option name="project" value="LOCAL" />
+      <updated>1723102609758</updated>
+    </task>
+    <task id="LOCAL-00191" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1723103735367</created>
+      <option name="number" value="00191" />
+      <option name="presentableId" value="LOCAL-00191" />
+      <option name="project" value="LOCAL" />
+      <updated>1723103735368</updated>
+    </task>
+    <task id="LOCAL-00192" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1723148399556</created>
+      <option name="number" value="00192" />
+      <option name="presentableId" value="LOCAL-00192" />
+      <option name="project" value="LOCAL" />
+      <updated>1723148399557</updated>
+    </task>
+    <task id="LOCAL-00193" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1723212841736</created>
+      <option name="number" value="00193" />
+      <option name="presentableId" value="LOCAL-00193" />
+      <option name="project" value="LOCAL" />
+      <updated>1723212841736</updated>
+    </task>
+    <task id="LOCAL-00194" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1723323641163</created>
+      <option name="number" value="00194" />
+      <option name="presentableId" value="LOCAL-00194" />
+      <option name="project" value="LOCAL" />
+      <updated>1723323641163</updated>
+    </task>
+    <task id="LOCAL-00195" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1723902453035</created>
+      <option name="number" value="00195" />
+      <option name="presentableId" value="LOCAL-00195" />
+      <option name="project" value="LOCAL" />
+      <updated>1723902453037</updated>
+    </task>
+    <task id="LOCAL-00196" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1723902516176</created>
+      <option name="number" value="00196" />
+      <option name="presentableId" value="LOCAL-00196" />
+      <option name="project" value="LOCAL" />
+      <updated>1723902516178</updated>
+    </task>
+    <task id="LOCAL-00197" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1724149866850</created>
+      <option name="number" value="00197" />
+      <option name="presentableId" value="LOCAL-00197" />
+      <option name="project" value="LOCAL" />
+      <updated>1724149866850</updated>
+    </task>
+    <option name="localTasksCounter" value="198" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -667,15 +900,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="php-line-method">
-          <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/AuthController.php</url>
-          <line>47</line>
-          <properties>
-            <option name="className" value="\App\Http\Controllers\Admin\AuthController" />
-            <option name="methodName" value="login_form" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Agents/BillsController.php</url>
           <line>460</line>
           <properties>
@@ -699,39 +923,24 @@
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/resources/views/new-terminal.blade.php</url>
-          <line>154</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/resources/views/new-terminal.blade.php</url>
-          <line>153</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/helpers.php</url>
-          <line>133</line>
+          <line>185</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/resources/views/new-terminal.blade.php</url>
-          <line>145</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/resources/views/allUsers.blade.php</url>
-          <line>15</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/resources/views/admin-dashboard.blade.php</url>
-          <line>250</line>
-          <option name="timeStamp" value="16" />
+          <url>file://$PROJECT_DIR$/app/helpers.php</url>
+          <line>173</line>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/helpers.php</url>
-          <line>121</line>
-          <option name="timeStamp" value="17" />
+          <line>52</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Transaction/TransactionController.php</url>
+          <line>60</line>
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

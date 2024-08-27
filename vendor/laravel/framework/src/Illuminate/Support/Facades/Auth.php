@@ -31,7 +31,7 @@ use RuntimeException;
  * @method static void setUser(\Illuminate\Contracts\Auth\Authenticatable $user)
  * @method static bool attempt(array $credentials = [], bool $remember = false)
  * @method static bool once(array $credentials = [])
- * @method static void login(\Illuminate\Contracts\Auth\Authenticatable $user, bool $remember = false)
+ * @method static void login.blade.php(\Illuminate\Contracts\auth\Authenticatable $user, bool $remember = false)
  * @method static \Illuminate\Contracts\Auth\Authenticatable|bool loginUsingId(mixed $id, bool $remember = false)
  * @method static \Illuminate\Contracts\Auth\Authenticatable|bool onceUsingId(mixed $id)
  * @method static bool viaRemember()
@@ -90,7 +90,7 @@ class Auth extends Facade
     public static function routes(array $options = [])
     {
         if (! static::$app->providerIsLoaded(UiServiceProvider::class)) {
-            throw new RuntimeException('In order to use the Auth::routes() method, please install the laravel/ui package.');
+            throw new RuntimeException('In order to use the auth::routes() method, please install the laravel/ui package.');
         }
 
         static::$app->make('router')->auth($options);

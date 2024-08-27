@@ -33,14 +33,14 @@ class Acess
                 [
                     'status_code' => 401,
                     'status' => false,
-                    'message' => 'Token Expired, Please login to continue.',
+                    'message' => 'Token Expired, Please login.blade.php to continue.',
                 ], 401));
 
         }elseif (Auth::guard('api')->check() != true) {
             abort(response()->json(
                 [
                     'status' => false,
-                    'message' => 'Unauthorized!! Token Expired, Please login to continue',
+                    'message' => 'Unauthorized!! Token Expired, Please login.blade.php to continue',
                 ], 500));
         }
     }

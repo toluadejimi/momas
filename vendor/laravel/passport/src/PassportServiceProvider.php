@@ -184,7 +184,7 @@ class PassportServiceProvider extends ServiceProvider
     }
 
     /**
-     * Create and configure an instance of the Auth Code grant.
+     * Create and configure an instance of the auth Code grant.
      *
      * @return \League\OAuth2\Server\Grant\AuthCodeGrant
      */
@@ -196,7 +196,7 @@ class PassportServiceProvider extends ServiceProvider
     }
 
     /**
-     * Build the Auth Code grant instance.
+     * Build the auth Code grant instance.
      *
      * @return \League\OAuth2\Server\Grant\AuthCodeGrant
      */

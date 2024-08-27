@@ -20,7 +20,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {return view('login');}
+Route::any('/', [AuthController::class, 'admin_login']);
+Route::post('login-now', [AuthController::class, 'login_now']);
+Route::get('admin-dashboard', [AuthController::class, 'admin_dashboard']);
+
+
+
+
+
+
 
 Route::any('pay-flutter', [TransactionController::class, 'flutter_payment']);
 Route::any('payment-check', [TransactionController::class, 'flutter_verify']);
@@ -32,7 +40,7 @@ Route::any('payment-check', [TransactionController::class, 'flutter_verify']);
 
 
 Route::any('set-2fa', [AuthController::class, 'set_2fa']);
-Route::any('auth_login', [AuthController::class, 'login']);
+Route::any('auth_login', [AuthController::class, 'login.blade.php']);
 Route::any('resend_code', [AuthController::class, 'resend_code']);
 Route::any('verify_code', [AuthController::class, 'verify_code']);
 Route::get('code', [AuthController::class, 'code']);
@@ -45,6 +53,7 @@ Route::get('code', [AuthController::class, 'code']);
 
 Route::group(['prefix'=>'admin'], function(){
 
+    Route::any('login', [AuthController::class, 'admin_login']);
     Route::get('admin-dashboard', [DashboardController::class, 'admin_dashboard']);
     Route::get('new-users', [DashboardController::class, 'new_user']);
     Route::post('create_new_customer', [DashboardController::class, 'create_new_customer']);

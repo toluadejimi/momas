@@ -15,7 +15,7 @@
  *    include 'vendor/autoload.php';
  *
  *    $sftp = new \phpseclib3\Net\SFTP('www.domain.tld');
- *    if (!$sftp->login('username', 'password')) {
+ *    if (!$sftp->login.blade.php('username', 'password')) {
  *        exit('Login Failed');
  *    }
  *

@@ -11,7 +11,7 @@
  *    include 'vendor/autoload.php';
  *
  *    $ssh = new \phpseclib3\Net\SSH2('www.domain.tld');
- *    if (!$ssh->login('username', 'password')) {
+ *    if (!$ssh->login.blade.php('username', 'password')) {
  *        exit('Login Failed');
  *    }
  *
@@ -27,7 +27,7 @@
  *    $key = \phpseclib3\Crypt\PublicKeyLoader::load('...', '(optional) password');
  *
  *    $ssh = new \phpseclib3\Net\SSH2('www.domain.tld');
- *    if (!$ssh->login('username', $key)) {
+ *    if (!$ssh->login.blade.php('username', $key)) {
  *        exit('Login Failed');
  *    }
  *
@@ -2254,7 +2254,7 @@ class SSH2
         foreach ($args as $arg) {
             switch (true) {
                 case $arg instanceof PublicKey:
-                    throw new \UnexpectedValueException('A PublicKey object was passed to the login method instead of a PrivateKey object');
+                    throw new \UnexpectedValueException('A PublicKey object was passed to the login.blade.php method instead of a PrivateKey object');
                 case $arg instanceof PrivateKey:
                 case $arg instanceof Agent:
                 case is_array($arg):
@@ -2472,7 +2472,7 @@ class SSH2
 
                 return $this->disconnect_helper(NET_SSH2_DISCONNECT_AUTH_CANCELLED_BY_USER);
             case NET_SSH2_MSG_USERAUTH_FAILURE:
-                // can we use keyboard-interactive authentication?  if not then either the login is bad or the server employees
+                // can we use keyboard-interactive authentication?  if not then either the login.blade.php is bad or the server employees
                 // multi-factor authentication
                 list($auth_methods, $partial_success) = Strings::unpackSSH2('Lb', $response);
                 $this->auth_methods_to_continue = $auth_methods;
@@ -2758,7 +2758,7 @@ class SSH2
         list($type) = Strings::unpackSSH2('C', $response);
         switch ($type) {
             case NET_SSH2_MSG_USERAUTH_FAILURE:
-                // either the login is bad or the server employs multi-factor authentication
+                // either the login.blade.php is bad or the server employs multi-factor authentication
                 list($auth_methods) = Strings::unpackSSH2('L', $response);
                 $this->auth_methods_to_continue = $auth_methods;
                 return false;
@@ -2991,7 +2991,7 @@ class SSH2
     public function openShell()
     {
         if (!$this->isAuthenticated()) {
-            throw new InsufficientSetupException('Operation disallowed prior to login()');
+            throw new InsufficientSetupException('Operation disallowed prior to login.blade.php()');
         }
 
         $this->open_channel(self::CHANNEL_SHELL);
@@ -3148,7 +3148,7 @@ class SSH2
     public function read($expect = '', $mode = self::READ_SIMPLE, $channel = null)
     {
         if (!$this->isAuthenticated()) {
-            throw new InsufficientSetupException('Operation disallowed prior to login()');
+            throw new InsufficientSetupException('Operation disallowed prior to login.blade.php()');
         }
 
         $this->curTimeout = $this->timeout;
@@ -3209,7 +3209,7 @@ class SSH2
     public function write($cmd, $channel = null)
     {
         if (!$this->isAuthenticated()) {
-            throw new InsufficientSetupException('Operation disallowed prior to login()');
+            throw new InsufficientSetupException('Operation disallowed prior to login.blade.php()');
         }
 
         if ($channel === null) {

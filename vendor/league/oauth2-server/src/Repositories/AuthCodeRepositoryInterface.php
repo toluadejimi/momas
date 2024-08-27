@@ -13,7 +13,7 @@ use League\OAuth2\Server\Entities\AuthCodeEntityInterface;
 use League\OAuth2\Server\Exception\UniqueTokenIdentifierConstraintViolationException;
 
 /**
- * Auth code storage interface.
+ * auth code storage interface.
  */
 interface AuthCodeRepositoryInterface extends RepositoryInterface
 {

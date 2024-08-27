@@ -43,8 +43,8 @@ use function hexdec;
  *
  * @link https://publications.opengroup.org/c311 DCE 1.1: Authentication and Security Services
  * @link https://publications.opengroup.org/c706 DCE 1.1: Remote Procedure Call
- * @link https://pubs.opengroup.org/onlinepubs/9696989899/chap5.htm#tagcjh_08_02_01_01 DCE 1.1: Auth & Sec, §5.2.1.1
- * @link https://pubs.opengroup.org/onlinepubs/9696989899/chap11.htm#tagcjh_14_05_01_01 DCE 1.1: Auth & Sec, §11.5.1.1
+ * @link https://pubs.opengroup.org/onlinepubs/9696989899/chap5.htm#tagcjh_08_02_01_01 DCE 1.1: auth & Sec, §5.2.1.1
+ * @link https://pubs.opengroup.org/onlinepubs/9696989899/chap11.htm#tagcjh_14_05_01_01 DCE 1.1: auth & Sec, §11.5.1.1
  * @link https://pubs.opengroup.org/onlinepubs/9629399/apdxa.htm DCE 1.1: RPC, Appendix A
  * @link https://github.com/google/uuid Go package for UUIDs (includes DCE implementation)
  *

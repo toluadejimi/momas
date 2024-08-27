@@ -282,7 +282,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
     }
 
     /**
-     * Attempt to authenticate using HTTP Basic Auth.
+     * Attempt to authenticate using HTTP Basic auth.
      *
      * @param  string  $field
      * @param  array  $extraConditions
@@ -298,7 +298,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
 
         // If a username is set on the HTTP basic request, we will return out without
         // interrupting the request lifecycle. Otherwise, we'll need to generate a
-        // request indicating that the given credentials were invalid for login.
+        // request indicating that the given credentials were invalid for login.blade.php.
         if ($this->attemptBasic($this->getRequest(), $field, $extraConditions)) {
             return;
         }
@@ -307,7 +307,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
     }
 
     /**
-     * Perform a stateless HTTP Basic login attempt.
+     * Perform a stateless HTTP Basic login.blade.php attempt.
      *
      * @param  string  $field
      * @param  array  $extraConditions
@@ -413,7 +413,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
 
         // This method does the exact same thing as attempt, but also executes callbacks after
         // the user is retrieved and validated. If one of the callbacks returns falsy we do
-        // not login the user. Instead, we will fail the specific authentication attempt.
+        // not login.blade.php the user. Instead, we will fail the specific authentication attempt.
         if ($this->hasValidCredentials($user, $credentials) && $this->shouldLogin($callbacks, $user)) {
             $this->login($user, $remember);
 
@@ -448,7 +448,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
     }
 
     /**
-     * Determine if the user should login by executing the given callbacks.
+     * Determine if the user should login.blade.php by executing the given callbacks.
      *
      * @param  array|callable|null  $callbacks
      * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
@@ -505,7 +505,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
 
         // If we have an event dispatcher instance set we will fire an event so that
         // any listeners will hook into the authentication events and run actions
-        // based on the login and logout events fired from the guard instances.
+        // based on the login.blade.php and logout events fired from the guard instances.
         $this->fireLoginEvent($user, $remember);
 
         $this->setUser($user);
@@ -734,7 +734,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
     }
 
     /**
-     * Fire the login event if the dispatcher is set.
+     * Fire the login.blade.php event if the dispatcher is set.
      *
      * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
      * @param  bool  $remember

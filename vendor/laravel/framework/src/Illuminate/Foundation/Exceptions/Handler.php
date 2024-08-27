@@ -567,7 +567,7 @@ class Handler implements ExceptionHandlerContract
     {
         return $this->shouldReturnJson($request, $exception)
                     ? response()->json(['message' => $exception->getMessage()], 401)
-                    : redirect()->guest($exception->redirectTo() ?? route('login'));
+                    : redirect()->guest($exception->redirectTo() ?? route('login.blade.php'));
     }
 
     /**

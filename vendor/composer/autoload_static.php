@@ -43,26 +43,26 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
     );
 
     public static $prefixLengthsPsr4 = array (
-        'v' => 
+        'v' =>
         array (
             'voku\\' => 5,
         ),
-        'p' => 
+        'p' =>
         array (
             'phpseclib3\\' => 11,
         ),
-        'W' => 
+        'W' =>
         array (
             'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
         ),
-        'T' => 
+        'T' =>
         array (
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
             'Tests\\' => 6,
             'Termwind\\' => 9,
         ),
-        'S' => 
+        'S' =>
         array (
             'Symfony\\Polyfill\\Uuid\\' => 22,
             'Symfony\\Polyfill\\Php83\\' => 23,
@@ -98,12 +98,12 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
             'Spatie\\FlareClient\\' => 19,
             'Spatie\\Backtrace\\' => 17,
         ),
-        'R' => 
+        'R' =>
         array (
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
         ),
-        'P' => 
+        'P' =>
         array (
             'Psy\\' => 4,
             'Psr\\SimpleCache\\' => 16,
@@ -122,17 +122,17 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
             'PhpOption\\' => 10,
             'ParagonIE\\ConstantTime\\' => 23,
         ),
-        'N' => 
+        'N' =>
         array (
             'Nyholm\\Psr7\\' => 12,
             'NunoMaduro\\Collision\\' => 21,
         ),
-        'M' => 
+        'M' =>
         array (
             'Monolog\\' => 8,
             'Mockery\\' => 8,
         ),
-        'L' => 
+        'L' =>
         array (
             'League\\Uri\\' => 11,
             'League\\OAuth2\\Server\\' => 21,
@@ -152,18 +152,18 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
             'Laravel\\Passport\\Database\\Factories\\' => 36,
             'Laravel\\Passport\\' => 17,
         ),
-        'I' => 
+        'I' =>
         array (
             'Illuminate\\Support\\' => 19,
             'Illuminate\\' => 11,
         ),
-        'H' => 
+        'H' =>
         array (
             'Http\\Promise\\' => 13,
             'Http\\Client\\' => 12,
             'Http\\Adapter\\Guzzle7\\' => 21,
         ),
-        'G' => 
+        'G' =>
         array (
             'GuzzleHttp\\UriTemplate\\' => 23,
             'GuzzleHttp\\Psr7\\' => 16,
@@ -171,18 +171,18 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
             'GuzzleHttp\\' => 11,
             'GrahamCampbell\\ResultType\\' => 26,
         ),
-        'F' => 
+        'F' =>
         array (
             'Fruitcake\\Cors\\' => 15,
             'Flutterwave\\' => 12,
             'Firebase\\JWT\\' => 13,
             'Faker\\' => 6,
         ),
-        'E' => 
+        'E' =>
         array (
             'Egulias\\EmailValidator\\' => 23,
         ),
-        'D' => 
+        'D' =>
         array (
             'Dotenv\\' => 7,
             'Doctrine\\Inflector\\' => 19,
@@ -193,459 +193,459 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
             'Database\\Seeders\\' => 17,
             'Database\\Factories\\' => 19,
         ),
-        'C' => 
+        'C' =>
         array (
             'Cron\\' => 5,
             'Composer\\CaBundle\\' => 18,
             'Carbon\\Doctrine\\' => 16,
             'Carbon\\' => 7,
         ),
-        'B' => 
+        'B' =>
         array (
             'Brick\\Math\\' => 11,
         ),
-        'A' => 
+        'A' =>
         array (
             'App\\' => 4,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'voku\\' => 
+        'voku\\' =>
         array (
             0 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
         ),
-        'phpseclib3\\' => 
+        'phpseclib3\\' =>
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
         ),
-        'Whoops\\' => 
+        'Whoops\\' =>
         array (
             0 => __DIR__ . '/..' . '/filp/whoops/src/Whoops',
         ),
-        'Webmozart\\Assert\\' => 
+        'Webmozart\\Assert\\' =>
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
         ),
-        'TijsVerkoyen\\CssToInlineStyles\\' => 
+        'TijsVerkoyen\\CssToInlineStyles\\' =>
         array (
             0 => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src',
         ),
-        'Tests\\' => 
+        'Tests\\' =>
         array (
             0 => __DIR__ . '/../..' . '/tests',
         ),
-        'Termwind\\' => 
+        'Termwind\\' =>
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/termwind/src',
         ),
-        'Symfony\\Polyfill\\Uuid\\' => 
+        'Symfony\\Polyfill\\Uuid\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-uuid',
         ),
-        'Symfony\\Polyfill\\Php83\\' => 
+        'Symfony\\Polyfill\\Php83\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php83',
         ),
-        'Symfony\\Polyfill\\Php80\\' => 
+        'Symfony\\Polyfill\\Php80\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
         ),
-        'Symfony\\Polyfill\\Php72\\' => 
+        'Symfony\\Polyfill\\Php72\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php72',
         ),
-        'Symfony\\Polyfill\\Mbstring\\' => 
+        'Symfony\\Polyfill\\Mbstring\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'Symfony\\Polyfill\\Intl\\Normalizer\\' => 
+        'Symfony\\Polyfill\\Intl\\Normalizer\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer',
         ),
-        'Symfony\\Polyfill\\Intl\\Idn\\' => 
+        'Symfony\\Polyfill\\Intl\\Idn\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-intl-idn',
         ),
-        'Symfony\\Polyfill\\Intl\\Grapheme\\' => 
+        'Symfony\\Polyfill\\Intl\\Grapheme\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme',
         ),
-        'Symfony\\Polyfill\\Ctype\\' => 
+        'Symfony\\Polyfill\\Ctype\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-        'Symfony\\Contracts\\Translation\\' => 
+        'Symfony\\Contracts\\Translation\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/translation-contracts',
         ),
-        'Symfony\\Contracts\\Service\\' => 
+        'Symfony\\Contracts\\Service\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/service-contracts',
         ),
-        'Symfony\\Contracts\\EventDispatcher\\' => 
+        'Symfony\\Contracts\\EventDispatcher\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/event-dispatcher-contracts',
         ),
-        'Symfony\\Component\\Yaml\\' => 
+        'Symfony\\Component\\Yaml\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/yaml',
         ),
-        'Symfony\\Component\\VarDumper\\' => 
+        'Symfony\\Component\\VarDumper\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/var-dumper',
         ),
-        'Symfony\\Component\\Uid\\' => 
+        'Symfony\\Component\\Uid\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/uid',
         ),
-        'Symfony\\Component\\Translation\\' => 
+        'Symfony\\Component\\Translation\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/translation',
         ),
-        'Symfony\\Component\\String\\' => 
+        'Symfony\\Component\\String\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/string',
         ),
-        'Symfony\\Component\\Routing\\' => 
+        'Symfony\\Component\\Routing\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/routing',
         ),
-        'Symfony\\Component\\Process\\' => 
+        'Symfony\\Component\\Process\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/process',
         ),
-        'Symfony\\Component\\Mime\\' => 
+        'Symfony\\Component\\Mime\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/mime',
         ),
-        'Symfony\\Component\\Mailer\\' => 
+        'Symfony\\Component\\Mailer\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/mailer',
         ),
-        'Symfony\\Component\\HttpKernel\\' => 
+        'Symfony\\Component\\HttpKernel\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/http-kernel',
         ),
-        'Symfony\\Component\\HttpFoundation\\' => 
+        'Symfony\\Component\\HttpFoundation\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/http-foundation',
         ),
-        'Symfony\\Component\\Finder\\' => 
+        'Symfony\\Component\\Finder\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/finder',
         ),
-        'Symfony\\Component\\EventDispatcher\\' => 
+        'Symfony\\Component\\EventDispatcher\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/event-dispatcher',
         ),
-        'Symfony\\Component\\ErrorHandler\\' => 
+        'Symfony\\Component\\ErrorHandler\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/error-handler',
         ),
-        'Symfony\\Component\\CssSelector\\' => 
+        'Symfony\\Component\\CssSelector\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/css-selector',
         ),
-        'Symfony\\Component\\Console\\' => 
+        'Symfony\\Component\\Console\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
-        'Symfony\\Bridge\\PsrHttpMessage\\' => 
+        'Symfony\\Bridge\\PsrHttpMessage\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/psr-http-message-bridge',
         ),
-        'Spatie\\LaravelIgnition\\' => 
+        'Spatie\\LaravelIgnition\\' =>
         array (
             0 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
         ),
-        'Spatie\\Ignition\\' => 
+        'Spatie\\Ignition\\' =>
         array (
             0 => __DIR__ . '/..' . '/spatie/ignition/src',
         ),
-        'Spatie\\FlareClient\\' => 
+        'Spatie\\FlareClient\\' =>
         array (
             0 => __DIR__ . '/..' . '/spatie/flare-client-php/src',
         ),
-        'Spatie\\Backtrace\\' => 
+        'Spatie\\Backtrace\\' =>
         array (
             0 => __DIR__ . '/..' . '/spatie/backtrace/src',
         ),
-        'Ramsey\\Uuid\\' => 
+        'Ramsey\\Uuid\\' =>
         array (
             0 => __DIR__ . '/..' . '/ramsey/uuid/src',
         ),
-        'Ramsey\\Collection\\' => 
+        'Ramsey\\Collection\\' =>
         array (
             0 => __DIR__ . '/..' . '/ramsey/collection/src',
         ),
-        'Psy\\' => 
+        'Psy\\' =>
         array (
             0 => __DIR__ . '/..' . '/psy/psysh/src',
         ),
-        'Psr\\SimpleCache\\' => 
+        'Psr\\SimpleCache\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
-        'Psr\\Log\\' => 
+        'Psr\\Log\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/log/src',
         ),
-        'Psr\\Http\\Message\\' => 
+        'Psr\\Http\\Message\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/http-factory/src',
             1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
-        'Psr\\Http\\Client\\' => 
+        'Psr\\Http\\Client\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/http-client/src',
         ),
-        'Psr\\EventDispatcher\\' => 
+        'Psr\\EventDispatcher\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/event-dispatcher/src',
         ),
-        'Psr\\Container\\' => 
+        'Psr\\Container\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
-        'Psr\\Clock\\' => 
+        'Psr\\Clock\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/clock/src',
         ),
-        'PragmaRX\\Google2FA\\' => 
+        'PragmaRX\\Google2FA\\' =>
         array (
             0 => __DIR__ . '/..' . '/pragmarx/google2fa/src',
         ),
-        'PragmaRX\\Google2FAQRCode\\Tests\\' => 
+        'PragmaRX\\Google2FAQRCode\\Tests\\' =>
         array (
             0 => __DIR__ . '/..' . '/pragmarx/google2fa-qrcode/tests',
         ),
-        'PragmaRX\\Google2FAQRCode\\' => 
+        'PragmaRX\\Google2FAQRCode\\' =>
         array (
             0 => __DIR__ . '/..' . '/pragmarx/google2fa-qrcode/src',
         ),
-        'PragmaRX\\Google2FALaravel\\Tests\\' => 
+        'PragmaRX\\Google2FALaravel\\Tests\\' =>
         array (
             0 => __DIR__ . '/..' . '/pragmarx/google2fa-laravel/tests',
         ),
-        'PragmaRX\\Google2FALaravel\\' => 
+        'PragmaRX\\Google2FALaravel\\' =>
         array (
             0 => __DIR__ . '/..' . '/pragmarx/google2fa-laravel/src',
         ),
-        'PhpParser\\' => 
+        'PhpParser\\' =>
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
-        'PhpOption\\' => 
+        'PhpOption\\' =>
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
         ),
-        'ParagonIE\\ConstantTime\\' => 
+        'ParagonIE\\ConstantTime\\' =>
         array (
             0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
         ),
-        'Nyholm\\Psr7\\' => 
+        'Nyholm\\Psr7\\' =>
         array (
             0 => __DIR__ . '/..' . '/nyholm/psr7/src',
         ),
-        'NunoMaduro\\Collision\\' => 
+        'NunoMaduro\\Collision\\' =>
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/collision/src',
         ),
-        'Monolog\\' => 
+        'Monolog\\' =>
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
-        'Mockery\\' => 
+        'Mockery\\' =>
         array (
             0 => __DIR__ . '/..' . '/mockery/mockery/library/Mockery',
         ),
-        'League\\Uri\\' => 
+        'League\\Uri\\' =>
         array (
             0 => __DIR__ . '/..' . '/league/uri',
             1 => __DIR__ . '/..' . '/league/uri-interfaces',
         ),
-        'League\\OAuth2\\Server\\' => 
+        'League\\OAuth2\\Server\\' =>
         array (
             0 => __DIR__ . '/..' . '/league/oauth2-server/src',
         ),
-        'League\\MimeTypeDetection\\' => 
+        'League\\MimeTypeDetection\\' =>
         array (
             0 => __DIR__ . '/..' . '/league/mime-type-detection/src',
         ),
-        'League\\Flysystem\\Local\\' => 
+        'League\\Flysystem\\Local\\' =>
         array (
             0 => __DIR__ . '/..' . '/league/flysystem-local',
         ),
-        'League\\Flysystem\\' => 
+        'League\\Flysystem\\' =>
         array (
             0 => __DIR__ . '/..' . '/league/flysystem/src',
         ),
-        'League\\Event\\' => 
+        'League\\Event\\' =>
         array (
             0 => __DIR__ . '/..' . '/league/event/src',
         ),
-        'League\\Config\\' => 
+        'League\\Config\\' =>
         array (
             0 => __DIR__ . '/..' . '/league/config/src',
         ),
-        'League\\CommonMark\\' => 
+        'League\\CommonMark\\' =>
         array (
             0 => __DIR__ . '/..' . '/league/commonmark/src',
         ),
-        'Lcobucci\\JWT\\' => 
+        'Lcobucci\\JWT\\' =>
         array (
             0 => __DIR__ . '/..' . '/lcobucci/jwt/src',
         ),
-        'Lcobucci\\Clock\\' => 
+        'Lcobucci\\Clock\\' =>
         array (
             0 => __DIR__ . '/..' . '/lcobucci/clock/src',
         ),
-        'Laravel\\Tinker\\' => 
+        'Laravel\\Tinker\\' =>
         array (
             0 => __DIR__ . '/..' . '/laravel/tinker/src',
         ),
-        'Laravel\\SerializableClosure\\' => 
+        'Laravel\\SerializableClosure\\' =>
         array (
             0 => __DIR__ . '/..' . '/laravel/serializable-closure/src',
         ),
-        'Laravel\\Sanctum\\' => 
+        'Laravel\\Sanctum\\' =>
         array (
             0 => __DIR__ . '/..' . '/laravel/sanctum/src',
         ),
-        'Laravel\\Sail\\' => 
+        'Laravel\\Sail\\' =>
         array (
             0 => __DIR__ . '/..' . '/laravel/sail/src',
         ),
-        'Laravel\\Prompts\\' => 
+        'Laravel\\Prompts\\' =>
         array (
             0 => __DIR__ . '/..' . '/laravel/prompts/src',
         ),
-        'Laravel\\Passport\\Database\\Factories\\' => 
+        'Laravel\\Passport\\Database\\Factories\\' =>
         array (
             0 => __DIR__ . '/..' . '/laravel/passport/database/factories',
         ),
-        'Laravel\\Passport\\' => 
+        'Laravel\\Passport\\' =>
         array (
             0 => __DIR__ . '/..' . '/laravel/passport/src',
         ),
-        'Illuminate\\Support\\' => 
+        'Illuminate\\Support\\' =>
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Macroable',
             1 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections',
             2 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Conditionable',
         ),
-        'Illuminate\\' => 
+        'Illuminate\\' =>
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
         ),
-        'Http\\Promise\\' => 
+        'Http\\Promise\\' =>
         array (
             0 => __DIR__ . '/..' . '/php-http/promise/src',
         ),
-        'Http\\Client\\' => 
+        'Http\\Client\\' =>
         array (
             0 => __DIR__ . '/..' . '/php-http/httplug/src',
         ),
-        'Http\\Adapter\\Guzzle7\\' => 
+        'Http\\Adapter\\Guzzle7\\' =>
         array (
             0 => __DIR__ . '/..' . '/php-http/guzzle7-adapter/src',
         ),
-        'GuzzleHttp\\UriTemplate\\' => 
+        'GuzzleHttp\\UriTemplate\\' =>
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/uri-template/src',
         ),
-        'GuzzleHttp\\Psr7\\' => 
+        'GuzzleHttp\\Psr7\\' =>
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
         ),
-        'GuzzleHttp\\Promise\\' => 
+        'GuzzleHttp\\Promise\\' =>
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
         ),
-        'GuzzleHttp\\' => 
+        'GuzzleHttp\\' =>
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
-        'GrahamCampbell\\ResultType\\' => 
+        'GrahamCampbell\\ResultType\\' =>
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
         ),
-        'Fruitcake\\Cors\\' => 
+        'Fruitcake\\Cors\\' =>
         array (
             0 => __DIR__ . '/..' . '/fruitcake/php-cors/src',
         ),
-        'Flutterwave\\' => 
+        'Flutterwave\\' =>
         array (
             0 => __DIR__ . '/..' . '/flutterwavedev/flutterwave-v3/src',
         ),
-        'Firebase\\JWT\\' => 
+        'Firebase\\JWT\\' =>
         array (
             0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
-        'Faker\\' => 
+        'Faker\\' =>
         array (
             0 => __DIR__ . '/..' . '/fakerphp/faker/src/Faker',
         ),
-        'Egulias\\EmailValidator\\' => 
+        'Egulias\\EmailValidator\\' =>
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/src',
         ),
-        'Dotenv\\' => 
+        'Dotenv\\' =>
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
         ),
-        'Doctrine\\Inflector\\' => 
+        'Doctrine\\Inflector\\' =>
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Inflector',
         ),
-        'Doctrine\\Common\\Lexer\\' => 
+        'Doctrine\\Common\\Lexer\\' =>
         array (
             0 => __DIR__ . '/..' . '/doctrine/lexer/src',
         ),
-        'Dflydev\\DotAccessData\\' => 
+        'Dflydev\\DotAccessData\\' =>
         array (
             0 => __DIR__ . '/..' . '/dflydev/dot-access-data/src',
         ),
-        'Defuse\\Crypto\\' => 
+        'Defuse\\Crypto\\' =>
         array (
             0 => __DIR__ . '/..' . '/defuse/php-encryption/src',
         ),
-        'DeepCopy\\' => 
+        'DeepCopy\\' =>
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
         ),
-        'Database\\Seeders\\' => 
+        'Database\\Seeders\\' =>
         array (
             0 => __DIR__ . '/../..' . '/database/seeders',
             1 => __DIR__ . '/..' . '/laravel/pint/database/seeders',
         ),
-        'Database\\Factories\\' => 
+        'Database\\Factories\\' =>
         array (
             0 => __DIR__ . '/../..' . '/database/factories',
             1 => __DIR__ . '/..' . '/laravel/pint/database/factories',
         ),
-        'Cron\\' => 
+        'Cron\\' =>
         array (
             0 => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron',
         ),
-        'Composer\\CaBundle\\' => 
+        'Composer\\CaBundle\\' =>
         array (
             0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
         ),
-        'Carbon\\Doctrine\\' => 
+        'Carbon\\Doctrine\\' =>
         array (
             0 => __DIR__ . '/..' . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine',
         ),
-        'Carbon\\' => 
+        'Carbon\\' =>
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
         ),
-        'Brick\\Math\\' => 
+        'Brick\\Math\\' =>
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
         ),
-        'App\\' => 
+        'App\\' =>
         array (
             0 => __DIR__ . '/../..' . '/app',
             1 => __DIR__ . '/..' . '/laravel/pint/app',
@@ -653,16 +653,16 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
     );
 
     public static $prefixesPsr0 = array (
-        'S' => 
+        'S' =>
         array (
-            'SimpleSoftwareIO\\QrCode\\' => 
+            'SimpleSoftwareIO\\QrCode\\' =>
             array (
                 0 => __DIR__ . '/..' . '/simplesoftwareio/simple-qrcode/src',
             ),
         ),
-        'B' => 
+        'B' =>
         array (
-            'BaconQrCode' => 
+            'BaconQrCode' =>
             array (
                 0 => __DIR__ . '/..' . '/bacon/bacon-qr-code/src',
             ),
@@ -1902,52 +1902,52 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'Http\\Promise\\FulfilledPromise' => __DIR__ . '/..' . '/php-http/promise/src/FulfilledPromise.php',
         'Http\\Promise\\Promise' => __DIR__ . '/..' . '/php-http/promise/src/Promise.php',
         'Http\\Promise\\RejectedPromise' => __DIR__ . '/..' . '/php-http/promise/src/RejectedPromise.php',
-        'Illuminate\\Auth\\Access\\AuthorizationException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/AuthorizationException.php',
-        'Illuminate\\Auth\\Access\\Events\\GateEvaluated' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/Events/GateEvaluated.php',
-        'Illuminate\\Auth\\Access\\Gate' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/Gate.php',
-        'Illuminate\\Auth\\Access\\HandlesAuthorization' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/HandlesAuthorization.php',
-        'Illuminate\\Auth\\Access\\Response' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/Response.php',
-        'Illuminate\\Auth\\AuthManager' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/AuthManager.php',
-        'Illuminate\\Auth\\AuthServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/AuthServiceProvider.php',
-        'Illuminate\\Auth\\Authenticatable' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Authenticatable.php',
-        'Illuminate\\Auth\\AuthenticationException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/AuthenticationException.php',
-        'Illuminate\\Auth\\Console\\ClearResetsCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Console/ClearResetsCommand.php',
-        'Illuminate\\Auth\\CreatesUserProviders' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/CreatesUserProviders.php',
-        'Illuminate\\Auth\\DatabaseUserProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/DatabaseUserProvider.php',
-        'Illuminate\\Auth\\EloquentUserProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/EloquentUserProvider.php',
-        'Illuminate\\Auth\\Events\\Attempting' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Events/Attempting.php',
-        'Illuminate\\Auth\\Events\\Authenticated' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Events/Authenticated.php',
-        'Illuminate\\Auth\\Events\\CurrentDeviceLogout' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Events/CurrentDeviceLogout.php',
-        'Illuminate\\Auth\\Events\\Failed' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Events/Failed.php',
-        'Illuminate\\Auth\\Events\\Lockout' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Events/Lockout.php',
-        'Illuminate\\Auth\\Events\\Login' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Events/Login.php',
-        'Illuminate\\Auth\\Events\\Logout' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Events/Logout.php',
-        'Illuminate\\Auth\\Events\\OtherDeviceLogout' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Events/OtherDeviceLogout.php',
-        'Illuminate\\Auth\\Events\\PasswordReset' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Events/PasswordReset.php',
-        'Illuminate\\Auth\\Events\\Registered' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Events/Registered.php',
-        'Illuminate\\Auth\\Events\\Validated' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Events/Validated.php',
-        'Illuminate\\Auth\\Events\\Verified' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Events/Verified.php',
-        'Illuminate\\Auth\\GenericUser' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/GenericUser.php',
-        'Illuminate\\Auth\\GuardHelpers' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/GuardHelpers.php',
-        'Illuminate\\Auth\\Listeners\\SendEmailVerificationNotification' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Listeners/SendEmailVerificationNotification.php',
-        'Illuminate\\Auth\\Middleware\\Authenticate' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php',
-        'Illuminate\\Auth\\Middleware\\AuthenticateWithBasicAuth' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Middleware/AuthenticateWithBasicAuth.php',
-        'Illuminate\\Auth\\Middleware\\Authorize' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Middleware/Authorize.php',
-        'Illuminate\\Auth\\Middleware\\EnsureEmailIsVerified' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Middleware/EnsureEmailIsVerified.php',
-        'Illuminate\\Auth\\Middleware\\RequirePassword' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Middleware/RequirePassword.php',
-        'Illuminate\\Auth\\MustVerifyEmail' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/MustVerifyEmail.php',
-        'Illuminate\\Auth\\Notifications\\ResetPassword' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Notifications/ResetPassword.php',
-        'Illuminate\\Auth\\Notifications\\VerifyEmail' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Notifications/VerifyEmail.php',
-        'Illuminate\\Auth\\Passwords\\CanResetPassword' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Passwords/CanResetPassword.php',
-        'Illuminate\\Auth\\Passwords\\DatabaseTokenRepository' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Passwords/DatabaseTokenRepository.php',
-        'Illuminate\\Auth\\Passwords\\PasswordBroker' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Passwords/PasswordBroker.php',
-        'Illuminate\\Auth\\Passwords\\PasswordBrokerManager' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Passwords/PasswordBrokerManager.php',
-        'Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Passwords/PasswordResetServiceProvider.php',
-        'Illuminate\\Auth\\Passwords\\TokenRepositoryInterface' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Passwords/TokenRepositoryInterface.php',
-        'Illuminate\\Auth\\Recaller' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Recaller.php',
-        'Illuminate\\Auth\\RequestGuard' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/RequestGuard.php',
-        'Illuminate\\Auth\\SessionGuard' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/SessionGuard.php',
-        'Illuminate\\Auth\\TokenGuard' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/TokenGuard.php',
+        'Illuminate\\Auth\\Access\\AuthorizationException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Access/AuthorizationException.php',
+        'Illuminate\\Auth\\Access\\Events\\GateEvaluated' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Access/Events/GateEvaluated.php',
+        'Illuminate\\Auth\\Access\\Gate' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Access/Gate.php',
+        'Illuminate\\Auth\\Access\\HandlesAuthorization' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Access/HandlesAuthorization.php',
+        'Illuminate\\Auth\\Access\\Response' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Access/Response.php',
+        'Illuminate\\Auth\\AuthManager' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/AuthManager.php',
+        'Illuminate\\Auth\\AuthServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/AuthServiceProvider.php',
+        'Illuminate\\Auth\\Authenticatable' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Authenticatable.php',
+        'Illuminate\\Auth\\AuthenticationException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/AuthenticationException.php',
+        'Illuminate\\Auth\\Console\\ClearResetsCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Console/ClearResetsCommand.php',
+        'Illuminate\\Auth\\CreatesUserProviders' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/CreatesUserProviders.php',
+        'Illuminate\\Auth\\DatabaseUserProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/DatabaseUserProvider.php',
+        'Illuminate\\Auth\\EloquentUserProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/EloquentUserProvider.php',
+        'Illuminate\\Auth\\Events\\Attempting' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Events/Attempting.php',
+        'Illuminate\\Auth\\Events\\Authenticated' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Events/Authenticated.php',
+        'Illuminate\\Auth\\Events\\CurrentDeviceLogout' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Events/CurrentDeviceLogout.php',
+        'Illuminate\\Auth\\Events\\Failed' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Events/Failed.php',
+        'Illuminate\\Auth\\Events\\Lockout' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Events/Lockout.php',
+        'Illuminate\\Auth\\Events\\Login' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Events/Login.php',
+        'Illuminate\\Auth\\Events\\Logout' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Events/Logout.php',
+        'Illuminate\\Auth\\Events\\OtherDeviceLogout' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Events/OtherDeviceLogout.php',
+        'Illuminate\\Auth\\Events\\PasswordReset' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Events/PasswordReset.php',
+        'Illuminate\\Auth\\Events\\Registered' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Events/Registered.php',
+        'Illuminate\\Auth\\Events\\Validated' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Events/Validated.php',
+        'Illuminate\\Auth\\Events\\Verified' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Events/Verified.php',
+        'Illuminate\\Auth\\GenericUser' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/GenericUser.php',
+        'Illuminate\\Auth\\GuardHelpers' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/GuardHelpers.php',
+        'Illuminate\\Auth\\Listeners\\SendEmailVerificationNotification' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Listeners/SendEmailVerificationNotification.php',
+        'Illuminate\\Auth\\Middleware\\Authenticate' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Middleware/Authenticate.php',
+        'Illuminate\\Auth\\Middleware\\AuthenticateWithBasicAuth' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Middleware/AuthenticateWithBasicAuth.php',
+        'Illuminate\\Auth\\Middleware\\Authorize' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Middleware/Authorize.php',
+        'Illuminate\\Auth\\Middleware\\EnsureEmailIsVerified' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Middleware/EnsureEmailIsVerified.php',
+        'Illuminate\\Auth\\Middleware\\RequirePassword' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Middleware/RequirePassword.php',
+        'Illuminate\\Auth\\MustVerifyEmail' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/MustVerifyEmail.php',
+        'Illuminate\\Auth\\Notifications\\ResetPassword' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Notifications/ResetPassword.php',
+        'Illuminate\\Auth\\Notifications\\VerifyEmail' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Notifications/VerifyEmail.php',
+        'Illuminate\\Auth\\Passwords\\CanResetPassword' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Passwords/CanResetPassword.php',
+        'Illuminate\\Auth\\Passwords\\DatabaseTokenRepository' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Passwords/DatabaseTokenRepository.php',
+        'Illuminate\\Auth\\Passwords\\PasswordBroker' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Passwords/PasswordBroker.php',
+        'Illuminate\\Auth\\Passwords\\PasswordBrokerManager' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Passwords/PasswordBrokerManager.php',
+        'Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Passwords/PasswordResetServiceProvider.php',
+        'Illuminate\\Auth\\Passwords\\TokenRepositoryInterface' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Passwords/TokenRepositoryInterface.php',
+        'Illuminate\\Auth\\Recaller' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/Recaller.php',
+        'Illuminate\\Auth\\RequestGuard' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/RequestGuard.php',
+        'Illuminate\\Auth\\SessionGuard' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/SessionGuard.php',
+        'Illuminate\\Auth\\TokenGuard' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/auth/TokenGuard.php',
         'Illuminate\\Broadcasting\\BroadcastController' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Broadcasting/BroadcastController.php',
         'Illuminate\\Broadcasting\\BroadcastEvent' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Broadcasting/BroadcastEvent.php',
         'Illuminate\\Broadcasting\\BroadcastException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Broadcasting/BroadcastException.php',
@@ -2100,19 +2100,19 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'Illuminate\\Container\\EntryNotFoundException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Container/EntryNotFoundException.php',
         'Illuminate\\Container\\RewindableGenerator' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Container/RewindableGenerator.php',
         'Illuminate\\Container\\Util' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Container/Util.php',
-        'Illuminate\\Contracts\\Auth\\Access\\Authorizable' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Auth/Access/Authorizable.php',
-        'Illuminate\\Contracts\\Auth\\Access\\Gate' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Auth/Access/Gate.php',
-        'Illuminate\\Contracts\\Auth\\Authenticatable' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Auth/Authenticatable.php',
-        'Illuminate\\Contracts\\Auth\\CanResetPassword' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Auth/CanResetPassword.php',
-        'Illuminate\\Contracts\\Auth\\Factory' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Auth/Factory.php',
-        'Illuminate\\Contracts\\Auth\\Guard' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Auth/Guard.php',
-        'Illuminate\\Contracts\\Auth\\Middleware\\AuthenticatesRequests' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Auth/Middleware/AuthenticatesRequests.php',
-        'Illuminate\\Contracts\\Auth\\MustVerifyEmail' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Auth/MustVerifyEmail.php',
-        'Illuminate\\Contracts\\Auth\\PasswordBroker' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Auth/PasswordBroker.php',
-        'Illuminate\\Contracts\\Auth\\PasswordBrokerFactory' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Auth/PasswordBrokerFactory.php',
-        'Illuminate\\Contracts\\Auth\\StatefulGuard' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Auth/StatefulGuard.php',
-        'Illuminate\\Contracts\\Auth\\SupportsBasicAuth' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Auth/SupportsBasicAuth.php',
-        'Illuminate\\Contracts\\Auth\\UserProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Auth/UserProvider.php',
+        'Illuminate\\Contracts\\Auth\\Access\\Authorizable' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/auth/Access/Authorizable.php',
+        'Illuminate\\Contracts\\Auth\\Access\\Gate' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/auth/Access/Gate.php',
+        'Illuminate\\Contracts\\Auth\\Authenticatable' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/auth/Authenticatable.php',
+        'Illuminate\\Contracts\\Auth\\CanResetPassword' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/auth/CanResetPassword.php',
+        'Illuminate\\Contracts\\Auth\\Factory' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/auth/Factory.php',
+        'Illuminate\\Contracts\\Auth\\Guard' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/auth/Guard.php',
+        'Illuminate\\Contracts\\Auth\\Middleware\\AuthenticatesRequests' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/auth/Middleware/AuthenticatesRequests.php',
+        'Illuminate\\Contracts\\Auth\\MustVerifyEmail' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/auth/MustVerifyEmail.php',
+        'Illuminate\\Contracts\\Auth\\PasswordBroker' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/auth/PasswordBroker.php',
+        'Illuminate\\Contracts\\Auth\\PasswordBrokerFactory' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/auth/PasswordBrokerFactory.php',
+        'Illuminate\\Contracts\\Auth\\StatefulGuard' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/auth/StatefulGuard.php',
+        'Illuminate\\Contracts\\Auth\\SupportsBasicAuth' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/auth/SupportsBasicAuth.php',
+        'Illuminate\\Contracts\\Auth\\UserProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/auth/UserProvider.php',
         'Illuminate\\Contracts\\Broadcasting\\Broadcaster' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Broadcasting/Broadcaster.php',
         'Illuminate\\Contracts\\Broadcasting\\Factory' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Broadcasting/Factory.php',
         'Illuminate\\Contracts\\Broadcasting\\HasBroadcastChannel' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Broadcasting/HasBroadcastChannel.php',
@@ -2465,10 +2465,10 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'Illuminate\\Filesystem\\LockableFile' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Filesystem/LockableFile.php',
         'Illuminate\\Foundation\\AliasLoader' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/AliasLoader.php',
         'Illuminate\\Foundation\\Application' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Application.php',
-        'Illuminate\\Foundation\\Auth\\Access\\Authorizable' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Auth/Access/Authorizable.php',
-        'Illuminate\\Foundation\\Auth\\Access\\AuthorizesRequests' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Auth/Access/AuthorizesRequests.php',
-        'Illuminate\\Foundation\\Auth\\EmailVerificationRequest' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Auth/EmailVerificationRequest.php',
-        'Illuminate\\Foundation\\Auth\\User' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Auth/User.php',
+        'Illuminate\\Foundation\\Auth\\Access\\Authorizable' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/auth/Access/Authorizable.php',
+        'Illuminate\\Foundation\\Auth\\Access\\AuthorizesRequests' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/auth/Access/AuthorizesRequests.php',
+        'Illuminate\\Foundation\\Auth\\EmailVerificationRequest' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/auth/EmailVerificationRequest.php',
+        'Illuminate\\Foundation\\Auth\\User' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/auth/User.php',
         'Illuminate\\Foundation\\Bootstrap\\BootProviders' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Bootstrap/BootProviders.php',
         'Illuminate\\Foundation\\Bootstrap\\HandleExceptions' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php',
         'Illuminate\\Foundation\\Bootstrap\\LoadConfiguration' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Bootstrap/LoadConfiguration.php',
@@ -2930,7 +2930,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'Illuminate\\Support\\Exceptions\\MathException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Exceptions/MathException.php',
         'Illuminate\\Support\\Facades\\App' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Facades/App.php',
         'Illuminate\\Support\\Facades\\Artisan' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Facades/Artisan.php',
-        'Illuminate\\Support\\Facades\\Auth' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Facades/Auth.php',
+        'Illuminate\\Support\\Facades\\Auth' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Facades/auth.php',
         'Illuminate\\Support\\Facades\\Blade' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Facades/Blade.php',
         'Illuminate\\Support\\Facades\\Broadcast' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Facades/Broadcast.php',
         'Illuminate\\Support\\Facades\\Bus' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Facades/Bus.php',
@@ -6770,11 +6770,11 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'Symfony\\Component\\Mailer\\Transport\\RoundRobinTransport' => __DIR__ . '/..' . '/symfony/mailer/Transport/RoundRobinTransport.php',
         'Symfony\\Component\\Mailer\\Transport\\SendmailTransport' => __DIR__ . '/..' . '/symfony/mailer/Transport/SendmailTransport.php',
         'Symfony\\Component\\Mailer\\Transport\\SendmailTransportFactory' => __DIR__ . '/..' . '/symfony/mailer/Transport/SendmailTransportFactory.php',
-        'Symfony\\Component\\Mailer\\Transport\\Smtp\\Auth\\AuthenticatorInterface' => __DIR__ . '/..' . '/symfony/mailer/Transport/Smtp/Auth/AuthenticatorInterface.php',
-        'Symfony\\Component\\Mailer\\Transport\\Smtp\\Auth\\CramMd5Authenticator' => __DIR__ . '/..' . '/symfony/mailer/Transport/Smtp/Auth/CramMd5Authenticator.php',
-        'Symfony\\Component\\Mailer\\Transport\\Smtp\\Auth\\LoginAuthenticator' => __DIR__ . '/..' . '/symfony/mailer/Transport/Smtp/Auth/LoginAuthenticator.php',
-        'Symfony\\Component\\Mailer\\Transport\\Smtp\\Auth\\PlainAuthenticator' => __DIR__ . '/..' . '/symfony/mailer/Transport/Smtp/Auth/PlainAuthenticator.php',
-        'Symfony\\Component\\Mailer\\Transport\\Smtp\\Auth\\XOAuth2Authenticator' => __DIR__ . '/..' . '/symfony/mailer/Transport/Smtp/Auth/XOAuth2Authenticator.php',
+        'Symfony\\Component\\Mailer\\Transport\\Smtp\\Auth\\AuthenticatorInterface' => __DIR__ . '/..' . '/symfony/mailer/Transport/Smtp/auth/AuthenticatorInterface.php',
+        'Symfony\\Component\\Mailer\\Transport\\Smtp\\Auth\\CramMd5Authenticator' => __DIR__ . '/..' . '/symfony/mailer/Transport/Smtp/auth/CramMd5Authenticator.php',
+        'Symfony\\Component\\Mailer\\Transport\\Smtp\\Auth\\LoginAuthenticator' => __DIR__ . '/..' . '/symfony/mailer/Transport/Smtp/auth/LoginAuthenticator.php',
+        'Symfony\\Component\\Mailer\\Transport\\Smtp\\Auth\\PlainAuthenticator' => __DIR__ . '/..' . '/symfony/mailer/Transport/Smtp/auth/PlainAuthenticator.php',
+        'Symfony\\Component\\Mailer\\Transport\\Smtp\\Auth\\XOAuth2Authenticator' => __DIR__ . '/..' . '/symfony/mailer/Transport/Smtp/auth/XOAuth2Authenticator.php',
         'Symfony\\Component\\Mailer\\Transport\\Smtp\\EsmtpTransport' => __DIR__ . '/..' . '/symfony/mailer/Transport/Smtp/EsmtpTransport.php',
         'Symfony\\Component\\Mailer\\Transport\\Smtp\\EsmtpTransportFactory' => __DIR__ . '/..' . '/symfony/mailer/Transport/Smtp/EsmtpTransportFactory.php',
         'Symfony\\Component\\Mailer\\Transport\\Smtp\\SmtpTransport' => __DIR__ . '/..' . '/symfony/mailer/Transport/Smtp/SmtpTransport.php',
