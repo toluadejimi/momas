@@ -50,7 +50,7 @@ class MeterController extends Controller
         $trx = $request->trxref;
         $date = date('ymd');
         $dater = date('d-m-y');
-        $date_time=date('ymdhis');
+        $date_time=date('ydis');
 
 
 
