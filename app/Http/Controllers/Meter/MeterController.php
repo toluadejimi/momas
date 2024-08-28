@@ -82,12 +82,12 @@ class MeterController extends Controller
             ),
         ));
 
-        $var = curl_exec($curl);
+        $var2 = curl_exec($curl);
         curl_close($curl);
-        $var = json_decode($var);
+        $var = json_decode($var2);
 
 
-        dd($var,$url, $_SERVER['SERVER_ADDR']);
+        dd($var2,$url, $_SERVER['SERVER_ADDR']);
 
         $data['full_name'] =  Auth::user()->first_name." ".Auth::user()->last_name;
         $data['address'] =  Auth::user()->address.",".Auth::user()->city.",".Auth::user()->state;
