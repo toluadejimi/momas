@@ -243,7 +243,7 @@ class TransactionController extends Controller
     public function paystack_verify(request $request)
     {
 
-        $message = json_encode($request->all());
+        $message = "paystack=".json_encode($request->all());
         send_notification($message);
 
         $fl = Setting::where('id', 1)->first();
