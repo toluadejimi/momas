@@ -146,7 +146,7 @@ class TransactionController extends Controller
             $trx_id = "TRX" . random_int(0000000, 9999999);
             $email = Auth::user()->email;
 
-            dd(($request->amount > Auth::user()->main_wallet);
+            dd($request->amount > Auth::user()->main_wallet);
 
 
             if ($request->amount > Auth::user()->main_wallet) {
