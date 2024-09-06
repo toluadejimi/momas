@@ -35,6 +35,8 @@ Route::post('verify-code', [AuthController::class, 'verify_code']);
 
 Route::any('pay-flutter', [TransactionController::class, 'flutter_payment']);
 Route::any('payment-check', [TransactionController::class, 'flutter_verify']);
+Route::any('paystack-check', [TransactionController::class, 'paystack_verify']);
+
 
 
 
