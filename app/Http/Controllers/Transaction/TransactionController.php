@@ -148,10 +148,7 @@ class TransactionController extends Controller
 
 
 
-            dd($request->amount < Auth::user()->main_wallet);
-
-
-            if ($request->amount < Auth::user()->main_wallet) {
+            if ($request->amount > Auth::user()->main_wallet) {
                 $code = 422;
                 $message = "Insufficient Funds";
                 error($message, $code);
