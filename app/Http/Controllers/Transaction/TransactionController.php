@@ -148,7 +148,7 @@ class TransactionController extends Controller
 
 
 
-            dd(Auth::user()->main_wallet);
+            dd($request->amount < Auth::user()->main_wallet);
 
 
             if ($request->amount < Auth::user()->main_wallet) {
