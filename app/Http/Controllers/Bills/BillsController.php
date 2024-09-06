@@ -23,7 +23,7 @@ class BillsController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://test.enkpay.com/api/buy-ng-airtime',
+            CURLOPT_URL => 'https://web.enkpay.com/api/buy-ng-airtime',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -79,7 +79,7 @@ class BillsController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://test.enkpay.com/api/get-data',
+            CURLOPT_URL => 'https://web.enkpay.com/api/get-data',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -133,7 +133,7 @@ class BillsController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://test.enkpay.com/api/cable-plan',
+            CURLOPT_URL => 'https://web.enkpay.com/api/cable-plan',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -182,7 +182,7 @@ class BillsController extends Controller
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://test.enkpay.com/api/validate-cable',
+                CURLOPT_URL => 'https://web.enkpay.com/api/validate-cable',
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
@@ -261,7 +261,7 @@ class BillsController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://test.enkpay.com/api/buy-cable',
+            CURLOPT_URL => 'https://web.enkpay.com/api/buy-cable',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -317,7 +317,7 @@ class BillsController extends Controller
 
 
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://test.enkpay.com/api/buy-data',
+                CURLOPT_URL => 'https://web.enkpay.com/api/buy-data',
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
