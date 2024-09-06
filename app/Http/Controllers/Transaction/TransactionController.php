@@ -147,11 +147,12 @@ class TransactionController extends Controller
             $email = Auth::user()->email;
 
 
-            if ($request->amount < Auth::user()->wallet) {
+            if ($request->amount < Auth::user()->main_wallet) {
                 $code = 422;
                 $message = "Insufficient Funds";
                 error($message, $code);
             }
+
 
             User::where('id', Auth::id())->decrement('main_wallet', $request->amount);
 
