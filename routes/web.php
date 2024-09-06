@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\DashboardContoller;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TerminalController;
 use App\Http\Controllers\Agents\TransferController;
 use App\Http\Controllers\LoginSecurityController;
+use App\Http\Controllers\Meter\MeterController;
 use App\Http\Controllers\Transaction\TransactionController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +24,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::any('/', [AuthController::class, 'admin_login']);
 Route::post('login-now', [AuthController::class, 'login_now']);
-Route::get('admin-dashboard', [AuthController::class, 'admin_dashboard']);
+Route::any('log-out', [AuthController::class, 'log_out']);
+Route::post('verify-code', [AuthController::class, 'verify_code']);
 
 
 
@@ -48,39 +51,42 @@ Route::get('code', [AuthController::class, 'code']);
 
 
 
-
-
-
 Route::group(['prefix'=>'admin'], function(){
 
-    Route::any('login', [AuthController::class, 'admin_login']);
-    Route::get('admin-dashboard', [DashboardController::class, 'admin_dashboard']);
-    Route::get('new-users', [DashboardController::class, 'new_user']);
-    Route::post('create_new_customer', [DashboardController::class, 'create_new_customer']);
-    Route::get('users', [DashboardController::class, 'all_customer']);
-    Route::any('search_user', [DashboardController::class, 'search_user']);
-    Route::any('reverse', [TransferController::class, 'reverse']);
-
-
-    Route::any('all-transactions', [TransactionController::class, 'get_all_transactions']);
+    Route::get('admin-dashboard', [DashboardContoller::class, 'index']);
+    Route::get('users-list', [DashboardContoller::class, 'list_users']);
+    Route::get('new-user', [DashboardContoller::class, 'new_user']);
+    Route::post('add-new-user', [DashboardContoller::class, 'add_new_user']);
+    Route::get('user-delete', [DashboardContoller::class, 'delete_user']);
 
 
 
+    Route::get('meter-list', [MeterController::class, 'list_meter']);
+    Route::get('new-meter', [MeterController::class, 'new_meter']);
+    Route::post('add-new-meter', [MeterController::class, 'add_new_meter']);
+    Route::get('meter-delete', [MeterController::class, 'delete_meter']);
+    Route::get('edit-delete', [MeterController::class, 'delete_meter']);
 
 
-    //Terminal
-    Route::get('/new-terminal', [TerminalController::class, 'create_terminal_view']);
-    Route::any('create_new_terminal', [TerminalController::class, 'create_new_terminal']);
-    Route::any('list-terminals', [TerminalController::class, 'list_terminals']);
+    Route::get('settings', [DashboardContoller::class, 'settings']);
+    Route::post('features', [DashboardContoller::class, 'update_feat']);
+    Route::post('payment-keys', [DashboardContoller::class, 'update_pay']);
+    Route::post('support-set', [DashboardContoller::class, 'support_set']);
 
 
-    Route::any('settings', [AdminController::class, 'setting']);
-    Route::any('update_setting', [AdminController::class, 'update_setting']);
 
 
-    Route::post('/generateSecret', [LoginSecurityController::class, 'generate2faSecret'])->name('generate2faSecret');
-    Route::post('/enable2fa', [LoginSecurityController::class, 'enable2fa'])->name('enable2fa');
-    Route::post('/disable2fa', [LoginSecurityController::class, 'disable2fa'])->name('disable2fa');
+
+
+
+
+
+
+
+
+
+
+
 
 });
 

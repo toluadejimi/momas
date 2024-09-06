@@ -10,6 +10,18 @@ class Feature extends Model
     use HasFactory;
 
 
+    protected $fillable = [
+        'momas_meter',
+        'other_meter',
+        'print_token',
+        'access_token',
+        'services',
+        'bill_payment',
+        'support',
+        'analysis',
+
+    ];
+
 
     protected $casts = [
 

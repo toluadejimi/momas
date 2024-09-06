@@ -18,9 +18,18 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'meterNo',
+        'meterType',
+        'address',
+        'city',
+        'state',
+        'estate',
+        'phone',
+
     ];
 
     /**
@@ -63,5 +72,10 @@ class User extends Authenticatable
     public function terminal()
     {
         return $this->hasMany(Terminal::class);
+    }
+
+    public function meter()
+    {
+        return $this->hasMany(Meter::class);
     }
 }

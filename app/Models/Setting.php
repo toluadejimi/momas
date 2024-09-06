@@ -9,6 +9,17 @@ class Setting extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'flutterwave_secret',
+        'flutterwave_public',
+        'paystack_secret',
+        'paystack_public',
+        'payment_support',
+        'meter_support',
+        'general_support',
+
+    ];
+
     protected $casts = [
         'transfer_charge' => 'string',
         'hour' => 'integer',

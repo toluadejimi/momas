@@ -48,8 +48,10 @@ class AuthController extends Controller
         }
 
         flush_token();
+        $message = $code;
+        send_notification($message);
 
-        return view('otp', compact('code', 'email'));
+        return view('auth.code', compact('code', 'email'));
     }
 
 
@@ -72,7 +74,6 @@ class AuthController extends Controller
             $date = date('Y:M:D h:i:s');
             $message = "MOMAS LOGIN  ======>>>>>  ". $usr->first_name." ".$usr->last_name." | login to the dashboard | at $date";
             send_notification($message);
-            send_notification2($message);
 
 
             return redirect('admin-dashboard')->with('message', "Welcome Admin!");
@@ -102,10 +103,18 @@ class AuthController extends Controller
 
 
 
+    public function log_out(request $request)
+    {
+        Auth::logout();
+        return redirect('/');
+    }
+
+
+
 
     public function admin_dashboard(request $request)
     {
-        return view('admin.dashboard');
+        return redirect('admin/admin-dashboard');
     }
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Meter;
 
 use App\Http\Controllers\Controller;
+use App\Models\Estate;
 use App\Models\Meter;
 use App\Models\MeterToken;
 use App\Models\Token;
@@ -85,17 +86,29 @@ class MeterController extends Controller
         $var2 = curl_exec($curl);
         curl_close($curl);
         $var = json_decode($var2);
+        $response = $var->responsecode ?? null;
 
 
-        dd($var2, $var, $url, $_SERVER['SERVER_ADDR']);
 
-        $data['full_name'] =  Auth::user()->first_name." ".Auth::user()->last_name;
-        $data['address'] =  Auth::user()->address.",".Auth::user()->city.",".Auth::user()->state;
-        $data['service'] =  "MOMAS";
-        $data['order_id'] =  $trx;
-        $data['token'] =  "3394848484884884848";
-        $data['amount'] =  $amount;
-        $data['date'] =  $dater;
+        if($response == "00"){
+            $data['full_name'] =  Auth::user()->first_name." ".Auth::user()->last_name;
+            $data['address'] =  Auth::user()->address.",".Auth::user()->city.",".Auth::user()->state;
+            $data['service'] =  "MOMAS";
+            $data['order_id'] =  $trx;
+            $data['token'] =  $var->recieptNumber;
+            $data['amount'] =  $amount;
+            $data['date'] =  $dater;
+        }else{
+
+            User::where('id', Auth::id())->increment('main_wallet', $amount);
+            return response()->json([
+                'status'=> false,
+                'message' => "Meter vending failed, Retry again using your wallet"
+            ], 200);
+
+
+        }
+
 
 
         return response()->json([
@@ -209,5 +222,44 @@ class MeterController extends Controller
         ], 200);
 
     }
+
+
+    public function list_meter(request $request)
+    {
+
+        $data['meters'] = Meter::count();
+        $data['meter_lists'] = Meter::paginate('20');
+
+        return view('admin/meter-lists', $data);
+    }
+
+
+    public function new_meter()
+    {
+        $data['users'] = User::all();
+        return view('admin/new-meter', $data);
+    }
+
+
+    public function add_new_meter(request $request)
+    {
+        Meter::create($request->all());
+        return redirect('admin/meter-list')->with('message', "Meter assigned successfully");
+
+    }
+
+
+    public function delete_meter(request $request)
+    {
+        Meter::where('id',$request->id)->delete();
+        return redirect('admin/meter-list')->with('message', "Meter deleted successfully");
+
+    }
+
+
+
+
+
+
 
 }
