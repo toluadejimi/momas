@@ -46,7 +46,6 @@ class BillsController extends Controller
 
 
         if ($status == true) {
-
             $message = "Airtime Purchase successful";
             return success($message);
 
