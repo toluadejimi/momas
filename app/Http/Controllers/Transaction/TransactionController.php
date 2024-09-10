@@ -98,12 +98,15 @@ class TransactionController extends Controller
             $var = json_decode($var);
             $status = $var->status;
 
+
+
             if ($status == true) {
                 $trx = new Transaction();
                 $trx->user_id = Auth::id();
                 $trx->pay_type = "paystack";
                 $trx->amount = $request->amount;
                 $trx->trx_id = $trx_id;
+                $trx->payment_ref = $var->data->access_code ?? null;
                 $trx->service_type = "fund";
                 $trx->save();
 
@@ -273,11 +276,11 @@ class TransactionController extends Controller
 
             if ($status == 'success') {
                 Transaction::where('trx_id', $var->data->reference)->update(['status' => 2]);
-                $ref = $var->data->reference;
+                $ref = Transaction::where('payment_ref', $var->data->reference)->first()->trx_id;
                 $url = url('') . "/payment?ref=$ref&status=success";
                 return redirect($url);
             }else{
-                $ref = $var->data->reference;
+                $ref = Transaction::where('payment_ref', $var->data->reference)->first()->trx_id;
                 $url = url('') . "/payment?ref=$ref&status=failure";
                 return redirect($url);
             }
