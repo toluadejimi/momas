@@ -277,7 +277,6 @@ class TransactionController extends Controller
         $ref = $var->data->reference ?? null;
 
 
-        dd($var);
 
         $ck_transaction = Transaction::where('trx_id', $var->data->reference)->first()->status ?? null;
         if ($ck_transaction == null) {
