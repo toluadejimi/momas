@@ -84,6 +84,8 @@ class MeterController extends Controller
         ));
 
         $var2 = curl_exec($curl);
+
+        dd($var2);
         curl_close($curl);
         $var = json_decode($var2);
         $response = $var->responsecode ?? null;
