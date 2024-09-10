@@ -39,7 +39,7 @@ if (!function_exists('token')) {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://test.enkpay.com/api/auth',
+            CURLOPT_URL => 'https://web.enkpay.com/api/auth',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
