@@ -283,11 +283,11 @@ class TransactionController extends Controller
 
             if ($status == 'success') {
                 Transaction::where('trx_id', $var->data->metadata->ref)->update(['status' => 2]);
-                $ref = Transaction::where('trx_id', $var->data->metadata->refe)->first()->trx_id;
+                $ref = Transaction::where('trx_id', $var->data->metadata->ref)->first()->trx_id;
                 $url = url('') . "/payment?ref=$ref&status=success";
                 return redirect($url);
             }else{
-                $ref = Transaction::where('trx_id', $var->data->metadata->refe)->first()->trx_id;
+                $ref = Transaction::where('trx_id', $var->data->metadata->ref)->first()->trx_id;
                 $url = url('') . "/payment?ref=$ref&status=failure";
                 return redirect($url);
             }
