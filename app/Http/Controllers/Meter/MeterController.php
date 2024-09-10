@@ -62,7 +62,7 @@ class MeterController extends Controller
 
         );
 
-        $url = "http://41.216.166.163:8080/MomasPayService/api/Payment/$meterNo/$meterType/999/$date_time$trx/$amount/999/$date/$final_amount/false";
+        $url = "http://41.216.166.163:8080/MomasPayService/api/Payment/$meterNo/$meterType/999/$date_time/$amount/999/$date/$final_amount/false";
 
         $body = json_encode($databody);
         $curl = curl_init();
@@ -85,7 +85,6 @@ class MeterController extends Controller
 
         $var2 = curl_exec($curl);
 
-        dd($var2);
         curl_close($curl);
         $var = json_decode($var2);
         $response = $var->responsecode ?? null;
