@@ -72,6 +72,8 @@ class TransactionController extends Controller
                 "amount" => $request->amount * 100,
                 "email" => $email,
                 "ref" => $trx_id,
+                'metadata' => ["ref" => $trx_id],
+
 
             );
 
