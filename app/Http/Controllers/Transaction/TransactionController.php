@@ -270,17 +270,18 @@ class TransactionController extends Controller
         $var = json_decode($var);
 
         $status = $var->status ?? null;
-        $ref = $var->data->tx_ref ?? null;
+        $ref = $var->data->reference ?? null;
 
         $ck_transaction = Transaction::where('trx_id', $var->data->reference)->first()->status ?? null;
         if ($ck_transaction == null) {
 
             if ($status == 'success') {
                 Transaction::where('trx_id', $var->data->reference)->update(['status' => 2]);
-                $ref = $var->data->tx_ref;
+                $ref = $var->data->reference;
                 $url = url('') . "/payment?ref=$ref&status=success";
                 return redirect($url);
             }else{
+                $ref = $var->data->reference;
                 $url = url('') . "/payment?ref=$ref&status=failure";
                 return redirect($url);
             }
