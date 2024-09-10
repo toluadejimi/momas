@@ -244,8 +244,7 @@ class TransactionController extends Controller
         send_notification($message);
 
         $fl = Setting::where('id', 1)->first();
-        $flsecret = $fl->flutterwave_secret;
-        $flkey['flutterwave_public'] = $fl->flutterwave_public;
+        $pksecret = $fl->paystack_secret;
         $transactionId = $request->reference;
 
         $curl = curl_init();
@@ -259,19 +258,16 @@ class TransactionController extends Controller
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                'Accept: application/json',
-                'Content-Type: application/json',
-                'Authorization: Bearer ' . $flsecret,
+                "Authorization: Bearer $pksecret",
+                "Cache-Control: no-cache",
             ),
         ));
 
         $var = curl_exec($curl);
         curl_close($curl);
         $var = json_decode($var);
-
         $status = $var->status ?? null;
         $ref = $var->data->reference ?? null;
-
         $ck_transaction = Transaction::where('trx_id', $var->data->reference)->first()->status ?? null;
         if ($ck_transaction == null) {
 
