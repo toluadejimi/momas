@@ -21,7 +21,6 @@ class TransactionController extends Controller
         $pkkey['paystack_secret'] = $fl->paystack_secret;
         $pkkey['paystack_public'] = $fl->paystack_public;
 
-
         $data['amount'] = $request->amount;
         $data['trx_id'] = $request->trx_id;
         $data['email'] = $request->email;
@@ -115,11 +114,9 @@ class TransactionController extends Controller
 
             }
 
-
             $code = 422;
             $message = "Payment not available at the moment, Kindly select other payment option";
-            error($message, $code);
-
+            return error($message, $code);
 
         }
 
@@ -249,11 +246,11 @@ class TransactionController extends Controller
         $fl = Setting::where('id', 1)->first();
         $flsecret = $fl->flutterwave_secret;
         $flkey['flutterwave_public'] = $fl->flutterwave_public;
-        $transactionId = $request->transaction_id;
+        $transactionId = $request->reference;
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.flutterwave.com/v3/transactions/$transactionId/verify",
+            CURLOPT_URL => "https://api.paystack.co/transaction/verify/$transactionId",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -275,21 +272,20 @@ class TransactionController extends Controller
         $status = $var->status ?? null;
         $ref = $var->data->tx_ref ?? null;
 
-        $ck_transaction = Transaction::where('trx_id', $var->data->tx_ref)->first()->status ?? null;
+        $ck_transaction = Transaction::where('trx_id', $var->data->reference)->first()->status ?? null;
         if ($ck_transaction == null) {
 
             if ($status == 'success') {
-                Transaction::where('trx_id', $var->data->tx_ref)->update(['status' => 2]);
+                Transaction::where('trx_id', $var->data->reference)->update(['status' => 2]);
                 $ref = $var->data->tx_ref;
                 $url = url('') . "/payment?ref=$ref&status=success";
+                return redirect($url);
+            }else{
+                $url = url('') . "/payment?ref=$ref&status=failure";
                 return redirect($url);
             }
 
         }
-
-        $url = url('') . "/payment?ref=$ref&status=failure";
-        return redirect($url);
-
 
     }
 }
