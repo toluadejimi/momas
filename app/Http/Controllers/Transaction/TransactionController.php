@@ -71,6 +71,8 @@ class TransactionController extends Controller
             $databody = array(
                 "amount" => $request->amount * 100,
                 "email" => $email,
+                "ref" => $trx_id,
+
             );
 
             $body = json_encode($databody);
