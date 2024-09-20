@@ -196,6 +196,7 @@ if (!function_exists('vend')) {
               $new_pay->estate_id = $estate_id;
               $new_pay->amount = $total;
               $new_pay->status = 0;
+              $new_pay->duration = "daily";
               $new_pay->save();
               return $total;
           } else {
@@ -222,6 +223,7 @@ if (!function_exists('vend')) {
                 $new_pay->estate_id = $estate_id;
                 $new_pay->amount = $total;
                 $new_pay->status = 0;
+                $new_pay->duration = "weekly";
                 $new_pay->save();
                 return $total;
 
@@ -250,6 +252,7 @@ if (!function_exists('vend')) {
                 $new_pay->estate_id = $estate_id;
                 $new_pay->amount = $total;
                 $new_pay->status = 0;
+                $new_pay->duration = "monthly";
                 $new_pay->save();
                 return $total;
             } else {
@@ -274,7 +277,7 @@ if (!function_exists('send_email')) {
     {
         $first_name = User::where('email', $email)->first()->first_name;
         $data = array(
-            'fromsender' => 'noreply@momaspay.bplux.store', 'MOMASPAY',
+            'fromsender' => 'momas@tomitechltd.com', 'MOMASPAY',
             'subject' => "One Time Password",
             'toreceiver' => $email,
             'sms_code' => $sms_code,
@@ -282,6 +285,33 @@ if (!function_exists('send_email')) {
         );
 
         Mail::send('emails.email', ["data1" => $data], function ($message) use ($data) {
+            $message->from($data['fromsender']);
+            $message->to($data['toreceiver']);
+            $message->subject($data['subject']);
+        });
+
+
+        return 0;
+
+    }
+}
+
+if (!function_exists('send_email_token')) {
+
+    function send_email_token($email, $token, $amount, $unit)
+    {
+        $first_name = User::where('email', $email)->first()->first_name;
+        $data = array(
+            'fromsender' => 'momas@tomitechltd.com', 'MOMASPAY',
+            'subject' => "Token Purchase",
+            'toreceiver' => $email,
+            'token' => $token,
+            'user' => $first_name,
+            'unit' => $unit,
+            'amount' => $amount
+        );
+
+        Mail::send('emails.vendtoken', ["data1" => $data], function ($message) use ($data) {
             $message->from($data['fromsender']);
             $message->to($data['toreceiver']);
             $message->subject($data['subject']);

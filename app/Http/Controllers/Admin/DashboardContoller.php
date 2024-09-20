@@ -12,6 +12,9 @@ use App\Models\Setting;
 use App\Models\Token;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\UtilitiesPayment;
+use App\Models\Utitlity;
+use App\Models\Vending;
 use Illuminate\Http\Request;
 
 class DashboardContoller extends Controller
@@ -186,7 +189,79 @@ class DashboardContoller extends Controller
 
 
 
+    public function view_user(request $request)
+    {
+        $data['user'] = User::where('id', $request->id)->first();
+        $data['estate'] = Estate::where('status', 2)->get();
+        $data['estate_name'] = Estate::where('id', $data['user']->estate_id)->first()->title ?? null;
+        $data['upayment'] = UtilitiesPayment::where('user_id', $request->id)->paginate(10);
+        $data['vending'] = MeterToken::where('user_id', $request->id)->paginate(10);
 
+
+
+
+
+
+        return view('admin/user/view', $data);
+    }
+
+
+    public function send_token_email(request $request)
+    {
+        $email = $request->email;
+        $token = $request->token;
+        $amount = $request->amount;
+        $unit = $request->unit;
+        send_email_token($email, $token, $amount, $unit);
+
+        return back()->with('message', 'Email sent successfully');
+    }
+
+
+
+    public function update_meter_info(request $request)
+    {
+
+
+
+
+        User::where('meterNo', $request->meterNo)->update([
+            'meterNo' => $request->meterNo,
+            'meterType' => $request->meterType,
+        ]);
+
+
+       $meter = Meter::where('meterNo', $request->meterNo)->update([
+            'meterNo' => $request->meterNo,
+            'meterType' => $request->meterType,
+        ]);
+
+
+
+
+        return back()->with('message', "Meter updated successfully");
+
+    }
+
+
+
+
+    public function update_user(request $request)
+    {
+
+            User::where('email', $request->email)->update([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'phone' => $request->phone,
+                'address' => $request->addreess,
+                'city' => $request->city,
+                'lga' => $request->lga,
+            ]);
+
+
+            return back()->with('message', "User updated successfully");
+
+        }
 
 
 

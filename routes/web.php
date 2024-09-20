@@ -62,6 +62,15 @@ Route::group(['prefix'=>'admin'], function(){
     Route::get('new-user', [DashboardContoller::class, 'new_user']);
     Route::post('add-new-user', [DashboardContoller::class, 'add_new_user']);
     Route::get('user-delete', [DashboardContoller::class, 'delete_user']);
+    Route::get('view-user', [DashboardContoller::class, 'view_user']);
+    Route::post('update-user', [DashboardContoller::class, 'update_user']);
+    Route::post('update-meter-info', [DashboardContoller::class, 'update_meter_info']);
+
+    Route::get('send-token-email', [DashboardContoller::class, 'send_token_email']);
+
+
+
+
 
 
     //Estates

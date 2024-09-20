@@ -115,12 +115,9 @@ class MeterController extends Controller
         ));
 
         $var2 = curl_exec($curl);
-
         curl_close($curl);
         $var = json_decode($var2);
         $response = $var->responsecode ?? null;
-
-
 
         if($response == "00"){
             $data['full_name'] =  Auth::user()->first_name." ".Auth::user()->last_name;
@@ -130,6 +127,30 @@ class MeterController extends Controller
             $data['token'] =  $var->recieptNumber;
             $data['amount'] =  $amount;
             $data['date'] =  $dater;
+
+
+            $ved = new MeterToken();
+            $ved->user_id = Auth::id();
+            $ved->order_id = $trx;
+            $ved->token = $var->recieptNumber;
+            $ved->amount = $amount;
+            $ved->estate_id = Auth::user()->estate_id;
+            $ved->meterNo = $meterNo;
+            $ved->estate_name = Estate::where('id', Auth::user()->estate_id)->first()->title;
+            $ved->unit = $var->unit;
+            $ved->vat = $var->vat;
+            $ved->status = 2;
+            $ved->save();
+
+
+            $email = Auth::user()->email;
+            $token = $var->recieptNumber;
+            $unit = $var->unit;
+
+            send_email_token($email, $token, $amount, $unit);
+
+
+
         }else{
 
             User::where('id', Auth::id())->increment('main_wallet', $amount);
@@ -140,7 +161,6 @@ class MeterController extends Controller
 
 
         }
-
 
 
         return response()->json([
@@ -158,6 +178,7 @@ class MeterController extends Controller
     public function pay_for_others_meter_token(request $request)
     {
 
+
         $amount = $request->amount;
         $meterNo = $request->meterNo;
         $meterType = $request->meterType;
@@ -172,7 +193,7 @@ class MeterController extends Controller
         $databody = array(
         );
 
-        $url = "http://41.216.166.163:8080/MomasPayService/api/Payment/$meterNo/$meterType/999/$trx/$amount/999/$date/$final_amount/true";
+        $url = "http://41.216.166.163:8080/MomasPayService/api/Payment/$meterNo/$meterType/999/$trx/$amount/999/$date/$final_amount/false";
 
         $body = json_encode($databody);
         $curl = curl_init();
@@ -196,17 +217,54 @@ class MeterController extends Controller
         $var = curl_exec($curl);
         curl_close($curl);
         $var = json_decode($var);
+        $response = $var->responsecode ?? null;
 
 
 
+        if($response == "00"){
+            $data['full_name'] =  Auth::user()->first_name." ".Auth::user()->last_name;
+            $data['address'] =  Auth::user()->address.",".Auth::user()->city.",".Auth::user()->state;
+            $data['service'] =  "MOMAS";
+            $data['order_id'] =  $trx;
+            $data['token'] =  $var->recieptNumber;
+            $data['amount'] =  $amount;
+            $data['date'] =  $dater;
 
-        $data['full_name'] =  Auth::user()->first_name." ".Auth::user()->last_name;
-        $data['address'] =  Auth::user()->address.",".Auth::user()->city.",".Auth::user()->state;
-        $data['service'] =  "MOMAS";
-        $data['order_id'] =  $trx;
-        $data['token'] =  "3394848484884884848";
-        $data['amount'] =  $amount;
-        $data['date'] =  $dater;
+
+            $ved = new MeterToken();
+            $ved->user_id = Auth::id();
+            $ved->order_id = $trx;
+            $ved->meterNo = $meterNo;
+            $ved->token = $var->recieptNumber;
+            $ved->estate_id = $estate_id;
+            $ved->amount = $amount;
+            $ved->unit = $var->unit;
+            $ved->vat = $var->vat;
+            $ved->estate_name = Estate::where('id', $estate_id)->first()->title;
+            $ved->status = 2;
+            $ved->save();
+
+
+
+            $email = Auth::user()->email;
+            $token = $var->recieptNumber;
+            $unit = $var->unit;
+
+            send_email_token($email, $token, $amount, $unit);
+
+        }else{
+
+            User::where('id', Auth::id())->increment('main_wallet', $amount);
+            return response()->json([
+                'status'=> false,
+                'message' => "Meter vending failed, Retry again using your wallet"
+            ], 200);
+
+
+        }
+
+
+
 
 
         return response()->json([
