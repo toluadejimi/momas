@@ -31,7 +31,7 @@ class FeatureController extends Controller
 
         foreach($slider as $data){
             $slide = [];
-            $slide['url'] = url('')."/public/asset/img/".$data->image.".png";
+            $slide['url'] = url('')."/public/assets/img/".$data->image.".png";
             $slide['link'] = $data->link;
             $slides[] = $slide;
         }
