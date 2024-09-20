@@ -60,6 +60,8 @@ class LoginController extends Controller
                 $get_vend =   vend($duration, $estate_id);
                 if($get_vend == null){
                     $minvend = 0;
+                }else{
+                    $minvend = $get_vend;
                 }
             }
 
@@ -70,7 +72,6 @@ class LoginController extends Controller
                 $pur['min_purchase'] = $purr->min_pur;
                 $pur['max_purchase'] = $purr->max_pur;
                 $pur['min_vending'] = $minvend;
-
 
             }
 
