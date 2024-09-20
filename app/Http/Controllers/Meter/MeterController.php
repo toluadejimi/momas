@@ -32,6 +32,16 @@ class MeterController extends Controller
 
 
 
+
+        //$data['purchase'] = $pur;
+
+
+
+
+
+
+
+
         return response()->json([
            'status' => true,
            'data' => $data
