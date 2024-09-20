@@ -15,7 +15,7 @@ class EstateController extends Controller
 
     public function get_estate(){
 
-        $data = Estate::where('status', 1)->get()->makeHidden(['created_at','updated_at']);
+        $data = Estate::where('status', 2)->get()->makeHidden(['created_at','updated_at']);
         return response()->json([
             'status' => true,
             'data' => $data

@@ -78,10 +78,6 @@ class LoginController extends Controller
 
 
 
-//            dd($minvend);
-
-
-
             $token = auth()->user()->createToken('API Token')->accessToken;
             $meter = meter();
             $user = user();

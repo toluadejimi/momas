@@ -185,12 +185,10 @@ if (!function_exists('vend')) {
         if($duration == "daily"){
 
             $total = total_utility($estate_id);
-
           $chk_pay =  UtilitiesPayment::where([
                 'user_id' => Auth::id(),
-                'estate_id' => $estate_id,
-                'created_at' => Carbon::today(),
-            ])->get() ?? null;
+                'estate_id' => $estate_id
+            ])->whereDate('created_at', Carbon::today())->get() ?? null;
 
           if($chk_pay == null || $chk_pay->isEmpty()){
               $new_pay = new UtilitiesPayment();
@@ -200,19 +198,69 @@ if (!function_exists('vend')) {
               $new_pay->status = 0;
               $new_pay->save();
               return $total;
+          } else {
+              $total = 0;
+              foreach ($chk_pay as $data) {
+                  $total += $data->amount;
+              }
+              return $total;
           }
-
-          if($chk_pay->status == 0){
-
-
-
-          }
-
-
-
 
         }
 
+        if($duration == "weekly"){
+
+            $total = total_utility($estate_id);
+            $chk_pay =  UtilitiesPayment::where([
+                'user_id' => Auth::id(),
+                'estate_id' => $estate_id
+            ])->whereBetween('created_at',[Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get() ?? null;
+
+            if($chk_pay == null || $chk_pay->isEmpty()){
+                $new_pay = new UtilitiesPayment();
+                $new_pay->user_id = Auth::id();
+                $new_pay->estate_id = $estate_id;
+                $new_pay->amount = $total;
+                $new_pay->status = 0;
+                $new_pay->save();
+                return $total;
+
+            } else {
+                $total = 0;
+                foreach ($chk_pay as $data) {
+                    $total += $data->amount;
+                }
+                return $total;
+
+            }
+
+        }
+
+        if($duration == "monthly"){
+
+            $total = total_utility($estate_id);
+            $chk_pay =  UtilitiesPayment::where([
+                'user_id' => Auth::id(),
+                'estate_id' => $estate_id
+            ])->whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->get() ?? null;
+
+            if($chk_pay == null || $chk_pay->isEmpty()){
+                $new_pay = new UtilitiesPayment();
+                $new_pay->user_id = Auth::id();
+                $new_pay->estate_id = $estate_id;
+                $new_pay->amount = $total;
+                $new_pay->status = 0;
+                $new_pay->save();
+                return $total;
+            } else {
+                $total = 0;
+                foreach ($chk_pay as $data) {
+                    $total += $data->amount;
+                }
+                return $total;
+            }
+
+        }
     }
 }
 
