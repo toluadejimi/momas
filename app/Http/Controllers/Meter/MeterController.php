@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Estate;
 use App\Models\Meter;
 use App\Models\MeterToken;
+use App\Models\Tariff;
 use App\Models\Token;
 use App\Models\User;
+use App\Models\Utitlity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,15 +32,34 @@ class MeterController extends Controller
         $data['address'] = $user->address. ", ".$user->city. ", ".$user->state;
         $data['meter_type'] = $meter_type;
 
+        $es_id = User::where('meterNo', $request->meterNo)->first()->estate_id ?? null;
+        $purr = Tariff::where('estate_id', $es_id)->first() ?? null;
+        $duration = Utitlity::where('estate_id', $es_id)->first()->duration ?? null;
+        $estate_id = $es_id ?? null;
 
 
+        if($duration == null || $estate_id == null){
+            $minvend = 0;
+        }else{
+            $get_vend =   vend($duration, $estate_id);
+            if($get_vend == null){
+                $minvend = 0;
+            }else{
+                $minvend = $get_vend;
+            }
+        }
 
-        //$data['purchase'] = $pur;
 
+        if($purr == null){
+            $pur = [];
+        }else{
+            $pur['min_purchase'] = $purr->min_pur;
+            $pur['max_purchase'] = $purr->max_pur;
+            $pur['min_vending'] = $minvend;
 
+        }
 
-
-
+        $data['purchase'] = $pur;
 
 
 
