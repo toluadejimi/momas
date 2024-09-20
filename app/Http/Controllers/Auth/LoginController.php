@@ -50,26 +50,31 @@ class LoginController extends Controller
 
             $purr = Tariff::where('estate_id', Auth::user()->estate_id)->first() ?? null;
 
+            $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first()->duration ?? null;
+            $estate_id = Auth::user()->estate_id ?? null;
+
+
+            if($duration == null || $estate_id == null){
+                $minvend = 0;
+            }else{
+                $minvend =   vend($duration, $estate_id);
+            }
+
+
             if($purr == null){
                 $pur = [];
             }else{
                 $pur['min_purchase'] = $purr->min_pur;
                 $pur['max_purchase'] = $purr->max_pur;
+                $pur['min_vending'] = $minvend;
+
+
             }
 
 
-            $get_ut = UtilitiesPayment::where('user_id', Auth::id())->first() ?? null;
-            $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first() ?? null;
-            $estate_id = Auth::user()->estate_id ?? null;
 
-          //  dd($get_ut, $duration, $estate_id);
 
-            if($get_ut == null ||  $duration == null || $estate_id == null){
-                $minvend = 0;
-            }else{
-              //  $minvend =   vend($duration, $estate_id);
-            }
-
+//            dd($minvend);
 
 
 
@@ -79,7 +84,6 @@ class LoginController extends Controller
             $user['token'] = $token;
             $user['meter'] = $meter;
             $user['purchase'] = $pur;
-            $user['min_vending'] = $minvend;
 
 
             return response()->json([

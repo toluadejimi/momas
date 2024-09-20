@@ -182,7 +182,6 @@ if (!function_exists('vend')) {
     {
 
 
-
         if($duration == "daily"){
 
             $total = total_utility($estate_id);
@@ -193,14 +192,10 @@ if (!function_exists('vend')) {
                 'created_at' => Carbon::today(),
             ])->get() ?? null;
 
-          dd($chk_pay);
-
           if($chk_pay == null || $chk_pay->isEmpty()){
               $new_pay = new UtilitiesPayment();
               $new_pay->user_id = Auth::id();
               $new_pay->estate_id = $estate_id;
-              $new_pay->created_at = Carbon::now();
-              $new_pay->updated_at = Carbon::now();
               $new_pay->amount = $total;
               $new_pay->status = 0;
               $new_pay->save();
