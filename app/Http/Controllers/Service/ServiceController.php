@@ -16,8 +16,8 @@ class ServiceController extends Controller
     public function service_properties(request $request)
     {
 
-        $data['estate'] = Estate::where('status', 1)->get()->makeHidden(['created_at', 'updated_at']);
-        $data['service'] = Service::where('status', 1)->get()->makeHidden(['created_at', 'updated_at']);
+        $data['estate'] = Estate::where('status', 2)->get()->makeHidden(['created_at', 'updated_at']);
+        $data['service'] = Service::where('status', 2)->get()->makeHidden(['created_at', 'updated_at']);
 
         return response()->json([
             'status' => true,
