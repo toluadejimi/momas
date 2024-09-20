@@ -76,7 +76,7 @@ class AuthController extends Controller
             send_notification($message);
 
 
-            return redirect('admin-dashboard')->with('message', "Welcome Admin!");
+            return redirect('admin/admin-dashboard')->with('message', "Welcome Admin!");
         }
 
         return back()->with('error', 'You don\'t have permission');

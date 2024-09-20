@@ -7,6 +7,7 @@ use App\Models\Estate;
 use App\Models\Feature;
 use App\Models\Meter;
 use App\Models\MeterToken;
+use App\Models\Organization;
 use App\Models\Setting;
 use App\Models\Token;
 use App\Models\Transaction;
@@ -35,14 +36,14 @@ class DashboardContoller extends Controller
         $data['users'] = User::where('status', 2)->count();
         $data['users_lists'] = User::paginate('20');
 
-        return view('admin/user-list', $data);
+        return view('admin/user/user-list', $data);
 
     }
 
     public function new_user()
     {
         $data['estate'] = Estate::all();
-        return view('admin/new-user', $data);
+        return view('admin/user/new-user', $data);
 
     }
 
@@ -131,6 +132,60 @@ class DashboardContoller extends Controller
         return redirect('admin/settings')->with('message', "Features updated successfully");
 
     }
+
+
+
+    public function organization_index(request $request)
+    {
+        $data['organization_list'] = Organization::paginate(20);
+        $data['organization'] = Organization::where('status', 2)->count();
+
+
+        return view('admin/organization/index', $data)->with('message', "Features updated successfully");
+
+    }
+
+
+    public function organization_new(request $request)
+    {
+        return view('admin/organization/create');
+    }
+
+
+    public function organization_store(request $request)
+    {
+
+       $org = new Organization();
+       $org->title = $request->title;
+       $org->status = 2;
+       $org->save();
+
+        return redirect('admin/organization')->with('Organization created successfully');
+    }
+
+
+    public function organization_view(request $request)
+    {
+
+        $data['org'] = Organization::where('id', $request->id)->first();
+        return view('admin/organization/view', $data);
+    }
+
+    public function organization_update(request $request)
+    {
+         Organization::where('id', $request->id)->update(['title' => $request->title]);
+        return redirect('admin/organization')->with('Organization updated successfully');
+    }
+
+    public function organization_delete(request $request)
+    {
+        Organization::where('id', $request->id)->delete();
+        return redirect('admin/organization')->with('Organization deleted successfully');
+    }
+
+
+
+
 
 
 

@@ -231,14 +231,14 @@ class MeterController extends Controller
         $data['meters'] = Meter::count();
         $data['meter_lists'] = Meter::paginate('20');
 
-        return view('admin/meter-lists', $data);
+        return view('admin/meter/meter-lists', $data);
     }
 
 
     public function new_meter()
     {
         $data['users'] = User::all();
-        return view('admin/new-meter', $data);
+        return view('admin/meter/new-meter', $data);
     }
 
 

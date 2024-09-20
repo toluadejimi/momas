@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AssetController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardContoller;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EstateController;
 use App\Http\Controllers\Admin\TerminalController;
 use App\Http\Controllers\Agents\TransferController;
 use App\Http\Controllers\LoginSecurityController;
@@ -60,6 +62,48 @@ Route::group(['prefix'=>'admin'], function(){
     Route::get('new-user', [DashboardContoller::class, 'new_user']);
     Route::post('add-new-user', [DashboardContoller::class, 'add_new_user']);
     Route::get('user-delete', [DashboardContoller::class, 'delete_user']);
+
+
+    //Estates
+    Route::get('estate', [EstateController::class, 'estate_index']);
+    Route::get('new-estate', [EstateController::class, 'estate_new']);
+    Route::post('estate-store', [EstateController::class, 'estate_store']);
+    Route::post('estate-update-tariff', [EstateController::class, 'estate_update_tariff']);
+    Route::get('view-estate', [EstateController::class, 'estate_view']);
+    Route::post('estate-update-info', [EstateController::class, 'estate_update']);
+    Route::post('estate-update-utilities', [EstateController::class, 'estate_update_utilities']);
+
+
+    Route::get('estate-delete', [EstateController::class, 'estate_delete']);
+
+
+
+
+    //Organization
+    Route::get('organization', [DashboardContoller::class, 'organization_index']);
+    Route::get('new-organization', [DashboardContoller::class, 'organization_new']);
+    Route::post('organization-store', [DashboardContoller::class, 'organization_store']);
+    Route::get('view-organization', [DashboardContoller::class, 'organization_view']);
+    Route::post('organization-update', [DashboardContoller::class, 'organization_update']);
+    Route::get('organization-delete', [DashboardContoller::class, 'organization_delete']);
+
+
+
+
+    //Assets
+    Route::get('asset', [AssetController::class, 'asset_index']);
+    Route::get('new-asset', [AssetController::class, 'asset_new']);
+    Route::post('asset-store', [AssetController::class, 'asset_store']);
+    Route::get('view-asset', [AssetController::class, 'asset_view']);
+    Route::post('asset-update', [AssetController::class, 'asset_update']);
+    Route::get('asset-delete', [AssetController::class, 'asset_delete']);
+
+
+    //utilities
+    Route::get('utility', [DashboardContoller::class, 'utility_index']);
+    Route::get('utility-store', [DashboardContoller::class, 'utility_store']);
+    Route::get('utility-update', [DashboardContoller::class, 'utility_update']);
+    Route::get('utility-delete', [DashboardContoller::class, 'utility_delete']);
 
 
 

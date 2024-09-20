@@ -8,6 +8,8 @@ use App\Models\Setting;
 use App\Models\Terminal;
 use App\Models\Dyaccount;
 use App\Models\TidConfig;
+use App\Models\UtilitiesPayment;
+use App\Models\Utitlity;
 use App\Models\Webaccount;
 use App\Models\Transaction;
 use App\Models\VirtualAccount;
@@ -157,6 +159,69 @@ if (!function_exists('flush_token')) {
 
     }
 }
+
+
+if (!function_exists('total_utility')) {
+
+    function total_utility($estate_id)
+    {
+
+        $data['utl'] = Utitlity::where('id', $estate_id)->first();
+        $total_utility = $data['utl']->water + $data['utl']->eletricity +  $data['utl']->security + $data['utl']->waste + $data['utl']->cleaners + $data['utl']->grardners + $data['utl']->service_charge;
+        return $total_utility;
+
+    }
+}
+
+
+
+
+if (!function_exists('vend')) {
+
+    function vend($duration, $estate_id)
+    {
+
+
+
+        if($duration == "daily"){
+
+            $total = total_utility($estate_id);
+
+          $chk_pay =  UtilitiesPayment::where([
+                'user_id' => Auth::id(),
+                'estate_id' => $estate_id,
+                'created_at' => Carbon::today(),
+            ])->get() ?? null;
+
+          dd($chk_pay);
+
+          if($chk_pay == null || $chk_pay->isEmpty()){
+              $new_pay = new UtilitiesPayment();
+              $new_pay->user_id = Auth::id();
+              $new_pay->estate_id = $estate_id;
+              $new_pay->created_at = Carbon::now();
+              $new_pay->updated_at = Carbon::now();
+              $new_pay->amount = $total;
+              $new_pay->status = 0;
+              $new_pay->save();
+              return $total;
+          }
+
+          if($chk_pay->status == 0){
+
+
+
+          }
+
+
+
+
+        }
+
+    }
+}
+
+
 
 
 

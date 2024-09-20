@@ -129,12 +129,32 @@
                         </a>
                     </li>
 
+
+                    <li>
+                        <a class='tp-link'  href="asset">
+                            <i data-feather="archive"></i>
+                            <span> Assets </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class='tp-link'  href="organization">
+                            <i data-feather="folder"></i>
+                            <span> Organization </span>
+                        </a>
+                    </li>
+
+
+
                     <li>
                         <a class='tp-link'  href="estate">
                             <i data-feather="home"></i>
                             <span> Estate </span>
                         </a>
                     </li>
+
+
+
 
 
                     <li>

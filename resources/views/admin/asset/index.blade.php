@@ -10,7 +10,7 @@
 
             <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                 <div class="flex-grow-1">
-                    <h4 class="fs-18 fw-semibold m-0">Meter List</h4>
+                    <h4 class="fs-18 fw-semibold m-0">Assets List</h4>
                 </div>
             </div>
 
@@ -45,17 +45,17 @@
                                 <div class="d-flex align-items-center mb-2">
                                     <div
                                         class="bg-secondary-subtle rounded-circle p-2 me-2 border border-dashed border-secondary">
-                                        <svg width="20" height="20" viewBox="0 0 100 105" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M50 0C22.4444 0 0 21.21 0 47.25C0 67.7775 13.8889 85.26 33.3333 91.7175V105H44.4444V94.185C46.2778 94.5 48.1111 94.5 50 94.5C51.8889 94.5 53.7222 94.5 55.5556 94.185V105H66.6667V91.7175C86.1111 85.2075 100 67.725 100 47.25C100 21.21 77.5556 0 50 0ZM62.5 63L45.8333 78.75L37.5 70.875L44.4444 64.3125L37.5 57.75L54.1667 42L62.5 49.875L55.5556 56.4375L62.5 63ZM72.2222 36.75H27.7778V26.25H72.2222V36.75Z" fill="#E50086" fill-opacity="0.52"/>
+                                        <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7 3.38391e-09C7.2198 -1.80724e-05 7.43348 0.0723807 7.608 0.206L7.708 0.293L10.414 3H17C17.7652 2.99996 18.5015 3.29233 19.0583 3.81728C19.615 4.34224 19.9501 5.06011 19.995 5.824L20 6V14C20 14.7652 19.7077 15.5015 19.1827 16.0583C18.6578 16.615 17.9399 16.9501 17.176 16.995L17 17H3C2.23479 17 1.49849 16.7077 0.941739 16.1827C0.384993 15.6578 0.0498925 14.9399 0.00500012 14.176L4.66045e-09 14V3C-4.26217e-05 2.23479 0.292325 1.49849 0.817284 0.941739C1.34224 0.384993 2.06011 0.0498925 2.824 0.00500012L3 3.38391e-09H7Z" fill="#D60574" fill-opacity="0.57"/>
                                         </svg>
 
                                     </div>
 
-                                    <p class="mb-0 text-dark fs-15">Total Meter</p>
+                                    <p class="mb-0 text-dark fs-15">Total Assets</p>
                                 </div>
 
                                 <div class="d-flex align-items-center">
-                                    <h3 class="mb-0 fs-24 text-black me-2">{{number_format($meters, 2)}}</h3>
+                                    <h3 class="mb-0 fs-24 text-black me-2">{{number_format($asset, 2)}}</h3>
 
                                 </div>
 
@@ -69,14 +69,24 @@
             </div>
 
 
+            <hr>
+            @foreach($asset_count as $data)
+                <button type="button" class="btn btn-primary">
+                    {{$data->title}} <span class="badge text-bg-secondary">{{$data->count}}</span>
+                </button>
+            @endforeach
+
+            <hr>
+
+
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card overflow-hidden">
 
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h5 class="card-title text-black mb-0">Latest Transaction</h5>
-                                <a href="new-meter" class="btn btn-primary text-white justify-content-end">Add new</a>
+                                <h5 class="card-title text-black mb-0">Assets List</h5>
+                                <a href="new-asset" class="btn btn-primary text-white justify-content-end">Add new</a>
 
                             </div>
 
@@ -89,11 +99,9 @@
                                    class="table table-striped table-bordered dt-responsive nowrap">
                                 <thead>
                                 <tr>
-                                    <th scope="col" class="cursor-pointer">First Name</th>
-                                    <th scope="col" class="cursor-pointer">Last Name</th>
-                                    <th scope="col" class="cursor-pointer">Meter No</th>
-                                    <th scope="col" class="cursor-pointer">Meter Pay Type</th>
-                                    <th scope="col" class="cursor-pointer">Meter Type</th>
+                                    <th scope="col" class="cursor-pointer">Asset</th>
+                                    <th scope="col" class="cursor-pointer">Organization</th>
+                                    <th scope="col" class="cursor-pointer">Estate</th>
                                     <th scope="col" class="cursor-pointer">Status</th>
                                     <th scope="col" class="cursor-pointer desc">Action</th>
 
@@ -102,22 +110,13 @@
                                 <tbody>
 
 
-                                @foreach($meter_lists as $data)
+                                @foreach($asset_list as $data)
 
                                     <tr>
-                                        <td><a href="view-user?id={{$data->user->id}}">{{$data->user->first_name}}</a> </td>
-                                        <td><a href="view-user?id={{$data->user->id}}">{{$data->user->last_name}}</a></td>
-                                        <td><a href="view-meter?meter_no={{$data->meterNo}}">{{$data->meterNo}}</td>
-                                        <td>{{$data->payType}}</td>
+                                        <td><a href="view-asset?id={{$data->id}}&org_id={{$data->organization_id}}&est_id={{$data->estate_id}}">{{$data->title}}</a> </td>
+                                        <td>{{$data->organization->title}}</td>
+                                        <td>{{$data->estate->title}}</td>
 
-                                        <td>
-                                            @if($data->meterType == "pro")
-                                                <span class="badge text-bg-primary">PRO METER</span>
-                                            @else
-                                                <span class="badge text-bg-dark">NORMAL METER</span>
-                                            @endif
-
-                                        </td>
 
                                         <td>
                                             @if($data->status == 2)
@@ -129,7 +128,12 @@
                                             @endif
 
                                         </td>
-                                        <td><a href="meter-delete?id={{$data->id}}" class="btn btn-danger">Delete</a> </td>
+                                        <td><a href="asset-delete?id={{$data->id}}" onclick="return confirmDelete();" class="btn btn-danger">Delete</a> </td>
+                                        <script>
+                                            function confirmDelete() {
+                                                return confirm('Are you sure you want to delete this item?');
+                                            }
+                                        </script>
 
                                     </tr>
 
@@ -140,7 +144,7 @@
 
                                 <tfoot>
 
-                                {{ $meter_lists->links() }}
+                                {{ $asset_list->links() }}
 
 
                                 </tfoot>

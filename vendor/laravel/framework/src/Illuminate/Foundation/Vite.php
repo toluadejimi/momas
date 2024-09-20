@@ -84,7 +84,7 @@ class Vite implements Htmlable
     protected $preloadTagAttributesResolvers = [];
 
     /**
-     * The preloaded assets.
+     * The preloaded asset.
      *
      * @var array
      */
@@ -98,7 +98,7 @@ class Vite implements Htmlable
     protected static $manifests = [];
 
     /**
-     * Get the preloaded assets.
+     * Get the preloaded asset.
      *
      * @return array
      */

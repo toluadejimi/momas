@@ -22,7 +22,7 @@ class Payment extends \Faker\Provider\Payment
 
     /**
      * Sources:
-     * The 19 largest German banks by total assets
+     * The 19 largest German banks by total asset
      *
      * @see https://de.wikipedia.org/wiki/Liste_der_größten_Banken_in_Deutschland
      * The 20 largest co-operative banks by branch count

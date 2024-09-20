@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\Setting;
+use App\Models\Tariff;
+use App\Models\UtilitiesPayment;
+use App\Models\Utitlity;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Meter;
@@ -45,12 +48,29 @@ class LoginController extends Controller
 
             flush_token();
 
+            $purr = Tariff::where('estate_id', Auth::user()->estate_id)->first() ?? null;
 
-            $fl = Setting::where('id', 1)->first();
-            $flkey['flutterwave_secret'] = $fl->flutterwave_secret;
-            $flkey['flutterwave_public'] = $fl->flutterwave_public;
-            $pkkey['paystack_secret'] = $fl->paystack_secret;
-            $pkkey['paystack_public'] = $fl->paystack_public;
+            if($purr == null){
+                $pur = [];
+            }else{
+                $pur['min_purchase'] = $purr->min_pur;
+                $pur['max_purchase'] = $purr->max_pur;
+            }
+
+
+            $get_ut = UtilitiesPayment::where('user_id', Auth::id())->first() ?? null;
+            $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first() ?? null;
+            $estate_id = Auth::user()->estate_id ?? null;
+
+          //  dd($get_ut, $duration, $estate_id);
+
+            if($get_ut == null ||  $duration == null || $estate_id == null){
+                $minvend = 0;
+            }else{
+              //  $minvend =   vend($duration, $estate_id);
+            }
+
+
 
 
             $token = auth()->user()->createToken('API Token')->accessToken;
@@ -58,8 +78,8 @@ class LoginController extends Controller
             $user = user();
             $user['token'] = $token;
             $user['meter'] = $meter;
-            $user['flutterwave_keys'] = $flkey;
-            $user['paystack_keys'] = $pkkey;
+            $user['purchase'] = $pur;
+            $user['min_vending'] = $minvend;
 
 
             return response()->json([

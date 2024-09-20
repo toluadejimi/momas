@@ -50,16 +50,16 @@ class VendorPublishCommand extends Command
     protected $signature = 'vendor:publish
                     {--existing : Publish and overwrite only the files that have already been published}
                     {--force : Overwrite any existing files}
-                    {--all : Publish assets for all service providers without prompt}
-                    {--provider= : The service provider that has assets you want to publish}
-                    {--tag=* : One or many tags that have assets you want to publish}';
+                    {--all : Publish asset for all service providers without prompt}
+                    {--provider= : The service provider that has asset you want to publish}
+                    {--tag=* : One or many tags that have asset you want to publish}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Publish any publishable assets from vendor packages';
+    protected $description = 'Publish any publishable asset from vendor packages';
 
     /**
      * Create a new command instance.
@@ -172,7 +172,7 @@ class VendorPublishCommand extends Command
     }
 
     /**
-     * Publishes the assets for a tag.
+     * Publishes the asset for a tag.
      *
      * @param  string  $tag
      * @return mixed
