@@ -7,7 +7,6 @@
         <div class="container-fluid">
 
 
-
             <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                 <div class="flex-grow-1">
                     <h4 class="fs-18 fw-semibold m-0">Users List</h4>
@@ -66,7 +65,6 @@
                 </div>
 
 
-
             </div>
 
 
@@ -82,7 +80,6 @@
                             </div>
 
 
-
                         </div>
 
                         <div class="card-body">
@@ -94,10 +91,10 @@
                                     <th scope="col" class="cursor-pointer">Last Name</th>
                                     <th scope="col" class="cursor-pointer">Phone</th>
                                     <th scope="col" class="cursor-pointer">Email</th>
-                                    <th scope="col" class="cursor-pointer">Meter No</th>
+                                    <th scope="col" class="cursor-pointer">Role</th>
                                     <th scope="col" class="cursor-pointer">Type</th>
                                     <th scope="col" class="cursor-pointer">Status</th>
-                                    <th scope="col" class="cursor-pointer desc">Date Joined</th>
+                                    <th scope="col" class="cursor-pointer desc">Date Registered</th>
                                     <th scope="col" class="cursor-pointer desc">Action</th>
 
                                 </tr>
@@ -108,11 +105,22 @@
                                 @foreach($users_lists as $data)
 
                                     <tr>
-                                        <td><a href="view-user?id={{$data->id}}">{{$data->first_name}}</a> </td>
+                                        <td><a href="view-user?id={{$data->id}}">{{$data->first_name}}</a></td>
                                         <td><a href="view-user?id={{$data->id}}">{{$data->last_name}}</a></td>
                                         <td>{{$data->phone}}</td>
                                         <td>{{$data->email}}</td>
-                                        <td><a href="view-meter?meter_no={{$data->meterNo}}">{{$data->meterNo}}</td>
+                                        <td>
+                                            @if($data->role == 2)
+                                                <span class="badge text-bg-primary">Customer</span>
+                                            @elseif($data->role == 3)
+                                                <span class="badge text-bg-dark">Estate Admin</span>
+                                            @elseif($data->role == 1)
+                                                <span class="badge text-bg-dark">Main Admin</span>
+                                            @elseif($data->role == 4)
+                                                <span class="badge text-bg-warning">Estate Staff</span>
+                                            @endif
+
+                                        </td>
                                         <td>{{$data->meterType}}</td>
                                         <td>
                                             @if($data->status == 2)
@@ -125,7 +133,14 @@
 
                                         </td>
                                         <td>{{$data->created_at}}</td>
-                                        <td><a href="user-delete?id={{$data->id}}" class="btn btn-danger">Delete</a> </td>
+                                        <td><a href="user-delete?id={{$data->id}}" onclick="return confirmDelete();" class="btn btn-danger">Delete</a>
+
+                                            <script>
+                                                function confirmDelete() {
+                                                    return confirm('Are you sure you want to delete this item?');
+                                                }
+                                            </script>
+                                        </td>
 
                                     </tr>
 

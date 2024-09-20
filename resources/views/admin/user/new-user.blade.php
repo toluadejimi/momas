@@ -60,7 +60,7 @@
 
                                 <div class="col-3">
                                     <label class="my-2">Address</label>
-                                    <input type="text" name="addreess" class="form-control" required>
+                                    <input type="text" name="address" class="form-control" required>
                                 </div>
 
                                 <div class="col-3">
@@ -95,7 +95,7 @@
 
                                 <div class="col-3">
                                     <label class="my-2">Meter Type</label>
-                                    <select type="text" name="state" class="form-control" required>
+                                    <select type="text" name="meterType" class="form-control" required>
                                         <option value="prepaid">Prepaid</option>
                                         <option value="postpaid">Postpaid</option>
                                     </select>
@@ -120,7 +120,10 @@
                                     <select type="text" name="role" class="form-control" required>
                                         <option value="2">Customer</option>
                                         <option value="1">Admin</option>
-                                        <option value="3">Estate Staff</option>
+                                        <option value="3">Estate Admin</option>
+                                        <option value="4">Estate Staff</option>
+
+
                                     </select>
 
                                 </div>

@@ -106,10 +106,10 @@
                                 @foreach($meter_lists as $data)
 
                                     <tr>
-                                        <td><a href="view-user?id={{$data->user->id}}">{{$data->user->first_name}}</a> </td>
-                                        <td><a href="view-user?id={{$data->user->id}}">{{$data->user->last_name}}</a></td>
-                                        <td><a href="view-meter?meter_no={{$data->meterNo}}">{{$data->meterNo}}</td>
-                                        <td><a href="view-estate?id={{$data->user->estate_id}}">{{$data->user->estate_name}}</td>
+                                        <td><a href="view-user?id={{$data->user->id ?? "Name"}}">{{$data->user->first_name ?? "Name"}}</a> </td>
+                                        <td><a href="view-user?id={{$data->user->id ?? "Name"}}">{{$data->user->last_name ?? "Name"}}</a></td>
+                                        <td>{{$data->meterNo}}</td>
+                                        <td><a href="view-estate?id={{$data->user->estate_id ?? "Name"}}">{{$data->user->estate_name ?? "Name"}}</td>
                                         <td>{{$data->payType}}</td>
 
                                         <td>

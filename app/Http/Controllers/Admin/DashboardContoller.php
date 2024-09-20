@@ -58,9 +58,42 @@ class DashboardContoller extends Controller
         $usr_phone = User::where('email', $request->email)->first()->phone ?? null;
 
         if($usr_email == null && $usr_phone == null){
-            User::create($request->all());
+
+            $estate_name = Estate::where('id', $request->estate_id)->first()->title;
+            $usr = new User();
+            $usr->first_name = $request->first_name;
+            $usr->last_name = $request->last_name;
+            $usr->phone = $request->phone;
+            $usr->email = $request->email;
+            $usr->role = $request->role;
+            $usr->estate_id = $request->estate_id;
+            $usr->estate_name = $estate_name;
+            $usr->meterNo = $request->meterNo;
+            $usr->meterType = $request->meterType;
+            $usr->lga = $request->lga;
+            $usr->state = $request->state;
+            $usr->hno = $request->hno;
+            $usr->address = $request->address;
+            $usr->city = $request->city;
+            $usr->status = 2;
+            $usr->password = bcrypt($request->password);
+            $usr->save();
+
+            $userId = $usr->id;
+            $met = new Meter();
+            $met->user_id = $userId;
+            $met->estate_id = $request->estate_id;
+            $met->meterNo = $request->meterNo;
+            $met->payType = "Prepaid";
+            $met->meterType = "normal";
+            $met->save();
+
+
+
             return redirect('admin/users-list')->with('message', "User created successfully");
         }else{
+
+
 
             return redirect('admin/users-list')->with('error', "User already  exist");
 
@@ -112,7 +145,7 @@ class DashboardContoller extends Controller
             'general_support' => $request->general_support,
 
         ]);
-        return redirect('admin/settings')->with('message', "Payment Keys updated successfully");
+        return redirect('admin/settings')->with('message', "Support data updated successfully");
 
     }
 

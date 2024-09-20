@@ -73,7 +73,7 @@
 
                                     <div class="col-3">
                                         <label class="my-2">Address</label>
-                                        <input type="text" value="{{$user->address}}" name="addreess"
+                                        <input type="text" value="{{$user->address}}" name="address"
                                                class="form-control" required>
                                     </div>
 

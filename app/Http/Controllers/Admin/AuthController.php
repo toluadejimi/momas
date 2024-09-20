@@ -48,8 +48,7 @@ class AuthController extends Controller
         }
 
         flush_token();
-        $message = $code;
-        send_notification($message);
+        send_login_code($email, $code);
 
         return view('auth.code', compact('code', 'email'));
     }

@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::any('/', [AuthController::class, 'admin_login']);
 Route::post('login-now', [AuthController::class, 'login_now']);
-Route::any('log-out', [AuthController::class, 'log_out']);
+Route::any('logout', [AuthController::class, 'log_out']);
 Route::post('verify-code', [AuthController::class, 'verify_code']);
 
 

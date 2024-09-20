@@ -61,10 +61,12 @@
                             </div>
 
                             <!-- item-->
-                            <a class='dropdown-item notify-item' href='log-out'>
+                            <a class='dropdown-item notify-item' href='/logout'>
                                 <i class="mdi mdi-location-exit fs-16 align-middle"></i>
                                 <span>Logout</span>
                             </a>
+
+
 
                         </div>
                     </li>

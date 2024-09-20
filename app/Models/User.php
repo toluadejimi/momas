@@ -26,6 +26,7 @@ class User extends Authenticatable
         'meterType',
         'address',
         'city',
+        'lga',
         'state',
         'estate',
         'phone',

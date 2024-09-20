@@ -259,28 +259,23 @@
                                 <h6 class="d-flex justify-content-start my-4">Support Settings</h6>
 
                                 <div class="col-6">
-                                    <label class="my-2">Flutterwave Secret</label>
-                                    <input type="text" name="flutterwave_secret" class="form-control" value="{{$set->flutterwave_secret}}">
+                                    <label class="my-2">Payment Support</label>
+                                    <input type="text" name="payment_support" class="form-control" value="{{$set->payment_support}}">
 
                                 </div>
 
                                 <div class="col-6">
-                                    <label class="my-2">Flutterwave Public</label>
-                                    <input type="text" name="flutterwave_public" class="form-control" value="{{$set->flutterwave_public}}">
+                                    <label class="my-2">Meter Support</label>
+                                    <input type="text" name="meter_support" class="form-control" value="{{$set->meter_support}}">
 
                                 </div>
 
                                 <div class="col-6">
-                                    <label class="my-2">Paystack Secret</label>
-                                    <input type="text" name="paystack_secret" class="form-control" value="{{$set->paystack_secret}}">
+                                    <label class="my-2">General Support</label>
+                                    <input type="text" name="general_support" class="form-control" value="{{$set->general_support}}">
 
                                 </div>
 
-                                <div class="col-6">
-                                    <label class="my-2">Paystack Public</label>
-                                    <input type="text" name="paystack_public" class="form-control" value="{{$set->paystack_public}}">
-
-                                </div>
 
 
 
@@ -291,7 +286,7 @@
                             <hr class="my-4">
 
                             <button type="submit" class="col-2 d-flex btn btn-primary">
-                                Update Payment Keys
+                                Update Support
                             </button>
 
 
