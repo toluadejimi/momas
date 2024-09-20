@@ -57,7 +57,10 @@ class LoginController extends Controller
             if($duration == null || $estate_id == null){
                 $minvend = 0;
             }else{
-                $minvend =   vend($duration, $estate_id);
+                $get_vend =   vend($duration, $estate_id);
+                if($get_vend == null){
+                    $minvend = 0;
+                }
             }
 
 
