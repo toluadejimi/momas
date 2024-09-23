@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardContoller;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EstateController;
+use App\Http\Controllers\Admin\TariffController;
 use App\Http\Controllers\Admin\TerminalController;
 use App\Http\Controllers\Agents\TransferController;
 use App\Http\Controllers\LoginSecurityController;
@@ -65,10 +66,7 @@ Route::group(['prefix'=>'admin'], function(){
     Route::get('view-user', [DashboardContoller::class, 'view_user']);
     Route::post('update-user', [DashboardContoller::class, 'update_user']);
     Route::post('update-meter-info', [DashboardContoller::class, 'update_meter_info']);
-
     Route::get('send-token-email', [DashboardContoller::class, 'send_token_email']);
-
-
 
 
 
@@ -129,7 +127,11 @@ Route::group(['prefix'=>'admin'], function(){
     Route::post('support-set', [DashboardContoller::class, 'support_set']);
 
 
-
+    Route::get('tariff-list', [TariffController::class, 'tariff_list']);
+    Route::get('new-tariff', [TariffController::class, 'new_tariff']);
+    Route::post('add-new-tariff', [TariffController::class, 'add_new_tariff']);
+    Route::get('tariff-delete', [TariffController::class, 'delete_tariff']);
+    Route::get('tariff-delete', [TariffController::class, 'delete_tariff']);
 
 
 

@@ -7,7 +7,6 @@ use App\Models\Estate;
 use App\Models\Meter;
 use App\Models\MeterToken;
 use App\Models\Tariff;
-use App\Models\Token;
 use App\Models\User;
 use App\Models\Utitlity;
 use Illuminate\Http\Request;
@@ -20,7 +19,7 @@ class MeterController extends Controller
 
         $user = User::where('meterNo', $request->meterNo)->first() ?? null;
 
-        if($user == null){
+        if ($user == null) {
             $message = "Validation Failed, please check meter number";
             $code = 422;
             error($message, $code);
@@ -28,8 +27,8 @@ class MeterController extends Controller
 
         $meter_type = Meter::where('meterNo', $request->meterNo)->first()->payType;
 
-        $data['customer_name'] = $user->first_name. " ".$user->last_name;
-        $data['address'] = $user->address. ", ".$user->city. ", ".$user->state;
+        $data['customer_name'] = $user->first_name . " " . $user->last_name;
+        $data['address'] = $user->address . ", " . $user->city . ", " . $user->state;
         $data['meter_type'] = $meter_type;
 
         $es_id = User::where('meterNo', $request->meterNo)->first()->estate_id ?? null;
@@ -38,21 +37,21 @@ class MeterController extends Controller
         $estate_id = $es_id ?? null;
 
 
-        if($duration == null || $estate_id == null){
+        if ($duration == null || $estate_id == null) {
             $minvend = 0;
-        }else{
-            $get_vend =   vend($duration, $estate_id);
-            if($get_vend == null){
+        } else {
+            $get_vend = vend($duration, $estate_id);
+            if ($get_vend == null) {
                 $minvend = 0;
-            }else{
+            } else {
                 $minvend = $get_vend;
             }
         }
 
 
-        if($purr == null){
+        if ($purr == null) {
             $pur = [];
-        }else{
+        } else {
             $pur['min_purchase'] = $purr->min_pur;
             $pur['max_purchase'] = $purr->max_pur;
             $pur['min_vending'] = $minvend;
@@ -62,10 +61,9 @@ class MeterController extends Controller
         $data['purchase'] = $pur;
 
 
-
         return response()->json([
-           'status' => true,
-           'data' => $data
+            'status' => true,
+            'data' => $data
 
         ]);
 
@@ -82,16 +80,13 @@ class MeterController extends Controller
         $trx = $request->trxref;
         $date = date('ymd');
         $dater = date('d-m-y');
-        $date_time=date('ydis');
-
+        $date_time = date('ydis');
 
 
         $percentage = 2.5 / 100;
         $final_amount = $percentage * $amount;
 
-        $databody = array(
-
-        );
+        $databody = array();
 
         $url = "http://41.216.166.163:8080/MomasPayService/api/Payment/$meterNo/$meterType/999/$date_time/$amount/999/$date/$final_amount/false";
 
@@ -119,14 +114,14 @@ class MeterController extends Controller
         $var = json_decode($var2);
         $response = $var->responsecode ?? null;
 
-        if($response == "00"){
-            $data['full_name'] =  Auth::user()->first_name." ".Auth::user()->last_name;
-            $data['address'] =  Auth::user()->address.",".Auth::user()->city.",".Auth::user()->state;
-            $data['service'] =  "MOMAS";
-            $data['order_id'] =  $trx;
-            $data['token'] =  $var->recieptNumber;
-            $data['amount'] =  $amount;
-            $data['date'] =  $dater;
+        if ($response == "00") {
+            $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
+            $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
+            $data['service'] = "MOMAS";
+            $data['order_id'] = $trx;
+            $data['token'] = $var->recieptNumber;
+            $data['amount'] = $amount;
+            $data['date'] = $dater;
 
 
             $ved = new MeterToken();
@@ -150,12 +145,11 @@ class MeterController extends Controller
             send_email_token($email, $token, $amount, $unit);
 
 
-
-        }else{
+        } else {
 
             User::where('id', Auth::id())->increment('main_wallet', $amount);
             return response()->json([
-                'status'=> false,
+                'status' => false,
                 'message' => "Meter vending failed, Retry again using your wallet"
             ], 200);
 
@@ -164,12 +158,9 @@ class MeterController extends Controller
 
 
         return response()->json([
-            'status'=> true,
+            'status' => true,
             'data' => $data
         ], 200);
-
-
-
 
 
     }
@@ -190,8 +181,7 @@ class MeterController extends Controller
         $dater = date('d-m-y');
 
 
-        $databody = array(
-        );
+        $databody = array();
 
         $url = "http://41.216.166.163:8080/MomasPayService/api/Payment/$meterNo/$meterType/999/$trx/$amount/999/$date/$final_amount/false";
 
@@ -220,15 +210,14 @@ class MeterController extends Controller
         $response = $var->responsecode ?? null;
 
 
-
-        if($response == "00"){
-            $data['full_name'] =  Auth::user()->first_name." ".Auth::user()->last_name;
-            $data['address'] =  Auth::user()->address.",".Auth::user()->city.",".Auth::user()->state;
-            $data['service'] =  "MOMAS";
-            $data['order_id'] =  $trx;
-            $data['token'] =  $var->recieptNumber;
-            $data['amount'] =  $amount;
-            $data['date'] =  $dater;
+        if ($response == "00") {
+            $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
+            $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
+            $data['service'] = "MOMAS";
+            $data['order_id'] = $trx;
+            $data['token'] = $var->recieptNumber;
+            $data['amount'] = $amount;
+            $data['date'] = $dater;
 
 
             $ved = new MeterToken();
@@ -245,18 +234,17 @@ class MeterController extends Controller
             $ved->save();
 
 
-
             $email = Auth::user()->email;
             $token = $var->recieptNumber;
             $unit = $var->unit;
 
             send_email_token($email, $token, $amount, $unit);
 
-        }else{
+        } else {
 
             User::where('id', Auth::id())->increment('main_wallet', $amount);
             return response()->json([
-                'status'=> false,
+                'status' => false,
                 'message' => "Meter vending failed, Retry again using your wallet"
             ], 200);
 
@@ -264,18 +252,10 @@ class MeterController extends Controller
         }
 
 
-
-
-
         return response()->json([
-            'status'=> true,
+            'status' => true,
             'data' => $data
         ], 200);
-
-
-
-
-
 
 
     }
@@ -284,12 +264,13 @@ class MeterController extends Controller
     public function reprint_meter_token(request $request)
     {
 
-      $token =  MeterToken::where('status', 2)->where('user_id', Auth::id())->get();
-      return response()->json([
-          'status'=> true,
-          'data' => $token
-      ], 200);
-
+        $token = MeterToken::where('status', 2)->where('user_id', Auth::id())->get();
+        $token['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
+        $token['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
+        return response()->json([
+            'status' => true,
+            'data' => $token
+        ], 200);
 
 
     }
@@ -299,15 +280,14 @@ class MeterController extends Controller
     {
 
 
-
-        $data['token'] =  MeterToken::where('id', $request->token_id)->get();
-        $data['full_name'] =  Auth::user()->first_name." ".Auth::user()->last_name;
-        $data['address'] =  Auth::user()->address.",".Auth::user()->city.",".Auth::user()->state;
-        $data['service'] =  "Reprint";
+        $data['token'] = MeterToken::where('id', $request->token_id)->get();
+        $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
+        $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
+        $data['service'] = "Reprint";
 
 
         return response()->json([
-            'status'=> true,
+            'status' => true,
             'data' => $data
         ], 200);
 
@@ -341,15 +321,10 @@ class MeterController extends Controller
 
     public function delete_meter(request $request)
     {
-        Meter::where('id',$request->id)->delete();
+        Meter::where('id', $request->id)->delete();
         return redirect('admin/meter-list')->with('message', "Meter deleted successfully");
 
     }
-
-
-
-
-
 
 
 }

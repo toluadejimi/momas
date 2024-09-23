@@ -10,7 +10,7 @@
 
             <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                 <div class="flex-grow-1">
-                    <h4 class="fs-18 fw-semibold m-0">Meter List</h4>
+                    <h4 class="fs-18 fw-semibold m-0">Tariff List</h4>
                 </div>
             </div>
 
@@ -51,11 +51,11 @@
 
                                     </div>
 
-                                    <p class="mb-0 text-dark fs-15">Total Meter</p>
+                                    <p class="mb-0 text-dark fs-15">Total Tariff</p>
                                 </div>
 
                                 <div class="d-flex align-items-center">
-                                    <h3 class="mb-0 fs-24 text-black me-2">{{number_format($meters, 2)}}</h3>
+                                    <h3 class="mb-0 fs-24 text-black me-2">{{number_format($tarifftariffis, 2)}}</h3>
 
                                 </div>
 
@@ -75,7 +75,7 @@
 
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h5 class="card-title text-black mb-0">Latest Transaction</h5>
+                                <h5 class="card-title text-black mb-0">Latest Tariff</h5>
                                 <a href="new-meter" class="btn btn-primary text-white justify-content-end">Add new</a>
 
                             </div>
@@ -89,12 +89,9 @@
                                    class="table table-striped table-bordered dt-responsive nowrap">
                                 <thead>
                                 <tr>
-                                    <th scope="col" class="cursor-pointer">First Name</th>
-                                    <th scope="col" class="cursor-pointer">Last Name</th>
-                                    <th scope="col" class="cursor-pointer">Meter No</th>
-                                    <th scope="col" class="cursor-pointer">Estate</th>
-                                    <th scope="col" class="cursor-pointer">Meter Pay Type</th>
-                                    <th scope="col" class="cursor-pointer">Meter Type</th>
+                                    <th scope="col" class="cursor-pointer">TariffID</th>
+                                    <th scope="col" class="cursor-pointer">TariffCode</th>
+                                    <th scope="col" class="cursor-pointer">Description</th>
                                     <th scope="col" class="cursor-pointer">Status</th>
                                     <th scope="col" class="cursor-pointer desc">Action</th>
 
@@ -106,21 +103,9 @@
                                 @foreach($meter_lists as $data)
 
                                     <tr>
-                                        <td><a href="view-user?id={{$data->user->id ?? "Name"}}">{{$data->user->first_name ?? "Name"}}</a> </td>
-                                        <td><a href="view-user?id={{$data->user->id ?? "Name"}}">{{$data->user->last_name ?? "Name"}}</a></td>
-                                        <td>{{$data->meterNo}}</td>
-                                        <td><a href="view-estate?id={{$data->user->estate_id ?? "Name"}}">{{$data->user->estate_name ?? "Name"}}</td>
-                                        <td>{{$data->payType}}</td>
-
-                                        <td>
-                                            @if($data->meterType == "pro")
-                                                <span class="badge text-bg-primary">PRO METER</span>
-                                            @else
-                                                <span class="badge text-bg-dark">NORMAL METER</span>
-                                            @endif
-
-                                        </td>
-
+                                        <td>{{$data->id}}</td>
+                                        <td>{{$data->TariffCode}}</td>
+                                        <td>{{$data->Description}}</td>
                                         <td>
                                             @if($data->status == 2)
                                                 <span class="badge text-bg-primary">Active</span>
@@ -131,12 +116,15 @@
                                             @endif
 
                                         </td>
-                                        <td><a href="meter-delete?id={{$data->id}}"  onclick="return confirmDelete();" class="btn btn-danger">Delete</a> </td>
-                                        <script>
-                                            function confirmDelete() {
-                                                return confirm('Are you sure you want to delete this item?');
-                                            }
-                                        </script>
+                                        <td><a href="delete-tariff?id={{$data->id}}"  onclick="return confirmDelete();" class="btn btn-danger">Delete</a>
+                                            <script>
+
+                                                function confirmDelete() {
+                                                    return confirm('Are you sure you want to delete this item?');
+                                                }
+                                            </script>
+                                        </td>
+
                                     </tr>
 
                                 @endforeach

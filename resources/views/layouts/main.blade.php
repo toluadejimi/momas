@@ -158,6 +158,16 @@
 
 
 
+                    <li>
+                        <a class='tp-link'  href="tariff-list">
+                            <i data-feather="divide-square"></i>
+                            <span> Tariff </span>
+                        </a>
+                    </li>
+
+
+
+
 
                     <li>
                         <a class='tp-link'  href="settings">
