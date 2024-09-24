@@ -265,8 +265,8 @@ class MeterController extends Controller
     {
 
         $token = MeterToken::where('status', 2)->where('user_id', Auth::id())->get();
-        $token['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
-        $token['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
+//        $token['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
+//        $token['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
         return response()->json([
             'status' => true,
             'data' => $token
