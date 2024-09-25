@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df462c8f-229d-4527-915f-ee2aade1fa51" name="Changes" comment="pusgggghhh">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/TariffController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/tariff/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/note" beforeDir="false" afterPath="$PROJECT_DIR$/note" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/meter/meter-lists.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/meter/meter-lists.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/meter/new-meter.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/meter/new-meter.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/main.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -289,22 +282,7 @@
       <workItem from="1726766978372" duration="598000" />
       <workItem from="1726811054752" duration="7000" />
       <workItem from="1726847880558" duration="111000" />
-    </task>
-    <task id="LOCAL-00160" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1722149562746</created>
-      <option name="number" value="00160" />
-      <option name="presentableId" value="LOCAL-00160" />
-      <option name="project" value="LOCAL" />
-      <updated>1722149562746</updated>
-    </task>
-    <task id="LOCAL-00161" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1722201960238</created>
-      <option name="number" value="00161" />
-      <option name="presentableId" value="LOCAL-00161" />
-      <option name="project" value="LOCAL" />
-      <updated>1722201960238</updated>
+      <workItem from="1727090325088" duration="1585000" />
     </task>
     <task id="LOCAL-00162" summary="pusgggghhh">
       <option name="closed" value="true" />
@@ -682,7 +660,23 @@
       <option name="project" value="LOCAL" />
       <updated>1724854235539</updated>
     </task>
-    <option name="localTasksCounter" value="209" />
+    <task id="LOCAL-00209" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1727091265183</created>
+      <option name="number" value="00209" />
+      <option name="presentableId" value="LOCAL-00209" />
+      <option name="project" value="LOCAL" />
+      <updated>1727091265183</updated>
+    </task>
+    <task id="LOCAL-00210" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1727180848945</created>
+      <option name="number" value="00210" />
+      <option name="presentableId" value="LOCAL-00210" />
+      <option name="project" value="LOCAL" />
+      <updated>1727180848945</updated>
+    </task>
+    <option name="localTasksCounter" value="211" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

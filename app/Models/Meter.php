@@ -14,7 +14,32 @@ class Meter extends Model
         'user_id',
         'meterNo',
         'meterType',
-        'payType'
+        'payType',
+        'meterModel',
+        'AccountNo',
+        'estate_id',
+        'TransformerID',
+        'isDualTariff',
+        'NewSGC',
+        'OldSGC',
+        'NewTariffID',
+        'OldTariffID',
+        'NewSGCDual',
+        'OldSGCDual',
+        'NewTariffDual',
+        'OldTariffDual',
+        'KRN1',
+        'KRN2',
+        'NeedKCT',
+        'CreditTypeID',
+        'AddedBy'
+
+
+
+
+
+
+
     ];
 
     protected $casts = [

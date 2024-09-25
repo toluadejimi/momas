@@ -7,6 +7,7 @@ use App\Models\Estate;
 use App\Models\Meter;
 use App\Models\MeterToken;
 use App\Models\Tariff;
+use App\Models\Transformer;
 use App\Models\User;
 use App\Models\Utitlity;
 use Illuminate\Http\Request;
@@ -300,6 +301,7 @@ class MeterController extends Controller
         $data['meters'] = Meter::count();
         $data['meter_lists'] = Meter::paginate('20');
 
+
         return view('admin/meter/meter-lists', $data);
     }
 
@@ -307,6 +309,12 @@ class MeterController extends Controller
     public function new_meter()
     {
         $data['users'] = User::all();
+        $data['estate'] = Estate::where('status', 2)->get();
+        $data['transformer'] = Transformer::latest()->where('status', 2)->get();
+        $data['tariff'] = Tariff::latest()->where('status', 2)->get();
+
+
+
         return view('admin/meter/new-meter', $data);
     }
 

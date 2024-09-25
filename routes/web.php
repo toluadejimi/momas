@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EstateController;
 use App\Http\Controllers\Admin\TariffController;
 use App\Http\Controllers\Admin\TerminalController;
+use App\Http\Controllers\Admin\TransformerController;
 use App\Http\Controllers\Agents\TransferController;
 use App\Http\Controllers\LoginSecurityController;
 use App\Http\Controllers\Meter\MeterController;
@@ -119,6 +120,16 @@ Route::group(['prefix'=>'admin'], function(){
     Route::post('add-new-meter', [MeterController::class, 'add_new_meter']);
     Route::get('meter-delete', [MeterController::class, 'delete_meter']);
     Route::get('edit-delete', [MeterController::class, 'delete_meter']);
+
+
+
+
+    Route::get('transformer-list', [TransformerController::class, 'list_transformer']);
+    Route::get('new-transformer', [TransformerController::class, 'new_transformer']);
+    Route::post('view-transformer', [TransformerController::class, 'view_transformer']);
+    Route::post('add-new-transformer', [TransformerController::class, 'add_new_transformer']);
+    Route::get('transformer-delete', [TransformerController::class, 'delete_transformer']);
+    Route::get('edit-delete', [TransformerController::class, 'delete_transformer']);
 
 
     Route::get('settings', [DashboardContoller::class, 'settings']);

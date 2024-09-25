@@ -7,10 +7,9 @@
         <div class="container-fluid">
 
 
-
             <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                 <div class="flex-grow-1">
-                    <h4 class="fs-18 fw-semibold m-0">Meter List</h4>
+                    <h4 class="fs-18 fw-semibold m-0">Transformer List</h4>
                 </div>
             </div>
 
@@ -45,17 +44,18 @@
                                 <div class="d-flex align-items-center mb-2">
                                     <div
                                         class="bg-secondary-subtle rounded-circle p-2 me-2 border border-dashed border-secondary">
-                                        <svg width="20" height="20" viewBox="0 0 100 105" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M50 0C22.4444 0 0 21.21 0 47.25C0 67.7775 13.8889 85.26 33.3333 91.7175V105H44.4444V94.185C46.2778 94.5 48.1111 94.5 50 94.5C51.8889 94.5 53.7222 94.5 55.5556 94.185V105H66.6667V91.7175C86.1111 85.2075 100 67.725 100 47.25C100 21.21 77.5556 0 50 0ZM62.5 63L45.8333 78.75L37.5 70.875L44.4444 64.3125L37.5 57.75L54.1667 42L62.5 49.875L55.5556 56.4375L62.5 63ZM72.2222 36.75H27.7778V26.25H72.2222V36.75Z" fill="#E50086" fill-opacity="0.52"/>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                             viewBox="0 0 640 512">
+                                            <path fill="#963b68"
+                                                  d="M96 224c35.3 0 64-28.7 64-64s-28.7-64-64-64s-64 28.7-64 64s28.7 64 64 64m448 0c35.3 0 64-28.7 64-64s-28.7-64-64-64s-64 28.7-64 64s28.7 64 64 64m32 32h-64c-17.6 0-33.5 7.1-45.1 18.6c40.3 22.1 68.9 62 75.1 109.4h66c17.7 0 32-14.3 32-32v-32c0-35.3-28.7-64-64-64m-256 0c61.9 0 112-50.1 112-112S381.9 32 320 32S208 82.1 208 144s50.1 112 112 112m76.8 32h-8.3c-20.8 10-43.9 16-68.5 16s-47.6-6-68.5-16h-8.3C179.6 288 128 339.6 128 403.2V432c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-28.8c0-63.6-51.6-115.2-115.2-115.2m-223.7-13.4C161.5 263.1 145.6 256 128 256H64c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32h65.9c6.3-47.4 34.9-87.3 75.2-109.4"/>
                                         </svg>
-
                                     </div>
 
-                                    <p class="mb-0 text-dark fs-15">Total Meter</p>
+                                    <p class="mb-0 text-dark fs-15">Total Transformer</p>
                                 </div>
 
                                 <div class="d-flex align-items-center">
-                                    <h3 class="mb-0 fs-24 text-black me-2">{{number_format($meters, 2)}}</h3>
+                                    <h3 class="mb-0 fs-24 text-black me-2">{{number_format($transformer, 2)}}</h3>
 
                                 </div>
 
@@ -63,7 +63,6 @@
                         </div>
                     </div>
                 </div>
-
 
 
             </div>
@@ -75,11 +74,10 @@
 
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h5 class="card-title text-black mb-0">Latest Meter</h5>
-                                <a href="new-meter" class="btn btn-primary text-white justify-content-end">Add new</a>
+                                <h5 class="card-title text-black mb-0">Latest Transformer</h5>
+                                <a href="new-transforme" class="btn btn-primary text-white justify-content-end">Add new</a>
 
                             </div>
-
 
 
                         </div>
@@ -89,12 +87,13 @@
                                    class="table table-striped table-bordered dt-responsive nowrap">
                                 <thead>
                                 <tr>
-                                    <th scope="col" class="cursor-pointer">Meter No</th>
-                                    <th scope="col" class="cursor-pointer">Meter Model</th>
+                                    <th scope="col" class="cursor-pointer">ID</th>
+                                    <th scope="col" class="cursor-pointer">Title</th>
+                                    <th scope="col" class="cursor-pointer">City</th>
+                                    <th scope="col" class="cursor-pointer">State</th>
                                     <th scope="col" class="cursor-pointer">Estate</th>
-                                    <th scope="col" class="cursor-pointer">Meter Pay Type</th>
-                                    <th scope="col" class="cursor-pointer">Meter Type</th>
                                     <th scope="col" class="cursor-pointer">Status</th>
+                                    <th scope="col" class="cursor-pointer desc">Date Registered</th>
                                     <th scope="col" class="cursor-pointer desc">Action</th>
 
                                 </tr>
@@ -102,40 +101,34 @@
                                 <tbody>
 
 
-                                @foreach($meter_lists as $data)
+                                @foreach($transformer_list as $data)
 
                                     <tr>
-                                        <td><a href="view-user?id={{$data->user->id ?? "Name"}}">{{$data->user->first_name ?? "Name"}}</a> </td>
-                                        <td><a href="view-user?id={{$data->user->id ?? "Name"}}">{{$data->user->last_name ?? "Name"}}</a></td>
-                                        <td>{{$data->meterNo}}</td>
-                                        <td><a href="view-estate?id={{$data->user->estate_id ?? "Name"}}">{{$data->user->estate_name ?? "Name"}}</td>
-                                        <td>{{$data->payType}}</td>
-
-                                        <td>
-                                            @if($data->meterType == "pro")
-                                                <span class="badge text-bg-primary">PRO METER</span>
-                                            @else
-                                                <span class="badge text-bg-dark">NORMAL METER</span>
-                                            @endif
-
-                                        </td>
-
+                                        <td><a href="view-transformer?id={{$data->id}}">{{$data->id}}</a></td>
+                                        <td>{{$data->title}}</td>
+                                        <td>{{$data->city}}</td>
+                                        <td>{{$data->state}}</td>
+                                        <td>{{$data->estate}}</td>
                                         <td>
                                             @if($data->status == 2)
                                                 <span class="badge text-bg-primary">Active</span>
+                                            @elseif($data->status == 3)
+                                                <span class="badge text-bg-dark">Banned</span>
                                             @elseif($data->status == 0)
                                                 <span class="badge text-bg-warning">Inactive</span>
-                                            @elseif($data->status == 3)
-                                                <span class="badge text-bg-danger">Blocked</span>
                                             @endif
 
                                         </td>
-                                        <td><a href="meter-delete?id={{$data->id}}"  onclick="return confirmDelete();" class="btn btn-danger">Delete</a> </td>
-                                        <script>
-                                            function confirmDelete() {
-                                                return confirm('Are you sure you want to delete this item?');
-                                            }
-                                        </script>
+                                        <td>{{$data->created_at}}</td>
+                                        <td><a href="transformer-delete?id={{$data->id}}" onclick="return confirmDelete();" class="btn btn-danger">Delete</a>
+
+                                            <script>
+                                                function confirmDelete() {
+                                                    return confirm('Are you sure you want to delete this item?');
+                                                }
+                                            </script>
+                                        </td>
+
                                     </tr>
 
                                 @endforeach
@@ -145,7 +138,7 @@
 
                                 <tfoot>
 
-                                {{ $meter_lists->links() }}
+                                {{ $transformer_list->links() }}
 
 
                                 </tfoot>

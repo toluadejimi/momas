@@ -147,6 +147,13 @@
                     </li>
 
 
+                    <li>
+                        <a class='tp-link'  href="transformer-list">
+                            <i data-feather="box"></i>
+                            <span> Transformer </span>
+                        </a>
+                    </li>
+
 
                     <li>
                         <a class='tp-link'  href="estate">
