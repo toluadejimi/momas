@@ -80,10 +80,11 @@ class TransactionController extends Controller
             ));
 
             $var = curl_exec($curl);
-
-            dd($var);
             curl_close($curl);
             $var = json_decode($var);
+
+            dd($var);
+
 
 
 
