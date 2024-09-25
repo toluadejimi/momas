@@ -40,15 +40,12 @@ class TransactionController extends Controller
             $trx_id = "TRX" . random_int(0000000, 9999999);
             $email = Auth::user()->email;
             $phone = Auth::user()->phone ?? "012345678";
-
             $fl = Setting::where('id', 1)->first();
             $secretKey= $fl->flutterwave_secret;
             $fpublic = $fl->flutterwave_public;
             $url = url('');
 
-
             $client = new Client();
-
             $body = [
                 'title' => 'Payment for services',
                 'amount' => $request->amount,
@@ -62,7 +59,7 @@ class TransactionController extends Controller
                 'tx_ref' => $trx_id,
             ];
 
-            $response = $client->request('POST', 'https://api.flutterwave.com/v3/payment', [
+            $response = $client->request('POST', 'https://api.flutterwave.com/v3/payments', [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $secretKey,
                     'Content-Type'  => 'application/json',
