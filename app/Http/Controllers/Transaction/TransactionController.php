@@ -82,11 +82,7 @@ class TransactionController extends Controller
             $var = curl_exec($curl);
             curl_close($curl);
             $var = json_decode($var);
-
-            dd($var);
-
-
-
+            $status = $var->status ?? null;
 
             $trx = new Transaction();
             $trx->user_id = Auth::id();
@@ -96,15 +92,21 @@ class TransactionController extends Controller
             $trx->trx_id = $trx_id;
             $trx->save();
 
+            if ($status == "success") {
+                return response()->json([
+                    'status' => true,
+                    'url' => $var->data->link
+                ], 200);
+            }
 
-//            if (isset($responseBody['status']) && $responseBody['status'] == 'success') {
-//
-//                return response()->json([
-//                    'status' => true,
-//                    'url' => $responseBody['data']['link']
-//                ], 200);
-//
-//            }
+
+
+
+
+
+
+
+
 
 
         }
