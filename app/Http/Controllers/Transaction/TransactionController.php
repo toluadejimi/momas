@@ -80,6 +80,8 @@ class TransactionController extends Controller
             $trx->save();
 
             $responseBody = json_decode($response->getBody(), true);
+
+            dd($responseBody);
             if (isset($responseBody['status']) && $responseBody['status'] == 'success') {
 
                 return response()->json([
