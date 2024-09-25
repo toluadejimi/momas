@@ -45,8 +45,7 @@ class TransactionController extends Controller
             $fpublic = $fl->flutterwave_public;
             $url = url('');
 
-            $client = new Client();
-            $body = [
+            $databody = array(
                 'title' => 'Payment for services',
                 'amount' => $request->amount,
                 'currency' => 'NGN',
@@ -57,15 +56,34 @@ class TransactionController extends Controller
                     'name' => Auth::user()->first_name." ".Auth::user()->last_name,
                 ],
                 'tx_ref' => $trx_id,
-            ];
 
-            $response = $client->request('POST', 'https://api.flutterwave.com/v3/payments', [
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $secretKey,
-                    'Content-Type'  => 'application/json',
-                ],
-                'json' => $body,
-            ]);
+            );
+
+            $body = json_encode($databody);
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://api.flutterwave.com/v3/payments',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => $body,
+                CURLOPT_HTTPHEADER => array(
+                    'Accept: application/json',
+                    'Content-Type: application/json',
+                    'Authorization: Bearer ' . $secretKey,
+                ),
+            ));
+
+            $var = curl_exec($curl);
+
+            dd($var);
+            curl_close($curl);
+            $var = json_decode($var);
 
 
 
@@ -77,16 +95,15 @@ class TransactionController extends Controller
             $trx->trx_id = $trx_id;
             $trx->save();
 
-            $responseBody = json_decode($response->getBody(), true);
 
-            if (isset($responseBody['status']) && $responseBody['status'] == 'success') {
-
-                return response()->json([
-                    'status' => true,
-                    'url' => $responseBody['data']['link']
-                ], 200);
-
-            }
+//            if (isset($responseBody['status']) && $responseBody['status'] == 'success') {
+//
+//                return response()->json([
+//                    'status' => true,
+//                    'url' => $responseBody['data']['link']
+//                ], 200);
+//
+//            }
 
 
         }
