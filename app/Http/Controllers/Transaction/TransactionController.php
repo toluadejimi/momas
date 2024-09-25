@@ -70,6 +70,8 @@ class TransactionController extends Controller
                 'json' => $body,
             ]);
 
+            dd($response);
+
 
             $trx = new Transaction();
             $trx->user_id = Auth::id();
@@ -81,7 +83,6 @@ class TransactionController extends Controller
 
             $responseBody = json_decode($response->getBody(), true);
 
-            dd($responseBody);
             if (isset($responseBody['status']) && $responseBody['status'] == 'success') {
 
                 return response()->json([
