@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use App\Models\Transaction;
 use App\Models\User;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,6 +39,37 @@ class TransactionController extends Controller
         if ($request->pay_type == 'flutterwave') {
             $trx_id = "TRX" . random_int(0000000, 9999999);
             $email = Auth::user()->email;
+            $phone = Auth::user()->phone ?? "012345678";
+
+            $fl = Setting::where('id', 1)->first();
+            $secretKey= $fl->flutterwave_secret;
+            $fpublic = $fl->flutterwave_public;
+            $url = url('');
+
+
+
+            $client = new Client();
+
+            $body = [
+                'title' => 'Payment for services',
+                'amount' => $request->amount,
+                'currency' => 'NGN',
+                'redirect_url' => $url."/pay-flutter",
+                'customer' => [
+                    'email' => $email,
+                    'phonenumber' => $phone,
+                    'name' => Auth::user()->first_name." ".Auth::user()->last_name,
+                ],
+                'tx_ref' => $trx_id,
+            ];
+
+            $response = $client->request('POST', 'https://api.flutterwave.com/v3/payments', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $secretKey,
+                    'Content-Type'  => 'application/json',
+                ],
+                'json' => $body,
+            ]);
 
 
             $trx = new Transaction();
@@ -48,12 +80,19 @@ class TransactionController extends Controller
             $trx->trx_id = $trx_id;
             $trx->save();
 
-            return response()->json([
-                'status' => true,
-                'url' => url('') . "/pay-flutter?amount=$request->amount&trx_id=$trx_id&email=$email"
-            ], 200);
+            $responseBody = json_decode($response->getBody(), true);
+            if (isset($responseBody['status']) && $responseBody['status'] == 'success') {
+
+                return response()->json([
+                    'status' => true,
+                    'url' => $responseBody['data']['link']
+                ], 200);
+
+            }
+
 
         }
+
 
 
         if ($request->pay_type == 'paystack') {
