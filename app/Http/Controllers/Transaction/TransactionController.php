@@ -47,7 +47,6 @@ class TransactionController extends Controller
             $url = url('');
 
 
-
             $client = new Client();
 
             $body = [
@@ -63,7 +62,7 @@ class TransactionController extends Controller
                 'tx_ref' => $trx_id,
             ];
 
-            $response = $client->request('POST', 'https://api.flutterwave.com/v3/payments', [
+            $response = $client->request('POST', 'https://api.flutterwave.com/v3/payment-links', [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $secretKey,
                     'Content-Type'  => 'application/json',
