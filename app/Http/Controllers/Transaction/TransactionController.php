@@ -70,7 +70,6 @@ class TransactionController extends Controller
                 'json' => $body,
             ]);
 
-            dd($response);
 
 
             $trx = new Transaction();
