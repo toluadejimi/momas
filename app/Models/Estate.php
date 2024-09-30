@@ -13,4 +13,15 @@ class Estate extends Model
     {
         return $this->belongsTo(Asset::class);
     }
+
+    public function meter()
+    {
+        return $this->belongsTo(Meter::class);
+    }
+
+
+    public function transformer()
+    {
+        return $this->hasMany(Transformer::class);
+    }
 }

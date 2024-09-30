@@ -23,6 +23,7 @@ class Meter extends Model
         'NewSGC',
         'OldSGC',
         'NewTariffID',
+        'NewTariffDualID',
         'OldTariffID',
         'NewSGCDual',
         'OldSGCDual',
@@ -60,5 +61,16 @@ class Meter extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+
+    public function estate()
+    {
+        return $this->belongsTo(Estate::class);
+    }
+
+    public function transformer()
+    {
+        return $this->belongsTo(Transformer::class);
     }
 }

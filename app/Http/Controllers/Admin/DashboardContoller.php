@@ -54,6 +54,7 @@ class DashboardContoller extends Controller
     public function add_new_user(request $request)
     {
 
+
         $usr_email = User::where('email', $request->email)->first()->email ?? null;
         $usr_phone = User::where('email', $request->email)->first()->phone ?? null;
 

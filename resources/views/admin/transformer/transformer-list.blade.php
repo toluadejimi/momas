@@ -75,7 +75,7 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
                                 <h5 class="card-title text-black mb-0">Latest Transformer</h5>
-                                <a href="new-transforme" class="btn btn-primary text-white justify-content-end">Add new</a>
+                                <a href="new-transformer" class="btn btn-primary text-white justify-content-end">Add new</a>
 
                             </div>
 
@@ -87,12 +87,11 @@
                                    class="table table-striped table-bordered dt-responsive nowrap">
                                 <thead>
                                 <tr>
-                                    <th scope="col" class="cursor-pointer">ID</th>
                                     <th scope="col" class="cursor-pointer">Title</th>
-                                    <th scope="col" class="cursor-pointer">City</th>
                                     <th scope="col" class="cursor-pointer">State</th>
+                                    <th scope="col" class="cursor-pointer">City</th>
                                     <th scope="col" class="cursor-pointer">Estate</th>
-                                    <th scope="col" class="cursor-pointer">Status</th>
+                                    <th scope="col" class="cursor-pointer">Capacity</th>
                                     <th scope="col" class="cursor-pointer desc">Date Registered</th>
                                     <th scope="col" class="cursor-pointer desc">Action</th>
 
@@ -104,21 +103,11 @@
                                 @foreach($transformer_list as $data)
 
                                     <tr>
-                                        <td><a href="view-transformer?id={{$data->id}}">{{$data->id}}</a></td>
-                                        <td>{{$data->title}}</td>
-                                        <td>{{$data->city}}</td>
-                                        <td>{{$data->state}}</td>
-                                        <td>{{$data->estate}}</td>
-                                        <td>
-                                            @if($data->status == 2)
-                                                <span class="badge text-bg-primary">Active</span>
-                                            @elseif($data->status == 3)
-                                                <span class="badge text-bg-dark">Banned</span>
-                                            @elseif($data->status == 0)
-                                                <span class="badge text-bg-warning">Inactive</span>
-                                            @endif
-
-                                        </td>
+                                        <td><a href="view-transformer?id={{$data->id}}">{{$data->Title}}</a></td>
+                                        <td>{{$data->State ?? "state"}}</td>
+                                        <td>{{$data->City ?? "city"}}</td>
+                                        <td>{{$data->estate ?? "Estate"}}</td>
+                                        <td>{{$data->Capacity ?? "Capacity"}}</td>
                                         <td>{{$data->created_at}}</td>
                                         <td><a href="transformer-delete?id={{$data->id}}" onclick="return confirmDelete();" class="btn btn-danger">Delete</a>
 

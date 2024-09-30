@@ -92,9 +92,8 @@
                                     <th scope="col" class="cursor-pointer">Meter No</th>
                                     <th scope="col" class="cursor-pointer">Meter Model</th>
                                     <th scope="col" class="cursor-pointer">Estate</th>
-                                    <th scope="col" class="cursor-pointer">Meter Pay Type</th>
-                                    <th scope="col" class="cursor-pointer">Meter Type</th>
                                     <th scope="col" class="cursor-pointer">Status</th>
+                                    <th scope="col" class="cursor-pointer">Date Added</th>
                                     <th scope="col" class="cursor-pointer desc">Action</th>
 
                                 </tr>
@@ -105,21 +104,11 @@
                                 @foreach($meter_lists as $data)
 
                                     <tr>
-                                        <td><a href="view-user?id={{$data->user->id ?? "Name"}}">{{$data->user->first_name ?? "Name"}}</a> </td>
-                                        <td><a href="view-user?id={{$data->user->id ?? "Name"}}">{{$data->user->last_name ?? "Name"}}</a></td>
-                                        <td>{{$data->meterNo}}</td>
-                                        <td><a href="view-estate?id={{$data->user->estate_id ?? "Name"}}">{{$data->user->estate_name ?? "Name"}}</td>
-                                        <td>{{$data->payType}}</td>
-
+                                        <td><a href="view-meter?id={{$data->id}}"> {{$data->meterNo}} </a> </td>
                                         <td>
-                                            @if($data->meterType == "pro")
-                                                <span class="badge text-bg-primary">PRO METER</span>
-                                            @else
-                                                <span class="badge text-bg-dark">NORMAL METER</span>
-                                            @endif
-
+                                            {{strtoupper($data->meterModel)}}
                                         </td>
-
+                                        <td>{{$data->estate->title ?? "Name"}}</td>
                                         <td>
                                             @if($data->status == 2)
                                                 <span class="badge text-bg-primary">Active</span>
@@ -130,6 +119,7 @@
                                             @endif
 
                                         </td>
+                                        <td>{{$data->created_at}}</td>
                                         <td><a href="meter-delete?id={{$data->id}}"  onclick="return confirmDelete();" class="btn btn-danger">Delete</a> </td>
                                         <script>
                                             function confirmDelete() {

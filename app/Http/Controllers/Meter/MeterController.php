@@ -308,12 +308,10 @@ class MeterController extends Controller
 
     public function new_meter()
     {
-        $data['users'] = User::all();
+
         $data['estate'] = Estate::where('status', 2)->get();
         $data['transformer'] = Transformer::latest()->where('status', 2)->get();
         $data['tariff'] = Tariff::latest()->where('status', 2)->get();
-
-
 
         return view('admin/meter/new-meter', $data);
     }
@@ -321,11 +319,32 @@ class MeterController extends Controller
 
     public function add_new_meter(request $request)
     {
+
+        $ck = Meter::where('meterNO', $request->meterNo)->first()->meterNo ?? null;
+        if($ck == $request->meterNo){
+            return back()->with('error', "Meter Already Exist");
+        }
+
         Meter::create($request->all());
-        return redirect('admin/meter-list')->with('message', "Meter assigned successfully");
+        return redirect('admin/meter-list')->with('message', "Meter added successfully");
 
     }
 
+    public function view_meter(request $request)
+    {
+        $data['estate'] = Estate::where('status', 2)->get();
+        $data['transformer'] = Transformer::latest()->where('status', 2)->get();
+        $data['tariff'] = Tariff::latest()->where('status', 2)->get();
+        $data['meter'] = Meter::where('id', $request->id)->first();
+        $data['trans_title'] = Transformer::where('id', $data['meter']->TransformerID)->first()->Title ?? null;
+        $data['NewTariffID'] = Tariff::where('id', $data['meter']->NewTariffID)->first()->title ?? null;
+        $data['OldTariffID'] = Tariff::where('id', $data['meter']->OldTariffID)->first()->title ?? null;
+
+
+
+        return view('admin/meter/view-meter', $data);
+
+    }
 
     public function delete_meter(request $request)
     {
