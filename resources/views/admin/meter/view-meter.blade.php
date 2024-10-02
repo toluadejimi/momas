@@ -117,7 +117,7 @@
                                                class="form-check-input" style="border: 10px">
                                         <label class="form-check-label">Is Dual Tariff</label>
 
-                                    </div>/
+                                    </div>
 
 
                                     <div class="col-3" id="newTariffDualContainer" style="display: none;">
@@ -187,19 +187,6 @@
                                 <hr class="my-4">
 
                                 <div class="col-3">
-                                    <label class="my-2">Old SGC Dual</label>
-                                    <input type="text" value="{{$meter->OldSGCDual}}" name="OldSGCDual"
-                                           class="form-control" required>
-                                </div>
-
-
-                                <div class="col-3">
-                                    <label class="my-2">Old Tariff Dual</label>
-                                    <input type="text" value="{{$meter->OldTariffDual}}" name="OldTariffDual"
-                                           class="form-control" required>
-                                </div>
-
-                                <div class="col-3">
                                     <label class="my-2">KRN1</label>
                                     <input type="text" value="STS" name="KRN1" class="form-control" required>
                                 </div>
@@ -210,7 +197,6 @@
                                 </div>
 
 
-                                <hr class="my-4">
 
                                 <div class="col-3 mt-4">
                                     @if($meter->NeedKCT == "on")
