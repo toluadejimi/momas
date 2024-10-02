@@ -126,19 +126,19 @@
                                     </div>
 
 
-                                    <div class="col-3" id="newSGCDualContainer" style="display: none;">
-                                        <label class="my-2">New SGC Dual</label>
-                                        <input type="text" name="NewSGCDual" class="form-control">
+                                    <div class="col-3" id="newSGCContainer" style="display: none;">
+                                        <label class="my-2">New SGC</label>
+                                        <input type="text" name="NewSGC" class="form-control">
                                     </div>
 
-                                    <div class="col-3" id="newSGCDualContainer" style="display: none;">
-                                        <label class="my-2">Old SGC Dual</label>
-                                        <input type="text"  name="OldSGCDual"
+                                    <div class="col-3" id="oldSGCContainer" style="display: none;">
+                                        <label class="my-2">Old SGC</label>
+                                        <input type="text"  name="OldSGC"
                                                class="form-control" required>
                                     </div>
 
 
-                                    <div class="col-3" id="oldSGCDualContainer" style="display: none;">
+                                    <div class="col-3" id="oldtariffDualContainer" style="display: none;">
                                         <label class="my-2">Old Tariff Dual</label>
                                         <input type="text" name="OldTariffDual"
                                                class="form-control" required>
@@ -151,9 +151,9 @@
                                         document.getElementById('isDualTariff').addEventListener('change', function () {
                                             var isChecked = this.checked;
                                             document.getElementById('newTariffDualContainer').style.display = isChecked ? 'block' : 'none';
-                                            document.getElementById('newSGCDualContainer').style.display = isChecked ? 'block' : 'none';
-                                            document.getElementById('oldTariffDualContainer').style.display = isChecked ? 'block' : 'none';
-                                            document.getElementById('oldSGCDualContainer').style.display = isChecked ? 'block' : 'none';
+                                            document.getElementById('newSGCContainer').style.display = isChecked ? 'block' : 'none';
+                                            document.getElementById('oldSGCContainer').style.display = isChecked ? 'block' : 'none';
+                                            document.getElementById('oldtariffDualContainer').style.display = isChecked ? 'block' : 'none';
                                         });
                                     </script>
 
