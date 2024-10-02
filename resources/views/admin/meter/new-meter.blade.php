@@ -96,6 +96,8 @@
                                         var isChecked = this.checked;
                                         document.getElementById('newTariffDualContainer').style.display = isChecked ? 'block' : 'none';
                                         document.getElementById('newSGCDualContainer').style.display = isChecked ? 'block' : 'none';
+                                        document.getElementById('oldTariffDualContainer').style.display = isChecked ? 'block' : 'none';
+                                        document.getElementById('oldSGCDualContainer').style.display = isChecked ? 'block' : 'none';
                                     });
                                 </script>
 
@@ -103,12 +105,12 @@
                                 <hr class="my-4">
 
 
-                                <div class="col-3">
+                                <div class="col-3" id="oldTariffDualContainer" style="display: none;">
                                     <label class="my-2">Old SGC</label>
                                     <input type="text" name="OldSGC" class="form-control" required>
                                 </div>
 
-                                <div class="col-3">
+                                <div class="col-3" id="oldTariffDualContainer" style="display: none;">
                                     <label class="my-2">New SGC</label>
                                     <input type="text" name="NewSGC" class="form-control" required>
                                 </div>
