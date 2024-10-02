@@ -152,9 +152,6 @@
                                 </div>
 
 
-
-                                <hr class="my-4">
-
                                 <div class="col-3 mt-4">
                                     <input  type="checkbox" name="NeedKCT" class="form-check-input" style="border: 10px">
                                     <label class="form-check-label">Need KCT</label>
