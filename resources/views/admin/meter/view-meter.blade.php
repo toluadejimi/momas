@@ -91,8 +91,21 @@
 
 
                                     <div class="col-3">
-                                        <label class="my-2">New SGC Dual</label>
-                                        <input type="text" value="{{$meter->NewSGCDual}}" name="NewSGCDual"
+                                        <label class="my-2">New SGC</label>
+                                        <input type="text" value="{{$meter->NewSGC}}" name="NewSGC"
+                                               class="form-control">
+                                    </div>
+
+                                    <div class="col-3">
+                                        <label class="my-2">Old Tariff Dual</label>
+                                        <input type="text" value="{{$meter->OldTariffDual}}" name="OldTariffDual"
+                                               class="form-control" required>
+                                    </div>
+
+
+                                    <div class="col-3">
+                                        <label class="my-2">Old SGC</label>
+                                        <input type="text" value="{{$meter->OldSGC}}" name="OldSGC"
                                                class="form-control">
                                     </div>
 
