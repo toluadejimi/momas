@@ -78,7 +78,6 @@
                                 </div>
 
 
-
                                 <div class="col-3"  id="newTariffDualContainer" style="display: none;">
                                     <label class="my-2">New Tariff Dual</label>
                                     <input type="text" name="NewTariffDual" class="form-control" required>
@@ -105,14 +104,14 @@
                                 <hr class="my-4">
 
 
-                                <div class="col-3" id="oldTariffDualContainer" style="display: none;">
+                                <div class="col-3" id="oldSGCDualContainer" style="display: none;">
                                     <label class="my-2">Old SGC</label>
                                     <input type="text" name="OldSGC" class="form-control" required>
                                 </div>
 
                                 <div class="col-3" id="oldTariffDualContainer" style="display: none;">
-                                    <label class="my-2">New SGC</label>
-                                    <input type="text" name="NewSGC" class="form-control" required>
+                                    <label class="my-2">Old Tariff  Dual</label>
+                                    <input type="text" name="OldTariffDual" class="form-control" required>
                                 </div>
 
                                 <div class="col-3">
@@ -140,17 +139,7 @@
 
                                 <hr class="my-4">
 
-                                <div class="col-3">
-                                    <label class="my-2">Old SGC Dual</label>
-                                    <input type="text" name="OldSGCDual" class="form-control" required>
-                                </div>
 
-
-
-                                <div class="col-3">
-                                    <label class="my-2">Old Tariff Dual</label>
-                                    <input type="text" name="OldTariffDual" class="form-control" required>
-                                </div>
 
                                 <div class="col-3">
                                     <label class="my-2">KRN1</label>
