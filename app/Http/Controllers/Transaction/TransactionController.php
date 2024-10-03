@@ -84,10 +84,13 @@ class TransactionController extends Controller
             $var = json_decode($var);
             $status = $var->status ?? null;
 
+
+
+
             $trx = new Transaction();
             $trx->user_id = Auth::id();
             $trx->pay_type = "flutterwave";
-            $trx->service_type = "fund";
+            $trx->service_type = $request->service;
             $trx->amount = $request->amount;
             $trx->trx_id = $trx_id;
             $trx->save();
@@ -168,7 +171,7 @@ class TransactionController extends Controller
                 $trx->amount = $request->amount;
                 $trx->trx_id = $trx_id;
                 $trx->payment_ref = $var->data->access_code ?? null;
-                $trx->service_type = "fund";
+                $trx->service_type = $request->service;
                 $trx->save();
 
                 return response()->json([
@@ -221,7 +224,7 @@ class TransactionController extends Controller
             $trx->user_id = Auth::id();
             $trx->pay_type = "wallet";
             $trx->amount = $request->amount;
-            $trx->service_type = "fund";
+            $trx->service_type = $request->service;
             $trx->trx_id = $trx_id;
             $trx->save();
 
@@ -284,7 +287,7 @@ class TransactionController extends Controller
         if ($ck_transaction == null) {
 
             if ($status == 'success') {
-                Transaction::where('trx_id', $var->data->tx_ref)->update(['status' => 2]);
+                Transaction::where('trx_id', $var->data->tx_ref)->update(['status' => 4]);
                 $ref = $var->data->tx_ref;
                 $url = url('') . "/payment?ref=$ref&status=success";
                 return redirect($url);

@@ -16,6 +16,7 @@ use App\Models\UtilitiesPayment;
 use App\Models\Utitlity;
 use App\Models\Vending;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardContoller extends Controller
 {
@@ -36,6 +37,8 @@ class DashboardContoller extends Controller
 
     public function list_users()
     {
+
+
         $data['users'] = User::where('status', 2)->count();
         $data['users_lists'] = User::paginate('20');
 
@@ -45,7 +48,11 @@ class DashboardContoller extends Controller
 
     public function new_user()
     {
+
+
         $data['estate'] = Estate::all();
+        $data['meters'] = Meter::all();
+
         return view('admin/user/new-user', $data);
 
     }
@@ -59,6 +66,8 @@ class DashboardContoller extends Controller
         $usr_phone = User::where('email', $request->email)->first()->phone ?? null;
 
         if($usr_email == null && $usr_phone == null){
+
+
 
             $estate_name = Estate::where('id', $request->estate_id)->first()->title;
             $usr = new User();
@@ -80,16 +89,9 @@ class DashboardContoller extends Controller
             $usr->password = bcrypt($request->password);
             $usr->save();
 
-            $userId = $usr->id;
-            $met = new Meter();
-            $met->user_id = $userId;
-            $met->estate_id = $request->estate_id;
-            $met->meterNo = $request->meterNo;
-            $met->payType = "Prepaid";
-            $met->meterType = "normal";
-            $met->save();
 
-
+            $m_no = Meter::where('id', $request->meterid)->first()->meterNo;
+            User::where('id', $usr->id)->update(['meterNo' => $m_no, 'meterid' => $request->meterid]);
 
             return redirect('admin/users-list')->with('message', "User created successfully");
         }else{
@@ -230,8 +232,7 @@ class DashboardContoller extends Controller
         $data['estate_name'] = Estate::where('id', $data['user']->estate_id)->first()->title ?? null;
         $data['upayment'] = UtilitiesPayment::where('user_id', $request->id)->paginate(10);
         $data['vending'] = MeterToken::where('user_id', $request->id)->paginate(10);
-
-
+        $data['meters'] = Meter::all();
 
 
 
@@ -253,29 +254,6 @@ class DashboardContoller extends Controller
 
 
 
-    public function update_meter_info(request $request)
-    {
-
-
-
-
-        User::where('meterNo', $request->meterNo)->update([
-            'meterNo' => $request->meterNo,
-            'meterType' => $request->meterType,
-        ]);
-
-
-       $meter = Meter::where('meterNo', $request->meterNo)->update([
-            'meterNo' => $request->meterNo,
-            'meterType' => $request->meterType,
-        ]);
-
-
-
-
-        return back()->with('message', "Meter updated successfully");
-
-    }
 
 
 

@@ -19,7 +19,7 @@
 
                     <div class="card-body">
 
-                        <form action="update-meter" method="post">
+                        <form action="update-meter-info" method="post">
                             @csrf
 
                             <div class="row">
@@ -30,6 +30,9 @@
                                     <input type="number" disabled name="meterNo" value="{{$meter->meterNo}}"
                                            class="form-control"
                                            required>
+                                    <input type="text" name="id" value="{{$meter->id}}"
+                                           hidden >
+
                                 </div>
 
 

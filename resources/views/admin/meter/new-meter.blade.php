@@ -3,6 +3,26 @@
 
     <div class="content">
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
+        @endif
+        @if (session()->has('error'))
+            <div class="alert alert-danger">
+                {{ session()->get('error') }}
+            </div>
+        @endif
+
         <!-- Start Content-->
         <div class="container-fluid">
 
@@ -29,7 +49,7 @@
 
                                 <div class="col-3">
                                     <label class="my-2">Meter Number</label>
-                                    <input type="number" name="meterNo" class="form-control" required>
+                                    <input type="text" name="meterNo" class="form-control" required>
                                 </div>
 
 
@@ -44,7 +64,7 @@
 
                                 <div class="col-3">
                                     <label class="my-2">Account No</label>
-                                    <input type="number" name="AccountNo" class="form-control" required>
+                                    <input type="text" name="AccountNo" class="form-control" required>
                                 </div>
 
                                 <div class="col-3">
@@ -65,7 +85,7 @@
                                     <select type="text" name="TransformerID" class="form-control" required>
                                         <option value=" ">Select</option>
                                         @foreach($transformer as $data)
-                                            <option value="{{$data->id}}">{{$data->Title}} </option>
+                                            <option value="{{$data->id}}">{{$data->Capacity}} KVA </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -86,7 +106,7 @@
 
                                 <div class="col-3" id="newSGCDualContainer" style="display: none;">
                                     <label class="my-2">New SGC Dual</label>
-                                    <input type="text" name="NewSGCDual" class="form-control">
+                                    <input type="text" name="NewSGC" class="form-control">
                                 </div>
 
 

@@ -75,7 +75,13 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
                                 <h5 class="card-title text-black mb-0">Latest Transaction</h5>
-                                <a href="new-user" class="btn btn-primary text-white justify-content-end">Add new</a>
+
+                                @if(auth::user()->role == 0)
+                                    <a href="new-user" class="btn btn-primary text-white justify-content-end">Add new</a>
+                                @else
+                                @endif
+
+
 
                             </div>
 
@@ -95,7 +101,9 @@
                                     <th scope="col" class="cursor-pointer">Type</th>
                                     <th scope="col" class="cursor-pointer">Status</th>
                                     <th scope="col" class="cursor-pointer desc">Date Registered</th>
-                                    <th scope="col" class="cursor-pointer desc">Action</th>
+                                    @if(auth::user()->role == 0)
+                                        <th scope="col" class="cursor-pointer desc">Action</th>
+                                    @endif
 
                                 </tr>
                                 </thead>
@@ -114,8 +122,10 @@
                                                 <span class="badge text-bg-primary">Customer</span>
                                             @elseif($data->role == 3)
                                                 <span class="badge text-bg-dark">Estate Admin</span>
+                                            @elseif($data->role == 0)
+                                                <span class="badge text-bg-dark">Super Admin</span>
                                             @elseif($data->role == 1)
-                                                <span class="badge text-bg-dark">Main Admin</span>
+                                                <span class="badge text-bg-dark"> Admin</span>
                                             @elseif($data->role == 4)
                                                 <span class="badge text-bg-warning">Estate Staff</span>
                                             @endif
@@ -133,6 +143,8 @@
 
                                         </td>
                                         <td>{{$data->created_at}}</td>
+
+                                        @if(auth::user()->role == 0)
                                         <td><a href="user-delete?id={{$data->id}}" onclick="return confirmDelete();" class="btn btn-danger">Delete</a>
 
                                             <script>
@@ -141,6 +153,7 @@
                                                 }
                                             </script>
                                         </td>
+                                        @endif
 
                                     </tr>
 

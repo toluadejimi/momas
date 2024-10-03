@@ -176,7 +176,7 @@
                                     <tr>
                                         <th scope="col" class="cursor-pointer">Transaction ID</th>
                                         <th scope="col" class="cursor-pointer">User</th>
-                                        <th scope="col" class="cursor-pointer">Type</th>
+                                        <th scope="col" class="cursor-pointer">Trx Type</th>
                                         <th scope="col" class="cursor-pointer">Amount</th>
                                         <th scope="col" class="cursor-pointer">Status</th>
                                         <th scope="col" class="cursor-pointer desc">Date</th>
@@ -191,16 +191,13 @@
                                             <td>{{$data->trx_id}}</td>
                                             <td>{{$data->user->first_name}} {{$data->user->last_name}}</td>
                                             <td>
-                                                @if($data->service_type == "fund")
-                                                    <span class="badge text-bg-dark">Wallet Funded</span>
-                                                @elseif($data->service_type == "meter_token")
+                                                @if($data->service_type == "meter_token")
                                                     <span class="badge text-bg-dark">Meter Token</span>
                                                 @elseif($data->service_type == "airtime")
                                                     <span class="badge text-bg-dark">Airtime</span>
                                                 @elseif($data->service_type == "data")
                                                     <span class="badge text-bg-dark">Data</span>
                                                 @endif
-
                                             </td>
                                             <td>{{number_format($data->amount, 2)}}</td>
                                             <td>
@@ -210,6 +207,10 @@
                                                     <span class="badge text-bg-dark">Reversed</span>
                                                 @elseif($data->status == 1)
                                                     <span class="badge text-bg-warning">Pending</span>
+                                                @elseif($data->status == 0)
+                                                    <span class="badge text-bg-warning">initiated</span>
+                                                @elseif($data->status == 4)
+                                                    <span class="badge text-bg-secondary">Payment Completed</span>
                                                 @else
                                                     <span class="badge text-bg-danger">Failed</span>
                                                 @endif

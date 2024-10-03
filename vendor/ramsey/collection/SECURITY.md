@@ -10,7 +10,7 @@
 
 <!--
     This is your brand promise. Its objective is to "demonstrate a clear, good
-    faith commitment to customers and other stakeholders potentially impacted by
+    faith commitment to Users and other stakeholders potentially impacted by
     security vulnerabilities" [2].
 -->
 

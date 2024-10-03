@@ -86,20 +86,16 @@
                             <div class="row">
 
 
-                                <h6 class="d-flex justify-content-start my-2">Meter Information</h6>
+                                <h6 class="d-flex justify-content-start my-2">Attach Meter</h6>
 
                                 <div class="col-3">
-                                    <label class="my-2">Meter No</label>
-                                    <input type="number" name="meterNo" class="form-control" required>
-                                </div>
-
-                                <div class="col-3">
-                                    <label class="my-2">Meter Type</label>
-                                    <select type="text" name="meterType" class="form-control" required>
-                                        <option value="prepaid">Prepaid</option>
-                                        <option value="postpaid">Postpaid</option>
+                                    <label class="my-2">Choose Meter</label>
+                                    <select type="text" name="meterid" class="form-control" required>
+                                        <option value=" "> Select meter </option>
+                                        @foreach($meters as $data)
+                                            <option value="{{$data->id}}">{{$data->meterNo}}</option>
+                                        @endforeach
                                     </select>
-
                                 </div>
 
 

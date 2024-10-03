@@ -300,8 +300,6 @@ class MeterController extends Controller
 
         $data['meters'] = Meter::count();
         $data['meter_lists'] = Meter::paginate('20');
-
-
         return view('admin/meter/meter-lists', $data);
     }
 
@@ -312,6 +310,7 @@ class MeterController extends Controller
         $data['estate'] = Estate::where('status', 2)->get();
         $data['transformer'] = Transformer::latest()->where('status', 2)->get();
         $data['tariff'] = Tariff::latest()->where('status', 2)->get();
+
 
         return view('admin/meter/new-meter', $data);
     }
@@ -339,9 +338,6 @@ class MeterController extends Controller
         $data['trans_title'] = Transformer::where('id', $data['meter']->TransformerID)->first()->Title ?? null;
         $data['NewTariffID'] = Tariff::where('id', $data['meter']->NewTariffID)->first()->title ?? null;
         $data['OldTariffID'] = Tariff::where('id', $data['meter']->OldTariffID)->first()->title ?? null;
-
-
-
         return view('admin/meter/view-meter', $data);
 
     }
@@ -352,6 +348,32 @@ class MeterController extends Controller
         return redirect('admin/meter-list')->with('message', "Meter deleted successfully");
 
     }
+
+    public function update_meter_info(request $request)
+    {
+
+        $meter = Meter::find($request->id);
+        $meter->update($request->all());
+
+        return redirect('admin/meter-list')->with('message', "Meter updated successfully");
+
+
+    }
+
+
+    public function update_meter(request $request)
+    {
+        $m_no = Meter::where('id', $request->meterid)->first()->meterNo;
+        User::where('id', $request->user_id)->update(['meterNo' => $m_no, 'meterid' => $request->meterid]);
+        return back()->with('message', "Meter Attached  successfully");
+
+    }
+
+
+
+
+
+
 
 
 }

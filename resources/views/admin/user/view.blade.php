@@ -116,29 +116,22 @@
 
                     <div class="card-body">
                         <div class="row">
-                            <form action="update-meter-info" method="post">
+                            <form action="update-meter" method="post">
                                 @csrf
                                 <div class="row">
 
-                                    <h6 class="d-flex justify-content-start my-2">Meter Information</h6>
+                                    <h6 class="d-flex justify-content-start my-2">Attach Information</h6>
 
                                     <div class="col-3">
-                                        <label class="my-2">Meter No</label>
-                                        <input type="text" value="{{$user->meterNo}}" name="meterNo"
-                                               class="form-control" required>
+                                        <label class="my-2">Choose Meter</label>
+                                            <select type="text" name="meterid" class="form-control" required>
+                                                <option value="{{$user->meterid ?? "id"}}">{{$user->meterNo ?? "Select Meter"}}</option>
+                                                @foreach($meters as $data)
+                                                    <option value="{{$data->id}}">{{$data->meterNo}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
-
-                                    <div class="col-3">
-                                        <label class="my-2">Meter Type</label>
-                                        <select type="text" name="meterType" class="form-control" required>
-                                            <option
-                                                value="{{$user->meterType}}">{{strtoupper($user->meterType)}}</option>
-                                            <option value="prepaid">Prepaid</option>
-                                            <option value="postpaid">Postpaid</option>
-                                        </select>
-
-                                    </div>
-
 
                                 </div>
 

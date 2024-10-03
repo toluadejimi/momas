@@ -65,7 +65,7 @@ class AuthController extends Controller
         $usr = User::where('id', Auth::id())->first();
 
         if($request->code != $usr->code){
-            return back()->with('error', 'Invalid OTP Code');
+            return redirect('code')->with('error', 'Invalid OTP Code');
         }
 
         if($usr->role == 1){

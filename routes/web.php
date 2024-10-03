@@ -44,6 +44,7 @@ Route::any('paystack-check', [TransactionController::class, 'paystack_verify']);
 
 
 Route::any('set-2fa', [AuthController::class, 'set_2fa']);
+Route::any('code', [AuthController::class, 'code']);
 Route::any('auth_login', [AuthController::class, 'login.blade.php']);
 Route::any('resend_code', [AuthController::class, 'resend_code']);
 Route::any('verify_code', [AuthController::class, 'verify_code']);
@@ -61,7 +62,6 @@ Route::group(['prefix'=>'admin'], function(){
     Route::get('user-delete', [DashboardContoller::class, 'delete_user']);
     Route::get('view-user', [DashboardContoller::class, 'view_user']);
     Route::post('update-user', [DashboardContoller::class, 'update_user']);
-    Route::post('update-meter-info', [DashboardContoller::class, 'update_meter_info']);
     Route::get('send-token-email', [DashboardContoller::class, 'send_token_email']);
 
 
@@ -111,6 +111,8 @@ Route::group(['prefix'=>'admin'], function(){
 
 
     Route::get('meter-list', [MeterController::class, 'list_meter']);
+    Route::post('update-meter-info', [MeterController::class, 'update_meter_info']);
+    Route::post('update-meter', [MeterController::class, 'update_meter']);
     Route::get('new-meter', [MeterController::class, 'new_meter']);
     Route::post('add-new-meter', [MeterController::class, 'add_new_meter']);
     Route::get('meter-delete', [MeterController::class, 'delete_meter']);
