@@ -107,7 +107,7 @@
                                         <td>{{$data->State ?? "state"}}</td>
                                         <td>{{$data->City ?? "city"}}</td>
                                         <td>{{$data->estate ?? "Estate"}}</td>
-                                        <td>{{$data->Capacity ?? "Capacity"}}</td>
+                                        <td>{{$data->Capacity ?? "Capacity"}} KVA</td>
                                         <td>{{$data->created_at}}</td>
                                         <td><a href="transformer-delete?id={{$data->id}}" onclick="return confirmDelete();" class="btn btn-danger">Delete</a>
 
