@@ -9,15 +9,39 @@ use App\Models\Tariff;
 use App\Models\Transformer;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransformerController extends Controller
 {
     public function list_transformer()
     {
 
-        $data['transformer_list'] = Transformer::latest()->where('status', 2)->paginate(20);
-        $data['transformer'] = Transformer::latest()->where('status', 2)->count();
-        return view('admin/transformer/transformer-list', $data);
+
+        if(auth::user()->role == 0){
+
+            $data['transformer_list'] = Transformer::latest()->where('status', 2)->paginate(20);
+            $data['transformer'] = Transformer::latest()->where('status', 2)->count();
+            return view('admin/transformer/transformer-list', $data);
+
+        } elseif(auth::user()->role == 1){
+
+        } elseif(auth::user()->role == 2){
+
+        } elseif(auth::user()->role == 3){
+
+            $data['transformer_list'] = Transformer::latest()->where('Estate_id', auth::user()->estate_id)->where('status', 2)->paginate(20);
+            $data['transformer'] = Transformer::latest()->where('Estate_id', auth::user()->estate_id)->where('status', 2)->count();
+            return view('admin/transformer/transformer-list', $data);
+
+
+        } elseif(auth::user()->role == 4){
+
+        } elseif(auth::user()->role == 5){
+
+        } else{
+
+        }
+
 
 
     }
