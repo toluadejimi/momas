@@ -7,27 +7,6 @@
     <list default="true" id="df462c8f-229d-4527-915f-ee2aade1fa51" name="Changes" comment="pusgggghhh">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardContoller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardContoller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Meter/MeterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Meter/MeterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Transaction/TransactionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Transaction/TransactionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/ass/js/pages/datatable.init.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/ass/js/pages/datatable.init.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-buttons/js/buttons.flash.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-buttons/js/buttons.flash.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-buttons/js/buttons.html5.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/ass/libs/datatables.net-buttons/js/buttons.html5.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/js/dataTables.bootstrap4.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/dataTables.bootstrap4.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/js/demo_customizer.js?version=4.5.0" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/demo_customizer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/js/main.js?version=4.5.0" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/js/main_rentals.js?version=4.5.0" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/main_rentals.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/asset/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/asset/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/meter/meter-lists.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/meter/meter-lists.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/meter/new-meter.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/meter/new-meter.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/meter/view-meter.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/meter/view-meter.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/user/new-user.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/user/new-user.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/user/user-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/user/user-list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/user/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/user/view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/ramsey/collection/SECURITY.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/ramsey/collection/SECURITY.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/simplesoftwareio/simple-qrcode/docs/en/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/simplesoftwareio/simple-qrcode/docs/en/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -309,23 +288,7 @@
       <workItem from="1727090325088" duration="1585000" />
       <workItem from="1727361913799" duration="179000" />
       <workItem from="1727415532469" duration="599000" />
-      <workItem from="1727505961145" duration="30601000" />
-    </task>
-    <task id="LOCAL-00169" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1722434767774</created>
-      <option name="number" value="00169" />
-      <option name="presentableId" value="LOCAL-00169" />
-      <option name="project" value="LOCAL" />
-      <updated>1722434767774</updated>
-    </task>
-    <task id="LOCAL-00170" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1722434942950</created>
-      <option name="number" value="00170" />
-      <option name="presentableId" value="LOCAL-00170" />
-      <option name="project" value="LOCAL" />
-      <updated>1722434942950</updated>
+      <workItem from="1727505961145" duration="32530000" />
     </task>
     <task id="LOCAL-00171" summary="pusgggghhh">
       <option name="closed" value="true" />
@@ -703,7 +666,23 @@
       <option name="project" value="LOCAL" />
       <updated>1727872514679</updated>
     </task>
-    <option name="localTasksCounter" value="218" />
+    <task id="LOCAL-00218" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1727946606533</created>
+      <option name="number" value="00218" />
+      <option name="presentableId" value="LOCAL-00218" />
+      <option name="project" value="LOCAL" />
+      <updated>1727946606533</updated>
+    </task>
+    <task id="LOCAL-00219" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1727946977205</created>
+      <option name="number" value="00219" />
+      <option name="presentableId" value="LOCAL-00219" />
+      <option name="project" value="LOCAL" />
+      <updated>1727946977205</updated>
+    </task>
+    <option name="localTasksCounter" value="220" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

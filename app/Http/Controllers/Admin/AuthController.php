@@ -20,7 +20,7 @@ class AuthController extends Controller
         if(Auth::check() == false){
             return view('auth.login');
         }else{
-            return redirect('admin-dashboard');
+            return redirect('admin/admin-dashboard');
         }
     }
 
@@ -32,10 +32,10 @@ class AuthController extends Controller
         if($get_user == null){
             return back()->with('error', "User Not Found");
         }
-
-        if($get_user->role != 1){
-            return back()->with('error', "You dont have permission");
-        }
+//
+//        if($get_user->role != 0 ){
+//            return back()->with('error', "You dont have permission");
+//        }
 
         $credentials = request(['email', 'password']);
 
@@ -65,20 +65,19 @@ class AuthController extends Controller
         $usr = User::where('id', Auth::id())->first();
 
         if($request->code != $usr->code){
-            return redirect('code')->with('error', 'Invalid OTP Code');
+            auth::logout();
+            return redirect('/')->with('error', 'Invalid OTP Code');
         }
 
-        if($usr->role == 1){
-
+        if($usr->role == 1 || $usr->role == 0){
             $date = date('Y:M:D h:i:s');
             $message = "MOMAS LOGIN  ======>>>>>  ". $usr->first_name." ".$usr->last_name." | login to the dashboard | at $date";
             send_notification($message);
-
-
             return redirect('admin/admin-dashboard')->with('message', "Welcome Admin!");
+        }else{
+            return redirect('/')->with('error', "You don\'t have permission");
         }
 
-        return back()->with('error', 'You don\'t have permission');
 
 
     }

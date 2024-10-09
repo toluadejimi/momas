@@ -307,12 +307,44 @@ class MeterController extends Controller
     public function new_meter()
     {
 
-        $data['estate'] = Estate::where('status', 2)->get();
-        $data['transformer'] = Transformer::latest()->where('status', 2)->get();
-        $data['tariff'] = Tariff::latest()->where('status', 2)->get();
+
+        if(auth::user()->role == 0){
 
 
-        return view('admin/meter/new-meter', $data);
+            $data['estate'] = Estate::where('status', 2)->get();
+            $data['transformer'] = Transformer::latest()->where('status', 2)->get();
+            $data['tariff'] = Tariff::latest()->where('status', 2)->get();
+
+
+            return view('admin/meter/new-meter', $data);
+
+        } elseif(auth::user()->role == 1){
+
+
+        } elseif(auth::user()->role == 2){
+
+        } elseif(auth::user()->role == 3){
+
+
+            $data['estate'] = Estate::where('id', auth::user()->estate_id)->first();
+            $data['transformer'] = Transformer::latest()->where('estate_id', auth::user()->estate_id)->get();
+            $data['tariff'] = Tariff::latest()->where('status', 2)->where('estate_id', auth::user()->estate_id)->get();
+
+            return view('admin/meter/new-meter', $data);
+
+
+
+        } elseif(auth::user()->role == 4){
+
+        } elseif(auth::user()->role == 5){
+
+        } else{
+
+        }
+
+
+
+
     }
 
 

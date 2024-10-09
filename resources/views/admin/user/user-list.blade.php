@@ -51,7 +51,7 @@
                                         </svg>
                                     </div>
 
-                                    <p class="mb-0 text-dark fs-15">Total Customer</p>
+                                    <p class="mb-0 text-dark fs-15">Total Users</p>
                                 </div>
 
                                 <div class="d-flex align-items-center">

@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Admin\AssetController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CustomerImportController;
 use App\Http\Controllers\Admin\DashboardContoller;
 use App\Http\Controllers\Admin\EstateController;
+use App\Http\Controllers\Admin\MeterImportController;
 use App\Http\Controllers\Admin\TariffController;
 use App\Http\Controllers\Meter\MeterController;
 use App\Http\Controllers\Transformer\TransformerController;
@@ -25,6 +27,7 @@ Route::any('/', [AuthController::class, 'admin_login']);
 Route::post('login-now', [AuthController::class, 'login_now']);
 Route::any('logout', [AuthController::class, 'log_out']);
 Route::post('verify-code', [AuthController::class, 'verify_code']);
+
 
 
 
@@ -55,8 +58,15 @@ Route::get('code', [AuthController::class, 'code']);
 
 Route::group(['prefix'=>'admin'], function(){
 
+    Route::post('import-users', [CustomerImportController::class, 'import'])->name('customers.import');
+    Route::post('import-meters', [MeterImportController::class, 'import'])->name('meters.import');
+
+
+
     Route::get('admin-dashboard', [DashboardContoller::class, 'index']);
     Route::get('users-list', [DashboardContoller::class, 'list_users']);
+    Route::get('customers', [DashboardContoller::class, 'list_customers']);
+
     Route::get('new-user', [DashboardContoller::class, 'new_user']);
     Route::post('add-new-user', [DashboardContoller::class, 'add_new_user']);
     Route::get('user-delete', [DashboardContoller::class, 'delete_user']);

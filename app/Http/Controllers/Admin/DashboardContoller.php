@@ -23,14 +23,49 @@ class DashboardContoller extends Controller
 
     public function index()
     {
-        $data['users'] = User::where('status', 2)->count();
-        $data['meter'] = Meter::count();
-        $data['total_in'] = Transaction::where('status', 2)->sum('amount');
-        $data['estate'] = Estate::where('status', 1)->count();
-        $data['token'] = Token::count();
-        $data['meter_token'] = MeterToken::where('status', 2)->count();
-        $data['transaction'] = Transaction::paginate('20');
-        return view('admin.dashboard', $data);
+        if(auth::user()->role == 0){
+
+            $data['users'] = User::where('status', 2)->count();
+            $data['meter'] = Meter::count();
+            $data['total_in'] = Transaction::where('status', 2)->sum('amount');
+            $data['estate'] = Estate::where('status', 1)->count();
+            $data['token'] = Token::count();
+            $data['meter_token'] = MeterToken::where('status', 2)->count();
+            $data['transaction'] = Transaction::paginate('20');
+            return view('admin.dashboard', $data);
+
+        } elseif(auth::user()->role == 1){
+
+        } elseif(auth::user()->role == 2){
+
+        } elseif(auth::user()->role == 3){
+
+            $data['users'] = User::where('status', 2)->where('estate_id', auth::user()->estate_id)->count();
+            $data['customers'] = User::where([
+                'status' => 2,
+                'estate_id' => auth::user()->estate_id,
+                'role' => 2,
+            ])->count();
+
+            $data['meter'] = Meter::where('estate_id', auth::user()->estate_id)->count();
+            $data['token'] = Token::where('estate_id', auth::user()->estate_id)->count();
+
+            return view('admin.dashboard', $data);
+
+        } elseif(auth::user()->role == 4){
+
+        } elseif(auth::user()->role == 5){
+
+        } else{
+
+        }
+
+
+
+
+
+
+
 
     }
 
@@ -46,14 +81,57 @@ class DashboardContoller extends Controller
 
     }
 
+
+    public function list_customers()
+    {
+
+
+        $data['users'] = User::where('status', 2)->where('role', 2)->count();
+        $data['users_lists'] = User::where('role', 2)->paginate('20');
+
+        return view('admin/user/customer-list', $data);
+
+    }
+
+
+
+
+
+
     public function new_user()
     {
 
 
-        $data['estate'] = Estate::all();
-        $data['meters'] = Meter::all();
 
-        return view('admin/user/new-user', $data);
+        if(auth::user()->role == 0){
+
+            $data['estate'] = Estate::all();
+            $data['meters'] = Meter::all();
+            return view('admin/user/new-user', $data);
+
+
+        } elseif(auth::user()->role == 1){
+
+
+        } elseif(auth::user()->role == 2){
+
+        } elseif(auth::user()->role == 3){
+
+            $data['estate'] = Estate::where('id', auth::user()->estate_id)->first();
+            $data['meters'] = Meter::all();
+
+            return view('admin/user/new-user', $data);
+
+
+        } elseif(auth::user()->role == 4){
+
+        } elseif(auth::user()->role == 5){
+
+        } else{
+
+        }
+
+
 
     }
 

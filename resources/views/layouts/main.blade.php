@@ -105,89 +105,174 @@
                     </a>
                 </div>
 
-                <ul id="side-menu">
+                @if(auth::user()->role == 0)
+                    <ul id="side-menu">
 
-                    <li class="menu-title">Menu</li>
+                        <li class="menu-title">Menu</li>
 
-                    <li>
-                        <a class='tp-link'  href="admin-dashboard">
-                           <i data-feather="menu"></i>
-                            <span> Dashboard </span>
-                        </a>
-                    </li>
-
-
-                    <li>
-                        <a class='tp-link'  href="users-list">
-                            <i data-feather="users"></i>
-                            <span> Users </span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class='tp-link'  href="meter-list">
-                            <i data-feather="cpu"></i>
-                            <span> Meter </span>
-                        </a>
-                    </li>
+                        <li>
+                            <a class='tp-link'  href="admin-dashboard">
+                                <i data-feather="menu"></i>
+                                <span> Dashboard </span>
+                            </a>
+                        </li>
 
 
-                    <li>
-                        <a class='tp-link'  href="asset">
-                            <i data-feather="archive"></i>
-                            <span> Assets </span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class='tp-link'  href="organization">
-                            <i data-feather="folder"></i>
-                            <span> Organization </span>
-                        </a>
-                    </li>
+                        <li>
+                            <a class='tp-link'  href="customers">
+                                <i data-feather="users"></i>
+                                <span> Customers </span>
+                            </a>
+                        </li>
 
 
-                    <li>
-                        <a class='tp-link'  href="transformer-list">
-                            <i data-feather="box"></i>
-                            <span> Transformer </span>
-                        </a>
-                    </li>
+                        <li>
+                            <a class='tp-link'  href="meter-list">
+                                <i data-feather="cpu"></i>
+                                <span> Meter </span>
+                            </a>
+                        </li>
 
 
-                    <li>
-                        <a class='tp-link'  href="estate">
-                            <i data-feather="home"></i>
-                            <span> Estate </span>
-                        </a>
-                    </li>
+                        <li>
+                            <a class='tp-link'  href="asset">
+                                <i data-feather="archive"></i>
+                                <span> Assets </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class='tp-link'  href="organization">
+                                <i data-feather="folder"></i>
+                                <span> Organization </span>
+                            </a>
+                        </li>
 
 
+                        <li>
+                            <a class='tp-link'  href="transformer-list">
+                                <i data-feather="box"></i>
+                                <span> Transformer </span>
+                            </a>
+                        </li>
 
 
-                    <li>
-                        <a class='tp-link'  href="tariff-list">
-                            <i data-feather="divide-square"></i>
-                            <span> Tariff </span>
-                        </a>
-                    </li>
+                        <li>
+                            <a class='tp-link'  href="estate">
+                                <i data-feather="home"></i>
+                                <span> Estate </span>
+                            </a>
+                        </li>
 
 
 
 
-
-                    <li>
-                        <a class='tp-link'  href="settings">
-                            <i data-feather="settings"></i>
-                            <span> Settings </span>
-                        </a>
-                    </li>
-
+                        <li>
+                            <a class='tp-link'  href="tariff-list">
+                                <i data-feather="divide-square"></i>
+                                <span> Tariff </span>
+                            </a>
+                        </li>
 
 
 
+                        <li>
+                            <a class='tp-link'  href="users-list">
+                                <i data-feather="users"></i>
+                                <span> Users </span>
+                            </a>
+                        </li>
 
-                </ul>
+
+                        <li>
+                            <a class='tp-link'  href="settings">
+                                <i data-feather="settings"></i>
+                                <span> Settings </span>
+                            </a>
+                        </li>
+
+
+
+
+
+                    </ul>
+                @elseif(auth::user()->role == 1)
+                @elseif(auth::user()->role == 2)
+                @elseif(auth::user()->role == 3)
+                    <ul id="side-menu">
+
+                        <li class="menu-title">Menu</li>
+
+                        <li>
+                            <a class='tp-link'  href="admin-dashboard">
+                                <i data-feather="menu"></i>
+                                <span> Dashboard </span>
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a class='tp-link'  href="customers">
+                                <i data-feather="users"></i>
+                                <span> Customers </span>
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a class='tp-link'  href="meter-list">
+                                <i data-feather="cpu"></i>
+                                <span> Meter </span>
+                            </a>
+                        </li>
+
+
+
+
+                        <li>
+                            <a class='tp-link'  href="transformer-list">
+                                <i data-feather="box"></i>
+                                <span> Transformer </span>
+                            </a>
+                        </li>
+
+
+
+
+                        <li>
+                            <a class='tp-link'  href="tariff-list">
+                                <i data-feather="divide-square"></i>
+                                <span> Tariff </span>
+                            </a>
+                        </li>
+
+
+
+                        <li>
+                            <a class='tp-link'  href="users-list">
+                                <i data-feather="users"></i>
+                                <span> Users </span>
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a class='tp-link'  href="settings">
+                                <i data-feather="settings"></i>
+                                <span> Settings </span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                @elseif(auth::user()->role == 4)
+                @elseif(auth::user()->role == 5)
+                @else
+                @endif
+
+
+
+
 
             </div>
             <!-- End Sidebar -->
