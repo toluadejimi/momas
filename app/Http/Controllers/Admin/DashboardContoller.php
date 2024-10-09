@@ -85,8 +85,14 @@ class DashboardContoller extends Controller
 
         } elseif(auth::user()->role == 3){
 
-            $data['users'] = User::where('role' != 2)->where('estate_id', auth::user()->estate_id)->count();
-            $data['users_lists'] = User::where('role' != 2)->where('estate_id', auth::user()->estate_id)->paginate('20');
+            $data['users'] = User::where([
+                'role' => 3,
+                'estate_id', auth::user()->estate_id,
+            ])->ORwhere('role', 4)->count();
+            $data['users_lists'] = User::where([
+                'role' => 3,
+                'estate_id', auth::user()->estate_id,
+            ])->ORwhere('role', 4)->paginate('20');
             return view('admin/user/user-list', $data);
 
 
