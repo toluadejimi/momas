@@ -9,6 +9,7 @@ use App\Models\Meter;
 use App\Models\MeterToken;
 use App\Models\Organization;
 use App\Models\Setting;
+use App\Models\Tariff;
 use App\Models\Token;
 use App\Models\Transaction;
 use App\Models\User;
@@ -225,8 +226,43 @@ class DashboardContoller extends Controller
 
     public function settings(request $request)
     {
-        $data['fea'] = Feature::where('id', 1)->first();
-        $data['set'] = Setting::where('id', 1)->first();
+
+
+        if(auth::user()->role == 0){
+
+            $data['fea'] = Feature::where('id', 1)->first();
+            $data['set'] = Setting::where('id', 1)->first();
+
+
+        } elseif(auth::user()->role == 1){
+
+            $data['fea'] = Feature::where('id', 1)->first();
+            $data['set'] = Setting::where('id', 1)->first();
+
+        } elseif(auth::user()->role == 2){
+
+        } elseif(auth::user()->role == 3){
+
+
+
+            $data['org'] = Estate::where('id', auth::user()->estate_id)->first();
+            $data['tar'] = Tariff::where('estate_id', auth::user()->estate_id)->first();
+            $data['utl'] = Utitlity::where('estate_id', auth::user()->estate_id)->first();
+            $data['total_utility'] = $data['utl']->water + $data['utl']->eletricity +  $data['utl']->security + $data['utl']->waste + $data['utl']->cleaners + $data['utl']->grardners + $data['utl']->service_charge;
+
+        } elseif(auth::user()->role == 4){
+
+        } elseif(auth::user()->role == 5){
+
+        } else{
+
+        }
+
+
+
+
+
+
 
         return view('admin/settings', $data);
 
