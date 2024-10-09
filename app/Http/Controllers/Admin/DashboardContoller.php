@@ -87,11 +87,11 @@ class DashboardContoller extends Controller
 
             $data['users'] = User::where([
                 'role' => 3,
-                'estate_id', auth::user()->estate_id,
-            ])->ORwhere('role', 4)->count();
+                'estate_id' => auth::user()->estate_id,
+            ])->orWhere('role', 4)->count();
             $data['users_lists'] = User::where([
                 'role' => 3,
-                'estate_id', auth::user()->estate_id,
+                'estate_id' => auth::user()->estate_id,
             ])->ORwhere('role', 4)->paginate('20');
             return view('admin/user/user-list', $data);
 
