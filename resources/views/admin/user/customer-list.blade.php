@@ -56,7 +56,7 @@
                                     </div>
 
                                     <div class="d-flex align-items-center">
-                                        <h3 class="mb-0 fs-24 text-black me-2">{{number_format($users, 2)}}</h3>
+                                        <h3 class="mb-0 fs-24 text-black me-2">{{$users}}</h3>
 
                                     </div>
 
@@ -79,7 +79,7 @@
                                     @if(auth::user()->role == 0)
                                         <div class="justify-content-end">
                                             <a href="#" class="btn btn-primary text-white " data-bs-toggle="modal"
-                                               data-bs-target="#staticBackdrop">Import Bulk Users</a>
+                                               data-bs-target="#staticBackdrop">Import Bulk Customers</a>
 
                                             <div class="col-xl-6">
                                                 <div class="card">
@@ -271,7 +271,7 @@
                                     </div>
 
                                     <div class="d-flex align-items-center">
-                                        <h3 class="mb-0 fs-24 text-black me-2">{{number_format($users, 2)}}</h3>
+                                        <h3 class="mb-0 fs-24 text-black me-2">{{$users}}</h3>
 
                                     </div>
 
@@ -308,7 +308,7 @@
 
                                                 <div class="modal-body">
 
-                                                    <p>CLick here to download the sample of file to upload <a href="{{url('')}}/public/assets/estateimportuser.xlsx">Download here</a></p>
+                                                    <p>Click here to download the sample of file to upload <a href="{{url('')}}/public/assets/importcsg.csv" download="importcsg.csv" >Download here</a></p>
                                                     <label class="mt-3">Choose File</label>
                                                     <input type="file"  class="form-control mb-3" name="file" required>
 
@@ -335,7 +335,7 @@
                                     <div class="justify-content-end">
                                         <div class="justify-content-end">
                                             <a href="#" class="btn btn-primary text-white " data-bs-toggle="modal"
-                                               data-bs-target="#staticBackdrop">Import Bulk Users</a>
+                                               data-bs-target="#staticBackdrop">Import Bulk Customers</a>
                                             <a href="new-user" class="btn btn-primary text-white">Add new</a>
                                         </div>
                                     </div>

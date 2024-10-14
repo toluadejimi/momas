@@ -4,15 +4,14 @@
 
 
 
+
     @if(auth::user()->role == 0)
         <div class="content">
-
-            <!-- Start Content-->
             <div class="container-fluid">
 
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
-                        <h4 class="fs-18 fw-semibold m-0">Dashboard</h4>
+                        <h4 class="fs-18 fw-semibold m-0">{{$title}}</h4>
                     </div>
                 </div>
 
@@ -30,7 +29,7 @@
 
                                         <div class="d-flex align-items-baseline mb-2">
                                             <div
-                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{number_format($users, 2)}}</div>
+                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{$users}}</div>
                                             <div class="me-auto">
                                             </div>
                                         </div>
@@ -49,7 +48,7 @@
 
                                         <div class="d-flex align-items-baseline mb-2">
                                             <div
-                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{number_format($meter, 2)}}</div>
+                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{$meter}}</div>
                                         </div>
                                         {{--                                    <div id="conversion-visitors" class="apex-charts"></div>--}}
                                     </div>
@@ -65,7 +64,7 @@
 
                                         <div class="d-flex align-items-baseline mb-2">
                                             <div
-                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{number_format($estate, 2)}}</div>
+                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{$estate}}</div>
                                             <div class="me-auto">
                                             </div>
                                         </div>
@@ -84,7 +83,7 @@
 
                                         <div class="d-flex align-items-baseline mb-2">
                                             <div
-                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{number_format($token, 2)}}</div>
+                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{$token}}</div>
                                         </div>
                                         {{--                                    <div id="conversion-visitors" class="apex-charts"></div>--}}
                                     </div>
@@ -100,7 +99,7 @@
 
                                         <div class="d-flex align-items-baseline mb-2">
                                             <div
-                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{number_format($meter_token, 2)}}</div>
+                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{$meter_token}}</div>
                                         </div>
                                         {{--                                    <div id="conversion-visitors" class="apex-charts"></div>--}}
                                     </div>
@@ -116,7 +115,7 @@
 
                                         <div class="d-flex align-items-baseline mb-2">
                                             <div
-                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{number_format($token, 2)}}</div>
+                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{$token}}</div>
                                         </div>
                                         {{--                                    <div id="conversion-visitors" class="apex-charts"></div>--}}
                                     </div>
@@ -246,8 +245,8 @@
                 </div>
 
 
-            </div> <!-- container-fluid -->
-        </div> <!-- content -->
+            </div>
+        </div>
     @elseif(auth::user()->role == 1)
     @elseif(auth::user()->role == 2)
     @elseif(auth::user()->role == 3)
@@ -258,7 +257,7 @@
 
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
-                        <h4 class="fs-18 fw-semibold m-0">Dashboard</h4>
+                        <h4 class="fs-18 fw-semibold m-0">{{$title}}</h4>
                     </div>
                 </div>
 
@@ -276,7 +275,7 @@
 
                                         <div class="d-flex align-items-baseline mb-2">
                                             <div
-                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{number_format($users, 2)}}</div>
+                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{$users}}</div>
                                             <div class="me-auto">
                                             </div>
                                         </div>
@@ -295,7 +294,7 @@
 
                                         <div class="d-flex align-items-baseline mb-2">
                                             <div
-                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{number_format($meter, 2)}}</div>
+                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{$meter}}</div>
                                         </div>
                                         {{--                                    <div id="conversion-visitors" class="apex-charts"></div>--}}
                                     </div>
@@ -312,7 +311,7 @@
 
                                         <div class="d-flex align-items-baseline mb-2">
                                             <div
-                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{number_format($token, 2)}}</div>
+                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{$token}}</div>
                                         </div>
                                         {{--                                    <div id="conversion-visitors" class="apex-charts"></div>--}}
                                     </div>
@@ -329,7 +328,7 @@
 
                                         <div class="d-flex align-items-baseline mb-2">
                                             <div
-                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{number_format($token, 2)}}</div>
+                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{$token}}</div>
                                         </div>
                                         {{--                                    <div id="conversion-visitors" class="apex-charts"></div>--}}
                                     </div>

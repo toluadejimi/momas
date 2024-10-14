@@ -27,7 +27,7 @@
 
                                 <div class="row">
 
-                                    <h6 class="d-flex justify-content-start my-4">User Information</h6>
+                                    <h6 class="d-flex justify-content-start my-4">Customer Information</h6>
 
                                     <div class="col-3">
                                         <label class="my-2">First Name</label>
@@ -193,7 +193,7 @@
 
                                 <div class="row">
 
-                                    <h6 class="d-flex justify-content-start my-4">User Information</h6>
+                                    <h6 class="d-flex justify-content-start my-4">Customer Information</h6>
 
                                     <div class="col-3">
                                         <label class="my-2">First Name</label>
@@ -280,11 +280,6 @@
                                         <label class="my-2">User Role</label>
                                         <select type="text" name="role" class="form-control" required>
                                             <option value="2">Customer</option>
-                                            <option value="1">Admin</option>
-                                            <option value="3">Estate Admin</option>
-                                            <option value="4">Estate Staff</option>
-
-
                                         </select>
 
                                     </div>

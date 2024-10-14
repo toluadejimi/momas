@@ -45,7 +45,7 @@
 
                                 <div class="row">
 
-                                    <h6 class="d-flex justify-content-start my-4">User Information</h6>
+                                    <h6 class="d-flex justify-content-start my-4">Customer Information</h6>
 
                                     <div class="col-3">
                                         <label class="my-2">First Name</label>
@@ -105,7 +105,7 @@
                                 </div>
 
                                 <button type="submit" class="col-3 d-flex btn btn-primary my-3">
-                                    Update User Information
+                                    Update Customer Information
                                 </button>
 
                             </form>

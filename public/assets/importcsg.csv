@@ -1,0 +1,3 @@
+firstname,lastname,phone,email,gender,city,address,hno,state,lga,meterno,metertype
+Tolulope,Adejimi,8105059613,customer@gmail.com,Male,Ikeja,Ikoyi street,10,Lagos,IKOYI-LGA,62122385081,prepaid
+Jane,Doe,8105551212,jane.doe@example.com,Female,Victoria Island,Banana street,5,Lagos,VI-LGA,62122385082,postpaid

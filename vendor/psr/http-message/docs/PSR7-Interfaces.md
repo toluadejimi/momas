@@ -99,14 +99,14 @@ Same methods as `Psr\Http\Message\MessageInterface`  + the following methods:
 |------------------------------------| ----------- | ----- |
 | `getScheme()` | Retrieve the scheme component of the URI. | |
 | `getAuthority()` | Retrieve the authority component of the URI. | |
-| `getUserInfo()` | Retrieve the user information component of the URI. | |
+| `getUserInfo()` | Retrieve the Customer Information component of the URI. | |
 | `getHost()` | Retrieve the host component of the URI. | |
 | `getPort()` | Retrieve the port component of the URI. | |
 | `getPath()` | Retrieve the path component of the URI. | |
 | `getQuery()` | Retrieve the query string of the URI. | |
 | `getFragment()` | Retrieve the fragment component of the URI. | |
 | `withScheme($scheme)` | Return an instance with the specified scheme. | |
-| `withUserInfo($user, $password = null)` | Return an instance with the specified user information. | |
+| `withUserInfo($user, $password = null)` | Return an instance with the specified Customer Information. | |
 | `withHost($host)` | Return an instance with the specified host. | |
 | `withPort($port)` | Return an instance with the specified port. | |
 | `withPath($path)` | Return an instance with the specified path. | |

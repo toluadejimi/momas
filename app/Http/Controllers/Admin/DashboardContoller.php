@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Auditlog;
 use App\Models\Estate;
 use App\Models\Feature;
 use App\Models\Meter;
@@ -33,6 +34,9 @@ class DashboardContoller extends Controller
             $data['token'] = Token::count();
             $data['meter_token'] = MeterToken::where('status', 2)->count();
             $data['transaction'] = Transaction::paginate('20');
+
+            $data['title'] = "Admin Dashboard";
+
             return view('admin.dashboard', $data);
 
         } elseif(auth::user()->role == 1){
@@ -50,6 +54,7 @@ class DashboardContoller extends Controller
 
             $data['meter'] = Meter::where('estate_id', auth::user()->estate_id)->count();
             $data['token'] = Token::where('estate_id', auth::user()->estate_id)->count();
+            $data['title'] = "Estate Dashboard";
 
             return view('admin.dashboard', $data);
 
@@ -60,10 +65,6 @@ class DashboardContoller extends Controller
         } else{
 
         }
-
-
-
-
 
 
 
@@ -300,7 +301,10 @@ class DashboardContoller extends Controller
 
     public function update_feat(request $request)
     {
-        Feature::where('id', 1)->update([
+
+        $feature = Feature::find(1);
+        $old_values = $feature->toArray();
+        $feature->update([
             'momas_meter' => $request->momas_meter,
             'other_meter' => $request->other_meter,
             'print_token' => $request->print_token,
@@ -309,8 +313,20 @@ class DashboardContoller extends Controller
             'bill_payment' => $request->bill_payment,
             'support' => $request->support,
             'analysis' => $request->analysis,
-
         ]);
+
+        $new_values = $feature->refresh()->toArray();
+
+        $aud = new Auditlog();
+        $aud->user_id = Auth::id();
+        $aud->name = Auth::user()->first_name." ".Auth::user()->_name;
+        $aud->user_id = Auth::id();
+        $aud->old_values = json_encode($old_values);
+        $aud->new_values = json_encode($new_values);
+        $aud->action = "Feature Update";
+        $aud->save();
+
+
         return redirect('admin/settings')->with('message', "Features updated successfully");
 
     }

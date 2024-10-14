@@ -14,7 +14,7 @@
     security vulnerabilities" [2].
 -->
 
-Keeping user information safe and secure is a top priority, and we welcome the
+Keeping Customer Information safe and secure is a top priority, and we welcome the
 contribution of external security researchers.
 
 ## Scope

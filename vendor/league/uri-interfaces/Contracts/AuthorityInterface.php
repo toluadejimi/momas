@@ -30,7 +30,7 @@ interface AuthorityInterface extends UriComponentInterface
     public function getPort(): ?int;
 
     /**
-     * Returns the user information component of the authority.
+     * Returns the Customer Information component of the authority.
      */
     public function getUserInfo(): ?string;
 
@@ -77,12 +77,12 @@ interface AuthorityInterface extends UriComponentInterface
     public function withPort(?int $port): self;
 
     /**
-     * Return an instance with the specified user information.
+     * Return an instance with the specified Customer Information.
      *
      * This method MUST retain the state of the current instance, and return
-     * an instance that contains the specified user information.
+     * an instance that contains the specified Customer Information.
      *
-     * Password is optional, but the user information MUST include the
+     * Password is optional, but the Customer Information MUST include the
      * user; a null value for the user is equivalent to removing user
      * information.
      *

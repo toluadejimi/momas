@@ -61,19 +61,19 @@ interface UriInterface
     public function getAuthority(): string;
 
     /**
-     * Retrieve the user information component of the URI.
+     * Retrieve the Customer Information component of the URI.
      *
-     * If no user information is present, this method MUST return an empty
+     * If no Customer Information is present, this method MUST return an empty
      * string.
      *
      * If a user is present in the URI, this will return that value;
      * additionally, if the password is also present, it will be appended to the
      * user value, with a colon (":") separating the values.
      *
-     * The trailing "@" character is not part of the user information and MUST
+     * The trailing "@" character is not part of the Customer Information and MUST
      * NOT be added.
      *
-     * @return string The URI user information, in "username[:password]" format.
+     * @return string The URI Customer Information, in "username[:password]" format.
      */
     public function getUserInfo(): string;
 
@@ -192,18 +192,18 @@ interface UriInterface
     public function withScheme(string $scheme): UriInterface;
 
     /**
-     * Return an instance with the specified user information.
+     * Return an instance with the specified Customer Information.
      *
      * This method MUST retain the state of the current instance, and return
-     * an instance that contains the specified user information.
+     * an instance that contains the specified Customer Information.
      *
-     * Password is optional, but the user information MUST include the
+     * Password is optional, but the Customer Information MUST include the
      * user; an empty string for the user is equivalent to removing user
      * information.
      *
      * @param string $user The user name to use for authority.
      * @param null|string $password The password associated with $user.
-     * @return static A new instance with the specified user information.
+     * @return static A new instance with the specified Customer Information.
      */
     public function withUserInfo(string $user, ?string $password = null): UriInterface;
 

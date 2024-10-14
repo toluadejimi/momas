@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 abstract class Broadcaster implements BroadcasterContract
 {
     /**
-     * The callback to resolve the authenticated user information.
+     * The callback to resolve the authenticated Customer Information.
      *
      * @var \Closure|null
      */

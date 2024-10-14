@@ -197,7 +197,7 @@ class DatabaseSessionHandler implements ExistenceAwareInterface, SessionHandlerI
     }
 
     /**
-     * Add the user information to the session payload.
+     * Add the Customer Information to the session payload.
      *
      * @param  array  $payload
      * @return $this

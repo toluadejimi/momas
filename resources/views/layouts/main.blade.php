@@ -306,6 +306,24 @@
         <!-- end Footer -->
 
     </div>
+
+
+
+    <script>
+        let sessionLifetime = {{ config('session.lifetime') }} * 60 * 1000;
+        let warningTime = sessionLifetime - (5 * 60 * 1000);
+
+        setTimeout(function() {
+            alert('Your session is about to expire. Please save your work!');
+        }, warningTime);
+
+        setTimeout(function() {
+            window.location.href = '/login';
+        }, sessionLifetime);
+    </script>
+
+
+
     <!-- ============================================================== -->
     <!-- End Page content -->
     <!-- ============================================================== -->

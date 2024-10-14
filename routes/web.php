@@ -56,7 +56,7 @@ Route::get('code', [AuthController::class, 'code']);
 
 
 
-Route::group(['prefix'=>'admin'], function(){
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']], function () {
 
     Route::post('import-users', [CustomerImportController::class, 'import'])->name('customers.import');
     Route::post('import-meters', [MeterImportController::class, 'import'])->name('meters.import');

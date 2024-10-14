@@ -74,7 +74,7 @@ interface UriInterface extends JsonSerializable, Stringable
     public function getAuthority(): ?string;
 
     /**
-     * Retrieve the user information component of the URI.
+     * Retrieve the Customer Information component of the URI.
      *
      * If no scheme is present, this method MUST return a null value.
      *
@@ -82,7 +82,7 @@ interface UriInterface extends JsonSerializable, Stringable
      * additionally, if the password is also present, it will be appended to the
      * user value, with a colon (":") separating the values.
      *
-     * The trailing "@" character is not part of the user information and MUST
+     * The trailing "@" character is not part of the Customer Information and MUST
      * NOT be added.
      */
     public function getUserInfo(): ?string;
@@ -211,12 +211,12 @@ interface UriInterface extends JsonSerializable, Stringable
     public function withScheme(Stringable|string|null $scheme): self;
 
     /**
-     * Return an instance with the specified user information.
+     * Return an instance with the specified Customer Information.
      *
      * This method MUST retain the state of the current instance, and return
-     * an instance that contains the specified user information.
+     * an instance that contains the specified Customer Information.
      *
-     * Password is optional, but the user information MUST include the
+     * Password is optional, but the Customer Information MUST include the
      * user; a null value for the user is equivalent to removing user
      * information.
      *
