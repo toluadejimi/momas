@@ -5,88 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df462c8f-229d-4527-915f-ee2aade1fa51" name="Changes" comment="pusgggghhh">
-      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/SessionTimeout.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Auditlog.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/audit.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/importcsg.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/LICENSE.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/composer.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/config/audit.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/database/migrations/audits.stub" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Audit.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Auditable.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/AuditableObserver.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/AuditingServiceProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Auditor.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Console/AuditDriverCommand.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Console/AuditResolverCommand.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Console/InstallCommand.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Contracts/AttributeEncoder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Contracts/AttributeModifier.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Contracts/AttributeRedactor.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Contracts/Audit.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Contracts/AuditDriver.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Contracts/Auditable.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Contracts/Auditor.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Contracts/IpAddressResolver.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Contracts/Resolver.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Contracts/UrlResolver.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Contracts/UserAgentResolver.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Contracts/UserResolver.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Drivers/Database.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Encoders/Base64Encoder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Events/AuditCustom.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Events/Audited.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Events/Auditing.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Events/DispatchAudit.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Events/DispatchingAudit.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Exceptions/AuditableTransitionException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Exceptions/AuditingException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Facades/Auditor.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Listeners/ProcessDispatchAudit.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Listeners/RecordCustomAudit.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Models/Audit.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Redactors/LeftRedactor.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Redactors/RightRedactor.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Resolvers/DumpResolver.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Resolvers/IpAddressResolver.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Resolvers/UrlResolver.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Resolvers/UserAgentResolver.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/src/Resolvers/UserResolver.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/stubs/driver.stub" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/owen-it/laravel-auditing/stubs/resolver.stub" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardContoller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardContoller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Feature.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Feature.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Setting.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Setting.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/session.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/session.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/note" beforeDir="false" afterPath="$PROJECT_DIR$/note" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/user/customer-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/user/customer-list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/user/new-user.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/user/new-user.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/user/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/user/view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/main.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Broadcasting/Broadcasters/Broadcaster.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Broadcasting/Broadcasters/Broadcaster.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Session/DatabaseSessionHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Session/DatabaseSessionHandler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/league/uri-interfaces/Contracts/AuthorityInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/league/uri-interfaces/Contracts/AuthorityInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/league/uri-interfaces/Contracts/UriInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/league/uri-interfaces/Contracts/UriInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/league/uri-interfaces/Contracts/UserInfoInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/league/uri-interfaces/Contracts/UserInfoInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/psr/http-message/docs/PSR7-Interfaces.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/psr/http-message/docs/PSR7-Interfaces.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/psr/http-message/src/UriInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/psr/http-message/src/UriInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/ramsey/collection/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/ramsey/collection/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/ramsey/collection/SECURITY.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/ramsey/collection/SECURITY.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/ramsey/uuid/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/ramsey/uuid/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -377,15 +296,7 @@
       <workItem from="1727361913799" duration="179000" />
       <workItem from="1727415532469" duration="599000" />
       <workItem from="1727505961145" duration="53833000" />
-      <workItem from="1728751808106" duration="8798000" />
-    </task>
-    <task id="LOCAL-00179" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1722698100005</created>
-      <option name="number" value="00179" />
-      <option name="presentableId" value="LOCAL-00179" />
-      <option name="project" value="LOCAL" />
-      <updated>1722698100005</updated>
+      <workItem from="1728751808106" duration="10279000" />
     </task>
     <task id="LOCAL-00180" summary="pusgggghhh">
       <option name="closed" value="true" />
@@ -771,7 +682,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728477888050</updated>
     </task>
-    <option name="localTasksCounter" value="228" />
+    <task id="LOCAL-00228" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1728903431221</created>
+      <option name="number" value="00228" />
+      <option name="presentableId" value="LOCAL-00228" />
+      <option name="project" value="LOCAL" />
+      <updated>1728903431221</updated>
+    </task>
+    <option name="localTasksCounter" value="229" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
