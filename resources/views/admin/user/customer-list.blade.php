@@ -355,7 +355,6 @@
                                         <th scope="col" class="cursor-pointer">Last Name</th>
                                         <th scope="col" class="cursor-pointer">Phone</th>
                                         <th scope="col" class="cursor-pointer">Email</th>
-                                        <th scope="col" class="cursor-pointer">Role</th>
                                         <th scope="col" class="cursor-pointer">Status</th>
                                         <th scope="col" class="cursor-pointer desc">Date Registered</th>
                                         @if(auth::user()->role == 0)
@@ -374,20 +373,6 @@
                                             <td><a href="view-user?id={{$data->id}}">{{$data->last_name}}</a></td>
                                             <td>{{$data->phone}}</td>
                                             <td>{{$data->email}}</td>
-                                            <td>
-                                                @if($data->role == 2)
-                                                    <span class="badge text-bg-primary">Customer</span>
-                                                @elseif($data->role == 3)
-                                                    <span class="badge text-bg-dark">Estate Admin</span>
-                                                @elseif($data->role == 0)
-                                                    <span class="badge text-bg-dark">Super Admin</span>
-                                                @elseif($data->role == 1)
-                                                    <span class="badge text-bg-dark"> Admin</span>
-                                                @elseif($data->role == 4)
-                                                    <span class="badge text-bg-warning">Estate Staff</span>
-                                                @endif
-
-                                            </td>
 
                                             <td>
                                                 @if($data->status == 2)
