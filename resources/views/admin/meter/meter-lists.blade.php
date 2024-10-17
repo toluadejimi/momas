@@ -9,8 +9,6 @@
             <!-- Start Content-->
             <div class="container-fluid">
 
-
-
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
                         <h4 class="fs-18 fw-semibold m-0">Meter List</h4>
@@ -76,53 +74,57 @@
                     <div class="col-xl-12">
                         <div class="card overflow-hidden">
 
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="staticBackdrop"
+                                         data-bs-backdrop="static" data-bs-keyboard="false"
+                                         tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5"
+                                                        id="staticBackdropLabel">Import Meter</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+
+                                                <form action="{{ route('meters.import') }}" method="POST" enctype="multipart/form-data">
+                                                    @csrf
+
+                                                    <div class="modal-body">
+
+                                                        <p>CLick here to download the sample of file to upload <a href="{{url('')}}/public/assets/meterdataimport.csv">Download here</a></p>
+                                                        <label class="mt-3">Choose File</label>
+                                                        <input type="file"  class="form-control mb-3" name="file" required>
+
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Import Meters</button>
+                                                    </div>
+
+                                                </form>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> <!-- end card -->
+                            </div> <!-- end col -->
+
+
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <h5 class="card-title text-black mb-0">Latest Meter</h5>
-                                    @if(auth::user()->role == 0)
+                                    <div class="justify-content-end">
                                         <div class="justify-content-end">
                                             <a href="#" class="btn btn-primary text-white " data-bs-toggle="modal"
                                                data-bs-target="#staticBackdrop">Import Bulk Meter</a>
-
-                                            <div class="col-xl-6">
-                                                <div class="card">
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="staticBackdrop"
-                                                         data-bs-backdrop="static" data-bs-keyboard="false"
-                                                         tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                                         aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5"
-                                                                        id="staticBackdropLabel">Modal Title</h1>
-                                                                    <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    I will not close if you click outside me. Don't even
-                                                                    try to press escape key.
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-light"
-                                                                            data-bs-dismiss="modal">Close
-                                                                    </button>
-                                                                    <button type="button" class="btn btn-primary">
-                                                                        Understood
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> <!-- end card -->
-                                            </div> <!-- end col -->
-
                                             <a href="new-meter" class="btn btn-primary text-white">Add new</a>
                                         </div>
-                                    @else
-                                    @endif
-
+                                    </div>
 
                                 </div>
 
@@ -196,6 +198,7 @@
 
                     </div>
                 </div>
+
 
 
             </div>
