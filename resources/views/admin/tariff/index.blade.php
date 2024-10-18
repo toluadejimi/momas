@@ -231,7 +231,7 @@
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <h5 class="card-title text-black mb-0">Latest Tariff</h5>
-                                    <a href="new-meter" class="btn btn-primary text-white justify-content-end">Add new</a>
+                                    <a href="new-tariff" class="btn btn-primary text-white justify-content-end">Add new Tariff</a>
 
                                 </div>
 
@@ -246,7 +246,7 @@
                                     <tr>
                                         <th scope="col" class="cursor-pointer">TariffID</th>
                                         <th scope="col" class="cursor-pointer">TariffCode</th>
-                                        <th scope="col" class="cursor-pointer">Description</th>
+                                        <th scope="col" class="cursor-pointer">Estate</th>
                                         <th scope="col" class="cursor-pointer">Status</th>
                                         <th scope="col" class="cursor-pointer desc">Action</th>
 
@@ -255,12 +255,12 @@
                                     <tbody>
 
 
-                                    @foreach($meter_lists as $data)
+                                    @foreach($tariffis as $data)
 
                                         <tr>
                                             <td>{{$data->id}}</td>
-                                            <td>{{$data->TariffCode}}</td>
-                                            <td>{{$data->Description}}</td>
+                                            <td>{{$data->title}}</td>
+                                            <td>{{$data->estate->title}}</td>
                                             <td>
                                                 @if($data->status == 2)
                                                     <span class="badge text-bg-primary">Active</span>
@@ -289,7 +289,6 @@
 
                                     <tfoot>
 
-                                    {{ $meter_lists->links() }}
 
 
                                     </tfoot>

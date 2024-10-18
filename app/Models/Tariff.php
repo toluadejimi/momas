@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Tariff extends Model
 {
     use HasFactory;
+
+
+    public function estate()
+    {
+        return $this->belongsTo(Estate::class);
+    }
+
+
 }

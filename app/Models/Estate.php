@@ -24,4 +24,9 @@ class Estate extends Model
     {
         return $this->hasMany(Transformer::class);
     }
+
+    public function tariff()
+    {
+        return $this->hasMany(Tariff::class);
+    }
 }
