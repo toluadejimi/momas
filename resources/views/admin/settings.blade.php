@@ -425,78 +425,7 @@
 
                                 </div>
 
-                                <div class="card " style="background: #f3ffff">
-                                    <div class="card-body">
-                                        <form action="estate-update-tariff" method="post">
-                                            @csrf
 
-                                            <div class="row">
-
-                                                <h6 class="d-flex justify-content-start my-4">Tariff Information</h6>
-
-                                                <div class="col-4">
-                                                    <label class="my-2">Tariff Amount</label>
-                                                    <input type="number" step="0.01" name="amount"
-                                                           value="{{$tar->estate_tariff_cost}}"
-                                                           class="form-control"
-                                                           required>
-
-                                                    <input hidden name="id" value="{{$org->id}}" class="form-control"
-                                                           required>
-
-
-                                                </div>
-
-
-                                                <div class="col-4">
-                                                    <label class="my-2">VAT</label>
-                                                    <input type="number" step="0.01" name="vat" value="{{$tar->vat}}"
-                                                           class="form-control"
-                                                           required>
-
-
-                                                </div>
-
-                                                <hr class="my-4">
-
-                                                <h6 class="d-flex justify-content-start my-4">MIN/MAX PURCHASE
-                                                    Information</h6>
-
-
-                                                <div class="col-4">
-                                                    <label class="my-2">MIN Purchase</label>
-                                                    <input type="number" step="0.01" name="min_pur"
-                                                           value="{{$tar->min_pur}}"
-                                                           class="form-control"
-                                                           required>
-
-
-                                                </div>
-
-
-                                                <div class="col-4">
-                                                    <label class="my-2">MAX Purchase</label>
-                                                    <input type="number" step="0.01" name="max_pur"
-                                                           value="{{$tar->max_pur}}"
-                                                           class="form-control"
-                                                           required>
-
-
-                                                </div>
-
-
-                                            </div>
-
-                                            <hr class="my-4">
-
-                                            <button type="submit" class="col-2 d-flex btn btn-primary">
-                                                Update
-                                            </button>
-
-
-                                        </form>
-                                    </div>
-                                </div>
 
 
                             </div>
