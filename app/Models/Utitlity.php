@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Utitlity extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'amount',
+        'duration',
+        'estate_id'
+    ];
 }

@@ -248,8 +248,12 @@ class DashboardContoller extends Controller
 
             $data['org'] = Estate::where('id', auth::user()->estate_id)->first();
             $data['tar'] = Tariff::where('estate_id', auth::user()->estate_id)->first();
-            $data['utl'] = Utitlity::where('estate_id', auth::user()->estate_id)->first();
-            $data['total_utility'] = $data['utl']->water + $data['utl']->eletricity +  $data['utl']->security + $data['utl']->waste + $data['utl']->cleaners + $data['utl']->grardners + $data['utl']->service_charge;
+            $data['utl'] = Utitlity::where('estate_id', auth::user()->estate_id)->first() ?? null;
+            $data['total_utility'] = Utitlity::where('estate_id', auth::user()->estate_id)->sum('amount');
+
+
+            $data['utility'] = Utitlity::where('estate_id', auth::user()->estate_id)->get() ?? null;
+
 
         } elseif(auth::user()->role == 4){
 
@@ -261,11 +265,21 @@ class DashboardContoller extends Controller
 
 
 
-
-
-
-
         return view('admin/settings', $data);
+
+    }
+
+    public function update_utility(request $request)
+    {
+        Utitlity::where('id', $request->id)->update(['title' => $request->title, 'amount' => $request->amount]);
+        return back()->with('message', 'Utility Updated Successfully');
+
+    }
+
+    public function delete_utility(request $request)
+    {
+        Utitlity::where('id', $request->id)->delete();
+        return back()->with('message', 'Utility deleted Successfully');
 
     }
 

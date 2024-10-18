@@ -145,6 +145,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
     Route::post('features', [DashboardContoller::class, 'update_feat']);
     Route::post('payment-keys', [DashboardContoller::class, 'update_pay']);
     Route::post('support-set', [DashboardContoller::class, 'support_set']);
+    Route::get('update-utility', [DashboardContoller::class, 'update_utility']);
+    Route::get('delete-utility', [DashboardContoller::class, 'delete_utility']);
+
+
+
 
 
     Route::get('tariff-list', [TariffController::class, 'tariff_list']);

@@ -7,6 +7,7 @@ use App\Models\Estate;
 use App\Models\Tariff;
 use App\Models\Utitlity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EstateController extends Controller
 {
@@ -101,21 +102,26 @@ class EstateController extends Controller
 
     public function estate_update_utilities(request $request)
     {
-        Utitlity::where('estate_id', $request->id)->update([
 
-            'water' => $request->water,
-            'eletricity' => $request->eletricity,
-            'security' => $request->security,
-            'waste' => $request->waste,
-            'cleaners' => $request->cleaners,
-            'grardners' => $request->grardners,
-            'service_charge' => $request->service_charge,
-            'duration' => $request->duration,
+        $utilitiesData = json_decode($request->input('utilities_data'), true);
+        if (is_array($utilitiesData)) {
+            foreach ($utilitiesData as $utility) {
+                if (!empty($utility['title']) && !empty($utility['amount'])) {
+                    Utitlity::create([
+                        'title' => $utility['title'],
+                        'amount' => $utility['amount'],
+                        'duration' => $request->duration,
+                        'estate_id' => auth::user()->estate_id,
+
+                    ]);
+                }
+            }
+        }
 
 
-        ]);
+        return redirect()->back()->with('success', 'Utilities updated successfully');
 
-        return back()->with('message','Utility updated successfully');
+
     }
 
 
