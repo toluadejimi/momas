@@ -88,6 +88,16 @@ class TariffController extends Controller
 
     }
 
+    public function delete_tariff(request $request)
+    {
+
+        Tariff::where('id', $request->id)->delete();
+        return back()->with('messsage', 'Tariff deleted successfully');
+
+    }
+
+
+
 
 
 

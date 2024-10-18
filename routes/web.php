@@ -150,7 +150,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
     Route::get('tariff-list', [TariffController::class, 'tariff_list']);
     Route::get('new-tariff', [TariffController::class, 'new_tariff']);
     Route::post('add-new-Tariff', [TariffController::class, 'add_new_Tariff']);
-    Route::get('tariff-delete', [TariffController::class, 'delete_tariff']);
+    Route::get('delete-tariff', [TariffController::class, 'delete_tariff']);
     Route::get('tariff-delete', [TariffController::class, 'delete_tariff']);
 
 
