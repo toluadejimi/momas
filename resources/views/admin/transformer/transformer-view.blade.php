@@ -28,7 +28,7 @@
 
 
                                 <div class="col-3">
-                                    <label class="my-2">Meter Title</label>
+                                    <label class="my-2">Title</label>
                                     <input type="text" name="Title" value="{{$trans->Title}}" class="form-control" required>
                                     <input type="text" name="id" value="{{$trans->id}}" hidden>
 

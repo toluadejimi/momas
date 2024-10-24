@@ -28,7 +28,7 @@
 
 
                                 <div class="col-3">
-                                    <label class="my-2">Meter Title</label>
+                                    <label class="my-2">Title</label>
                                     <input type="text" name="Title" class="form-control" required>
                                 </div>
 
