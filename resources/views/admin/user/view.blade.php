@@ -51,6 +51,11 @@
                                         <label class="my-2">First Name</label>
                                         <input type="text" value="{{$user->first_name}}" name="first_name"
                                                class="form-control" required>
+
+                                        <input type="text" value="{{$user->email}}" name="email"
+                                               hidden>
+
+
                                     </div>
 
                                     <div class="col-3">
@@ -61,7 +66,8 @@
 
                                     <div class="col-3">
                                         <label class="my-2">Email</label>
-                                        <input type="email" disabled value="{{$user->email}}" name="email" class="form-control"
+                                        <input type="email" disabled value="{{$user->email}}" name="email"
+                                               class="form-control"
                                                required>
                                     </div>
 
@@ -87,10 +93,44 @@
                                         <label class="my-2">State</label>
                                         <select type="text" name="state" class="form-control" required>
                                             <option value="{{$user->state}}">{{$user->state}}</option>
-                                            <option value="Lagos">Lagos</option>
-                                            <option value="oyo">Oyo</option>
+                                            <option disabled selected>--Select State--</option>
                                             <option value="Abia">Abia</option>
                                             <option value="Adamawa">Adamawa</option>
+                                            <option value="Akwa Ibom">Akwa Ibom</option>
+                                            <option value="Anambra">Anambra</option>
+                                            <option value="Bauchi">Bauchi</option>
+                                            <option value="Bayelsa">Bayelsa</option>
+                                            <option value="Benue">Benue</option>
+                                            <option value="Borno">Borno</option>
+                                            <option value="Cross River">Cross River</option>
+                                            <option value="Delta">Delta</option>
+                                            <option value="Ebonyi">Ebonyi</option>
+                                            <option value="Edo">Edo</option>
+                                            <option value="Ekiti">Ekiti</option>
+                                            <option value="Enugu">Enugu</option>
+                                            <option value="FCT">Federal Capital Territory</option>
+                                            <option value="Gombe">Gombe</option>
+                                            <option value="Imo">Imo</option>
+                                            <option value="Jigawa">Jigawa</option>
+                                            <option value="Kaduna">Kaduna</option>
+                                            <option value="Kano">Kano</option>
+                                            <option value="Katsina">Katsina</option>
+                                            <option value="Kebbi">Kebbi</option>
+                                            <option value="Kogi">Kogi</option>
+                                            <option value="Kwara">Kwara</option>
+                                            <option value="Lagos">Lagos</option>
+                                            <option value="Nasarawa">Nasarawa</option>
+                                            <option value="Niger">Niger</option>
+                                            <option value="Ogun">Ogun</option>
+                                            <option value="Ondo">Ondo</option>
+                                            <option value="Osun">Osun</option>
+                                            <option value="Oyo">Oyo</option>
+                                            <option value="Plateau">Plateau</option>
+                                            <option value="Rivers">Rivers</option>
+                                            <option value="Sokoto">Sokoto</option>
+                                            <option value="Taraba">Taraba</option>
+                                            <option value="Yobe">Yobe</option>
+                                            <option value="Zamfara">Zamfara</option>
                                         </select>
 
                                     </div>
@@ -99,6 +139,24 @@
                                         <label class="my-2">LGA</label>
                                         <input type="text" value="{{$user->lga}}" name="lga" class="form-control"
                                                required>
+                                    </div>
+
+
+                                    <div class="col-3">
+                                        <label class="my-2">Status</label>
+                                        <select type="text" name="status" class="form-control" required>
+                                            @if($user->status == 2)
+                                                <option value="{{$user->status}}">Active</option>
+                                            @elseif($user->status == 0)
+                                                <option value="{{$user->status}}">Pending</option>
+                                            @elseif($user->status == 3)
+                                                <option value="{{$user->status}}"><span
+                                                        style="color: red">Inactive</span></option>
+                                            @endif
+                                            <option value="3">Deactivate</option>
+                                            <option value="1">Activate</option>
+
+                                        </select>
                                     </div>
 
 
@@ -122,30 +180,94 @@
 
                                     <h6 class="d-flex justify-content-start my-2">Attach Information</h6>
 
-                                    <div class="col-3">
+
+                                    <div class="col-xl-4 col-sm-12" style="position: relative;">
+
                                         <label class="my-2">Choose Meter</label>
-                                            <select type="text" name="meterid" class="form-control" required>
-                                                <option value="{{$user->meterid ?? "id"}}">{{$user->meterNo ?? "Select Meter"}}</option>
-                                                @foreach($meters as $data)
-                                                    <option value="{{$data->id}}">{{$data->meterNo}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                        <input type="text" name="meterNo" value="{{$user->meterNo ?? "Select Meter"}}" id="searchMeter"
+                                               placeholder="Type meter number..." class="form-control" required
+                                               autocomplete="off">
+                                        <div id="meterResult" class="search-result"></div>
+
+                                        <input type="text" name="user_id" value="{{$user->id}}" hidden>
+
+                                        <input type="text" name="old_value" value="{{$user->meterNo}}" hidden>
+
+
+
+                                        <script>
+                                            document.getElementById('searchMeter').addEventListener('keyup', function () {
+                                                let query = this.value;
+                                                console.log('User input:', query); // Log user input
+
+                                                if (query.length > 2) { // Only search if input has more than 2 characters
+                                                    let xhr = new XMLHttpRequest();
+                                                    xhr.open('GET', '/search-meters?q=' + query, true); // Replace with the correct URL
+
+                                                    xhr.onreadystatechange = function () {
+                                                        if (xhr.readyState == 4 && xhr.status == 200) {
+                                                            console.log('Response received:', xhr.responseText); // Log the response
+
+                                                            let meters = JSON.parse(xhr.responseText);
+                                                            let meterResultDiv = document.getElementById('meterResult');
+                                                            meterResultDiv.innerHTML = ''; // Clear previous results
+
+                                                            if (meters.length > 0) {
+                                                                meters.forEach(meter => {
+                                                                    let div = document.createElement('div');
+                                                                    div.textContent = meter.meterNo;
+                                                                    div.setAttribute('data-id', meter.id);
+
+                                                                    // Add click event to populate the input with the selected suggestion
+                                                                    div.addEventListener('click', function () {
+                                                                        document.getElementById('searchMeter').value = meter.meterNo;
+                                                                        meterResultDiv.style.display = 'none'; // Hide suggestions
+                                                                    });
+
+                                                                    meterResultDiv.appendChild(div);
+                                                                });
+                                                                meterResultDiv.style.display = 'block'; // Show results
+                                                            } else {
+                                                                let noResultDiv = document.createElement('div');
+                                                                noResultDiv.textContent = 'No meters found';
+                                                                noResultDiv.style.color = 'red';
+                                                                meterResultDiv.appendChild(noResultDiv);
+                                                                meterResultDiv.style.display = 'block'; // Show the "No meters found" message
+                                                            }
+                                                        } else if (xhr.readyState == 4) {
+                                                            console.log('Error: Status', xhr.status); // Log error status
+                                                        }
+                                                    };
+
+                                                    xhr.onerror = function () {
+                                                        console.error('Request error'); // Log any request errors
+                                                    };
+
+                                                    xhr.send();
+                                                } else {
+                                                    document.getElementById('meterResult').style.display = 'none'; // Hide if input is too short
+                                                }
+                                            });
+                                        </script>
+
+
                                     </div>
 
-                                </div>
+                                    <div class="col-xl-6 col-sm-12">
 
-                                <button type="submit" class="col-3 d-flex btn btn-primary my-3">
-                                    Update meter information
-                                </button>
+                                    </div>
+
+                                    <div class="col-xl-3 col-sm-12">
+                                    <button type="submit" class="col-12 d-flex w-100 btn btn-primary my-3">
+                                        Update meter information
+                                    </button>
+                                    </div>
+                                </div>
 
                             </form>
                         </div>
                     </div>
                 </div>
-
-
-
 
 
                 <div class="card">
@@ -197,7 +319,10 @@
                                                 @endif
 
                                             </td>
-                                            <td><a href="send-token-email?email={{$user->email}}&amount={{$data->amount}}&token={{$data->token}}&unit={{$data->unit}}" onclick="return confirmDelete();" class="btn btn-primary">Send</a> </td>
+                                            <td>
+                                                <a href="send-token-email?email={{$user->email}}&amount={{$data->amount}}&token={{$data->token}}&unit={{$data->unit}}"
+                                                   onclick="return confirmDelete();" class="btn btn-primary">Send</a>
+                                            </td>
                                             <script>
                                                 function confirmDelete() {
                                                     return confirm('Are you sure you want to send email to  {{$user->email}}?');

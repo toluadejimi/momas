@@ -1,316 +1,453 @@
 @extends('layouts.main')
 @section('content')
 
-    <div class="content">
+    @if(auth::user()->role == 0)
+        <div class="content">
 
-        <!-- Start Content-->
-        <div class="container-fluid">
+            <!-- Start Content-->
+            <div class="container-fluid">
 
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if (session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
+                @if (session()->has('error'))
+                    <div class="alert alert-danger">
+                        {{ session()->get('error') }}
+                    </div>
+                @endif
+
+
+                <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
+                    <div class="flex-grow-1">
+                        <h4 class="fs-18 fw-semibold m-0">Add New Estate</h4>
+                    </div>
                 </div>
-            @endif
-            @if (session()->has('message'))
-                <div class="alert alert-success">
-                    {{ session()->get('message') }}
-                </div>
-            @endif
-            @if (session()->has('error'))
-                <div class="alert alert-danger">
-                    {{ session()->get('error') }}
-                </div>
-            @endif
 
 
-            <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
-                <div class="flex-grow-1">
-                    <h4 class="fs-18 fw-semibold m-0">Add New Estate</h4>
-                </div>
-            </div>
 
+                <div class="row">
 
-            <div class="row">
+                    <div class="col-md-6 col-xl-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="widget-first">
 
-                <div class="card" >
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div
+                                            class="bg-secondary-subtle rounded-circle p-2 me-2 border border-dashed border-secondary">
+                                            <svg width="20" height="20" viewBox="0 0 100 105" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M50 0C22.4444 0 0 21.21 0 47.25C0 67.7775 13.8889 85.26 33.3333 91.7175V105H44.4444V94.185C46.2778 94.5 48.1111 94.5 50 94.5C51.8889 94.5 53.7222 94.5 55.5556 94.185V105H66.6667V91.7175C86.1111 85.2075 100 67.725 100 47.25C100 21.21 77.5556 0 50 0ZM62.5 63L45.8333 78.75L37.5 70.875L44.4444 64.3125L37.5 57.75L54.1667 42L62.5 49.875L55.5556 56.4375L62.5 63ZM72.2222 36.75H27.7778V26.25H72.2222V36.75Z" fill="#E50086" fill-opacity="0.52"/>
+                                            </svg>
 
-                    <div class="card-body">
+                                        </div>
 
-                        <form action="estate-update-info" method="post">
-                            @csrf
+                                        <p class="mb-0 text-dark fs-15">Total Meters</p>
+                                    </div>
 
-                            <div class="row">
+                                    <div class="d-flex align-items-center">
+                                        <h3 class="mb-0 fs-24 text-black me-2">{{$total_meters}}</h3>
 
-                                <h6 class="d-flex justify-content-start my-4">Estate Information</h6>
-
-                                <div class="col-4">
-                                    <label class="my-2">Estate Name</label>
-                                    <input type="text" name="title" value="{{$org->title}}" class="form-control"
-                                           required>
-                                    <input hidden name="id" value="{{$org->id}}" class="form-control" required>
+                                    </div>
 
                                 </div>
-
-                                <div class="col-4">
-                                    <label class="my-2">State</label>
-                                    <input type="text" name="state" value="{{$org->state}}" class="form-control"
-                                           required>
-
-                                </div>
-
-                                <div class="col-4">
-                                    <label class="my-2">City</label>
-                                    <input type="text" name="city" value="{{$org->city}}" class="form-control"
-                                           required>
-
-                                </div>
-
-                                <div class="col-4">
-                                    <label class="my-2">LGA</label>
-                                    <input type="text" name="lga" value="{{$org->lga}}" class="form-control"
-                                           required>
-
-                                </div>
-
-                                <div class="col-3">
-                                    <label class="my-2">Status</label>
-                                    <select type="text" name="status" class="form-control" required>
-                                        <option value="2">Activate</option>
-                                        <option value="0">Deactivate</option>
-
-                                    </select>
-
-                                </div>
-
                             </div>
+                        </div>
+                    </div>
 
-                            <hr class="my-4">
+                    <div class="col-md-6 col-xl-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="widget-first">
 
-                            <button type="submit" class="col-2 d-flex btn btn-primary">
-                                Update Info
-                            </button>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div
+                                            class="bg-secondary-subtle rounded-circle p-2 me-2 border border-dashed border-secondary">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                 viewBox="0 0 640 512">
+                                                <path fill="#963b68"
+                                                      d="M96 224c35.3 0 64-28.7 64-64s-28.7-64-64-64s-64 28.7-64 64s28.7 64 64 64m448 0c35.3 0 64-28.7 64-64s-28.7-64-64-64s-64 28.7-64 64s28.7 64 64 64m32 32h-64c-17.6 0-33.5 7.1-45.1 18.6c40.3 22.1 68.9 62 75.1 109.4h66c17.7 0 32-14.3 32-32v-32c0-35.3-28.7-64-64-64m-256 0c61.9 0 112-50.1 112-112S381.9 32 320 32S208 82.1 208 144s50.1 112 112 112m76.8 32h-8.3c-20.8 10-43.9 16-68.5 16s-47.6-6-68.5-16h-8.3C179.6 288 128 339.6 128 403.2V432c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-28.8c0-63.6-51.6-115.2-115.2-115.2m-223.7-13.4C161.5 263.1 145.6 256 128 256H64c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32h65.9c6.3-47.4 34.9-87.3 75.2-109.4"/>
+                                            </svg>
+                                        </div>
+
+                                        <p class="mb-0 text-dark fs-15">Total Customers</p>
+                                    </div>
+
+                                    <div class="d-flex align-items-center">
+                                        <h3 class="mb-0 fs-24 text-black me-2">{{$customers}}</h3>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
 
 
-                        </form>
+                <div class="row">
+
+                    <div class="card">
+
+                        <div class="card-body">
+
+                            <form action="estate-update-info" method="post">
+                                @csrf
+
+                                <div class="row">
+
+                                    <h6 class="d-flex justify-content-start my-4">Estate Information</h6>
+
+                                    <div class="col-4">
+                                        <label class="my-2">Estate Name</label>
+                                        <input type="text" name="title" value="{{$org->title}}" class="form-control"
+                                               required>
+                                        <input hidden name="id" value="{{$org->id}}" class="form-control" required>
+
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label class="my-2">State</label>
+                                        <input type="text" name="state" value="{{$org->state}}" class="form-control"
+                                               required>
+
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label class="my-2">City</label>
+                                        <input type="text" name="city" value="{{$org->city}}" class="form-control"
+                                               required>
+
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label class="my-2">LGA</label>
+                                        <input type="text" name="lga" value="{{$org->lga}}" class="form-control"
+                                               required>
+
+                                    </div>
+
+                                    <div class="col-3">
+                                        <label class="my-2">Status</label>
+                                        <select type="text" name="status" class="form-control" required>
+                                            <option value="2">Activate</option>
+                                            <option value="0">Deactivate</option>
+
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+                                <hr class="my-4">
+
+                                <button type="submit" class="col-2 d-flex btn btn-primary">
+                                    Update Info
+                                </button>
+
+
+                            </form>
+
+                        </div>
+
 
                     </div>
 
+                    <div class="card " style="background: #f3ffff">
+                        <div class="card-body">
+                            <form action="estate-update-tariff" method="post">
+                                @csrf
 
-                </div>
+                                <div class="row">
 
-                <div class="card " style="background: #f3ffff">
-                    <div class="card-body">
-                        <form action="estate-update-tariff" method="post">
-                            @csrf
+                                    <h6 class="d-flex justify-content-start my-4">Tariff Information</h6>
 
-                            <div class="row">
+                                    <div class="col-4">
+                                        <label class="my-2">Tariff Amount</label>
+                                        <input type="number" step="0.01" name="amount"
+                                               value="{{$tar->estate_tariff_cost ?? 0}}"
+                                               class="form-control"
+                                               required>
 
-                                <h6 class="d-flex justify-content-start my-4">Tariff Information</h6>
-
-                                <div class="col-4">
-                                    <label class="my-2">Tariff Amount</label>
-                                    <input type="number" step="0.01" name="amount" value="{{$tar->estate_tariff_cost}}"
-                                           class="form-control"
-                                           required>
-
-                                    <input hidden name="id" value="{{$org->id}}" class="form-control" required>
+                                        <input hidden name="id" value="{{$org->id}}" class="form-control" required>
 
 
-                                </div>
+                                    </div>
 
 
-                                <div class="col-4">
-                                    <label class="my-2">VAT</label>
-                                    <input type="number" step="0.01" name="vat" value="{{$tar->vat}}"
-                                           class="form-control"
-                                           required>
+                                    <div class="col-4">
+                                        <label class="my-2">VAT</label>
+                                        <input type="number" step="0.01" name="vat" value="{{$tar->vat ?? 0}}"
+                                               class="form-control"
+                                               required>
+
+
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <h6 class="d-flex justify-content-start my-4">MIN/MAX PURCHASE Information</h6>
+
+
+                                    <div class="col-4">
+                                        <label class="my-2">MIN Purchase</label>
+                                        <input type="number" step="0.01" name="min_pur" value="{{$tar->min_pur ?? 0}}"
+                                               class="form-control"
+                                               required>
+
+
+                                    </div>
+
+
+                                    <div class="col-4">
+                                        <label class="my-2">MAX Purchase</label>
+                                        <input type="number" step="0.01" name="max_pur" value="{{$tar->max_pur ?? 0}}"
+                                               class="form-control"
+                                               required>
+
+
+                                    </div>
 
 
                                 </div>
 
                                 <hr class="my-4">
 
-                                <h6 class="d-flex justify-content-start my-4">MIN/MAX PURCHASE Information</h6>
+                                <button type="submit" class="col-2 d-flex btn btn-primary">
+                                    Update
+                                </button>
 
 
-                                <div class="col-4">
-                                    <label class="my-2">MIN Purchase</label>
-                                    <input type="number" step="0.01" name="min_pur" value="{{$tar->min_pur}}"
-                                           class="form-control"
-                                           required>
-
-
-                                </div>
-
-
-                                <div class="col-4">
-                                    <label class="my-2">MAX Purchase</label>
-                                    <input type="number" step="0.01" name="max_pur" value="{{$tar->max_pur}}"
-                                           class="form-control"
-                                           required>
-
-
-                                </div>
-
-
-
-                            </div>
-
-                            <hr class="my-4">
-
-                            <button type="submit" class="col-2 d-flex btn btn-primary">
-                                Update
-                            </button>
-
-
-                        </form>
+                            </form>
+                        </div>
                     </div>
+
+
                 </div>
 
 
-            </div>
+                <div class="row">
+
+                    <div class="card" style="background: #d1fff1">
+
+                        <div class="card-body">
 
 
-            <div class="row">
+                            <div class="d-flex justify-content-between my-4">
+                                <h6 class="">Utilities Information</h6>
+                                <h6 class="mb-0">Total Utilities <span
+                                        class="badge text-bg-secondary">NGN {{number_format($total_utility, 2)}}</span>
+                                </h6>
 
-                <div class="card" style="background: #f3fffa">
-
-                    <div class="card-body" >
-
-                        <form action="estate-update-utilities" method="post">
-                            @csrf
-
-                            <div class="row">
-
-                                <div class="d-flex justify-content-between my-4">
-                                    <h6 class="">Utilities Information</h6>
-                                    <h6 class="mb-0">Total Utilities <span
-                                            class="badge text-bg-secondary">NGN {{number_format($total_utility, 2)}}</span>
-                                    </h6>
+                                @if($utl != null)
                                     @if($utl->duration != null)
                                         <h6 class="mb-0">Duration <span
-                                                class="badge text-bg-danger">{{strtoupper($utl->duration)}}</span></h6>
+                                                class="badge text-bg-danger">{{strtoupper($utl->duration)}}</span>
+                                        </h6>
                                     @else
                                         <h6 class="mb-0">Duration <span
-                                                class="badge text-bg-secondary">Set Duration</span></h6>
+                                                class="badge text-bg-secondary">Set Duration</span>
+                                        </h6>
                                     @endif
-                                </div>
 
-                                <div class="col-4">
-                                    <label class="my-2">Water</label>
-                                    <input type="text" name="water" value="{{$utl->water}}" class="form-control"
-                                           required>
-                                    <input hidden name="id" value="{{$org->id}}" class="form-control" required>
-
-                                </div>
-
-                                <div class="col-4">
-                                    <label class="my-2">Electricity</label>
-                                    <input type="text" name="eletricity" value="{{$utl->eletricity}}"
-                                           class="form-control"
-                                           required>
-
-                                </div>
-
-                                <div class="col-4">
-                                    <label class="my-2">Security</label>
-                                    <input type="text" name="security" value="{{$utl->security}}" class="form-control"
-                                           required>
-
-                                </div>
+                                @else
 
 
-                                <div class="col-4">
-                                    <label class="my-2">Waste</label>
-                                    <input type="text" name="waste" value="{{$utl->waste}}" class="form-control"
-                                           required>
-
-                                </div>
-
-                                <div class="col-4">
-                                    <label class="my-2">Cleaners</label>
-                                    <input type="text" name="cleaners" value="{{$utl->cleaners}}" class="form-control"
-                                           required>
-
-                                </div>
-
-                                <div class="col-4">
-                                    <label class="my-2">Gardner</label>
-                                    <input type="text" name="grardners" value="{{$utl->grardners}}" class="form-control"
-                                           required>
-
-                                </div>
-
-                                <div class="col-4">
-                                    <label class="my-2">Service Charge</label>
-                                    <input type="text" name="service_charge" value="{{$utl->service_charge}}"
-                                           class="form-control"
-                                           required>
-
-                                </div>
-
-
-                                <div class="col-4">
-                                    <label class="my-2">Duration</label>
-                                    <select type="text" name="duration" class="form-control" required>
-                                        @if($utl->duration != null)
-                                            <option value="{{$utl->duration}}">{{strtoupper($utl->duration)}}</option>
-                                        @else
-                                            <option value=" ">Set Duration</option>
-                                        @endif
-                                        <option value="daily">Daily</option>
-                                        <option value="daily">Daily</option>
-                                        <option value="weekly">Weekly</option>
-                                        <option value="monthly">Monthly</option>
-                                        <option value="quarterly">Quarterly</option>
-                                        <option value="annually">Annually</option>
-                                        <option value="onetime">OneTime</option>
-
-
-                                    </select>
-
-                                </div>
-
-
-                                <div class="col-4">
-                                    <label class="my-2">Status</label>
-                                    <select type="text" name="status" class="form-control" required>
-                                        <option value="2">Activate</option>
-                                        <option value="0">Deactivate</option>
-
-                                    </select>
-
-                                </div>
-
+                                @endif
                             </div>
 
-                            <hr class="my-4">
 
-                            <button type="submit" class="col-2 d-flex btn btn-primary">
-                                Update Utility Bills
-                            </button>
+                            <hr class="my-2">
 
 
-                        </form>
+                            @if($utility != null)
+
+                                <h6 class="my-3">Available Utilities</h6>
+
+                                @foreach($utility as $index => $data)
+
+                                    <form action="update-utility" method="get" class="row">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{$data->id}}"
+                                               required>
+                                        <div class="col-xl-4 col-sm-12 my-1">
+                                            <label class="my-1">Utility</label>
+                                            <input type="text" name="title" id="title_{{$index}}"
+                                                   class="form-control" value="{{$data->title}}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col-xl-4 col-sm-12 my-1">
+                                            <label class="my-1">Amount</label>
+                                            <input type="text" name="amount" id="amount_{{$index}}"
+                                                   class="form-control" value="{{$data->amount}}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col-xl-4 col-sm-12 my-4">
+                                            <button type="submit" class="btn btn-primary">Update
+                                            </button>
+                                            <a href="delete-utility?id={{$data->id}}"
+                                               class="btn btn-danger"
+                                               onsubmit="return confirmDelete();"> Delete</a>
+
+                                        </div>
+                                        <script>
+
+                                            function confirmDelete() {
+                                                return confirm('Are you sure you want to delete this item?');
+                                            }
+                                        </script>
+                                    </form>
+
+                                @endforeach
+
+                            @else
+                                <p>No utilities available.</p>
+                            @endif
+
+
+                            <hr class="my-2">
+
+
+                            <form id="utility-form" action="estate-update-utilities" method="post">
+                                @csrf
+
+                                <div class="row">
+
+
+                                    <div class="col-6 mb-3">
+                                        <h6 class="my-3">Add New Utility</h6>
+
+                                        <label class="my-2">Set Duration</label>
+                                        <select name="duration" required class="form-control">
+                                            <option value=" ">Choose Duration</option>
+                                            <option value="weekly">Weekly</option>
+                                            <option value="monthly">Monthly</option>
+                                            <option value="yearly">Yearly</option>
+
+                                        </select>
+                                    </div>
+
+                                    <!-- Container to hold dynamic fields -->
+                                    <div id="utility-fields"></div>
+
+                                    <!-- Add more button -->
+                                    <div class="col-12 my-4">
+                                        <button type="button" class="btn btn-success" id="add-more">
+                                            Add Utility
+                                        </button>
+                                    </div>
+
+                                    <!-- Hidden template for the new fields -->
+                                    <div id="template" class="d-none">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <label class="my-2">Title</label>
+                                                <input type="text" name="title[]"
+                                                       class="form-control"
+                                                       required>
+                                            </div>
+                                            <div class="col-4">
+                                                <label class="my-2">Amount</label>
+                                                <input type="text" name="amount[]"
+                                                       class="form-control"
+                                                       required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Hidden input to hold all the utilities data -->
+                                    <input type="hidden" id="utilities-data" name="utilities_data">
+
+                                    <hr class="my-4">
+
+                                    <!-- Save Button to submit the form -->
+                                    <button style="width: 200px" type="button"
+                                            class="btn btn-primary w-40" id="save">Save Utility
+                                    </button>
+                                </div>
+                            </form>
+
+                            <!-- JavaScript to handle adding fields and saving the data -->
+                            <script>
+                                let utilities = [];
+
+                                // Add More functionality
+                                document.getElementById('add-more').addEventListener('click', function () {
+                                    // Clone the template
+                                    var template = document.getElementById('template').cloneNode(true);
+                                    template.classList.remove('d-none');
+                                    template.removeAttribute('id');
+
+                                    // Append the cloned fields to the utility fields container
+                                    document.getElementById('utility-fields').appendChild(template);
+                                });
+
+                                // Save functionality
+                                document.getElementById('save').addEventListener('click', function () {
+                                    // Get all the dynamic fields
+                                    let titles = document.querySelectorAll('input[name="title[]"]');
+                                    let amounts = document.querySelectorAll('input[name="amount[]"]');
+
+                                    // Clear the previous utilities data
+                                    utilities = [];
+
+                                    // Loop through each input and store the data in an array
+                                    for (let i = 0; i < titles.length; i++) {
+                                        utilities.push({
+                                            title: titles[i].value,
+                                            amount: amounts[i].value
+                                        });
+                                    }
+
+                                    // Check the result in the console
+                                    console.log("Utilities Data: ", utilities);
+
+                                    // Save the data in a hidden input as a JSON string
+                                    document.getElementById('utilities-data').value = JSON.stringify(utilities);
+
+                                    // Debugging: Check if the hidden input is being populated
+                                    console.log("Hidden Input Value: ", document.getElementById('utilities-data').value);
+
+                                    // Now submit the form after setting the value
+                                    document.getElementById('utility-form').submit();
+                                });
+                            </script>
+
+
+                        </div>
 
 
                     </div>
-
 
                 </div>
 
 
             </div>
-
 
 
         </div>
+    @elseif(auth::user()->role == 1)
+    @elseif(auth::user()->role == 2)
+    @elseif(auth::user()->role == 3)
+    @elseif(auth::user()->role == 4)
+    @elseif(auth::user()->role == 5)
+    @else
+    @endif
 
 
-    </div> <!-- container-fluid -->
+    <!-- container-fluid -->
 
 @endsection

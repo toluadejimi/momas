@@ -11,7 +11,7 @@
 
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
-                        <h4 class="fs-18 fw-semibold m-0">Add New User</h4>
+                        <h4 class="fs-18 fw-semibold m-0">Add New Customer</h4>
                     </div>
                 </div>
 
@@ -22,35 +22,35 @@
 
                         <div class="card-body">
 
-                            <form action="add-new-user" method="post">
+                            <form action="add-new-customer" method="post">
                                 @csrf
 
                                 <div class="row">
 
                                     <h6 class="d-flex justify-content-start my-4">Customer Information</h6>
 
-                                    <div class="col-xl-3 col-sm-12">
+                                    <div class="col-3">
                                         <label class="my-2">First Name</label>
                                         <input type="text" name="first_name" class="form-control" required>
                                     </div>
 
-                                    <div class="col-xl-3 col-sm-12">
+                                    <div class="col-3">
                                         <label class="my-2">Last Name</label>
                                         <input type="text" name="last_name" class="form-control" required>
                                     </div>
 
-                                    <div class="col-xl-3 col-sm-12">
+                                    <div class="col-3">
                                         <label class="my-2">Email</label>
                                         <input type="email" name="email" class="form-control" required>
                                     </div>
 
-                                    <div class="col-xl-3 col-sm-12">
+                                    <div class="col-3">
                                         <label class="my-2">Phone</label>
                                         <input type="number" name="phone" class="form-control" required>
                                     </div>
 
 
-                                    <div class="col-xl-3 col-sm-12">
+                                    <div class="col-3">
                                         <label class="my-2">Estate</label>
                                         <select type="text" name="estate_id" class="form-control" required>
                                             <option value="1">None</option>
@@ -61,17 +61,17 @@
 
                                     </div>
 
-                                    <div class="col-xl-3 col-sm-12">
+                                    <div class="col-3">
                                         <label class="my-2">Address</label>
                                         <input type="text" name="address" class="form-control" required>
                                     </div>
 
-                                    <div class="col-xl-3 col-sm-12">
+                                    <div class="col-3">
                                         <label class="my-2">City</label>
                                         <input type="text" name="city" class="form-control" required>
                                     </div>
 
-                                    <div class="col-xl-3 col-sm-12">
+                                    <div class="col-3">
                                         <label class="my-2">State</label>
                                         <select type="text" name="state" class="form-control" required>
                                             <option disabled selected>--Select State--</option>
@@ -125,69 +125,71 @@
 
                                     <h6 class="d-flex justify-content-start my-2">Attach Meter</h6>
 
-                                    <div class="col-xl-3 col-sm-12" style="position: relative;">
+                                    <div class="col-6">
+                                        <div class="col-xl-3 col-sm-12" style="position: relative;">
 
-                                        <label class="my-2">Choose Meter</label>
-                                        <input type="text" id="searchMeter" placeholder="Type meter number..." class="form-control" required autocomplete="off">
-                                        <div id="meterResult" class="search-result"></div>
+                                            <label class="my-2">Choose Meter</label>
+                                            <input type="text" name="meterNo" id="searchMeter" placeholder="Type meter number..." class="form-control" required autocomplete="off">
 
+                                            <div id="meterResult" class="search-result"></div>
 
-                                        <script>
-                                            document.getElementById('searchMeter').addEventListener('keyup', function() {
-                                                let query = this.value;
-                                                console.log('User input:', query); // Log user input
+                                            <script>
+                                                document.getElementById('searchMeter').addEventListener('keyup', function() {
+                                                    let query = this.value;
+                                                    console.log('User input:', query); // Log user input
 
-                                                if (query.length > 2) { // Only search if input has more than 2 characters
-                                                    let xhr = new XMLHttpRequest();
-                                                    xhr.open('GET', '/search-meters?q=' + query, true); // Replace with the correct URL
+                                                    if (query.length > 2) { // Only search if input has more than 2 characters
+                                                        let xhr = new XMLHttpRequest();
+                                                        xhr.open('GET', '/search-meters?q=' + query, true); // Replace with the correct URL
 
-                                                    xhr.onreadystatechange = function() {
-                                                        if (xhr.readyState == 4 && xhr.status == 200) {
-                                                            console.log('Response received:', xhr.responseText); // Log the response
+                                                        xhr.onreadystatechange = function() {
+                                                            if (xhr.readyState == 4 && xhr.status == 200) {
+                                                                console.log('Response received:', xhr.responseText); // Log the response
 
-                                                            let meters = JSON.parse(xhr.responseText);
-                                                            let meterResultDiv = document.getElementById('meterResult');
-                                                            meterResultDiv.innerHTML = ''; // Clear previous results
+                                                                let meters = JSON.parse(xhr.responseText);
+                                                                let meterResultDiv = document.getElementById('meterResult');
+                                                                meterResultDiv.innerHTML = ''; // Clear previous results
 
-                                                            if (meters.length > 0) {
-                                                                meters.forEach(meter => {
-                                                                    let div = document.createElement('div');
-                                                                    div.textContent = meter.meterNo;
-                                                                    div.setAttribute('data-id', meter.id);
+                                                                if (meters.length > 0) {
+                                                                    meters.forEach(meter => {
+                                                                        let div = document.createElement('div');
+                                                                        div.textContent = meter.meterNo;
+                                                                        div.setAttribute('data-id', meter.id);
 
-                                                                    // Add click event to populate the input with the selected suggestion
-                                                                    div.addEventListener('click', function() {
-                                                                        document.getElementById('searchMeter').value = meter.meterNo;
-                                                                        meterResultDiv.style.display = 'none'; // Hide suggestions
+                                                                        // Add click event to populate the input with the selected suggestion
+                                                                        div.addEventListener('click', function() {
+                                                                            document.getElementById('searchMeter').value = meter.meterNo;
+                                                                            meterResultDiv.style.display = 'none'; // Hide suggestions
+                                                                        });
+
+                                                                        meterResultDiv.appendChild(div);
                                                                     });
-
-                                                                    meterResultDiv.appendChild(div);
-                                                                });
-                                                                meterResultDiv.style.display = 'block'; // Show results
-                                                            } else {
-                                                                let noResultDiv = document.createElement('div');
-                                                                noResultDiv.textContent = 'No meters found';
-                                                                noResultDiv.style.color = 'red';
-                                                                meterResultDiv.appendChild(noResultDiv);
-                                                                meterResultDiv.style.display = 'block'; // Show the "No meters found" message
+                                                                    meterResultDiv.style.display = 'block'; // Show results
+                                                                } else {
+                                                                    let noResultDiv = document.createElement('div');
+                                                                    noResultDiv.textContent = 'No meters found';
+                                                                    noResultDiv.style.color = 'red';
+                                                                    meterResultDiv.appendChild(noResultDiv);
+                                                                    meterResultDiv.style.display = 'block'; // Show the "No meters found" message
+                                                                }
+                                                            } else if (xhr.readyState == 4) {
+                                                                console.log('Error: Status', xhr.status); // Log error status
                                                             }
-                                                        } else if (xhr.readyState == 4) {
-                                                            console.log('Error: Status', xhr.status); // Log error status
-                                                        }
-                                                    };
+                                                        };
 
-                                                    xhr.onerror = function() {
-                                                        console.error('Request error'); // Log any request errors
-                                                    };
+                                                        xhr.onerror = function() {
+                                                            console.error('Request error'); // Log any request errors
+                                                        };
 
-                                                    xhr.send();
-                                                } else {
-                                                    document.getElementById('meterResult').style.display = 'none'; // Hide if input is too short
-                                                }
-                                            });
-                                        </script>
+                                                        xhr.send();
+                                                    } else {
+                                                        document.getElementById('meterResult').style.display = 'none'; // Hide if input is too short
+                                                    }
+                                                });
+                                            </script>
 
 
+                                        </div>
                                     </div>
 
 
@@ -202,8 +204,8 @@
                                     <hr class="my-4">
                                     <h6 class="d-flex justify-content-start my-2">Login Information</h6>
 
-                                    <div class="col-xl-4 col-sm-12">
-                                        <label class="my-2">User Role</label>
+                                    <div class="col-4">
+                                        <label class="my-2">Customer Role</label>
                                         <select type="text" name="role" class="form-control" required>
                                             <option value="2">Customer</option>
                                             <option value="1">Admin</option>
@@ -215,12 +217,12 @@
 
                                     </div>
 
-                                    <div class="col-xl-4 col-sm-12">
+                                    <div class="col-4">
                                         <label class="my-2">Password</label>
                                         <input type="password" name="password" value="123456" class="form-control" required>
                                     </div>
 
-                                    <div class="col-xl-4 col-sm-12">
+                                    <div class="col-4">
                                         <label class="my-2">Confirm Password</label>
                                         <input type="password" name="password_confirmation" value="123456" class="form-control" required>
 
@@ -265,7 +267,7 @@
 
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
-                        <h4 class="fs-18 fw-semibold m-0">Add New User</h4>
+                        <h4 class="fs-18 fw-semibold m-0">Add New Customer</h4>
                     </div>
                 </div>
 
@@ -276,7 +278,7 @@
 
                         <div class="card-body">
 
-                            <form action="add-new-user" method="post">
+                            <form action="add-new-customer" method="post">
                                 @csrf
 
                                 <div class="row">
@@ -377,15 +379,12 @@
 
                                     <div class="col-3">
                                         <label class="my-2">Choose Meter</label>
-                                        <div>
-                                            <select style="border-color:rgb(0, 11, 136); padding: 10px" class="w-100"  id="dropdownMenu" class="dropdown-content" name="meterid">
-                                                <option
-                                                    value="{{$user->meterid ?? "id"}}">{{$user->meterNo ?? "Select Meter"}}</option>
-                                                @foreach($meters as $data)
-                                                    <option value="{{$data->id}}">{{$data->meterNo}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                        <select type="text" name="meterid" class="form-control" required>
+                                            <option value=" "> Select meter </option>
+                                            @foreach($meters as $data)
+                                                <option value="{{$data->id}}">{{$data->meterNo}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
 
@@ -402,7 +401,7 @@
                                     <h6 class="d-flex justify-content-start my-2">Login Information</h6>
 
                                     <div class="col-4">
-                                        <label class="my-2">User Role</label>
+                                        <label class="my-2">Customer Role</label>
                                         <select type="text" name="role" class="form-control" required>
                                             <option value="2">Customer</option>
                                         </select>

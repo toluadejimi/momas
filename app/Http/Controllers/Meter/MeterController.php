@@ -15,6 +15,17 @@ use Illuminate\Support\Facades\Auth;
 
 class MeterController extends Controller
 {
+
+
+
+
+    public function searchMeters(request $request)
+    {
+        $query = $request->get('q');
+        $meters = Meter::where('meterNo', 'LIKE', '%' . $query . '%')->where('user_id', null)->get();
+        return response()->json($meters);
+    }
+
     public function validate_meter(request $request)
     {
 
@@ -395,9 +406,28 @@ class MeterController extends Controller
 
     public function update_meter(request $request)
     {
-        $m_no = Meter::where('id', $request->meterid)->first()->meterNo;
-        User::where('id', $request->user_id)->update(['meterNo' => $m_no, 'meterid' => $request->meterid]);
-        return back()->with('message', "Meter Attached  successfully");
+
+
+
+
+
+        if($request->meterNo !== null){
+            $m_id = Meter::where('meterNo', $request->meterNo)->first()->id ?? null;
+
+            if($m_id == null){
+                return back()->with('error', "Meter not found, contact admin");
+            }
+
+            Meter::where('meterNo', $request->old_value)->update(['user_id' => null]);
+
+            User::where('id', $request->user_id)->update(['meterNo' => $request->meterNo, 'meterid' => $m_id]);
+
+            Meter::where('meterNo', $request->meterNo)->update(['user_id' => $request->user_id]);
+
+            return back()->with('message', "Meter Attached  successfully");
+
+        }
+
 
     }
 

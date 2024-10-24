@@ -56,7 +56,7 @@
                                     </div>
 
                                     <div class="d-flex align-items-center">
-                                        <h3 class="mb-0 fs-24 text-black me-2">{{number_format($meters, 2)}}</h3>
+                                        <h3 class="mb-0 fs-24 text-black me-2">{{$meters}}</h3>
 
                                     </div>
 
@@ -85,7 +85,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5"
-                                                        id="staticBackdropLabel">Import Meter</h1>
+                                                        id="staticBackdropLabel">Import Bulk Meter</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
 
@@ -94,7 +94,7 @@
 
                                                     <div class="modal-body">
 
-                                                        <p>CLick here to download the sample of file to upload <a href="{{url('')}}/public/assets/meterdataimport.csv">Download here</a></p>
+                                                        <p>Click here  to download the sample of file to upload <a href="{{url('')}}/public/assets/meterdataimport.csv">Download here</a></p>
                                                         <label class="mt-3">Choose File</label>
                                                         <input type="file"  class="form-control mb-3" name="file" required>
 
@@ -102,7 +102,7 @@
 
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary">Import Meters</button>
+                                                        <button type="submit" class="btn btn-primary">Import bulk Meters</button>
                                                     </div>
 
                                                 </form>
@@ -262,7 +262,7 @@
                                     </div>
 
                                     <div class="d-flex align-items-center">
-                                        <h3 class="mb-0 fs-24 text-black me-2">{{number_format($meters, 2)}}</h3>
+                                        <h3 class="mb-0 fs-24 text-black me-2">{{$meters}}</h3>
 
                                     </div>
 
@@ -291,7 +291,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5"
-                                                        id="staticBackdropLabel">Import Meter</h1>
+                                                        id="staticBackdropLabel">Import Bulk Meter</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
 
@@ -300,7 +300,7 @@
 
                                                     <div class="modal-body">
 
-                                                        <p>CLick here to download the sample of file to upload <a href="{{url('')}}/public/assets/meterdataimport.csv">Download here</a></p>
+                                                        <p>Click here  to download the sample of file to upload <a href="{{url('')}}/public/assets/meterdataimport.csv">Download here</a></p>
                                                         <label class="mt-3">Choose File</label>
                                                         <input type="file"  class="form-control mb-3" name="file" required>
 
@@ -308,7 +308,7 @@
 
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary">Import Meters</button>
+                                                        <button type="submit" class="btn btn-primary">Import Bulk Meters</button>
                                                     </div>
 
                                                 </form>

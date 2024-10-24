@@ -58,7 +58,7 @@
                                     </div>
 
                                     <div class="d-flex align-items-center">
-                                        <h3 class="mb-0 fs-24 text-black me-2">{{number_format($tarifftariffis, 2)}}</h3>
+                                        <h3 class="mb-0 fs-24 text-black me-2">{{$tarifftariffis}}</h3>
 
                                     </div>
 
@@ -210,7 +210,7 @@
                                     </div>
 
                                     <div class="d-flex align-items-center">
-                                        <h3 class="mb-0 fs-24 text-black me-2">{{number_format($tarifftariffis, 2)}}</h3>
+                                        <h3 class="mb-0 fs-24 text-black me-2">{{$tarifftariffis}}</h3>
 
                                     </div>
 

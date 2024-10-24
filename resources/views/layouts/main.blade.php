@@ -18,6 +18,25 @@
     <!-- Icons -->
     <link href="{{url('')}}/public/assets/ass/css/icons.min.css" rel="stylesheet" type="text/css"/>
 
+    <style>
+        .search-result {
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+            display: none; /* Initially hidden */
+            position: absolute;
+            background-color: white;
+            width: 100%;
+        }
+        .search-result div {
+            padding: 8px;
+            cursor: pointer;
+        }
+        .search-result div:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+
 </head>
 
 <!-- body start -->

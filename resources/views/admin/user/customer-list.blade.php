@@ -84,7 +84,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5"
-                                                        id="staticBackdropLabel">Import Customers</h1>
+                                                        id="staticBackdropLabel">Import  Bulk Customers</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
 
@@ -93,7 +93,7 @@
 
                                                     <div class="modal-body">
 
-                                                        <p>Click here to download the sample of file to upload <a href="{{url('')}}/public/assets/importcsg.csv" download="importcsg.csv" >Download here</a></p>
+                                                        <p>Click here  to download the sample of file to upload <a href="{{url('')}}/public/assets/importcsg.csv" download="importcsg.csv" >Download here</a></p>
                                                         <label class="mt-3">Choose File</label>
                                                         <input type="file"  class="form-control mb-3" name="file" required>
 
@@ -101,7 +101,7 @@
 
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary">Import Customers</button>
+                                                        <button type="submit" class="btn btn-primary">Import  Bulk Customers</button>
                                                     </div>
 
                                                 </form>
@@ -121,7 +121,7 @@
                                         <div class="justify-content-end">
                                             <a href="#" class="btn btn-primary text-white " data-bs-toggle="modal"
                                                data-bs-target="#staticBackdrop">Import Bulk Customers</a>
-                                            <a href="new-user" class="btn btn-primary text-white">Add new</a>
+                                            <a href="new-customer" class="btn btn-primary text-white">Add new</a>
                                         </div>
                                     </div>
 
@@ -140,7 +140,7 @@
                                         <th scope="col" class="cursor-pointer">Last Name</th>
                                         <th scope="col" class="cursor-pointer">Phone</th>
                                         <th scope="col" class="cursor-pointer">Email</th>
-                                        <th scope="col" class="cursor-pointer">Role</th>
+                                        <th scope="col" class="cursor-pointer">Estate</th>
                                         <th scope="col" class="cursor-pointer">Status</th>
                                         <th scope="col" class="cursor-pointer desc">Date Registered</th>
                                         @if(auth::user()->role == 0)
@@ -159,20 +159,7 @@
                                             <td><a href="view-user?id={{$data->id}}">{{$data->last_name}}</a></td>
                                             <td>{{$data->phone}}</td>
                                             <td>{{$data->email}}</td>
-                                            <td>
-                                                @if($data->role == 2)
-                                                    <span class="badge text-bg-primary">Customer</span>
-                                                @elseif($data->role == 3)
-                                                    <span class="badge text-bg-dark">Estate Admin</span>
-                                                @elseif($data->role == 0)
-                                                    <span class="badge text-bg-dark">Super Admin</span>
-                                                @elseif($data->role == 1)
-                                                    <span class="badge text-bg-dark"> Admin</span>
-                                                @elseif($data->role == 4)
-                                                    <span class="badge text-bg-warning">Estate Staff</span>
-                                                @endif
-
-                                            </td>
+                                            <td>{{$data->estate_name}}</td>
 
                                             <td>
                                                 @if($data->status == 2)
@@ -304,7 +291,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5"
-                                                        id="staticBackdropLabel">Import Customers</h1>
+                                                        id="staticBackdropLabel">Import  Bulk Customers</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
 
@@ -313,7 +300,7 @@
 
                                                 <div class="modal-body">
 
-                                                    <p>Click here to download the sample of file to upload <a href="{{url('')}}/public/assets/importcsg.csv" download="importcsg.csv" >Download here</a></p>
+                                                    <p>Click here  to download the sample of file to upload <a href="{{url('')}}/public/assets/importcsg.csv" download="importcsg.csv" >Download here</a></p>
                                                     <label class="mt-3">Choose File</label>
                                                     <input type="file"  class="form-control mb-3" name="file" required>
 
@@ -321,7 +308,7 @@
 
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Import Customers</button>
+                                                    <button type="submit" class="btn btn-primary">Import  Bulk Customers</button>
                                                 </div>
 
                                                 </form>
@@ -341,7 +328,7 @@
                                         <div class="justify-content-end">
                                             <a href="#" class="btn btn-primary text-white " data-bs-toggle="modal"
                                                data-bs-target="#staticBackdrop">Import Bulk Customers</a>
-                                            <a href="new-user" class="btn btn-primary text-white">Add new</a>
+                                            <a href="new-customer" class="btn btn-primary text-white">Add new</a>
                                         </div>
                                     </div>
 

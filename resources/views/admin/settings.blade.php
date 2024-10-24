@@ -3,8 +3,6 @@
 
     @if(auth::user()->role == 0)
         <div class="content">
-
-            <!-- Start Content-->
             <div class="container-fluid">
 
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">

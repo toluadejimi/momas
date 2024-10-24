@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Estate;
+use App\Models\Feature;
+use App\Models\Meter;
+use App\Models\Setting;
 use App\Models\Tariff;
+use App\Models\User;
 use App\Models\Utitlity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,11 +46,50 @@ class EstateController extends Controller
     public function estate_view(request $request)
     {
 
-        $data['org'] = Estate::where('id', $request->id)->first();
-        $data['tar'] = Tariff::where('id', $request->id)->first();
-        $data['utl'] = Utitlity::where('id', $request->id)->first();
-        $data['total_utility'] = $data['utl']->water + $data['utl']->eletricity +  $data['utl']->security + $data['utl']->waste + $data['utl']->cleaners + $data['utl']->grardners + $data['utl']->service_charge;
 
+
+        if(auth::user()->role == 0){
+
+            $data['org'] = Estate::where('id', $request->id)->first();
+            $data['tar'] = Tariff::where('estate_id', $request->id)->first();
+            $data['utl'] = Utitlity::where('estate_id', $request->id)->first() ?? null;
+            $data['total_utility'] = Utitlity::where('estate_id', $request->id)->sum('amount');
+            $data['utility'] = Utitlity::where('estate_id', $request->id)->get() ?? null;
+            $data['total_meters'] = Meter::where('estate_id', $request->id)->count() ?? null;
+            $data['customers'] = User::where('estate_id', $request->id)->count() ?? null;
+
+
+
+
+
+
+
+
+        } elseif(auth::user()->role == 1){
+
+
+        } elseif(auth::user()->role == 2){
+
+        } elseif(auth::user()->role == 3){
+
+
+
+            $data['org'] = Estate::where('id', auth::user()->estate_id)->first();
+            $data['tar'] = Tariff::where('estate_id', auth::user()->estate_id)->first();
+            $data['utl'] = Utitlity::where('estate_id', auth::user()->estate_id)->first() ?? null;
+            $data['total_utility'] = Utitlity::where('estate_id', auth::user()->estate_id)->sum('amount');
+
+
+            $data['utility'] = Utitlity::where('estate_id', auth::user()->estate_id)->get() ?? null;
+
+
+        } elseif(auth::user()->role == 4){
+
+        } elseif(auth::user()->role == 5){
+
+        } else{
+
+        }
 
         return view('admin/estate/view', $data);
     }

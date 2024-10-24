@@ -29,7 +29,7 @@ Route::any('logout', [AuthController::class, 'log_out']);
 Route::post('verify-code', [AuthController::class, 'verify_code']);
 
 
-
+Route::get('/search-meters', [MeterController::class, 'searchMeters']);
 
 
 
@@ -68,7 +68,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
     Route::get('customers', [DashboardContoller::class, 'list_customers']);
 
     Route::get('new-user', [DashboardContoller::class, 'new_user']);
+    Route::get('new-customer', [DashboardContoller::class, 'new_customer']);
     Route::post('add-new-user', [DashboardContoller::class, 'add_new_user']);
+    Route::post('add-new-customer', [DashboardContoller::class, 'add_new_customer']);
+
     Route::get('user-delete', [DashboardContoller::class, 'delete_user']);
     Route::get('view-user', [DashboardContoller::class, 'view_user']);
     Route::post('update-user', [DashboardContoller::class, 'update_user']);
@@ -117,7 +120,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
     Route::get('utility-store', [DashboardContoller::class, 'utility_store']);
     Route::get('utility-update', [DashboardContoller::class, 'utility_update']);
     Route::get('utility-delete', [DashboardContoller::class, 'utility_delete']);
-
 
 
     Route::get('meter-list', [MeterController::class, 'list_meter']);

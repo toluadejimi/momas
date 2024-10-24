@@ -167,6 +167,97 @@ class DashboardContoller extends Controller
     }
 
 
+    public function new_customer()
+    {
+
+
+
+        if(auth::user()->role == 0){
+
+            $data['estate'] = Estate::all();
+            $data['meters'] = Meter::all();
+            return view('admin/user/new-customer', $data);
+
+
+        } elseif(auth::user()->role == 1){
+
+
+        } elseif(auth::user()->role == 2){
+
+        } elseif(auth::user()->role == 3){
+
+            $data['estate'] = Estate::where('id', auth::user()->estate_id)->first();
+            $data['meters'] = Meter::all();
+
+            return view('admin/user/new-customer', $data);
+
+
+        } elseif(auth::user()->role == 4){
+
+        } elseif(auth::user()->role == 5){
+
+        } else{
+
+        }
+
+
+
+    }
+
+
+    public function add_new_customer(request $request)
+    {
+
+
+        $usr_email = User::where('email', $request->email)->first()->email ?? null;
+        $usr_phone = User::where('email', $request->email)->first()->phone ?? null;
+
+        if($usr_email == null && $usr_phone == null){
+
+
+
+            $estate_name = Estate::where('id', $request->estate_id)->first()->title;
+            $usr = new User();
+            $usr->first_name = $request->first_name;
+            $usr->last_name = $request->last_name;
+            $usr->phone = $request->phone;
+            $usr->email = $request->email;
+            $usr->role = $request->role;
+            $usr->estate_id = $request->estate_id;
+            $usr->estate_name = $estate_name;
+            $usr->meterNo = $request->meterNo;
+            $usr->meterType = $request->meterType;
+            $usr->lga = $request->lga;
+            $usr->state = $request->state;
+            $usr->hno = $request->hno;
+            $usr->address = $request->address;
+            $usr->city = $request->city;
+            $usr->status = 2;
+            $usr->password = bcrypt($request->password);
+            $usr->save();
+
+
+
+            if($request->meterNo !== null){
+                $m_id = Meter::where('meterNo', $request->meterNo)->first()->id;
+                User::where('id', $usr->id)->update(['meterNo' => $request->meterNo, 'meterid' => $m_id]);
+                Meter::where('meterNo', $request->meterNo)->update(['user_id' => $usr->id]);
+            }
+
+            return redirect('admin/customers')->with('message', "Customer created successfully");
+        }else{
+
+
+
+            return redirect('admin/customers')->with('error', "Customer already  exist");
+
+        }
+
+
+    }
+
+
+
     public function add_new_user(request $request)
     {
 
@@ -199,8 +290,15 @@ class DashboardContoller extends Controller
             $usr->save();
 
 
-            $m_no = Meter::where('id', $request->meterid)->first()->meterNo;
-            User::where('id', $usr->id)->update(['meterNo' => $m_no, 'meterid' => $request->meterid]);
+            if($request->meterNo !== null){
+                $m_id = Meter::where('meterNo', $request->meterNo)->first()->id;
+                User::where('id', $usr->id)->update(['meterNo' => $request->meterNo, 'meterid' => $m_id]);
+
+                Meter::where('meterNo', $request->meterNo)->update(['user_id' => $usr->id]);
+
+            }
+
+
 
             return redirect('admin/users-list')->with('message', "User created successfully");
         }else{
@@ -407,9 +505,6 @@ class DashboardContoller extends Controller
         $data['vending'] = MeterToken::where('user_id', $request->id)->paginate(10);
         $data['meters'] = Meter::all();
 
-
-
-
         return view('admin/user/view', $data);
     }
 
@@ -434,6 +529,7 @@ class DashboardContoller extends Controller
     public function update_user(request $request)
     {
 
+
             User::where('email', $request->email)->update([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -441,6 +537,7 @@ class DashboardContoller extends Controller
                 'address' => $request->addreess,
                 'city' => $request->city,
                 'lga' => $request->lga,
+                'status' => $request->status,
             ]);
 
 
