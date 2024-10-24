@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Estate;
 
 use App\Http\Controllers\Controller;
 use App\Models\Estate;
+use App\Models\Meter;
 use App\Models\Token;
 use App\Models\User;
 use Carbon\Carbon;
@@ -135,6 +136,29 @@ class EstateController extends Controller
 
 
     }
+
+
+    public function estate_deactivate(request $request)
+    {
+
+        Estate::where('id', $request->id)->update(['status' => 0]);
+
+        return back()->with('message', "Estate Deactivated successfully");
+
+
+    }
+
+
+    public function estate_activate(request $request)
+    {
+
+        Estate::where('id', $request->id)->update(['status' => 2]);
+
+        return back()->with('message', "Estate Activated successfully");
+
+
+    }
+
 
 
 

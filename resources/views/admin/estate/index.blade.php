@@ -95,6 +95,8 @@
                                     <th scope="col" class="cursor-pointer">Lga</th>
                                     <th scope="col" class="cursor-pointer">Status</th>
                                     <th scope="col" class="cursor-pointer desc">Action</th>
+                                    <th scope="col" class="cursor-pointer desc">Action</th>
+
 
                                 </tr>
                                 </thead>
@@ -124,6 +126,28 @@
                                                 return confirm('Are you sure you want to delete this item?');
                                             }
                                         </script>
+
+
+                                        @if($data->status == 2)
+                                            <td><a href="estate-deactivate?id={{$data->id}}"  onclick="return confirmupdate();" class="btn btn-warning">Deactivate Estate</a>
+
+                                                <script>
+                                                    function confirmupdate() {
+                                                        return confirm('Are you sure you want to deactivate this estate?');
+                                                    }
+                                                </script>
+                                            </td>
+                                        @else
+
+                                            <td><a href="estate-activate?id={{$data->id}}"  onclick="return confirmupdate();" class="btn btn-primary">Activate Estate</a>
+
+                                                <script>
+                                                    function confirmupdate() {
+                                                        return confirm('Are you sure you want to activate this estate?');
+                                                    }
+                                                </script>
+                                            </td>
+                                        @endif
 
                                     </tr>
 

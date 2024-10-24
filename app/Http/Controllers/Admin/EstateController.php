@@ -36,6 +36,9 @@ class EstateController extends Controller
 
         $org = new estate();
         $org->title = $request->title;
+        $org->state = $request->state;
+        $org->lga = $request->lga;
+        $org->city = $request->city;
         $org->status = 2;
         $org->save();
 
@@ -163,6 +166,30 @@ class EstateController extends Controller
 
 
         return redirect()->back()->with('success', 'Utilities updated successfully');
+
+
+    }
+
+
+
+
+    public function estate_deactivate(request $request)
+    {
+
+        Estate::where('id', $request->id)->update(['status' => 0]);
+
+        return back()->with('message', "Estate Deactivated successfully");
+
+
+    }
+
+
+    public function estate_activate(request $request)
+    {
+
+        Estate::where('id', $request->id)->update(['status' => 2]);
+
+        return back()->with('message', "Estate Activated successfully");
 
 
     }

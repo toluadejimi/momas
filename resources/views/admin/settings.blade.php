@@ -365,7 +365,7 @@
 
                                                 <div class="col-4">
                                                     <label class="my-2">Estate Name</label>
-                                                    <input type="text" name="title" value="{{$org->title}}"
+                                                    <input type="text" readonly name="title" value="{{$org->title}}"
                                                            class="form-control"
                                                            required>
                                                     <input hidden name="id" value="{{$org->id}}" class="form-control"
@@ -399,11 +399,12 @@
 
                                                 <div class="col-3">
                                                     <label class="my-2">Status</label>
-                                                    <select type="text" name="status" class="form-control" required>
-                                                        <option value="2">Activate</option>
-                                                        <option value="0">Deactivate</option>
+                                                    @if($org->status == 2)
+                                                        <input type="text" readonly  value="Active" class="form-control" required>
+                                                    @else
+                                                        <input type="text" readonly  value="Inactive" class="form-control" required>
+                                                    @endif
 
-                                                    </select>
 
                                                 </div>
 

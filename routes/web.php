@@ -99,6 +99,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
 
 
 
+    Route::get('estate-activate', [EstateController::class, 'estate_activate']);
+    Route::get('estate-deactivate', [EstateController::class, 'estate_deactivate']);
+
+
+
 
     //Organization
     Route::get('organization', [DashboardContoller::class, 'organization_index']);
