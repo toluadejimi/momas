@@ -553,50 +553,41 @@
                                                         </div>
                                                         <div class="col-4">
                                                             <label class="my-2">Amount</label>
-                                                            <input type="text" name="amount[]"
+                                                            <input type="number" name="amount[]"
                                                                    class="form-control"
                                                                    required>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <!-- Hidden input to hold all the utilities data -->
                                                 <input type="hidden" id="utilities-data" name="utilities_data">
 
                                                 <hr class="my-4">
 
-                                                <!-- Save Button to submit the form -->
                                                 <button style="width: 200px" type="button"
                                                         class="btn btn-primary w-40" id="save">Save Utility
                                                 </button>
                                             </div>
                                         </form>
 
-                                        <!-- JavaScript to handle adding fields and saving the data -->
                                         <script>
                                             let utilities = [];
 
-                                            // Add More functionality
                                             document.getElementById('add-more').addEventListener('click', function () {
-                                                // Clone the template
                                                 var template = document.getElementById('template').cloneNode(true);
                                                 template.classList.remove('d-none');
                                                 template.removeAttribute('id');
 
-                                                // Append the cloned fields to the utility fields container
                                                 document.getElementById('utility-fields').appendChild(template);
                                             });
 
-                                            // Save functionality
+
                                             document.getElementById('save').addEventListener('click', function () {
-                                                // Get all the dynamic fields
                                                 let titles = document.querySelectorAll('input[name="title[]"]');
                                                 let amounts = document.querySelectorAll('input[name="amount[]"]');
 
-                                                // Clear the previous utilities data
                                                 utilities = [];
 
-                                                // Loop through each input and store the data in an array
                                                 for (let i = 0; i < titles.length; i++) {
                                                     utilities.push({
                                                         title: titles[i].value,
@@ -604,16 +595,9 @@
                                                     });
                                                 }
 
-                                                // Check the result in the console
                                                 console.log("Utilities Data: ", utilities);
-
-                                                // Save the data in a hidden input as a JSON string
                                                 document.getElementById('utilities-data').value = JSON.stringify(utilities);
-
-                                                // Debugging: Check if the hidden input is being populated
                                                 console.log("Hidden Input Value: ", document.getElementById('utilities-data').value);
-
-                                                // Now submit the form after setting the value
                                                 document.getElementById('utility-form').submit();
                                             });
                                         </script>

@@ -438,9 +438,6 @@
                                                             return confirm('Are you sure you want to activate this meter?');
                                                         }
                                                     </script>
-
-
-
                                                 </td>
                                             @endif
 
