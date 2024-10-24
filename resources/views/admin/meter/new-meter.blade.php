@@ -317,7 +317,7 @@
                                     <div class="col-3">
                                         <label class="my-2">Estate</label>
                                         <input type="text" value="{{$estate->title}}" class="form-control" required>
-                                        <input type="text" name="estate_id"  hidden >
+                                        <input type="text" value="{{$estate->id}}" name="estate_id"  hidden >
 
                                     </div>
 
@@ -378,13 +378,13 @@
 
                                     <div class="col-3" id="oldTariffDualContainer" style="display: none;">
                                         <label class="my-2">Old Tariff  Dual</label>
-                                        <input type="text" name="OldTariffDual" class="form-control" required>
+                                        <input type="text" name="OldTariffDual" class="form-control" >
                                     </div>
 
 
                                     <div class="col-3" id="newtar" style="display: none;">
                                         <label class="my-2">New Tariff  Dual</label>
-                                        <input type="text" name="NewTariffDual" class="form-control" required>
+                                        <input type="text" name="NewTariffDual" class="form-control" >
                                     </div>
 
 
@@ -411,7 +411,7 @@
 
                                     <div class="col-3"  id="newTariffDualContainer" style="display: none;">
                                         <label class="my-2">New SGC Dual</label>
-                                        <input type="text" name="NewSGCDual" class="form-control" required>
+                                        <input type="text" name="NewSGCDual" class="form-control" >
                                     </div>
 
 
