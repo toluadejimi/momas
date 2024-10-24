@@ -32,6 +32,14 @@ class AuthController extends Controller
         if($get_user == null){
             return back()->with('error', "User Not Found");
         }
+
+
+        $get_status = User::where('email', $request->email)->first()->status ?? null;
+        if($get_status == 0){
+            return back()->with('error', "Account deactivated, contact admin");
+        }
+
+
 //
 //        if($get_user->role != 0 ){
 //            return back()->with('error', "You dont have permission");
