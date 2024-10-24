@@ -310,7 +310,7 @@ class MeterController extends Controller
     {
 
         $data['meters'] = Meter::count();
-        $data['meter_lists'] = Meter::paginate('20');
+        $data['meter_lists'] = Meter::latest()->paginate('20');
         return view('admin/meter/meter-lists', $data);
     }
 
