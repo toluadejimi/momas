@@ -44,17 +44,17 @@ class CustomersImport implements ToModel, WithHeadingRow
             return new User([
 
 
-                'first_name' => $row['first_name'],
-                'last_name' => $row['last_name'],
+                'first_name' => $row['firstname'],
+                'last_name' => $row['lastname'],
                 'email' => $row['email'],
-                'meterNo' => $row['meterNo'],
-                'meterType' => $row['meterType'],
+                'meterNo' => $row['meterno'],
+                'meterType' => $row['metertype'],
                 'address' => $row['address'],
                 'city' => $row['city'],
                 'lga' => $row['lga'],
                 'state' => $row['state'],
-                'estate_name' => $row['estate_name'],
-                'estate_id' => $row['estate_id'],
+                'estate_name' => $row['estatename'],
+                'estate_id' => $row['estateid'],
                 'phone' => $row['phone'],
                 'role' => 3,
                 "paswword" => bcrypt('123456')
