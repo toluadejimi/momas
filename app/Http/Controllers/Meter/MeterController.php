@@ -310,7 +310,7 @@ class MeterController extends Controller
     {
 
         $data['meters'] = Meter::count();
-        $data['meter_lists'] = Meter::latest()->paginate('20');
+        $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->paginate('20');
         return view('admin/meter/meter-lists', $data);
     }
 
@@ -320,7 +320,6 @@ class MeterController extends Controller
 
 
         if(auth::user()->role == 0){
-
 
             $data['estate'] = Estate::where('status', 2)->get();
             $data['transformer'] = Transformer::latest()->where('status', 2)->get();
