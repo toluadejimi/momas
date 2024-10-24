@@ -67,6 +67,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
     Route::get('users-list', [DashboardContoller::class, 'list_users']);
     Route::get('customers', [DashboardContoller::class, 'list_customers']);
 
+
+    Route::get('user-activate', [DashboardContoller::class, 'user_activate']);
+    Route::get('user-deactivate', [DashboardContoller::class, 'user_deactivate']);
+
+
     Route::get('new-user', [DashboardContoller::class, 'new_user']);
     Route::get('new-customer', [DashboardContoller::class, 'new_customer']);
     Route::post('add-new-user', [DashboardContoller::class, 'add_new_user']);

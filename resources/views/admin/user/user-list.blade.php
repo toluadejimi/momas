@@ -108,6 +108,9 @@
                                             <th scope="col" class="cursor-pointer desc">Action</th>
                                         @endif
 
+                                        <th scope="col" class="cursor-pointer desc">Action</th>
+
+
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -154,6 +157,33 @@
                                                             return confirm('Are you sure you want to delete this item?');
                                                         }
                                                     </script>
+                                                </td>
+                                            @endif
+
+                                            @if($data->status == 2)
+                                                <td><a href="user-deactivate?id={{$data->id}}"  onclick="return confirmupdate();" class="btn btn-warning">Deactivate User</a>
+
+                                                    <script>
+                                                        function confirmupdate() {
+                                                            return confirm('Are you sure you want to deactivate this user?');
+                                                        }
+                                                    </script>
+
+
+
+                                                </td>
+                                            @else
+
+                                                <td><a href="user-activate?id={{$data->id}}"  onclick="return confirmupdate();" class="btn btn-primary">Activate User</a>
+
+                                                    <script>
+                                                        function confirmupdate() {
+                                                            return confirm('Are you sure you want to activate this user?');
+                                                        }
+                                                    </script>
+
+
+
                                                 </td>
                                             @endif
 
@@ -470,6 +500,9 @@
                                             <th scope="col" class="cursor-pointer desc">Action</th>
                                         @endif
 
+                                        <th scope="col" class="cursor-pointer desc">Action</th>
+
+
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -516,6 +549,33 @@
                                                             return confirm('Are you sure you want to delete this item?');
                                                         }
                                                     </script>
+                                                </td>
+                                            @endif
+
+                                            @if($data->status == 2)
+                                                <td><a href="user-deactivate?id={{$data->id}}"  onclick="return confirmupdate();" class="btn btn-warning">Deactivate User</a>
+
+                                                    <script>
+                                                        function confirmupdate() {
+                                                            return confirm('Are you sure you want to deactivate this user?');
+                                                        }
+                                                    </script>
+
+
+
+                                                </td>
+                                            @else
+
+                                                <td><a href="user-activate?id={{$data->id}}"  onclick="return confirmupdate();" class="btn btn-primary">Activate User</a>
+
+                                                    <script>
+                                                        function confirmupdate() {
+                                                            return confirm('Are you sure you want to activate this user?');
+                                                        }
+                                                    </script>
+
+
+
                                                 </td>
                                             @endif
 

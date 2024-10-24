@@ -547,6 +547,29 @@ class DashboardContoller extends Controller
 
 
 
+    public function user_deactivate(request $request)
+    {
+
+        User::where('id', $request->id)->update(['status' => 0]);
+
+        return back()->with('message', "User Deactivated successfully");
+
+
+    }
+
+
+    public function user_activate(request $request)
+    {
+
+        User::where('id', $request->id)->update(['status' => 2]);
+
+        return back()->with('message', "User Activated successfully");
+
+
+    }
+
+
+
 
 
 
