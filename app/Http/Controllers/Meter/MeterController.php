@@ -407,10 +407,6 @@ class MeterController extends Controller
     public function update_meter(request $request)
     {
 
-
-
-
-
         if($request->meterNo !== null){
             $m_id = Meter::where('meterNo', $request->meterNo)->first()->id ?? null;
 
@@ -430,6 +426,31 @@ class MeterController extends Controller
 
 
     }
+
+
+    public function meter_deactivate(request $request)
+    {
+
+        Meter::where('id', $request->id)->update(['status' => 0]);
+
+        return back()->with('message', "Meter Deactivated successfully");
+
+
+    }
+
+
+    public function meter_activate(request $request)
+    {
+
+        Meter::where('id', $request->id)->update(['status' => 2]);
+
+        return back()->with('message', "Meter Activated successfully");
+
+
+    }
+
+
+
 
 
 

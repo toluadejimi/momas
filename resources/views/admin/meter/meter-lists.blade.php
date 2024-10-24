@@ -146,6 +146,9 @@
                                             <th scope="col" class="cursor-pointer desc">Action</th>
                                         @endif
 
+                                        <th scope="col" class="cursor-pointer desc">Action</th>
+
+
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -178,6 +181,33 @@
                                                         return confirm('Are you sure you want to delete this item?');
                                                     }
                                                 </script>
+                                            @endif
+
+                                            @if($data->status == 2)
+                                                <td><a href="meter-deactivate?id={{$data->id}}"  onclick="return confirmupdate();" class="btn btn-warning">Deactivate Meter</a>
+
+                                                    <script>
+                                                        function confirmupdate() {
+                                                            return confirm('Are you sure you want to deactivate this meter?');
+                                                        }
+                                                    </script>
+
+
+
+                                                </td>
+                                            @else
+
+                                                <td><a href="meter-activate?id={{$data->id}}"  onclick="return confirmupdate();" class="btn btn-primary">Activate Meter</a>
+
+                                                    <script>
+                                                        function confirmupdate() {
+                                                            return confirm('Are you sure you want to activate this meter?');
+                                                        }
+                                                    </script>
+
+
+
+                                                </td>
                                             @endif
                                         </tr>
 
@@ -352,6 +382,9 @@
                                             <th scope="col" class="cursor-pointer desc">Action</th>
                                         @endif
 
+                                        <th scope="col" class="cursor-pointer desc">Action</th>
+
+
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -385,6 +418,34 @@
                                                     }
                                                 </script>
                                             @endif
+
+                                            @if($data->status == 2)
+                                                <td><a href="meter-deactivate?id={{$data->id}}"  onclick="return confirmupdate();" class="btn btn-warning">Deactivate Meter</a>
+
+                                                    <script>
+                                                        function confirmupdate() {
+                                                            return confirm('Are you sure you want to deactivate this meter?');
+                                                        }
+                                                    </script>
+
+
+
+                                                </td>
+                                            @else
+
+                                                <td><a href="meter-activate?id={{$data->id}}"  onclick="return confirmupdate();" class="btn btn-primary">Activate Meter</a>
+
+                                                    <script>
+                                                        function confirmupdate() {
+                                                            return confirm('Are you sure you want to activate this meter?');
+                                                        }
+                                                    </script>
+
+
+
+                                                </td>
+                                            @endif
+
                                         </tr>
 
                                     @endforeach
