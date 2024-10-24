@@ -391,7 +391,7 @@
 
                                     <div class="col-3">
                                         <label class="my-2">New Tariff</label>
-                                        <select name="NewTariffID" class="form-control">
+                                        <select name="NewTariffID" class="form-control" required>
                                             <option value=" ">Select</option>
                                             @foreach($tariff as $data)
                                                 <option value="{{$data->id}}">{{$data->title}}</option>

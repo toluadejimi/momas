@@ -34,7 +34,7 @@
 
                                 <div class="col-3">
                                     <label class="my-2">Capacity</label>
-                                    <input type="text" name="Capacity" class="form-control" required>
+                                    <input type="number" name="Capacity" class="form-control" required>
                                 </div>
 
 
@@ -57,31 +57,68 @@
 
                                 <div class="col-3">
                                     <label class="my-2">Estate</label>
-                                    <select type="text" name="Estate_id" class="form-control" required>
-                                        <option value=" ">Select</option>
-                                        @foreach($estate as $data)
-                                            <option value="{{$data->id}}">{{$data->title}} </option>
-                                        @endforeach
-                                    </select>
+                                    <input type="text" readonly class="form-control" value="{{$estate->title}}">
+                                    <input type="text" hidden name="Estate_id" value="{{$estate->id}}">
+
                                 </div>
 
 
                                 <div class="col-3">
                                     <label class="my-2">Address</label>
-                                    <input type="text" name="Location" class="form-control" required>
+                                    <input type="text" name="Location" class="form-control" >
                                 </div>
 
 
                                 <div class="col-3">
                                     <label class="my-2">City</label>
-                                    <input type="text" name="City" class="form-control" required>
+                                    <input type="text" name="City" class="form-control" >
                                 </div>
 
+                                    <div class="col-xl-3 col-sm-12">
+                                        <label class="my-2">State</label>
+                                        <select type="text" name="state" class="form-control" >
+                                            <option disabled selected>--Select State--</option>
+                                            <option value="Abia">Abia</option>
+                                            <option value="Adamawa">Adamawa</option>
+                                            <option value="Akwa Ibom">Akwa Ibom</option>
+                                            <option value="Anambra">Anambra</option>
+                                            <option value="Bauchi">Bauchi</option>
+                                            <option value="Bayelsa">Bayelsa</option>
+                                            <option value="Benue">Benue</option>
+                                            <option value="Borno">Borno</option>
+                                            <option value="Cross River">Cross River</option>
+                                            <option value="Delta">Delta</option>
+                                            <option value="Ebonyi">Ebonyi</option>
+                                            <option value="Edo">Edo</option>
+                                            <option value="Ekiti">Ekiti</option>
+                                            <option value="Enugu">Enugu</option>
+                                            <option value="FCT">Federal Capital Territory</option>
+                                            <option value="Gombe">Gombe</option>
+                                            <option value="Imo">Imo</option>
+                                            <option value="Jigawa">Jigawa</option>
+                                            <option value="Kaduna">Kaduna</option>
+                                            <option value="Kano">Kano</option>
+                                            <option value="Katsina">Katsina</option>
+                                            <option value="Kebbi">Kebbi</option>
+                                            <option value="Kogi">Kogi</option>
+                                            <option value="Kwara">Kwara</option>
+                                            <option value="Lagos">Lagos</option>
+                                            <option value="Nasarawa">Nasarawa</option>
+                                            <option value="Niger">Niger</option>
+                                            <option value="Ogun">Ogun</option>
+                                            <option value="Ondo">Ondo</option>
+                                            <option value="Osun">Osun</option>
+                                            <option value="Oyo">Oyo</option>
+                                            <option value="Plateau">Plateau</option>
+                                            <option value="Rivers">Rivers</option>
+                                            <option value="Sokoto">Sokoto</option>
+                                            <option value="Taraba">Taraba</option>
+                                            <option value="Yobe">Yobe</option>
+                                            <option value="Zamfara">Zamfara</option>
+                                        </select>
 
-                                <div class="col-3">
-                                    <label class="my-2">State</label>
-                                    <input type="text" name="State" class="form-control" required>
-                                </div>
+                                    </div>
+
 
 
                                 <hr class="my-4">
@@ -89,7 +126,7 @@
 
                                 <div class="col-3">
                                     <label class="my-2">CT Ratio</label>
-                                    <input type="text" name="CTRatio" class="form-control" required>
+                                    <input type="text" name="CTRatio" class="form-control" >
                                 </div>
 
 

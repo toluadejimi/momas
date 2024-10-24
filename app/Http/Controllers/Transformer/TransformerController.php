@@ -49,7 +49,28 @@ class TransformerController extends Controller
 
     public function new_transformer()
     {
-        $data['estate'] = Estate::where('status', 2)->get();
+
+        if(auth::user()->role == 0){
+
+            $data['estate'] = Estate::where('status', 2)->get();
+
+        } elseif(auth::user()->role == 1){
+
+        } elseif(auth::user()->role == 2){
+
+        } elseif(auth::user()->role == 3){
+
+            $data['estate'] = Estate::where('status', 2)->where('id', Auth::user()->estate_id)->first();
+
+        } elseif(auth::user()->role == 4){
+
+        } elseif(auth::user()->role == 5){
+
+        } else{
+
+        }
+
+
 
         return view('admin/transformer/new-transformer', $data);
     }

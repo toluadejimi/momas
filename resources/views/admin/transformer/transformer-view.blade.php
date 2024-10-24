@@ -36,7 +36,7 @@
 
                                 <div class="col-3">
                                     <label class="my-2">Capacity</label>
-                                    <input type="text" name="Capacity" value="{{$trans->Capacity}}" class="form-control" required>
+                                    <input type="number" name="Capacity" value="{{$trans->Capacity}}" class="form-control" required>
                                 </div>
 
 
