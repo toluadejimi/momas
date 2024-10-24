@@ -308,7 +308,6 @@ class MeterController extends Controller
 
     public function list_meter(request $request)
     {
-
         $data['meters'] = Meter::count();
         $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->paginate('20');
         return view('admin/meter/meter-lists', $data);
