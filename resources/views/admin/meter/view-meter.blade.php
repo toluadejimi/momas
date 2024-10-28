@@ -66,6 +66,7 @@
                                 <hr class="my-4">
 
 
+
                                 <div class="col-3">
                                     <label class="my-2">Transformer</label>
                                     <select type="text" name="TransformerID" class="form-control" required>
@@ -77,93 +78,71 @@
                                 </div>
 
 
-                                @if($meter->isDualTariff == "on")
+                                <div class="col-3 mt-4">
+                                    <input  type="checkbox" id="isDualTariff" name="isDualTariff" class="form-check-input" style="border: 10px">
+                                    <label class="form-check-label">Is Dual Tariff</label>
 
-                                    <div class="col-3 mt-4">
-                                        <input type="checkbox" name="isDualTariff" checked class="form-check-input"
-                                               style="border: 10px">
-                                        <label class="form-check-label">Is Dual Tariff</label>
-                                    </div>
+                                </div>
 
+                                <div class="col-3">
+                                    <label class="my-2">Old SGC</label>
+                                    <input type="text" value="{{$meter->OldSGC}}" name="OldSGC" class="form-control" required>
+                                </div>
 
-                                    <div class="col-3">
-                                        <label class="my-2">New Tariff Dual</label>
-                                        <input type="text" value="{{$meter->NewTariffDual}}" name="NewTariffDual"
-                                               class="form-control" required>
-                                    </div>
-
-
-                                    <div class="col-3">
-                                        <label class="my-2">New SGC</label>
-                                        <input type="text" value="{{$meter->NewSGC}}" name="NewSGC"
-                                               class="form-control">
-                                    </div>
-
-                                    <div class="col-3">
-                                        <label class="my-2">Old Tariff Dual</label>
-                                        <input type="text" value="{{$meter->OldTariffDual}}" name="OldTariffDual"
-                                               class="form-control" required>
-                                    </div>
-
-
-                                    <div class="col-3">
-                                        <label class="my-2">Old SGC</label>
-                                        <input type="text" value="{{$meter->OldSGC}}" name="OldSGC"
-                                               class="form-control">
-                                    </div>
-
-                                @else
-
-                                    <div class="col-3 mt-4">
-
-                                        <input type="checkbox" id="isDualTariff" name="isDualTariff"
-                                               class="form-check-input" style="border: 10px">
-                                        <label class="form-check-label">Is Dual Tariff</label>
-
-                                    </div>
-
-
-                                    <div class="col-3" id="newTariffDualContainer" style="display: none;">
-                                        <label class="my-2">New Tariff Dual</label>
-                                        <input type="text" name="NewTariffDual" class="form-control" required>
-                                    </div>
-
-
-                                    <div class="col-3" id="newSGCContainer" style="display: none;">
-                                        <label class="my-2">New SGC</label>
-                                        <input type="text" name="NewSGC" class="form-control">
-                                    </div>
-
-                                    <div class="col-3" id="oldSGCContainer" style="display: none;">
-                                        <label class="my-2">Old SGC</label>
-                                        <input type="text"  name="OldSGC"
-                                               class="form-control" required>
-                                    </div>
-
-
-                                    <div class="col-3" id="oldtariffDualContainer" style="display: none;">
-                                        <label class="my-2">Old Tariff Dual</label>
-                                        <input type="text" name="OldTariffDual"
-                                               class="form-control" required>
-                                    </div>
+                                <div class="col-3">
+                                    <label class="my-2">New SGC</label>
+                                    <input type="text" value="{{$meter->NewSGC}}" name="NewSGC" class="form-control" required>
+                                </div>
 
 
 
 
-                                    <script>
-                                        document.getElementById('isDualTariff').addEventListener('change', function () {
-                                            var isChecked = this.checked;
-                                            document.getElementById('newTariffDualContainer').style.display = isChecked ? 'block' : 'none';
-                                            document.getElementById('newSGCContainer').style.display = isChecked ? 'block' : 'none';
-                                            document.getElementById('oldSGCContainer').style.display = isChecked ? 'block' : 'none';
-                                            document.getElementById('oldtariffDualContainer').style.display = isChecked ? 'block' : 'none';
-                                        });
-                                    </script>
 
-                                @endif
+
+
+
+                                <script>
+                                    document.getElementById('isDualTariff').addEventListener('change', function () {
+                                        var isChecked = this.checked;
+                                        document.getElementById('newtar').style.display = isChecked ? 'block' : 'none';
+                                        document.getElementById('newTariffDualContainer').style.display = isChecked ? 'block' : 'none';
+                                        document.getElementById('newSGCDualContainer').style.display = isChecked ? 'block' : 'none';
+                                        document.getElementById('oldTariffDualContainer').style.display = isChecked ? 'block' : 'none';
+                                        document.getElementById('oldSGCDualContainer').style.display = isChecked ? 'block' : 'none';
+
+
+                                    });
+                                </script>
 
 
                                 <hr class="my-4">
+
+
+
+                                <div class="col-3" id="oldTariffDualContainer" style="display: none;">
+                                    <label class="my-2">Old Tariff Dual</label>
+                                    <select name="OldTariffDual" class="form-control">
+                                        <option value="{{$meter->OldTariffDual}}">{{strtoupper($meter->OldTariffDual)}}</option>
+                                        @foreach($tariffdual as $data)
+                                            <option value="{{$data->OldTariffDual}}">{{$data->title}}</option>
+                                        @endforeach
+                                    </select>
+
+
+                                </div>
+
+
+                                <div class="col-3" id="newtar" style="display: none;">
+                                    <label class="my-2">New Tariff Dual</label>
+                                    <select name="NewTariffDual" class="form-control">
+                                        <option value="{{$meter->NewTariffDual}}">{{strtoupper($meter->NewTariffDual)}}</option>
+                                        @foreach($tariffdual as $data)
+                                            <option value="{{$data->NewTariffDual}}">{{$data->title}}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+
 
 
                                 <div class="col-3">
@@ -186,8 +165,72 @@
                                     </select>
                                 </div>
 
+                                <div class="col-3 mt-2"  id="newTariffDualContainer" style="display: none;">
+                                    <label class="my-2">New SGC Dual</label>
+                                    <input type="text" value="{{$meter->NewSGCDual}}" name="NewSGCDual" class="form-control" >
+                                </div>
+
+
+                                <div class="col-3 mt-2" id="newSGCDualContainer" style="display: none;">
+                                    <label class="my-2">OLD SGC Dual</label>
+                                    <input type="text"  value="{{$meter->OldSGCDual}}" name="OldSGCDual" class="form-control">
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                @if($meter->isDualTariff == "on")
+
+
+
+
+
+                                @else
+
+
+
+
+
+
+
+                                @endif
+
 
                                 <hr class="my-4">
+
+
 
                                 <div class="col-3">
                                     <label class="my-2">KRN1</label>

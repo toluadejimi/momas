@@ -108,11 +108,6 @@
 
 
 
-
-
-
-
-
                                     <script>
                                         document.getElementById('isDualTariff').addEventListener('change', function () {
                                             var isChecked = this.checked;
@@ -138,7 +133,7 @@
 
 
                                     <div class="col-3" id="newtar" style="display: none;">
-                                        <label class="my-2">New Tariff  Dual</label>
+                                        <label class="my-2">New Tariff Dual</label>
                                         <input type="text" name="NewTariffDual" class="form-control" required>
                                     </div>
 
@@ -377,14 +372,25 @@
 
 
                                     <div class="col-3" id="oldTariffDualContainer" style="display: none;">
-                                        <label class="my-2">Old Tariff  Dual</label>
-                                        <input type="text" name="OldTariffDual" class="form-control" >
+                                        <label class="my-2">Old Tariff Dual</label>
+                                        <select name="OldTariffDual" class="form-control" required>
+                                            <option value=" ">Select</option>
+                                            @foreach($tariffdual as $data)
+                                                <option value="{{$data->OldTariffDual}}">{{$data->title}}</option>
+                                            @endforeach
+                                        </select>
+
                                     </div>
 
 
                                     <div class="col-3" id="newtar" style="display: none;">
-                                        <label class="my-2">New Tariff  Dual</label>
-                                        <input type="text" name="NewTariffDual" class="form-control" >
+                                        <label class="my-2">New Tariff Dual</label>
+                                        <select name="NewTariffDual" class="form-control" required>
+                                            <option value=" ">Select</option>
+                                            @foreach($tariffdual as $data)
+                                                <option value="{{$data->NewTariffDual}}">{{$data->title}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
 
@@ -409,13 +415,13 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-3"  id="newTariffDualContainer" style="display: none;">
+                                    <div class="col-3 mt-2"  id="newTariffDualContainer" style="display: none;">
                                         <label class="my-2">New SGC Dual</label>
                                         <input type="text" name="NewSGCDual" class="form-control" >
                                     </div>
 
 
-                                    <div class="col-3" id="newSGCDualContainer" style="display: none;">
+                                    <div class="col-3 mt-2" id="newSGCDualContainer" style="display: none;">
                                         <label class="my-2">OLD SGC Dual</label>
                                         <input type="text" name="OldSGCDual" class="form-control">
                                     </div>
@@ -424,9 +430,6 @@
 
 
                                     <hr class="my-4">
-
-
-
                                     <div class="col-3">
                                         <label class="my-2">KRN1</label>
                                         <select type="text" name="KRN1" class="form-control" required>

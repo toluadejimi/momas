@@ -68,6 +68,7 @@ class TariffController extends Controller
     public function add_new_Tariff(request $request)
     {
 
+
         $ck = Tariff::where('title', $request->title)->first() ?? null;
 
 
@@ -76,12 +77,29 @@ class TariffController extends Controller
         }
 
 
-        $tr = new Tariff();
-        $tr->title = $request->title;
-        $tr->estate_tariff_cost = $request->estate_tariff_cost;
-        $tr->estate_id = $request->estate_id;
-        $tr->status = 2;
-        $tr->save();
+
+        if($request->isDualTariff ==  "on"){
+            $tr = new Tariff();
+            $tr->title = $request->title;
+            $tr->estate_tariff_cost = $request->estate_tariff_cost;
+            $tr->estate_id = $request->estate_id;
+            $tr->OldTariffDual = $request->OldTariffDual;
+            $tr->NewTariffDual = $request->NewTariffDual;
+            $tr->isDualTariff = $request->isDualTariff;
+            $tr->status = 2;
+            $tr->save();
+        }else{
+            $tr = new Tariff();
+            $tr->title = $request->title;
+            $tr->estate_tariff_cost = $request->estate_tariff_cost;
+            $tr->estate_id = $request->estate_id;
+            $tr->status = 2;
+            $tr->save();
+
+        }
+
+
+
 
         return redirect('admin/tariff-list')->with('message', 'Tariff created successfully');
 
@@ -95,6 +113,52 @@ class TariffController extends Controller
         return back()->with('messsage', 'Tariff deleted successfully');
 
     }
+
+
+    public function view_tariff(request $request)
+    {
+
+        $tr = Tariff::where('id', $request->id)->first();
+
+        return view('admin.tariff.view', compact('tr'));
+
+    }
+
+
+    public function update_the_tariff(request $request)
+    {
+
+        if($request->isDualTariff ==  "on"){
+
+            Tariff::where('id', $request->id)->update([
+                'title' => $request->title,
+                'estate_tariff_cost' => $request->estate_tariff_cost,
+                'estate_id' => $request->estate_id,
+                'OldTariffDual' => $request->OldTariffDual,
+                'NewTariffDual' => $request->NewTariffDual,
+                'isDualTariff' => $request->isDualTariff,
+            ]);
+
+
+        }else{
+
+            Tariff::where('id', $request->id)->update([
+                'title' => $request->title,
+                'estate_tariff_cost' => $request->estate_tariff_cost,
+                'estate_id' => $request->estate_id,
+                'isDualTariff' => $request->isDualTariff,
+            ]);
+
+        }
+
+        return redirect('admin/tariff-list')->with('message', 'Tariff updated successfully');
+
+    }
+
+
+
+
+
 
 
 

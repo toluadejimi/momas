@@ -259,8 +259,8 @@
 
                                         <tr>
                                             <td>{{$data->id}}</td>
-                                            <td>{{$data->title}}</td>
-                                            <td>{{$data->estate->title}}</td>
+                                            <td><a href="view-tariff?id={{$data->id}}">{{$data->title ?? "name"}}</a> </td>
+                                            <td>{{$data->estate->title ?? "name"}}</td>
                                             <td>
                                                 @if($data->status == 2)
                                                     <span class="badge text-bg-primary">Active</span>

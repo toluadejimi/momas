@@ -363,46 +363,50 @@
 
                                                 <h6 class="d-flex justify-content-start my-4">Estate Information</h6>
 
-                                                <div class="col-4">
+                                                <div class="col-xl-4 col-sm-12">
                                                     <label class="my-2">Estate Name</label>
-                                                    <input type="text" readonly name="title" value="{{$org->title}}"
+                                                    <input type="text" readonly name="title"
+                                                           value="{{$org->title ?? "name"}}"
                                                            class="form-control"
                                                            required>
-                                                    <input hidden name="id" value="{{$org->id}}" class="form-control"
+                                                    <input hidden name="id" value="{{$org->id ?? "id" }}"
+                                                           class="form-control"
                                                            required>
 
                                                 </div>
 
-                                                <div class="col-4">
+                                                <div class="col-xl-4 col-sm-12">
                                                     <label class="my-2">State</label>
-                                                    <input type="text" name="state" value="{{$org->state}}"
+                                                    <input type="text" name="state" value="{{$org->state ?? "state"}}"
                                                            class="form-control"
                                                            required>
 
                                                 </div>
 
-                                                <div class="col-4">
+                                                <div class="col-xl-4 col-sm-12">
                                                     <label class="my-2">City</label>
-                                                    <input type="text" name="city" value="{{$org->city}}"
+                                                    <input type="text" name="city" value="{{$org->city ?? "city"}}"
                                                            class="form-control"
                                                            required>
 
                                                 </div>
 
-                                                <div class="col-4">
+                                                <div class="col-xl-4 col-sm-12">
                                                     <label class="my-2">LGA</label>
-                                                    <input type="text" name="lga" value="{{$org->lga}}"
+                                                    <input type="text" name="lga" value="{{$org->lga ?? "lga"}}"
                                                            class="form-control"
                                                            required>
 
                                                 </div>
 
-                                                <div class="col-3">
+                                                <div class="col-xl-3 col-sm-12">
                                                     <label class="my-2">Status</label>
                                                     @if($org->status == 2)
-                                                        <input type="text" readonly  value="Active" class="form-control" required>
+                                                        <input type="text" readonly value="Active" class="form-control"
+                                                               required>
                                                     @else
-                                                        <input type="text" readonly  value="Inactive" class="form-control" required>
+                                                        <input type="text" readonly value="Inactive"
+                                                               class="form-control" required>
                                                     @endif
 
 
@@ -410,9 +414,9 @@
 
                                             </div>
 
-                                            <hr class="my-4">
+                                            <hr class="col-xl-4 col-sm-12">
 
-                                            <button type="submit" class="col-2 d-flex btn btn-primary">
+                                            <button type="submit" class=" d-flex btn btn-primary">
                                                 Update Info
                                             </button>
 
@@ -423,8 +427,6 @@
 
 
                                 </div>
-
-
 
 
                             </div>
@@ -462,10 +464,46 @@
 
                                         <hr class="my-2">
 
+                                        <form action="update-duration" method="POST"  class="">
+                                            @csrf
+
+                                            <div class="col-xl-4 col-sm-12">
+                                                <h6 class="my-3">Add New Utility</h6>
+
+                                                <label class="my-2">Set Duration</label>
+                                                <select name="duration" required class="form-control">
+                                                    <option value=" ">Choose Duration</option>
+                                                    <option value="weekly">Weekly</option>
+                                                    <option value="monthly">Monthly</option>
+                                                    <option value="yearly">Yearly</option>
+
+                                                </select>
+
+                                                <input hidden name="id" value="{{$org->id ?? "id" }}"
+                                                       class="form-control"
+                                                       required>
+
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary my-3">Update duration
+                                            </button>
+
+
+                                        </form>
+
+
+
+                                        <hr class="my-4">
+
 
                                         @if($utility != null)
 
                                             <h6 class="my-3">Available Utilities</h6>
+
+
+
+
+
 
                                             @foreach($utility as $index => $data)
 
@@ -476,7 +514,7 @@
                                                     <div class="col-xl-4 col-sm-12 my-1">
                                                         <label class="my-1">Utility</label>
                                                         <input type="text" name="title" id="title_{{$index}}"
-                                                               class="form-control" value="{{$data->title}}"
+                                                               class="form-control" value="{{$data->title ?? "name"}}"
                                                                required>
                                                     </div>
 
@@ -518,19 +556,6 @@
 
                                             <div class="row">
 
-
-                                                <div class="col-6 mb-3">
-                                                <h6 class="my-3">Add New Utility</h6>
-
-                                                <label class="my-2">Set Duration</label>
-                                                <select name="duration" required class="form-control">
-                                                    <option value=" ">Choose Duration</option>
-                                                    <option value="weekly">Weekly</option>
-                                                    <option value="monthly">Monthly</option>
-                                                    <option value="yearly">Yearly</option>
-
-                                                </select>
-                                                </div>
 
                                                 <!-- Container to hold dynamic fields -->
                                                 <div id="utility-fields"></div>

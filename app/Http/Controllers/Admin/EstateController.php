@@ -171,6 +171,21 @@ class EstateController extends Controller
     }
 
 
+    public function update_duration(request $request)
+    {
+
+
+                    Utitlity::where('estate_id', $request->id)->update([
+                        'duration' => $request->duration,
+                    ]);
+
+
+        return redirect()->back()->with('success', 'Duration updated successfully');
+
+
+    }
+
+
 
 
     public function estate_deactivate(request $request)

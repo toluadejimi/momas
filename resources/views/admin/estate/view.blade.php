@@ -2,9 +2,9 @@
 @section('content')
 
     @if(auth::user()->role == 0)
-        <div class="content">
 
-            <!-- Start Content-->
+
+        <div class="content">
             <div class="container-fluid">
 
                 @if ($errors->any())
@@ -436,18 +436,28 @@
 
 
             </div>
-
-
         </div>
+
+
     @elseif(auth::user()->role == 1)
+
+
     @elseif(auth::user()->role == 2)
+
+
     @elseif(auth::user()->role == 3)
+
+
     @elseif(auth::user()->role == 4)
+
+
     @elseif(auth::user()->role == 5)
+
+
     @else
+
+
     @endif
 
-
-    <!-- container-fluid -->
 
 @endsection

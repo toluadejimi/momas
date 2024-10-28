@@ -71,10 +71,6 @@
 
 
 
-
-
-
-
                                     <button type="submit" class="col-2 d-flex btn btn-primary">
                                         Add Tariff
                                     </button>
@@ -143,53 +139,79 @@
 
                         <div class="card-body">
 
-                            <form action="add-new-Tariff" method="post">
+                            <form action="update-the-tariff" method="post">
                                 @csrf
 
                                 <div class="row">
 
                                     <h6 class="d-flex justify-content-start my-4">Tariff Information</h6>
-
-
                                     <div class="col-3">
                                         <label class="my-2">Tariff Title</label>
-                                        <input type="text" value="TF" name="title" class="form-control" required>
+                                        <input type="text" value="{{$tr->title ?? "name"}}" name="title" class="form-control" required>
                                         <input type="text" name="estate_id" value="{{auth::user()->estate_id}}"  hidden >
+                                        <input type="text" name="id" value="{{$tr->id}}"  hidden >
+
 
                                     </div>
 
 
                                     <div class="col-3">
                                         <label class="my-2">Tariff Cost</label>
-                                        <input type="number" name="estate_tariff_cost" class="form-control" required>
+                                        <input type="number" value="{{$tr->estate_tariff_cost ?? "name"}}"  name="estate_tariff_cost" class="form-control" required>
                                     </div>
 
 
-                                    <div class="col-3 mt-4">
-                                        <input  type="checkbox" id="isDualTariff" name="isDualTariff" class="form-check-input" style="border: 10px">
-                                        <label class="form-check-label">Is Dual Tariff</label>
+                                    @if($tr->isDualTariff == "on")
 
-                                    </div>
+                                        <div class="col-3 mt-4">
+                                            <input  type="checkbox"  id="isDualTariff" name="isDualTariff" class="form-check-input" style="border: 10px" checked>
+                                            <label class="form-check-label">Is Dual Tariff</label>
+
+                                        </div>
+
+                                        <div class="row">
 
 
 
-                                    <div class="row">
+                                            <div class="col-3" id="oldTariffDualContainer" style="display: none;">
+                                                <label class="my-4">Old Tariff  Dual</label>
+                                                <input type="text" value="{{$tr->OldTariffDual}}" name="OldTariffDual" class="form-control" required>
+                                            </div>
 
 
+                                            <div class="col-3" id="newTariffDualContainer" style="display: none;">
+                                                <label class="my-4">New Tariff Dual</label>
+                                                <input type="text" value="{{$tr->NewTariffDual}}" name="NewTariffDual" class="form-control" required>
+                                            </div>
 
-                                        <div class="col-3" id="oldTariffDualContainer" style="display: none;">
-                                            <label class="my-4">Old Tariff  Dual</label>
-                                            <input type="text" name="OldTariffDual" class="form-control" required>
+
+                                        </div>
+
+                                    @else
+                                        <div class="col-3 mt-4">
+                                            <input  type="checkbox" id="isDualTariff" name="isDualTariff" class="form-check-input" style="border: 10px">
+                                            <label class="form-check-label">Is Dual Tariff</label>
                                         </div>
 
 
-                                        <div class="col-3" id="newTariffDualContainer" style="display: none;">
-                                            <label class="my-4">New Tariff Dual</label>
-                                            <input type="text" name="NewTariffDual" class="form-control" required>
+                                        <div class="row">
+
+                                            <div class="col-3" id="oldTariffDualContainer" style="display: none;">
+                                                <label class="my-4">Old Tariff  Dual</label>
+                                                <input type="text" name="OldTariffDual" class="form-control" required>
+                                            </div>
+
+
+                                            <div class="col-3" id="newTariffDualContainer" style="display: none;">
+                                                <label class="my-4">New Tariff Dual</label>
+                                                <input type="text" name="NewTariffDual" class="form-control" required>
+                                            </div>
+
+
                                         </div>
 
 
-                                    </div>
+                                    @endif
 
 
 
@@ -209,7 +231,7 @@
                                     <hr class="my-4">
 
                                     <button type="submit" class="col-2 d-flex btn btn-primary">
-                                        Add Tariff
+                                        Update Tariff
                                     </button>
 
                                 </div>

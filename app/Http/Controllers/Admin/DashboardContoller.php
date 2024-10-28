@@ -331,26 +331,27 @@ class DashboardContoller extends Controller
 
             $data['fea'] = Feature::where('id', 1)->first();
             $data['set'] = Setting::where('id', 1)->first();
+            return view('admin/settings', $data);
+
 
 
         } elseif(auth::user()->role == 1){
 
             $data['fea'] = Feature::where('id', 1)->first();
             $data['set'] = Setting::where('id', 1)->first();
+            return view('admin/settings', $data);
+
 
         } elseif(auth::user()->role == 2){
 
         } elseif(auth::user()->role == 3){
 
-
-
             $data['org'] = Estate::where('id', auth::user()->estate_id)->first();
             $data['tar'] = Tariff::where('estate_id', auth::user()->estate_id)->first();
             $data['utl'] = Utitlity::where('estate_id', auth::user()->estate_id)->first() ?? null;
             $data['total_utility'] = Utitlity::where('estate_id', auth::user()->estate_id)->sum('amount');
-
-
             $data['utility'] = Utitlity::where('estate_id', auth::user()->estate_id)->get() ?? null;
+            return view('admin/settings', $data);
 
 
         } elseif(auth::user()->role == 4){
@@ -363,7 +364,6 @@ class DashboardContoller extends Controller
 
 
 
-        return view('admin/settings', $data);
 
     }
 

@@ -323,6 +323,8 @@ class MeterController extends Controller
             $data['estate'] = Estate::where('status', 2)->get();
             $data['transformer'] = Transformer::latest()->where('status', 2)->get();
             $data['tariff'] = Tariff::latest()->where('status', 2)->get();
+            $data['tariffdual'] = Tariff::latest()->where('isDualTariff', "on")->get();
+
 
 
             return view('admin/meter/new-meter', $data);
@@ -338,6 +340,8 @@ class MeterController extends Controller
             $data['estate'] = Estate::where('id', auth::user()->estate_id)->first();
             $data['transformer'] = Transformer::latest()->where('estate_id', auth::user()->estate_id)->get();
             $data['tariff'] = Tariff::latest()->where('status', 2)->where('estate_id', auth::user()->estate_id)->get();
+            $data['tariffdual'] = Tariff::latest()->where('isDualTariff', "on")->get();
+
 
             return view('admin/meter/new-meter', $data);
 
@@ -379,6 +383,8 @@ class MeterController extends Controller
         $data['trans_title'] = Transformer::where('id', $data['meter']->TransformerID)->first()->Title ?? null;
         $data['NewTariffID'] = Tariff::where('id', $data['meter']->NewTariffID)->first()->title ?? null;
         $data['OldTariffID'] = Tariff::where('id', $data['meter']->OldTariffID)->first()->title ?? null;
+        $data['tariffdual'] = Tariff::latest()->where('isDualTariff', "on")->get();
+
         return view('admin/meter/view-meter', $data);
 
     }

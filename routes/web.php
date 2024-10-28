@@ -93,6 +93,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
     Route::get('view-estate', [EstateController::class, 'estate_view']);
     Route::post('estate-update-info', [EstateController::class, 'estate_update']);
     Route::post('estate-update-utilities', [EstateController::class, 'estate_update_utilities']);
+    Route::post('update-duration', [EstateController::class, 'update_duration']);
+
+
+
 
 
     Route::get('estate-delete', [EstateController::class, 'estate_delete']);
@@ -167,11 +171,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
 
 
 
+
+
+
     Route::get('tariff-list', [TariffController::class, 'tariff_list']);
     Route::get('new-tariff', [TariffController::class, 'new_tariff']);
     Route::post('add-new-Tariff', [TariffController::class, 'add_new_Tariff']);
     Route::get('delete-tariff', [TariffController::class, 'delete_tariff']);
     Route::get('tariff-delete', [TariffController::class, 'delete_tariff']);
+    Route::get('view-tariff', [TariffController::class, 'view_tariff']);
+    Route::post('update-the-tariff', [TariffController::class, 'update_the_tariff']);
+
+
 
 
 
