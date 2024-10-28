@@ -102,6 +102,7 @@
                                         <th scope="col" class="cursor-pointer">Phone</th>
                                         <th scope="col" class="cursor-pointer">Email</th>
                                         <th scope="col" class="cursor-pointer">Role</th>
+                                        <th scope="col" class="cursor-pointer">Designation</th>
                                         <th scope="col" class="cursor-pointer">Status</th>
                                         <th scope="col" class="cursor-pointer desc">Date Registered</th>
                                         @if(auth::user()->role == 0)
@@ -494,6 +495,7 @@
                                         <th scope="col" class="cursor-pointer">Phone</th>
                                         <th scope="col" class="cursor-pointer">Email</th>
                                         <th scope="col" class="cursor-pointer">Role</th>
+                                        <th scope="col" class="cursor-pointer">Designation</th>
                                         <th scope="col" class="cursor-pointer">Status</th>
                                         <th scope="col" class="cursor-pointer desc">Date Registered</th>
                                         @if(auth::user()->role == 3)
@@ -529,6 +531,7 @@
                                                 @endif
 
                                             </td>
+                                            <td>{{$data->desgination}}</td>
                                             <td>
                                                 @if($data->status == 2)
                                                     <span class="badge text-bg-primary">Active</span>
