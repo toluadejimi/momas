@@ -294,7 +294,8 @@
                                                 <input type="text" name="meterNo"
                                                    value="{{$user->meterNo ?? "Select Meter"}}" id="searchMeter"
                                                    placeholder="Type meter number..." class="form-control" required
-                                                   autocomplete="off">
+                                                   autocomplete="off"
+                                                >
                                             <div id="meterResult" class="search-result"></div>
 
                                             <input type="text" name="user_id" value="{{$user->id}}" hidden>
