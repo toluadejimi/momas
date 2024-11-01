@@ -72,6 +72,12 @@
                                     </div>
 
                                     <div class="col-xl-3 col-sm-12">
+                                        <label class="my-2">Designation</label>
+                                        <input type="text" name="desgination" class="form-control" required>
+                                    </div>
+
+
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">State</label>
                                         <select type="text" name="state" class="form-control" required>
                                             <option disabled selected>--Select State--</option>

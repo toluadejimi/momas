@@ -119,7 +119,7 @@
 
 
 
-                                <div class="col-3" id="oldTariffDualContainer" style="display: none;">
+                                <div class="col-2" id="oldTariffDualContainer" style="display: none;">
                                     <label class="my-2">Old Tariff Dual</label>
                                     <select name="OldTariffDual" class="form-control">
                                         <option value="{{$meter->OldTariffDual}}">{{strtoupper($meter->OldTariffDual)}}</option>
@@ -132,7 +132,7 @@
                                 </div>
 
 
-                                <div class="col-3" id="newtar" style="display: none;">
+                                <div class="col-2" id="newtar" style="display: none;">
                                     <label class="my-2">New Tariff Dual</label>
                                     <select name="NewTariffDual" class="form-control">
                                         <option value="{{$meter->NewTariffDual}}">{{strtoupper($meter->NewTariffDual)}}</option>
@@ -145,7 +145,7 @@
 
 
 
-                                <div class="col-3">
+                                <div class="col-2">
                                     <label class="my-2">New Tariff</label>
                                     <select name="NewTariffID" class="form-control">
                                         <option value="{{$meter->NewTariffID}}">{{strtoupper($NewTariffID)}}</option>
@@ -155,7 +155,7 @@
                                     </select>
                                 </div>
 
-                                <div class="col-3">
+                                <div class="col-2">
                                     <label class="my-2">Old Tariff</label>
                                     <select type="text" name="OldTariffID" class="form-control" required>
                                         <option value="{{$meter->OldTariffID}}">{{strtoupper($OldTariffID)}}</option>
@@ -165,13 +165,13 @@
                                     </select>
                                 </div>
 
-                                <div class="col-3 mt-2"  id="newTariffDualContainer" style="display: none;">
+                                <div class="col-2 "  id="newTariffDualContainer" style="display: none;">
                                     <label class="my-2">New SGC Dual</label>
                                     <input type="text" value="{{$meter->NewSGCDual}}" name="NewSGCDual" class="form-control" >
                                 </div>
 
 
-                                <div class="col-3 mt-2" id="newSGCDualContainer" style="display: none;">
+                                <div class="col-2 " id="newSGCDualContainer" style="display: none;">
                                     <label class="my-2">OLD SGC Dual</label>
                                     <input type="text"  value="{{$meter->OldSGCDual}}" name="OldSGCDual" class="form-control">
                                 </div>

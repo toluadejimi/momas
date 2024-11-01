@@ -22,9 +22,9 @@ class LoginController extends Controller
 
         if($request->email == null) {
             $credentials = request(['meterNo', 'password']);
-
             $usr = User::where('meterNo', $request->meterNo)->first() ?? null;
             $status = User::where('meterNo', $request->meterNo)->first()->status ?? null;
+
             if($status == 9){
                 $message = "User does not exist";
                 $code = 401;
@@ -49,7 +49,6 @@ class LoginController extends Controller
             flush_token();
 
             $purr = Tariff::where('estate_id', Auth::user()->estate_id)->first() ?? null;
-
             $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first()->duration ?? null;
             $estate_id = Auth::user()->estate_id ?? null;
 
@@ -74,9 +73,6 @@ class LoginController extends Controller
                 $pur['min_vending'] = $minvend;
 
             }
-
-
-
 
             $token = auth()->user()->createToken('API Token')->accessToken;
             $meter = meter();

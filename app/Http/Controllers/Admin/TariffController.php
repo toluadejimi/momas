@@ -7,9 +7,11 @@ use App\Models\Estate;
 use App\Models\Meter;
 use App\Models\MeterToken;
 use App\Models\Tariff;
+use App\Models\TarrifState;
 use App\Models\Token;
 use App\Models\Transaction;
 use App\Models\User;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -78,30 +80,38 @@ class TariffController extends Controller
 
 
 
-        if($request->isDualTariff ==  "on"){
-            $tr = new Tariff();
-            $tr->title = $request->title;
-            $tr->estate_tariff_cost = $request->estate_tariff_cost;
-            $tr->estate_id = $request->estate_id;
-            $tr->OldTariffDual = $request->OldTariffDual;
-            $tr->NewTariffDual = $request->NewTariffDual;
-            $tr->isDualTariff = $request->isDualTariff;
-            $tr->status = 2;
-            $tr->save();
-        }else{
-            $tr = new Tariff();
-            $tr->title = $request->title;
-            $tr->estate_tariff_cost = $request->estate_tariff_cost;
-            $tr->estate_id = $request->estate_id;
-            $tr->status = 2;
-            $tr->save();
-
-        }
-
-
+//        if($request->isDualTariff ==  "on"){
+//            $tr = new Tariff();
+//            $tr->title = $request->title;
+//            $tr->estate_tariff_cost = $request->estate_tariff_cost;
+//            $tr->estate_id = $request->estate_id;
+//            $tr->OldTariffDual = $request->OldTariffDual;
+//            $tr->NewTariffDual = $request->NewTariffDual;
+//            $tr->isDualTariff = $request->isDualTariff;
+//            $tr->status = 2;
+//            $tr->save();
+//        }else{
+//            $tr = new Tariff();
+//            $tr->title = $request->title;
+//            $tr->estate_tariff_cost = $request->estate_tariff_cost;
+//            $tr->estate_id = $request->estate_id;
+//            $tr->status = 2;
+//            $tr->save();
+//
+//        }
 
 
-        return redirect('admin/tariff-list')->with('message', 'Tariff created successfully');
+        $tr = new Tariff();
+        $tr->title = $request->title;
+        $tr->estate_id = $request->estate_id;
+        $tr->status = 2;
+        $tr->save();
+
+        $tr = Tariff::where('id', $tr->id)->first();
+        $tstate = TarrifState::where('tariff_id', $request->id)->get();
+        $effictive_date = TarrifState::where('tariff_id', $request->id)->where('status', 2)->first()->effective_from ?? null;
+
+        return view('admin.tariff.view', compact('tr','tstate','effictive_date'));
 
 
     }
@@ -119,10 +129,55 @@ class TariffController extends Controller
     {
 
         $tr = Tariff::where('id', $request->id)->first();
+        $tstate = TarrifState::where('tariff_id', $request->id)->get();
+        $effictive_date = TarrifState::where('tariff_id', $request->id)->where('status', 2)->first()->effective_from ?? null;
 
-        return view('admin.tariff.view', compact('tr'));
+
+        return view('admin.tariff.view', compact('tr', 'tstate', 'effictive_date'));
 
     }
+
+    public function add_state_tariff(request $request)
+    {
+
+
+        $ddfrom = new DateTime($request->date_from);
+        $ddto = new DateTime($request->date_to);
+
+        if( $ddfrom >= $ddto  ){
+            return back()->with('error', 'End date can not be greater than start date');
+        }
+
+
+        $newdate = TarrifState::latest()->where('status', 2)->where('tariff_id', $request->id)->first()->effective_to ?? null;
+        $nd = new DateTime($newdate) ?? null;
+
+        if($ddto <= $nd ){
+            return back()->with('error', 'you have a running tariff');
+        }
+
+        $tr = new TarrifState();
+        $tr->amount = $request->amount;
+        $tr->effective_from = $request->date_from;
+        $tr->effective_to = $request->date_to;
+        $tr->tariff_id = $request->id;
+        $tr->save();
+
+        $ck_count = TarrifState::where('tariff_id', $request->id)->count();
+
+        if($ck_count == 1){
+            TarrifState::latest()->where('status', 0)->where('tariff_id', $request->id)->update(['status' => 2]);
+        }
+
+
+        return back()->with('message', 'Tariff Added Successfully');
+
+
+
+
+    }
+
+
 
 
     public function update_the_tariff(request $request)

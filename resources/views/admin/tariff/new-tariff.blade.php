@@ -59,24 +59,11 @@
                                     </div>
 
 
-                                    <div class="col-3">
-                                        <label class="my-2">Tariff Cost</label>
-                                        <input type="number" name="estate_tariff_cost" class="form-control" required>
-                                    </div>
-
-
-
-
                                     <hr class="my-4">
 
 
-
-
-
-
-
                                     <button type="submit" class="col-2 d-flex btn btn-primary">
-                                        Add Tariff
+                                        Create
                                     </button>
 
                                 </div>
@@ -159,57 +146,13 @@
                                     </div>
 
 
-                                    <div class="col-3">
-                                        <label class="my-2">Tariff Cost</label>
-                                        <input type="number" name="estate_tariff_cost" class="form-control" required>
-                                    </div>
-
-
-                                    <div class="col-3 mt-4">
-                                        <input  type="checkbox" id="isDualTariff" name="isDualTariff" class="form-check-input" style="border: 10px">
-                                        <label class="form-check-label">Is Dual Tariff</label>
-
-                                    </div>
-
-
-
-                                    <div class="row">
-
-
-
-                                        <div class="col-3" id="oldTariffDualContainer" style="display: none;">
-                                            <label class="my-4">Old Tariff  Dual</label>
-                                            <input type="text" name="OldTariffDual" class="form-control" required>
-                                        </div>
-
-
-                                        <div class="col-3" id="newTariffDualContainer" style="display: none;">
-                                            <label class="my-4">New Tariff Dual</label>
-                                            <input type="text" name="NewTariffDual" class="form-control" required>
-                                        </div>
-
-
-                                    </div>
-
-
-
-
-
-                                    <script>
-                                        document.getElementById('isDualTariff').addEventListener('change', function () {
-                                            var isChecked = this.checked;
-                                            document.getElementById('newTariffDualContainer').style.display = isChecked ? 'block' : 'none';
-                                            document.getElementById('oldTariffDualContainer').style.display = isChecked ? 'block' : 'none';
-                                        });
-                                    </script>
-
 
 
 
                                     <hr class="my-4">
 
                                     <button type="submit" class="col-2 d-flex btn btn-primary">
-                                        Add Tariff
+                                        Create Tariff
                                     </button>
 
                                 </div>

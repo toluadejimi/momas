@@ -280,6 +280,49 @@
                     <div class="card">
 
                         <div class="card-body">
+                            <div class="row">
+                                <form action="update-meter" method="post">
+                                    @csrf
+                                    <div class="row">
+
+                                        <h6 class="d-flex justify-content-start my-2">Tariff Information</h6>
+
+
+                                        <div class="col-xl-4 col-sm-12" style="position: relative;">
+
+                                            <h6 class="mb-0">NEPA TARIFF <span class="badge text-bg-secondary">{{$tariff->title}}</span>
+                                                <input type="text" name="meterNo"
+                                                   value="{{$user->meterNo ?? "Select Meter"}}" id="searchMeter"
+                                                   placeholder="Type meter number..." class="form-control" required
+                                                   autocomplete="off">
+                                            <div id="meterResult" class="search-result"></div>
+
+                                            <input type="text" name="user_id" value="{{$user->id}}" hidden>
+
+                                            <input type="text" name="old_value" value="{{$user->meterNo}}" hidden>
+
+
+
+                                        </div>
+
+                                        <div class="col-xl-6 col-sm-12">
+
+                                        </div>
+
+                                        <div class="col-xl-3 col-sm-12">
+                                            <button type="submit" class="col-12 d-flex w-100 btn btn-primary my-3">
+                                                Update meter information
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+
+                        <div class="card-body">
 
                             <div class="row">
 

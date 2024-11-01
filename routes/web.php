@@ -182,6 +182,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
     Route::get('view-tariff', [TariffController::class, 'view_tariff']);
     Route::post('update-the-tariff', [TariffController::class, 'update_the_tariff']);
 
+    Route::post('add-new-tariffstate', [TariffController::class, 'add_state_tariff']);
+
+
+
 
 
 
