@@ -11,6 +11,5 @@ class TarrifState extends Model
 
     protected $casts = [
         'amount' => 'integer',
-
     ];
 }
