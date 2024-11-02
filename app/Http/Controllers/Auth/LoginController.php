@@ -74,12 +74,18 @@ class LoginController extends Controller
 
             }
 
+            $tariff = Tariff::select('id', 'estate_tariff_cost', 'type', 'estate_id', 'title')->where('user_id', Auth::id())->get();
+
             $token = auth()->user()->createToken('API Token')->accessToken;
             $meter = meter();
             $user = user();
             $user['token'] = $token;
             $user['meter'] = $meter;
             $user['purchase'] = $pur;
+            $user['tariff'] = $tariff;
+
+
+
 
 
             return response()->json([

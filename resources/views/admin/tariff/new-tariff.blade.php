@@ -149,7 +149,7 @@
                                     <div class="col-3">
                                         <select name="type" class="form-control">
 
-                                            <option
+                                            <option value=""
 
                                         </select>
 
