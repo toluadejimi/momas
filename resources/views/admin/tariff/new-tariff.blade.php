@@ -146,8 +146,14 @@
                                     </div>
 
 
+                                    <div class="col-3">
+                                        <select name="type" class="form-control">
 
+                                            <option
 
+                                        </select>
+
+                                    </div>
 
                                     <hr class="my-4">
 
