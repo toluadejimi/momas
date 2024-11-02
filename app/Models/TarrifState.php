@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class TarrifState extends Model
 {
     use HasFactory;
+
+    protected $casts = [
+        'amount' => 'integer',
+
+    ];
 }

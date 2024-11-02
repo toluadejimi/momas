@@ -84,7 +84,7 @@ class LoginController extends Controller
 
             foreach ($tariffs as $tariff) {
                 $tariffState = TarrifState::where('tariff_id', $tariff->id)->first();
-                $tariff->amount = $tariffState ? $tariffState->amount : null; // Appending 'amount' if it exists
+                $tariff->amount = $tariffState ? $tariffState->amount : null;
             }
 
 
