@@ -180,7 +180,6 @@
 
                 @if($user->role == 2)
                     <div class="card">
-
                         <div class="card-body">
                             <div class="row">
                                 <form action="update-meter" method="post">
@@ -277,44 +276,76 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-
+                    <div class="col-xl-6 mr-3 col-sm-12 card">
                         <div class="card-body">
                             <div class="row">
-                                <form action="update-meter" method="post">
+                                <form action="update-nepa" method="post">
                                     @csrf
                                     <div class="row">
 
                                         <h6 class="d-flex justify-content-start my-2">Tariff Information</h6>
 
 
-                                        <div class="col-xl-4 col-sm-12" style="position: relative;">
+                                        <div class="col-xl-6 col-sm-12" style="position: relative;">
 
-                                            <h6 class="mb-0">NEPA TARIFF <span class="badge text-bg-secondary">{{$tariff->title}}</span>
-                                                <input type="text" name="meterNo"
-                                                   value="{{$user->meterNo ?? "Select Meter"}}" id="searchMeter"
-                                                   placeholder="Type meter number..." class="form-control" required
-                                                   autocomplete="off"
-                                                >
-                                            <div id="meterResult" class="search-result"></div>
+                                            <h6 class="mb-4">NEPA TARIFF <span class="badge text-bg-secondary">{{$nepa_tariff_title ?? "Set Tariff"}}</span>
 
-                                            <input type="text" name="user_id" value="{{$user->id}}" hidden>
+                                                <select class="form-control my-3" name="id">
 
-                                            <input type="text" name="old_value" value="{{$user->meterNo}}" hidden>
+                                                    @foreach($tariff as $data)
+                                                        <option value="{{$data->id}}">{{$data->title}}</option>
+                                                    @endforeach
+
+                                                    <input name="user_id" hidden value="{{$user->id}}">
 
 
+
+
+                                                </select>
+
+                                                <button type="submit" class="col-12 d-flex w-100 btn btn-primary my-3">
+                                                    Update Tariff Information
+                                                </button>
 
                                         </div>
 
-                                        <div class="col-xl-6 col-sm-12">
+
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-sm-12 card">
+                        <div class="card-body">
+                            <div class="row">
+                                <form action="update-gen" method="post">
+                                    @csrf
+                                    <div class="row">
+
+                                        <h6 class="d-flex justify-content-start my-2">Tariff Information</h6>
+
+
+                                        <div class="col-xl-6 col-sm-12" style="position: relative;">
+
+                                            <h6 class="mb-4">GENERATOR TARIFF <span class="badge text-bg-secondary">{{$gen_tariff_title ?? "Set Tariff"}}</span>
+
+                                                <select class="form-control my-3" name="tariff">
+
+                                                    @foreach($tariff as $data)
+                                                        <option value="{{$data->id}}">{{$data->title}}</option>
+                                                    @endforeach
+
+
+                                                </select>
+
+                                                <button type="submit" class="col-12 d-flex w-100 btn btn-primary my-3">
+                                                    Update Tariff information
+                                                </button>
 
                                         </div>
 
-                                        <div class="col-xl-3 col-sm-12">
-                                            <button type="submit" class="col-12 d-flex w-100 btn btn-primary my-3">
-                                                Update meter information
-                                            </button>
-                                        </div>
+
                                     </div>
 
                                 </form>

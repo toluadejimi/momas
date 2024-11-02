@@ -184,6 +184,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
 
     Route::post('add-new-tariffstate', [TariffController::class, 'add_state_tariff']);
 
+    Route::post('update-nepa', [TariffController::class, 'update_nepa']);
+    Route::post('update-gen', [TariffController::class, 'update_gen']);
+
+
+
+
 
 
 

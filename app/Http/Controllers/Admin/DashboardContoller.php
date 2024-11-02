@@ -505,6 +505,14 @@ class DashboardContoller extends Controller
         $data['vending'] = MeterToken::where('user_id', $request->id)->paginate(10);
         $data['meters'] = Meter::all();
 
+        $data['tariff'] = Tariff::where('estate_id', $data['user']->estate_id)->where('user_id', null)->get();
+        $data['nepa_tariff_title'] = Tariff::where('user_id', $request->id)->where('type', "nepa")->first()->title ?? null;
+        $data['gen_tariff_title'] = Tariff::where('user_id', $request->id)->where('type', "gen")->first()->title ?? null;
+
+
+
+
+
         return view('admin/user/view', $data);
     }
 

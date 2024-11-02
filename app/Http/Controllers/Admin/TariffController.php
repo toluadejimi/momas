@@ -211,6 +211,36 @@ class TariffController extends Controller
     }
 
 
+    public function update_nepa(request $request)
+    {
+        $ck = Tariff::where('user_id', $request->user_id)->where('type', 'nepa')->first() ?? null;
+        if($ck != null){
+            Tariff::where('id', $request->id)->where('user_id', $request->user_id)->update([
+                'user_id' => null,
+                 'type' => 'nepa'
+            ]);
+        }
+
+
+        Tariff::where('id', $request->id)->update([
+            'user_id' => $request->user_id, 'type' => "nepa"
+        ]);
+
+
+
+        return back()->with('message', "User Tariff has been updated");
+
+    }
+
+
+    public function update_gen(request $request)
+    {
+        Tariff::where('id', $request->id)->update(['user_id' => $request->user_id, 'type' => "gen"]);
+        return back()->with('message', "User Tariff has been updated");
+
+    }
+
+
 
 
 

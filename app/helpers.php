@@ -166,8 +166,8 @@ if (!function_exists('total_utility')) {
     function total_utility($estate_id)
     {
 
-        $data['utl'] = Utitlity::where('id', $estate_id)->first();
-        $total_utility = $data['utl']->water + $data['utl']->eletricity +  $data['utl']->security + $data['utl']->waste + $data['utl']->cleaners + $data['utl']->grardners + $data['utl']->service_charge;
+        $data['utl'] = Utitlity::where('id', $estate_id)->sum('amount');
+        $total_utility =  $data['utl'];
         return $total_utility;
 
     }
