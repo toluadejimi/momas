@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\Setting;
 use App\Models\Tariff;
+use App\Models\TariffState;
+use App\Models\TarrifState;
 use App\Models\UtilitiesPayment;
 use App\Models\Utitlity;
 use Carbon\Carbon;
@@ -74,7 +76,17 @@ class LoginController extends Controller
 
             }
 
-            $tariff = Tariff::select('id', 'estate_tariff_cost', 'type', 'estate_id', 'title')->where('user_id', Auth::id())->get();
+
+            $tariffs = Tariff::select('id', 'type', 'estate_id', 'title')
+                ->where('user_id', Auth::id())
+                ->get();
+
+
+            foreach ($tariffs as $tariff) {
+                $tariffState = TarrifState::where('tariff_id', $tariff->id)->first();
+                $tariff->amount = $tariffState ? $tariffState->amount : null; // Appending 'amount' if it exists
+            }
+
 
             $token = auth()->user()->createToken('API Token')->accessToken;
             $meter = meter();
@@ -82,7 +94,7 @@ class LoginController extends Controller
             $user['token'] = $token;
             $user['meter'] = $meter;
             $user['purchase'] = $pur;
-            $user['tariff'] = $tariff;
+            $user['tariff'] = $tariffs;
 
 
 

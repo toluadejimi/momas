@@ -293,7 +293,7 @@
                                                 <select class="form-control my-3" name="id">
 
                                                     @foreach($tariff as $data)
-                                                        <option value="{{$data->id}}">{{$data->title}}</option>
+                                                        <option value="{{$data->id}}">{{$data->title}} - ₦{{$data->estate_tariff_cost}}</option>
                                                     @endforeach
 
                                                     <input name="user_id" hidden value="{{$user->id}}">
