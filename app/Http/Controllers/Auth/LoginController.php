@@ -109,11 +109,13 @@ class LoginController extends Controller
             flush_token();
 
 
-            $fl = Setting::where('id', 1)->first();
-            $flkey['flutterwave_secret'] = $fl->flutterwave_secret;
-            $flkey['flutterwave_public'] = $fl->flutterwave_public;
-            $pkkey['paystack_secret'] = $fl->paystack_secret;
-            $pkkey['paystack_public'] = $fl->paystack_public;
+            $tariffs = Tariff::select('id', 'type', 'estate_id', 'title')
+                ->where('user_id', Auth::id())
+                ->get();
+            foreach ($tariffs as $tariff) {
+                $tariffState = TarrifState::where('tariff_id', $tariff->id)->first();
+                $tariff->amount = $tariffState ? $tariffState->amount : null;
+            }
 
 
             $token = auth()->user()->createToken('API Token')->accessToken;
@@ -121,6 +123,9 @@ class LoginController extends Controller
             $user = user();
             $user['token'] = $token;
             $user['meter'] = $meter;
+            $user['tariff'] = $tariffs;
+
+
 
 
 
@@ -128,7 +133,6 @@ class LoginController extends Controller
                 'status' => true,
                 'user' => $user
             ]);
-
 
         }
 
