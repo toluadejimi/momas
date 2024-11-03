@@ -194,10 +194,11 @@ if (!function_exists('vend')) {
             if($chk_pay == null || $chk_pay->isEmpty()){
               return $total;
             }else{
+                $totalck = 0;
                 foreach ($chk_pay as $data) {
                     $totalck += $data->amount;
                 }
-                $ftotal = $total - $totalck;
+                $ftotal = $totalck - $total;
                 return $ftotal;
             }
 
@@ -214,10 +215,11 @@ if (!function_exists('vend')) {
             if($chk_pay == null || $chk_pay->isEmpty()){
                 return $total;
             }else{
+                $totalck = 0;
                 foreach ($chk_pay as $data) {
                     $totalck += $data->amount;
                 }
-                $ftotal = $total - $totalck;
+                $ftotal = $totalck - $total;
                 return $ftotal;
             }
 
@@ -234,10 +236,11 @@ if (!function_exists('vend')) {
             if($chk_pay == null || $chk_pay->isEmpty()){
                 return $total;
             }else{
+                $totalck = 0;
                 foreach ($chk_pay as $data) {
                     $totalck += $data->amount;
                 }
-                $ftotal = $total - $totalck;
+                $ftotal = $totalck - $total;
                 return $ftotal;
             }
 
@@ -256,10 +259,11 @@ if (!function_exists('vend')) {
             if($chk_pay == null || $chk_pay->isEmpty()){
                 return $total;
             }else{
+                $totalck = 0;
                 foreach ($chk_pay as $data) {
                     $totalck += $data->amount;
                 }
-                $ftotal = $total - $totalck;
+                $ftotal = $totalck - $total;
                 return $ftotal;
             }
 
