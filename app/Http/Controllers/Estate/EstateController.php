@@ -89,7 +89,7 @@ class EstateController extends Controller
             ]);
         }else{
 
-            Token::where('id', $request->token_id)->update(['status' => 2]);
+            Token::where('id', $request->token_id)->update(['status' => "2"]);
             return response()->json([
                 'status' => true,
                 'message' => "Token Successfully Validated"
