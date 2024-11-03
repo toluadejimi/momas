@@ -374,7 +374,7 @@ if (!function_exists('send_token_email')) {
 
 
         $data = array(
-            'fromsender' => 'support@tomitechltd.com', 'MOMASPAY',
+            'fromsender' => 'momas@tomitechltd.com', 'MOMASPAY',
             'subject' => "Pass Token",
             'toreceiver' => $email,
             'token_code' => $token_code,
