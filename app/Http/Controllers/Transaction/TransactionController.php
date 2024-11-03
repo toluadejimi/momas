@@ -69,9 +69,6 @@ class TransactionController extends Controller
                 return redirect($url);
             }
 
-
-
-
     }
 
 
