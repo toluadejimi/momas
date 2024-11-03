@@ -102,7 +102,7 @@ class EstateController extends Controller
 
     public function token_list(request $request){
 
-        $list = Token::latest()->where('estate_id', Auth::user()->estate_id)->take('50')->get() ?? null;
+        $list = Token::latest()->where('estate_id', Auth::user()->estate_id)->where('status', 0)->take('50')->get() ?? null;
         return response()->json([
             'status' => true,
             'data' =>$list
