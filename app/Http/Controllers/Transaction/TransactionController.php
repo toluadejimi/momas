@@ -58,9 +58,6 @@ class TransactionController extends Controller
         $var = json_decode($var);
         $status = $var->status ?? null;
 
-        $ck_transaction = Transaction::where('trx_id', $request->tx_ref)->first()->status ?? null;
-        if ($ck_transaction != null) {
-
             if ($status == 'success') {
                 Transaction::where('trx_id', $request->tx_ref)->update(['status' => 2]);
                 $ref = Transaction::where('trx_id', $request->tx_ref)->first()->trx_id;
@@ -72,7 +69,7 @@ class TransactionController extends Controller
                 return redirect($url);
             }
 
-        }
+
 
 
     }
