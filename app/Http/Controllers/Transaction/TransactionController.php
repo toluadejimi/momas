@@ -34,8 +34,8 @@ class TransactionController extends Controller
         send_notification($message);
 
         $fl = Setting::where('id', 1)->first();
-        $pksecret = $fl->paystack_secret;
-        $transactionId = $request->reference;
+        $secretKey = $fl->flutterwave_secret;
+        $transactionId = $request->transaction_id;
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
@@ -48,7 +48,7 @@ class TransactionController extends Controller
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                "Authorization: Bearer $pksecret",
+                "Authorization: Bearer $secretKey",
                 "Cache-Control: no-cache",
             ),
         ));
@@ -57,20 +57,19 @@ class TransactionController extends Controller
         curl_close($curl);
         $var = json_decode($var);
         $status = $var->status ?? null;
-        $ref = $var->data->reference ?? null;
 
 
-        $ck_transaction = Transaction::where('trx_id', $var->data->reference)->first()->status ?? null;
-        if ($ck_transaction == null) {
+        $ck_transaction = Transaction::where('trx_id', $request->tx_ref)->first()->status ?? null;
+        if ($ck_transaction != null) {
 
             if ($status == 'success') {
-                Transaction::where('trx_id', $var->data->metadata->ref)->update(['status' => 2]);
-                $ref = Transaction::where('trx_id', $var->data->metadata->ref)->first()->trx_id;
-                $url = url('') . "/payment?ref=$ref&status=success";
+                Transaction::where('trx_id', $request->tx_ref)->update(['status' => 2]);
+                $ref = Transaction::where('trx_id', $request->tx_ref)->first()->trx_id;
+                $url = url('') . "/payment?ref=$request->tx_ref&status=success";
                 return redirect($url);
             } else {
                 $ref = Transaction::where('trx_id', $var->data->metadata->ref)->first()->trx_id;
-                $url = url('') . "/payment?ref=$ref&status=failure";
+                $url = url('') . "/payment?ref=$request->tx_ref&status=failure";
                 return redirect($url);
             }
 
@@ -130,8 +129,6 @@ class TransactionController extends Controller
             curl_close($curl);
             $var = json_decode($var);
             $status = $var->status ?? null;
-
-            dd($var);
 
 
             $trx = new Transaction();
