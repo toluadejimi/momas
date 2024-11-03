@@ -58,9 +58,6 @@ class TransactionController extends Controller
         $var = json_decode($var);
         $status = $var->status ?? null;
 
-        dd($var);
-
-
         $ck_transaction = Transaction::where('trx_id', $request->tx_ref)->first()->status ?? null;
         if ($ck_transaction != null) {
 
