@@ -29,4 +29,8 @@ class Estate extends Model
     {
         return $this->hasMany(Tariff::class);
     }
+
+    protected $casts = [
+        'status' => 'integer',
+        ];
 }
