@@ -82,7 +82,7 @@ class EstateController extends Controller
     public function approve_token(request $request){
 
         $ck = Token::where('id', $request->token_id)->first() ?? null;
-        if($ck == 2){
+        if($ck == "2"){
             return response()->json([
                 'status' => false,
                 'message' => "Token has already been validated"
