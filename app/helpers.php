@@ -191,6 +191,12 @@ if (!function_exists('vend')) {
                 'estate_id' => $estate_id
           ])->whereDate('created_at', Carbon::today())->get() ?? null;
 
+
+
+
+
+
+
             if($chk_pay == null || $chk_pay->isEmpty()){
               return $total;
             }else{

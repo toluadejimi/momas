@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Estate;
 use App\Models\Meter;
 use App\Models\MeterToken;
+use App\Models\SpreadPayment;
 use App\Models\Tariff;
 use App\Models\TarrifState;
 use App\Models\Transformer;
 use App\Models\User;
+use App\Models\UtilitiesPayment;
 use App\Models\Utitlity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,25 +50,36 @@ class MeterController extends Controller
         $duration = Utitlity::where('estate_id', $es_id)->first()->duration ?? null;
         $estate_id = $es_id;
 
+
+
+
         if($duration == null || $estate_id == null){
             $minvend = "Not set";
         }else{
-            $get_vend =  vend($duration, $estate_id);
-            if($get_vend == null){
-                $minvend = "Not set";
-            }else{
+
+            $sp = SpreadPayment::where('user_id', $user->id)->where('estate_id', $es_id)->first()->percentage ?? null;
+            if($sp != null){
+                $percentage = $sp / 100;
+                $vend =  vend($duration, $estate_id);
+                $get_vend =  $percentage * $vend;
                 $minvend = $get_vend;
+
+            }else{
+
+                $get_vend =  vend($duration, $estate_id);
+                if($get_vend == null){
+                    $minvend = "Not set";
+                }else{
+                    $minvend = $get_vend;
+                }
+
             }
+
         }
 
         $min_pur = Estate::where('id', $es_id)->first()->min_pur ?? null;
         $max_pur = Estate::where('id', $es_id)->first()->max_pur ?? null;
-
-
-
         $data['min_purchase'] = (int)$min_pur;
-
-
         $tariffs = Tariff::select('id', 'type', 'estate_id', 'title')
             ->where('user_id', $user->id)
             ->get();
@@ -102,6 +115,21 @@ class MeterController extends Controller
         $date = date('ymd');
         $dater = date('d-m-y');
         $date_time = date('ydis');
+
+
+
+
+        $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first()->duration;
+
+        $utl = new UtilitiesPayment();
+        $utl->user_id = Auth::id();
+        $utl->estate_id = Auth::user()->estate_id;
+        $utl->amount = $request->min_vend_amount;
+        $utl->duration = $duration;
+        $utl->status = 2;
+        $utl->save();
+
+
 
 
         $percentage = 2.5 / 100;
@@ -200,6 +228,17 @@ class MeterController extends Controller
         $percentage = 2.5 / 100;
         $final_amount = $percentage * $amount;
         $dater = date('d-m-y');
+
+        $user = User::where('meterNo', $request->meterNo)->first() ?? null;
+        $duration = Utitlity::where('estate_id', $request->estate_id)->first()->duration;
+
+        $utl = new UtilitiesPayment();
+        $utl->user_id = $user->id ?? null;
+        $utl->estate_id = $request->estate_id;
+        $utl->amount = $request->min_vend_amount;
+        $utl->duration = $duration;
+        $utl->status = 2;
+        $utl->save();
 
 
         $databody = array();
