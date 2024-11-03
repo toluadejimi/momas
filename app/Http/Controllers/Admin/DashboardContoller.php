@@ -10,6 +10,7 @@ use App\Models\Meter;
 use App\Models\MeterToken;
 use App\Models\Organization;
 use App\Models\Setting;
+use App\Models\SpreadPayment;
 use App\Models\Tariff;
 use App\Models\Token;
 use App\Models\Transaction;
@@ -494,6 +495,36 @@ class DashboardContoller extends Controller
     }
 
 
+    public function set_percentage(request $request)
+    {
+
+        $usp = SpreadPayment::where('user_id', $request->user_id)->first() ?? null;
+
+        if($usp == null){
+
+            $sp = new SpreadPayment();
+            $sp->user_id = $request->user_id;
+            $sp->percentage = $request->percent;
+            $sp->estate_id = $request->estate_id;
+            $sp->save();
+
+            return back()->with('message', 'Percentage Updated');
+
+
+        }else{
+
+            SpreadPayment::where('user_id', $request->user_id)->update(['percentage' => $request->percent]);
+            return back()->with('message', 'Percentage Updated');
+
+        }
+
+
+
+
+    }
+
+
+
 
 
     public function view_user(request $request)
@@ -509,6 +540,7 @@ class DashboardContoller extends Controller
         $data['nepa_tariff_title'] = Tariff::where('user_id', $request->id)->where('type', "nepa")->first()->title ?? null;
         $data['gen_tariff_title'] = Tariff::where('user_id', $request->id)->where('type', "gen")->first()->title ?? null;
 
+        $data['percentage'] = SpreadPayment::where('user_id', $request->id)->first()->percentage ?? null;
 
 
 

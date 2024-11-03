@@ -116,6 +116,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
     Route::get('view-organization', [DashboardContoller::class, 'organization_view']);
     Route::post('organization-update', [DashboardContoller::class, 'organization_update']);
     Route::get('organization-delete', [DashboardContoller::class, 'organization_delete']);
+    Route::post('set-percentage', [DashboardContoller::class, 'set_percentage']);
+
 
 
 
@@ -147,6 +149,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
 
     Route::get('meter-activate', [MeterController::class, 'meter_activate']);
     Route::get('meter-deactivate', [MeterController::class, 'meter_deactivate']);
+
+
+
+
 
 
 

@@ -178,104 +178,150 @@
                 </div>
 
 
+
                 @if($user->role == 2)
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <form action="update-meter" method="post">
-                                    @csrf
-                                    <div class="row">
+                    <div class="row ">
 
-                                        <h6 class="d-flex justify-content-start my-2">Attach Information</h6>
+                        <div class="card col-xl-6 mr-3 col-sm-12 card mr-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <form action="update-meter" method="post">
+                                        @csrf
+                                        <div class="row">
 
-
-                                        <div class="col-xl-4 col-sm-12" style="position: relative;">
-
-                                            <label class="my-2">Choose Meter</label>
-                                            <input type="text" name="meterNo"
-                                                   value="{{$user->meterNo ?? "Select Meter"}}" id="searchMeter"
-                                                   placeholder="Type meter number..." class="form-control" required
-                                                   autocomplete="off">
-                                            <div id="meterResult" class="search-result"></div>
-
-                                            <input type="text" name="user_id" value="{{$user->id}}" hidden>
-
-                                            <input type="text" name="old_value" value="{{$user->meterNo}}" hidden>
+                                            <h6 class="d-flex justify-content-start my-2">Attach Information</h6>
 
 
-                                            <script>
-                                                document.getElementById('searchMeter').addEventListener('keyup', function () {
-                                                    let query = this.value;
-                                                    console.log('User input:', query); // Log user input
+                                            <div class="col-xl-4 col-sm-12" style="position: relative;">
 
-                                                    if (query.length > 2) { // Only search if input has more than 2 characters
-                                                        let xhr = new XMLHttpRequest();
-                                                        xhr.open('GET', '/search-meters?q=' + query, true); // Replace with the correct URL
+                                                <label class="my-2">Choose Meter</label>
+                                                <input type="text" name="meterNo"
+                                                       value="{{$user->meterNo ?? "Select Meter"}}" id="searchMeter"
+                                                       placeholder="Type meter number..." class="form-control" required
+                                                       autocomplete="off">
+                                                <div id="meterResult" class="search-result"></div>
 
-                                                        xhr.onreadystatechange = function () {
-                                                            if (xhr.readyState == 4 && xhr.status == 200) {
-                                                                console.log('Response received:', xhr.responseText); // Log the response
+                                                <input type="text" name="user_id" value="{{$user->id}}" hidden>
 
-                                                                let meters = JSON.parse(xhr.responseText);
-                                                                let meterResultDiv = document.getElementById('meterResult');
-                                                                meterResultDiv.innerHTML = ''; // Clear previous results
+                                                <input type="text" name="old_value" value="{{$user->meterNo}}" hidden>
 
-                                                                if (meters.length > 0) {
-                                                                    meters.forEach(meter => {
-                                                                        let div = document.createElement('div');
-                                                                        div.textContent = meter.meterNo;
-                                                                        div.setAttribute('data-id', meter.id);
 
-                                                                        // Add click event to populate the input with the selected suggestion
-                                                                        div.addEventListener('click', function () {
-                                                                            document.getElementById('searchMeter').value = meter.meterNo;
-                                                                            meterResultDiv.style.display = 'none'; // Hide suggestions
+                                                <script>
+                                                    document.getElementById('searchMeter').addEventListener('keyup', function () {
+                                                        let query = this.value;
+                                                        console.log('User input:', query); // Log user input
+
+                                                        if (query.length > 2) { // Only search if input has more than 2 characters
+                                                            let xhr = new XMLHttpRequest();
+                                                            xhr.open('GET', '/search-meters?q=' + query, true); // Replace with the correct URL
+
+                                                            xhr.onreadystatechange = function () {
+                                                                if (xhr.readyState == 4 && xhr.status == 200) {
+                                                                    console.log('Response received:', xhr.responseText); // Log the response
+
+                                                                    let meters = JSON.parse(xhr.responseText);
+                                                                    let meterResultDiv = document.getElementById('meterResult');
+                                                                    meterResultDiv.innerHTML = ''; // Clear previous results
+
+                                                                    if (meters.length > 0) {
+                                                                        meters.forEach(meter => {
+                                                                            let div = document.createElement('div');
+                                                                            div.textContent = meter.meterNo;
+                                                                            div.setAttribute('data-id', meter.id);
+
+                                                                            // Add click event to populate the input with the selected suggestion
+                                                                            div.addEventListener('click', function () {
+                                                                                document.getElementById('searchMeter').value = meter.meterNo;
+                                                                                meterResultDiv.style.display = 'none'; // Hide suggestions
+                                                                            });
+
+                                                                            meterResultDiv.appendChild(div);
                                                                         });
-
-                                                                        meterResultDiv.appendChild(div);
-                                                                    });
-                                                                    meterResultDiv.style.display = 'block'; // Show results
-                                                                } else {
-                                                                    let noResultDiv = document.createElement('div');
-                                                                    noResultDiv.textContent = 'No meters found';
-                                                                    noResultDiv.style.color = 'red';
-                                                                    meterResultDiv.appendChild(noResultDiv);
-                                                                    meterResultDiv.style.display = 'block'; // Show the "No meters found" message
+                                                                        meterResultDiv.style.display = 'block'; // Show results
+                                                                    } else {
+                                                                        let noResultDiv = document.createElement('div');
+                                                                        noResultDiv.textContent = 'No meters found';
+                                                                        noResultDiv.style.color = 'red';
+                                                                        meterResultDiv.appendChild(noResultDiv);
+                                                                        meterResultDiv.style.display = 'block'; // Show the "No meters found" message
+                                                                    }
+                                                                } else if (xhr.readyState == 4) {
+                                                                    console.log('Error: Status', xhr.status); // Log error status
                                                                 }
-                                                            } else if (xhr.readyState == 4) {
-                                                                console.log('Error: Status', xhr.status); // Log error status
-                                                            }
-                                                        };
+                                                            };
 
-                                                        xhr.onerror = function () {
-                                                            console.error('Request error'); // Log any request errors
-                                                        };
+                                                            xhr.onerror = function () {
+                                                                console.error('Request error'); // Log any request errors
+                                                            };
 
-                                                        xhr.send();
-                                                    } else {
-                                                        document.getElementById('meterResult').style.display = 'none'; // Hide if input is too short
-                                                    }
-                                                });
-                                            </script>
+                                                            xhr.send();
+                                                        } else {
+                                                            document.getElementById('meterResult').style.display = 'none'; // Hide if input is too short
+                                                        }
+                                                    });
+                                                </script>
 
 
+                                            </div>
+
+                                            <div class="col-xl-6 col-sm-12">
+
+                                            </div>
+
+                                            <div class="col-xl-3 col-sm-12">
+                                                <button type="submit" class="col-12 d-flex w-100 btn btn-primary my-3">
+                                                    Update
+                                                </button>
+                                            </div>
                                         </div>
 
-                                        <div class="col-xl-6 col-sm-12">
-
-                                        </div>
-
-                                        <div class="col-xl-3 col-sm-12">
-                                            <button type="submit" class="col-12 d-flex w-100 btn btn-primary my-3">
-                                                Update meter information
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
+
+
+                        <div class="card col-xl-6 mr-3 col-sm-12 card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <form action="set-percentage" method="post">
+                                        @csrf
+                                        <div class="row">
+
+                                            <h6 class="d-flex justify-content-start my-2">Set Utilities percentage</h6>
+
+
+                                            <div class="col-xl-4 col-sm-12" style="position: relative;">
+
+                                                <label class="my-2">Set percentage %</label>
+                                                <input type="number" step="0.01" name="percent"  class="form-control" value="{{$percentage}}" required>
+                                                <input type="text" name="user_id" value="{{$user->id}}" hidden>
+                                                <input type="text" name="estate_id" value="{{$user->estate_id}}" hidden>
+
+                                            </div>
+
+                                            <div class="col-xl-6 col-sm-12">
+
+                                            </div>
+
+                                            <div class="col-xl-3 col-sm-12">
+                                                <button type="submit" class="col-12 d-flex w-100 btn btn-primary my-3">
+                                                    Update
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
+
+
+
+
                     <div class="col-xl-6 mr-3 col-sm-12 card">
                         <div class="card-body">
                             <div class="row">
