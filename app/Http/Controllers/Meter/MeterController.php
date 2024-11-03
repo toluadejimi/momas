@@ -473,8 +473,8 @@ class MeterController extends Controller
 
         return response()->json([
             'status' => true,
-            'min_purchase' => $min_pur,
-            'min_vend' => $minvend
+            'min_purchase' => (int)$min_pur,
+            'min_vend' => (int)$minvend
         ]);
 
 
