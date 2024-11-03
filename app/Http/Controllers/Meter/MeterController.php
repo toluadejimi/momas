@@ -470,15 +470,10 @@ class MeterController extends Controller
         }
 
         $min_pur = Estate::where('id', Auth::user()->estate_id)->first()->min_pur ?? null;
-        if($min_pur == null){
-            $get_pur = "Not Set";
-        }else{
-            $get_pur = $min_pur;
-        }
 
         return response()->json([
             'status' => true,
-            'min_purchase' => $get_pur,
+            'min_purchase' => $min_pur,
             'min_vend' => $minvend
         ]);
 

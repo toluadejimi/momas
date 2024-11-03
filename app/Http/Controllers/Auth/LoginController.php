@@ -59,8 +59,6 @@ class LoginController extends Controller
             $tariffs = Tariff::select('id', 'type', 'estate_id', 'title')
                 ->where('user_id', Auth::id())
                 ->get();
-
-
             foreach ($tariffs as $tariff) {
                 $tariffState = TarrifState::where('tariff_id', $tariff->id)->first();
                 $tariff->amount = $tariffState ? $tariffState->amount : null;

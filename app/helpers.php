@@ -166,8 +166,7 @@ if (!function_exists('total_utility')) {
     function total_utility($estate_id)
     {
 
-        $data['utl'] = Utitlity::where('id', $estate_id)->sum('amount');
-        $total_utility =  $data['utl'];
+        $total_utility =  Utitlity::where('estate_id', $estate_id)->sum('amount');
         return $total_utility;
 
     }
@@ -180,6 +179,7 @@ if (!function_exists('vend')) {
 
     function vend($duration, $estate_id)
     {
+
 
 
         if($duration == "daily"){
@@ -245,6 +245,7 @@ if (!function_exists('vend')) {
 
 
         if($duration == "yearly"){
+
 
             $total = total_utility($estate_id);
             $chk_pay =  UtilitiesPayment::where([
