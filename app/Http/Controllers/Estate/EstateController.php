@@ -32,7 +32,7 @@ class EstateController extends Controller
         $visitor = $request->qty;
         $email = $request->email;
         $can_send = $request->can_send_mail;
-        $estate_id = $request->estate_id;
+        $estate_id = Auth::user()->estate_id;
         $currentTime = Carbon::now();
         $valid_date = $currentTime->addHours(24);
 
@@ -81,15 +81,35 @@ class EstateController extends Controller
 
     public function approve_token(request $request){
 
-        Token::where('id', $request->token_id)->update(['status' => 1]);
+        $ck = Token::where('id', $request->token_id)->first() ?? null;
+        if($ck == 2){
+            return response()->json([
+                'status' => false,
+                'message' => "Token has already been validated"
+            ]);
+        }else{
+
+            Token::where('id', $request->token_id)->update(['status' => 2]);
+            return response()->json([
+                'status' => true,
+                'message' => "Token Successfully Validated"
+            ]);
+
+        }
+
+    }
+
+
+    public function token_list(request $request){
+
+        $list = Token::where('estate_id', Auth::user()->estate_id)->get() ?? null;
         return response()->json([
             'status' => true,
-            'message' => "Token Successfully Approved"
+            'data' =>$list
         ]);
 
 
     }
-
 
 
     public function disapprove_token(request $request){

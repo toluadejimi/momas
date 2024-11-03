@@ -101,6 +101,10 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::post('disapprove-token', [EstateController::class, 'disapprove_token']);
     Route::post('delete-token', [EstateController::class, 'delete_token']);
     Route::post('set-default', [EstateController::class, 'set_default_estate']);
+    Route::post('token-list', [EstateController::class, 'token_list']);
+
+
+
 
 
     //Services
