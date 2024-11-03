@@ -453,6 +453,38 @@ class MeterController extends Controller
 
     }
 
+    public function vending_properties(request $request){
+
+        $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first()->duration ?? null;
+        $estate_id = Auth::user()->estate_id ?? null;
+
+        if($duration == null || $estate_id == null){
+            $minvend = "Not set";
+        }else{
+            $get_vend =  vend($duration, $estate_id);
+            if($get_vend == null){
+                $minvend = "Not set";
+            }else{
+                $minvend = $get_vend;
+            }
+        }
+
+        $min_pur = Estate::where('estate_id', Auth::user()->estate_id)->first()->min_pur ?? null;
+        if($min_pur == null){
+            $get_pur = "Not Set";
+        }else{
+            $get_pur = $min_pur;
+        }
+
+        return response()->json([
+            'status' => true,
+            'min_purchase' => $get_pur,
+            'min_vend' => $minvend
+        ]);
+
+
+    }
+
 
 
 

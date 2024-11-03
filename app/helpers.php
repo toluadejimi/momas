@@ -184,28 +184,22 @@ if (!function_exists('vend')) {
 
         if($duration == "daily"){
 
+
             $total = total_utility($estate_id);
           $chk_pay =  UtilitiesPayment::where([
                 'user_id' => Auth::id(),
                 'estate_id' => $estate_id
-            ])->whereDate('created_at', Carbon::today())->get() ?? null;
+          ])->whereDate('created_at', Carbon::today())->get() ?? null;
 
-          if($chk_pay == null || $chk_pay->isEmpty()){
-              $new_pay = new UtilitiesPayment();
-              $new_pay->user_id = Auth::id();
-              $new_pay->estate_id = $estate_id;
-              $new_pay->amount = $total;
-              $new_pay->status = 0;
-              $new_pay->duration = "daily";
-              $new_pay->save();
+            if($chk_pay == null || $chk_pay->isEmpty()){
               return $total;
-          } else {
-              $total = 0;
-              foreach ($chk_pay as $data) {
-                  $total += $data->amount;
-              }
-              return $total;
-          }
+            }else{
+                foreach ($chk_pay as $data) {
+                    $totalck += $data->amount;
+                }
+                $ftotal = $total - $totalck;
+                return $ftotal;
+            }
 
         }
 
@@ -218,22 +212,13 @@ if (!function_exists('vend')) {
             ])->whereBetween('created_at',[Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get() ?? null;
 
             if($chk_pay == null || $chk_pay->isEmpty()){
-                $new_pay = new UtilitiesPayment();
-                $new_pay->user_id = Auth::id();
-                $new_pay->estate_id = $estate_id;
-                $new_pay->amount = $total;
-                $new_pay->status = 0;
-                $new_pay->duration = "weekly";
-                $new_pay->save();
                 return $total;
-
-            } else {
-                $total = 0;
+            }else{
                 foreach ($chk_pay as $data) {
-                    $total += $data->amount;
+                    $totalck += $data->amount;
                 }
-                return $total;
-
+                $ftotal = $total - $totalck;
+                return $ftotal;
             }
 
         }
@@ -247,23 +232,39 @@ if (!function_exists('vend')) {
             ])->whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->get() ?? null;
 
             if($chk_pay == null || $chk_pay->isEmpty()){
-                $new_pay = new UtilitiesPayment();
-                $new_pay->user_id = Auth::id();
-                $new_pay->estate_id = $estate_id;
-                $new_pay->amount = $total;
-                $new_pay->status = 0;
-                $new_pay->duration = "monthly";
-                $new_pay->save();
                 return $total;
-            } else {
-                $total = 0;
+            }else{
                 foreach ($chk_pay as $data) {
-                    $total += $data->amount;
+                    $totalck += $data->amount;
                 }
-                return $total;
+                $ftotal = $total - $totalck;
+                return $ftotal;
             }
 
         }
+
+
+        if($duration == "yearly"){
+
+            $total = total_utility($estate_id);
+            $chk_pay =  UtilitiesPayment::where([
+                'user_id' => Auth::id(),
+                'estate_id' => $estate_id
+            ])->whereBetween('created_at', [Carbon::now()->startOfYear(), Carbon::now()->endOfYear()])->get() ?? null;
+
+            if($chk_pay == null || $chk_pay->isEmpty()){
+                return $total;
+            }else{
+                foreach ($chk_pay as $data) {
+                    $totalck += $data->amount;
+                }
+                $ftotal = $total - $totalck;
+                return $ftotal;
+            }
+
+        }
+
+
     }
 }
 

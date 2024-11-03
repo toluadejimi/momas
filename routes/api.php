@@ -81,6 +81,8 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::post('buy-meter-others', [MeterController::class, 'pay_for_others_meter_token']);
     Route::post('reprint-token', [MeterController::class, 'reprint_meter_token']);
     Route::post('get-token', [MeterController::class, 'get_token']);
+    Route::get('vending-properties', [MeterController::class, 'vending_properties']);
+
 
 
 
@@ -103,6 +105,7 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
 
     //Services
     Route::get('get-service', [ServiceController::class, 'get_estate']);
+
 
 
 
