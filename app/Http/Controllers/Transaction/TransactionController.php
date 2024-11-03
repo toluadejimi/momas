@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use App\Models\Transaction;
 use App\Models\User;
-use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,19 +15,67 @@ class TransactionController extends Controller
     public function flutter_payment(request $request)
     {
 
+//        $fl = Setting::where('id', 1)->first();
+//        $flkey['flutterwave_secret'] = $fl->flutterwave_secret;
+//        $flkey['flutterwave_public'] = $fl->flutterwave_public;
+//        $pkkey['paystack_secret'] = $fl->paystack_secret;
+//        $pkkey['paystack_public'] = $fl->paystack_public;
+//
+//        $data['amount'] = $request->amount;
+//        $data['trx_id'] = $request->trx_id;
+//        $data['email'] = $request->email;
+//        $data['key'] = $flkey['flutterwave_public'];
+//
+//
+//        return view('flutter-pay', $data);
+
+
+        $message = "flutterwave = " . json_encode($request->all());
+        send_notification($message);
+
         $fl = Setting::where('id', 1)->first();
-        $flkey['flutterwave_secret'] = $fl->flutterwave_secret;
-        $flkey['flutterwave_public'] = $fl->flutterwave_public;
-        $pkkey['paystack_secret'] = $fl->paystack_secret;
-        $pkkey['paystack_public'] = $fl->paystack_public;
+        $pksecret = $fl->paystack_secret;
+        $transactionId = $request->reference;
 
-        $data['amount'] = $request->amount;
-        $data['trx_id'] = $request->trx_id;
-        $data['email'] = $request->email;
-        $data['key'] = $flkey['flutterwave_public'];
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.flutterwave.com/v3/transactions/$transactionId/verify",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                "Authorization: Bearer $pksecret",
+                "Cache-Control: no-cache",
+            ),
+        ));
+
+        $var = curl_exec($curl);
+        curl_close($curl);
+        $var = json_decode($var);
+        $status = $var->status ?? null;
+        $ref = $var->data->reference ?? null;
 
 
-        return view('flutter-pay', $data);
+        $ck_transaction = Transaction::where('trx_id', $var->data->reference)->first()->status ?? null;
+        if ($ck_transaction == null) {
+
+            if ($status == 'success') {
+                Transaction::where('trx_id', $var->data->metadata->ref)->update(['status' => 2]);
+                $ref = Transaction::where('trx_id', $var->data->metadata->ref)->first()->trx_id;
+                $url = url('') . "/payment?ref=$ref&status=success";
+                return redirect($url);
+            } else {
+                $ref = Transaction::where('trx_id', $var->data->metadata->ref)->first()->trx_id;
+                $url = url('') . "/payment?ref=$ref&status=failure";
+                return redirect($url);
+            }
+
+        }
+
 
     }
 
@@ -41,7 +88,7 @@ class TransactionController extends Controller
             $email = Auth::user()->email;
             $phone = Auth::user()->phone ?? "012345678";
             $fl = Setting::where('id', 1)->first();
-            $secretKey= $fl->flutterwave_secret;
+            $secretKey = $fl->flutterwave_secret;
             $fpublic = $fl->flutterwave_public;
             $url = url('');
 
@@ -49,11 +96,11 @@ class TransactionController extends Controller
                 'title' => 'Payment for services',
                 'amount' => $request->amount,
                 'currency' => 'NGN',
-                'redirect_url' => $url."/pay-flutter",
+                'redirect_url' => $url . "/pay-flutter",
                 'customer' => [
                     'email' => $email,
                     'phonenumber' => $phone,
-                    'name' => Auth::user()->first_name." ".Auth::user()->last_name,
+                    'name' => Auth::user()->first_name . " " . Auth::user()->last_name,
                 ],
                 'tx_ref' => $trx_id,
 
@@ -85,8 +132,6 @@ class TransactionController extends Controller
             $status = $var->status ?? null;
 
 
-
-
             $trx = new Transaction();
             $trx->user_id = Auth::id();
             $trx->pay_type = "flutterwave";
@@ -103,17 +148,7 @@ class TransactionController extends Controller
             }
 
 
-
-
-
-
-
-
-
-
-
         }
-
 
 
         if ($request->pay_type == 'paystack') {
@@ -163,7 +198,6 @@ class TransactionController extends Controller
             $status = $var->status;
 
 
-
             if ($status == true) {
                 $trx = new Transaction();
                 $trx->user_id = Auth::id();
@@ -211,7 +245,7 @@ class TransactionController extends Controller
             $email = Auth::user()->email;
 
 
-            if ( Auth::user()->main_wallet < $request->amount) {
+            if (Auth::user()->main_wallet < $request->amount) {
                 $code = 422;
                 $message = "Insufficient Funds";
                 return error($message, $code);
@@ -305,7 +339,7 @@ class TransactionController extends Controller
     public function paystack_verify(request $request)
     {
 
-        $message = "paystack=".json_encode($request->all());
+        $message = "paystack=" . json_encode($request->all());
         send_notification($message);
 
         $fl = Setting::where('id', 1)->first();
@@ -335,7 +369,6 @@ class TransactionController extends Controller
         $ref = $var->data->reference ?? null;
 
 
-
         $ck_transaction = Transaction::where('trx_id', $var->data->reference)->first()->status ?? null;
         if ($ck_transaction == null) {
 
@@ -344,7 +377,7 @@ class TransactionController extends Controller
                 $ref = Transaction::where('trx_id', $var->data->metadata->ref)->first()->trx_id;
                 $url = url('') . "/payment?ref=$ref&status=success";
                 return redirect($url);
-            }else{
+            } else {
                 $ref = Transaction::where('trx_id', $var->data->metadata->ref)->first()->trx_id;
                 $url = url('') . "/payment?ref=$ref&status=failure";
                 return redirect($url);

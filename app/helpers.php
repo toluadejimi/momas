@@ -262,6 +262,8 @@ if (!function_exists('vend')) {
                 'estate_id' => $estate_id
             ])->whereBetween('created_at', [Carbon::now()->startOfYear(), Carbon::now()->endOfYear()])->get() ?? null;
 
+
+
             if($chk_pay == null || $chk_pay->isEmpty()){
                 return $total;
             }else{
