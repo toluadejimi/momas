@@ -469,7 +469,7 @@ class MeterController extends Controller
             }
         }
 
-        $min_pur = Estate::where('estate_id', Auth::user()->estate_id)->first()->min_pur ?? null;
+        $min_pur = Estate::where('id', Auth::user()->estate_id)->first()->min_pur ?? null;
         if($min_pur == null){
             $get_pur = "Not Set";
         }else{
