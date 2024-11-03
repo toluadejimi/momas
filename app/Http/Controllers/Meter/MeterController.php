@@ -60,11 +60,11 @@ class MeterController extends Controller
         }
 
         $min_pur = Estate::where('id', $es_id)->first()->min_pur ?? null;
+        $max_pur = Estate::where('id', $es_id)->first()->max_pur ?? null;
+
+
 
         $data['min_purchase'] = (int)$min_pur;
-        $data['min_vend'] = (int)$minvend;
-
-
 
 
         $tariffs = Tariff::select('id', 'type', 'estate_id', 'title')
@@ -75,15 +75,18 @@ class MeterController extends Controller
             $tariff->amount = $tariffState ? $tariffState->amount : null;
         }
 
-        $data['tariffs'] = $tariffs;
+            $data['tariffs'] = $tariffs;
+            $pur['min_purchase'] = (int)$min_pur;
+            $pur['max_purchase'] = (int)$max_pur;
+            $pur['min_vending'] = (int)$minvend;
+            $data['purchase'] = $pur;
+
 
         return response()->json([
             'status' => true,
             'data' => $data
+
         ]);
-
-
-
 
 
     }
