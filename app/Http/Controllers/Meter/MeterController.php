@@ -7,6 +7,7 @@ use App\Models\Estate;
 use App\Models\Meter;
 use App\Models\MeterToken;
 use App\Models\Tariff;
+use App\Models\TarrifState;
 use App\Models\Transformer;
 use App\Models\User;
 use App\Models\Utitlity;
@@ -37,47 +38,52 @@ class MeterController extends Controller
             error($message, $code);
         }
 
-        $meter_type = Meter::where('meterNo', $request->meterNo)->first()->payType;
+//        $meter_type = Meter::where('meterNo', $request->meterNo)->first()->payType;
 
         $data['customer_name'] = $user->first_name . " " . $user->last_name;
         $data['address'] = $user->address . ", " . $user->city . ", " . $user->state;
-        $data['meter_type'] = $meter_type;
+       // $data['meter_type'] = $meter_type;
 
         $es_id = User::where('meterNo', $request->meterNo)->first()->estate_id ?? null;
-        $purr = Tariff::where('estate_id', $es_id)->first() ?? null;
         $duration = Utitlity::where('estate_id', $es_id)->first()->duration ?? null;
-        $estate_id = $es_id ?? null;
+        $estate_id = $es_id;
 
-
-        if ($duration == null || $estate_id == null) {
-            $minvend = 0;
-        } else {
-            $get_vend = vend($duration, $estate_id);
-            if ($get_vend == null) {
-                $minvend = 0;
-            } else {
+        if($duration == null || $estate_id == null){
+            $minvend = "Not set";
+        }else{
+            $get_vend =  vend($duration, $estate_id);
+            if($get_vend == null){
+                $minvend = "Not set";
+            }else{
                 $minvend = $get_vend;
             }
         }
 
+        $min_pur = Estate::where('id', $es_id)->first()->min_pur ?? null;
 
-        if ($purr == null) {
-            $pur = [];
-        } else {
-            $pur['min_purchase'] = $purr->min_pur;
-            $pur['max_purchase'] = $purr->max_pur;
-            $pur['min_vending'] = $minvend;
+        $data['min_purchase'] = (int)$min_pur;
+        $data['min_vend'] = (int)$minvend;
 
+
+
+
+        $tariffs = Tariff::select('id', 'type', 'estate_id', 'title')
+            ->where('user_id', $user->id)
+            ->get();
+        foreach ($tariffs as $tariff) {
+            $tariffState = TarrifState::where('tariff_id', $tariff->id)->first();
+            $tariff->amount = $tariffState ? $tariffState->amount : null;
         }
 
-        $data['purchase'] = $pur;
-
+        $data['tariffs'] = $tariffs;
 
         return response()->json([
             'status' => true,
             'data' => $data
-
         ]);
+
+
+
 
 
     }

@@ -51,11 +51,6 @@ class LoginController extends Controller
             flush_token();
 
 
-
-
-
-
-
             $tariffs = Tariff::select('id', 'type', 'estate_id', 'title')
                 ->where('user_id', Auth::id())
                 ->get();
