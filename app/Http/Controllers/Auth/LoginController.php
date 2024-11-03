@@ -50,7 +50,7 @@ class LoginController extends Controller
 
             flush_token();
 
-            $purr = Tariff::where('estate_id', Auth::user()->estate_id)->first() ?? null;
+            $purr = Utitlity::where('estate_id', Auth::user()->estate_id)->sum('amount') ?? null;
             $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first()->duration ?? null;
             $estate_id = Auth::user()->estate_id ?? null;
 
@@ -68,12 +68,9 @@ class LoginController extends Controller
 
 
             if($purr == null){
-                $pur = [];
+                $pur = 0;
             }else{
-                $pur['min_purchase'] = $purr->min_pur;
-                $pur['max_purchase'] = $purr->max_pur;
-                $pur['min_vending'] = $minvend;
-
+                $pur = $purr;
             }
 
 
@@ -93,7 +90,7 @@ class LoginController extends Controller
             $user = user();
             $user['token'] = $token;
             $user['meter'] = $meter;
-            $user['purchase'] = $pur;
+            $user['min_purchase'] = $pur;
             $user['tariff'] = $tariffs;
 
 
