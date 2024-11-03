@@ -131,6 +131,8 @@ class TransactionController extends Controller
             $var = json_decode($var);
             $status = $var->status ?? null;
 
+            dd($var);
+
 
             $trx = new Transaction();
             $trx->user_id = Auth::id();
