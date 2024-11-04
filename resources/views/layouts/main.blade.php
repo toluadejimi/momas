@@ -184,6 +184,15 @@
                         </li>
 
 
+                        <li>
+                            <a class='tp-link'  href="estate-service">
+                                <i data-feather="layers"></i>
+                                <span> Estate Service </span>
+                            </a>
+                        </li>
+
+
+
 
 
                         <li>
@@ -246,6 +255,12 @@
                         </li>
 
 
+                        <li>
+                            <a class='tp-link'  href="estate-service">
+                                <i data-feather="layers"></i>
+                                <span> Estate Service </span>
+                            </a>
+                        </li>
 
 
                         <li>

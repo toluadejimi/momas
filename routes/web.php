@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DashboardContoller;
 use App\Http\Controllers\Admin\EstateController;
 use App\Http\Controllers\Admin\MeterImportController;
 use App\Http\Controllers\Admin\TariffController;
+use App\Http\Controllers\Estate\EstateServiceController;
 use App\Http\Controllers\Meter\MeterController;
 use App\Http\Controllers\Transformer\TransformerController;
 use App\Http\Controllers\Transaction\TransactionController;
@@ -94,6 +95,23 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
     Route::post('estate-update-info', [EstateController::class, 'estate_update']);
     Route::post('estate-update-utilities', [EstateController::class, 'estate_update_utilities']);
     Route::post('update-duration', [EstateController::class, 'update_duration']);
+    Route::get('estate-service', [EstateServiceController::class, 'index']);
+    Route::get('view-service', [EstateServiceController::class, 'view_service']);
+    Route::post('add-new-service-list', [EstateServiceController::class, 'add_new_service']);
+    Route::post('service-update', [EstateServiceController::class, 'service_update']);
+    Route::get('delete-comment', [EstateServiceController::class, 'delete_comment']);
+    Route::get('service-delete', [EstateServiceController::class, 'delete_service']);
+    Route::get('service-deactivate', [EstateServiceController::class, 'deactivate_service']);
+    Route::get('service-activate', [EstateServiceController::class, 'activate_service']);
+
+
+
+
+
+
+
+
+
 
 
 

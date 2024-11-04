@@ -30,6 +30,11 @@ class Estate extends Model
         return $this->hasMany(Tariff::class);
     }
 
+    public function estate_service()
+    {
+        return $this->hasMany(EstateService::class);
+    }
+
     protected $casts = [
         'status' => 'integer',
         ];

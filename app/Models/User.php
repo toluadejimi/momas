@@ -92,4 +92,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Estate::class);
     }
+
+    public function estate_service()
+    {
+        return $this->hasMany(EstateService::class);
+    }
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
