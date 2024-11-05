@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Estate;
 use App\Models\Meter;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -103,6 +104,8 @@ class RegisterController extends Controller
 
 
 
+        $estate_name = Estate::where('id', $gm->estate_id)->first()->first()->title ?? null;
+
 
         if($usr->status == 1){
 
@@ -116,6 +119,7 @@ class RegisterController extends Controller
                 'phone' =>  $request->phone,
                 'meterNo' =>  $request->meterNo,
                 'estate_id' =>  $gm->estate_id ?? null,
+                'estate_name' =>  $gm->estate_name ?? null,
                 'status' =>  2,
                 'password' => bcrypt($request->password),
 
