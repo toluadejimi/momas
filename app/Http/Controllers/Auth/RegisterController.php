@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Meter;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -92,6 +93,17 @@ class RegisterController extends Controller
         }
 
 
+        $gm = Meter::where('meterNo', $request->meterNo)->first() ?? null;
+        if($gm == null){
+            $code = 422;
+            $message = "Meter has not been profiled";
+            return error($message, $code);
+
+        }
+
+
+
+
         if($usr->status == 1){
 
             User::where('email', $request->email)->update([
@@ -103,6 +115,7 @@ class RegisterController extends Controller
                 'state' =>  $request->state,
                 'phone' =>  $request->phone,
                 'meterNo' =>  $request->meterNo,
+                'estate_id' =>  $gm->estate_id ?? null,
                 'status' =>  2,
                 'password' => bcrypt($request->password),
 
