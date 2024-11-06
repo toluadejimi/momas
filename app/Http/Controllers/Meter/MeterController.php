@@ -31,17 +31,12 @@ class MeterController extends Controller
     {
         $user = User::where('meterNo', $request->meterNo)->first() ?? null;
 
-
         $meter = Meter::where('meterNo', $request->meterNo)->where('estate_id', $request->estateId)->first() ?? null;
-
         if ($meter == null) {
             $message = "Validation Failed, please check meter number or estate selected";
             $code = 422;
-            error($message, $code);
+            return error($message, $code);
         }
-
-
-
 
 
 
