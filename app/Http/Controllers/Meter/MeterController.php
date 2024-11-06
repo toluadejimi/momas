@@ -30,7 +30,9 @@ class MeterController extends Controller
     public function validate_meter(request $request)
     {
         $user = User::where('meterNo', $request->meterNo)->first() ?? null;
-        $meter = Meter::where('meterNo', $request->meterNo)->where('estate_id', $request->estate_id)->first() ?? null;
+
+
+        $meter = Meter::where('meterNo', $request->meterNo)->where('estate_id', $request->estateId)->first() ?? null;
 
 
         if ($meter == null) {
