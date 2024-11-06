@@ -29,12 +29,18 @@ class MeterController extends Controller
 
     public function validate_meter(request $request)
     {
-        $user = Meter::where('meterNo', $request->meterNo)->where('estate_id', $request->estate_id)->first() ?? null;
-        if ($user == null) {
+        $user = User::where('meterNo', $request->meterNo)->first() ?? null;
+        $meter = Meter::where('meterNo', $request->meterNo)->where('estate_id', $request->estate_id)->first() ?? null;
+
+
+        if ($meter == null) {
             $message = "Validation Failed, please check meter number or estate selected";
             $code = 422;
             error($message, $code);
         }
+
+
+
 
 
 
