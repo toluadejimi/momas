@@ -30,13 +30,15 @@ class MeterController extends Controller
     public function validate_meter(request $request)
     {
 
-        $user = User::where('meterNo', $request->meterNo)->first() ?? null;
+        $user = User::where('meterNo', $request->meterNo)->where('estate_id', $request->estate_id)->first() ?? null;
 
         if ($user == null) {
-            $message = "Validation Failed, please check meter number";
+            $message = "Validation Failed, please check meter number or estate selected";
             $code = 422;
             error($message, $code);
         }
+
+
 
 //        $meter_type = Meter::where('meterNo', $request->meterNo)->first()->payType;
 
@@ -47,6 +49,8 @@ class MeterController extends Controller
         $es_id = User::where('meterNo', $request->meterNo)->first()->estate_id ?? null;
         $duration = Utitlity::where('estate_id', $es_id)->first()->duration ?? null;
         $estate_id = $es_id;
+
+
 
 
         if ($duration == null || $estate_id == null) {
