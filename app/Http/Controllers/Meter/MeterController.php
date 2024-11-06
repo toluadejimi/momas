@@ -118,6 +118,15 @@ class MeterController extends Controller
 
 
         $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first()->duration;
+        if ($request->min_vend_amount > 0) {
+            $utl = new UtilitiesPayment();
+            $utl->user_id = Auth::id();
+            $utl->estate_id = Auth::user()->estate_id;
+            $utl->amount = $request->min_vend_amount;
+            $utl->duration = $duration;
+            $utl->status = 2;
+            $utl->save();
+        }
 
         $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
         $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
@@ -386,13 +395,19 @@ class MeterController extends Controller
         $user = User::where('meterNo', $request->meterNo)->first() ?? null;
         $duration = Utitlity::where('estate_id', $request->estate_id)->first()->duration;
 
-        $utl = new UtilitiesPayment();
-        $utl->user_id = $user->id ?? null;
-        $utl->estate_id = $request->estate_id;
-        $utl->amount = $request->min_vend_amount;
-        $utl->duration = $duration;
-        $utl->status = 2;
-        $utl->save();
+
+        $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first()->duration;
+        if ($request->min_vend_amount > 0) {
+            $utl = new UtilitiesPayment();
+            $utl->user_id = $user->id ?? null;
+            $utl->estate_id = $request->estate_id;
+            $utl->amount = $request->min_vend_amount;
+            $utl->duration = $duration;
+            $utl->status = 2;
+            $utl->save();
+        }
+
+
 
 //////////////////////////////////////////////////////////////////////////test
 
