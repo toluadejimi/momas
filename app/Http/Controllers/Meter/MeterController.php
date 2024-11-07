@@ -5,11 +5,9 @@ namespace App\Http\Controllers\Meter;
 use App\Http\Controllers\Controller;
 use App\Models\Estate;
 use App\Models\Meter;
-use App\Models\MeterToken;
 use App\Models\SpreadPayment;
 use App\Models\Tariff;
 use App\Models\TarrifState;
-use App\Models\Transformer;
 use App\Models\User;
 use App\Models\UtilitiesPayment;
 use App\Models\Utitlity;
@@ -39,7 +37,6 @@ class MeterController extends Controller
         }
 
 
-
 //        $meter_type = Meter::where('meterNo', $request->meterNo)->first()->payType;
 
         $data['customer_name'] = $user->first_name . " " . $user->last_name;
@@ -49,8 +46,6 @@ class MeterController extends Controller
         $es_id = User::where('meterNo', $request->meterNo)->first()->estate_id ?? null;
         $duration = Utitlity::where('estate_id', $es_id)->first()->duration ?? null;
         $estate_id = $es_id;
-
-
 
 
         if ($duration == null || $estate_id == null) {
@@ -150,17 +145,10 @@ class MeterController extends Controller
             curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
             $response = curl_exec($ch);
             curl_close($ch);
-            $var = json_decode($response, true);
-            $status = $var->code ?? null;
+            $data = json_decode($response, true);
+            if (strpos($data, 'SUCCESS') !== false) {
 
-            dd($var);
-
-
-
-
-            if($status == "SUCCESS"){
-
-
+                $token = preg_replace('/\D/', '', $data);
                 $kctdatabody = [
                     'meterType' => $meter->KRN1,
                     'tometerType' => $meter->KRN1,
@@ -173,7 +161,6 @@ class MeterController extends Controller
                     'allowkrn' => true,
                 ];
 
-
                 $kctjsonData = json_encode($kctdatabody);
                 $url = "http://169.239.189.91:19071/kcttokenGen";
                 $ch = curl_init($url);
@@ -184,70 +171,123 @@ class MeterController extends Controller
                 ]);
                 curl_setopt($ch, CURLOPT_POST, true);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $kctjsonData);
-                $response = curl_exec($ch);
+                $kct_response = curl_exec($ch);
                 curl_close($ch);
-                $var = json_decode($response);
-                $kct_status = $var->code ?? null;
+                $kct_data = json_decode($kct_response, true);
 
-                $get_kct_token = $var['token'];
-                $kct_token = array_filter($get_kct_token, function($item) {
-                    return trim($item) !== "";
-                });
+                if (strpos($kct_data, 'SUCCESS') !== false) {
 
+                    $data = json_decode($kct_data, true);
+                    if (isset($data['tokens']) && is_array($data['tokens'])) {
+                        foreach ($data['tokens'] as $number) {
+                            $kct_token = $number . "\n";  // Print each number from the 'tokens' array
+                        }
+                    }
 
-                if($kct_status == "SUCCESS"){
-
-                    $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
-                    $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
-                    $data['service'] = "MOMAS METER";
-                    $data['order_id'] = $trx;
-                    $data['token'] = $token;
-                    $data['amount'] = $amount;
-                    $data['kct_tokens'] = $kct_token;
+                    $kct_token = $data['tokens'];
 
 
-                    $ved = new MeterToken();
-                    $ved->user_id = Auth::id();
-                    $ved->order_id = $trx;
-                    $ved->token = $token;
-                    $ved->amount = $amount;
-                    $ved->estate_id = Auth::user()->estate_id;
-                    $ved->meterNo = $meterNo;
-                    $ved->estate_name = Estate::where('id', Auth::user()->estate_id)->first()->title;
-                    $ved->status = 2;
-                    $ved->save();
+                    $data2['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
+                    $data2['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
+                    $data2['service'] = "MOMAS METER";
+                    $data2['order_id'] = $trx;
+                    $data2['token'] = $token;
+                    $data2['amount'] = $amount;
+                    $data2['kct_token1'] = $kct_token[0];
+                    $data2['kct_token2'] = $kct_token[1];
+
 
                     $email = Auth::user()->email;
-                    send_kct_email_token($email, $token, $amount, $kct_token);
+                    $kct_token = $data['tokens'];
+                    $kct_token1 = $kct_token[0];
+                    $kct_token2 = $kct_token[1];
+
+                    send_kct_email_token($email, $token, $amount, $kct_token1, $kct_token2);
+
 
                     return response()->json([
                         'status' => true,
-                        'data' => $data
+                        'data' => $data2
                     ], 200);
 
 
                 }
 
 
-
-
-
-
-
-
-
-            }else{
+            } else {
 
                 User::where('id', Auth::id())->increment('main_wallet', $amount);
                 return response()->json([
                     'status' => false,
                     'message' => "Meter vending failed, Retry again using your wallet"
-                ], 200);
+                ], 422);
 
             }
 
 
         }
+
+        if ($meter != null && $meter->NeedKCT == null) {
+
+            $databody = [
+                'meterType' => $meter->KRN1,
+                'meterNo' => Auth::user()->meterNo,
+                'sgc' => (int)$meter->OldSGC,
+                'ti' => 1,
+                'amount' => $request->amount,
+            ];
+
+            $jsonData = json_encode($databody);
+            $url = "http://169.239.189.91:19071/tokenGen";
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($jsonData)
+            ]);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+            $no_kct_response = curl_exec($ch);
+            curl_close($ch);
+            $no_kct_data = json_decode($no_kct_response, true);
+            if (strpos($no_kct_data, 'SUCCESS') !== false) {
+                $no_kct_token = preg_replace('/\D/', '', $no_kct_data);
+                $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
+                $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
+                $data['service'] = "MOMAS METER";
+                $data['order_id'] = $trx;
+                $data['token'] = $no_kct_token;
+                $data['amount'] = $amount;
+
+
+                $email = Auth::user()->email;
+                $token = $no_kct_token;
+                send_email_token($email, $token, $amount);
+
+                return response()->json([
+                    'status' => true,
+                    'data' => $data
+                ], 200);
+
+
+            }
+
+
+        } else {
+            User::where('id', Auth::id())->increment('main_wallet', $amount);
+            return response()->json([
+                'status' => false,
+                'message' => "Meter vending failed, Retry again using your wallet"
+            ], 422);
+
+        }
+
+        return response()->json([
+            'status' => false,
+            'message' => "No meter found"
+        ], 200);
+
+
     }
 
 
@@ -280,7 +320,6 @@ class MeterController extends Controller
             $utl->status = 2;
             $utl->save();
         }
-
 
 
 //////////////////////////////////////////////////////////////////////////test

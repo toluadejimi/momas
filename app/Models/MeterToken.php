@@ -12,8 +12,6 @@ class MeterToken extends Model
     protected $casts = [
         'amount' => 'integer',
         'status' => 'integer'
-
-
     ];
 
 }

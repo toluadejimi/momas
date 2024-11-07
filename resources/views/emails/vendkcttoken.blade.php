@@ -480,7 +480,9 @@
                                         <ul>
                                             <li><b>Amount:</b> {{$data1['amount']}}</li>
                                             <li><b>Token:</b> {{$data1['token']}}</li>
-                                            <li><b>KCT Token:</b> {{$data1['kct_token']}}</li>
+                                            <li><b>KCT Token 1:</b> {{$data1['kct_token1']}}</li>
+                                            <li><b>KCT Token 2:</b> {{$data1['kct_token2']}}</li>
+
 
 
                                         </ul>

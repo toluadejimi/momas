@@ -365,7 +365,7 @@ if (!function_exists('send_email_token')) {
 
 if (!function_exists('send_kct_email_token')) {
 
-    function send_kct_email_token($email, $token, $amount, $kct_token)
+    function send_kct_email_token($email, $token, $amount, $kct_token1, $kct_token2)
     {
         $first_name = User::where('email', $email)->first()->first_name;
         $data = array(
@@ -373,7 +373,8 @@ if (!function_exists('send_kct_email_token')) {
             'subject' => "Token Purchase",
             'toreceiver' => $email,
             'token' => $token,
-            'kct_token' => $kct_token,
+            'kct_token1' => $kct_token1,
+            'kct_token2' => $kct_token2,
             'user' => $first_name,
             'amount' => $amount
         );
