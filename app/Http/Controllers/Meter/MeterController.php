@@ -204,7 +204,6 @@ class MeterController extends Controller
 
                     send_kct_email_token($email, $token, $amount, $kct_token1, $kct_token2);
 
-
                     return response()->json([
                         'status' => true,
                         'data' => $data2
@@ -262,6 +261,7 @@ class MeterController extends Controller
 
                 $email = Auth::user()->email;
                 $token = $no_kct_token;
+                
                 send_email_token($email, $token, $amount);
 
                 return response()->json([
