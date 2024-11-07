@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Service;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
 use App\Models\Estate;
 use App\Models\EstateService;
 use App\Models\Job;
@@ -53,14 +54,8 @@ class ServiceController extends Controller
     public function get_comment(request $request)
     {
 
-//        $data['professional_name'] = Job::where('job_id', $request->job_id)->first()->proffessional_name ?? null;
-//        $data['rating'] = Rating::where('job_id', $request->job_id)->max('count');
-//        $data['service_title'] = Job::where('job_id', $request->job_id)->first()->service_title ?? null;
-//        $data['professional_phone'] = Job::where('job_id', $request->job_id)->first()->professional_phone ?? null;
-//        $data['comment'] = Rating::where('job_id', $request->job_id)->get();
 
-
-        $data =  Rating::where('job_id', $request->job_id)->get();
+        $data =  Comment::where('job_id', $request->job_id)->get();
         $rate =  Rating::where('job_id', $request->job_id)->max('count');
         Job::where('id', $request->job_id)->update(['rating' => $rate]) ?? null;
 

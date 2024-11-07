@@ -13,4 +13,15 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+
+
+    protected $casts = [
+        'job_id' => 'integer',
+        'user_id' => 'integer',
+        'count' => 'integer'
+
+
+
+    ];
 }
