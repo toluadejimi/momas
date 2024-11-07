@@ -122,7 +122,6 @@ class MeterController extends Controller
 
         $meter = Meter::where('MeterNo', $meterNo)->first() ?? null;
 
-        dd($meter);
 
         if ($meter != null && $meter->NeedKCT == "on") {
 
@@ -133,6 +132,8 @@ class MeterController extends Controller
                 'ti' => 1,
                 'amount' => $request->amount,
             ];
+
+            dd($databody);
 
             $jsonData = json_encode($databody);
             $url = "http://169.239.189.91:19071/tokenGen";
