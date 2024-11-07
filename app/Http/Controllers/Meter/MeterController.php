@@ -110,65 +110,11 @@ class MeterController extends Controller
 
         $amount = $request->amount;
         $meterNo = Auth::user()->meterNo;
-        $meterType = $request->meterType;
         $trx = $request->trxref;
-        $date = date('ymd');
         $dater = date('d-m-y');
-        $date_time = date('ydis');
 
 
         $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first()->duration;
-//        if ($request->min_vend_amount > 0) {
-//            $utl = new UtilitiesPayment();
-//            $utl->user_id = Auth::id();
-//            $utl->estate_id = Auth::user()->estate_id;
-//            $utl->amount = $request->min_vend_amount;
-//            $utl->duration = $duration;
-//            $utl->status = 2;
-//            $utl->save();
-//        }
-//
-//        $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
-//        $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
-//        $data['service'] = "MOMAS";
-//        $data['order_id'] = $trx;
-//        $data['token'] = "123456944885756";
-//        $data['amount'] = $amount;
-//        $data['date'] = $dater;
-//
-//
-//        $ved = new MeterToken();
-//        $ved->user_id = Auth::id();
-//        $ved->order_id = $trx;
-//        $ved->meterNo = $meterNo;
-//        $ved->token = "123456944885756";
-//        $ved->estate_id = Auth::user()->estate_id;
-//        $ved->amount = $amount;
-//        $ved->unit = "0099847";
-//        $ved->vat = "1234";
-//        $ved->estate_name = Estate::where('id', Auth::user()->estate_id)->first()->title;
-//        $ved->status = 2;
-//        $ved->save();
-//
-//
-//        $email = Auth::user()->email;
-//        $token = "123456944885756";
-//        $unit = "0099847";
-//
-//        send_email_token($email, $token, $amount, $unit);
-//
-//        return response()->json([
-//            'status' => true,
-//            'data' => $data
-//        ], 200);
-
-
-
-
-
-
-
-
         if ($request->min_vend_amount > 0) {
             $utl = new UtilitiesPayment();
             $utl->user_id = Auth::id();
@@ -181,21 +127,19 @@ class MeterController extends Controller
 
 
         $meter = Meter::where('MeterNo', Auth::user()->meterNo)->first() ?? null;
-        if ($meter != null && $meter->NeedKCT == "on") {
 
-            $percentage = 2.5 / 100;
-            $final_amount = $percentage * $amount;
+        if ($meter != null && $meter->NeedKCT == "on") {
 
             $databody = [
                 'meterType' => $meter->KRN1,
                 'meterNo' => Auth::user()->meterNo,
                 'sgc' => (int)$meter->OldSGC,
                 'ti' => 1,
-                'amount' => 10,
+                'amount' => $request->amount,
             ];
 
             $jsonData = json_encode($databody);
-            $url = "http://safedc.memmserve.com:19071/tokenGen";
+            $url = "http://169.239.189.91:19071/tokenGen";
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -205,150 +149,94 @@ class MeterController extends Controller
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
             $response = curl_exec($ch);
+            curl_close($ch);
+            $var = json_decode($response);
+            $status = $var->code ?? null;
 
-            dd($response, $jsonData);
-
-
-            $var2 = curl_exec($curl);
-            curl_close($curl);
-            $var = json_decode($var2);
+            dd($response);
 
 
-            dd($var, $body);
 
 
-            $response = $var->responsecode ?? null;
-
-            if ($response == "00") {
-                $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
-                $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
-                $data['service'] = "MOMAS";
-                $data['order_id'] = $trx;
-                $data['token'] = $var->recieptNumber;
-                $data['amount'] = $amount;
-                $data['date'] = $dater;
+            if($status == "SUCCESS"){
 
 
-                $ved = new MeterToken();
-                $ved->user_id = Auth::id();
-                $ved->order_id = $trx;
-                $ved->token = $var->recieptNumber;
-                $ved->amount = $amount;
-                $ved->estate_id = Auth::user()->estate_id;
-                $ved->meterNo = $meterNo;
-                $ved->estate_name = Estate::where('id', Auth::user()->estate_id)->first()->title;
-                $ved->unit = $var->unit;
-                $ved->vat = $var->vat;
-                $ved->status = 2;
-                $ved->save();
+                $kctdatabody = [
+                    'meterType' => $meter->KRN1,
+                    'tometerType' => $meter->KRN1,
+                    'meterNo' => Auth::user()->meterNo,
+                    'sgc' => (int)$meter->OldSGC,
+                    'tosgc' => (int)$meter->NewSGC,
+                    'ti' => 1,
+                    'toti' => 1,
+                    'allow' => false,
+                    'allowkrn' => true,
+                ];
 
 
-                $email = Auth::user()->email;
-                $token = $var->recieptNumber;
-                $unit = $var->unit;
+                $kctjsonData = json_encode($kctdatabody);
+                $url = "http://169.239.189.91:19071/kcttokenGen";
+                $ch = curl_init($url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                    'Content-Type: application/json',
+                    'Content-Length: ' . strlen($kctjsonData)
+                ]);
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $kctjsonData);
+                $response = curl_exec($ch);
+                curl_close($ch);
+                $var = json_decode($response);
+                $kct_status = $var->code ?? null;
 
-                send_email_token($email, $token, $amount, $unit);
-
-
-            } else {
-
-                User::where('id', Auth::id())->increment('main_wallet', $amount);
-                return response()->json([
-                    'status' => false,
-                    'message' => "Meter vending failed, Retry again using your wallet"
-                ], 200);
-
-
-            }
-
-
-            return response()->json([
-                'status' => true,
-                'data' => $data
-            ], 200);
+                $get_kct_token = $var['token'];
+                $kct_token = array_filter($get_kct_token, function($item) {
+                    return trim($item) !== "";
+                });
 
 
-        } else {
+                if($kct_status == "SUCCESS"){
+
+                    $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
+                    $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
+                    $data['service'] = "MOMAS METER";
+                    $data['order_id'] = $trx;
+                    $data['token'] = $token;
+                    $data['amount'] = $amount;
+                    $data['kct_tokens'] = $kct_token;
 
 
-            $percentage = 2.5 / 100;
-            $final_amount = $percentage * $amount;
+                    $ved = new MeterToken();
+                    $ved->user_id = Auth::id();
+                    $ved->order_id = $trx;
+                    $ved->token = $token;
+                    $ved->amount = $amount;
+                    $ved->estate_id = Auth::user()->estate_id;
+                    $ved->meterNo = $meterNo;
+                    $ved->estate_name = Estate::where('id', Auth::user()->estate_id)->first()->title;
+                    $ved->status = 2;
+                    $ved->save();
 
-            $databody = array([
-                'meterType' => $meter->KRN1,
-                'tometerType' => $meter->KRN2,
-                'meterNo' => Auth::user()->meterNo,
-                'sgc' => $meter->OldSGC,
-                'tosgc' => $meter->NewSGC,
-                'ti' => 1,
-                'toti' => 1,
-                'allow' => false,
-                'allowkrn' => true,
-            ]);
+                    $email = Auth::user()->email;
+                    send_kct_email_token($email, $token, $amount, $kct_token);
 
-            $url = "http://safedc.memmserve.com:19071/tokenGen";
+                    return response()->json([
+                        'status' => true,
+                        'data' => $data
+                    ], 200);
 
-            $body = json_encode($databody);
-            $curl = curl_init();
 
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => $url,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => $body,
-                CURLOPT_HTTPHEADER => array(
-                    'Accept: application/json',
-                    'Content-Type: application/json'
-                ),
-            ));
-
-            $var2 = curl_exec($curl);
-            curl_close($curl);
-            $var = json_decode($var2);
+                }
 
 
 
 
 
-            $response = $var->responsecode ?? null;
-
-            if ($response == "00") {
-                $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
-                $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
-                $data['service'] = "MOMAS";
-                $data['order_id'] = $trx;
-                $data['token'] = $var->recieptNumber;
-                $data['amount'] = $amount;
-                $data['date'] = $dater;
 
 
-                $ved = new MeterToken();
-                $ved->user_id = Auth::id();
-                $ved->order_id = $trx;
-                $ved->token = $var->recieptNumber;
-                $ved->amount = $amount;
-                $ved->estate_id = Auth::user()->estate_id;
-                $ved->meterNo = $meterNo;
-                $ved->estate_name = Estate::where('id', Auth::user()->estate_id)->first()->title;
-                $ved->unit = $var->unit;
-                $ved->vat = $var->vat;
-                $ved->status = 2;
-                $ved->save();
 
 
-                $email = Auth::user()->email;
-                $token = $var->recieptNumber;
-                $unit = $var->unit;
-
-                send_email_token($email, $token, $amount, $unit);
-
-
-            } else {
+            }else{
 
                 User::where('id', Auth::id())->increment('main_wallet', $amount);
                 return response()->json([
@@ -356,18 +244,10 @@ class MeterController extends Controller
                     'message' => "Meter vending failed, Retry again using your wallet"
                 ], 200);
 
-
             }
-
-
-            return response()->json([
-                'status' => true,
-                'data' => $data
-            ], 200);
 
 
         }
-
     }
 
 

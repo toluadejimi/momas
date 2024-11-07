@@ -338,7 +338,7 @@ if (!function_exists('send_email')) {
 
 if (!function_exists('send_email_token')) {
 
-    function send_email_token($email, $token, $amount, $unit)
+    function send_email_token($email, $token, $amount)
     {
         $first_name = User::where('email', $email)->first()->first_name;
         $data = array(
@@ -347,7 +347,6 @@ if (!function_exists('send_email_token')) {
             'toreceiver' => $email,
             'token' => $token,
             'user' => $first_name,
-            'unit' => $unit,
             'amount' => $amount
         );
 
@@ -363,6 +362,33 @@ if (!function_exists('send_email_token')) {
     }
 }
 
+
+if (!function_exists('send_kct_email_token')) {
+
+    function send_kct_email_token($email, $token, $amount, $kct_token)
+    {
+        $first_name = User::where('email', $email)->first()->first_name;
+        $data = array(
+            'fromsender' => 'momas@tomitechltd.com', 'MOMASPAY',
+            'subject' => "Token Purchase",
+            'toreceiver' => $email,
+            'token' => $token,
+            'kct_token' => $kct_token,
+            'user' => $first_name,
+            'amount' => $amount
+        );
+
+        Mail::send('emails.vendkcttoken', ["data1" => $data], function ($message) use ($data) {
+            $message->from($data['fromsender']);
+            $message->to($data['toreceiver']);
+            $message->subject($data['subject']);
+        });
+
+
+        return 0;
+
+    }
+}
 
 
 

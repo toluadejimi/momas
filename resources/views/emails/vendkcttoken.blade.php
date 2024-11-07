@@ -480,6 +480,8 @@
                                         <ul>
                                             <li><b>Amount:</b> {{$data1['amount']}}</li>
                                             <li><b>Token:</b> {{$data1['token']}}</li>
+                                            <li><b>KCT Token:</b> {{$data1['kct_token']}}</li>
+
 
                                         </ul>
 
