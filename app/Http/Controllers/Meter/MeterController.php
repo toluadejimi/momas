@@ -133,7 +133,6 @@ class MeterController extends Controller
                 'amount' => $request->amount,
             ];
 
-            dd($databody);
 
             $jsonData = json_encode($databody);
             $url = "http://169.239.189.91:19071/tokenGen";
@@ -177,6 +176,8 @@ class MeterController extends Controller
                 curl_close($ch);
                 $kct_data = json_decode($kct_response, true);
 
+                dd($kct_data);
+
                 if (strpos($kct_data, 'SUCCESS') !== false) {
 
                     $data = json_decode($kct_data, true);
@@ -213,6 +214,13 @@ class MeterController extends Controller
 
 
                 }else{
+
+                    User::where('id', Auth::id())->increment('main_wallet', $amount);
+                    return response()->json([
+                        'status' => false,
+                        'message' => "Meter vending failed, Retry again using your wallet"
+                    ], 422);
+
                     $message = "MOMAS VENDING ERROR ====> ". json_encode($kct_response ?? $data);
                     send_notification($message);
                 }
@@ -220,11 +228,10 @@ class MeterController extends Controller
 
             } else {
 
-                User::where('id', Auth::id())->increment('main_wallet', $amount);
                 return response()->json([
                     'status' => false,
-                    'message' => "Meter vending failed, Retry again using your wallet"
-                ], 422);
+                    'message' => "No meter found"
+                ], 200);
 
             }
 
