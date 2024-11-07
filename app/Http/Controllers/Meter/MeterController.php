@@ -210,6 +210,9 @@ class MeterController extends Controller
                     ], 200);
 
 
+                }else{
+                    $message = "MOMAS VENDING ERROR ====> ". json_encode($kct_response ?? $data);
+                    send_notification($message);
                 }
 
 
@@ -261,7 +264,7 @@ class MeterController extends Controller
 
                 $email = Auth::user()->email;
                 $token = $no_kct_token;
-                
+
                 send_email_token($email, $token, $amount);
 
                 return response()->json([
@@ -270,6 +273,10 @@ class MeterController extends Controller
                 ], 200);
 
 
+            }else{
+
+                $message = "MOMAS VENDING ERROR ====> ". json_encode($no_kct_data);
+                send_notification($message);
             }
 
 
