@@ -10,7 +10,10 @@ class MeterToken extends Model
     use HasFactory;
 
     protected $casts = [
-        'amount' => 'integer'
+        'amount' => 'integer',
+        'status' => 'integer'
+
+
     ];
 
 }
