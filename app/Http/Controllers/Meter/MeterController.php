@@ -104,9 +104,8 @@ class MeterController extends Controller
     {
 
         $amount = $request->amount;
-        $meterNo = Auth::user()->meterNo;
+        $meterNo = $request->meterNo;
         $trx = $request->trxref;
-        $dater = date('d-m-y');
 
 
         $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first()->duration;
@@ -121,7 +120,7 @@ class MeterController extends Controller
         }
 
 
-        $meter = Meter::where('MeterNo', Auth::user()->meterNo)->first() ?? null;
+        $meter = Meter::where('MeterNo', $meterNo)->first() ?? null;
 
         if ($meter != null && $meter->NeedKCT == "on") {
 
