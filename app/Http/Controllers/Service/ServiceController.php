@@ -77,6 +77,7 @@ class ServiceController extends Controller
         $rate->user_name = Auth::user()->first_name;
         $rate->comment = $request->comment;
         $rate->job_id = $request->job_id;
+        $rate->estate_service_id = $request->job_id;
         $rate->rate = $request->rate;
         $rate->save();
 
