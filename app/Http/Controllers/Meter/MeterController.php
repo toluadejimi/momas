@@ -13,6 +13,7 @@ use App\Models\UtilitiesPayment;
 use App\Models\Utitlity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class MeterController extends Controller
 {
@@ -121,8 +122,6 @@ class MeterController extends Controller
 
 
         $meter = Meter::where('MeterNo', $meterNo)->first() ?? null;
-
-
         if ($meter != null && $meter->NeedKCT == "on") {
 
             $databody = [
@@ -133,120 +132,122 @@ class MeterController extends Controller
                 'amount' => $request->amount,
             ];
 
-            $jsonData = json_encode($databody);
+
+            $response = Http::withOptions([
+                'verify' => false,
+                'timeout' => 0,
+            ])->post('http://169.239.189.91:19071/tokenGen', [
+                'json' => $databody,
+            ]);
+
+            if ($response->successful()) {
+                $data = $response->json();
+//                $data = json_decode($response, true);
+
+                dd($data);
+
+                if (strpos($data, 'SUCCESS') !== false) {
+
+                    $token = preg_replace('/\D/', '', $data);
+                    $kctdatabody = [
+                        'meterType' => $meter->KRN1,
+                        'tometerType' => $meter->KRN1,
+                        'meterNo' => Auth::user()->meterNo,
+                        'sgc' => (int)$meter->OldSGC,
+                        'tosgc' => (int)$meter->NewSGC,
+                        'ti' => 1,
+                        'toti' => 1,
+                        'allow' => false,
+                        'allowkrn' => true,
+                    ];
+
+                    $kctjsonData = json_encode($kctdatabody);
+                    $curl = curl_init();
+                    curl_setopt_array($curl, array(
+                        CURLOPT_URL => 'https://169.239.189.91:19071/kcttokenGen',
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => '',
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_SSL_VERIFYPEER => false,
+                        CURLOPT_SSL_VERIFYHOST => false,
+                        CURLOPT_TIMEOUT => 0,
+                        CURLOPT_FOLLOWLOCATION => true,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => 'POST',
+                        CURLOPT_POSTFIELDS =>$kctjsonData,
+                        CURLOPT_HTTPHEADER => array(
+                            'Content-Type: application/json'
+                        ),
+                    ));
+
+                    $kct_response = curl_exec($curl);
+                    curl_close($curl);
+
+                    if($kct_response == false){
+                        return response()->json([
+                            'status' => false,
+                            'message' => "Vending server not connected, Retry again later using your wallet",
+                            'kct_response' => $kct_response
+                        ], 422);
+                    }
 
 
-            $curl = curl_init();
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'http://169.239.189.91:19071/tokenGen',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_SSL_VERIFYPEER => false,
-                CURLOPT_SSL_VERIFYHOST => false,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => $jsonData,
-                CURLOPT_HTTPHEADER => array(
-                    'Content-Type: application/json'
-                ),
-            ));
-            $response = curl_exec($curl);
-            curl_close($curl);
+                    $kct_data = json_decode($kct_response, true);
 
-            if($response == false){
-                return response()->json([
-                    'status' => false,
-                    'message' => "Vending server not connected, Retry again later using your wallet",
-                    'no_kct_response1' => $response
-                ], 422);
-            }
+                    if (strpos($kct_data, 'SUCCESS') !== false) {
+
+                        $data = json_decode($kct_data, true);
+                        if (isset($data['tokens']) && is_array($data['tokens'])) {
+                            foreach ($data['tokens'] as $number) {
+                                $kct_token = $number . "\n";  // Print each number from the 'tokens' array
+                            }
+                        }
+
+                        $kct_token = $data['tokens'];
 
 
-            $data = json_decode($response, true);
-            if (strpos($data, 'SUCCESS') !== false) {
+                        $data2['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
+                        $data2['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
+                        $data2['service'] = "MOMAS METER";
+                        $data2['order_id'] = $trx;
+                        $data2['token'] = $token;
+                        $data2['amount'] = $amount;
+                        $data2['kct_token1'] = $kct_token[0];
+                        $data2['kct_token2'] = $kct_token[1];
 
-                $token = preg_replace('/\D/', '', $data);
-                $kctdatabody = [
-                    'meterType' => $meter->KRN1,
-                    'tometerType' => $meter->KRN1,
-                    'meterNo' => Auth::user()->meterNo,
-                    'sgc' => (int)$meter->OldSGC,
-                    'tosgc' => (int)$meter->NewSGC,
-                    'ti' => 1,
-                    'toti' => 1,
-                    'allow' => false,
-                    'allowkrn' => true,
-                ];
 
-                $kctjsonData = json_encode($kctdatabody);
-                $curl = curl_init();
-                curl_setopt_array($curl, array(
-                    CURLOPT_URL => 'https://169.239.189.91:19071/kcttokenGen',
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => '',
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_SSL_VERIFYPEER => false,
-                    CURLOPT_SSL_VERIFYHOST => false,
-                    CURLOPT_TIMEOUT => 0,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => 'POST',
-                    CURLOPT_POSTFIELDS =>$kctjsonData,
-                    CURLOPT_HTTPHEADER => array(
-                        'Content-Type: application/json'
-                    ),
-                ));
+                        $email = Auth::user()->email;
+                        $kct_token = $data['tokens'];
+                        $kct_token1 = $kct_token[0];
+                        $kct_token2 = $kct_token[1];
 
-                $kct_response = curl_exec($curl);
-                curl_close($curl);
+                        send_kct_email_token($email, $token, $amount, $kct_token1, $kct_token2);
 
-                if($kct_response == false){
+                        return response()->json([
+                            'status' => true,
+                            'data' => $data2
+                        ], 200);
+
+
+
+
+
+
+
+
+
+                    } else {
+                // Handle the error
+                $error = $response->body();
+                if($response == false){
                     return response()->json([
                         'status' => false,
                         'message' => "Vending server not connected, Retry again later using your wallet",
-                        'kct_response' => $kct_response
+                        'no_kct_response1' => $response
                     ], 422);
                 }
 
-
-                $kct_data = json_decode($kct_response, true);
-
-                if (strpos($kct_data, 'SUCCESS') !== false) {
-
-                    $data = json_decode($kct_data, true);
-                    if (isset($data['tokens']) && is_array($data['tokens'])) {
-                        foreach ($data['tokens'] as $number) {
-                            $kct_token = $number . "\n";  // Print each number from the 'tokens' array
-                        }
-                    }
-
-                    $kct_token = $data['tokens'];
-
-
-                    $data2['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
-                    $data2['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
-                    $data2['service'] = "MOMAS METER";
-                    $data2['order_id'] = $trx;
-                    $data2['token'] = $token;
-                    $data2['amount'] = $amount;
-                    $data2['kct_token1'] = $kct_token[0];
-                    $data2['kct_token2'] = $kct_token[1];
-
-
-                    $email = Auth::user()->email;
-                    $kct_token = $data['tokens'];
-                    $kct_token1 = $kct_token[0];
-                    $kct_token2 = $kct_token[1];
-
-                    send_kct_email_token($email, $token, $amount, $kct_token1, $kct_token2);
-
-                    return response()->json([
-                        'status' => true,
-                        'data' => $data2
-                    ], 200);
+            }
 
 
                 }else{
