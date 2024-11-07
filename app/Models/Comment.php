@@ -19,6 +19,8 @@ class Comment extends Model
     protected $casts = [
         'job_id' => 'integer',
         'user_id' => 'integer',
-        'count' => 'integer'
+        'count' => 'integer',
+        'rate' => 'integer'
+
     ];
 }

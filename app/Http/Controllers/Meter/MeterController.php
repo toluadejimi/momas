@@ -150,10 +150,10 @@ class MeterController extends Controller
             curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
             $response = curl_exec($ch);
             curl_close($ch);
-            $var = json_decode($response);
+            $var = json_decode($response, true);
             $status = $var->code ?? null;
 
-            dd($response);
+            dd($var);
 
 
 
