@@ -93,6 +93,13 @@ class User extends Authenticatable
         return $this->hasMany(Estate::class);
     }
 
+
+    public function token()
+    {
+        return $this->hasMany(Token::class);
+    }
+
+
     public function estate_service()
     {
         return $this->hasMany(EstateService::class);

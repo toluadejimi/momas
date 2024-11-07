@@ -399,7 +399,7 @@ if (!function_exists('send_token_email')) {
 
 if (!function_exists('generate_token')) {
 
-    function generate_token($user_id, $visitor, $email, $valid_date)
+    function generate_token($user_id, $visitor, $email, $valid_date, $estate_id)
     {
 
         $usr = User::where('id', Auth::id())->first();
@@ -408,6 +408,7 @@ if (!function_exists('generate_token')) {
         $tok->user_id = $user_id;
         $tok->token = $get_token;
         $tok->visitor = $visitor;
+        $tok->estate_id = $estate_id;
         $tok->email = $email;
         $tok->address = $usr->address." ".$usr->city." ".$usr->state;
         $tok->valid_date = $valid_date;

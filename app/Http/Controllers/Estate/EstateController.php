@@ -36,11 +36,8 @@ class EstateController extends Controller
         $currentTime = Carbon::now();
         $valid_date = $currentTime->addHours(24);
 
-        $tok = generate_token($user_id, $visitor, $email, $valid_date);
-
-
+        $tok = generate_token($user_id, $visitor, $email, $valid_date, $estate_id);
         if($can_send == 1){
-
             $usr = User::where('id', Auth::id())->first();
             $token_code = $tok;
             $estate = Estate::where('id', $estate_id)->first()->title ?? null;
@@ -49,15 +46,12 @@ class EstateController extends Controller
             $data['name'] = $usr->first_name." ".$usr->last_name;
             $data['address'] = $usr->address." ".$usr->city." ".$usr->state;
             $data['service'] = "Access Token";
-
-
             if($send == 0 ){
                return response()->json([
                    'status' => true,
                    'data' => $data,
                    'message' => "Token Created Successfully, Token sent to visitor"
                ]);
-
            }
         }
 

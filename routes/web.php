@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccessToken\AccessTokenConroller;
 use App\Http\Controllers\Admin\AssetController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CustomerImportController;
@@ -9,8 +10,8 @@ use App\Http\Controllers\Admin\MeterImportController;
 use App\Http\Controllers\Admin\TariffController;
 use App\Http\Controllers\Estate\EstateServiceController;
 use App\Http\Controllers\Meter\MeterController;
-use App\Http\Controllers\Transformer\TransformerController;
 use App\Http\Controllers\Transaction\TransactionController;
+use App\Http\Controllers\Transformer\TransformerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -103,6 +104,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
     Route::get('service-delete', [EstateServiceController::class, 'delete_service']);
     Route::get('service-deactivate', [EstateServiceController::class, 'deactivate_service']);
     Route::get('service-activate', [EstateServiceController::class, 'activate_service']);
+
+
+    //Access TOken
+    Route::get('access-token', [AccessTokenConroller::class, 'index']);
+    Route::get('token-delete', [AccessTokenConroller::class, 'delete_token']);
+    Route::get('token-activate', [AccessTokenConroller::class, 'activate_token']);
+    Route::get('token-deactivate', [AccessTokenConroller::class, 'deactivate_token']);
+
+
+
 
 
 

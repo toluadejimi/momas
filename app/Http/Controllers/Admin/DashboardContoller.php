@@ -46,7 +46,13 @@ class DashboardContoller extends Controller
 
         } elseif(auth::user()->role == 3){
 
-            $data['users'] = User::where('status', 2)->where('estate_id', auth::user()->estate_id)->count();
+            $data['users'] = User::where([
+                'status' => 2,
+                'estate_id' => auth::user()->estate_id,
+                'role' => 3,
+            ])->count();
+
+
             $data['customers'] = User::where([
                 'status' => 2,
                 'estate_id' => auth::user()->estate_id,
@@ -54,8 +60,13 @@ class DashboardContoller extends Controller
             ])->count();
 
             $data['meter'] = Meter::where('estate_id', auth::user()->estate_id)->count();
+
             $data['token'] = Token::where('estate_id', auth::user()->estate_id)->count();
-            $data['title'] = "Estate Dashboard";
+
+            $estate_name = Estate::where('id', auth::user()->estate_id)->first()->title;
+
+
+            $data['title'] = "Dashboard | $estate_name ";
 
             return view('admin.dashboard', $data);
 

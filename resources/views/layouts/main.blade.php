@@ -203,6 +203,15 @@
                         </li>
 
 
+                        <li>
+                            <a class='tp-link'  href="access-token">
+                                <i data-feather="lock"></i>
+                                <span> Access Token </span>
+                            </a>
+                        </li>
+
+
+
 
                         <li>
                             <a class='tp-link'  href="users-list">
@@ -277,6 +286,13 @@
                             <a class='tp-link'  href="tariff-list">
                                 <i data-feather="divide-square"></i>
                                 <span> Tariff </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class='tp-link'  href="access-token">
+                                <i data-feather="lock"></i>
+                                <span> Access Token </span>
                             </a>
                         </li>
 

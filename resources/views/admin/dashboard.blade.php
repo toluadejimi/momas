@@ -289,14 +289,13 @@
                                 <div class="card mb-0">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
-                                            <div class="fs-16 mb-1">Total Meter</div>
+                                            <div class="fs-16 mb-1">Total Customer</div>
                                         </div>
 
                                         <div class="d-flex align-items-baseline mb-2">
                                             <div
-                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{$meter}}</div>
+                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{$customers}}</div>
                                         </div>
-                                        {{--                                    <div id="conversion-visitors" class="apex-charts"></div>--}}
                                     </div>
                                 </div>
                             </div>
@@ -306,12 +305,12 @@
                                 <div class="card mb-0">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
-                                            <div class="fs-16 mb-1">Estate Token</div>
+                                            <div class="fs-16 mb-1">Estate Meter</div>
                                         </div>
 
                                         <div class="d-flex align-items-baseline mb-2">
                                             <div
-                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{$token}}</div>
+                                                class="fs-22 mb-0 me-2 fw-semibold text-black">{{$meter}}</div>
                                         </div>
                                         {{--                                    <div id="conversion-visitors" class="apex-charts"></div>--}}
                                     </div>

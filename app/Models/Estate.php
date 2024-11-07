@@ -25,10 +25,12 @@ class Estate extends Model
         return $this->hasMany(Transformer::class);
     }
 
-    public function tariff()
+    public function token()
     {
-        return $this->hasMany(Tariff::class);
+        return $this->hasMany(Token::class);
     }
+
+
 
     public function estate_service()
     {
