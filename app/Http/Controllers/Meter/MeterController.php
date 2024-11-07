@@ -137,12 +137,13 @@ class MeterController extends Controller
 
 
             $curl = curl_init();
-
             curl_setopt_array($curl, array(
                 CURLOPT_URL => 'http://169.239.189.91:19071/tokenGen',
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
+                CURLOPT_SSL_VERIFYPEER => false,
+                CURLOPT_SSL_VERIFYHOST => false,
                 CURLOPT_TIMEOUT => 0,
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
@@ -186,6 +187,8 @@ class MeterController extends Controller
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_ENCODING => '',
                     CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_SSL_VERIFYPEER => false,
+                    CURLOPT_SSL_VERIFYHOST => false,
                     CURLOPT_TIMEOUT => 0,
                     CURLOPT_FOLLOWLOCATION => true,
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
@@ -273,17 +276,25 @@ class MeterController extends Controller
                 'amount' => $request->amount,
             ];
 
-            $jsonData = json_encode($databody);
-            $url = "http://169.239.189.91:19071/tokenGen";
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, [
-                'Content-Type: application/json',
-                'Content-Length: ' . strlen($jsonData)
-            ]);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
-            $no_kct_response = curl_exec($ch);
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'http://169.239.189.91:19071/tokenGen',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_SSL_VERIFYPEER => false,
+                CURLOPT_SSL_VERIFYHOST => false,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => $jsonData,
+                CURLOPT_HTTPHEADER => array(
+                    'Content-Type: application/json'
+                ),
+            ));
+            $no_kct_response = curl_exec($curl);
+            curl_close($curl);
 
             if($no_kct_response == false){
                 return response()->json([
@@ -292,7 +303,6 @@ class MeterController extends Controller
                 ], 422);
             }
 
-            curl_close($ch);
             $no_kct_data = json_decode($no_kct_response, true);
             if (strpos($no_kct_data, 'SUCCESS') !== false) {
                 $no_kct_token = preg_replace('/\D/', '', $no_kct_data);
