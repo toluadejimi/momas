@@ -17,7 +17,7 @@ class ServiceController extends Controller
     {
 
         $data['estate'] = Estate::where('status', 2)->get()->makeHidden(['created_at', 'updated_at']);
-        $data['service'] = Service::where('status', 2)->get()->makeHidden(['created_at', 'updated_at']);
+        $data['service'] = Service::where('status', 2)->where('estate_id', auth::user()->estate_id)->get()->makeHidden(['created_at', 'updated_at']);
 
         return response()->json([
             'status' => true,
