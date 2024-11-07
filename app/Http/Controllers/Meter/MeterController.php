@@ -132,8 +132,8 @@ class MeterController extends Controller
             ];
             $response = Http::withOptions([
                 'verify' => false,
-                'timeout' => 0,
-            ])->post('http://169.239.189.91:19071/tokenGen', $databody);
+                'timeout' => 10,
+            ])->post('https://169.239.189.91:19071/tokenGen', $databody);
 
             if ($response->successful()) {
                 $gdata = $response->json();
@@ -156,8 +156,8 @@ class MeterController extends Controller
 
                     $kct_response = Http::withOptions([
                         'verify' => false,
-                        'timeout' => 0,
-                    ])->post('http://169.239.189.91:19071/kcttokenGen', $kctdatabody);
+                        'timeout' => 10,
+                    ])->post('https://169.239.189.91:19071/kcttokenGen', $kctdatabody);
 
                     if ($kct_response->successful()) {
                         $kct = $kct_response->json();
@@ -227,8 +227,8 @@ class MeterController extends Controller
             ];
             $no_kct_response = Http::withOptions([
                 'verify' => false,
-                'timeout' => 0,
-            ])->post('http://169.239.189.91:19071/tokenGen', $databody);
+                'timeout' => 10,
+            ])->post('https://169.239.189.91:19071/tokenGen', $databody);
 
             if ($no_kct_response->successful()) {
                 $no_kct = $no_kct_response->json();
