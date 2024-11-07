@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class MeterToken extends Model
 {
     use HasFactory;
+
+    protected $casts = [
+        'amount' => 'integer'
+    ];
+
 }
