@@ -133,7 +133,6 @@ class MeterController extends Controller
                 'amount' => $request->amount,
             ];
 
-
             $jsonData = json_encode($databody);
             $url = "http://169.239.189.91:19071/tokenGen";
             $ch = curl_init($url);
@@ -145,14 +144,17 @@ class MeterController extends Controller
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
             $response = curl_exec($ch);
-            dd($response, $url);
-
             curl_close($ch);
+
+            if($response == false){
+                return response()->json([
+                    'status' => false,
+                    'message' => "Vender server not connected"
+                ], 422);
+            }
+
+
             $data = json_decode($response, true);
-
-
-
-
             if (strpos($data, 'SUCCESS') !== false) {
 
                 $token = preg_replace('/\D/', '', $data);
@@ -180,8 +182,16 @@ class MeterController extends Controller
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $kctjsonData);
                 $kct_response = curl_exec($ch);
                 curl_close($ch);
-                $kct_data = json_decode($kct_response, true);
 
+                if($kct_response == false){
+                    return response()->json([
+                        'status' => false,
+                        'message' => "Vender server not connected"
+                    ], 422);
+                }
+
+
+                $kct_data = json_decode($kct_response, true);
 
                 if (strpos($kct_data, 'SUCCESS') !== false) {
 
@@ -219,13 +229,6 @@ class MeterController extends Controller
 
 
                 }else{
-
-                    User::where('id', Auth::id())->increment('main_wallet', $amount);
-                    return response()->json([
-                        'status' => false,
-                        'message' => "Meter vending failed, Retry again using your wallet"
-                    ], 422);
-
                     $message = "MOMAS VENDING ERROR ====> ". json_encode($kct_response ?? $data);
                     send_notification($message);
                 }
@@ -233,10 +236,11 @@ class MeterController extends Controller
 
             } else {
 
+                User::where('id', Auth::id())->increment('main_wallet', $amount);
                 return response()->json([
                     'status' => false,
-                    'message' => "No meter found"
-                ], 200);
+                    'message' => "Meter vending failed, Retry again using your wallet"
+                ], 422);
 
             }
 
@@ -264,6 +268,14 @@ class MeterController extends Controller
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
             $no_kct_response = curl_exec($ch);
+
+            if($no_kct_response == false){
+                return response()->json([
+                    'status' => false,
+                    'message' => "Vender server not connected"
+                ], 422);
+            }
+
             curl_close($ch);
             $no_kct_data = json_decode($no_kct_response, true);
             if (strpos($no_kct_data, 'SUCCESS') !== false) {
