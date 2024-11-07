@@ -145,7 +145,7 @@ class MeterController extends Controller
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
             $response = curl_exec($ch);
-            dd($response);
+            dd($response, $url);
 
             curl_close($ch);
             $data = json_decode($response, true);
