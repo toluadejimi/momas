@@ -138,7 +138,7 @@ class MeterController extends Controller
 
             $curl = curl_init();
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://169.239.189.91:19071/tokenGen',
+                CURLOPT_URL => 'http://169.239.189.91:19071/tokenGen',
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
@@ -160,7 +160,7 @@ class MeterController extends Controller
                 return response()->json([
                     'status' => false,
                     'message' => "Vending server not connected, Retry again later using your wallet",
-                    'no_kct_response' => $response
+                    'no_kct_response1' => $response
                 ], 422);
             }
 
