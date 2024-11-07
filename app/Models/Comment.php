@@ -20,8 +20,5 @@ class Comment extends Model
         'job_id' => 'integer',
         'user_id' => 'integer',
         'count' => 'integer'
-
-
-
     ];
 }
