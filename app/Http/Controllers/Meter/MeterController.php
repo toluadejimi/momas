@@ -147,6 +147,10 @@ class MeterController extends Controller
             $response = curl_exec($ch);
             curl_close($ch);
             $data = json_decode($response, true);
+
+            dd($data);
+
+
             if (strpos($data, 'SUCCESS') !== false) {
 
                 $token = preg_replace('/\D/', '', $data);
@@ -176,7 +180,6 @@ class MeterController extends Controller
                 curl_close($ch);
                 $kct_data = json_decode($kct_response, true);
 
-                dd($kct_data);
 
                 if (strpos($kct_data, 'SUCCESS') !== false) {
 
