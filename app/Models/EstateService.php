@@ -22,6 +22,9 @@ class EstateService extends Model
     }
 
 
+    protected $casts = [
+        'status' => 'integer'
+    ];
 
 
 }
