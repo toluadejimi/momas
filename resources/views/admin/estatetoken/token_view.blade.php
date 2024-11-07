@@ -136,6 +136,7 @@
                                         <th scope="col" class="cursor-pointer">Estate</th>
                                         <th scope="col" class="cursor-pointer">Visitors</th>
                                         <th scope="col" class="cursor-pointer">Email</th>
+                                        <th scope="col" class="cursor-pointer">Date</th>
                                         <th scope="col" class="cursor-pointer desc">Status</th>
                                         <th scope="col" class="cursor-pointer desc">Action</th>
                                         <th scope="col" class="cursor-pointer desc">Action</th>
@@ -158,6 +159,7 @@
                                             @else
                                                 <td>No email provided</td>
                                             @endif
+                                            <td>{{$data->created_at}}</td>
                                             <td>
                                                 @if($data->status == 2)
                                                     <span class="badge text-bg-primary">Activated</span>
@@ -322,6 +324,7 @@
                                         <th scope="col" class="cursor-pointer">Token No</th>
                                         <th scope="col" class="cursor-pointer">Visitors</th>
                                         <th scope="col" class="cursor-pointer">Email</th>
+                                        <th scope="col" class="cursor-pointer">Date</th>
                                         <th scope="col" class="cursor-pointer desc">Status</th>
                                         <th scope="col" class="cursor-pointer desc">Action</th>
                                         <th scope="col" class="cursor-pointer desc">Action</th>
@@ -343,6 +346,7 @@
                                             @else
                                                 <td>No email provided</td>
                                             @endif
+                                            <td>{{$data->created_at}}</td>
                                             <td>
                                                 @if($data->status == 2)
                                                     <span class="badge text-bg-primary">Activated</span>

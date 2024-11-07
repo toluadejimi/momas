@@ -14,7 +14,7 @@ class AccessTokenConroller extends Controller
 
         if(auth::user()->role == 0){
 
-            $data['token'] = Token::paginate(20);
+            $data['token'] = Token::latest()->paginate(20);
             $data['token_count'] = Token::count();
             $data['token_active'] = Token::where('status', 0)->count();
             $data['token_inactive'] = Token::where('status', 0)->count();
@@ -29,7 +29,7 @@ class AccessTokenConroller extends Controller
 
         } elseif(auth::user()->role == 3){
 
-            $data['token'] = Token::where('estate_id', auth::user()->estate_id)->paginate(20);
+            $data['token'] = Token::latest()->where('estate_id', auth::user()->estate_id)->paginate(20);
             $data['token_count'] = Token::where('estate_id', auth::user()->estate_id)->count();
             return view('admin.estatetoken.token_view', $data);
 
