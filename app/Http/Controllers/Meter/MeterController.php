@@ -138,7 +138,7 @@ class MeterController extends Controller
 
             $curl = curl_init();
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'http://169.239.189.91:19071/tokenGen',
+                CURLOPT_URL => 'https://169.239.189.91:19071/tokenGen',
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
@@ -159,7 +159,8 @@ class MeterController extends Controller
             if($response == false){
                 return response()->json([
                     'status' => false,
-                    'message' => "Vending server not connected, Retry again later using your wallet"
+                    'message' => "Vending server not connected, Retry again later using your wallet",
+                    'no_kct_response' => $response
                 ], 422);
             }
 
@@ -183,7 +184,7 @@ class MeterController extends Controller
                 $kctjsonData = json_encode($kctdatabody);
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
-                    CURLOPT_URL => 'http://169.239.189.91:19071/kcttokenGen',
+                    CURLOPT_URL => 'https://169.239.189.91:19071/kcttokenGen',
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_ENCODING => '',
                     CURLOPT_MAXREDIRS => 10,
@@ -205,7 +206,8 @@ class MeterController extends Controller
                 if($kct_response == false){
                     return response()->json([
                         'status' => false,
-                        'message' => "Vending server not connected, Retry again later using your wallet"
+                        'message' => "Vending server not connected, Retry again later using your wallet",
+                        'kct_response' => $kct_response
                     ], 422);
                 }
 
@@ -299,7 +301,8 @@ class MeterController extends Controller
             if($no_kct_response == false){
                 return response()->json([
                     'status' => false,
-                    'message' => "Vending server not connected, Retry again later using your wallet"
+                    'message' => "Vending server not connected, Retry again later using your wallet",
+                    'no_kct_response' => $no_kct_response
                 ], 422);
             }
 
