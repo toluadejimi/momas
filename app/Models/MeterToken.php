@@ -14,4 +14,9 @@ class MeterToken extends Model
         'status' => 'integer'
     ];
 
+    public function estate()
+    {
+        return $this->belongsTo(Estate::class);
+    }
+
 }

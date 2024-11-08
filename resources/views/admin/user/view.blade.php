@@ -431,10 +431,14 @@
 
                                             <tr>
                                                 <td>{{$data->order_id}} </td>
-                                                <td>{{$data->estate_name}}</td>
+                                                <td>{{$data->estate->title}}</td>
                                                 <td>{{$data->meterNo}}</td>
                                                 <td>{{$data->token}}</td>
-                                                <td>{{$data->kct_tokens}}</td>
+                                                @if($data->kct_tokens != null)
+                                                    <td>{{$data->kct_tokens}}</td>
+                                                @else
+                                                    <td>{{"Not Available"}}</td>
+                                                @endif
                                                 <td>{{number_format($data->amount, 2)}}</td>
                                                 <td>{{number_format($data->vat, 2)}}</td>
                                                 <td>

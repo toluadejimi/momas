@@ -175,7 +175,7 @@ class MeterController extends Controller
                             $met->meterNo = $meterNo;
                             $met->token = $token;
                             $met->amount = $request->amount;
-                            $met->kct_tokens = $kct_data['tokens'][0]."  ".$kct_data['tokens'][1];
+                            $met->kct_tokens = $kct_data['tokens'][0].",".$kct_data['tokens'][1];
                             $met->vat = $vat;
                             $met->estate_id = Auth::user()->estate_id;
                             $met->status = 2;
