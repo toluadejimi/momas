@@ -159,8 +159,8 @@ class TransactionController extends Controller
                 "amount" => $request->amount * 100,
                 "email" => $email,
                 "ref" => $trx_id,
+                'callback_url' => url('')."/paystack-check",
                 'metadata' => ["ref" => $trx_id],
-
 
             );
 
