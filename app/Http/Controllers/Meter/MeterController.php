@@ -143,6 +143,7 @@ class MeterController extends Controller
 
                 if ($status == "SUCCESS") {
                     $token = $data['tokens'][0];
+
                     $kctdatabody = [
                         'meterType' => $meter->KRN1,
                         'tometerType' => $meter->KRN1,
@@ -252,12 +253,13 @@ class MeterController extends Controller
 
                 if ($status == "SUCCESS") {
 
+                    $no_kct_token = $no_kct_data['tokens'][0];
                     $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
                     $met =  new MeterToken ();
                     $met->user_id = Auth::user()->id;
                     $met->order_id = $trx;
                     $met->meterNo = $meterNo;
-                    $met->token = $token;
+                    $met->token = $no_kct_token;
                     $met->amount = $request->amount;
                     $met->vat = $vat;
                     $met->estate_id = Auth::user()->estate_id;
