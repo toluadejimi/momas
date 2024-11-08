@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
 
     <meta charset="utf-8"/>
@@ -10,9 +8,17 @@
     <meta name="description" content="Momas Admin"/>
     <meta name="author" content="Momaspay"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <link rel="shortcut icon" href="{{ asset('asset/ass/images/favicon.ico"') }}">
-    <link href="{{ asset('asset/ass/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style"/>
-    <link href="{{ asset('asset/ass/css/icons.min.css') }}" rel="stylesheet" type="text/css"/>
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{url('')}}/public/asset/ass/images/favicon.ico">
+
+    <!-- App css -->
+{{--    <link href="{{ asset('css/ass/css/app.min.css') }} {{url('')}}/public/asset/ass/css/app.min.css" rel="stylesheet" type="text/css" id="app-style"/>--}}
+    <link href="{{url('')}}/public/asset/ass/css/app.min.css" rel="stylesheet" type="text/css" id="app-style"/>
+
+
+    <!-- Icons -->
+    <link href="{{url('')}}/public/asset/ass/css/icons.min.css" rel="stylesheet" type="text/css"/>
 
     <style>
         .search-result {
@@ -24,19 +30,16 @@
             background-color: white;
             width: 100%;
         }
-
         .search-result div {
             padding: 8px;
             cursor: pointer;
         }
-
         .search-result div:hover {
             background-color: #f0f0f0;
         }
     </style>
 
 </head>
-
 
 <!-- body start -->
 <body data-menu-color="light" data-sidebar="default"
@@ -56,7 +59,7 @@
                         </button>
                     </li>
                     <li class="d-none d-lg-block">
-                        <h5 class="mb-0">Hi, Admin</h5>
+                        <h5 class="mb-0">Good Morning, Admin</h5>
                     </li>
                 </ul>
 
@@ -66,7 +69,7 @@
                     <li class="dropdown notification-list topbar-dropdown">
                         <a class="nav-link dropdown-toggle nav-user me-0" data-bs-toggle="dropdown"
                            href="analytics.html#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="{{ asset('asset/ass/images/users/user-5.jpg')}}" alt="user-image"
+                            <img src="{{url('')}}/public/asset/ass/images/users/user-5.jpg" alt="user-image"
                                  class="rounded-circle">
                             <span class="pro-user-name ms-1">
                                         Admin <i class="mdi mdi-chevron-down"></i>
@@ -83,6 +86,7 @@
                                 <i class="mdi mdi-location-exit fs-16 align-middle"></i>
                                 <span>Logout</span>
                             </a>
+
 
 
                         </div>
@@ -106,18 +110,18 @@
                 <div class="logo-box">
                     <a class='logo logo-light' href='index.html'>
                                 <span class="logo-sm">
-                                    <img src="{{ asset('asset/ass/images/logo-sm.png')}}" alt="" height="22">
+                                    <img src="{{url('')}}/public/asset/ass/images/logo-sm.png" alt="" height="22">
                                 </span>
                         <span class="logo-lg">
-                                    <img src="{{ asset('asset/ass/images/logo-light.png')}}" alt="" height="24">
+                                    <img src="{{url('')}}/public/asset/ass/images/logo-light.png" alt="" height="24">
                                 </span>
                     </a>
                     <a class='logo logo-dark' href='index.html'>
                                 <span class="logo-sm">
-                                    <img src="{{ asset('asset/ass/images/logo-sm.png')}}" alt="" height="22">
+                                    <img src="{{url('')}}/public/asset/ass/images/logo-sm.png" alt="" height="22">
                                 </span>
                         <span class="logo-lg">
-                                    <img src="{{ asset('asset/ass/images/logo-dark.png')}}" alt="" height="24">
+                                    <img src="{{url('')}}/public/asset/ass/images/logo-dark.png" alt="" height="24">
                                 </span>
                     </a>
                 </div>
@@ -128,7 +132,7 @@
                         <li class="menu-title">Menu</li>
 
                         <li>
-                            <a class='tp-link' href="admin-dashboard">
+                            <a class='tp-link'  href="admin-dashboard">
                                 <i data-feather="menu"></i>
                                 <span> Dashboard </span>
                             </a>
@@ -136,7 +140,7 @@
 
 
                         <li>
-                            <a class='tp-link' href="customers">
+                            <a class='tp-link'  href="customers">
                                 <i data-feather="users"></i>
                                 <span> Customers </span>
                             </a>
@@ -144,7 +148,7 @@
 
 
                         <li>
-                            <a class='tp-link' href="meter-list">
+                            <a class='tp-link'  href="meter-list">
                                 <i data-feather="cpu"></i>
                                 <span> Meter </span>
                             </a>
@@ -152,14 +156,14 @@
 
 
                         <li>
-                            <a class='tp-link' href="asset">
+                            <a class='tp-link'  href="asset">
                                 <i data-feather="archive"></i>
                                 <span> Assets </span>
                             </a>
                         </li>
 
                         <li>
-                            <a class='tp-link' href="organization">
+                            <a class='tp-link'  href="organization">
                                 <i data-feather="folder"></i>
                                 <span> Organization </span>
                             </a>
@@ -167,7 +171,7 @@
 
 
                         <li>
-                            <a class='tp-link' href="transformer-list">
+                            <a class='tp-link'  href="transformer-list">
                                 <i data-feather="box"></i>
                                 <span> Transformer </span>
                             </a>
@@ -175,7 +179,7 @@
 
 
                         <li>
-                            <a class='tp-link' href="estate">
+                            <a class='tp-link'  href="estate">
                                 <i data-feather="home"></i>
                                 <span> Estate </span>
                             </a>
@@ -183,15 +187,18 @@
 
 
                         <li>
-                            <a class='tp-link' href="estate-service">
+                            <a class='tp-link'  href="estate-service">
                                 <i data-feather="layers"></i>
                                 <span> Estate Service </span>
                             </a>
                         </li>
 
 
+
+
+
                         <li>
-                            <a class='tp-link' href="tariff-list">
+                            <a class='tp-link'  href="tariff-list">
                                 <i data-feather="divide-square"></i>
                                 <span> Tariff </span>
                             </a>
@@ -199,15 +206,17 @@
 
 
                         <li>
-                            <a class='tp-link' href="access-token">
+                            <a class='tp-link'  href="access-token">
                                 <i data-feather="lock"></i>
                                 <span> Access Token </span>
                             </a>
                         </li>
 
 
+
+
                         <li>
-                            <a class='tp-link' href="users-list">
+                            <a class='tp-link'  href="users-list">
                                 <i data-feather="users"></i>
                                 <span> Users </span>
                             </a>
@@ -215,11 +224,14 @@
 
 
                         <li>
-                            <a class='tp-link' href="settings">
+                            <a class='tp-link'  href="settings">
                                 <i data-feather="settings"></i>
                                 <span> Settings </span>
                             </a>
                         </li>
+
+
+
 
 
                     </ul>
@@ -231,7 +243,7 @@
                         <li class="menu-title">Menu</li>
 
                         <li>
-                            <a class='tp-link' href="admin-dashboard">
+                            <a class='tp-link'  href="admin-dashboard">
                                 <i data-feather="menu"></i>
                                 <span> Dashboard </span>
                             </a>
@@ -239,7 +251,7 @@
 
 
                         <li>
-                            <a class='tp-link' href="customers">
+                            <a class='tp-link'  href="customers">
                                 <i data-feather="users"></i>
                                 <span> Customers </span>
                             </a>
@@ -247,7 +259,7 @@
 
 
                         <li>
-                            <a class='tp-link' href="meter-list">
+                            <a class='tp-link'  href="meter-list">
                                 <i data-feather="cpu"></i>
                                 <span> Meter </span>
                             </a>
@@ -255,7 +267,7 @@
 
 
                         <li>
-                            <a class='tp-link' href="estate-service">
+                            <a class='tp-link'  href="estate-service">
                                 <i data-feather="layers"></i>
                                 <span> Estate Service </span>
                             </a>
@@ -263,30 +275,33 @@
 
 
                         <li>
-                            <a class='tp-link' href="transformer-list">
+                            <a class='tp-link'  href="transformer-list">
                                 <i data-feather="box"></i>
                                 <span> Transformer </span>
                             </a>
                         </li>
 
 
+
+
                         <li>
-                            <a class='tp-link' href="tariff-list">
+                            <a class='tp-link'  href="tariff-list">
                                 <i data-feather="divide-square"></i>
                                 <span> Tariff </span>
                             </a>
                         </li>
 
                         <li>
-                            <a class='tp-link' href="access-token">
+                            <a class='tp-link'  href="access-token">
                                 <i data-feather="lock"></i>
                                 <span> Access Token </span>
                             </a>
                         </li>
 
 
+
                         <li>
-                            <a class='tp-link' href="users-list">
+                            <a class='tp-link'  href="users-list">
                                 <i data-feather="users"></i>
                                 <span> Users </span>
                             </a>
@@ -294,7 +309,7 @@
 
 
                         <li>
-                            <a class='tp-link' href="settings">
+                            <a class='tp-link'  href="settings">
                                 <i data-feather="settings"></i>
                                 <span> Settings </span>
                             </a>
@@ -306,6 +321,9 @@
                 @elseif(auth::user()->role == 5)
                 @else
                 @endif
+
+
+
 
 
             </div>
@@ -342,18 +360,20 @@
     </div>
 
 
+
     <script>
         let sessionLifetime = {{ config('session.lifetime') }} * 60 * 1000;
         let warningTime = sessionLifetime - (5 * 60 * 1000);
 
-        setTimeout(function () {
+        setTimeout(function() {
             alert('Your session is about to expire. Please save your work!');
         }, warningTime);
 
-        setTimeout(function () {
+        setTimeout(function() {
             window.location.href = '/login';
         }, sessionLifetime);
     </script>
+
 
 
     <!-- ============================================================== -->
@@ -364,62 +384,57 @@
 <!-- END wrapper -->
 
 <!-- Vendor -->
-
-
-<script src="{{ asset('asset/ass/libs/jquery/jquery.min.js')}}"></script>
-<script src="{{ asset('asset/ass/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{ asset('asset/ass/libs/simplebar/simplebar.min.js')}}"></script>
-<script src="{{ asset('asset/ass/libs/node-waves/waves.min.js')}}"></script>
-<script src="{{ asset('asset/ass/libs/waypoints/lib/jquery.waypoints.min.js')}}"></script>
-<script src="{{ asset('asset/ass/libs/jquery.counterup/jquery.counterup.min.js')}}"></script>
-<script src="{{ asset('asset/ass/libs/feather-icons/feather.min.js')}}"></script>
+<script src="{{url('')}}/public/asset/ass/libs/jquery/jquery.min.js"></script>
+<script src="{{url('')}}/public/asset/ass/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{url('')}}/public/asset/ass/libs/simplebar/simplebar.min.js"></script>
+<script src="{{url('')}}/public/asset/ass/libs/node-waves/waves.min.js"></script>
+<script src="{{url('')}}/public/asset/ass/libs/waypoints/lib/jquery.waypoints.min.js"></script>
+<script src="{{url('')}}/public/asset/ass/libs/jquery.counterup/jquery.counterup.min.js"></script>
+<script src="{{url('')}}/public/asset/ass/libs/feather-icons/feather.min.js"></script>
 
 <!-- Apexcharts JS -->
-<script src="{{ asset('asset/ass/libs/apexcharts/apexcharts.min.js')}}"></script>
+<script src="{{url('')}}/public/asset/ass/libs/apexcharts/apexcharts.min.js"></script>
 
 <!-- for basic area chart -->
-<script src="{{ asset('asset/ass/stock-prices.js')}}"></script>
+<script src="{{url('')}}/public/asset/ass/stock-prices.js"></script>
 
 <!-- Widgets Init Js -->
-<script src="{{ asset('asset/ass/js/pages/analytics-dashboard.init.js')}}"></script>
+<script src="{{url('')}}/public/asset/ass/js/pages/analytics-dashboard.init.js"></script>
 
 <!-- App js-->
-<script src="{{ asset('asset/ass/js/app.js')}}"></script>
+<script src="{{url('')}}/public/asset/ass/js/app.js"></script>
 
 
 <!-- Datatables js -->
-<script src="{{ asset('asset/ass/libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{url('')}}/public/asset/ass/libs/datatables.net/js/jquery.dataTables.min.js"></script>
 
 <!-- dataTables.bootstrap5 -->
-<script src="{{ asset('asset/ass/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js')}}"></script>
-<script src="{{ asset('asset/ass/libs/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{url('')}}/public/asset/ass/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+<script src="{{url('')}}/public/asset/ass/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
 
 <!-- buttons.colVis -->
-<script src="{{ asset('asset/ass/libs/datatables.net-buttons/js/buttons.colVis.min.js')}}"></script>
-<script src="{{ asset('asset/ass/libs/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
-<script src="{{ asset('asset/ass/libs/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
-<script src="{{ asset('asset/ass/libs/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{url('')}}/public/asset/ass/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+<script src="{{url('')}}/public/asset/ass/libs/datatables.net-buttons/js/buttons.flash.min.js"></script>
+<script src="{{url('')}}/public/asset/ass/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="{{url('')}}/public/asset/ass/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
 
 <!-- buttons.bootstrap5 -->
-<script src="{{ asset('asset/ass/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js')}}"></script>
+<script src="{{url('')}}/public/asset/ass/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
 
 <!-- dataTables.keyTable -->
-<script src="{{ asset('asset/ass/libs/datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>
-<script src="{{ asset('asset/ass/libs/datatables.net-keytable-bs5/js/keyTable.bootstrap5.min.js')}}"></script>
+<script src="{{url('')}}/public/asset/ass/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+<script src="{{url('')}}/public/asset/ass/libs/datatables.net-keytable-bs5/js/keyTable.bootstrap5.min.js"></script>
 
 <!-- dataTable.responsive -->
-<script src="{{ asset('asset/ass/libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{ asset('asset/ass/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js')}}"></script>
+<script src="{{url('')}}/public/asset/ass/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="{{url('')}}/public/asset/ass/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
 
 <!-- dataTables.select -->
-<script src="{{ asset('asset/ass/libs/datatables.net-select/js/dataTables.select.min.js')}}"></script>
-<script src="{{ asset('asset/ass/libs/datatables.net-select-bs5/js/select.bootstrap5.min.js')}}"></script>
+<script src="{{url('')}}/public/asset/ass/libs/datatables.net-select/js/dataTables.select.min.js"></script>
+<script src="{{url('')}}/public/asset/ass/libs/datatables.net-select-bs5/js/select.bootstrap5.min.js"></script>
 
 <!-- Datatable Demo App Js -->
-<script src="{{ asset('asset/ass/js/pages/datatable.init.js')}}"></script>
-
-
-
+<script src="{{url('')}}/public/asset/ass/js/pages/datatable.init.js"></script>
 
 </body>
 </html>

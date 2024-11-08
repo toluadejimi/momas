@@ -10,13 +10,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('asset/ass/images/favicon.ico"') }}">
+    <link rel="shortcut icon" href="{{url('')}}/public/asset/ass/images/favicon.ico">
 
-    <link href="{{ asset('asset/ass/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style"/>
-
+    <!-- App css -->
+    <link href="{{url('')}}/public/asset/ass/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
 
     <!-- Icons -->
-    <link href="{{ asset('asset/ass/css/icons.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{url('')}}/public/asset/ass/css/icons.min.css" rel="stylesheet" type="text/css" />
 
     <style>
         .btn {
@@ -71,7 +71,7 @@
                                 <div class="mb-0 border-0 p-md-5 p-lg-0 p-4">
                                     <div class="mb-4 p-0 text-center">
                                         <a class='auth-logo' href='index.html'>
-                                            <img src="{{ asset('asset/ass/images/logo-dark.png') }}" alt="logo-dark" class="mx-auto" height="70" />
+                                            <img src="{{url('')}}/public/asset/ass/images/logo-dark.png" alt="logo-dark" class="mx-auto" height="70" />
                                         </a>
                                     </div>
 
@@ -157,17 +157,17 @@
 
 <!-- END wrapper -->
 
-<script src="{{ asset('asset/ass/libs/jquery/jquery.minjs')}}"></script>
-<script src="{{ asset('asset/ass/libs/bootstrap/js/bootstrap.bundle.minjs')}}"></script>
-<script src="{{ asset('asset/ass/libs/simplebar/simplebar.minjs')}}"></script>
-<script src="{{ asset('asset/ass/libs/node-waves/waves.minjs')}}"></script>
-<script src="{{ asset('asset/ass/libs/waypoints/lib/jquery.waypoints.minjs')}}"></script>
-<script src="{{ asset('asset/ass/libs/jquery.counterup/jquery.counterup.minjs')}}"></script>
-<script src="{{ asset('asset/ass/libs/feather-icons/feather.minjs')}}"></script>
+<!-- Vendor -->
+<script src="{{url('')}}/public/asset/ass/libs/jquery/jquery.min.js"></script>
+<script src="{{url('')}}/public/asset/ass/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{url('')}}/public/asset/ass/libs/simplebar/simplebar.min.js"></script>
+<script src="{{url('')}}/public/asset/ass/libs/node-waves/waves.min.js"></script>
+<script src="{{url('')}}/public/asset/ass/libs/waypoints/lib/jquery.waypoints.min.js"></script>
+<script src="{{url('')}}/public/asset/ass/libs/jquery.counterup/jquery.counterup.min.js"></script>
+<script src="{{url('')}}/public/asset/ass/libs/feather-icons/feather.min.js"></script>
 
 <!-- App js-->
-<script src="{{ asset('asset/ass/js/appjs')}}"></script>
-
+<script src="{{url('')}}/public/asset/ass/js/app.js"></script>
 
 
 <script>
