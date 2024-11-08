@@ -110,7 +110,7 @@ class MeterController extends Controller
 
 
         $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first()->duration;
-        if ($request->min_vend_amount > 0) {
+        if ($request->min_vend_amount != 0) {
             $utl = new UtilitiesPayment();
             $utl->user_id = Auth::id();
             $utl->estate_id = Auth::user()->estate_id;
