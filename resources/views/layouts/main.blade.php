@@ -1,5 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
+@if(env('APP_URL') == "http://192.64.115.75:9081")
+    <head>
+
+        <meta charset="utf-8"/>
+        <title>Dashboard | Momaspay Admin</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Momas Admin"/>
+        <meta name="author" content="Momaspay"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{{ asset('asset/ass/images/favicon.ico"') }}">
+
+        <link href="{{ asset('asset/ass/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style"/>
+
+
+        <!-- Icons -->
+        <link href="{{ asset('asset/ass/css/icons.min.css') }}" rel="stylesheet" type="text/css"/>
+
+        <style>
+            .search-result {
+                border: 1px solid #ccc;
+                max-height: 150px;
+                overflow-y: auto;
+                display: none; /* Initially hidden */
+                position: absolute;
+                background-color: white;
+                width: 100%;
+            }
+            .search-result div {
+                padding: 8px;
+                cursor: pointer;
+            }
+            .search-result div:hover {
+                background-color: #f0f0f0;
+            }
+        </style>
+
+    </head>
+
+@else
+    <head>
+
+        <meta charset="utf-8"/>
+        <title>Dashboard | Momaspay Admin</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Momas Admin"/>
+        <meta name="author" content="Momaspay"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{{url('')}}/public/asset/ass/images/favicon.ico">
+
+        <!-- App css -->
+            <link href="{{url('')}}/public/asset/ass/css/app.min.css" rel="stylesheet" type="text/css" id="app-style"/>
+
+        <!-- Icons -->
+        <link href="{{url('')}}/public/asset/ass/css/icons.min.css" rel="stylesheet" type="text/css"/>
+
+        <style>
+            .search-result {
+                border: 1px solid #ccc;
+                max-height: 150px;
+                overflow-y: auto;
+                display: none; /* Initially hidden */
+                position: absolute;
+                background-color: white;
+                width: 100%;
+            }
+            .search-result div {
+                padding: 8px;
+                cursor: pointer;
+            }
+            .search-result div:hover {
+                background-color: #f0f0f0;
+            }
+        </style>
+
+    </head>
+
+@endif
+
+
 <head>
 
     <meta charset="utf-8"/>
@@ -10,13 +95,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{url('')}}/public/assets/ass/images/favicon.ico">
+    <link rel="shortcut icon" href="{{url('')}}/public/asset/ass/images/favicon.ico">
 
     <!-- App css -->
-    <link href="{{url('')}}/public/assets/ass/css/app.min.css" rel="stylesheet" type="text/css" id="app-style"/>
+{{--    <link href="{{ asset('css/ass/css/app.min.css') }} {{url('')}}/public/asset/ass/css/app.min.css" rel="stylesheet" type="text/css" id="app-style"/>--}}
+
+    <link href="{{ asset('asset/ass/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style"/>
+
 
     <!-- Icons -->
-    <link href="{{url('')}}/public/assets/ass/css/icons.min.css" rel="stylesheet" type="text/css"/>
+    <link href="{{url('')}}/public/asset/ass/css/icons.min.css" rel="stylesheet" type="text/css"/>
 
     <style>
         .search-result {
@@ -67,7 +155,7 @@
                     <li class="dropdown notification-list topbar-dropdown">
                         <a class="nav-link dropdown-toggle nav-user me-0" data-bs-toggle="dropdown"
                            href="analytics.html#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="{{url('')}}/public/assets/ass/images/users/user-5.jpg" alt="user-image"
+                            <img src="{{url('')}}/public/asset/ass/images/users/user-5.jpg" alt="user-image"
                                  class="rounded-circle">
                             <span class="pro-user-name ms-1">
                                         Admin <i class="mdi mdi-chevron-down"></i>
@@ -108,18 +196,18 @@
                 <div class="logo-box">
                     <a class='logo logo-light' href='index.html'>
                                 <span class="logo-sm">
-                                    <img src="{{url('')}}/public/assets/ass/images/logo-sm.png" alt="" height="22">
+                                    <img src="{{url('')}}/public/asset/ass/images/logo-sm.png" alt="" height="22">
                                 </span>
                         <span class="logo-lg">
-                                    <img src="{{url('')}}/public/assets/ass/images/logo-light.png" alt="" height="24">
+                                    <img src="{{url('')}}/public/asset/ass/images/logo-light.png" alt="" height="24">
                                 </span>
                     </a>
                     <a class='logo logo-dark' href='index.html'>
                                 <span class="logo-sm">
-                                    <img src="{{url('')}}/public/assets/ass/images/logo-sm.png" alt="" height="22">
+                                    <img src="{{url('')}}/public/asset/ass/images/logo-sm.png" alt="" height="22">
                                 </span>
                         <span class="logo-lg">
-                                    <img src="{{url('')}}/public/assets/ass/images/logo-dark.png" alt="" height="24">
+                                    <img src="{{url('')}}/public/asset/ass/images/logo-dark.png" alt="" height="24">
                                 </span>
                     </a>
                 </div>
@@ -382,57 +470,117 @@
 <!-- END wrapper -->
 
 <!-- Vendor -->
-<script src="{{url('')}}/public/assets/ass/libs/jquery/jquery.min.js"></script>
-<script src="{{url('')}}/public/assets/ass/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="{{url('')}}/public/assets/ass/libs/simplebar/simplebar.min.js"></script>
-<script src="{{url('')}}/public/assets/ass/libs/node-waves/waves.min.js"></script>
-<script src="{{url('')}}/public/assets/ass/libs/waypoints/lib/jquery.waypoints.min.js"></script>
-<script src="{{url('')}}/public/assets/ass/libs/jquery.counterup/jquery.counterup.min.js"></script>
-<script src="{{url('')}}/public/assets/ass/libs/feather-icons/feather.min.js"></script>
+
+@if(env('APP_URL') == "http://192.64.115.75:9081")
+
+    <script src="{{ asset('asset/ass/libs/jquery/jquery.min.js')}}></script>
+<script src="{{ asset('asset/ass/libs/bootstrap/js/bootstrap.bundle.min.js')}}></script>
+    <script src="{{ asset('asset/ass/libs/simplebar/simplebar.min.js')}}></script>
+<script src="{{ asset('asset/ass/libs/node-waves/waves.min.js')}}></script>
+    <script src="{{ asset('asset/ass/libs/waypoints/lib/jquery.waypoints.min.js')}}></script>
+<script src="{{ asset('asset/ass/libs/jquery.counterup/jquery.counterup.min.js')}}></script>
+    <script src="{{ asset('asset/ass/libs/feather-icons/feather.min.js')}}></script>
 
 <!-- Apexcharts JS -->
-<script src="{{url('')}}/public/assets/ass/libs/apexcharts/apexcharts.min.js"></script>
+<script src="{{ asset('asset/ass/libs/apexcharts/apexcharts.min.js')}}></script>
 
-<!-- for basic area chart -->
-<script src="{{url('')}}/public/assets/ass/stock-prices.js"></script>
+    <!-- for basic area chart -->
+    <script src="{{ asset('asset/ass/stock-prices.js')}}></script>
 
 <!-- Widgets Init Js -->
-<script src="{{url('')}}/public/assets/ass/js/pages/analytics-dashboard.init.js"></script>
+<script src="{{ asset('asset/ass/js/pages/analytics-dashboard.init.js')}}></script>
 
-<!-- App js-->
-<script src="{{url('')}}/public/assets/ass/js/app.js"></script>
+    <!-- App js-->
+    <script src="{{ asset('asset/ass/js/app.js')}}></script>
 
 
 <!-- Datatables js -->
-<script src="{{url('')}}/public/assets/ass/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="{{ asset('asset/ass/libs/datatables.net/js/jquery.dataTables.min.js')}}></script>
 
-<!-- dataTables.bootstrap5 -->
-<script src="{{url('')}}/public/assets/ass/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
-<script src="{{url('')}}/public/assets/ass/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <!-- dataTables.bootstrap5 -->
+    <script src="{{ asset('asset/ass/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js')}}></script>
+<script src="{{ asset('asset/ass/libs/datatables.net-buttons/js/dataTables.buttons.min.js')}}></script>
 
-<!-- buttons.colVis -->
-<script src="{{url('')}}/public/assets/ass/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
-<script src="{{url('')}}/public/assets/ass/libs/datatables.net-buttons/js/buttons.flash.min.js"></script>
-<script src="{{url('')}}/public/assets/ass/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
-<script src="{{url('')}}/public/assets/ass/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <!-- buttons.colVis -->
+    <script src="{{ asset('asset/ass/libs/datatables.net-buttons/js/buttons.colVis.min.js')}}></script>
+<script src="{{ asset('asset/ass/libs/datatables.net-buttons/js/buttons.flash.min.js')}}></script>
+    <script src="{{ asset('asset/ass/libs/datatables.net-buttons/js/buttons.html5.min.js')}}></script>
+<script src="{{ asset('asset/ass/libs/datatables.net-buttons/js/buttons.print.min.js')}}></script>
 
-<!-- buttons.bootstrap5 -->
-<script src="{{url('')}}/public/assets/ass/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+    <!-- buttons.bootstrap5 -->
+    <script src="{{ asset('asset/ass/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js')}}></script>
 
 <!-- dataTables.keyTable -->
-<script src="{{url('')}}/public/assets/ass/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-<script src="{{url('')}}/public/assets/ass/libs/datatables.net-keytable-bs5/js/keyTable.bootstrap5.min.js"></script>
+<script src="{{ asset('asset/ass/libs/datatables.net-keytable/js/dataTables.keyTable.min.js')}}></script>
+    <script src="{{ asset('asset/ass/libs/datatables.net-keytable-bs5/js/keyTable.bootstrap5.min.js')}}></script>
 
 <!-- dataTable.responsive -->
-<script src="{{url('')}}/public/assets/ass/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-<script src="{{url('')}}/public/assets/ass/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+<script src="{{ asset('asset/ass/libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}></script>
+    <script src="{{ asset('asset/ass/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js')}}></script>
 
 <!-- dataTables.select -->
-<script src="{{url('')}}/public/assets/ass/libs/datatables.net-select/js/dataTables.select.min.js"></script>
-<script src="{{url('')}}/public/assets/ass/libs/datatables.net-select-bs5/js/select.bootstrap5.min.js"></script>
+<script src="{{ asset('asset/ass/libs/datatables.net-select/js/dataTables.select.min.js')}}></script>
+    <script src="{{ asset('asset/ass/libs/datatables.net-select-bs5/js/select.bootstrap5.min.js')}}></script>
 
 <!-- Datatable Demo App Js -->
-<script src="{{url('')}}/public/assets/ass/js/pages/datatable.init.js"></script>
+<script src="{{ asset('asset/ass/js/pages/datatable.init.js')}}></script>
+
+@else
+
+    <script src="{{url('')}}/public/asset/ass/libs/jquery/jquery.min.js"></script>
+    <script src="{{url('')}}/public/asset/ass/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{url('')}}/public/asset/ass/libs/simplebar/simplebar.min.js"></script>
+    <script src="{{url('')}}/public/asset/ass/libs/node-waves/waves.min.js"></script>
+    <script src="{{url('')}}/public/asset/ass/libs/waypoints/lib/jquery.waypoints.min.js"></script>
+    <script src="{{url('')}}/public/asset/ass/libs/jquery.counterup/jquery.counterup.min.js"></script>
+    <script src="{{url('')}}/public/asset/ass/libs/feather-icons/feather.min.js"></script>
+
+    <!-- Apexcharts JS -->
+    <script src="{{url('')}}/public/asset/ass/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- for basic area chart -->
+    <script src="{{url('')}}/public/asset/ass/stock-prices.js"></script>
+
+    <!-- Widgets Init Js -->
+    <script src="{{url('')}}/public/asset/ass/js/pages/analytics-dashboard.init.js"></script>
+
+    <!-- App js-->
+    <script src="{{url('')}}/public/asset/ass/js/app.js"></script>
+
+
+    <!-- Datatables js -->
+    <script src="{{url('')}}/public/asset/ass/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+
+    <!-- dataTables.bootstrap5 -->
+    <script src="{{url('')}}/public/asset/ass/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="{{url('')}}/public/asset/ass/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+
+    <!-- buttons.colVis -->
+    <script src="{{url('')}}/public/asset/ass/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <script src="{{url('')}}/public/asset/ass/libs/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="{{url('')}}/public/asset/ass/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="{{url('')}}/public/asset/ass/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+
+    <!-- buttons.bootstrap5 -->
+    <script src="{{url('')}}/public/asset/ass/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+
+    <!-- dataTables.keyTable -->
+    <script src="{{url('')}}/public/asset/ass/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="{{url('')}}/public/asset/ass/libs/datatables.net-keytable-bs5/js/keyTable.bootstrap5.min.js"></script>
+
+    <!-- dataTable.responsive -->
+    <script src="{{url('')}}/public/asset/ass/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="{{url('')}}/public/asset/ass/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+
+    <!-- dataTables.select -->
+    <script src="{{url('')}}/public/asset/ass/libs/datatables.net-select/js/dataTables.select.min.js"></script>
+    <script src="{{url('')}}/public/asset/ass/libs/datatables.net-select-bs5/js/select.bootstrap5.min.js"></script>
+
+    <!-- Datatable Demo App Js -->
+    <script src="{{url('')}}/public/asset/ass/js/pages/datatable.init.js"></script>
+
+@endif
+
 
 </body>
 </html>

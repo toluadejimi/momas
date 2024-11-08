@@ -94,7 +94,7 @@
 
                                                     <div class="modal-body">
 
-                                                        <p>Click here  to download the sample of file to upload <a href="{{url('')}}/public/assets/meterdataimport.csv">Download here</a></p>
+                                                        <p>Click here  to download the sample of file to upload <a href="{{url('')}}/public/asset/meterdataimport.csv">Download here</a></p>
                                                         <label class="mt-3">Choose File</label>
                                                         <input type="file"  class="form-control mb-3" name="file" required>
 
@@ -329,7 +329,7 @@
 
                                                     <div class="modal-body">
 
-                                                        <p>Click here  to download the sample of file to upload <a href="{{url('')}}/public/assets/meterdataimport.csv">Download here</a></p>
+                                                        <p>Click here  to download the sample of file to upload <a href="{{url('')}}/public/asset/meterdataimport.csv">Download here</a></p>
                                                         <label class="mt-3">Choose File</label>
                                                         <input type="file"  class="form-control mb-3" name="file" required>
 
