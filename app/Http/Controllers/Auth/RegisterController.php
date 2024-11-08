@@ -11,27 +11,27 @@ use Illuminate\Http\Request;
 class RegisterController extends Controller
 {
 
+
+    public
+    function reset_password(request $request)
+    {
+        User::where('email', $request->email)->update([
+            'password' => bcrypt($request->password)
+        ]);
+
+
+        $email = $request->email;
+        send_reset_email_notification($email);
+
+        $message = "Password Reset Successfully";
+        return success($message);
+
+
+    }
+
+
     public function check_user(request $request)
     {
-
-
-        public
-        function reset_password(request $request)
-        {
-            User::where('email', $request->email)->update([
-                'password' => bcrypt($request->password)
-            ]);
-
-
-            $email = $request->email;
-            send_reset_email_notification($email);
-
-                $message = "Password Reset Successfully";
-                return success($message);
-
-
-        }
-
 
         if ($request->action == "reset") {
 
