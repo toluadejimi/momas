@@ -166,6 +166,20 @@ class MeterController extends Controller
 
                         if ($status == "SUCCESS") {
 
+                            $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
+                            $met =  new MeterToken ();
+                            $met->user_id = Auth::user()->id;
+                            $met->order_id = $trx;
+                            $met->meterNo = $meterNo;
+                            $met->token = $token;
+                            $met->amount = $request->amount;
+                            $met->kct_tokens = $kct_data['tokens'][0]."  ".$kct_data['tokens'][1];
+                            $met->vat = $vat;
+                            $met->estate_id = Auth::user()->estate_id;
+                            $met->status = 2;
+                            $met->save();
+
+
                             $data2['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
                             $data2['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
                             $data2['service'] = "MOMAS METER";
@@ -237,6 +251,19 @@ class MeterController extends Controller
 
                 if ($status == "SUCCESS") {
 
+                    $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
+                    $met =  new MeterToken ();
+                    $met->user_id = Auth::user()->id;
+                    $met->order_id = $trx;
+                    $met->meterNo = $meterNo;
+                    $met->token = $token;
+                    $met->amount = $request->amount;
+                    $met->vat = $vat;
+                    $met->estate_id = Auth::user()->estate_id;
+                    $met->status = 2;
+                    $met->save();
+
+
                     $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
                     $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
                     $data['service'] = "MOMAS METER";
@@ -265,10 +292,8 @@ class MeterController extends Controller
     }
 
 
-    public
-    function pay_for_others_meter_token(request $request)
+    public function pay_for_others_meter_token(request $request)
     {
-
 
         $amount = $request->amount;
         $meterNo = $request->meterNo;
@@ -279,6 +304,37 @@ class MeterController extends Controller
         $percentage = 2.5 / 100;
         $final_amount = $percentage * $amount;
         $dater = date('d-m-y');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         $user = User::where('meterNo', $request->meterNo)->first() ?? null;
         $duration = Utitlity::where('estate_id', $request->estate_id)->first()->duration;

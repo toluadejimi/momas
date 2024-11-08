@@ -414,8 +414,8 @@
                                             <th scope="col" class="cursor-pointer">Estate</th>
                                             <th scope="col" class="cursor-pointer">MeterNo</th>
                                             <th scope="col" class="cursor-pointer">Token</th>
+                                            <th scope="col" class="cursor-pointer">KCT Tokens</th>
                                             <th scope="col" class="cursor-pointer">Amount</th>
-                                            <th scope="col" class="cursor-pointer">Unit</th>
                                             <th scope="col" class="cursor-pointer">VAT</th>
                                             <th scope="col" class="cursor-pointer">Status</th>
                                             <th scope="col" class="cursor-pointer">Action</th>
@@ -434,8 +434,8 @@
                                                 <td>{{$data->estate_name}}</td>
                                                 <td>{{$data->meterNo}}</td>
                                                 <td>{{$data->token}}</td>
+                                                <td>{{$data->kct_tokens}}</td>
                                                 <td>{{number_format($data->amount, 2)}}</td>
-                                                <td>{{number_format($data->unit, 2)}}</td>
                                                 <td>{{number_format($data->vat, 2)}}</td>
                                                 <td>
                                                     @if($data->status == 2)
