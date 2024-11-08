@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Meter;
 use App\Http\Controllers\Controller;
 use App\Models\Estate;
 use App\Models\Meter;
+use App\Models\MeterToken;
 use App\Models\SpreadPayment;
 use App\Models\Tariff;
 use App\Models\TarrifState;
