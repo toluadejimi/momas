@@ -69,7 +69,7 @@
                     <li class="dropdown notification-list topbar-dropdown">
                         <a class="nav-link dropdown-toggle nav-user me-0" data-bs-toggle="dropdown"
                            href="analytics.html#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="{{url('')}}/public/asset/ass/images/users/user-5.jpg" alt="user-image"
+                            <img src="{{ asset('asset/ass/images/users/user-5.jpg')}}" alt="user-image"
                                  class="rounded-circle">
                             <span class="pro-user-name ms-1">
                                         Admin <i class="mdi mdi-chevron-down"></i>
@@ -109,18 +109,18 @@
                 <div class="logo-box">
                     <a class='logo logo-light' href='index.html'>
                                 <span class="logo-sm">
-                                    <img src="{{url('')}}/public/asset/ass/images/logo-sm.png" alt="" height="22">
+                                    <img src="{{ asset('asset/ass/images/logo-sm.png')}}" alt="" height="22">
                                 </span>
                         <span class="logo-lg">
-                                    <img src="{{url('')}}/public/asset/ass/images/logo-light.png" alt="" height="24">
+                                    <img src="{{ asset('asset/ass/images/logo-light.png')}}" alt="" height="24">
                                 </span>
                     </a>
                     <a class='logo logo-dark' href='index.html'>
                                 <span class="logo-sm">
-                                    <img src="{{url('')}}/public/asset/ass/images/logo-sm.png" alt="" height="22">
+                                    <img src="{{ asset('asset/ass/images/logo-sm.png')}}" alt="" height="22">
                                 </span>
                         <span class="logo-lg">
-                                    <img src="{{url('')}}/public/asset/ass/images/logo-dark.png" alt="" height="24">
+                                    <img src="{{ asset('asset/ass/images/logo-dark.png')}}" alt="" height="24">
                                 </span>
                     </a>
                 </div>
