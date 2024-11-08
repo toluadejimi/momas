@@ -10,11 +10,8 @@
     <meta name="description" content="Momas Admin"/>
     <meta name="author" content="Momaspay"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-
-    <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('asset/ass/images/favicon.ico"') }}">
     <link href="{{ asset('asset/ass/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style"/>
-    <!-- Icons -->
     <link href="{{ asset('asset/ass/css/icons.min.css') }}" rel="stylesheet" type="text/css"/>
 
     <style>
@@ -369,57 +366,59 @@
 <!-- Vendor -->
 
 
-<script src="{{ asset('asset/ass/libs/jquery/jquery.min.js')}}></script>
-<script src="{{ asset('asset/ass/libs/bootstrap/js/bootstrap.bundle.min.js')}}></script>
-<script src="{{ asset('asset/ass/libs/simplebar/simplebar.min.js')}}></script>
-<script src="{{ asset('asset/ass/libs/node-waves/waves.min.js')}}></script>
-<script src="{{ asset('asset/ass/libs/waypoints/lib/jquery.waypoints.min.js')}}></script>
-<script src="{{ asset('asset/ass/libs/jquery.counterup/jquery.counterup.min.js')}}></script>
-<script src="{{ asset('asset/ass/libs/feather-icons/feather.min.js')}}></script>
+<script src="{{ asset('asset/ass/libs/jquery/jquery.min.js')}}"></script>
+<script src="{{ asset('asset/ass/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ asset('asset/ass/libs/simplebar/simplebar.min.js')}}"></script>
+<script src="{{ asset('asset/ass/libs/node-waves/waves.min.js')}}"></script>
+<script src="{{ asset('asset/ass/libs/waypoints/lib/jquery.waypoints.min.js')}}"></script>
+<script src="{{ asset('asset/ass/libs/jquery.counterup/jquery.counterup.min.js')}}"></script>
+<script src="{{ asset('asset/ass/libs/feather-icons/feather.min.js')}}"></script>
 
 <!-- Apexcharts JS -->
-<script src="{{ asset('asset/ass/libs/apexcharts/apexcharts.min.js')}}></script>
+<script src="{{ asset('asset/ass/libs/apexcharts/apexcharts.min.js')}}"></script>
 
 <!-- for basic area chart -->
-<script src="{{ asset('asset/ass/stock-prices.js')}}></script>
+<script src="{{ asset('asset/ass/stock-prices.js')}}"></script>
 
 <!-- Widgets Init Js -->
-<script src="{{ asset('asset/ass/js/pages/analytics-dashboard.init.js')}}></script>
+<script src="{{ asset('asset/ass/js/pages/analytics-dashboard.init.js')}}"></script>
 
 <!-- App js-->
-<script src="{{ asset('asset/ass/js/app.js')}}></script>
+<script src="{{ asset('asset/ass/js/app.js')}}"></script>
 
 
 <!-- Datatables js -->
-<script src="{{ asset('asset/ass/libs/datatables.net/js/jquery.dataTables.min.js')}}></script>
+<script src="{{ asset('asset/ass/libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
 
 <!-- dataTables.bootstrap5 -->
-<script src="{{ asset('asset/ass/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js')}}></script>
-<script src="{{ asset('asset/ass/libs/datatables.net-buttons/js/dataTables.buttons.min.js')}}></script>
+<script src="{{ asset('asset/ass/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js')}}"></script>
+<script src="{{ asset('asset/ass/libs/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
 
 <!-- buttons.colVis -->
-<script src="{{ asset('asset/ass/libs/datatables.net-buttons/js/buttons.colVis.min.js')}}></script>
-<script src="{{ asset('asset/ass/libs/datatables.net-buttons/js/buttons.flash.min.js')}}></script>
-<script src="{{ asset('asset/ass/libs/datatables.net-buttons/js/buttons.html5.min.js')}}></script>
-<script src="{{ asset('asset/ass/libs/datatables.net-buttons/js/buttons.print.min.js')}}></script>
+<script src="{{ asset('asset/ass/libs/datatables.net-buttons/js/buttons.colVis.min.js')}}"></script>
+<script src="{{ asset('asset/ass/libs/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
+<script src="{{ asset('asset/ass/libs/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{ asset('asset/ass/libs/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
 
 <!-- buttons.bootstrap5 -->
-<script src="{{ asset('asset/ass/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js')}}></script>
+<script src="{{ asset('asset/ass/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js')}}"></script>
 
 <!-- dataTables.keyTable -->
-<script src="{{ asset('asset/ass/libs/datatables.net-keytable/js/dataTables.keyTable.min.js')}}></script>
-<script src="{{ asset('asset/ass/libs/datatables.net-keytable-bs5/js/keyTable.bootstrap5.min.js')}}></script>
+<script src="{{ asset('asset/ass/libs/datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>
+<script src="{{ asset('asset/ass/libs/datatables.net-keytable-bs5/js/keyTable.bootstrap5.min.js')}}"></script>
 
 <!-- dataTable.responsive -->
-<script src="{{ asset('asset/ass/libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}></script>
-<script src="{{ asset('asset/ass/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js')}}></script>
+<script src="{{ asset('asset/ass/libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{ asset('asset/ass/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js')}}"></script>
 
 <!-- dataTables.select -->
-<script src="{{ asset('asset/ass/libs/datatables.net-select/js/dataTables.select.min.js')}}></script>
-<script src="{{ asset('asset/ass/libs/datatables.net-select-bs5/js/select.bootstrap5.min.js')}}></script>
+<script src="{{ asset('asset/ass/libs/datatables.net-select/js/dataTables.select.min.js')}}"></script>
+<script src="{{ asset('asset/ass/libs/datatables.net-select-bs5/js/select.bootstrap5.min.js')}}"></script>
 
 <!-- Datatable Demo App Js -->
-<script src="{{ asset('asset/ass/js/pages/datatable.init.js')}}></script>
+<script src="{{ asset('asset/ass/js/pages/datatable.init.js')}}"></script>
+
+
 
 
 </body>
