@@ -10,13 +10,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{url('')}}/public/asset/ass/images/favicon.ico">
+    <link rel="shortcut icon" href="{{ asset('asset/ass/images/favicon.ico"') }}">
 
-    <!-- App css -->
-    <link href="{{url('')}}/public/asset/ass/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="{{ asset('asset/ass/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style"/>
+
 
     <!-- Icons -->
-    <link href="{{url('')}}/public/asset/ass/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('asset/ass/css/icons.min.css') }}" rel="stylesheet" type="text/css"/>
 
     <style>
         .btn {
