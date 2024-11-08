@@ -11,37 +11,45 @@ use Illuminate\Http\Request;
 class RegisterController extends Controller
 {
 
-    public function check_user (request $request)
+    public function check_user(request $request)
     {
-        $usr = User::where('email', $request->email)->first() ?? null;
 
-        if($usr == null){
 
-            $sms_code = random_int(0000, 9999);
+        public
+        function reset_password(request $request)
+        {
+            User::where('email', $request->email)->update([
+                'password' => bcrypt($request->password)
+            ]);
+
+
             $email = $request->email;
-            $usrr = new User();
-            $usrr-> email = $email;
-            $usrr-> save();
-            User::where('email', $request->email)->update(['code' => $sms_code]);
-            $user = send_email($email, $sms_code);
+            send_reset_email_notification($email);
 
-            if($user == 0){
-                $message = "OTP Code has been sent successfully to $email";
-                return  success($message);
-            }
+                $message = "Password Reset Successfully";
+                return success($message);
+
 
         }
 
 
-        if($usr->status == 0){
+        if ($request->action == "reset") {
+
+            $usr = User::where('email', $request->email)->first() ?? null;
+            if ($usr == null) {
+                $code = 422;
+                $message = "User not found";
+                return error($code, $message);
+            }
 
 
             $sms_code = random_int(0000, 9999);
             $email = $request->email;
-            User::where('email', $request->email)->update(['code' => $sms_code]);
-            $user = send_email($email, $sms_code);
 
-            if($user == 0){
+            User::where('email', $request->email)->update(['code' => $sms_code]);
+            $user = send_email_reset($email, $sms_code);
+
+            if ($user == 0) {
                 $message = "OTP Code has been sent successfully to $email";
                 return success($message);
             }
@@ -49,27 +57,64 @@ class RegisterController extends Controller
 
         }
 
-        if($usr->status == 2){
+
+        $usr = User::where('email', $request->email)->first() ?? null;
+
+        if ($usr == null) {
+            $sms_code = random_int(0000, 9999);
+            $email = $request->email;
+
+            $usrr = new User();
+            $usrr->email = $email;
+            $usrr->save();
+
+            User::where('email', $request->email)->update(['code' => $sms_code]);
+            $user = send_email($email, $sms_code);
+
+            if ($user == 0) {
+                $message = "OTP Code has been sent successfully to $email";
+                return success($message);
+            }
+
+        }
+
+
+        if ($usr->status == 0) {
+            $sms_code = random_int(0000, 9999);
+            $email = $request->email;
+            User::where('email', $request->email)->update(['code' => $sms_code]);
+            $user = send_email($email, $sms_code);
+
+            if ($user == 0) {
+                $message = "OTP Code has been sent successfully to $email";
+                return success($message);
+            }
+
+
+        }
+
+        if ($usr->status == 2) {
 
             $code = 422;
             $message = "User Already exist with email, Please login.blade.php";
-            return  error($code, $message);
+            return error($code, $message);
 
         }
 
 
     }
 
-    public function validate_email(request $request){
+    public function validate_email(request $request)
+    {
 
         $code = $request->code;
         $email = $request->email;
 
         $validate = validate_code($code, $email);
-        if($validate == 0){
+        if ($validate == 0) {
             $message = "OTP code verified successfully";
             return success($message);
-        }else{
+        } else {
             $code = 422;
             $message = "Invalid Code";
             return error($message, $code);
@@ -78,15 +123,12 @@ class RegisterController extends Controller
     }
 
 
-
-
-
     public function register(request $request)
     {
 
 
         $usr = User::where('email', $request->email)->first() ?? null;
-        if($usr == null){
+        if ($usr == null) {
 
             $code = 422;
             $message = "Please Verify your email";
@@ -95,7 +137,7 @@ class RegisterController extends Controller
 
 
         $gm = Meter::where('meterNo', $request->meterNo)->first() ?? null;
-        if($gm == null){
+        if ($gm == null) {
             $code = 422;
             $message = "Meter has not been profiled";
             return error($message, $code);
@@ -103,24 +145,23 @@ class RegisterController extends Controller
         }
 
 
-
         $estate_name = Estate::where('id', $gm->estate_id)->first()->first()->title ?? null;
 
 
-        if($usr->status == 1){
+        if ($usr->status == 1) {
 
             User::where('email', $request->email)->update([
 
-                'first_name' =>  $request->first_name,
-                'last_name' =>  $request->last_name,
-                'address' =>  $request->address,
-                'city' =>  $request->city,
-                'state' =>  $request->state,
-                'phone' =>  $request->phone,
-                'meterNo' =>  $request->meterNo,
-                'estate_id' =>  $gm->estate_id ?? null,
-                'estate_name' =>  $gm->estate_name ?? null,
-                'status' =>  2,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'address' => $request->address,
+                'city' => $request->city,
+                'state' => $request->state,
+                'phone' => $request->phone,
+                'meterNo' => $request->meterNo,
+                'estate_id' => $gm->estate_id ?? null,
+                'estate_name' => $gm->estate_name ?? null,
+                'status' => 2,
                 'password' => bcrypt($request->password),
 
             ]);
@@ -131,14 +172,14 @@ class RegisterController extends Controller
 
         }
 
-        if($usr->status == 0){
+        if ($usr->status == 0) {
             $code = 422;
             $message = "Please Verify your email";
             return error($message, $code);
 
         }
 
-        if($usr->status == 2){
+        if ($usr->status == 2) {
             $code = 422;
             $message = "User Already Exist";
             return error($message, $code);
@@ -146,15 +187,9 @@ class RegisterController extends Controller
         }
 
 
-
         $code = 422;
         $message = "We can not register this moment!!";
         return error($code, $message);
-
-
-
-
-
 
 
     }

@@ -286,6 +286,35 @@ if (!function_exists('send_login_code')) {
 }
 
 
+
+
+if (!function_exists('send_reset_email_notification')) {
+
+    function send_reset_email_notification($email)
+    {
+        $first_name = User::where('email', $email)->first()->first_name;
+        $data = array(
+            'fromsender' => 'momas@tomitechltd.com', 'MOMASPAY',
+            'subject' => "Password Reset Notification",
+            'toreceiver' => $email,
+            'user' => $first_name,
+        );
+
+        Mail::send('emails.reset-notification', ["data1" => $data], function ($message) use ($data) {
+            $message->from($data['fromsender']);
+            $message->to($data['toreceiver']);
+            $message->subject($data['subject']);
+        });
+
+
+        return 0;
+
+    }
+}
+
+
+
+
 if (!function_exists('send_email')) {
 
     function send_email($email, $sms_code)
@@ -310,6 +339,32 @@ if (!function_exists('send_email')) {
 
     }
 }
+
+if (!function_exists('send_email_reset')) {
+
+    function send_email_reset($email, $sms_code)
+    {
+        $first_name = User::where('email', $email)->first()->first_name;
+        $data = array(
+            'fromsender' => 'momas@tomitechltd.com', 'MOMASPAY',
+            'subject' => "One Time Password",
+            'toreceiver' => $email,
+            'sms_code' => $sms_code,
+            'user' => $first_name,
+        );
+
+        Mail::send('emails.reset', ["data1" => $data], function ($message) use ($data) {
+            $message->from($data['fromsender']);
+            $message->to($data['toreceiver']);
+            $message->subject($data['subject']);
+        });
+
+
+        return 0;
+
+    }
+}
+
 
 if (!function_exists('send_email_token')) {
 
