@@ -1,25 +1,16 @@
 <?php
 
 
+use App\Models\Meter;
+use App\Models\OauthAccessToken;
 use App\Models\Token;
 use App\Models\User;
-use App\Models\Meter;
-use App\Models\Setting;
-use App\Models\Terminal;
-use App\Models\Dyaccount;
-use App\Models\TidConfig;
 use App\Models\UtilitiesPayment;
 use App\Models\Utitlity;
-use App\Models\Webaccount;
-use App\Models\Transaction;
-use App\Models\VirtualAccount;
 use Illuminate\Support\Carbon;
-use Laravel\Passport\Passport;
-use App\Models\OauthAccessToken;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Database\QueryException;
 
 
 if (!function_exists('token')) {
@@ -70,9 +61,7 @@ if (!function_exists('token')) {
     }
 
 
-
 }
-
 
 
 if (!function_exists('error')) {
@@ -85,7 +74,6 @@ if (!function_exists('error')) {
         ], $code);
     }
 }
-
 
 
 if (!function_exists('success')) {
@@ -114,11 +102,11 @@ if (!function_exists('validate_code')) {
 
     function validate_code($code, $email)
     {
-        $get_code =  User::where('email', $email)->first()->code;
-        if($get_code == $code){
+        $get_code = User::where('email', $email)->first()->code;
+        if ($get_code == $code) {
             $vv = User::where('email', $email)->where('code', $code)->update(['status' => 1]);
             return 0;
-        }else{
+        } else {
             return 3;
         }
     }
@@ -130,9 +118,9 @@ if (!function_exists('meter')) {
     function meter()
     {
 
-        $ck_meter =  Meter::where('user_id', Auth::id())->first() ?? null;
+        $ck_meter = Meter::where('user_id', Auth::id())->first() ?? null;
 
-        if($ck_meter == null){
+        if ($ck_meter == null) {
             return [];
         }
 
@@ -143,15 +131,12 @@ if (!function_exists('meter')) {
 }
 
 
-
-
-
 if (!function_exists('flush_token')) {
 
     function flush_token()
     {
         $get_token = OauthAccessToken::where('user_id', Auth::id())->first()->user_id ?? null;
-        if($get_token != null){
+        if ($get_token != null) {
             OauthAccessToken::where('user_id', Auth::id())->delete();
         }
 
@@ -166,61 +151,32 @@ if (!function_exists('total_utility')) {
     function total_utility($estate_id)
     {
 
-        $total_utility =  Utitlity::where('estate_id', $estate_id)->sum('amount');
+        $total_utility = Utitlity::where('estate_id', $estate_id)->sum('amount');
         return $total_utility;
 
     }
 }
 
 
-
-
 if (!function_exists('vend')) {
 
-    function vend($duration, $estate_id)
+    function vend($duration, $estate_id, $user_id)
     {
 
 
-
-        if($duration == "daily"){
+        if ($duration == "daily") {
 
 
             $total = total_utility($estate_id);
-          $chk_pay =  UtilitiesPayment::where([
-                'user_id' => Auth::id(),
+            $chk_pay = UtilitiesPayment::where([
+                'user_id' => $user_id,
                 'estate_id' => $estate_id
-          ])->whereDate('created_at', Carbon::today())->get() ?? null;
+            ])->whereDate('created_at', Carbon::today())->get() ?? null;
 
 
-
-
-
-
-
-            if($chk_pay == null || $chk_pay->isEmpty()){
-              return $total;
-            }else{
-                $totalck = 0;
-                foreach ($chk_pay as $data) {
-                    $totalck += $data->amount;
-                }
-                $ftotal = $totalck - $total;
-                return $ftotal;
-            }
-
-        }
-
-        if($duration == "weekly"){
-
-            $total = total_utility($estate_id);
-            $chk_pay =  UtilitiesPayment::where([
-                'user_id' => Auth::id(),
-                'estate_id' => $estate_id
-            ])->whereBetween('created_at',[Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get() ?? null;
-
-            if($chk_pay == null || $chk_pay->isEmpty()){
+            if ($chk_pay == null || $chk_pay->isEmpty()) {
                 return $total;
-            }else{
+            } else {
                 $totalck = 0;
                 foreach ($chk_pay as $data) {
                     $totalck += $data->amount;
@@ -231,17 +187,41 @@ if (!function_exists('vend')) {
 
         }
 
-        if($duration == "monthly"){
+        if ($duration == "weekly") {
 
             $total = total_utility($estate_id);
-            $chk_pay =  UtilitiesPayment::where([
-                'user_id' => Auth::id(),
+            $chk_pay = UtilitiesPayment::where([
+                'user_id' => $user_id,
+                'estate_id' => $estate_id
+            ])->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get() ?? null;
+
+
+            if ($chk_pay == null || $chk_pay->isEmpty()) {
+                return $total;
+            } else {
+                $totalck = 0;
+                foreach ($chk_pay as $data) {
+                    $totalck += $data->amount;
+                }
+                $ftotal = $totalck - $total;
+                return $ftotal;
+
+
+            }
+
+        }
+
+        if ($duration == "monthly") {
+
+            $total = total_utility($estate_id);
+            $chk_pay = UtilitiesPayment::where([
+                'user_id' => $user_id,
                 'estate_id' => $estate_id
             ])->whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->get() ?? null;
 
-            if($chk_pay == null || $chk_pay->isEmpty()){
+            if ($chk_pay == null || $chk_pay->isEmpty()) {
                 return $total;
-            }else{
+            } else {
                 $totalck = 0;
                 foreach ($chk_pay as $data) {
                     $totalck += $data->amount;
@@ -253,20 +233,18 @@ if (!function_exists('vend')) {
         }
 
 
-        if($duration == "yearly"){
+        if ($duration == "yearly") {
 
 
             $total = total_utility($estate_id);
-            $chk_pay =  UtilitiesPayment::where([
-                'user_id' => Auth::id(),
+            $chk_pay = UtilitiesPayment::where([
+                'user_id' => $user_id,
                 'estate_id' => $estate_id
             ])->whereBetween('created_at', [Carbon::now()->startOfYear(), Carbon::now()->endOfYear()])->get() ?? null;
 
-
-
-            if($chk_pay == null || $chk_pay->isEmpty()){
+            if ($chk_pay == null || $chk_pay->isEmpty()) {
                 return $total;
-            }else{
+            } else {
                 $totalck = 0;
                 foreach ($chk_pay as $data) {
                     $totalck += $data->amount;
@@ -280,7 +258,6 @@ if (!function_exists('vend')) {
 
     }
 }
-
 
 
 if (!function_exists('send_login_code')) {
@@ -307,8 +284,6 @@ if (!function_exists('send_login_code')) {
 
     }
 }
-
-
 
 
 if (!function_exists('send_email')) {
@@ -392,12 +367,10 @@ if (!function_exists('send_kct_email_token')) {
 }
 
 
-
 if (!function_exists('send_token_email')) {
 
     function send_token_email($email, $token_code, $estate, $valid_date)
     {
-
 
 
         $data = array(
@@ -423,7 +396,6 @@ if (!function_exists('send_token_email')) {
 }
 
 
-
 if (!function_exists('generate_token')) {
 
     function generate_token($user_id, $visitor, $email, $valid_date, $estate_id)
@@ -437,7 +409,7 @@ if (!function_exists('generate_token')) {
         $tok->visitor = $visitor;
         $tok->estate_id = $estate_id;
         $tok->email = $email;
-        $tok->address = $usr->address." ".$usr->city." ".$usr->state;
+        $tok->address = $usr->address . " " . $usr->city . " " . $usr->state;
         $tok->valid_date = $valid_date;
 
         $tok->save();
@@ -446,15 +418,6 @@ if (!function_exists('generate_token')) {
 
     }
 }
-
-
-
-
-
-
-
-
-
 
 
 if (!function_exists('send_notification')) {
