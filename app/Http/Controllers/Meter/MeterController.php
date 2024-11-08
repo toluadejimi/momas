@@ -100,196 +100,196 @@ class MeterController extends Controller
     }
 
 
-//    public function buy_meter_token(request $request)
-//    {
-//
-//        $amount = $request->amount;
-//        $meterNo = $request->meterNo;
-//        $trx = $request->trxref;
-//
-//
-//        $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first()->duration;
-//        if ($request->min_vend_amount > 0) {
-//            $utl = new UtilitiesPayment();
-//            $utl->user_id = Auth::id();
-//            $utl->estate_id = Auth::user()->estate_id;
-//            $utl->amount = $request->min_vend_amount;
-//            $utl->duration = $duration;
-//            $utl->status = 2;
-//            $utl->save();
-//        }
-//
-//
-//        $meter = Meter::where('MeterNo', $meterNo)->first() ?? null;
-//        if ($meter != null && $meter->NeedKCT == "on") {
-//
-//            $databody = [
-//                'meterType' => $meter->KRN1,
-//                'meterNo' => Auth::user()->meterNo,
-//                'sgc' => (int)$meter->OldSGC,
-//                'ti' => 1,
-//                'amount' => $request->amount,
-//            ];
-//            $response = Http::withOptions([
-//                'verify' => false,
-//                'timeout' => 10,
-//            ])->post('http://169.239.189.91:19071/tokenGen', $databody);
-//
-//            if ($response->successful()) {
-//                $gdata = $response->json();
-//                $data = json_decode($gdata, true);
-//                $status = $data['code'] ?? null;
-//
-//                if ($status == "SUCCESS") {
-//                    $token = $data['tokens'][0];
-//                    $kctdatabody = [
-//                        'meterType' => $meter->KRN1,
-//                        'tometerType' => $meter->KRN1,
-//                        'meterNo' => Auth::user()->meterNo,
-//                        'sgc' => (int)$meter->OldSGC,
-//                        'tosgc' => (int)$meter->NewSGC,
-//                        'ti' => 1,
-//                        'toti' => 1,
-//                        'allow' => false,
-//                        'allowkrn' => true,
-//                    ];
-//
-//                    $kct_response = Http::withOptions([
-//                        'verify' => false,
-//                        'timeout' => 10,
-//                    ])->post('http://169.239.189.91:19071/kcttokenGen', $kctdatabody);
-//
-//                    if ($kct_response->successful()) {
-//                        $kct = $kct_response->json();
-//                        $kct_data = json_decode($kct, true);
-//                        $status = $kct_data['code'] ?? null;
-//
-//                        if ($status == "SUCCESS") {
-//
-//                            $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
-//                            $met =  new MeterToken ();
-//                            $met->user_id = Auth::user()->id;
-//                            $met->order_id = $trx;
-//                            $met->meterNo = $meterNo;
-//                            $met->token = $token;
-//                            $met->amount = $request->amount;
-//                            $met->kct_tokens = $kct_data['tokens'][0]."  ".$kct_data['tokens'][1];
-//                            $met->vat = $vat;
-//                            $met->estate_id = Auth::user()->estate_id;
-//                            $met->status = 2;
-//                            $met->save();
-//
-//
-//                            $data2['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
-//                            $data2['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
-//                            $data2['service'] = "MOMAS METER";
-//                            $data2['order_id'] = $trx;
-//                            $data2['token'] = $token;
-//                            $data2['amount'] = $amount;
-//                            $data2['kct_token1'] = $kct_data['tokens'][0];
-//                            $data2['kct_token2'] = $kct_data['tokens'][1];
-//
-//                            $email = Auth::user()->email;
-//                            $kct_token = $kct_data['tokens'];
-//                            $kct_token1 = $kct_token[0];
-//                            $kct_token2 = $kct_token[1];
-//
-//                            send_kct_email_token($email, $token, $amount, $kct_token1, $kct_token2);
-//
-//                            return response()->json([
-//                                'status' => true,
-//                                'data' => $data2
-//                            ], 200);
-//
-//
-//                        }
-//
-//
-//                    } else {
-//
-//                        return response()->json([
-//                            'status' => false,
-//                            'message' => "Vending server not connected, Retry again later using your wallet",
-//                            'kct_response' => $kct_response
-//                        ], 422);
-//                    }
-//
-//                }
-//
-//
-//            } else {
-//
-//                User::where('id', Auth::id())->increment('main_wallet', $amount);
-//                return response()->json([
-//                    'status' => false,
-//                    'message' => "Meter vending failed, Retry again using your wallet"
-//                ], 422);
-//
-//            }
-//
-//        }
-//
-//        if ($meter != null && $meter->NeedKCT == null) {
-//
-//
-//            $databody = [
-//                'meterType' => $meter->KRN1,
-//                'meterNo' => Auth::user()->meterNo,
-//                'sgc' => (int)$meter->OldSGC,
-//                'ti' => 1,
-//                'amount' => $request->amount,
-//            ];
-//            $no_kct_response = Http::withOptions([
-//                'verify' => false,
-//                'timeout' => 10,
-//            ])->post('http://169.239.189.91:19071/tokenGen', $databody);
-//
-//            if ($no_kct_response->successful()) {
-//                $no_kct = $no_kct_response->json();
-//                $no_kct_data = json_decode($no_kct, true);
-//                $status = $no_kct_data['code'] ?? null;
-//
-//                if ($status == "SUCCESS") {
-//
-//                    $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
-//                    $met =  new MeterToken ();
-//                    $met->user_id = Auth::user()->id;
-//                    $met->order_id = $trx;
-//                    $met->meterNo = $meterNo;
-//                    $met->token = $token;
-//                    $met->amount = $request->amount;
-//                    $met->vat = $vat;
-//                    $met->estate_id = Auth::user()->estate_id;
-//                    $met->status = 2;
-//                    $met->save();
-//
-//
-//                    $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
-//                    $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
-//                    $data['service'] = "MOMAS METER";
-//                    $data['order_id'] = $trx;
-//                    $data['token'] = $no_kct_data['tokens'][0];
-//                    $data['amount'] = $amount;
-//                    $email = Auth::user()->email;
-//                    $token = $no_kct_data['tokens'][0];
-//                    send_email_token($email, $token, $amount);
-//
-//                    return response()->json([
-//                        'status' => true,
-//                        'data' => $data
-//                    ], 200);
-//
-//
-//                }
-//
-//
-//            }
-//
-//
-//        }
-//
-//
-//    }
+    public function buy_meter_token(request $request)
+    {
+
+        $amount = $request->amount;
+        $meterNo = $request->meterNo;
+        $trx = $request->trxref;
+
+
+        $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first()->duration;
+        if ($request->min_vend_amount > 0) {
+            $utl = new UtilitiesPayment();
+            $utl->user_id = Auth::id();
+            $utl->estate_id = Auth::user()->estate_id;
+            $utl->amount = $request->min_vend_amount;
+            $utl->duration = $duration;
+            $utl->status = 2;
+            $utl->save();
+        }
+
+
+        $meter = Meter::where('MeterNo', $meterNo)->first() ?? null;
+        if ($meter != null && $meter->NeedKCT == "on") {
+
+            $databody = [
+                'meterType' => $meter->KRN1,
+                'meterNo' => Auth::user()->meterNo,
+                'sgc' => (int)$meter->OldSGC,
+                'ti' => 1,
+                'amount' => $request->amount,
+            ];
+            $response = Http::withOptions([
+                'verify' => false,
+                'timeout' => 10,
+            ])->post('http://169.239.189.91:19071/tokenGen', $databody);
+
+            if ($response->successful()) {
+                $gdata = $response->json();
+                $data = json_decode($gdata, true);
+                $status = $data['code'] ?? null;
+
+                if ($status == "SUCCESS") {
+                    $token = $data['tokens'][0];
+                    $kctdatabody = [
+                        'meterType' => $meter->KRN1,
+                        'tometerType' => $meter->KRN1,
+                        'meterNo' => Auth::user()->meterNo,
+                        'sgc' => (int)$meter->OldSGC,
+                        'tosgc' => (int)$meter->NewSGC,
+                        'ti' => 1,
+                        'toti' => 1,
+                        'allow' => false,
+                        'allowkrn' => true,
+                    ];
+
+                    $kct_response = Http::withOptions([
+                        'verify' => false,
+                        'timeout' => 10,
+                    ])->post('http://169.239.189.91:19071/kcttokenGen', $kctdatabody);
+
+                    if ($kct_response->successful()) {
+                        $kct = $kct_response->json();
+                        $kct_data = json_decode($kct, true);
+                        $status = $kct_data['code'] ?? null;
+
+                        if ($status == "SUCCESS") {
+
+                            $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
+                            $met =  new MeterToken ();
+                            $met->user_id = Auth::user()->id;
+                            $met->order_id = $trx;
+                            $met->meterNo = $meterNo;
+                            $met->token = $token;
+                            $met->amount = $request->amount;
+                            $met->kct_tokens = $kct_data['tokens'][0]."  ".$kct_data['tokens'][1];
+                            $met->vat = $vat;
+                            $met->estate_id = Auth::user()->estate_id;
+                            $met->status = 2;
+                            $met->save();
+
+
+                            $data2['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
+                            $data2['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
+                            $data2['service'] = "MOMAS METER";
+                            $data2['order_id'] = $trx;
+                            $data2['token'] = $token;
+                            $data2['amount'] = $amount;
+                            $data2['kct_token1'] = $kct_data['tokens'][0];
+                            $data2['kct_token2'] = $kct_data['tokens'][1];
+
+                            $email = Auth::user()->email;
+                            $kct_token = $kct_data['tokens'];
+                            $kct_token1 = $kct_token[0];
+                            $kct_token2 = $kct_token[1];
+
+                            send_kct_email_token($email, $token, $amount, $kct_token1, $kct_token2);
+
+                            return response()->json([
+                                'status' => true,
+                                'data' => $data2
+                            ], 200);
+
+
+                        }
+
+
+                    } else {
+
+                        return response()->json([
+                            'status' => false,
+                            'message' => "Vending server not connected, Retry again later using your wallet",
+                            'kct_response' => $kct_response
+                        ], 422);
+                    }
+
+                }
+
+
+            } else {
+
+                User::where('id', Auth::id())->increment('main_wallet', $amount);
+                return response()->json([
+                    'status' => false,
+                    'message' => "Meter vending failed, Retry again using your wallet"
+                ], 422);
+
+            }
+
+        }
+
+        if ($meter != null && $meter->NeedKCT == null) {
+
+
+            $databody = [
+                'meterType' => $meter->KRN1,
+                'meterNo' => Auth::user()->meterNo,
+                'sgc' => (int)$meter->OldSGC,
+                'ti' => 1,
+                'amount' => $request->amount,
+            ];
+            $no_kct_response = Http::withOptions([
+                'verify' => false,
+                'timeout' => 10,
+            ])->post('http://169.239.189.91:19071/tokenGen', $databody);
+
+            if ($no_kct_response->successful()) {
+                $no_kct = $no_kct_response->json();
+                $no_kct_data = json_decode($no_kct, true);
+                $status = $no_kct_data['code'] ?? null;
+
+                if ($status == "SUCCESS") {
+
+                    $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
+                    $met =  new MeterToken ();
+                    $met->user_id = Auth::user()->id;
+                    $met->order_id = $trx;
+                    $met->meterNo = $meterNo;
+                    $met->token = $token;
+                    $met->amount = $request->amount;
+                    $met->vat = $vat;
+                    $met->estate_id = Auth::user()->estate_id;
+                    $met->status = 2;
+                    $met->save();
+
+
+                    $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
+                    $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
+                    $data['service'] = "MOMAS METER";
+                    $data['order_id'] = $trx;
+                    $data['token'] = $no_kct_data['tokens'][0];
+                    $data['amount'] = $amount;
+                    $email = Auth::user()->email;
+                    $token = $no_kct_data['tokens'][0];
+                    send_email_token($email, $token, $amount);
+
+                    return response()->json([
+                        'status' => true,
+                        'data' => $data
+                    ], 200);
+
+
+                }
+
+
+            }
+
+
+        }
+
+
+    }
 
 
 
