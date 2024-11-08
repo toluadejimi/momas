@@ -157,8 +157,7 @@
 
 <!-- END wrapper -->
 
-<!-- Vendor -->
-<script src="{{ asset('asset/ass/libs/jquery/jquery.minjs') }}"></script>
+<script src="{{ asset('asset/ass/libs/jquery/jquery.minjs')}}"></script>
 <script src="{{ asset('asset/ass/libs/bootstrap/js/bootstrap.bundle.minjs')}}"></script>
 <script src="{{ asset('asset/ass/libs/simplebar/simplebar.minjs')}}"></script>
 <script src="{{ asset('asset/ass/libs/node-waves/waves.minjs')}}"></script>
@@ -167,7 +166,8 @@
 <script src="{{ asset('asset/ass/libs/feather-icons/feather.minjs')}}"></script>
 
 <!-- App js-->
-<script src="{{url('')}}/public/asset/ass/js/app.js"></script>
+<script src="{{ asset('asset/ass/js/appjs')}}"></script>
+
 
 
 <script>
