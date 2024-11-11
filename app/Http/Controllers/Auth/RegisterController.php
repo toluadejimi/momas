@@ -201,7 +201,6 @@ class RegisterController extends Controller
 
         $estate_name = Estate::where('id', $gm->estate_id)->first()->first()->title ?? null;
 
-
         if ($usr->status == 1) {
 
             User::where('email', $request->email)->update([
@@ -219,6 +218,9 @@ class RegisterController extends Controller
                 'password' => bcrypt($request->password),
 
             ]);
+
+            $user_id = User::where('email', $request->email)->first()->id;
+            Meter::where('meterNo' , $request->meterNo)->update(['user_id'=>$user_id]);
 
 
             $message = "Account Registered Successfully";
