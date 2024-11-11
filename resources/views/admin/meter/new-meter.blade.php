@@ -69,11 +69,15 @@
                                         <input type="text" name="AccountNo" class="form-control" required>
                                     </div>
 
+
                                     <div class="col-3">
                                         <label class="my-2">Estate</label>
-                                        <input type="text" value="{{$estate->title}}" class="form-control" required>
-                                        <input type="text" name="estate_id"  hidden >
-
+                                        <select type="text" name="estate_id" class="form-control" required>
+                                            <option value=" ">Select</option>
+                                            @foreach($estate as $data)
+                                                <option value="{{$data->id}}">{{$data->title}} </option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                     <hr class="my-4">

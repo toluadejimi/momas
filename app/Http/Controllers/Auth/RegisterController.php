@@ -58,48 +58,102 @@ class RegisterController extends Controller
         }
 
 
-        $usr = User::where('email', $request->email)->first() ?? null;
 
-        if ($usr == null) {
-            $sms_code = random_int(0000, 9999);
-            $email = $request->email;
+        if ($request->action == "register") {
 
-            $usrr = new User();
-            $usrr->email = $email;
-            $usrr->save();
+            $usr = User::where('email', $request->email)->first() ?? null;
 
-            User::where('email', $request->email)->update(['code' => $sms_code]);
-            $user = send_email($email, $sms_code);
+            if ($usr == null) {
+                $sms_code = random_int(0000, 9999);
+                $email = $request->email;
 
-            if ($user == 0) {
-                $message = "OTP Code has been sent successfully to $email";
-                return success($message);
+                $usrr = new User();
+                $usrr->email = $email;
+                $usrr->save();
+
+                User::where('email', $request->email)->update(['code' => $sms_code]);
+                $user = send_email($email, $sms_code);
+
+                if ($user == 0) {
+                    $message = "OTP Code has been sent successfully to $email";
+                    return success($message);
+                }
+
+            }
+
+
+            if ($usr->status == 0) {
+                $sms_code = random_int(0000, 9999);
+                $email = $request->email;
+                User::where('email', $request->email)->update(['code' => $sms_code]);
+                $user = send_email($email, $sms_code);
+
+                if ($user == 0) {
+                    $message = "OTP Code has been sent successfully to $email";
+                    return success($message);
+                }
+
+
+            }
+
+            if ($usr->status == 2) {
+
+                $code = 422;
+                $message = "User Already exist with email, Please login";
+                return error($code, $message);
+
             }
 
         }
 
 
-        if ($usr->status == 0) {
-            $sms_code = random_int(0000, 9999);
-            $email = $request->email;
-            User::where('email', $request->email)->update(['code' => $sms_code]);
-            $user = send_email($email, $sms_code);
+        if ($request->action == "forget") {
 
-            if ($user == 0) {
-                $message = "OTP Code has been sent successfully to $email";
-                return success($message);
+            $usr = User::where('email', $request->email)->first() ?? null;
+
+            if ($usr == null) {
+                $sms_code = random_int(0000, 9999);
+                $email = $request->email;
+
+                $usrr = new User();
+                $usrr->email = $email;
+                $usrr->save();
+
+                User::where('email', $request->email)->update(['code' => $sms_code]);
+                $user = send_email($email, $sms_code);
+
+                if ($user == 0) {
+                    $message = "OTP Code has been sent successfully to $email";
+                    return success($message);
+                }
+
             }
 
 
+            if ($usr->status == 0) {
+                $sms_code = random_int(0000, 9999);
+                $email = $request->email;
+                User::where('email', $request->email)->update(['code' => $sms_code]);
+                $user = send_email($email, $sms_code);
+
+                if ($user == 0) {
+                    $message = "OTP Code has been sent successfully to $email";
+                    return success($message);
+                }
+
+
+            }
+
+            if ($usr->status == 2) {
+
+                $code = 422;
+                $message = "User Already exist with email, Please login";
+                return error($code, $message);
+
+            }
+
         }
 
-        if ($usr->status == 2) {
-
-            $code = 422;
-            $message = "User Already exist with email, Please login.blade.php";
-            return error($code, $message);
-
-        }
 
 
     }

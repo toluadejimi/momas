@@ -9,6 +9,7 @@ use App\Models\MeterToken;
 use App\Models\SpreadPayment;
 use App\Models\Tariff;
 use App\Models\TarrifState;
+use App\Models\Transformer;
 use App\Models\User;
 use App\Models\UtilitiesPayment;
 use App\Models\Utitlity;
