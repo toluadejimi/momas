@@ -40,6 +40,16 @@ class MeterController extends Controller
 
 
 
+
+        $get_tar = Tariff::where('user_id', $user->user_id)->first() ?? null;
+        if ($get_tar == null) {
+            $message = "Tariff not properly configured";
+            $code = 422;
+            return error($message, $code);
+        }
+
+
+
         $data['customer_name'] = $user->first_name . " " . $user->last_name;
         $data['address'] = $user->address . ", " . $user->city . ", " . $user->state;
         // $data['meter_type'] = $meter_type;
