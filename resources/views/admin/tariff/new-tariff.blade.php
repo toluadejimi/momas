@@ -55,8 +55,8 @@
                                     <div class="col-3">
                                         <label class="my-2">Tariff Title</label>
                                         <input type="text" value="TF" name="title" class="form-control" required>
-                                        <input type="text" name="estate_id" value="{{auth::user()->estate_id}}"  hidden >
                                     </div>
+
 
 
                                     <hr class="my-4">

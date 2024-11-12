@@ -28,6 +28,8 @@ class TariffController extends Controller
             $data['tariff_list'] = Tariff::paginate(20);
             $data['tariffis'] = Tariff::all();
             $data['tarifftariffis'] = Tariff::count();
+            $data['estate'] = Estate::all();
+
 
             return view('admin/tariff/index', $data);
 
@@ -67,7 +69,59 @@ class TariffController extends Controller
 
     }
 
+
+
     public function add_new_Tariff(request $request)
+    {
+
+
+        $ck = Tariff::where('title', $request->title)->first() ?? null;
+
+
+        if($ck != null){
+            return back()->with('error', 'Tariff already exist');
+        }
+
+
+
+//        if($request->isDualTariff ==  "on"){
+//            $tr = new Tariff();
+//            $tr->title = $request->title;
+//            $tr->estate_tariff_cost = $request->estate_tariff_cost;
+//            $tr->estate_id = $request->estate_id;
+//            $tr->OldTariffDual = $request->OldTariffDual;
+//            $tr->NewTariffDual = $request->NewTariffDual;
+//            $tr->isDualTariff = $request->isDualTariff;
+//            $tr->status = 2;
+//            $tr->save();
+//        }else{
+//            $tr = new Tariff();
+//            $tr->title = $request->title;
+//            $tr->estate_tariff_cost = $request->estate_tariff_cost;
+//            $tr->estate_id = $request->estate_id;
+//            $tr->status = 2;
+//            $tr->save();
+//
+//        }
+
+
+        $tr = new Tariff();
+        $tr->title = $request->title;
+        $tr->estate_id = $request->estate_id;
+        $tr->status = 2;
+        $tr->save();
+
+        $tr = Tariff::where('id', $tr->id)->first();
+        $tstate = TarrifState::where('tariff_id', $request->id)->get();
+        $effictive_date = TarrifState::where('tariff_id', $request->id)->where('status', 2)->first()->effective_from ?? null;
+
+        return view('admin.tariff.view', compact('tr','tstate','effictive_date'));
+
+
+    }
+
+
+    public function add_new_state_Tariff(request $request)
     {
 
 
@@ -131,9 +185,10 @@ class TariffController extends Controller
         $tr = Tariff::where('id', $request->id)->first();
         $tstate = TarrifState::where('tariff_id', $request->id)->get();
         $effictive_date = TarrifState::where('tariff_id', $request->id)->where('status', 2)->first()->effective_from ?? null;
+        $estate = Estate::all();
 
 
-        return view('admin.tariff.view', compact('tr', 'tstate', 'effictive_date'));
+        return view('admin.tariff.view', compact('tr', 'tstate','estate', 'effictive_date'));
 
     }
 
