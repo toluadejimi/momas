@@ -123,7 +123,7 @@ class RegisterController extends Controller
                 $usrr->save();
 
                 User::where('email', $request->email)->update(['code' => $sms_code]);
-                $user = send_email($email, $sms_code);
+                $user = send_email_reset($email, $sms_code);
 
                 if ($user == 0) {
                     $message = "OTP Code has been sent successfully to $email";
