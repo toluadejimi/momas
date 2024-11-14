@@ -129,6 +129,8 @@ class RegisterController extends Controller
 
             }
 
+            dd($usr);
+
 
             if ($usr->status == "0") {
                 $sms_code = random_int(0000, 9999);
