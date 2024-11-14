@@ -90,7 +90,7 @@ class DashboardContoller extends Controller
         if(auth::user()->role == 0){
 
             $data['users'] = User::latest()->where('status', 2)->count();
-            $data['users_lists'] = User::latest()->where('role'!= 3)->paginate('20');
+            $data['users_lists'] = User::latest()->where('role', '!=', 3)->paginate('20');
             return view('admin/user/user-list', $data);
 
         } elseif(auth::user()->role == 1){
