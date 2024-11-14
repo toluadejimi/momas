@@ -113,6 +113,9 @@ class RegisterController extends Controller
 
             $usr = User::where('email', $request->email)->first() ?? null;
             $status = User::where('email', $request->email)->first()->status ?? null;
+            $pass = 2;
+            $nopass = 0;
+
 
 
             if ($usr == null) {
@@ -134,9 +137,7 @@ class RegisterController extends Controller
             }
 
 
-
-
-            if ($status == 0) {
+            if ($status == $nopass) {
                 $sms_code = random_int(0000, 9999);
                 $email = $request->email;
                 User::where('email', $request->email)->update(['code' => $sms_code]);
@@ -150,8 +151,7 @@ class RegisterController extends Controller
 
             }
 
-            if ($status == 2) {
-
+            if ($status == $pass) {
                 $code = 422;
                 $message = "User Already exist with email, Please login";
                 return error($code, $message);
