@@ -89,7 +89,7 @@ class DashboardContoller extends Controller
 
         if(auth::user()->role == 0){
 
-            $data['users'] = User::where('status', 2)->count();
+            $data['users'] = User::where('status', 2)->where('role', 3)->count();
             $data['users_lists'] = User::paginate('20');
             return view('admin/user/user-list', $data);
 
