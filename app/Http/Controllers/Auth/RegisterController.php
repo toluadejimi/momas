@@ -129,7 +129,6 @@ class RegisterController extends Controller
 
             }
 
-            dd($usr);
 
 
             if ($usr->status == "0") {
@@ -146,7 +145,7 @@ class RegisterController extends Controller
 
             }
 
-            if ($usr->status == 2) {
+            if ($usr->status == "2") {
 
                 $code = 422;
                 $message = "User Already exist with email, Please login";
