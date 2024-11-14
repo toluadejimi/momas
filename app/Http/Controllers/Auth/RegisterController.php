@@ -130,7 +130,7 @@ class RegisterController extends Controller
             }
 
 
-            if ($usr->status == 0) {
+            if ($usr->status == "0") {
                 $sms_code = random_int(0000, 9999);
                 $email = $request->email;
                 User::where('email', $request->email)->update(['code' => $sms_code]);
