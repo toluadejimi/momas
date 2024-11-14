@@ -112,13 +112,9 @@ class RegisterController extends Controller
         if ($request->action == "forget") {
 
             $usr = User::where('email', $request->email)->first() ?? null;
-            $status = User::where('email', $request->email)->first()->status ?? null;
-            $pass = 2;
-            $nopass = 0;
 
 
-
-            if ($usr == null) {
+            if ($usr != null) {
                 $sms_code = random_int(0000, 9999);
                 $email = $request->email;
 
@@ -134,29 +130,15 @@ class RegisterController extends Controller
                     return success($message);
                 }
 
+            }else{
+
+                return response()->json([
+                    'status' => false,
+                    'message' => "Email does not exist",
+                ], 422);
             }
 
 
-            if ($status == $nopass) {
-                $sms_code = random_int(0000, 9999);
-                $email = $request->email;
-                User::where('email', $request->email)->update(['code' => $sms_code]);
-                $user = send_email($email, $sms_code);
-
-                if ($user == 0) {
-                    $message = "OTP Code has been sent successfully to $email";
-                    return success($message);
-                }
-
-
-            }
-
-            if ($status == $pass) {
-                $code = 422;
-                $message = "User Already exist with email, Please login";
-                return error($code, $message);
-
-            }
 
         }
 
