@@ -138,7 +138,7 @@
                                         <label class="my-2">User Role</label>
                                         <select type="text" name="role" class="form-control" required>
                                             <option value="2">Customer</option>
-                                            <option value="1">Admin</option>
+                                            <option value="0">Super Admin</option>
                                             <option value="3">Estate Admin</option>
                                             <option value="4">Estate Staff</option>
 
