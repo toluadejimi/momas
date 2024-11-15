@@ -55,10 +55,13 @@ class AuthController extends Controller
             return back()->with('error', "Email or password is incorrect");
         }
 
-        flush_token();
-        send_login_code($email, $code);
+        return redirect('admin/admin-dashboard')->with('message', "Welcome Admin!");
 
-        return view('auth.code', compact('code', 'email'));
+
+//        flush_token();
+//        send_login_code($email, $code);
+//
+//        return view('auth.code', compact('code', 'email'));
     }
 
 
@@ -75,6 +78,13 @@ class AuthController extends Controller
         if($request->code != $usr->code){
             auth::logout();
             return redirect('/')->with('error', 'Invalid OTP Code');
+        }
+
+
+        if($request->type == "onboarding"){
+            if($usr->status == 0 ){
+                return redirect('admin/pending-onboarding');
+            }
         }
 
         if($usr->role == 1 || $usr->role == 0){

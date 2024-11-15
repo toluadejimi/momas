@@ -25,6 +25,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('onboarding', [DashboardContoller::class, 'onboarding_estate']);
+Route::post('estate-onboarding', [DashboardContoller::class, 'register_now']);
+
+
 Route::any('/', [AuthController::class, 'admin_login']);
 Route::post('login-now', [AuthController::class, 'login_now']);
 Route::any('logout', [AuthController::class, 'log_out']);
@@ -34,18 +39,9 @@ Route::post('verify-code', [AuthController::class, 'verify_code']);
 Route::get('/search-meters', [MeterController::class, 'searchMeters']);
 
 
-
-
-
 Route::any('pay-flutter', [TransactionController::class, 'flutter_payment']);
 Route::any('payment-check', [TransactionController::class, 'flutter_verify']);
 Route::any('paystack-check', [TransactionController::class, 'paystack_verify']);
-
-
-
-
-
-
 
 
 Route::any('set-2fa', [AuthController::class, 'set_2fa']);
@@ -56,13 +52,17 @@ Route::any('verify_code', [AuthController::class, 'verify_code']);
 Route::get('code', [AuthController::class, 'code']);
 
 
-
-
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']], function () {
+
+
+    Route::get('pending-onboarding', [DashboardContoller::class, 'pending_onboarding']);
+
+
+    Route::get('onboarding-email', [DashboardContoller::class, 'onboarding_email']);
+
 
     Route::post('import-users', [CustomerImportController::class, 'import'])->name('customers.import');
     Route::post('import-meters', [MeterImportController::class, 'import'])->name('meters.import');
-
 
 
     Route::get('admin-dashboard', [DashboardContoller::class, 'index']);
@@ -83,9 +83,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
     Route::get('view-user', [DashboardContoller::class, 'view_user']);
     Route::post('update-user', [DashboardContoller::class, 'update_user']);
     Route::get('send-token-email', [DashboardContoller::class, 'send_token_email']);
-
-
-
 
 
     //Estates
@@ -114,29 +111,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
     Route::get('token-deactivate', [AccessTokenConroller::class, 'deactivate_token']);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     Route::get('estate-delete', [EstateController::class, 'estate_delete']);
-
 
 
     Route::get('estate-activate', [EstateController::class, 'estate_activate']);
     Route::get('estate-deactivate', [EstateController::class, 'estate_deactivate']);
-
-
 
 
     //Organization
@@ -147,9 +126,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
     Route::post('organization-update', [DashboardContoller::class, 'organization_update']);
     Route::get('organization-delete', [DashboardContoller::class, 'organization_delete']);
     Route::post('set-percentage', [DashboardContoller::class, 'set_percentage']);
-
-
-
 
 
     //Assets
@@ -181,13 +157,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
     Route::get('meter-deactivate', [MeterController::class, 'meter_deactivate']);
 
 
-
-
-
-
-
-
-
     Route::get('transformer-list', [TransformerController::class, 'list_transformer']);
     Route::get('new-transformer', [TransformerController::class, 'new_transformer']);
     Route::get('view-transformer', [TransformerController::class, 'view_transformer']);
@@ -202,12 +171,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
     Route::post('support-set', [DashboardContoller::class, 'support_set']);
     Route::get('update-utility', [DashboardContoller::class, 'update_utility']);
     Route::get('delete-utility', [DashboardContoller::class, 'delete_utility']);
-
-
-
-
-
-
 
 
     Route::get('tariff-list', [TariffController::class, 'tariff_list']);
@@ -228,29 +191,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
     Route::post('update-gen', [TariffController::class, 'update_gen']);
 
 
-
-
-
-
-
-
     //Meter Token
     Route::post('generate-kct-token', [MeterController::class, 'generate_kct_token']);
     Route::post('generate-token', [MeterController::class, 'generate_meter_token']);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+    //
 
 
 });

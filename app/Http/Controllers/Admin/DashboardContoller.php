@@ -625,6 +625,83 @@ class DashboardContoller extends Controller
 
 
 
+    public function onboarding_estate(request $request)
+    {
+
+        return view('admin.estate.onboarding');
+
+
+    }
+
+    public function register_now(request $request)
+    {
+
+        $usr = User::where('email', $request->email)->first() ?? null;
+        $status = User::where('email', $request->email)->first()->status ?? null;
+
+        if($status == 2){
+            return back()->with('error', "Email has already been taken");
+        }
+
+
+        if($status  == null && $usr == null){
+
+            $sms_code = random_int(0000, 9999);
+            $email = $request->email;
+
+            $usrr = new User();
+            $usrr->email = $email;
+            $usrr->role = 3;
+            $usrr->save();
+
+            $user = send_email($email, $sms_code);
+
+            $data['email'] = $request->email;
+            if ($user == 0) {
+                return view('admin.estate.onboarding-email', $data);
+            }
+
+
+        }else{
+
+            $sms_code = random_int(0000, 9999);
+            $email = $request->email;
+
+            $usrr = new User();
+            $usrr->email = $email;
+            $usrr->role = 3;
+            $usrr->save();
+
+            $user = send_email($email, $sms_code);
+
+            $data['email'] = $request->email;
+            if ($user == 0) {
+                return view('admin.estate.onboarding-email', $data);
+            }
+        }
+
+
+
+    }
+
+
+    public function onboarding_email(request $request)
+    {
+        return view('admin.estate.onboarding-email');
+
+    }
+
+
+    public function pending_onboarding(request $request)
+    {
+        return view('admin.estate.pending');
+
+    }
+
+
+
+
+
 
 
 

@@ -325,7 +325,7 @@ if (!function_exists('send_email')) {
             'subject' => "One Time Password",
             'toreceiver' => $email,
             'sms_code' => $sms_code,
-            'user' => $first_name,
+            'user' => $first_name ?? "USER",
         );
 
         Mail::send('emails.email', ["data1" => $data], function ($message) use ($data) {
