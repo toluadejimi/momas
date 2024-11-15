@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Auditlog;
 use App\Models\Estate;
 use App\Models\Feature;
+use App\Models\KctMeterToken;
 use App\Models\Meter;
 use App\Models\MeterToken;
 use App\Models\Organization;
@@ -546,14 +547,17 @@ class DashboardContoller extends Controller
         $data['upayment'] = UtilitiesPayment::where('user_id', $request->id)->paginate(10);
         $data['vending'] = MeterToken::where('user_id', $request->id)->paginate(10);
         $data['meters'] = Meter::all();
+        $data['tariff_count'] = Tariff::where('user_id', $request->id)->count();
+        $data['tariffs'] = Tariff::where('user_id', $request->id)->get();
+        $data['meter_count']= Meter::where('user_id', $request->id)->count();
+        $data['kcttokens'] = KctMeterToken::where('user_id', $request->id)->get();
+        $data['meter'] = Meter::where('user_id', $request->id)->first() ?? null;
 
         $data['tariff'] = Tariff::where('estate_id', $data['user']->estate_id)->where('user_id', null)->get();
         $data['nepa_tariff_title'] = Tariff::where('user_id', $request->id)->where('type', "nepa")->first()->title ?? null;
         $data['gen_tariff_title'] = Tariff::where('user_id', $request->id)->where('type', "gen")->first()->title ?? null;
 
         $data['percentage'] = SpreadPayment::where('user_id', $request->id)->first()->percentage ?? null;
-
-
 
 
         return view('admin/user/view', $data);

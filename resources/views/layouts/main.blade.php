@@ -12,12 +12,8 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{url('')}}/public/asset/ass/images/favicon.ico">
 
-    <!-- App css -->
-{{--    <link href="{{ asset('css/ass/css/app.min.css') }} {{url('')}}/public/asset/ass/css/app.min.css" rel="stylesheet" type="text/css" id="app-style"/>--}}
     <link href="{{url('')}}/public/asset/ass/css/app.min.css" rel="stylesheet" type="text/css" id="app-style"/>
 
-
-    <!-- Icons -->
     <link href="{{url('')}}/public/asset/ass/css/icons.min.css" rel="stylesheet" type="text/css"/>
 
     <style>
@@ -42,7 +38,7 @@
 </head>
 
 <!-- body start -->
-<body data-menu-color="light" data-sidebar="default"
+<body data-menu-color="light" data-sidebar="default">
 
 <!-- Begin page -->
 <div id="app-layout">
@@ -361,6 +357,7 @@
 
 
 
+
     <script>
         let sessionLifetime = {{ config('session.lifetime') }} * 60 * 1000;
         let warningTime = sessionLifetime - (5 * 60 * 1000);
@@ -383,6 +380,8 @@
 </div>
 <!-- END wrapper -->
 
+
+
 <!-- Vendor -->
 <script src="{{url('')}}/public/asset/ass/libs/jquery/jquery.min.js"></script>
 <script src="{{url('')}}/public/asset/ass/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -391,19 +390,6 @@
 <script src="{{url('')}}/public/asset/ass/libs/waypoints/lib/jquery.waypoints.min.js"></script>
 <script src="{{url('')}}/public/asset/ass/libs/jquery.counterup/jquery.counterup.min.js"></script>
 <script src="{{url('')}}/public/asset/ass/libs/feather-icons/feather.min.js"></script>
-
-<!-- Apexcharts JS -->
-<script src="{{url('')}}/public/asset/ass/libs/apexcharts/apexcharts.min.js"></script>
-
-<!-- for basic area chart -->
-<script src="{{url('')}}/public/asset/ass/stock-prices.js"></script>
-
-<!-- Widgets Init Js -->
-<script src="{{url('')}}/public/asset/ass/js/pages/analytics-dashboard.init.js"></script>
-
-<!-- App js-->
-<script src="{{url('')}}/public/asset/ass/js/app.js"></script>
-
 
 <!-- Datatables js -->
 <script src="{{url('')}}/public/asset/ass/libs/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -436,5 +422,12 @@
 <!-- Datatable Demo App Js -->
 <script src="{{url('')}}/public/asset/ass/js/pages/datatable.init.js"></script>
 
+<!-- App js-->
+<script src="{{url('')}}/public/asset/ass/js/app.js"></script>
+
+
+
+
 </body>
+
 </html>

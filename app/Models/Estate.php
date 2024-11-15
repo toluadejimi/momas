@@ -35,6 +35,12 @@ class Estate extends Model
         return $this->hasMany(MeterToken::class);
     }
 
+    public function kct_token()
+    {
+        return $this->hasMany(KctMeterToken::class);
+    }
+
+
 
 
     public function estate_service()

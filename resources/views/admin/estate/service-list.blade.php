@@ -79,94 +79,6 @@
                         <div class="card overflow-hidden">
 
 
-                            <div class="col-xl-6">
-                                <div class="card">
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="staticBackdrop"
-                                         data-bs-backdrop="static" data-bs-keyboard="false"
-                                         tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                         aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5"
-                                                        id="staticBackdropLabel">Add New Service </h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                </div>
-
-                                                <form action="add-new-service-list" method="POST"
-                                                      enctype="multipart/form-data">
-                                                    @csrf
-
-                                                    <div class="modal-body">
-
-                                                        <label class="my-2">Select Service</label>
-                                                        <select class="form-control mb-3" name="service" required>
-                                                            <option value="" disabled selected>Select a job</option>
-                                                            @foreach($prof_services as $data)
-                                                                <option value="{{$data->id}}">{{$data->service_title}}</option>
-                                                            @endforeach
-
-                                                        </select>
-
-                                                        <label class="my-2">Choose Estate</label>
-                                                        <select class="form-control mb-3" name="estate_id" required>
-                                                            <option value="" disabled selected>Select Estate</option>
-                                                            @foreach($estate as $data)
-                                                                <option value="{{$data->id}}">{{$data->title}}</option>
-                                                            @endforeach
-
-                                                        </select>
-
-
-                                                        <label class="my-2">Full Name</label>
-                                                        <input type="text" class="form-control mb-3"
-                                                               name="professional_name" placeholder="Surname Lastname" required>
-
-
-
-                                                        <div class="row">
-
-                                                            <div class="col">
-
-                                                                <label class="my-2">Email</label>
-                                                                <input type="text" class="form-control mb-3"
-                                                                       name="professional_email" >
-
-
-                                                            </div>
-
-                                                            <div class="col">
-
-                                                                <label class="my-2">Phone No</label>
-                                                                <input type="number" class="form-control mb-3"
-                                                                       name="professional_phone"  required>
-
-                                                            </div>
-
-
-                                                        </div>
-
-
-                                                    </div>
-
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">
-                                                            Close
-                                                        </button>
-                                                        <button type="submit" class="btn btn-primary">Create
-                                                        </button>
-                                                    </div>
-
-                                                </form>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> <!-- end card -->
-                            </div> <!-- end col -->
 
 
                             <div class="card-header">
@@ -175,7 +87,6 @@
                                     <a href="#" data-bs-toggle="modal"
                                        data-bs-target="#staticBackdrop"
                                        class="btn btn-primary text-white justify-content-end">Add new</a>
-
                                 </div>
 
 

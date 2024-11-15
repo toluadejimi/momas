@@ -87,6 +87,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
 
 
 
+
     //Estates
     Route::get('estate', [EstateController::class, 'estate_index']);
     Route::get('new-estate', [EstateController::class, 'estate_new']);
@@ -229,6 +230,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
 
 
 
+
+
+
+
+    //Meter Token
+    Route::post('generate-kct-token', [MeterController::class, 'generate_kct_token']);
+    Route::post('generate-token', [MeterController::class, 'generate_meter_token']);
 
 
 

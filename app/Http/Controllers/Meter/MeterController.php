@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Meter;
 
 use App\Http\Controllers\Controller;
 use App\Models\Estate;
+use App\Models\KctMeterToken;
 use App\Models\Meter;
 use App\Models\MeterToken;
 use App\Models\SpreadPayment;
@@ -39,15 +40,12 @@ class MeterController extends Controller
         }
 
 
-
-
         $get_tar = Tariff::where('user_id', $user->user_id)->first() ?? null;
         if ($get_tar == null) {
             $message = "Tariff not properly configured";
             $code = 422;
             return error($message, $code);
         }
-
 
 
         $data['customer_name'] = $user->first_name . " " . $user->last_name;
@@ -180,13 +178,13 @@ class MeterController extends Controller
                         if ($status == "SUCCESS") {
 
                             $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
-                            $met =  new MeterToken ();
+                            $met = new MeterToken ();
                             $met->user_id = Auth::user()->id;
                             $met->order_id = $trx;
                             $met->meterNo = $meterNo;
                             $met->token = $token;
                             $met->amount = $request->amount;
-                            $met->kct_tokens = $kct_data['tokens'][0].",".$kct_data['tokens'][1];
+                            $met->kct_tokens = $kct_data['tokens'][0] . "," . $kct_data['tokens'][1];
                             $met->vat = $vat;
                             $met->estate_id = Auth::user()->estate_id;
                             $met->status = 2;
@@ -266,7 +264,7 @@ class MeterController extends Controller
 
                     $no_kct_token = $no_kct_data['tokens'][0];
                     $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
-                    $met =  new MeterToken ();
+                    $met = new MeterToken ();
                     $met->user_id = Auth::user()->id;
                     $met->order_id = $trx;
                     $met->meterNo = $meterNo;
@@ -306,9 +304,6 @@ class MeterController extends Controller
     }
 
 
-
-
-
     public function pay_for_others_meter_token(request $request)
     {
 
@@ -321,37 +316,6 @@ class MeterController extends Controller
         $percentage = 2.5 / 100;
         $final_amount = $percentage * $amount;
         $dater = date('d-m-y');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         $user = User::where('meterNo', $request->meterNo)->first() ?? null;
@@ -698,6 +662,141 @@ class MeterController extends Controller
             'min_vend' => (int)$minvend
         ]);
 
+
+    }
+
+    public
+    function generate_kct_token(request $request)
+    {
+
+
+        $meter = Meter::where('meterNo', $request->meterNo)->first() ?? null;
+        if ($meter == null) {
+            return back()->with('error', "Meter Not found");
+        }
+
+        if ($meter->OldSGC == null) {
+            return back()->with('error', "Meter Not properly configured");
+        }
+
+        $trx = "TRX-".random_int(000000,999999);
+
+        $kctdatabody = [
+            'meterType' => $meter->KRN1,
+            'tometerType' => $meter->KRN1,
+            'meterNo' => $request->meterNo,
+            'sgc' => (int)$meter->OldSGC,
+            'tosgc' => (int)$meter->NewSGC,
+            'ti' => 1,
+            'toti' => 1,
+            'allow' => false,
+            'allowkrn' => true,
+        ];
+
+        $kct_response = Http::withOptions([
+            'verify' => false,
+            'timeout' => 10,
+        ])->post('http://169.239.189.91:19071/kcttokenGen', $kctdatabody);
+
+       $estate_id = User::where('id', $request->user_id)->first()->estate_id;
+
+        if ($kct_response->successful()) {
+            $kct = $kct_response->json();
+            $kct_data = json_decode($kct, true);
+            $status = $kct_data['code'] ?? null;
+
+            if ($status == "SUCCESS") {
+
+                $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
+                $met = new KctMeterToken();
+                $met->user_id = $request->user_id;
+                $met->meterNo = $request->meterNo;
+                $met->NewSGC = $request->NewSGC;
+                $met->OldSGC = $request->OldSGC;
+                $met->kct_token = $kct_data['tokens'][0] . "," . $kct_data['tokens'][1];
+                $met->estate_id = $estate_id;
+                $met->save();
+
+                return back()->with('message', "Meter KCT Token has been generated");
+
+            }
+
+
+            return back()->with('error', "An error occured");
+
+
+
+        }
+
+
+
+
+
+    }
+
+    public
+    function generate_meter_token(request $request)
+    {
+
+
+        $trx = "TRX-".random_int(000000,999999);
+
+
+        $meter = Meter::where('meterNo', $request->meterNo)->first() ?? null;
+        $databody = [
+            'meterType' => $meter->KRN1,
+            'meterNo' => Auth::user()->meterNo,
+            'sgc' => (int)$meter->OldSGC,
+            'ti' => 1,
+            'amount' => $request->amount,
+        ];
+        $no_kct_response = Http::withOptions([
+            'verify' => false,
+            'timeout' => 10,
+        ])->post('http://169.239.189.91:19071/tokenGen', $databody);
+
+        if ($no_kct_response->successful()) {
+            $no_kct = $no_kct_response->json();
+            $no_kct_data = json_decode($no_kct, true);
+            $status = $no_kct_data['code'] ?? null;
+
+            $user = User::where('id', $request->user_id)->first() ?? null;
+
+
+            if ($status == "SUCCESS") {
+
+                $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
+
+
+
+                $met = new MeterToken ();
+                $met->user_id = $request->user_id;
+                $met->order_id = $trx;
+                $met->meterNo = $request->MeterNo;
+                $met->amount = $request->amount;
+                $met->vat = $vat;
+                $met->token = $no_kct_data['tokens'][0];
+                $met->estate_id = $user->estate_id;
+                $met->save();
+
+
+                $amount = $request->amount;
+                $email = $user->email;
+                $token = $no_kct_data['tokens'][0];
+                send_email_token($email, $token, $amount);
+
+                return back()->with('message', "Meter Token has been generated");
+
+
+
+            }
+
+            return back()->with('error', "Meter Token can not be generated");
+
+
+        }
+
+        return back()->with('error', "An error occured");
 
     }
 
