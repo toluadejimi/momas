@@ -107,7 +107,6 @@
                                         <form id="loginForm" action="verify-code"  method="post"  class="my-4">
                                             @csrf
                                             <div class="form-group mb-3">
-                                                <input class="form-control" name="email" type="email" value="{{$email}}" hidden>
                                                 <input class="form-control" name="text" type="type" value="onboarding" hidden>
 
                                             </div>

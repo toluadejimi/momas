@@ -134,6 +134,14 @@
                             </a>
                         </li>
 
+                        <li>
+                            <a class='tp-link'  href="meter-list">
+                                <i data-feather="cpu"></i>
+                                <span> Meter </span>
+                            </a>
+                        </li>
+
+
 
                         <li>
                             <a class='tp-link'  href="customers">
@@ -143,12 +151,6 @@
                         </li>
 
 
-                        <li>
-                            <a class='tp-link'  href="meter-list">
-                                <i data-feather="cpu"></i>
-                                <span> Meter </span>
-                            </a>
-                        </li>
 
 
                         <li>
@@ -247,6 +249,13 @@
 
 
                         <li>
+                            <a class='tp-link'  href="meter-list">
+                                <i data-feather="cpu"></i>
+                                <span> Meter </span>
+                            </a>
+                        </li>
+
+                        <li>
                             <a class='tp-link'  href="customers">
                                 <i data-feather="users"></i>
                                 <span> Customers </span>
@@ -254,12 +263,7 @@
                         </li>
 
 
-                        <li>
-                            <a class='tp-link'  href="meter-list">
-                                <i data-feather="cpu"></i>
-                                <span> Meter </span>
-                            </a>
-                        </li>
+
 
 
                         <li>

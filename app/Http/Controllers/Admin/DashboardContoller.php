@@ -549,9 +549,14 @@ class DashboardContoller extends Controller
         $data['meters'] = Meter::all();
         $data['tariff_count'] = Tariff::where('user_id', $request->id)->count();
         $data['tariffs'] = Tariff::where('user_id', $request->id)->get();
-        $data['meter_count']= Meter::where('user_id', $request->id)->count();
+        $data['meter_count'] = Meter::where('user_id', $request->id)->count();
+        $data['meter_no']= Meter::where('user_id', $request->id)->first()->MeterNo ?? null;
         $data['kcttokens'] = KctMeterToken::where('user_id', $request->id)->get();
         $data['meter'] = Meter::where('user_id', $request->id)->first() ?? null;
+        $data['estate_title'] = Estate::where('id', $data['user']->estate_id)->first()->title ?? null;
+
+
+
 
         $data['tariff'] = Tariff::where('estate_id', $data['user']->estate_id)->where('user_id', null)->get();
         $data['nepa_tariff_title'] = Tariff::where('user_id', $request->id)->where('type', "nepa")->first()->title ?? null;
@@ -644,7 +649,11 @@ class DashboardContoller extends Controller
         }
 
 
+
+
         if($status  == null && $usr == null){
+
+            dd('hello');
 
             $sms_code = random_int(0000, 9999);
             $email = $request->email;
@@ -654,31 +663,19 @@ class DashboardContoller extends Controller
             $usrr->role = 3;
             $usrr->save();
 
-            $user = send_email($email, $sms_code);
-
             $data['email'] = $request->email;
-            if ($user == 0) {
-                return view('admin.estate.onboarding-email', $data);
-            }
+            return redirect('admin/onboarding-pending');
+
 
 
         }else{
 
-            $sms_code = random_int(0000, 9999);
-            $email = $request->email;
-
-            $usrr = new User();
-            $usrr->email = $email;
-            $usrr->role = 3;
-            $usrr->save();
-
-            $user = send_email($email, $sms_code);
-
             $data['email'] = $request->email;
-            if ($user == 0) {
-                return view('admin.estate.onboarding-email', $data);
-            }
+            return redirect('onboarding-pending');
+
+
         }
+
 
 
 
@@ -694,7 +691,7 @@ class DashboardContoller extends Controller
 
     public function pending_onboarding(request $request)
     {
-        return view('admin.estate.pending');
+        return view('admin.estate.onboarding-email');
 
     }
 

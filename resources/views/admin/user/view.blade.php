@@ -78,6 +78,12 @@
                                     </div>
 
                                     <div class="col-3">
+                                        <label class="my-2">Estate</label>
+                                        <input type="text" value="{{$estate_title}}" name="estate_title"
+                                               class="form-control" required>
+                                    </div>
+
+                                    <div class="col-3">
                                         <label class="my-2">Address</label>
                                         <input type="text" value="{{$user->address}}" name="address"
                                                class="form-control" required>
@@ -192,9 +198,19 @@
                                             <h6 class="d-flex justify-content-start my-2">Attach Information</h6>
 
 
-                                            <div class="col-xl-4 col-sm-12" style="position: relative;">
+                                            <div class="col-xl-5 col-sm-12" style="position: relative;">
+
 
                                                 <label class="my-2">Choose Meter</label>
+                                                @if($meter_count > 0)
+                                                    <span
+                                                        class="badge text-bg-danger">{{$user->meterNo}}</span>
+                                                @else
+                                                    <span class="badge text-bg-danger">"No meter found"</span>
+                                                @endif
+
+
+
                                                 <input type="text" name="meterNo"
                                                        value="{{$user->meterNo ?? "Select Meter"}}" id="searchMeter"
                                                        placeholder="Type meter number..." class="form-control" required

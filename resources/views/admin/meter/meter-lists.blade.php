@@ -139,6 +139,7 @@
                                         <th scope="col" class="cursor-pointer">Meter No</th>
                                         <th scope="col" class="cursor-pointer">Meter Model</th>
                                         <th scope="col" class="cursor-pointer">Estate</th>
+                                        <th scope="col" class="cursor-pointer">Customer</th>
                                         <th scope="col" class="cursor-pointer">Status</th>
                                         <th scope="col" class="cursor-pointer">Date Added</th>
                                         @if(auth::user()->role == 0)
@@ -146,6 +147,8 @@
                                         @endif
 
                                         <th scope="col" class="cursor-pointer desc">Action</th>
+                                        <th scope="col" class="cursor-pointer desc">Action</th>
+
 
 
                                     </tr>
@@ -161,6 +164,8 @@
                                                 {{strtoupper($data->meterModel)}}
                                             </td>
                                             <td>{{$data->estate->title ?? "Name"}}</td>
+                                            <td>{{$data->user->first_name ?? "No user"}} {{$data->user->last_name ?? "attached"}}</td>
+
                                             <td>
                                                 @if($data->status == 2)
                                                     <span class="badge text-bg-primary">Active</span>
@@ -374,6 +379,7 @@
                                         <th scope="col" class="cursor-pointer">Meter No</th>
                                         <th scope="col" class="cursor-pointer">Meter Model</th>
                                         <th scope="col" class="cursor-pointer">Estate</th>
+                                        <th scope="col" class="cursor-pointer">Customer</th>
                                         <th scope="col" class="cursor-pointer">Status</th>
                                         <th scope="col" class="cursor-pointer">Date Added</th>
                                         @if(auth::user()->role == 0)
@@ -396,6 +402,8 @@
                                                 {{strtoupper($data->meterModel)}}
                                             </td>
                                             <td>{{$data->estate->title ?? "Name"}}</td>
+                                            <td>{{$data->user->first_name ?? "No user"}} {{$data->user->last_name ?? "attached"}}</td>
+
                                             <td>
                                                 @if($data->status == 2)
                                                     <span class="badge text-bg-primary">Active</span>

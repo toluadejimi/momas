@@ -12,25 +12,32 @@ use App\Http\Controllers\Estate\EstateServiceController;
 use App\Http\Controllers\Meter\MeterController;
 use App\Http\Controllers\Transaction\TransactionController;
 use App\Http\Controllers\Transformer\TransformerController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+
+
+Route::get('/clear', function(){
+    \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+});
+
 
 
 Route::get('onboarding', [DashboardContoller::class, 'onboarding_estate']);
 Route::post('estate-onboarding', [DashboardContoller::class, 'register_now']);
+Route::get('onboarding-pending', [DashboardContoller::class, 'pending_onboarding']);
 
 
-Route::any('/', [AuthController::class, 'admin_login']);
+
+Route::get('/', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    return app(AuthController::class)->admin_login(request());
+});
+
+
 Route::post('login-now', [AuthController::class, 'login_now']);
 Route::any('logout', [AuthController::class, 'log_out']);
 Route::post('verify-code', [AuthController::class, 'verify_code']);
@@ -55,7 +62,6 @@ Route::get('code', [AuthController::class, 'code']);
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']], function () {
 
 
-    Route::get('pending-onboarding', [DashboardContoller::class, 'pending_onboarding']);
 
 
     Route::get('onboarding-email', [DashboardContoller::class, 'onboarding_email']);
