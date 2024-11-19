@@ -58,7 +58,6 @@ class RegisterController extends Controller
         }
 
 
-
         if ($request->action == "register") {
 
             $usr = User::where('email', $request->email)->first() ?? null;
@@ -130,7 +129,7 @@ class RegisterController extends Controller
                     return success($message);
                 }
 
-            }else{
+            } else {
 
                 return response()->json([
                     'status' => false,
@@ -139,9 +138,37 @@ class RegisterController extends Controller
             }
 
 
-
         }
 
+
+        $usr = User::where('email', $request->email)->first() ?? null;
+        $status = User::where('email', $request->email)->first()->status ?? null;
+
+        if($status != 2){
+            User::where('email', $request->email)->delete();
+        }
+
+        if ($usr == null && $status != 2) {
+            $sms_code = random_int(0000, 9999);
+            $email = $request->email;
+
+
+            $usrr = new User();
+            $usrr->email = $email;
+            $usrr->save();
+
+            User::where('email', $request->email)->update(['code' => $sms_code]);
+            $user = send_email($email, $sms_code);
+
+            if ($user == 0) {
+                $message = "OTP Code has been sent successfully to $email";
+                return success($message);
+            }
+        } elseif ($status == 2) {
+            $code = 422;
+            $message = "User already exist";
+            return error($message, $code);
+        }
 
 
     }
@@ -208,7 +235,7 @@ class RegisterController extends Controller
             ]);
 
             $user_id = User::where('email', $request->email)->first()->id;
-            Meter::where('meterNo' , $request->meterNo)->update(['user_id'=>$user_id]);
+            Meter::where('meterNo', $request->meterNo)->update(['user_id' => $user_id]);
 
 
             $message = "Account Registered Successfully";
