@@ -166,7 +166,7 @@ class RegisterController extends Controller
             }
         } elseif ($status == 2) {
             $code = 422;
-            $message = "User already exist";
+            $message = "User already exist, login your account";
             return error($message, $code);
         }
 
