@@ -206,12 +206,20 @@ class RegisterController extends Controller
 
 
         $gm = Meter::where('meterNo', $request->meterNo)->first() ?? null;
+        $muser_id = Meter::where('meterNo', $request->meterNo)->first()->user_id ?? null;
         if ($gm == null) {
             $code = 422;
             $message = "Meter has not been profiled";
             return error($message, $code);
 
         }
+
+        if($muser_id != null){
+            $code = 422;
+            $message = "Meter is already attached to a customer";
+            return error($message, $code);
+        }
+
 
 
         $estate_name = Estate::where('id', $gm->estate_id)->first()->first()->title ?? null;
