@@ -55,6 +55,8 @@
                                     <div class="col-3">
                                         <label class="my-2">Tariff Title</label>
                                         <input type="text" value="TF" name="title" class="form-control" required>
+
+
                                     </div>
 
 
@@ -147,12 +149,9 @@
 
 
                                     <div class="col-3">
-                                        <select name="type" class="form-control">
-
-                                            <option value=""
-
-                                        </select>
-
+                                        <button type="submit" class="col-2 d-flex btn btn-primary">
+                                            Create
+                                        </button>
                                     </div>
 
                                     <hr class="my-4">
