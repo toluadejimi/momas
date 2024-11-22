@@ -200,7 +200,7 @@ class DashboardContoller extends Controller
         } elseif(auth::user()->role == 3){
 
             $data['estate'] = Estate::where('id', auth::user()->estate_id)->first();
-            $data['meters'] = Meter::all();
+            $data['meters'] = Meter::where('id', auth::user()->estate_id)->get();
 
             return view('admin/user/new-customer', $data);
 
