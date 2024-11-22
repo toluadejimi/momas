@@ -132,6 +132,9 @@ class MeterController extends Controller
 
 
         $meter = Meter::where('MeterNo', $meterNo)->first() ?? null;
+
+
+        dd($meter);
 //        if ($meter != null && $meter->NeedKCT == "on") {
 //
 //            $databody = [
