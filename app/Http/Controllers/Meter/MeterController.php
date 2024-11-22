@@ -136,7 +136,6 @@ class MeterController extends Controller
         if ($meter != null && $meter->NeedKCT == "on") {
 
 
-            dd($meter."code1");
 
             $databody = [
                 'meterType' => $meter->KRN1,
@@ -195,7 +194,7 @@ class MeterController extends Controller
                             $met->status = 2;
                             $met->save();
 
-                            //Transaction::where('trx_id', $trx)->update(['service_type' => "Token Purchase", 'service' => "Meter"]);
+                            Transaction::where('trx_id', $trx)->update(['service_type' => "Token Purchase", 'service' => "Meter"]);
 
 
                             $data2['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
@@ -251,7 +250,6 @@ class MeterController extends Controller
 
 
         if ($meter != null && $meter->NeedKCT == null) {
-
 
             $databody = [
                 'meterType' => $meter->KRN1,
