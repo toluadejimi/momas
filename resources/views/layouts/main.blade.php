@@ -230,15 +230,15 @@
                                     <li>
                                         <a class='tp-link' href='report-transaction'>Transactions</a>
                                     </li>
-                                    <li>
-                                        <a class='tp-link' href='report-meter'>Meter</a>
-                                    </li>
-                                    <li>
-                                        <a class='tp-link' href='report-customers'>Customer</a>
-                                    </li>
-                                    <li>
-                                        <a class='tp-link' href='report-tariff'>Tariff</a>
-                                    </li>
+{{--                                    <li>--}}
+{{--                                        <a class='tp-link' href='report-meter'>Meter</a>--}}
+{{--                                    </li>--}}
+{{--                                    <li>--}}
+{{--                                        <a class='tp-link' href='report-customers'>Customer</a>--}}
+{{--                                    </li>--}}
+{{--                                    <li>--}}
+{{--                                        <a class='tp-link' href='report-tariff'>Tariff</a>--}}
+{{--                                    </li>--}}
                                 </ul>
                             </div>
                         </li>
