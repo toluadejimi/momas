@@ -202,7 +202,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']],
     Route::post('generate-token', [MeterController::class, 'generate_meter_token']);
 
 
-    //
+    //REPORT
+    Route::get('report-transaction', [TransactionController::class, 'transaction_reports']);
+    Route::post('search-trx', [TransactionController::class, 'search_trx']);
+
+
+
+
+
+
 
 
 });
