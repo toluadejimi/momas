@@ -138,7 +138,7 @@ class MeterController extends Controller
                 'meterType' => $meter->KRN1,
                 'meterNo' => Auth::user()->meterNo,
                 'sgc' => (int)$meter->OldSGC,
-                'ti' => 1,
+                'ti' => 1, //TRARRRIF INDEX
                 'amount' => $request->amount,
             ];
             $response = Http::withOptions([
@@ -191,7 +191,7 @@ class MeterController extends Controller
                             $met->status = 2;
                             $met->save();
 
-                            Transaction::where('trx_id', $trx)->update(['service_type' => "Token Purchase", 'service' => "Meter"]);
+                            //Transaction::where('trx_id', $trx)->update(['service_type' => "Token Purchase", 'service' => "Meter"]);
 
 
                             $data2['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
