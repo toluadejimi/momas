@@ -273,7 +273,6 @@ class MeterController extends Controller
                 $status = $no_kct_data['code'] ?? null;
 
 
-                dd($no_kct_data, $status);
 
                 if ($status == "SUCCESS") {
 
@@ -318,8 +317,7 @@ class MeterController extends Controller
 
         return response()->json([
             'status' => false,
-            'message' => "Meter Data error",
-            'data' => $request->all(),
+            'message' => $no_kct_data['tokens'][0],
         ], 422);
 
 
