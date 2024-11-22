@@ -266,12 +266,14 @@ class MeterController extends Controller
             ])->post('http://169.239.189.91:19071/tokenGen', $databody);
 
 
-            dd($no_kct_response);
 
             if ($no_kct_response->successful()) {
                 $no_kct = $no_kct_response->json();
                 $no_kct_data = json_decode($no_kct, true);
                 $status = $no_kct_data['code'] ?? null;
+
+
+                dd($no_kct_data, $status);
 
                 if ($status == "SUCCESS") {
 
