@@ -304,6 +304,13 @@ class MeterController extends Controller
         }
 
 
+        return response()->json([
+            'status' => false,
+            'message' => "Meter Data error",
+            'data' => $request->all(),
+        ], 422);
+
+
     }
 
 
