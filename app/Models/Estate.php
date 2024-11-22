@@ -48,6 +48,11 @@ class Estate extends Model
         return $this->hasMany(EstateService::class);
     }
 
+    public function transaction()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
     protected $casts = [
         'status' => 'integer',
         ];

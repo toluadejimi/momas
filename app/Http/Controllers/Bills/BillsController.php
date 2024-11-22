@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Bills;
 
 use App\Http\Controllers\Controller;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,6 +44,9 @@ class BillsController extends Controller
         curl_close($curl);
         $var = json_decode($var);
         $status = $var->status ?? null;
+
+
+        Transaction::where('trx_id', $request->trxref)->update(['service_type' => "Airtime Purchase", 'service' => "Airtime"]);
 
 
         if ($status == true) {
@@ -104,7 +108,6 @@ class BillsController extends Controller
 
         if ($status == true) {
 
-            $message = "Airtime Purchase successful";
             return response()->json([
                 'status' => true,
                 'mtn_data' => $var->mtn_data,
@@ -285,6 +288,9 @@ class BillsController extends Controller
 
         $status = $var->status ?? null;
 
+        Transaction::where('trx_id', $request->trxref)->update(['service_type' => "Cable Purchase", 'service' => "Cable"]);
+
+
         if ($status == true) {
             return response()->json([
                 'status' => true,
@@ -336,6 +342,10 @@ class BillsController extends Controller
             curl_close($curl);
             $var = json_decode($var);
             $status = $var->status ?? null;
+
+
+            Transaction::where('trx_id', $request->trxref)->update(['service_type' => "Data Purchase", 'service' => "Data"]);
+
 
             if ($status == true) {
                 $message = "Data Purchase successful";

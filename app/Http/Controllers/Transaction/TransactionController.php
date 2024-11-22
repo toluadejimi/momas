@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use App\Models\Transaction;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -58,16 +59,16 @@ class TransactionController extends Controller
         $var = json_decode($var);
         $status = $var->status ?? null;
 
-            if ($status == 'success') {
-                Transaction::where('trx_id', $request->tx_ref)->update(['status' => 2]);
-                $ref = Transaction::where('trx_id', $request->tx_ref)->first()->trx_id;
-                $url = url('') . "/payment?ref=$request->tx_ref&status=success";
-                return redirect($url);
-            } else {
-                $ref = Transaction::where('trx_id', $var->data->metadata->ref)->first()->trx_id;
-                $url = url('') . "/payment?ref=$request->tx_ref&status=failure";
-                return redirect($url);
-            }
+        if ($status == 'success') {
+            Transaction::where('trx_id', $request->tx_ref)->update(['status' => 2]);
+            $ref = Transaction::where('trx_id', $request->tx_ref)->first()->trx_id;
+            $url = url('') . "/payment?ref=$request->tx_ref&status=success";
+            return redirect($url);
+        } else {
+            $ref = Transaction::where('trx_id', $var->data->metadata->ref)->first()->trx_id;
+            $url = url('') . "/payment?ref=$request->tx_ref&status=failure";
+            return redirect($url);
+        }
 
     }
 
@@ -126,6 +127,7 @@ class TransactionController extends Controller
 
             $trx = new Transaction();
             $trx->user_id = Auth::id();
+            $trx->estate_id = Auth::user()->estate_id;
             $trx->pay_type = "flutterwave";
             $trx->service_type = $request->service;
             $trx->amount = $request->amount;
@@ -159,7 +161,7 @@ class TransactionController extends Controller
                 "amount" => $request->amount * 100,
                 "email" => $email,
                 "ref" => $trx_id,
-                'callback_url' => url('')."/paystack-check",
+                'callback_url' => url('') . "/paystack-check",
                 'metadata' => ["ref" => $trx_id],
 
             );
@@ -277,6 +279,18 @@ class TransactionController extends Controller
     }
 
 
+    public function estate_transactions(request $request)
+    {
+
+        $trx = Transaction::where('user_id', Auth::id())->take(1000)->get();
+        return response()->json([
+            'status' => true,
+            'data' => $trx,
+        ], 200);
+
+    }
+
+
     public function flutter_verify(request $request)
     {
 
@@ -378,5 +392,214 @@ class TransactionController extends Controller
         }
 
     }
+
+
+    public function transaction_reports(request $request)
+    {
+
+
+        if (auth::user()->role == 0) {
+
+            $data['transactions'] = Transaction::latest()->paginate('20');
+            $data['total'] = Transaction::where('status', 2)->sum('amount');
+
+            return view('admin.report.transactionreport', $data);
+
+
+        } elseif (auth::user()->role == 1) {
+
+        } elseif
+        (auth::user()->role == 2) {
+
+        } elseif
+        (auth::user()->role == 3) {
+
+            $data['transactions'] = Transaction::latest()->where('estate_id', auth::user()->estate_id)->paginate('20');
+            $data['total'] = Transaction::where('status', 2)->where('estate_id', auth::user()->estate_id)->sum('amount');
+
+            return view('admin.report.transactionreport', $data);
+
+        } elseif
+        (auth::user()->role == 4) {
+
+        } elseif
+        (auth::user()->role == 5) {
+
+        }
+
+
+    }
+
+
+    public function search_trx(request $request)
+    {
+
+        if (auth::user()->role == 0) {
+
+
+            $rrn = $request->rrn;
+            $startofday = $request->from;
+            $endofday = $request->to;
+            $transaction_type = $request->transaction_type;
+            $status = $request->status;
+
+
+
+            if($startofday != null && $endofday != null &&  $rrn == null && $transaction_type == null && $status == null){
+
+                $data['transactions'] =Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->latest()
+                    ->take(50000)
+                    ->paginate(50);
+
+                $data['total'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->sum('amount') ?? 0;
+
+
+                return view('admin.report.transactionreport', $data);
+
+            }
+
+
+            if($startofday != null && $endofday != null &&  $rrn == null && $transaction_type != null && $status == null){
+
+
+                $data['transactions'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->latest()
+                    ->take(50000)
+                    ->where('service_type', $transaction_type)
+                    ->paginate(50);
+
+                $data['total'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->where('service_type', $transaction_type)
+                    ->sum('amount') ?? 0;
+
+
+                return view('admin.report.transactionreport', $data);
+
+
+            }
+
+
+
+            if($startofday != null && $endofday != null &&  $rrn == null && $transaction_type != null && $status != null){
+                $data['transactions'] = Transaction::latest()->take(50000)->whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])->
+                where([
+                    'status' => $status,
+                    'service_type' => $transaction_type,
+                ])->paginate('50') ?? null;
+
+
+                $data['total'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])->
+                where([
+                    'status' => $status,
+                    'service_type' => $transaction_type,
+                ])->sum('amount') ?? 0;
+
+
+                return view('admin.report.transactionreport', $data);
+
+            }
+
+
+
+            return back()->with('error', 'Select a field');
+
+
+
+        }
+
+
+        if (auth::user()->role == 3) {
+
+
+            $rrn = $request->rrn;
+            $startofday = $request->from;
+            $endofday = $request->to;
+            $transaction_type = $request->transaction_type;
+            $status = $request->status;
+
+
+
+            if($startofday != null && $endofday != null &&  $rrn == null && $transaction_type == null && $status == null){
+
+                $data['transactions'] =Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->latest()
+                    ->where('estate_id', auth::user()->estate_id)
+                    ->take(50000)
+                    ->paginate(50);
+
+                $data['total'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->where('estate_id', auth::user()->estate_id)
+                    ->sum('amount') ?? 0;
+
+
+                return view('admin.report.transactionreport', $data);
+
+            }
+
+
+            if($startofday != null && $endofday != null &&  $rrn == null && $transaction_type != null && $status == null){
+
+
+                $data['transactions'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->where([
+                        'status' => $status,
+                        'service_type' => $transaction_type,
+                        'estate_id' => auth::user()->estate_id
+                    ])->paginate('50') ?? null;
+
+                $data['total'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->where([
+                        'status' => $status,
+                        'service_type' => $transaction_type,
+                        'estate_id' => auth::user()->estate_id
+                    ])->paginate('50')
+                    ->sum('amount') ?? 0;
+
+
+                return view('admin.report.transactionreport', $data);
+
+
+            }
+
+
+
+            if($startofday != null && $endofday != null &&  $rrn == null && $transaction_type != null && $status != null){
+                $data['transactions'] = Transaction::latest()->take(50000)->whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])->
+                where([
+                    'status' => $status,
+                    'service_type' => $transaction_type,
+                    'estate_id' => auth::user()->estate_id
+                ])->paginate('50') ?? null;
+
+
+                $data['total'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])->
+                where([
+                    'status' => $status,
+                    'service_type' => $transaction_type,
+                    'estate_id' => auth::user()->estate_id
+
+                ])->sum('amount') ?? 0;
+
+
+                return view('admin.report.transactionreport', $data);
+
+            }
+
+
+
+            return back()->with('error', 'Select a field');
+
+
+
+        }
+
+
+
+    }
+
+
+
 }
 

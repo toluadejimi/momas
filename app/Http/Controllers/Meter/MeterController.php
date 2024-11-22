@@ -10,6 +10,7 @@ use App\Models\MeterToken;
 use App\Models\SpreadPayment;
 use App\Models\Tariff;
 use App\Models\TarrifState;
+use App\Models\Transaction;
 use App\Models\Transformer;
 use App\Models\User;
 use App\Models\UtilitiesPayment;
@@ -189,6 +190,8 @@ class MeterController extends Controller
                             $met->estate_id = Auth::user()->estate_id;
                             $met->status = 2;
                             $met->save();
+
+                            Transaction::where('trx_id', $trx)->update(['service_type' => "Token Purchase", 'service' => "Meter"]);
 
 
                             $data2['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;

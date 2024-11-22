@@ -211,13 +211,36 @@
                         </li>
 
 
-
-
                         <li>
                             <a class='tp-link'  href="users-list">
                                 <i data-feather="users"></i>
                                 <span> Users </span>
                             </a>
+                        </li>
+
+
+                        <li>
+                            <a href="charts-mixed.html#sidebarBaseui" data-bs-toggle="collapse">
+                                <i data-feather="package"></i>
+                                <span> Reports </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarBaseui">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a class='tp-link' href='report-transaction'>Transactions</a>
+                                    </li>
+                                    <li>
+                                        <a class='tp-link' href='report-meter'>Meter</a>
+                                    </li>
+                                    <li>
+                                        <a class='tp-link' href='report-customers'>Customer</a>
+                                    </li>
+                                    <li>
+                                        <a class='tp-link' href='report-tariff'>Tariff</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
 
 
@@ -305,6 +328,31 @@
                                 <i data-feather="users"></i>
                                 <span> Users </span>
                             </a>
+                        </li>
+
+
+                        <li>
+                            <a href="charts-mixed.html#sidebarBaseui" data-bs-toggle="collapse">
+                                <i data-feather="package"></i>
+                                <span> Reports </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarBaseui">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a class='tp-link' href='report-transaction'>Transactions</a>
+                                    </li>
+{{--                                    <li>--}}
+{{--                                        <a class='tp-link' href='report-meter'>Meter</a>--}}
+{{--                                    </li>--}}
+{{--                                    <li>--}}
+{{--                                        <a class='tp-link' href='report-customers'>Customer</a>--}}
+{{--                                    </li>--}}
+{{--                                    <li>--}}
+{{--                                        <a class='tp-link' href='report-tariff'>Tariff</a>--}}
+{{--                                    </li>--}}
+                                </ul>
+                            </div>
                         </li>
 
 
