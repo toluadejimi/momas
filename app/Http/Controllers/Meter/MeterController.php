@@ -505,9 +505,33 @@ class MeterController extends Controller
     public
     function list_meter(request $request)
     {
-        $data['meters'] = Meter::count();
-        $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->paginate('20');
-        return view('admin/meter/meter-lists', $data);
+
+        if (auth::user()->role == 0) {
+
+            $data['meters'] = Meter::count();
+            $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->paginate('20');
+            return view('admin/meter/meter-lists', $data);
+
+        } elseif (auth::user()->role == 1) {
+
+
+        } elseif (auth::user()->role == 2) {
+
+        } elseif (auth::user()->role == 3) {
+            $data['meters'] = Meter::count();
+            $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('estate_id', auth::user()->estate_id)->paginate('20');
+            return view('admin/meter/meter-lists', $data);
+
+        } elseif (auth::user()->role == 4) {
+
+        } elseif (auth::user()->role == 5) {
+
+        } else {
+
+        }
+
+
+
     }
 
 
