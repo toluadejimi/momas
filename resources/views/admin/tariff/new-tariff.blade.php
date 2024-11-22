@@ -148,11 +148,6 @@
                                     </div>
 
 
-                                    <div class="col-3">
-                                        <button type="submit" class="col-2 d-flex btn btn-primary">
-                                            Create
-                                        </button>
-                                    </div>
 
                                     <hr class="my-4">
 

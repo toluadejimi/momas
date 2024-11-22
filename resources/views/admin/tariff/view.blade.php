@@ -563,13 +563,4 @@
 @endsection
 
 
-<div class="col-3">
-    <label class="my-2">Choose Estate</label>
-    <select name="estate_id" required>
-        <option value="">---Select---</option>
-        @foreach($estate as $item)
-            <option value="{{$item->id}}">{{$item->title}}</option>
-        @endforeach
-    </select>
 
-</div>
