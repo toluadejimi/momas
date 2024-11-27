@@ -106,7 +106,6 @@
                                 @csrf
 
                                 <div class="row">
-
                                     <h6 class="d-flex justify-content-start my-4">Estate Information</h6>
 
                                     <div class="col-4">
@@ -133,8 +132,7 @@
 
                                     <div class="col-4">
                                         <label class="my-2">LGA</label>
-                                        <input type="text" name="lga" value="{{$org->lga}}" class="form-control"
-                                               required>
+                                        <input type="text" name="lga" value="{{$org->lga}}" class="form-control" required>
 
                                     </div>
 
@@ -143,6 +141,31 @@
                                         <select type="text" name="status" class="form-control" required>
                                             <option value="2">Activate</option>
                                             <option value="0">Deactivate</option>
+
+                                        </select>
+
+                                    </div>
+
+
+
+                                    <div class="col-3">
+                                        <label class="my-2">Payment Type</label>
+                                        <select type="text" name="ptype" class="form-control" required>
+                                            @if($org->ptype == null)
+                                                <option value="">--select type---</option>
+                                                <option value="1">APP Only</option>
+                                                <option value="2">Web Only</option>
+                                                <option value="3">App & Web</option>
+                                           @elseif($org->ptype == 1)<option value="1">APP Only</option>
+                                            <option value="2">Web Only</option>
+                                            <option value="3">App & Web</option>
+                                            @elseif($org->ptype == 2)<option value="2">Web Only</option>
+                                            <option value="1">App Only</option>
+                                            <option value="3">App & Web</option>
+                                            @elseif($org->ptype == 3)<option value="3">App & Web</option>
+                                            <option value="1">App Only</option>
+                                            <option value="2">Web Only</option>
+                                            @endif
 
                                         </select>
 

@@ -23,6 +23,12 @@ Route::get('/clear', function(){
 
 
 
+
+Route::any('verify2fa', [AuthController::class, 'verify2fa']);
+Route::any('verify2fa-code', [AuthController::class, 'verify2fa_view']);
+
+
+
 Route::get('onboarding', [DashboardContoller::class, 'onboarding_estate']);
 Route::post('estate-onboarding', [DashboardContoller::class, 'register_now']);
 Route::get('onboarding-pending', [DashboardContoller::class, 'pending_onboarding']);
@@ -59,7 +65,7 @@ Route::any('verify_code', [AuthController::class, 'verify_code']);
 Route::get('code', [AuthController::class, 'code']);
 
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'session.timeout']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
 
 

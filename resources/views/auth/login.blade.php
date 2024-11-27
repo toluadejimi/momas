@@ -116,7 +116,35 @@
                                                         <input class="form-control" name="password" type="password" required="" id="password" placeholder="Enter your password">
                                                     </div>
 
-                                                    <div class="form-group d-flex mb-3">
+                                                    <hr>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <h6 class="fs-15">Choose OTP Type</h6>
+                                                            <div class="">
+                                                                <div class="form-check mb-2">
+                                                                    <input class="form-check-input" type="checkbox" name="googleauth"  id="flexCheckDefault">
+                                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                                        Google Auth
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-6">
+                                                            <div class="mt-4">
+                                                                <div class="form-check mb-2">
+                                                                    <input class="form-check-input" name="emailauth" type="checkbox"  id="flexCheckDefault">
+                                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                                        Email
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <hr>
+
+                                                        <div class="form-group d-flex mb-3">
                                                         <div class="col-sm-6">
                                                             <div class="form-check">
                                                                 <input type="checkbox" class="form-check-input" id="checkbox-signin" checked>

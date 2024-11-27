@@ -27,6 +27,7 @@ class SessionTimeout
             session(['lastActivityTime' => time()]);
         }
 
+
         return $next($request);
     }
 }

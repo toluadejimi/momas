@@ -39,6 +39,7 @@ class EstateController extends Controller
         $org->state = $request->state;
         $org->lga = $request->lga;
         $org->city = $request->city;
+        $org->ptype = $request->ptype;
         $org->status = 2;
         $org->save();
 
@@ -60,10 +61,6 @@ class EstateController extends Controller
             $data['utility'] = Utitlity::where('estate_id', $request->id)->get() ?? null;
             $data['total_meters'] = Meter::where('estate_id', $request->id)->count() ?? null;
             $data['customers'] = User::where('estate_id', $request->id)->count() ?? null;
-
-
-
-
 
 
 
@@ -116,6 +113,8 @@ class EstateController extends Controller
             'state' => $request->state,
             'city' => $request->city,
             'lga' => $request->lga,
+            'ptype' => $request->ptype,
+
         ]);
         return redirect('admin/estate')->with('message','Estate updated successfully');
     }

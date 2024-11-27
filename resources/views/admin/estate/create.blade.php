@@ -85,7 +85,22 @@
                                 <div class="col-xl-4 col-sm-12">
                                     <label class="my-2">LGA</label>
                                     <input type="text" name="lga" class="form-control" required>
+
+
                                 </div>
+
+
+
+                                <div class="col-xl-4 col-sm-12">
+                                    <label class="my-2">Payment Type</label>
+                                    <select type="text" name="ptype" class="form-control" required>
+                                        <option disabled selected>--Select type--</option>
+                                        <option value="1">APP Only</option>
+                                        <option value="2">Web Only</option>
+                                        <option value="3">App & Web</option>
+                                    </select>
+                                </div>
+
 
 
                             </div>
