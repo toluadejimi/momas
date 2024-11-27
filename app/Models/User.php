@@ -34,6 +34,7 @@ class User extends Authenticatable
         'estate_name',
         'estate_id',
         'status',
+        'google2fa_secret'
 
     ];
 
