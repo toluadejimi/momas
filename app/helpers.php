@@ -164,7 +164,6 @@ if (!function_exists('vend')) {
     {
 
 
-        dd($duration, $estate_id, $user_id);
         if ($duration == "daily") {
 
 
