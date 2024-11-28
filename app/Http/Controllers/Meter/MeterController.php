@@ -468,7 +468,7 @@ class MeterController extends Controller
                             'service_type' => "Token Purchase",
                             'service' => "Meter",
                             'status' => 3,
-                            'note' => $kct_response
+                            'note' => json_encode($kct_response)
 
 
                         ]);
@@ -560,9 +560,7 @@ class MeterController extends Controller
                         'service_type' => "Token Purchase",
                         'service' => "Meter",
                         'status' => 3,
-                        'note' => $no_kct_response
-
-
+                        'note' => json_encode($no_kct_response)
                     ]);
 
                     User::where('id', Auth::id())->increment('main_wallet', $trx->unit_amount);
