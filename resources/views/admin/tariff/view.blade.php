@@ -57,8 +57,8 @@
 
                                         <div class="modal-body">
 
-                                            <label class="my-1">Tariff Amount</label>
-                                            <input type="number" class="form-control mb-3" name="amount" required>
+                                            <label class="my-1">Tariff Amount %</label>
+                                            <input type="text" value="1.075" class="form-control mb-3" name="amount" required>
 
                                             <div class="col-12 my-3">
                                                 <label class="my-2">Choose Estate</label>
@@ -178,7 +178,7 @@
                                             <label class="my-1">Tariff Amount</label>
                                             <a href="#" data-bs-toggle="modal"
                                                data-bs-target="#updatestate{{$data->id}}">
-                                                <h6>{{number_format($data->amount, 2)}}</h6></a>
+                                                <h6>{{$data->amount}}</h6></a>
 
 
 
@@ -341,8 +341,8 @@
 
                                         <div class="modal-body">
 
-                                            <label class="my-1">Tariff Amount</label>
-                                            <input type="number" class="form-control mb-3" name="amount" required>
+                                            <label class="my-1">Tariff Amount %</label>
+                                            <input type="text" value="1.075" class="form-control mb-3" name="amount" required>
 
                                             <div class="row">
                                                 <div class="col-6">
@@ -448,7 +448,7 @@
                                             <label class="my-1">Tariff Amount</label>
                                             <a href="#" data-bs-toggle="modal"
                                                data-bs-target="#updatestate{{$data->id}}">
-                                                <h6>{{number_format($data->amount, 2)}}</h6></a>
+                                                <h6>{{$data->amount}}</h6></a>
 
 
 
@@ -472,7 +472,7 @@
                                                             <div class="modal-body">
 
                                                                 <label class="my-1">Tariff Amount</label>
-                                                                <input type="number" class="form-control mb-3"
+                                                                <input type="text" class="form-control mb-3"
                                                                        value="{{$data->amount}}" name="amount" required>
 
                                                                 <div class="row">

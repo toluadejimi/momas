@@ -10,6 +10,6 @@ class TarrifState extends Model
     use HasFactory;
 
     protected $casts = [
-        'amount' => 'integer',
+        'amount' => 'double',
     ];
 }
