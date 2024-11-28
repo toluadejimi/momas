@@ -56,7 +56,7 @@ class MeterController extends Controller
         // $data['meter_type'] = $meter_type;
 
         $es_id = $request->estateId ?? null;
-        $duration = Estate::where('estate_id', $es_id)->first()->duration ?? null;
+        $duration = Estate::where('id', $es_id)->first()->duration ?? null;
         $estate_id = $es_id;
         $user_id = $user->id;
 
