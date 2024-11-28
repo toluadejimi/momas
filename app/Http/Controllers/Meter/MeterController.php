@@ -234,6 +234,10 @@ class MeterController extends Controller
 
                         ]);
 
+
+                        User::where('id', Auth::id())->increment('main_wallet', $request->amount);
+
+
                         return response()->json([
 
                         'status' => false,
@@ -246,7 +250,6 @@ class MeterController extends Controller
 
             } else {
 
-                User::where('id', Auth::id())->increment('main_wallet', $amount);
                 return response()->json([
                     'status' => false,
                     'message' => "Meter vending failed, Retry again using your wallet"
@@ -327,6 +330,9 @@ class MeterController extends Controller
 
 
                     ]);
+
+                    User::where('id', Auth::id())->increment('main_wallet', $request->amount);
+
 
                     return response()->json([
                         'status' => false,
