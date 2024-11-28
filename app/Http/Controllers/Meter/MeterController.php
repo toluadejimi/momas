@@ -88,12 +88,14 @@ class MeterController extends Controller
         $min_pur = Estate::where('id', $request->estateId)->first()->min_pur ?? null;
         $max_pur = Estate::where('id', $request->estateId)->first()->max_pur ?? null;
         $data['min_purchase'] = (int)$min_pur;
-        $tariffs = Tariff::select('id', 'type', 'estate_id', 'title', 'vat')
+        $tariffs = Tariff::select('id', 'type', 'estate_id', 'title')
             ->where('user_id', $user->id)
             ->get();
         foreach ($tariffs as $tariff) {
             $tariffState = TarrifState::where('tariff_id', $tariff->id)->first();
             $tariff->amount = $tariffState ? $tariffState->amount : null;
+            $tariff->vat = $tariffState ? $tariffState->vat : null;
+
         }
 
         $data['tariffs'] = $tariffs;
