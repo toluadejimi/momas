@@ -198,6 +198,7 @@
                                         <th scope="col" class="cursor-pointer">Amount</th>
                                         <th scope="col" class="cursor-pointer">Type</th>
                                         <th scope="col" class="cursor-pointer">Status</th>
+                                        <th scope="col" class="cursor-pointer">Note</th>
                                         <th scope="col" class="cursor-pointer desc">Date</th>
 
 
@@ -224,6 +225,7 @@
                                                 @endif
 
                                             </td>
+                                            <td>{{$data->note}}</td>
                                             <td>{{$data->created_at}}</td>
 
                                         </tr>
