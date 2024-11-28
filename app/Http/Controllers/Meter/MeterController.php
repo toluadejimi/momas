@@ -196,7 +196,7 @@ class MeterController extends Controller
                             $met->status = 2;
                             $met->save();
 
-                            Transaction::where('trx_id', $trx)->update(['service_type' => "Token Purchase", 'service' => "Meter"]);
+                            Transaction::where('trx_id', $trx)->update(['service_type' => "Token Purchase", 'service' => "Meter", 'unit_amount' => $request->amount ]);
 
 
                             $data2['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
@@ -438,7 +438,6 @@ class MeterController extends Controller
                             $met->save();
 
                             Transaction::where('trx_id', $trx)->update(['service_type' => "Token Purchase", 'service' => "Meter", 'status' => 2]);
-
 
                             $data2['full_name'] = $user->first_name . " " . $user->last_name;
                             $data2['address'] = $user->address . "," . $user->city . "," . $user->state;
