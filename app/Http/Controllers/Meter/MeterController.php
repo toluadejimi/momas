@@ -34,7 +34,6 @@ class MeterController extends Controller
         $user = User::where('meterNo', $request->meterNo)->first() ?? null;
 
 
-        dd($user, $request->all());
 
 
         $meter = Meter::where('meterNo', $request->meterNo)->where('estate_id', $request->estateId)->first() ?? null;
@@ -46,7 +45,7 @@ class MeterController extends Controller
 
 
 
-        $get_tar = Tariff::where('user_id', $user->user_id)->first() ?? null;
+        $get_tar = Tariff::where('user_id', $user->id)->first() ?? null;
         if ($get_tar == null) {
             $message = "Tariff not properly configured";
             $code = 422;
