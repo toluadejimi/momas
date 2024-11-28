@@ -121,6 +121,13 @@ class MeterController extends Controller
         $amount = $request->amount;
         $meterNo = $request->meterNo;
         $trx = $request->trxref;
+        $utility_amount = $request->utility_amount;
+        $total_paid = $request->total_paid_amount;
+        $unit = $request->vend_amount_kw_per_naira;
+        $vendong_amount = $request->vending_amount;
+
+
+
 
         $tariff_index = Tariff::where('id', $request->tariff_id)->first()->tariff_index ?? null;
 
@@ -129,7 +136,7 @@ class MeterController extends Controller
             $utl = new UtilitiesPayment();
             $utl->user_id = Auth::id();
             $utl->estate_id = Auth::user()->estate_id;
-            $utl->amount = $request->min_vend_amount;
+            $utl->amount = $utility_amount;
             $utl->duration = $duration;
             $utl->status = 2;
             $utl->save();
@@ -144,7 +151,7 @@ class MeterController extends Controller
                 'meterNo' => Auth::user()->meterNo,
                 'sgc' => (int)$meter->OldSGC,
                 'ti' => $tariff_index, //TRARRRIF INDEX
-                'amount' => $request->amount,
+                'amount' => $unit,
             ];
             $response = Http::withOptions([
                 'verify' => false,
@@ -189,14 +196,15 @@ class MeterController extends Controller
                             $met->order_id = $trx;
                             $met->meterNo = $meterNo;
                             $met->token = $token;
-                            $met->amount = $request->amount;
+                            $met->amount = $vendong_amount;
+                            $met->unit = $unit;
                             $met->kct_tokens = $kct_data['tokens'][0] . "," . $kct_data['tokens'][1];
                             $met->vat = $vat;
                             $met->estate_id = Auth::user()->estate_id;
                             $met->status = 2;
                             $met->save();
 
-                            Transaction::where('trx_id', $trx)->update(['service' => "METER PURCHASE", 'service_type' => "meter", 'unit_amount' => $request->amount ]);
+                            Transaction::where('trx_id', $trx)->update(['service' => "METER PURCHASE", 'service_type' => "meter", 'unit_amount' => $vendong_amount ]);
 
 
                             $data2['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
@@ -204,7 +212,9 @@ class MeterController extends Controller
                             $data2['service'] = "MOMAS METER";
                             $data2['order_id'] = $trx;
                             $data2['token'] = $token;
-                            $data2['amount'] = $amount;
+                            $data2['amount'] = $total_paid;
+                            $data2['vending_amount'] = $vendong_amount;
+                            $data2['vend_amount_kw_per_naira'] = $unit;
                             $data2['kct_token1'] = $kct_data['tokens'][0];
                             $data2['kct_token2'] = $kct_data['tokens'][1];
 
@@ -229,7 +239,7 @@ class MeterController extends Controller
                             'service_type' => "meter",
                             'status' => 3,
                             'tariff_id' => $request->tariff_id,
-                            'unit_amount' => $request->amount,
+                            'unit_amount' => $vendong_amount,
                             'note' => $kct_response."| ". json_encode($databody)
 
                         ]);
@@ -292,21 +302,23 @@ class MeterController extends Controller
                     $met->order_id = $trx;
                     $met->meterNo = $meterNo;
                     $met->token = $no_kct_token;
-                    $met->amount = $request->amount;
+                    $met->amount = $vendong_amount;
+                    $met->unit = $unit;
                     $met->vat = $vat;
                     $met->estate_id = Auth::user()->estate_id;
                     $met->status = 2;
                     $met->save();
 
-                    Transaction::where('trx_id', $trx)->update(['service' => "METER PURCHASE", 'service_type' => "meter", 'unit_amount' => $request->amount ]);
-
+                    Transaction::where('trx_id', $trx)->update(['service' => "METER PURCHASE", 'service_type' => "meter", 'unit_amount' => $vendong_amount ]);
 
                     $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
                     $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
                     $data['service'] = "MOMAS METER";
                     $data['order_id'] = $trx;
                     $data['token'] = $no_kct_data['tokens'][0];
-                    $data['amount'] = $amount;
+                    $data['amount'] = $total_paid;
+                    $data['vending_amount'] = $vendong_amount;
+                    $data['vend_amount_kw_per_naira'] = $unit;
                     $email = Auth::user()->email;
                     $token = $no_kct_data['tokens'][0];
                     send_email_token($email, $token, $amount);
@@ -325,7 +337,7 @@ class MeterController extends Controller
                         'service_type' => "meter",
                         'status' => 3,
                         'tariff_id' => $request->tariff_id,
-                        'unit_amount' => $request->amount,
+                        'unit_amount' => $vendong_amount,
                         'note' => $no_kct_response. "|".json_encode($databody)
 
 
