@@ -47,7 +47,7 @@
 
                                     <h6 class="d-flex justify-content-start my-4">Customer Information</h6>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">First Name</label>
                                         <input type="text" value="{{$user->first_name}}" name="first_name"
                                                class="form-control" required>
@@ -58,44 +58,44 @@
 
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Last Name</label>
                                         <input type="text" value="{{$user->last_name}}" name="last_name"
                                                class="form-control" required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Email</label>
                                         <input type="email" disabled value="{{$user->email}}" name="email"
                                                class="form-control"
                                                required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Phone</label>
                                         <input type="number" value="{{$user->phone}}" name="phone" class="form-control"
                                                required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Estate</label>
                                         <input type="text" value="{{$estate_title}}" name="estate_title"
                                                class="form-control" required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Address</label>
                                         <input type="text" value="{{$user->address}}" name="address"
                                                class="form-control" required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">City</label>
                                         <input type="text" value="{{$user->city}}" name="city" class="form-control"
                                                required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">State</label>
                                         <select type="text" name="state" class="form-control" required>
                                             <option value="{{$user->state}}">{{$user->state}}</option>
@@ -141,13 +141,13 @@
 
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">LGA</label>
                                         <input type="text" value="{{$user->lga}}" name="lga" class="form-control"
                                                required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Designation</label>
                                         <input type="text" value="{{$user->desgination}}" name="desgination"
                                                class="form-control"
@@ -155,7 +155,7 @@
                                     </div>
 
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Status</label>
                                         <select type="text" name="status" class="form-control" required>
                                             @if($user->status == 2)
@@ -175,7 +175,7 @@
 
                                 </div>
 
-                                <button type="submit" class="col-3 d-flex btn btn-primary my-3">
+                                <button type="submit" class="col-xl-3 col-sm-12 d-flex btn btn-primary my-3">
                                     Update Customer Information
                                 </button>
 
@@ -206,13 +206,12 @@
                                                     <span
                                                         class="badge text-bg-danger">{{$user->meterNo}}</span>
                                                 @else
-                                                    <span class="badge text-bg-danger">"No meter found"</span>
+                                                    <span class="badge text-bg-danger">No meter found</span>
                                                 @endif
 
 
-
                                                 <input type="text" name="meterNo"
-                                                       value="{{$user->meterNo ?? "Select Meter"}}" id="searchMeter"
+                                                       value="{{$user->meterNo }}" id="searchMeter"
                                                        placeholder="Type meter number..." class="form-control" required
                                                        autocomplete="off">
                                                 <div id="meterResult" class="search-result"></div>
@@ -284,11 +283,23 @@
 
                                             </div>
 
-                                            <div class="col-xl-3 col-sm-12">
-                                                <button type="submit" class="col-12 d-flex w-100 btn btn-primary my-3">
-                                                    Update
-                                                </button>
-                                            </div>
+
+
+                                            @if($user->meterNo == null)
+
+                                                <div class="col-xl-3 col-sm-12">
+                                                    <button type="submit" class="col-12 d-flex w-100 btn btn-primary my-3">
+                                                        Update
+                                                    </button>
+                                                </div>
+
+                                            @else
+                                                <a href="detach-meter?meterNo={{$user->meterNo}}" class="col-4 d-flex  btn btn-danger my-3">
+                                                    Detach Meter
+                                                </a>
+                                            @endif
+
+
                                         </div>
 
                                     </form>
@@ -354,14 +365,14 @@
                                     <li class="nav-item" role="presentation">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#navpills2-home"
                                            role="tab">
-                                            <span class="d-block d-sm-none"><i class="mdi mdi-home-account"></i></span>
+                                            <span class="d-block d-sm-none"><i class="mdi mdi-cog"></i></span>
                                             <span class="d-none d-sm-block">Tokens</span>
                                         </a>
                                     </li>
 
                                     <li class="nav-item" role="presentation">
                                         <a class="nav-link" data-bs-toggle="tab" href="#navpills2-messages" role="tab">
-                                            <span class="d-block d-sm-none"><i class="mdi mdi-email-outline"></i></span>
+                                            <span class="d-block d-sm-none"><i class="mdi mdi-cog"></i></span>
                                             <span class="d-none d-sm-block">KCT Tokens</span>
                                         </a>
                                     </li>
@@ -390,6 +401,7 @@
                                                              aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
+
                                                                     <div class="modal-header">
                                                                         <h1 class="modal-title fs-5"
                                                                             id="staticBackdropLabel">Generate Meter
@@ -398,6 +410,7 @@
                                                                                 data-bs-dismiss="modal"
                                                                                 aria-label="Close"></button>
                                                                     </div>
+
 
                                                                     <form action="generate-token" method="POST"
                                                                           enctype="multipart/form-data">
@@ -499,10 +512,15 @@
                                                         </div>
                                                     </div> <!-- end card -->
                                                 </div> <!-- end col -->
-                                                <a href="#" data-bs-toggle="modal"
-                                                   data-bs-target="#staticBackdrop"
-                                                   class="btn btn-primary text-white justify-content-end">Generate new
-                                                    Meter Token</a>
+                                                @if($ptype == 1)
+                                                @else
+                                                    <a href="#" data-bs-toggle="modal"
+                                                       data-bs-target="#staticBackdrop"
+                                                       class="btn btn-primary text-white justify-content-end">Generate
+                                                        new
+                                                        Meter Token</a>
+                                                @endif
+
                                             </div>
                                             <div class="card-body">
                                                 <table id="datatable"
@@ -608,12 +626,16 @@
                                                                         <div class="modal-body">
 
                                                                             <label class="my-2">Meter No</label>
-                                                                            <input class="form-control mb-3" disabled name="meterNo" value="{{$meter->meterNo ?? "No meter attached"}}">
-                                                                            <input  hidden name="meterNo" value="{{$meter->meterNo ?? "No meter attached"}}">
-                                                                            <input  hidden name="user_id" value="{{$user->id}}">
+                                                                            <input class="form-control mb-3" disabled
+                                                                                   name="meterNo"
+                                                                                   value="{{$meter->meterNo ?? "No meter attached"}}">
+                                                                            <input hidden name="meterNo"
+                                                                                   value="{{$meter->meterNo ?? "No meter attached"}}">
+                                                                            <input hidden name="user_id"
+                                                                                   value="{{$user->id}}">
 
 
-                                                                        @if($meter_count == 0)
+                                                                            @if($meter_count == 0)
 
                                                                             @else
                                                                                 <div class="row">
@@ -666,7 +688,8 @@
                                                                             </button>
                                                                             @if($meter_count != 0 && $tariff_count != 0)
                                                                                 <button type="submit"
-                                                                                        class="btn btn-primary">Generate KCT Tokens
+                                                                                        class="btn btn-primary">Generate
+                                                                                    KCT Tokens
                                                                                 </button>
                                                                             @else
 
@@ -699,7 +722,6 @@
                                                         <th scope="col" class="cursor-pointer">KCT TOKENS</th>
                                                         <th scope="col" class="cursor-pointer">Action</th>
                                                         <th scope="col" class="cursor-pointer">Date/Time</th>
-
 
 
                                                     </tr>
@@ -766,27 +788,44 @@
                                                                      style="position: relative;">
 
                                                                     <h6 class="mb-4">NEPA TARIFF <span
-                                                                            class="badge text-bg-secondary">{{$nepa_tariff_title ?? "Set Tariff"}}</span>
+                                                                            class="badge text-bg-secondary">{{$nepa_tariff_title   ?? "Set Tariff"}} | ID - {{$tariff_index_nepa ?? " "}}</span>
+                                                                    </h6>
 
-                                                                        <select class="form-control my-3" name="id">
+                                                                    <select class="form-control my-3" name="id">
 
-                                                                            @foreach($tariff as $data)
-                                                                                <option
-                                                                                    value="{{$data->id}}">{{$data->title}}
-                                                                                    -
-                                                                                    ₦{{$data->estate_tariff_cost}}</option>
-                                                                            @endforeach
+                                                                        @foreach($tariff as $data)
+                                                                            <option
+                                                                                value="{{$data->id}}">{{$data->title}}
+                                                                                |
+                                                                                ID - {{$data->tariff_index}}</option>
+                                                                        @endforeach
 
-                                                                            <input name="user_id" hidden
-                                                                                   value="{{$user->id}}">
+                                                                        <input name="user_id" hidden
+                                                                               value="{{$user->id}}">
 
 
-                                                                        </select>
+                                                                    </select>
+
+
+                                                                    @if($tariff_count_nepa == 0)
 
                                                                         <button type="submit"
                                                                                 class="col-12 d-flex w-100 btn btn-primary my-3">
-                                                                            Update Tariff Information
+                                                                            Attach Tariff
                                                                         </button>
+
+                                                                    @else
+
+                                                                        <a href="detach-nepa-tariff?id={{$tariff_id_nepa}}" class="col-12 d-flex w-100 btn btn-danger my-3">
+                                                                            Detach  Tariff
+                                                                        </a>
+
+
+
+                                                                    @endif
+
+
+
 
                                                                 </div>
 
@@ -812,22 +851,42 @@
                                                                      style="position: relative;">
 
                                                                     <h6 class="mb-4">GENERATOR TARIFF <span
-                                                                            class="badge text-bg-secondary">{{$gen_tariff_title ?? "Set Tariff"}}</span>
+                                                                            class="badge text-bg-secondary">{{$gen_tariff_title   ?? "Set Tariff"}} | ID - {{$tariff_index_gen ?? " "}}</span>
+                                                                    </h6>
 
-                                                                        <select class="form-control my-3" name="tariff">
+                                                                    <select class="form-control my-3" name="tariff">
 
-                                                                            @foreach($tariff as $data)
-                                                                                <option
-                                                                                    value="{{$data->id}}">{{$data->title}}</option>
-                                                                            @endforeach
+                                                                        @foreach($tariff as $data)
+                                                                            <option
+                                                                                value="{{$data->id}}">{{$data->title}}
+                                                                                |
+                                                                                ID - {{$data->tariff_index}}</option>
+                                                                        @endforeach
 
 
-                                                                        </select>
+                                                                    </select>
+
+
+                                                                    <input name="user_id" hidden
+                                                                           value="{{$user->id}}">
+
+
+                                                                    @if($tariff_count_gen == 0)
 
                                                                         <button type="submit"
                                                                                 class="col-12 d-flex w-100 btn btn-primary my-3">
-                                                                            Update Tariff information
+                                                                            Attach Tariff
                                                                         </button>
+
+                                                                    @else
+
+                                                                        <a href="detach-gen-tariff?id={{$tariff_id_gen}}" class="col-12 d-flex w-100 btn btn-danger my-3">
+                                                                            Detach  Tariff
+                                                                        </a>
+
+
+
+                                                                    @endif
 
                                                                 </div>
 

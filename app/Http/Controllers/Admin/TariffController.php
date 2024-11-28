@@ -25,10 +25,11 @@ class TariffController extends Controller
 
         if(auth::user()->role == 0){
 
-            $data['tariff_list'] = Tariff::paginate(20);
+            $data['tariff_list'] = Tariff::latest()->paginate(20);
             $data['tariffis'] = Tariff::all();
             $data['tarifftariffis'] = Tariff::count();
             $data['estate'] = Estate::all();
+
 
 
             return view('admin/tariff/index', $data);
@@ -41,9 +42,10 @@ class TariffController extends Controller
 
         } elseif(auth::user()->role == 3){
 
-            $data['tariff_list'] = Tariff::where('estate_id', auth::user()->estate_id)->get();
-            $data['tariffis'] = Tariff::latest()->where('estate_id', auth::user()->estate_id)->get();
+            $data['tariff_list'] = Tariff::latest()->where('estate_id', auth::user()->estate_id)->get();
+            $data['tariffis'] = Tariff::latest()->latest()->where('estate_id', auth::user()->estate_id)->get();
             $data['tarifftariffis'] = Tariff::where('estate_id', auth::user()->estate_id)->count();
+            $data['estate']  = Estate::all();
 
             return view('admin/tariff/index', $data);
 
@@ -65,7 +67,9 @@ class TariffController extends Controller
     public function new_tariff(request $request)
     {
 
-        return view('admin.tariff.new-tariff');
+
+        $data['estate']  = Estate::all();
+        return view('admin.tariff.new-tariff', $data);
 
     }
 
@@ -73,6 +77,8 @@ class TariffController extends Controller
 
     public function add_new_Tariff(request $request)
     {
+
+
 
 
         $ck = Tariff::where('title', $request->title)->first() ?? null;
@@ -109,13 +115,16 @@ class TariffController extends Controller
         $tr->title = $request->title;
         $tr->estate_id = $request->estate_id;
         $tr->status = 2;
+        $tr->tariff_index = $request->tariff_index;
         $tr->save();
 
         $tr = Tariff::where('id', $tr->id)->first();
         $tstate = TarrifState::where('tariff_id', $request->id)->get();
         $effictive_date = TarrifState::where('tariff_id', $request->id)->where('status', 2)->first()->effective_from ?? null;
+        $estate  = Estate::all();
 
-        return view('admin.tariff.view', compact('tr','tstate','effictive_date'));
+
+        return view('admin.tariff.view', compact('tr','tstate','effictive_date','estate'));
 
 
     }
@@ -164,8 +173,9 @@ class TariffController extends Controller
         $tr = Tariff::where('id', $tr->id)->first();
         $tstate = TarrifState::where('tariff_id', $request->id)->get();
         $effictive_date = TarrifState::where('tariff_id', $request->id)->where('status', 2)->first()->effective_from ?? null;
+        $estate  = Estate::all();
 
-        return view('admin.tariff.view', compact('tr','tstate','effictive_date'));
+        return view('admin.tariff.view', compact('tr','tstate','effictive_date','estate'));
 
 
     }
@@ -292,10 +302,30 @@ class TariffController extends Controller
 
     public function update_gen(request $request)
     {
-        Tariff::where('id', $request->id)->update(['user_id' => $request->user_id, 'type' => "gen"]);
+
+        Tariff::where('id', $request->tariff)->update(['user_id' => $request->user_id, 'type' => "gen"]);
         return back()->with('message', "User Tariff has been updated");
 
     }
+
+
+    public function detach_gen_tariff(request $request)
+    {
+        Tariff::where('id', $request->id)->update(['user_id' => null, 'type' => "gen"]);
+        return back()->with('message', "Detach Tariff successful");
+
+    }
+
+
+    public function detach_nepa_tariff(request $request)
+    {
+        Tariff::where('id', $request->id)->update(['user_id' => null, 'type' => "nepa"]);
+        return back()->with('message', "Detach Tariff successful");
+
+    }
+
+
+
 
 
 

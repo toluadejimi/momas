@@ -189,43 +189,47 @@
 
                     <div class="card " style="background: #f3ffff">
                         <div class="card-body">
-                            <form action="estate-update-tariff" method="post">
+                            <form action="estate-update-vat" method="post">
                                 @csrf
 
+
+                                <h6 class="d-flex justify-content-start my-4">Vat Information</h6>
+
+
+                                <div class="col-xl-3 col-sm-12">
+                                    <label class="my-2">VAT % </label>
+                                    <input type="text" step="0.01" name="vat" value="{{$org->estate_vat }}"
+                                           class="form-control"
+                                           required>
+
+                                    <input type="text"  name="estate_id"
+                                           value="{{$org->id}}"
+                                           hidden>
+
+
+                                </div>
+
+
+                                <button type="submit" class="col-xl-2 col-sm-12 my-2 d-flex btn btn-primary">
+                                    Update
+                                </button>
+
+                            </form>
+
+                            <hr class="my-4">
+
+
+                            <form action="estate-update-minpur" method="post">
+                                @csrf
+
+
+                                <h6 class="d-flex justify-content-start my-4">MIN/MAX PURCHASE Information</h6>
+
                                 <div class="row">
-
-                                    <h6 class="d-flex justify-content-start my-4">Tariff Information</h6>
-
-                                    <div class="col-4">
-                                        <label class="my-2">Tariff Amount</label>
-                                        <input type="number" step="0.01" name="amount"
-                                               value="{{$tar->estate_tariff_cost ?? 0}}"
-                                               class="form-control"
-                                               required>
-
-                                        <input hidden name="id" value="{{$org->id}}" class="form-control" required>
-
-
-                                    </div>
-
-
-                                    <div class="col-4">
-                                        <label class="my-2">VAT</label>
-                                        <input type="number" step="0.01" name="vat" value="{{$tar->vat ?? 0}}"
-                                               class="form-control"
-                                               required>
-
-
-                                    </div>
-
-                                    <hr class="my-4">
-
-                                    <h6 class="d-flex justify-content-start my-4">MIN/MAX PURCHASE Information</h6>
-
-
-                                    <div class="col-4">
+                                    <div class="col-xl-4 col-sm-12">
                                         <label class="my-2">MIN Purchase</label>
-                                        <input type="number" step="0.01" name="min_pur" value="{{$tar->min_pur ?? 0}}"
+                                        <input type="number" step="0.01" name="min_pur"
+                                               value="{{$org->min_pur ?? 1000}}"
                                                class="form-control"
                                                required>
 
@@ -233,21 +237,26 @@
                                     </div>
 
 
-                                    <div class="col-4">
+                                    <div class="col-xl-4 col-sm-12">
                                         <label class="my-2">MAX Purchase</label>
-                                        <input type="number" step="0.01" name="max_pur" value="{{$tar->max_pur ?? 0}}"
+                                        <input type="number" step="0.01" name="max_pur"
+                                               value="{{$org->max_pur ?? 1000000}}"
                                                class="form-control"
                                                required>
 
+
+                                        <input type="text"  name="estate_id"
+                                               value="{{$org->id}}"
+                                               hidden>
 
                                     </div>
 
 
                                 </div>
 
-                                <hr class="my-4">
 
-                                <button type="submit" class="col-2 d-flex btn btn-primary">
+
+                                <button type="submit" class="col-xl-2 col-sm-12 my-2 d-flex btn btn-primary">
                                     Update
                                 </button>
 
@@ -257,100 +266,46 @@
                     </div>
 
 
+
                 </div>
 
 
-                <div class="row">
+                    <div class="row">
 
-                    <div class="card" style="background: #d1fff1">
+                        <div class="card" style="background: #d1fff1">
 
-                        <div class="card-body">
+                            <div class="card-body">
 
 
-                            <div class="d-flex justify-content-between my-4">
-                                <h6 class="">Utilities Information</h6>
-                                <h6 class="mb-0">Total Utilities <span
-                                        class="badge text-bg-secondary">NGN {{number_format($total_utility, 2)}}</span>
-                                </h6>
+                                <div class="d-flex justify-content-between my-4">
+                                    <h6 class="">Utilities Information</h6>
+                                    <h6 class="mb-0">Total Utilities <span
+                                            class="badge text-bg-secondary">NGN {{number_format($total_utility, 2)}}</span>
+                                    </h6>
 
-                                @if($utl != null)
-                                    @if($utl->duration != null)
-                                        <h6 class="mb-0">Duration <span
-                                                class="badge text-bg-danger">{{strtoupper($utl->duration)}}</span>
-                                        </h6>
+                                    @if($utl != null)
+                                        @if($utl->duration != null)
+                                            <h6 class="mb-0">Duration <span
+                                                    class="badge text-bg-danger">{{strtoupper($utl->duration)}}</span>
+                                            </h6>
+                                        @else
+                                            <h6 class="mb-0">Duration <span class="badge text-bg-secondary">Set Duration</span>
+                                            </h6>
+                                        @endif
+
                                     @else
-                                        <h6 class="mb-0">Duration <span
-                                                class="badge text-bg-secondary">Set Duration</span>
-                                        </h6>
+
+
                                     @endif
-
-                                @else
-
-
-                                @endif
-                            </div>
+                                </div>
 
 
-                            <hr class="my-2">
+                                <hr class="my-2">
 
+                                <form action="update-duration" method="POST" class="">
+                                    @csrf
 
-                            @if($utility != null)
-
-                                <h6 class="my-3">Available Utilities</h6>
-
-                                @foreach($utility as $index => $data)
-
-                                    <form action="update-utility" method="get" class="row">
-                                        @csrf
-                                        <input type="hidden" name="id" value="{{$data->id}}"
-                                               required>
-                                        <div class="col-xl-4 col-sm-12 my-1">
-                                            <label class="my-1">Utility</label>
-                                            <input type="text" name="title" id="title_{{$index}}"
-                                                   class="form-control" value="{{$data->title}}"
-                                                   required>
-                                        </div>
-
-                                        <div class="col-xl-4 col-sm-12 my-1">
-                                            <label class="my-1">Amount</label>
-                                            <input type="text" name="amount" id="amount_{{$index}}"
-                                                   class="form-control" value="{{$data->amount}}"
-                                                   required>
-                                        </div>
-
-                                        <div class="col-xl-4 col-sm-12 my-4">
-                                            <button type="submit" class="btn btn-primary">Update
-                                            </button>
-                                            <a href="delete-utility?id={{$data->id}}"
-                                               class="btn btn-danger"
-                                               onsubmit="return confirmDelete();"> Delete</a>
-
-                                        </div>
-                                        <script>
-
-                                            function confirmDelete() {
-                                                return confirm('Are you sure you want to delete this item?');
-                                            }
-                                        </script>
-                                    </form>
-
-                                @endforeach
-
-                            @else
-                                <p>No utilities available.</p>
-                            @endif
-
-
-                            <hr class="my-2">
-
-
-                            <form id="utility-form" action="estate-update-utilities" method="post">
-                                @csrf
-
-                                <div class="row">
-
-
-                                    <div class="col-6 mb-3">
+                                    <div class="col-xl-4 col-sm-12">
                                         <h6 class="my-3">Add New Utility</h6>
 
                                         <label class="my-2">Set Duration</label>
@@ -361,101 +316,162 @@
                                             <option value="yearly">Yearly</option>
 
                                         </select>
+
+                                        <input hidden name="id" value="{{$org->id ?? "id" }}"
+                                               class="form-control"
+                                               required>
+
                                     </div>
 
-                                    <!-- Container to hold dynamic fields -->
-                                    <div id="utility-fields"></div>
+                                    <button type="submit" class="btn btn-primary my-3">Update duration
+                                    </button>
 
-                                    <!-- Add more button -->
-                                    <div class="col-12 my-4">
-                                        <button type="button" class="btn btn-success" id="add-more">
-                                            Add Utility
-                                        </button>
-                                    </div>
 
-                                    <!-- Hidden template for the new fields -->
-                                    <div id="template" class="d-none">
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <label class="my-2">Title</label>
-                                                <input type="text" name="title[]"
-                                                       class="form-control"
+                                </form>
+
+
+                                <hr class="my-4">
+
+
+                                @if($utility != null)
+
+                                    <h6 class="my-3">Available Utilities</h6>
+
+
+
+
+
+
+                                    @foreach($utility as $index => $data)
+
+                                        <form action="update-utility" method="get" class="row">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{$data->id}}"
+                                                   required>
+                                            <div class="col-xl-4 col-sm-12 my-1">
+                                                <label class="my-1">Utility</label>
+                                                <input type="text" name="title" id="title_{{$index}}"
+                                                       class="form-control" value="{{$data->title ?? "name"}}"
                                                        required>
                                             </div>
-                                            <div class="col-4">
-                                                <label class="my-2">Amount</label>
-                                                <input type="text" name="amount[]"
-                                                       class="form-control"
+
+                                            <div class="col-xl-4 col-sm-12 my-1">
+                                                <label class="my-1">Amount</label>
+                                                <input type="text" name="amount" id="amount_{{$index}}"
+                                                       class="form-control" value="{{$data->amount}}"
                                                        required>
+                                            </div>
+
+                                            <div class="col-xl-4 col-sm-12 my-4">
+                                                <button type="submit" class="btn btn-primary">Update
+                                                </button>
+                                                <a href="delete-utility?id={{$data->id}}"
+                                                   class="btn btn-danger"
+                                                   onsubmit="return confirmDelete();"> Delete</a>
+
+                                            </div>
+                                            <script>
+
+                                                function confirmDelete() {
+                                                    return confirm('Are you sure you want to delete this item?');
+                                                }
+                                            </script>
+                                        </form>
+
+                                    @endforeach
+
+                                @else
+                                    <p>No utilities available.</p>
+                                @endif
+
+
+                                <hr class="my-2">
+
+
+                                <form id="utility-form" action="estate-update-utilities" method="post">
+                                    @csrf
+
+                                    <div class="row">
+
+
+                                        <!-- Container to hold dynamic fields -->
+                                        <div id="utility-fields"></div>
+
+                                        <!-- Add more button -->
+                                        <div class="col-12 my-4">
+                                            <button type="button" class="btn btn-success" id="add-more">
+                                                Add Utility
+                                            </button>
+                                        </div>
+
+                                        <!-- Hidden template for the new fields -->
+                                        <div id="template" class="d-none">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <label class="my-2">Title</label>
+                                                    <input type="text" name="title[]"
+                                                           class="form-control"
+                                                           required>
+                                                </div>
+                                                <div class="col-4">
+                                                    <label class="my-2">Amount</label>
+                                                    <input type="number" name="amount[]"
+                                                           class="form-control"
+                                                           required>
+                                                </div>
                                             </div>
                                         </div>
+
+                                        <input type="hidden" id="utilities-data" name="utilities_data">
+
+                                        <hr class="my-4">
+
+                                        <button style="width: 200px" type="button"
+                                                class="btn btn-primary w-40" id="save">Save Utility
+                                        </button>
                                     </div>
+                                </form>
 
-                                    <!-- Hidden input to hold all the utilities data -->
-                                    <input type="hidden" id="utilities-data" name="utilities_data">
+                                <script>
+                                    let utilities = [];
 
-                                    <hr class="my-4">
+                                    document.getElementById('add-more').addEventListener('click', function () {
+                                        var template = document.getElementById('template').cloneNode(true);
+                                        template.classList.remove('d-none');
+                                        template.removeAttribute('id');
 
-                                    <!-- Save Button to submit the form -->
-                                    <button style="width: 200px" type="button"
-                                            class="btn btn-primary w-40" id="save">Save Utility
-                                    </button>
-                                </div>
-                            </form>
+                                        document.getElementById('utility-fields').appendChild(template);
+                                    });
 
-                            <!-- JavaScript to handle adding fields and saving the data -->
-                            <script>
-                                let utilities = [];
 
-                                // Add More functionality
-                                document.getElementById('add-more').addEventListener('click', function () {
-                                    // Clone the template
-                                    var template = document.getElementById('template').cloneNode(true);
-                                    template.classList.remove('d-none');
-                                    template.removeAttribute('id');
+                                    document.getElementById('save').addEventListener('click', function () {
+                                        let titles = document.querySelectorAll('input[name="title[]"]');
+                                        let amounts = document.querySelectorAll('input[name="amount[]"]');
 
-                                    // Append the cloned fields to the utility fields container
-                                    document.getElementById('utility-fields').appendChild(template);
-                                });
+                                        utilities = [];
 
-                                // Save functionality
-                                document.getElementById('save').addEventListener('click', function () {
-                                    // Get all the dynamic fields
-                                    let titles = document.querySelectorAll('input[name="title[]"]');
-                                    let amounts = document.querySelectorAll('input[name="amount[]"]');
+                                        for (let i = 0; i < titles.length; i++) {
+                                            utilities.push({
+                                                title: titles[i].value,
+                                                amount: amounts[i].value
+                                            });
+                                        }
 
-                                    // Clear the previous utilities data
-                                    utilities = [];
+                                        console.log("Utilities Data: ", utilities);
+                                        document.getElementById('utilities-data').value = JSON.stringify(utilities);
+                                        console.log("Hidden Input Value: ", document.getElementById('utilities-data').value);
+                                        document.getElementById('utility-form').submit();
+                                    });
+                                </script>
 
-                                    // Loop through each input and store the data in an array
-                                    for (let i = 0; i < titles.length; i++) {
-                                        utilities.push({
-                                            title: titles[i].value,
-                                            amount: amounts[i].value
-                                        });
-                                    }
 
-                                    // Check the result in the console
-                                    console.log("Utilities Data: ", utilities);
-
-                                    // Save the data in a hidden input as a JSON string
-                                    document.getElementById('utilities-data').value = JSON.stringify(utilities);
-
-                                    // Debugging: Check if the hidden input is being populated
-                                    console.log("Hidden Input Value: ", document.getElementById('utilities-data').value);
-
-                                    // Now submit the form after setting the value
-                                    document.getElementById('utility-form').submit();
-                                });
-                            </script>
+                            </div>
 
 
                         </div>
 
 
                     </div>
-
-                </div>
 
 
             </div>
@@ -469,6 +485,7 @@
 
 
     @elseif(auth::user()->role == 3)
+
 
 
     @elseif(auth::user()->role == 4)

@@ -221,6 +221,14 @@ class RegisterController extends Controller
         }
 
 
+        $ptype = Meter::where('meterNo', $request->meterNo)->first()->ptype ?? null;
+        if($ptype == 2){
+            $code = 422;
+            $message = "You can not register at the moment. Kindly visit your estate manager for further instruction";
+            return error($message, $code);
+        }
+
+
 
         $estate_name = Estate::where('id', $gm->estate_id)->first()->first()->title ?? null;
 

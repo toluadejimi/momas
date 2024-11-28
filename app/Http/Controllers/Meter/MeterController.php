@@ -118,6 +118,9 @@ class MeterController extends Controller
         $meterNo = $request->meterNo;
         $trx = $request->trxref;
 
+        $tariff_index = Tariff::where('id', $request->tariff_id)->first()->tariff_index ?? null;
+
+
 
         $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first()->duration;
         if ($request->min_vend_amount != 0) {
@@ -134,14 +137,11 @@ class MeterController extends Controller
         $meter = Meter::where('MeterNo', $meterNo)->first() ?? null;
 
         if ($meter != null && $meter->NeedKCT == "on") {
-
-
-
             $databody = [
                 'meterType' => $meter->KRN1,
                 'meterNo' => Auth::user()->meterNo,
                 'sgc' => (int)$meter->OldSGC,
-                'ti' => 1, //TRARRRIF INDEX
+                'ti' => $tariff_index, //TRARRRIF INDEX
                 'amount' => $request->amount,
             ];
             $response = Http::withOptions([
@@ -163,7 +163,7 @@ class MeterController extends Controller
                         'meterNo' => Auth::user()->meterNo,
                         'sgc' => (int)$meter->OldSGC,
                         'tosgc' => (int)$meter->NewSGC,
-                        'ti' => 1,
+                        'ti' => $tariff_index,
                         'toti' => 1,
                         'allow' => false,
                         'allowkrn' => true,
@@ -841,6 +841,20 @@ class MeterController extends Controller
         return back()->with('error', "An error occured");
 
     }
+
+
+    public
+    function detach_meter(request $request)
+    {
+
+        Meter::where('meterNo', $request->meterNo)->update(['user_id' => null]);
+        User::where('meterNo', $request->meterNo)->update(['meterNo' => null]);
+
+        return back()->with('message', 'Meter has been successfully detached');
+
+    }
+
+
 
 
 }

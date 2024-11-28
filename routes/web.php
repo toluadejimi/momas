@@ -114,6 +114,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('service-delete', [EstateServiceController::class, 'delete_service']);
     Route::get('service-deactivate', [EstateServiceController::class, 'deactivate_service']);
     Route::get('service-activate', [EstateServiceController::class, 'activate_service']);
+    Route::post('estate-update-vat', [EstateServiceController::class, 'estate_update_vat']);
+    Route::post('estate-update-minpur', [EstateServiceController::class, 'estate_update_minpur']);
+
+
+
+
 
 
     //Access TOken
@@ -202,10 +208,21 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::post('update-nepa', [TariffController::class, 'update_nepa']);
     Route::post('update-gen', [TariffController::class, 'update_gen']);
 
+    Route::get('detach-gen-tariff', [TariffController::class, 'detach_gen_tariff']);
+    Route::get('detach-nepa-tariff', [TariffController::class, 'detach_nepa_tariff']);
+
+
+
+
 
     //Meter Token
     Route::post('generate-kct-token', [MeterController::class, 'generate_kct_token']);
     Route::post('generate-token', [MeterController::class, 'generate_meter_token']);
+    Route::get('detach-meter', [MeterController::class, 'detach_meter']);
+
+
+
+
 
 
     //REPORT

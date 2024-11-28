@@ -552,6 +552,7 @@ class DashboardContoller extends Controller
         $data['kcttokens'] = KctMeterToken::where('user_id', $request->id)->get();
         $data['meter'] = Meter::where('user_id', $request->id)->first() ?? null;
         $data['estate_title'] = Estate::where('id', $data['user']->estate_id)->first()->title ?? null;
+        $data['ptype'] = Estate::where('id', $data['user']->estate_id)->first()->ptype ?? null;
 
 
 
@@ -559,6 +560,19 @@ class DashboardContoller extends Controller
         $data['tariff'] = Tariff::where('estate_id', $data['user']->estate_id)->where('user_id', null)->get();
         $data['nepa_tariff_title'] = Tariff::where('user_id', $request->id)->where('type', "nepa")->first()->title ?? null;
         $data['gen_tariff_title'] = Tariff::where('user_id', $request->id)->where('type', "gen")->first()->title ?? null;
+        $data['tariff_index_nepa'] = Tariff::where('user_id', $request->id)->where('type', "nepa")->first()->tariff_index ?? null;
+        $data['tariff_index_gen'] = Tariff::where('user_id', $request->id)->where('type', "gen")->first()->tariff_index ?? null;
+
+
+
+        $data['tariff_count_nepa'] = Tariff::where('user_id', $request->id)->where('type', "nepa")->count() ?? null;
+        $data['tariff_count_gen'] = Tariff::where('user_id', $request->id)->where('type', "gen")->count() ?? null;
+
+
+        $data['tariff_id_nepa'] = Tariff::where('user_id', $request->id)->where('type', "nepa")->first()->id ?? null;
+        $data['tariff_id_gen'] = Tariff::where('user_id', $request->id)->where('type', "gen")->first()->id ?? null;
+
+
 
         $data['percentage'] = SpreadPayment::where('user_id', $request->id)->first()->percentage ?? null;
 

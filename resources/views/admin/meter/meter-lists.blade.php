@@ -147,7 +147,6 @@
                                         @endif
 
                                         <th scope="col" class="cursor-pointer desc">Action</th>
-                                        <th scope="col" class="cursor-pointer desc">Action</th>
 
 
 
@@ -213,6 +212,11 @@
 
                                                 </td>
                                             @endif
+
+
+
+
+
                                         </tr>
 
                                     @endforeach

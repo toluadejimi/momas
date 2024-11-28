@@ -106,7 +106,7 @@
                                     @foreach($tariffis as $data)
 
                                         <tr>
-                                            <td>{{$data->id}}</td>
+                                            <td>{{$data->tariff_index}}</td>
                                             <td><a href="view-tariff?id={{$data->id}}">{{$data->title ?? "name"}}</a> </td>
                                             <td>{{$data->estate->title ?? "name"}}</td>
                                             <td>
@@ -257,7 +257,7 @@
                                     @foreach($tariffis as $data)
 
                                         <tr>
-                                            <td>{{$data->id}}</td>
+                                            <td>{{$data->tariff_index}}</td>
                                             <td><a href="view-tariff?id={{$data->id}}">{{$data->title ?? "name"}}</a> </td>
                                             <td>{{$data->estate->title ?? "name"}}</td>
                                             <td>

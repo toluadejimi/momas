@@ -168,6 +168,28 @@ class EstateServiceController extends Controller
     }
 
 
+    public function estate_update_vat(request $request)
+    {
+
+        Estate::where('id', $request->estate_id)->update(['estate_vat' => $request->vat]);
+        return back()->with('message', "Estate Vat updated successfully");
+
+    }
+
+
+    public function estate_update_minpur(request $request)
+    {
+        Estate::where('id', $request->estate_id)->update(['min_pur' => $request->min_pur,  'max_pur' => $request->max_pur,]);
+        return back()->with('message', "Estate MIN/MAX Purchase updated successfully");
+
+    }
+
+
+
+
+
+
+
 
 
 

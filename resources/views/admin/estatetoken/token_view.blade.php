@@ -152,7 +152,7 @@
                                         <tr>
                                             <td>{{$data->user->first_name}}  {{$data->user->last_name}}</td>
                                             <td>{{$data->token}}</td>
-                                            <td>{{$data->estate->title}}</td>
+                                            <td>{{$data->estate->title ?? "NAME"}}</td>
                                             <td>{{$data->visitor}}</td>
                                             @if($data->email != null)
                                                 <td>{{$data->email}}</td>

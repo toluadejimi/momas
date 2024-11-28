@@ -412,6 +412,34 @@
 
                                                 </div>
 
+
+                                                <div class="col-xl-3 col-sm-12">
+                                                    <label class="my-2">Payment Type</label>
+                                                    <select type="text" disabled name="ptype" class="form-control"
+                                                            required>
+                                                        @if($org->ptype == null)
+                                                            <option value="">--select type---</option>
+                                                            {{--                                                            <option value="1">APP Only</option>--}}
+                                                            {{--                                                            <option value="2">Web Only</option>--}}
+                                                            {{--                                                            <option value="3">App & Web</option>--}}
+                                                        @elseif($org->ptype == 1)
+                                                            <option value="1">APP Only</option>
+                                                            {{--                                                        <option value="2">Web Only</option>--}}
+                                                            {{--                                                        <option value="3">App & Web</option>--}}
+                                                        @elseif($org->ptype == 2)
+                                                            <option value="2">Web Only</option>
+                                                            {{--                                                        <option value="1">App Only</option>--}}
+                                                            {{--                                                        <option value="3">App & Web</option>--}}
+                                                        @elseif($org->ptype == 3)
+                                                            <option value="3">App & Web</option>
+                                                            {{--                                                        <option value="1">App Only</option>--}}
+                                                            {{--                                                        <option value="2">Web Only</option>--}}
+                                                        @endif
+
+                                                    </select>
+
+                                                </div>
+
                                             </div>
 
                                             <hr class="col-xl-4 col-sm-12">
@@ -432,6 +460,85 @@
                             </div>
 
 
+                            <div class="card " style="background: #f3ffff">
+                                <div class="card-body">
+                                    <form action="estate-update-vat" method="post">
+                                        @csrf
+
+
+                                        <h6 class="d-flex justify-content-start my-4">Vat Information</h6>
+
+
+                                        <div class="col-xl-3 col-sm-12">
+                                            <label class="my-2">VAT % </label>
+                                            <input type="text" step="0.01" name="vat" value="{{$org->estate_vat }}"
+                                                   class="form-control"
+                                                   required>
+
+                                            <input type="text"  name="estate_id"
+                                                   value="{{$org->id}}"
+                                                   hidden>
+
+
+                                        </div>
+
+
+                                        <button type="submit" class="col-xl-2 col-sm-12 my-2 d-flex btn btn-primary">
+                                            Update
+                                        </button>
+
+                                    </form>
+
+                                    <hr class="my-4">
+
+
+                                    <form action="estate-update-minpur" method="post">
+                                        @csrf
+
+
+                                        <h6 class="d-flex justify-content-start my-4">MIN/MAX PURCHASE Information</h6>
+
+                                        <div class="row">
+                                            <div class="col-xl-4 col-sm-12">
+                                                <label class="my-2">MIN Purchase</label>
+                                                <input type="number" step="0.01" name="min_pur"
+                                                       value="{{$org->min_pur ?? 1000}}"
+                                                       class="form-control"
+                                                       required>
+
+
+                                            </div>
+
+
+                                            <div class="col-xl-4 col-sm-12">
+                                                <label class="my-2">MAX Purchase</label>
+                                                <input type="number" step="0.01" name="max_pur"
+                                                       value="{{$org->max_pur ?? 1000000}}"
+                                                       class="form-control"
+                                                       required>
+
+
+                                                <input type="text"  name="estate_id"
+                                                       value="{{$org->id}}"
+                                                       hidden>
+
+                                            </div>
+
+
+                                        </div>
+
+
+
+                                        <button type="submit" class="col-xl-2 col-sm-12 my-2 d-flex btn btn-primary">
+                                            Update
+                                        </button>
+
+
+                                    </form>
+                                </div>
+                            </div>
+
+
                             <div class="row">
 
                                 <div class="card" style="background: #d1fff1">
@@ -447,7 +554,8 @@
 
                                             @if($utl != null)
                                                 @if($utl->duration != null)
-                                                    <h6 class="mb-0">Duration <span class="badge text-bg-danger">{{strtoupper($utl->duration)}}</span>
+                                                    <h6 class="mb-0">Duration <span
+                                                            class="badge text-bg-danger">{{strtoupper($utl->duration)}}</span>
                                                     </h6>
                                                 @else
                                                     <h6 class="mb-0">Duration <span class="badge text-bg-secondary">Set Duration</span>
@@ -463,7 +571,7 @@
 
                                         <hr class="my-2">
 
-                                        <form action="update-duration" method="POST"  class="">
+                                        <form action="update-duration" method="POST" class="">
                                             @csrf
 
                                             <div class="col-xl-4 col-sm-12">
@@ -489,7 +597,6 @@
 
 
                                         </form>
-
 
 
                                         <hr class="my-4">
