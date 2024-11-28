@@ -73,8 +73,6 @@ class EstateServiceController extends Controller
     public function add_new_service(request $request)
     {
 
-
-
         $services = Service::where('id', $request->service)->first();
         $ser = new EstateService();
         $ser->professional_name = $request->professional_name;

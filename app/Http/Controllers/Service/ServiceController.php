@@ -18,13 +18,12 @@ class ServiceController extends Controller
     public function service_properties(request $request)
     {
 
-        $data['estate'] = Estate::where('status', 2)->get()->makeHidden(['created_at', 'updated_at']);
+        $data['estate'] = Estate::where('status', 2)->where('id', Auth::user()->estate_id)->get()->makeHidden(['created_at', 'updated_at']);
         $data['service'] = EstateService::latest()->where('status', 2)->where('estate_id', auth::user()->estate_id)->get()->makeHidden(['created_at', 'updated_at']);
 
         return response()->json([
             'status' => true,
             'data' => $data
-
         ], 200);
 
 
@@ -53,7 +52,6 @@ class ServiceController extends Controller
 
     public function get_comment(request $request)
     {
-
 
         $data =  Comment::latest()->where('job_id', $request->job_id)->get();
         $rate =  Rating::latest()->where('job_id', $request->job_id)->max('count');
