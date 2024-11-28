@@ -236,7 +236,7 @@ class MeterController extends Controller
                         return response()->json([
 
                         'status' => false,
-                            'message' => "Vending server not connected, Retry again later using your wallet",
+                            'message' => "Vending server not connected, Retry again later using your wallet | $kct_response",
                             'kct_response' => $kct_response
                         ], 422);
                     }
@@ -325,9 +325,8 @@ class MeterController extends Controller
                     ]);
 
                     return response()->json([
-
                         'status' => false,
-                        'message' => "Vending server not connected, Retry again later using your wallet",
+                        'message' => "Vending server not connected, Retry again later using your wallet | $no_kct_response",
                         'kct_response' => $no_kct_response
                     ], 422);
 
