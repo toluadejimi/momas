@@ -230,14 +230,14 @@ class MeterController extends Controller
                             'status' => 3,
                             'tariff_id' => $request->tariff_id,
                             'unit_amount' => $request->amount,
+                            'note' => $kct_response
 
                         ]);
 
                         return response()->json([
 
                         'status' => false,
-                            'message' => "Vending server not connected, Retry again later using your wallet | $kct_response",
-                            'kct_response' => $kct_response
+                            'message' => "Vending server not connected, Retry again on transaction history",
                         ], 422);
                     }
 
@@ -321,13 +321,14 @@ class MeterController extends Controller
                         'status' => 3,
                         'tariff_id' => $request->tariff_id,
                         'unit_amount' => $request->amount,
+                        'note' => $kct_response
+
 
                     ]);
 
                     return response()->json([
                         'status' => false,
-                        'message' => "Vending server not connected, Retry again later using your wallet | $no_kct_response",
-                        'kct_response' => $no_kct_response
+                        'message' => "Vending server not connected, Retry again on transaction history",
                     ], 422);
 
                 }
@@ -467,14 +468,16 @@ class MeterController extends Controller
                             'service_type' => "Token Purchase",
                             'service' => "Meter",
                             'status' => 3,
+                            'note' => $kct_response
 
 
                         ]);
 
+                        User::where('id', Auth::id())->increment('main_wallet', $trx->unit_amount);
+
                         return response()->json([
                             'status' => false,
                             'message' => "Vending server not connected, Retry again later using your wallet",
-                            'kct_response' => $kct_response
                         ], 422);
                     }
 
@@ -483,7 +486,6 @@ class MeterController extends Controller
 
             } else {
 
-                User::where('id', Auth::id())->increment('main_wallet', $trx->unit_amount);
                 return response()->json([
                     'status' => false,
                     'message' => "Meter vending failed, Retry again on transaction history"
@@ -558,6 +560,8 @@ class MeterController extends Controller
                         'service_type' => "Token Purchase",
                         'service' => "Meter",
                         'status' => 3,
+                        'note' => $no_kct_response
+
 
                     ]);
 
