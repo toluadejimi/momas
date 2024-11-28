@@ -64,7 +64,6 @@ class EstateController extends Controller
 
 
 
-
         } elseif(auth::user()->role == 1){
 
 
@@ -78,6 +77,7 @@ class EstateController extends Controller
             $data['tar'] = Tariff::where('estate_id', auth::user()->estate_id)->first();
             $data['utl'] = Utitlity::where('estate_id', auth::user()->estate_id)->first() ?? null;
             $data['total_utility'] = Utitlity::where('estate_id', auth::user()->estate_id)->sum('amount');
+
 
 
             $data['utility'] = Utitlity::where('estate_id', auth::user()->estate_id)->get() ?? null;

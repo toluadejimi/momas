@@ -283,10 +283,10 @@
                                             class="badge text-bg-secondary">NGN {{number_format($total_utility, 2)}}</span>
                                     </h6>
 
-                                    @if($utl != null)
-                                        @if($utl->duration != null)
+                                    @if($org != null)
+                                        @if($org->duration != null)
                                             <h6 class="mb-0">Duration <span
-                                                    class="badge text-bg-danger">{{strtoupper($utl->duration)}}</span>
+                                                    class="badge text-bg-danger">{{strtoupper($org->duration)}}</span>
                                             </h6>
                                         @else
                                             <h6 class="mb-0">Duration <span class="badge text-bg-secondary">Set Duration</span>
