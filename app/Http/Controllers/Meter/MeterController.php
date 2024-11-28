@@ -230,7 +230,7 @@ class MeterController extends Controller
                             'status' => 3,
                             'tariff_id' => $request->tariff_id,
                             'unit_amount' => $request->amount,
-                            'note' => $kct_response
+                            'note' => $kct_response."| ". json_encode($databody)
 
                         ]);
 
