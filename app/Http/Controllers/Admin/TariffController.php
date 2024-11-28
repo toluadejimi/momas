@@ -206,6 +206,7 @@ class TariffController extends Controller
     {
 
 
+
         $ddfrom = new DateTime($request->date_from);
         $ddto = new DateTime($request->date_to);
 
@@ -226,6 +227,7 @@ class TariffController extends Controller
         $tr->effective_from = $request->date_from;
         $tr->effective_to = $request->date_to;
         $tr->tariff_id = $request->id;
+        $tr->estate_id = $request->estate_id;
         $tr->save();
 
         $ck_count = TarrifState::where('tariff_id', $request->id)->count();

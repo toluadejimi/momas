@@ -65,7 +65,6 @@
                                         <select required name="estate_id" class="form-control">
                                             <option value="">---select Estate----</option>
                                         @foreach($estate as $data)
-
                                                 <option value="{{$data->id}}">{{$data->title}}</option>
                                             @endforeach
 
@@ -74,8 +73,6 @@
 
 
                                     </div>
-
-
 
 
 
