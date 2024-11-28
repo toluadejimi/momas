@@ -196,7 +196,7 @@ class MeterController extends Controller
                             $met->status = 2;
                             $met->save();
 
-                            Transaction::where('trx_id', $trx)->update(['service_type' => "Token Purchase", 'service' => "Meter", 'unit_amount' => $request->amount ]);
+                            Transaction::where('trx_id', $trx)->update(['service' => "METER PURCHASE", 'service_type' => "meter", 'unit_amount' => $request->amount ]);
 
 
                             $data2['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
@@ -225,8 +225,8 @@ class MeterController extends Controller
                     } else {
 
                         Transaction::where('trx_id', $trx)->update([
-                            'service_type' => "Token Purchase",
-                            'service' => "Meter",
+                            'service' => "METER PURCHASE",
+                            'service_type' => "meter",
                             'status' => 3,
                             'tariff_id' => $request->tariff_id,
                             'unit_amount' => $request->amount,
@@ -295,6 +295,8 @@ class MeterController extends Controller
                     $met->status = 2;
                     $met->save();
 
+                    Transaction::where('trx_id', $trx)->update(['service' => "METER PURCHASE", 'service_type' => "meter", 'unit_amount' => $request->amount ]);
+
 
                     $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
                     $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
@@ -316,8 +318,8 @@ class MeterController extends Controller
 
 
                     Transaction::where('trx_id', $trx)->update([
-                        'service_type' => "Token Purchase",
-                        'service' => "Meter",
+                        'service' => "METER PURCHASE",
+                        'service_type' => "meter",
                         'status' => 3,
                         'tariff_id' => $request->tariff_id,
                         'unit_amount' => $request->amount,
