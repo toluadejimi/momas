@@ -174,7 +174,7 @@ class EstateController extends Controller
     {
 
 
-                    Utitlity::where('estate_id', $request->id)->update([
+                    Estate::where('id', $request->id)->update([
                         'duration' => $request->duration,
                     ]);
 

@@ -34,8 +34,6 @@ class MeterController extends Controller
         $user = User::where('meterNo', $request->meterNo)->first() ?? null;
 
 
-
-
         $meter = Meter::where('meterNo', $request->meterNo)->where('estate_id', $request->estateId)->first() ?? null;
         if ($meter == null) {
             $message = "Validation Failed, please check meter number or estate selected";
@@ -58,7 +56,7 @@ class MeterController extends Controller
         // $data['meter_type'] = $meter_type;
 
         $es_id = $request->estateId ?? null;
-        $duration = Utitlity::where('estate_id', $es_id)->first()->duration ?? null;
+        $duration = Estate::where('estate_id', $es_id)->first()->duration ?? null;
         $estate_id = $es_id;
         $user_id = $user->id;
 
