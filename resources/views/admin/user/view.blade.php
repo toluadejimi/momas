@@ -428,6 +428,11 @@
 
                                                                             @else
 
+
+                                                                                <label class="my-2">TRX ID</label>
+                                                                                <input class="form-control mb-3"
+                                                                                       name="trxid" required>
+
                                                                                 <label class="my-2">Meter No</label>
                                                                                 <input class="form-control mb-3"
                                                                                        name="meterNo"
