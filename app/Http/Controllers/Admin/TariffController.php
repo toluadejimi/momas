@@ -90,30 +90,9 @@ class TariffController extends Controller
 
 
 
-//        if($request->isDualTariff ==  "on"){
-//            $tr = new Tariff();
-//            $tr->title = $request->title;
-//            $tr->estate_tariff_cost = $request->estate_tariff_cost;
-//            $tr->estate_id = $request->estate_id;
-//            $tr->OldTariffDual = $request->OldTariffDual;
-//            $tr->NewTariffDual = $request->NewTariffDual;
-//            $tr->isDualTariff = $request->isDualTariff;
-//            $tr->status = 2;
-//            $tr->save();
-//        }else{
-//            $tr = new Tariff();
-//            $tr->title = $request->title;
-//            $tr->estate_tariff_cost = $request->estate_tariff_cost;
-//            $tr->estate_id = $request->estate_id;
-//            $tr->status = 2;
-//            $tr->save();
-//
-//        }
-
-
         $tr = new Tariff();
         $tr->title = $request->title;
-        $tr->estate_id = $request->estate_id;
+        $tr->estate_id = $request->estate_id ?? 0;
         $tr->status = 2;
         $tr->tariff_index = $request->tariff_index;
         $tr->save();
@@ -130,55 +109,11 @@ class TariffController extends Controller
     }
 
 
-    public function add_new_state_Tariff(request $request)
-    {
-
-
-        $ck = Tariff::where('title', $request->title)->first() ?? null;
-
-
-        if($ck != null){
-            return back()->with('error', 'Tariff already exist');
-        }
 
 
 
-//        if($request->isDualTariff ==  "on"){
-//            $tr = new Tariff();
-//            $tr->title = $request->title;
-//            $tr->estate_tariff_cost = $request->estate_tariff_cost;
-//            $tr->estate_id = $request->estate_id;
-//            $tr->OldTariffDual = $request->OldTariffDual;
-//            $tr->NewTariffDual = $request->NewTariffDual;
-//            $tr->isDualTariff = $request->isDualTariff;
-//            $tr->status = 2;
-//            $tr->save();
-//        }else{
-//            $tr = new Tariff();
-//            $tr->title = $request->title;
-//            $tr->estate_tariff_cost = $request->estate_tariff_cost;
-//            $tr->estate_id = $request->estate_id;
-//            $tr->status = 2;
-//            $tr->save();
-//
-//        }
 
 
-        $tr = new Tariff();
-        $tr->title = $request->title;
-        $tr->estate_id = $request->estate_id;
-        $tr->status = 2;
-        $tr->save();
-
-        $tr = Tariff::where('id', $tr->id)->first();
-        $tstate = TarrifState::where('tariff_id', $request->id)->get();
-        $effictive_date = TarrifState::where('tariff_id', $request->id)->where('status', 2)->first()->effective_from ?? null;
-        $estate  = Estate::all();
-
-        return view('admin.tariff.view', compact('tr','tstate','effictive_date','estate'));
-
-
-    }
 
     public function delete_tariff(request $request)
     {
@@ -206,21 +141,20 @@ class TariffController extends Controller
     {
 
 
-
         $ddfrom = new DateTime($request->date_from);
         $ddto = new DateTime($request->date_to);
 
-        if( $ddfrom >= $ddto  ){
-            return back()->with('error', 'End date can not be greater than start date');
-        }
-
-
-        $newdate = TarrifState::latest()->where('status', 2)->where('tariff_id', $request->id)->first()->effective_to ?? null;
-        $nd = new DateTime($newdate) ?? null;
-
-        if($ddto <= $nd ){
-            return back()->with('error', 'you have a running tariff');
-        }
+//        if( $ddfrom >= $ddto  ){
+//            return redirect('add-new-tariffstate')->with('error', 'End date can not be greater than start date');
+//        }
+//
+//
+//        $newdate = TarrifState::latest()->where('status', 2)->where('tariff_id', $request->id)->first()->effective_to ?? null;
+//        $nd = new DateTime($newdate) ?? null;
+//
+//        if($ddto <= $nd ){
+//            return redirect('add-new-tariffstate')->with('error', 'you have a running tariff');
+//        }
 
         $tr = new TarrifState();
         $tr->amount = $request->amount;

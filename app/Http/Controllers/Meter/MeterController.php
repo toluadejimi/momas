@@ -33,12 +33,17 @@ class MeterController extends Controller
     {
         $user = User::where('meterNo', $request->meterNo)->first() ?? null;
 
+
+        dd($user, $request->all());
+
+
         $meter = Meter::where('meterNo', $request->meterNo)->where('estate_id', $request->estateId)->first() ?? null;
         if ($meter == null) {
             $message = "Validation Failed, please check meter number or estate selected";
             $code = 422;
             return error($message, $code);
         }
+
 
 
         $get_tar = Tariff::where('user_id', $user->user_id)->first() ?? null;
