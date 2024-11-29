@@ -472,12 +472,12 @@ class MeterController extends Controller
                             $data2['service'] = "MOMAS METER";
                             $data2['order_id'] = $trx_id;
                             $data2['token'] = $token;
-                            $data2['amount'] = $trx->amount;
-                            $data2['vending_amount'] = $trx->vending_amount;
-                            $data2['vend_amount_kw_per_naira'] = $trx->unit_amount;
+                            $data2['amount'] = "$trx->amount";
+                            $data2['vending_amount'] = "$trx->vending_amount";
+                            $data2['vend_amount_kw_per_naira'] = "$trx->unit_amount";
                             $data2['kct_token1'] = $kct_data['tokens'][0];
                             $data2['kct_token2'] = $kct_data['tokens'][1];
-                            $data2['vat_amount'] = $trx->vat;
+                            $data2['vat_amount'] = "$trx->vat";
 
 
                             $email = $user->email;
@@ -574,10 +574,10 @@ class MeterController extends Controller
                     $data['service'] = "MOMAS METER";
                     $data['order_id'] = $trx_id;
                     $data['token'] = $no_kct_token;
-                    $data['amount'] = $trx->amount;
-                    $data['vending_amount'] = $trx->vending_amount;
-                    $data['vend_amount_kw_per_naira'] = $trx->unit_amount;
-                    $data['vat_amount'] = $trx->vat;
+                    $data['amount'] = "$trx->amount";
+                    $data['vending_amount'] = "$trx->vending_amount";
+                    $data['vend_amount_kw_per_naira'] = "$trx->unit_amount";
+                    $data['vat_amount'] = "$trx->vat";
 
                     $email = $user->email;
 
