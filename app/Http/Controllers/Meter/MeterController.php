@@ -463,7 +463,7 @@ class MeterController extends Controller
                             $met->status = 2;
                             $met->save();
 
-                            Transaction::where('trx_id', $trx_id)->update(['status' => 2 ]);
+                            Transaction::where('trx_id', $trx_id)->update(['status' => 2, 'note' => "Tokens generated successfully" ]);
 
 
 
@@ -566,7 +566,7 @@ class MeterController extends Controller
                     $met->status = 2;
                     $met->save();
 
-                    Transaction::where('trx_id', $trx_id)->update(['status' => 2 ]);
+                    Transaction::where('trx_id', $trx_id)->update(['status' => 2, 'note' => "Tokens generated successfully" ]);
 
 
                     $data['full_name'] = $user->first_name . " " . $user->last_name;
