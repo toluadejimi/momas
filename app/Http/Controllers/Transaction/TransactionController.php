@@ -270,7 +270,7 @@ class TransactionController extends Controller
     public function all_transactions(request $request)
     {
 
-        $trx = Transaction::where('user_id', Auth::id())->take(1000)->get();
+        $trx = Transaction::where('user_id', Auth::id())->take(1000)->get()->makeHidden('note');
         return response()->json([
             'status' => true,
             'data' => $trx,
