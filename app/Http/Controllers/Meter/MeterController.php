@@ -125,6 +125,7 @@ class MeterController extends Controller
         $total_paid = $request->total_paid_amount;
         $unit = $request->vend_amount_kw_per_naira;
         $vendong_amount = $request->vending_amount;
+        $vat_amount = $request->vat_amount;
 
 
 
@@ -199,12 +200,12 @@ class MeterController extends Controller
                             $met->amount = $vendong_amount;
                             $met->unit = $unit;
                             $met->kct_tokens = $kct_data['tokens'][0] . "," . $kct_data['tokens'][1];
-                            $met->vat = $vat;
+                            $met->vat = $vat_amount;
                             $met->estate_id = Auth::user()->estate_id;
                             $met->status = 2;
                             $met->save();
 
-                            Transaction::where('trx_id', $trx)->update(['service' => "METER PURCHASE", 'service_type' => "meter", 'unit_amount' => $vendong_amount ]);
+                            Transaction::where('trx_id', $trx)->update(['service' => "METER PURCHASE", 'service_type' => "meter", 'unit_amount' => $vendong_amount , 'vat' => $vat_amount]);
 
 
                             $data2['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
@@ -217,6 +218,8 @@ class MeterController extends Controller
                             $data2['vend_amount_kw_per_naira'] = $unit;
                             $data2['kct_token1'] = $kct_data['tokens'][0];
                             $data2['kct_token2'] = $kct_data['tokens'][1];
+                            $data2['vat_amount'] = $vat_amount;
+
 
                             $email = Auth::user()->email;
                             $kct_token = $kct_data['tokens'];
@@ -318,6 +321,7 @@ class MeterController extends Controller
                     $data['token'] = $no_kct_data['tokens'][0];
                     $data['amount'] = $total_paid;
                     $data['vending_amount'] = $vendong_amount;
+                    $data['vat_amount'] = $vat_amount;
                     $data['vend_amount_kw_per_naira'] = $unit;
                     $email = Auth::user()->email;
                     $token = $no_kct_data['tokens'][0];
