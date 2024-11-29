@@ -191,7 +191,6 @@ class MeterController extends Controller
 
                         if ($status == "SUCCESS") {
 
-                            $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
                             $met = new MeterToken ();
                             $met->user_id = Auth::user()->id;
                             $met->order_id = $trx;
@@ -205,7 +204,8 @@ class MeterController extends Controller
                             $met->status = 2;
                             $met->save();
 
-                            Transaction::where('trx_id', $trx)->update(['service' => "METER PURCHASE", 'service_type' => "meter", 'unit_amount' => $vendong_amount , 'vat' => $vat_amount]);
+                            Transaction::where('trx_id', $trx)->update(['service' => "METER PURCHASE", 'service_type' => "meter", 'unit_amount' => $vendong_amount , 'vat' => $vat_amount,                             'tariff_id' => $request->tariff_id,
+                            ]);
 
 
                             $data2['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
@@ -378,10 +378,10 @@ class MeterController extends Controller
 
         $amount = $request->amount;
         $meterNo = $request->meterNo;
-        $trx = $request->trxref;
+        $trx_id = $request->trxref;
 
 
-        $trx = Transaction::where('trx_id', $trx)->first() ?? null;
+        $trx = Transaction::where('trx_id', $trx_id)->first() ?? null;
         if($trx == null){
             return response()->json([
                 'status' => false,
@@ -423,6 +423,7 @@ class MeterController extends Controller
                 $status = $data['code'] ?? null;
 
                 if ($status == "SUCCESS") {
+
                     $token = $data['tokens'][0];
 
                     $kctdatabody = [
@@ -449,29 +450,35 @@ class MeterController extends Controller
 
                         if ($status == "SUCCESS") {
 
-                            $vat = TarrifState::where('tariff_id', $trx->tariff_id)->first()->amount ?? 0;
                             $met = new MeterToken ();
-                            $met->user_id = $user->id;
-                            $met->order_id = $trx;
+                            $met->user_id = $trx->user_id;
+                            $met->order_id = $trx->trx_id;
                             $met->meterNo = $meter->meterNo;
                             $met->token = $token;
-                            $met->amount = $trx->unit_amount;
+                            $met->amount = $trx->amount;
+                            $met->unit = $trx->unit_amount;
                             $met->kct_tokens = $kct_data['tokens'][0] . "," . $kct_data['tokens'][1];
-                            $met->vat = $vat;
-                            $met->estate_id = $trx->estate_id;
+                            $met->vat = $trx->vat;
+                            $met->estate_id = $user->estate_id;
                             $met->status = 2;
                             $met->save();
 
-                            Transaction::where('trx_id', $trx)->update(['service_type' => "Token Purchase", 'service' => "Meter", 'status' => 2]);
+                            Transaction::where('trx_id', $trx_id)->update(['status' => 2 ]);
+
+
 
                             $data2['full_name'] = $user->first_name . " " . $user->last_name;
                             $data2['address'] = $user->address . "," . $user->city . "," . $user->state;
                             $data2['service'] = "MOMAS METER";
-                            $data2['order_id'] = $trx;
+                            $data2['order_id'] = $trx_id;
                             $data2['token'] = $token;
-                            $data2['amount'] = $trx->unit_amount;
+                            $data2['amount'] = $trx->amount;
+                            $data2['vending_amount'] = $trx->vending_amount;
+                            $data2['vend_amount_kw_per_naira'] = $trx->unit_amount;
                             $data2['kct_token1'] = $kct_data['tokens'][0];
                             $data2['kct_token2'] = $kct_data['tokens'][1];
+                            $data2['vat_amount'] = $trx->vat;
+
 
                             $email = $user->email;
                             $kct_token = $kct_data['tokens'];
@@ -547,30 +554,34 @@ class MeterController extends Controller
                 if ($status == "SUCCESS") {
 
                     $no_kct_token = $no_kct_data['tokens'][0];
-                    $vat = TarrifState::where('tariff_id', $trx->tariff_id)->first()->amount ?? 0;
                     $met = new MeterToken ();
-                    $met->user_id = $user->id;
-                    $met->order_id = $trx;
-                    $met->meterNo = $meterNo;
+                    $met->user_id = $trx->user_id;
+                    $met->order_id = $trx->trx_id;
+                    $met->meterNo = $meter->meterNo;
                     $met->token = $no_kct_token;
-                    $met->amount = $trx->unit_amount;
-                    $met->vat = $vat;
+                    $met->amount = $trx->amount;
+                    $met->unit = $trx->unit_amount;
+                    $met->vat = $trx->vat;
                     $met->estate_id = $user->estate_id;
                     $met->status = 2;
                     $met->save();
 
+                    Transaction::where('trx_id', $trx_id)->update(['status' => 2 ]);
 
-                    Transaction::where('trx_id', $trx)->update(['service_type' => "Token Purchase", 'service' => "Meter", 'status' => 2]);
 
                     $data['full_name'] = $user->first_name . " " . $user->last_name;
                     $data['address'] = $user->address . "," . $user->city . "," . $user->state;
                     $data['service'] = "MOMAS METER";
-                    $data['order_id'] = $trx;
-                    $data['token'] = $no_kct_data['tokens'][0];
-                    $data['amount'] = $trx->unit_amount;
+                    $data['order_id'] = $trx_id;
+                    $data['token'] = $no_kct_token;
+                    $data['amount'] = $trx->amount;
+                    $data['vending_amount'] = $trx->vending_amount;
+                    $data['vend_amount_kw_per_naira'] = $trx->unit_amount;
+                    $data['vat_amount'] = $trx->vat;
+
                     $email = $user->email;
-                    $token = $no_kct_data['tokens'][0];
-                    send_email_token($email, $token, $amount);
+
+                    send_email_token($email, $no_kct_token, $amount);
 
                     return response()->json([
                         'status' => true,
@@ -581,7 +592,7 @@ class MeterController extends Controller
                 }else{
 
 
-                    Transaction::where('trx_id', $trx)->update([
+                    Transaction::where('trx_id', $trx_id)->update([
                         'service_type' => "Token Purchase",
                         'service' => "Meter",
                         'status' => 3,
