@@ -97,10 +97,6 @@
 
 
 
-
-
-
-
                                 <script>
                                     document.getElementById('isDualTariff').addEventListener('change', function () {
                                         var isChecked = this.checked;

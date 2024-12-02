@@ -22,10 +22,28 @@ use Illuminate\Support\Facades\Http;
 class MeterController extends Controller
 {
 
+
+    public function get_estate_tariff(request $request)
+    {
+
+        $tariff = Tariff::where('estate_id', $request->estate_id)->get();
+        return response()->json([
+            'tariffs' => $tariff
+        ]);
+
+    }
+
+
     public function searchMeters(request $request)
     {
         $query = $request->get('q');
-        $meters = Meter::where('meterNo', 'LIKE', '%' . $query . '%')->where('user_id', null)->get();
+        $meters = Meter::where('meterNo', 'LIKE', '%' . $query . '%')
+            ->where([
+                'user_id' => null,
+                'estate_id' => $request->estate_id
+            ])->get();
+
+
         return response()->json($meters);
     }
 
@@ -40,7 +58,6 @@ class MeterController extends Controller
             $code = 422;
             return error($message, $code);
         }
-
 
 
         $get_tar = Tariff::where('user_id', $user->id)->first() ?? null;
@@ -128,8 +145,6 @@ class MeterController extends Controller
         $vat_amount = $request->vat_amount;
 
 
-
-
         $tariff_index = Tariff::where('id', $request->tariff_id)->first()->tariff_index ?? null;
 
         $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first()->duration;
@@ -204,7 +219,7 @@ class MeterController extends Controller
                             $met->status = 2;
                             $met->save();
 
-                            Transaction::where('trx_id', $trx)->update(['service' => "METER PURCHASE", 'service_type' => "meter", 'unit_amount' => $vendong_amount , 'vat' => $vat_amount,                             'tariff_id' => $request->tariff_id,
+                            Transaction::where('trx_id', $trx)->update(['service' => "METER PURCHASE", 'service_type' => "meter", 'unit_amount' => $vendong_amount, 'vat' => $vat_amount, 'tariff_id' => $request->tariff_id,
                             ]);
 
 
@@ -243,7 +258,7 @@ class MeterController extends Controller
                             'status' => 3,
                             'tariff_id' => $request->tariff_id,
                             'unit_amount' => $vendong_amount,
-                            'note' => $kct_response."| ". json_encode($databody)
+                            'note' => $kct_response . "| " . json_encode($databody)
 
                         ]);
 
@@ -253,7 +268,7 @@ class MeterController extends Controller
 
                         return response()->json([
 
-                        'status' => false,
+                            'status' => false,
                             'message' => "Vending server not connected, Retry again on transaction history",
                         ], 422);
                     }
@@ -273,8 +288,6 @@ class MeterController extends Controller
         }
 
 
-
-
         if ($meter != null && $meter->NeedKCT == null) {
 
             $databody = [
@@ -288,7 +301,6 @@ class MeterController extends Controller
                 'verify' => false,
                 'timeout' => 10,
             ])->post('http://169.239.189.91:19071/tokenGen', $databody);
-
 
 
             if ($no_kct_response->successful()) {
@@ -312,7 +324,7 @@ class MeterController extends Controller
                     $met->status = 2;
                     $met->save();
 
-                    Transaction::where('trx_id', $trx)->update(['service' => "METER PURCHASE", 'service_type' => "meter", 'unit_amount' => $vendong_amount ]);
+                    Transaction::where('trx_id', $trx)->update(['service' => "METER PURCHASE", 'service_type' => "meter", 'unit_amount' => $vendong_amount]);
 
                     $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
                     $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
@@ -333,7 +345,7 @@ class MeterController extends Controller
                     ], 200);
 
 
-                }else{
+                } else {
 
 
                     Transaction::where('trx_id', $trx)->update([
@@ -342,8 +354,7 @@ class MeterController extends Controller
                         'status' => 3,
                         'tariff_id' => $request->tariff_id,
                         'unit_amount' => $vendong_amount,
-                        'note' => $no_kct_response. "|".json_encode($databody)
-
+                        'note' => $no_kct_response . "|" . json_encode($databody)
 
 
                     ]);
@@ -382,14 +393,14 @@ class MeterController extends Controller
 
 
         $trx = Transaction::where('trx_id', $trx_id)->first() ?? null;
-        if($trx == null){
+        if ($trx == null) {
             return response()->json([
                 'status' => false,
                 'message' => "Transaction not found, contact our support for more support",
             ], 422);
         }
 
-        if($trx->status == 2){
+        if ($trx->status == 2) {
             return response()->json([
                 'status' => false,
                 'message' => "Transaction already successful, contact our support for more support",
@@ -463,8 +474,7 @@ class MeterController extends Controller
                             $met->status = 2;
                             $met->save();
 
-                            Transaction::where('trx_id', $trx_id)->update(['status' => 2, 'note' => "Tokens generated successfully" ]);
-
+                            Transaction::where('trx_id', $trx_id)->update(['status' => 2, 'note' => "Tokens generated successfully"]);
 
 
                             $data2['full_name'] = $user->first_name . " " . $user->last_name;
@@ -528,8 +538,6 @@ class MeterController extends Controller
         }
 
 
-
-
         if ($meter != null && $meter->NeedKCT == null) {
 
             $databody = [
@@ -543,7 +551,6 @@ class MeterController extends Controller
                 'verify' => false,
                 'timeout' => 10,
             ])->post('http://169.239.189.91:19071/tokenGen', $databody);
-
 
 
             if ($no_kct_response->successful()) {
@@ -566,7 +573,7 @@ class MeterController extends Controller
                     $met->status = 2;
                     $met->save();
 
-                    Transaction::where('trx_id', $trx_id)->update(['status' => 2, 'note' => "Tokens generated successfully" ]);
+                    Transaction::where('trx_id', $trx_id)->update(['status' => 2, 'note' => "Tokens generated successfully"]);
 
 
                     $data['full_name'] = $user->first_name . " " . $user->last_name;
@@ -589,7 +596,7 @@ class MeterController extends Controller
                     ], 200);
 
 
-                }else{
+                } else {
 
 
                     Transaction::where('trx_id', $trx_id)->update([
@@ -833,7 +840,6 @@ class MeterController extends Controller
         }
 
 
-
     }
 
 
@@ -1023,7 +1029,7 @@ class MeterController extends Controller
             return back()->with('error', "Meter Not properly configured");
         }
 
-        $trx = "TRX-".random_int(000000,999999);
+        $trx = "TRX-" . random_int(000000, 999999);
 
         $kctdatabody = [
             'meterType' => $meter->KRN1,
@@ -1042,7 +1048,7 @@ class MeterController extends Controller
             'timeout' => 10,
         ])->post('http://169.239.189.91:19071/kcttokenGen', $kctdatabody);
 
-       $estate_id = User::where('id', $request->user_id)->first()->estate_id;
+        $estate_id = User::where('id', $request->user_id)->first()->estate_id;
 
         if ($kct_response->successful()) {
             $kct = $kct_response->json();
@@ -1069,11 +1075,7 @@ class MeterController extends Controller
             return back()->with('error', "An error occured");
 
 
-
         }
-
-
-
 
 
     }
@@ -1083,7 +1085,7 @@ class MeterController extends Controller
     {
 
 
-        $trx = "TRX-".random_int(000000,999999);
+        $trx = "TRX-" . random_int(000000, 999999);
 
 
         $meter = Meter::where('meterNo', $request->meterNo)->first() ?? null;
@@ -1112,7 +1114,6 @@ class MeterController extends Controller
                 $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
 
 
-
                 $met = new MeterToken ();
                 $met->user_id = $request->user_id;
                 $met->order_id = $trx;
@@ -1130,7 +1131,6 @@ class MeterController extends Controller
                 send_email_token($email, $token, $amount);
 
                 return back()->with('message', "Meter Token has been generated");
-
 
 
             }
@@ -1155,8 +1155,6 @@ class MeterController extends Controller
         return back()->with('message', 'Meter has been successfully detached');
 
     }
-
-
 
 
 }

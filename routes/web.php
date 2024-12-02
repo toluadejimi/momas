@@ -171,6 +171,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('edit-delete', [MeterController::class, 'delete_meter']);
     Route::get('view-meter', [MeterController::class, 'view_meter']);
 
+
+
+
     Route::get('meter-activate', [MeterController::class, 'meter_activate']);
     Route::get('meter-deactivate', [MeterController::class, 'meter_deactivate']);
 

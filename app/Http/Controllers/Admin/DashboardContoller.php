@@ -220,6 +220,18 @@ class DashboardContoller extends Controller
     {
 
 
+
+
+
+        if($request->password != $request->password_confirmation ){
+
+            return redirect('admin/customers')->with('error', "Password  does not match ");
+
+        }
+
+
+
+
         $usr_email = User::where('email', $request->email)->first()->email ?? null;
         $usr_phone = User::where('email', $request->email)->first()->phone ?? null;
 
@@ -271,6 +283,13 @@ class DashboardContoller extends Controller
 
     public function add_new_user(request $request)
     {
+
+
+        if($request->password != $request->password_confirmation ){
+
+            return redirect('admin/customers')->with('error', "Password  does not match ");
+
+        }
 
 
         $usr_email = User::where('email', $request->email)->first()->email ?? null;

@@ -49,13 +49,13 @@
                                     <h6 class="d-flex justify-content-start my-4">Meter Information</h6>
 
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Meter Number</label>
                                         <input type="text" name="meterNo" class="form-control" required>
                                     </div>
 
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Meter Model</label>
                                         <select type="text" name="meterModel" class="form-control" required>
                                             <option value=" ">Select</option>
@@ -64,16 +64,16 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Account No</label>
                                         <input type="text" name="AccountNo" class="form-control" required>
                                     </div>
 
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Estate</label>
-                                        <select type="text" name="estate_id" class="form-control" required>
-                                            <option value=" ">Select</option>
+                                        <select type="text" id="estateSelect" name="estate_id" class="form-control" required>
+                                            <option value="">Select an estate</option>
                                             @foreach($estate as $data)
                                                 <option value="{{$data->id}}">{{$data->title}} </option>
                                             @endforeach
@@ -83,7 +83,7 @@
                                     <hr class="my-4">
 
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Transformer</label>
                                         <select type="text" name="TransformerID" class="form-control" required>
                                             <option value=" ">Select</option>
@@ -94,18 +94,18 @@
                                     </div>
 
 
-                                    <div class="col-3 mt-4">
+                                    <div class="col-xl-3 col-sm-12 mt-4">
                                         <input  type="checkbox" id="isDualTariff" name="isDualTariff" class="form-check-input" style="border: 10px">
                                         <label class="form-check-label">Is Dual Tariff</label>
 
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Old SGC</label>
                                         <input type="text" name="OldSGC" class="form-control" required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">New SGC</label>
                                         <input type="text" name="NewSGC" class="form-control" required>
                                     </div>
@@ -130,46 +130,142 @@
 
 
 
-                                    <div class="col-3" id="oldTariffDualContainer" style="display: none;">
+                                    <div class="col-xl-3 col-sm-12" id="oldTariffDualContainer" style="display: none;">
                                         <label class="my-2">Old Tariff  Dual</label>
-                                        <input type="text" name="OldTariffDual" class="form-control" required>
+
+                                        <select id="tariffSelect4" name="OldTariffDual" class="form-control" required>
+                                            <option value=""></option>
+                                        </select>
+
                                     </div>
 
 
-                                    <div class="col-3" id="newtar" style="display: none;">
+                                    <div class="col-xl-3 col-sm-12" id="newtar" style="display: none;">
                                         <label class="my-2">New Tariff Dual</label>
-                                        <input type="text" name="NewTariffDual" class="form-control" required>
+                                        <select id="tariffSelect3" name="NewTariffDual" class="form-control" required>
+                                            <option value=""></option>
+                                        </select>
+
                                     </div>
 
 
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">New Tariff</label>
-                                        <select name="NewTariffID" class="form-control">
-                                            <option value=" ">Select</option>
-                                            @foreach($tariff as $data)
-                                                <option value="{{$data->id}}">{{$data->title}}</option>
-                                            @endforeach
-                                        </select>
+                                            <select id="tariffSelect1" name="NewTariffID" class="form-control" required>
+                                                <option value=""></option>
+                                            </select>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
+
                                         <label class="my-2">Old Tariff</label>
-                                        <select type="text" name="OldTariffID" class="form-control" required>
-                                            <option value=" ">Select</option>
-                                            @foreach($tariff as $data)
-                                                <option value="{{$data->id}}">{{$data->title}} </option>
-                                            @endforeach
+                                        <select id="tariffSelect2" name="OldTariffID" class="form-control" required>
+                                            <option value=""></option>
                                         </select>
                                     </div>
 
-                                    <div class="col-3"  id="newTariffDualContainer" style="display: none;">
+
+                                    <script>
+
+
+                                        document.addEventListener("DOMContentLoaded", function () {
+                                            const estateSelect = document.getElementById("estateSelect");
+                                            const tariffSelects = [
+                                                document.getElementById("tariffSelect1"),
+                                                document.getElementById("tariffSelect2"),
+                                                document.getElementById("tariffSelect3"),
+                                                document.getElementById("tariffSelect4"),
+                                            ];
+
+                                            const endpoint = "{{url('')}}/api/get-estate-tariff";
+
+                                            estateSelect.addEventListener("change", function () {
+                                                const estateId = this.value;
+
+                                                // Reset tariff dropdowns
+                                                tariffSelects.forEach(select => {
+                                                    select.innerHTML = '<option value="">Choose Tariff</option>';
+                                                });
+
+                                                // If no estate is selected, stop here
+                                                if (!estateId) return;
+
+                                                // Fetch data from the endpoint
+                                                fetch(`${endpoint}?estate_id=${estateId}`)
+                                                    .then(response => {
+                                                        if (!response.ok) {
+                                                            throw new Error("Network response was not ok");
+                                                        }
+                                                        return response.json();
+                                                    })
+                                                    .then(data => {
+                                                        if (data && Array.isArray(data.tariffs)) {
+                                                            tariffSelects.forEach(select => {
+                                                                // Populate tariff dropdowns
+                                                                data.tariffs.forEach(tariff => {
+                                                                    const option = document.createElement("option");
+                                                                    option.value = tariff.id; // Use {{$data->id}}
+                                                                    option.textContent = tariff.title; // Use {{$data->title}}
+                                                                    select.appendChild(option);
+                                                                });
+                                                            });
+                                                        } else {
+                                                            tariffSelects.forEach(select => {
+                                                                select.innerHTML = '<option value="">No tariffs available</option>';
+                                                            });
+                                                        }
+                                                    })
+                                                    .catch(error => {
+                                                        console.error("Error fetching tariff data:", error);
+                                                        tariffSelects.forEach(select => {
+                                                            select.innerHTML = '<option value="">Error fetching data</option>';
+                                                        });
+                                                    });
+                                            });
+                                        });
+
+
+
+
+
+                                    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <div class="col-xl-3 col-sm-12"  id="newTariffDualContainer" style="display: none;">
                                         <label class="my-2">New SGC Dual</label>
                                         <input type="text" name="NewSGCDual" class="form-control" required>
                                     </div>
 
 
-                                    <div class="col-3" id="newSGCDualContainer" style="display: none;">
+                                    <div class="col-xl-3 col-sm-12" id="newSGCDualContainer" style="display: none;">
                                         <label class="my-2">OLD SGC Dual</label>
                                         <input type="text" name="OldSGCDual" class="form-control">
                                     </div>
@@ -181,7 +277,7 @@
 
 
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">KRN1</label>
                                         <select type="text" name="KRN1" class="form-control" required>
                                             <option value=" ">Select</option>
@@ -190,7 +286,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">KRN2</label>
                                         <select type="text" name="KRN2" class="form-control" required>
                                             <option value=" ">Select</option>
@@ -200,14 +296,14 @@
                                     </div>
 
 
-                                    <div class="col-3 mt-4">
+                                    <div class="col-xl-3 col-sm-12 mt-4">
                                         <input  type="checkbox" name="NeedKCT" class="form-check-input" style="border: 10px">
                                         <label class="form-check-label">Need KCT</label>
 
                                     </div>
 
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Credit Type</label>
                                         <select type="text" name="CreditTypeID" class="form-control" required>
                                             <option value=" ">Select</option>
@@ -293,13 +389,13 @@
                                     <h6 class="d-flex justify-content-start my-4">Meter Information</h6>
 
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Meter Number</label>
                                         <input type="text" name="meterNo" class="form-control" required>
                                     </div>
 
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Meter Model</label>
                                         <select type="text" name="meterModel" class="form-control" required>
                                             <option value=" ">Select</option>
@@ -308,12 +404,12 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Account No</label>
                                         <input type="text" name="AccountNo" class="form-control" required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Estate</label>
                                         <input type="text" value="{{$estate->title}}" class="form-control" required>
                                         <input type="text" value="{{$estate->id}}" name="estate_id"  hidden >
@@ -323,7 +419,7 @@
                                     <hr class="my-4">
 
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Transformer</label>
                                         <select type="text" name="TransformerID" class="form-control" required>
                                             <option value=" ">Select</option>
@@ -334,18 +430,18 @@
                                     </div>
 
 
-                                    <div class="col-3 mt-4">
+                                    <div class="col-xl-3 col-sm-12 mt-4">
                                         <input  type="checkbox" id="isDualTariff" name="isDualTariff" class="form-check-input" style="border: 10px">
                                         <label class="form-check-label">Is Dual Tariff</label>
 
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Old SGC</label>
                                         <input type="text" name="OldSGC" class="form-control" required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">New SGC</label>
                                         <input type="text" name="NewSGC" class="form-control" required>
                                     </div>
@@ -375,7 +471,7 @@
 
 
 
-                                    <div class="col-3" id="oldTariffDualContainer" style="display: none;">
+                                    <div class="col-xl-3 col-sm-12" id="oldTariffDualContainer" style="display: none;">
                                         <label class="my-2">Old Tariff Dual</label>
                                         <select name="OldTariffDual" class="form-control" required>
                                             <option value=" ">Select</option>
@@ -387,7 +483,7 @@
                                     </div>
 
 
-                                    <div class="col-3" id="newtar" style="display: none;">
+                                    <div class="col-xl-3 col-sm-12" id="newtar" style="display: none;">
                                         <label class="my-2">New Tariff Dual</label>
                                         <select name="NewTariffDual" class="form-control" required>
                                             <option value=" ">Select</option>
@@ -399,33 +495,38 @@
 
 
 
-                                    <div class="col-3">
+
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">New Tariff</label>
-                                        <select name="NewTariffID" class="form-control" required>
-                                            <option value=" ">Select</option>
+                                        <select name="NewTariffID" class="form-control">
+                                            <option value="{{$meter->NewTariffID}}">{{strtoupper($NewTariffID)}}</option>
                                             @foreach($tariff as $data)
                                                 <option value="{{$data->id}}">{{$data->title}}</option>
                                             @endforeach
                                         </select>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Old Tariff</label>
                                         <select type="text" name="OldTariffID" class="form-control" required>
-                                            <option value=" ">Select</option>
+                                            <option value="{{$meter->OldTariffID}}">{{strtoupper($OldTariffID)}}</option>
                                             @foreach($tariff as $data)
                                                 <option value="{{$data->id}}">{{$data->title}} </option>
                                             @endforeach
                                         </select>
                                     </div>
 
-                                    <div class="col-3 mt-2"  id="newTariffDualContainer" style="display: none;">
+
+
+
+
+                                    <div class="col-xl-3 col-sm-12 mt-2"  id="newTariffDualContainer" style="display: none;">
                                         <label class="my-2">New SGC Dual</label>
                                         <input type="text" name="NewSGCDual" class="form-control" >
                                     </div>
 
 
-                                    <div class="col-3 mt-2" id="newSGCDualContainer" style="display: none;">
+                                    <div class="col-xl-3 col-sm-12 mt-2" id="newSGCDualContainer" style="display: none;">
                                         <label class="my-2">OLD SGC Dual</label>
                                         <input type="text" name="OldSGCDual" class="form-control">
                                     </div>
@@ -434,7 +535,7 @@
 
 
                                     <hr class="my-4">
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">KRN1</label>
                                         <select type="text" name="KRN1" class="form-control" required>
                                             <option value=" ">Select</option>
@@ -443,7 +544,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">KRN2</label>
                                         <select type="text" name="KRN2" class="form-control" required>
                                             <option value=" ">Select</option>
@@ -453,14 +554,14 @@
                                     </div>
 
 
-                                    <div class="col-3 mt-4">
+                                    <div class="col-xl-3 col-sm-12 mt-4">
                                         <input  type="checkbox" name="NeedKCT" class="form-check-input" style="border: 10px">
                                         <label class="form-check-label">Need KCT</label>
 
                                     </div>
 
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Credit Type</label>
                                         <select type="text" name="CreditTypeID" class="form-control" required>
                                             <option value=" ">Select</option>

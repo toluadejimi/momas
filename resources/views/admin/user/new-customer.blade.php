@@ -29,28 +29,28 @@
 
                                     <h6 class="d-flex justify-content-start my-4">Customer Information</h6>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">First Name</label>
                                         <input type="text" name="first_name" class="form-control" required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Last Name</label>
                                         <input type="text" name="last_name" class="form-control" required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Email</label>
                                         <input type="email" name="email" class="form-control" required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Phone</label>
                                         <input type="number" name="phone" class="form-control" required>
                                     </div>
 
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Estate</label>
                                         <select type="text" name="estate_id" class="form-control" required>
                                             <option value="1">None</option>
@@ -61,17 +61,17 @@
 
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Address</label>
                                         <input type="text" name="address" class="form-control" required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">City</label>
                                         <input type="text" name="city" class="form-control" required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">State</label>
                                         <select type="text" name="state" class="form-control" required>
                                             <option disabled selected>--Select State--</option>
@@ -124,7 +124,6 @@
 
 
                                     <h6 class="d-flex justify-content-start my-2">Attach Meter</h6>
-
                                     <div class="col-6">
                                         <div class="col-xl-3 col-sm-12" style="position: relative;">
 
@@ -134,65 +133,88 @@
                                             <div id="meterResult" class="search-result"></div>
 
                                             <script>
-                                                document.getElementById('searchMeter').addEventListener('keyup', function() {
-                                                    let query = this.value;
-                                                    console.log('User input:', query); // Log user input
 
-                                                    if (query.length > 2) { // Only search if input has more than 2 characters
-                                                        let xhr = new XMLHttpRequest();
-                                                        xhr.open('GET', '/search-meters?q=' + query, true); // Replace with the correct URL
 
-                                                        xhr.onreadystatechange = function() {
-                                                            if (xhr.readyState == 4 && xhr.status == 200) {
-                                                                console.log('Response received:', xhr.responseText); // Log the response
 
-                                                                let meters = JSON.parse(xhr.responseText);
-                                                                let meterResultDiv = document.getElementById('meterResult');
-                                                                meterResultDiv.innerHTML = ''; // Clear previous results
 
-                                                                if (meters.length > 0) {
-                                                                    meters.forEach(meter => {
-                                                                        let div = document.createElement('div');
-                                                                        div.textContent = meter.meterNo;
-                                                                        div.setAttribute('data-id', meter.id);
+                                                document.addEventListener('DOMContentLoaded', function () {
+                                                    const estateSelect = document.querySelector('[name="estate_id"]');
+                                                    const searchMeterInput = document.getElementById('searchMeter');
 
-                                                                        // Add click event to populate the input with the selected suggestion
-                                                                        div.addEventListener('click', function() {
-                                                                            document.getElementById('searchMeter').value = meter.meterNo;
-                                                                            meterResultDiv.style.display = 'none'; // Hide suggestions
+                                                    // Initially disable the searchMeter input
+                                                    searchMeterInput.disabled = true;
+
+                                                    // Enable/disable searchMeter based on estate selection
+                                                    estateSelect.addEventListener('change', function () {
+                                                        if (this.value) {
+                                                            searchMeterInput.disabled = false; // Enable if an estate is selected
+                                                        } else {
+                                                            searchMeterInput.disabled = true; // Disable if no estate is selected
+                                                        }
+                                                    });
+
+                                                    // Add search functionality
+                                                    searchMeterInput.addEventListener('keyup', function () {
+                                                        let query = this.value;
+                                                        console.log('User input:', query);
+
+                                                        // Get the selected estate ID
+                                                        let estateId = estateSelect.value;
+
+                                                        if (query.length > 2 && estateId) {
+                                                            let xhr = new XMLHttpRequest();
+                                                            xhr.open('GET', `/search-meters?q=${query}&estate_id=${estateId}`, true);
+
+                                                            xhr.onreadystatechange = function () {
+                                                                if (xhr.readyState == 4 && xhr.status == 200) {
+                                                                    console.log('Response received:', xhr.responseText);
+
+                                                                    let meters = JSON.parse(xhr.responseText);
+                                                                    let meterResultDiv = document.getElementById('meterResult');
+                                                                    meterResultDiv.innerHTML = ''; // Clear previous results
+
+                                                                    if (meters.length > 0) {
+                                                                        meters.forEach(meter => {
+                                                                            let div = document.createElement('div');
+                                                                            div.textContent = meter.meterNo;
+                                                                            div.setAttribute('data-id', meter.id);
+
+                                                                            div.addEventListener('click', function () {
+                                                                                searchMeterInput.value = meter.meterNo;
+                                                                                meterResultDiv.style.display = 'none'; // Hide suggestions
+                                                                            });
+
+                                                                            meterResultDiv.appendChild(div);
                                                                         });
-
-                                                                        meterResultDiv.appendChild(div);
-                                                                    });
-                                                                    meterResultDiv.style.display = 'block'; // Show results
-                                                                } else {
-                                                                    let noResultDiv = document.createElement('div');
-                                                                    noResultDiv.textContent = 'No meters found';
-                                                                    noResultDiv.style.color = 'red';
-                                                                    meterResultDiv.appendChild(noResultDiv);
-                                                                    meterResultDiv.style.display = 'block'; // Show the "No meters found" message
+                                                                        meterResultDiv.style.display = 'block'; // Show results
+                                                                    } else {
+                                                                        let noResultDiv = document.createElement('div');
+                                                                        noResultDiv.textContent = 'No meters found';
+                                                                        noResultDiv.style.color = 'red';
+                                                                        meterResultDiv.appendChild(noResultDiv);
+                                                                        meterResultDiv.style.display = 'block'; // Show the "No meters found" message
+                                                                    }
+                                                                } else if (xhr.readyState == 4) {
+                                                                    console.log('Error: Status', xhr.status); // Log error status
                                                                 }
-                                                            } else if (xhr.readyState == 4) {
-                                                                console.log('Error: Status', xhr.status); // Log error status
-                                                            }
-                                                        };
+                                                            };
 
-                                                        xhr.onerror = function() {
-                                                            console.error('Request error'); // Log any request errors
-                                                        };
+                                                            xhr.onerror = function () {
+                                                                console.error('Request error'); // Log any request errors
+                                                            };
 
-                                                        xhr.send();
-                                                    } else {
-                                                        document.getElementById('meterResult').style.display = 'none'; // Hide if input is too short
-                                                    }
+                                                            xhr.send();
+                                                        } else if (query.length <= 2) {
+                                                            document.getElementById('meterResult').style.display = 'none'; // Hide if input is too short
+                                                        }
+                                                    });
                                                 });
+
                                             </script>
 
 
                                         </div>
                                     </div>
-
-
 
                                 </div>
 
@@ -225,8 +247,6 @@
                                     <div class="col-4">
                                         <label class="my-2">Confirm Password</label>
                                         <input type="password" name="password_confirmation" value="123456" class="form-control" required>
-
-
                                     </div>
 
 
@@ -285,45 +305,45 @@
 
                                     <h6 class="d-flex justify-content-start my-4">Customer Information</h6>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">First Name</label>
                                         <input type="text" name="first_name" class="form-control" required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Last Name</label>
                                         <input type="text" name="last_name" class="form-control" required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Email</label>
                                         <input type="email" name="email" class="form-control" required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Phone</label>
                                         <input type="number" name="phone" class="form-control" required>
                                     </div>
 
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Estate</label>
                                         <input type="text" value="{{$estate->title}}" class="form-control" disabled required>
                                         <input type="text" value="{{$estate->id}}" name="estate_id"  hidden>
 
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Address</label>
                                         <input type="text" name="address" class="form-control" required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">City</label>
                                         <input type="text" name="city" class="form-control" required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">State</label>
                                         <select type="text" name="state" class="form-control" required>
                                             <option disabled selected>--Select State--</option>
@@ -377,7 +397,7 @@
 
                                     <h6 class="d-flex justify-content-start my-2">Attach Meter</h6>
 
-                                    <div class="col-3">
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Choose Meter</label>
                                         <select type="text" name="meterid" class="form-control" required>
                                             <option value=" "> Select meter </option>
