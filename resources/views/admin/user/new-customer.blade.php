@@ -63,17 +63,17 @@
 
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Address</label>
-                                        <input type="text" name="address" class="form-control" required>
+                                        <input type="text" name="address" class="form-control" >
                                     </div>
 
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">City</label>
-                                        <input type="text" name="city" class="form-control" required>
+                                        <input type="text" name="city" class="form-control" >
                                     </div>
 
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">State</label>
-                                        <select type="text" name="state" class="form-control" required>
+                                        <select type="text" name="state" class="form-control" >
                                             <option disabled selected>--Select State--</option>
                                             <option value="Abia">Abia</option>
                                             <option value="Adamawa">Adamawa</option>

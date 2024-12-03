@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Auth; @endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -197,6 +198,35 @@
 
 
                         <li>
+                            <a href="charts-mixed.html#sidebar1" data-bs-toggle="collapse">
+                                <i data-feather="zap"></i>
+                                <span> Meter Token </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+
+                            <div class="collapse" id="sidebar1">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a class='tp-link' href='credit-token'>Credit Token</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="collapse" id="sidebar1">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a class='tp-link' href='special-token'>Special Token</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </li>
+
+
+
+
+
+                        <li>
                             <a class='tp-link'  href="access-token">
                                 <i data-feather="lock"></i>
                                 <span> Access Token </span>
@@ -305,6 +335,40 @@
                                 <i data-feather="divide-square"></i>
                                 <span> Tariff </span>
                             </a>
+                        </li>
+
+
+                        <li>
+                            <a href="charts-mixed.html#sidebar1" data-bs-toggle="collapse">
+                                <i data-feather="zap"></i>
+                                <span> Meter Token </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+
+                            @php
+                            $ptype = \App\Models\Estate::where('id', Auth::user()->estate_id)->first()->ptype;
+                            @endphp
+
+
+                            @if($ptype == 2 || $ptype == 3 )
+                            <div class="collapse" id="sidebar1">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a class='tp-link' href='credit-token'>Credit Token</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            @else
+                            @endif
+
+                            <div class="collapse" id="sidebar1">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a class='tp-link' href='#'>Special Token</a>
+                                    </li>
+                                </ul>
+                            </div>
+
                         </li>
 
                         <li>

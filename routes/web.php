@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardContoller;
 use App\Http\Controllers\Admin\EstateController;
 use App\Http\Controllers\Admin\MeterImportController;
 use App\Http\Controllers\Admin\TariffController;
+use App\Http\Controllers\Admin\TokenController;
 use App\Http\Controllers\Estate\EstateServiceController;
 use App\Http\Controllers\Meter\MeterController;
 use App\Http\Controllers\Transaction\TransactionController;
@@ -50,6 +51,8 @@ Route::post('verify-code', [AuthController::class, 'verify_code']);
 
 
 Route::get('/search-meters', [MeterController::class, 'searchMeters']);
+Route::get('/search-meter', [MeterController::class, 'searchMeter']);
+
 
 
 Route::any('pay-flutter', [TransactionController::class, 'flutter_payment']);
@@ -116,6 +119,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('service-activate', [EstateServiceController::class, 'activate_service']);
     Route::post('estate-update-vat', [EstateServiceController::class, 'estate_update_vat']);
     Route::post('estate-update-minpur', [EstateServiceController::class, 'estate_update_minpur']);
+
 
 
 
@@ -231,6 +235,26 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     //REPORT
     Route::get('report-transaction', [TransactionController::class, 'transaction_reports']);
     Route::post('search-trx', [TransactionController::class, 'search_trx']);
+
+
+
+    //Token
+    Route::get('credit-token', [TokenController::class, 'credit_token_index']);
+    Route::post('validate-meter', [TokenController::class, 'validate_meter']);
+    Route::post('generate-credit-meter-token', [TokenController::class, 'generate_credit_meter_token']);
+    Route::any('paystack-check-web', [TokenController::class, 'paystack_verify_web']);
+    Route::any('pay-flutter-web', [TokenController::class, 'flutter_verify_web']);
+
+
+    Route::any('recepit', [TokenController::class, 'recepit']);
+
+
+
+
+
+
+
+
 
 
 

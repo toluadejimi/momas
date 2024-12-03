@@ -52,6 +52,10 @@ class Estate extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+    public function credit_token()
+    {
+        return $this->hasMany(CreditToken::class);
+    }
 
     protected $casts = [
         'status' => 'integer',

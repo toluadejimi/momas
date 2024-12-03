@@ -228,7 +228,7 @@
 
                                                         if (query.length > 2) { // Only search if input has more than 2 characters
                                                             let xhr = new XMLHttpRequest();
-                                                            xhr.open('GET', '/search-meters?q=' + query, true); // Replace with the correct URL
+                                                            xhr.open('GET', '/search-meter?q=' + query, true); // Replace with the correct URL
 
                                                             xhr.onreadystatechange = function () {
                                                                 if (xhr.readyState == 4 && xhr.status == 200) {

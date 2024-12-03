@@ -47,6 +47,16 @@ class MeterController extends Controller
         return response()->json($meters);
     }
 
+
+    public function searchMeter(request $request)
+    {
+        $query = $request->get('q');
+        $meters = Meter::where('meterNo', 'LIKE', '%' . $query . '%')->where('user_id',  null)->get();
+        return response()->json($meters);
+    }
+
+
+
     public function validate_meter(request $request)
     {
         $user = User::where('meterNo', $request->meterNo)->first() ?? null;

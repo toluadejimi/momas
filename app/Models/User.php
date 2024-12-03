@@ -110,4 +110,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function credit_token()
+    {
+        return $this->hasMany(CreditToken::class);
+    }
 }
