@@ -167,7 +167,7 @@
                                         <h6 class="d-flex justify-content-start my-4">Tariff History</h6>
                                         <a href="#" data-bs-toggle="modal"
                                            data-bs-target="#staticBackdrop"
-                                           class="btn btn-primary d-flex justify-content-end my-4">Add New</a>
+                                           class="btn btn-primary d-flex justify-content-end my-4">Add Rate</a>
 
                                     </div>
 
@@ -454,7 +454,7 @@
                                         <h6 class="d-flex justify-content-start my-4">Tariff History</h6>
                                         <a href="#" data-bs-toggle="modal"
                                            data-bs-target="#staticBackdrop"
-                                           class="btn btn-primary d-flex justify-content-end my-4">Add New</a>
+                                           class="btn btn-primary d-flex justify-content-end my-4">Add Rate</a>
 
                                     </div>
 
