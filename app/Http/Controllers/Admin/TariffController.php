@@ -130,20 +130,51 @@ class TariffController extends Controller
     public function add_state_tariff(request $request)
     {
 
+        $id = $request->id;
+
+
+        if($request->date_to == null && $request->never_expire == "yes"){
+
+
+            $tr = new TarrifState();
+            $tr->amount = $request->amount;
+            $tr->effective_from = $request->date_from;
+            $tr->effective_to = null;
+            $tr->tariff_id = $request->id;
+            $tr->estate_id = $request->estate_id;
+            $tr->vat = $request->vat;
+            $tr->save();
+
+            $ck_count = TarrifState::where('tariff_id', $request->id)->count();
+            if($ck_count == 1){
+                TarrifState::latest()->where('status', 0)->where('tariff_id', $request->id)->update(['status' => 2]);
+            }
+
+            return back()->with('message', 'Tariff Added Successfully');
+
+        }
+
+
+        if($request->date_to == null && $request->never_expire == "no"){
+            return redirect("admin/view-tariff?id=$id")->with('error', 'Please choose effective date to');
+        }
+
+        if($request->date_to != null && $request->never_expire == "no"){
+            return redirect("admin/view-tariff?id=$id")->with('error', 'Please choose choose NO on never expire');
+        }
 
         $ddfrom = new DateTime($request->date_from);
         $ddto = new DateTime($request->date_to);
 
         if( $ddfrom >= $ddto  ){
-            return redirect('add-new-tariffstate')->with('error', 'End date can not be greater than start date');
+            return redirect("admin/view-tariff?id=$id")->with('error', 'End date can not be greater than start date');
         }
-
 
         $newdate = TarrifState::latest()->where('status', 2)->where('tariff_id', $request->id)->first()->effective_to ?? null;
         $nd = new DateTime($newdate) ?? null;
 
         if($ddto <= $nd ){
-            return redirect('add-new-tariffstate')->with('error', 'you have a running tariff');
+            return redirect("admin/view-tariff?id=$id")->with('error', 'you have a running tariff');
         }
 
         $tr = new TarrifState();
@@ -248,6 +279,37 @@ class TariffController extends Controller
         return back()->with('message', "Detach Tariff successful");
 
     }
+
+
+
+    public function update_tariffstate(request $request)
+    {
+
+
+
+        if($request->status == 2){
+
+            $update1 =  TarrifState::where('estate_id', $request->estate_id)->where('status', 2)->update(['status' => 0]);
+
+            if($update1 == 0){
+               $update2 =  TarrifState::where('estate_id', $request->estate_id)->where('id', $request->id)->update(['status' => 2]);
+
+               dd($update2, $update1, $request->estate_id, $request->id);
+
+            }
+
+
+            return back()->with('message', "Tariff state updated successful");
+
+        }else{
+            TarrifState::where('estate_id', $request->estate_id)->where('id', $request->id)->update(['status' => 2]);
+
+            return back()->with('message', "Tariff state updated successful");
+
+        }
+
+    }
+
 
 
 

@@ -85,12 +85,28 @@
                                                 <div class="col-5">
                                                     <label class="my-1">Effective Date To</label>
                                                     <input type="date" class="form-control mb-3" name="date_to"
-                                                           required>
+                                                           >
 
                                                     <input type="text" name="id" value="{{$tr->id}}" hidden>
 
 
+
+
                                                 </div>
+
+
+                                                <div class="col-5">
+
+                                                    <label class="my-1">Never Expire</label>
+                                                    <select class="form-control" name="never_expire" required>
+                                                        <option value="">--select option---</option>
+                                                        <option value="yes">Yes</option>
+                                                        <option value="no">No</option>
+                                                    </select>
+
+
+                                                </div>
+
 
                                             </div>
 
@@ -131,9 +147,6 @@
 
 
                                     </div>
-
-
-
 
 
                                     <hr class="my-4">
@@ -212,6 +225,10 @@
                                                                 <label class="my-1">Vat %</label>
                                                                 <input type="number" class="form-control mb-3"
                                                                        value="{{$data->vat}}" name="vat" required>
+
+
+                                                                <input type="text" name="estate_id" value="{{auth::user()->estate_id}}" hidden>
+                                                                <input type="text" name="id" value="{{$data->id}}" >
 
                                                                 <div class="row">
                                                                     <div class="col-6">
@@ -371,15 +388,35 @@
                                                            class="form-control mb-3" name="date_from"
                                                            required>
                                                 </div>
+
                                                 <div class="col-5">
                                                     <label class="my-1">Effective Date To</label>
                                                     <input type="date" class="form-control mb-3" name="date_to"
-                                                           required>
+                                                           >
 
                                                     <input type="text" name="id" value="{{$tr->id}}" hidden>
 
+                                                    <input type="text" name="estate_id" value="{{Auth::user()->estate_id}}" hidden>
+
 
                                                 </div>
+
+
+
+
+
+                                                <div class="col-5">
+
+                                                    <label class="my-1">Never Expire</label>
+                                                    <select class="form-control" name="never_expire" required>
+                                                        <option value="">--select option---</option>
+                                                        <option value="yes">Yes</option>
+                                                        <option value="no">No</option>
+                                                    </select>
+
+
+                                                </div>
+
 
                                             </div>
 
@@ -470,12 +507,11 @@
                                                data-bs-target="#updatestate{{$data->id}}">
                                                 <h6>{{$data->amount}}</h6></a>
 
-
-
                                             <div class="modal fade" id="updatestate{{$data->id}}"
                                                  data-bs-backdrop="static" data-bs-keyboard="false"
                                                  tabindex="-1" aria-labelledby="staticBackdropLabel"
                                                  aria-hidden="true">
+
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -494,6 +530,10 @@
                                                                 <label class="my-1">Tariff Amount</label>
                                                                 <input type="number" class="form-control mb-3"
                                                                        value="{{$data->amount}}" name="amount" required>
+
+                                                                <input type="text" name="estate_id" value="{{auth::user()->estate_id}}" hidden>
+                                                                <input type="text" name="id" value="{{$data->id}}" hidden>
+
 
 
                                                                 <label class="my-1">Vat %</label>
@@ -532,15 +572,6 @@
                                                 </div>
                                             </div>
 
-
-
-                                        </div>
-
-                                        <div class="col-3">
-
-                                            <label class="my-1">Date Effective From</label>
-                                            <h6>{{$data->effective_from}}</h6>
-
                                         </div>
 
 
@@ -552,12 +583,24 @@
                                         </div>
 
 
+
+                                        <div class="col-3">
+
+                                            <label class="my-1">Date Effective From</label>
+                                            <h6>{{$data->effective_from}}</h6>
+
+                                        </div>
+
+
+
                                         <div class="col-3">
 
                                             <label class="my-1">Date Effective To</label>
                                             <h6>{{$data->effective_to}}</h6>
 
                                         </div>
+
+
 
                                         <div class="col-3">
 

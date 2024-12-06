@@ -68,6 +68,8 @@ Route::any('verify_code', [AuthController::class, 'verify_code']);
 Route::get('code', [AuthController::class, 'code']);
 
 
+
+
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
 
@@ -210,7 +212,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('view-tariff', [TariffController::class, 'view_tariff']);
     Route::post('update-the-tariff', [TariffController::class, 'update_the_tariff']);
 
-    Route::post('add-new-tariffstate', [TariffController::class, 'add_state_tariff']);
 
     Route::post('update-nepa', [TariffController::class, 'update_nepa']);
     Route::post('update-gen', [TariffController::class, 'update_gen']);
@@ -247,6 +248,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
 
     Route::any('recepit', [TokenController::class, 'recepit']);
+
+
+
+    Route::post('add-new-tariffstate', [TariffController::class, 'add_state_tariff']);
+    Route::post('update-tariffstate', [TariffController::class, 'update_tariffstate']);
 
 
 
