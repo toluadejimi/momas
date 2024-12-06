@@ -208,6 +208,11 @@
                                                                 <input type="number" class="form-control mb-3"
                                                                        value="{{$data->amount}}" name="amount" required>
 
+
+                                                                <label class="my-1">Vat %</label>
+                                                                <input type="number" class="form-control mb-3"
+                                                                       value="{{$data->vat}}" name="vat" required>
+
                                                                 <div class="row">
                                                                     <div class="col-6">
                                                                         <label class="my-1">Status</label>
@@ -247,6 +252,14 @@
 
                                             <label class="my-1">Date Effective From</label>
                                             <h6>{{$data->effective_from}}</h6>
+
+                                        </div>
+
+
+                                        <div class="col-3">
+
+                                            <label class="my-1">VAT</label>
+                                            <h6>{{$data->vat}}%</h6>
 
                                         </div>
 
@@ -479,8 +492,14 @@
                                                             <div class="modal-body">
 
                                                                 <label class="my-1">Tariff Amount</label>
-                                                                <input type="text" class="form-control mb-3"
+                                                                <input type="number" class="form-control mb-3"
                                                                        value="{{$data->amount}}" name="amount" required>
+
+
+                                                                <label class="my-1">Vat %</label>
+                                                                <input type="number" class="form-control mb-3"
+                                                                       value="{{$data->vat}}" name="vat" required>
+
 
                                                                 <div class="row">
                                                                     <div class="col-6">
@@ -523,6 +542,15 @@
                                             <h6>{{$data->effective_from}}</h6>
 
                                         </div>
+
+
+                                        <div class="col-3">
+
+                                            <label class="my-1">Vat</label>
+                                            <h6>{{$data->vat}}%</h6>
+
+                                        </div>
+
 
                                         <div class="col-3">
 
