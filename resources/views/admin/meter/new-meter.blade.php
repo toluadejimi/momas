@@ -499,17 +499,21 @@
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">New Tariff</label>
                                         <select name="NewTariffID" class="form-control">
-                                            <option value="{{$meter->NewTariffID}}">{{strtoupper($NewTariffID)}}</option>
+                                            <option value="{{$meter->tariff_id ?? " "}}">{{$meter->tariff_id ?? ""}}</option>
                                             @foreach($tariff as $data)
                                                 <option value="{{$data->id}}">{{$data->title}}</option>
                                             @endforeach
                                         </select>
                                     </div>
 
+
+
+
+
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Old Tariff</label>
                                         <select type="text" name="OldTariffID" class="form-control" required>
-                                            <option value="{{$meter->OldTariffID}}">{{strtoupper($OldTariffID)}}</option>
+                                            <option value="{{$meter->tariff_id ?? ""}}">{{$meter->tariff_id ?? ""}}</option>
                                             @foreach($tariff as $data)
                                                 <option value="{{$data->id}}">{{$data->title}} </option>
                                             @endforeach

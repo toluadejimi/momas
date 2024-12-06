@@ -875,11 +875,11 @@ class MeterController extends Controller
 
         } elseif (auth::user()->role == 3) {
 
-
             $data['estate'] = Estate::where('id', auth::user()->estate_id)->first();
             $data['transformer'] = Transformer::latest()->where('estate_id', auth::user()->estate_id)->get();
             $data['tariff'] = Tariff::latest()->where('status', 2)->where('estate_id', auth::user()->estate_id)->get();
             $data['tariffdual'] = Tariff::latest()->where('isDualTariff', "on")->get();
+            $data['meter'] = TarrifState::where('id', auth::user()->estate_id)->first();
 
 
             return view('admin/meter/new-meter', $data);
