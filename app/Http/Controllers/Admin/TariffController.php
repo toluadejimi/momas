@@ -160,7 +160,7 @@ class TariffController extends Controller
         }
 
         if($request->date_to != null && $request->never_expire == "no"){
-            return redirect("admin/view-tariff?id=$id")->with('error', 'Please choose choose NO on never expire');
+            return redirect("admin/view-tariff?id=$id")->with('error', 'Effective date has been set please choose NO on never expire option');
         }
 
         $ddfrom = new DateTime($request->date_from);
