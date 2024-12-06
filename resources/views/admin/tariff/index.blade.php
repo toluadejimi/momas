@@ -249,6 +249,7 @@
                                         <th scope="col" class="cursor-pointer">TariffCode</th>
                                         <th scope="col" class="cursor-pointer">Estate</th>
                                         <th scope="col" class="cursor-pointer">Status</th>
+                                        <th scope="col" class="cursor-pointer">Date/Time</th>
                                         <th scope="col" class="cursor-pointer desc">Action</th>
 
                                     </tr>
@@ -272,6 +273,7 @@
                                                 @endif
 
                                             </td>
+                                            <td>{{$data->created_at}}</td>
                                             <td><a href="delete-tariff?id={{$data->id}}"  onclick="return confirmDelete();" class="btn btn-danger">Delete</a>
                                                 <script>
 
