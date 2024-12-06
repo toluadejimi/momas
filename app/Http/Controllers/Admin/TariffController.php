@@ -152,6 +152,7 @@ class TariffController extends Controller
         $tr->effective_to = $request->date_to;
         $tr->tariff_id = $request->id;
         $tr->estate_id = $request->estate_id;
+        $tr->vat = $request->vat;
         $tr->save();
 
         $ck_count = TarrifState::where('tariff_id', $request->id)->count();

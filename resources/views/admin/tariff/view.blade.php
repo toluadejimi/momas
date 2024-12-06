@@ -57,8 +57,11 @@
 
                                         <div class="modal-body">
 
-                                            <label class="my-1">Tariff Amount %</label>
-                                            <input type="text" value="1.075" class="form-control mb-3" name="amount" required>
+                                            <label class="my-1">Tariff Amount </label>
+                                            <input type="text"  class="form-control mb-3" name="amount" required>
+
+                                            <label class="my-1">Vat %</label>
+                                            <input type="text" value="1.075" class="form-control mb-3" name="vat" required>
 
                                             <div class="col-12 my-3">
                                                 <label class="my-2">Choose Estate</label>
@@ -341,8 +344,12 @@
 
                                         <div class="modal-body">
 
-                                            <label class="my-1">Tariff Amount %</label>
-                                            <input type="text" value="1.075" class="form-control mb-3" name="amount" required>
+                                            <label class="my-1">Tariff Amount</label>
+                                            <input type="text"  class="form-control mb-3" name="amount" required>
+
+                                            <label class="my-1">Vat %</label>
+                                            <input type="text" value="1.075" class="form-control mb-3" name="vat" required>
+
 
                                             <div class="row">
                                                 <div class="col-6">
