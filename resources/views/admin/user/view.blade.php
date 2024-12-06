@@ -354,563 +354,134 @@
 
 
                     <div class="col-xl-12">
-                        <div class="card">
-
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Vending Information</h5>
-                            </div><!-- end card header -->
-
-                            <div class="card-body">
-                                <ul class="nav nav-pills nav-justified bg-light" role="tablist">
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#navpills2-home"
-                                           role="tab">
-                                            <span class="d-block d-sm-none"><i class="mdi mdi-cog"></i></span>
-                                            <span class="d-none d-sm-block">Tokens</span>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#navpills2-messages" role="tab">
-                                            <span class="d-block d-sm-none"><i class="mdi mdi-cog"></i></span>
-                                            <span class="d-none d-sm-block">KCT Tokens</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#navpills2-settings" role="tab">
-                                            <span class="d-block d-sm-none"><i class="mdi mdi-cog"></i></span>
-                                            <span class="d-none d-sm-block">Tariff</span>
-                                        </a>
-                                    </li>
-                                </ul>
-
-                                <div class="tab-content p-3 text-muted">
-
-                                    {{-- TOKENS--}}
-                                    <div class="tab-pane active show" id="navpills2-home" role="tabpanel">
-                                        <div class="row">
-                                            <div class="d-flex justify-content-between my-4">
-                                                <h5 class="card-title text-black mb-0">Meter Token Information</h5>
-
-                                                <div class="col-xl-6">
-                                                    <div class="card">
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="staticBackdrop"
-                                                             data-bs-backdrop="static" data-bs-keyboard="false"
-                                                             tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                                             aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered">
-                                                                <div class="modal-content">
-
-                                                                    <div class="modal-header">
-                                                                        <h1 class="modal-title fs-5"
-                                                                            id="staticBackdropLabel">Generate Meter
-                                                                            Token </h1>
-                                                                        <button type="button" class="btn-close"
-                                                                                data-bs-dismiss="modal"
-                                                                                aria-label="Close"></button>
-                                                                    </div>
-
-
-                                                                    <form action="generate-token" method="POST"
-                                                                          enctype="multipart/form-data">
-                                                                        @csrf
-
-                                                                        <div class="modal-body">
-
-
-                                                                            @if($meter_count == 0)
-
-                                                                                <label class="my-2">Meter No</label>
-                                                                                <input class="form-control mb-3"
-                                                                                       disabled name="meterNo"
-                                                                                       value="{{$meter->meterNo ?? "No meter attached"}}">
-
-                                                                            @else
-
-
-                                                                                <label class="my-2">TRX ID</label>
-                                                                                <input class="form-control mb-3"
-                                                                                       name="trxid" required>
-
-                                                                                <label class="my-2">Meter No</label>
-                                                                                <input class="form-control mb-3"
-                                                                                       name="meterNo"
-                                                                                       value="{{$meter->meterNo ?? "No meter attached"}}">
-                                                                                <input class="form-control mb-3"
-                                                                                       name="user_id"
-                                                                                       hidden
-                                                                                       value="{{$user->id}}">
-
-                                                                            @endif
-
-                                                                            <label class="my-2">Select Vending
-                                                                                Type</label>
-                                                                            @if($meter_count == 0 && $tariff_count == 0)
-                                                                                <span class="badge text-bg-danger">No tariff attached</span>
-                                                                                <a href="/admin/new-tariff">Add new
-                                                                                    tariff</a>
-                                                                            @else
-                                                                                @foreach($tariffs as $data)
-                                                                                    <span
-                                                                                        class="badge text-bg-danger">{{strtoupper($data->type)}}</span>
-                                                                                @endforeach
-                                                                            @endif
-
-                                                                            @if($meter_count != 0 && $tariff_count != 0)
-                                                                                <select class="form-control"
-                                                                                        name="tariff_id">
-                                                                                    <option value="">--select--</option>
-                                                                                    @foreach($tariffs as $data)
-                                                                                        <option
-                                                                                            value="{{$data->id}}">{{$data->title}}
-                                                                                            - {{strtoupper($data->type)}}</option>
-                                                                                    @endforeach
-                                                                                </select>
-
-                                                                            @else
-                                                                                <input class="form-control mb-3"
-                                                                                       value="No Tariff found" disabled>
-                                                                            @endif
-
-
-                                                                            @if($meter_count != 0 && $tariff_count != 0)
-                                                                                <div class="col">
-
-                                                                                    <label class="my-2">Amount</label>
-                                                                                    <input type="number"
-                                                                                           class="form-control mb-3"
-                                                                                           name="amount">
-
-                                                                                </div>
-
-                                                                            @else
-                                                                                <label class="my-2">Amount</label>
-                                                                                <input class="form-control mb-3"
-                                                                                       value=" " disabled>
-                                                                            @endif
-
-
-                                                                        </div>
-
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-light"
-                                                                                    data-bs-dismiss="modal">
-                                                                                Close
-                                                                            </button>
-                                                                            @if($meter_count != 0 && $tariff_count != 0)
-                                                                                <button type="submit"
-                                                                                        class="btn btn-primary">Create
-                                                                                </button>
-                                                                            @else
-
-                                                                            @endif
-
-
-                                                                        </div>
-
-                                                                    </form>
-
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div> <!-- end card -->
-                                                </div> <!-- end col -->
-                                                @if($ptype == 1)
-                                                @else
-                                                    <a href="#" data-bs-toggle="modal"
-                                                       data-bs-target="#staticBackdrop"
-                                                       class="btn btn-primary text-white justify-content-end">Generate
-                                                        new
-                                                        Meter Token</a>
-                                                @endif
-
-                                            </div>
-                                            <div class="card-body">
-                                                <table id="datatable"
-                                                       class="table table-bordered dt-responsive table-responsive nowrap">
-                                                    <thead>
-                                                    <tr>
-                                                        <th scope="col" class="cursor-pointer">ID</th>
-                                                        <th scope="col" class="cursor-pointer">Estate</th>
-                                                        <th scope="col" class="cursor-pointer">MeterNo</th>
-                                                        <th scope="col" class="cursor-pointer">Token</th>
-                                                        <th scope="col" class="cursor-pointer">Amount</th>
-                                                        <th scope="col" class="cursor-pointer">VAT</th>
-                                                        <th scope="col" class="cursor-pointer">Status</th>
-                                                        <th scope="col" class="cursor-pointer">Action</th>
-                                                        <th scope="col" class="cursor-pointer">Date/Time</th>
-
-
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-
-
-                                                    @foreach($vending as $data)
-
-                                                        <tr>
-                                                            <td>{{$data->order_id}} </td>
-                                                            <td>{{$data->estate->title}}</td>
-                                                            <td>{{$data->meterNo}}</td>
-                                                            <td>{{$data->token}}</td>
-                                                            <td>{{number_format($data->amount, 2)}}</td>
-                                                            <td>{{number_format($data->vat, 2)}}</td>
-                                                            <td>
-                                                                @if($data->status == 2)
-                                                                    <span class="badge text-bg-primary">Completed</span>
-                                                                @elseif($data->status == 3)
-                                                                    <span class="badge text-bg-dark">Error</span>
-                                                                @elseif($data->status == 0)
-                                                                    <span class="badge text-bg-warning">Pending</span>
-                                                                @endif
-
-                                                            </td>
-                                                            <td>
-                                                                <a href="send-token-email?email={{$user->email}}&amount={{$data->amount}}&token={{$data->token}}&unit={{$data->unit}}"
-                                                                   onclick="return confirmDelete();"
-                                                                   class="btn btn-primary">Send</a>
-                                                            </td>
-                                                            <script>
-                                                                function confirmDelete() {
-                                                                    return confirm('Are you sure you want to send email to  {{$user->email}}?');
-                                                                }
-                                                            </script>
-
-                                                            <td>{{$data->created_at}}</td>
-
-                                                        </tr>
-
-                                                    @endforeach
-
-
-                                                    </tbody><!-- end tbody -->
-
-                                                    <tfoot>
-
-                                                    {{ $vending->links() }}
-
-
-                                                    </tfoot>
-                                                </table><!-- end table -->
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    {{-- KCT TOKENS--}}
-                                    <div class="tab-pane" id="navpills2-messages" role="tabpanel">
-                                        <div class="row">
-                                            <div class="d-flex justify-content-between my-4">
-                                                <h5 class="card-title text-black mb-0">KCT Token Information</h5>
-
-                                                <div class="col-xl-6">
-                                                    <div class="card">
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="kcttoken"
-                                                             data-bs-backdrop="static" data-bs-keyboard="false"
-                                                             tabindex="-1" aria-labelledby="kcttoken"
-                                                             aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h1 class="modal-title fs-5"
-                                                                            id="kcttoken">Generate KCT Tokens </h1>
-
-
-                                                                        <button type="button" class="btn-close"
-                                                                                data-bs-dismiss="modal"
-                                                                                aria-label="Close"></button>
-                                                                    </div>
-
-                                                                    <form action="generate-kct-token" method="POST"
-                                                                          enctype="multipart/form-data">
-                                                                        @csrf
-
-                                                                        <div class="modal-body">
-
-                                                                            <label class="my-2">Meter No</label>
-                                                                            <input class="form-control mb-3" disabled
-                                                                                   name="meterNo"
-                                                                                   value="{{$meter->meterNo ?? "No meter attached"}}">
-                                                                            <input hidden name="meterNo"
-                                                                                   value="{{$meter->meterNo ?? "No meter attached"}}">
-                                                                            <input hidden name="user_id"
-                                                                                   value="{{$user->id}}">
-
-
-                                                                            @if($meter_count == 0)
-
-                                                                            @else
-                                                                                <div class="row">
-                                                                                    <div class="col-6">
-
-                                                                                        <label class="my-2">NEW
-                                                                                            SGC</label>
-                                                                                        <input type="text"
-                                                                                               class="form-control mb-3"
-                                                                                               value="{{$meter->NewSGC}}"
-                                                                                               disabled
-                                                                                               name="NewSGC">
-                                                                                        <input type="text"
-                                                                                               value="{{$meter->NewSGC}}"
-                                                                                               hidden
-                                                                                               name="NewSGC">
-
-                                                                                    </div>
-
-                                                                                    <div class="col-6">
-                                                                                        <label class="my-2">OLD
-                                                                                            SGC</label>
-                                                                                        <input type="text"
-                                                                                               class="form-control mb-3"
-                                                                                               disabled
-                                                                                               value="{{$meter->OldSGC}}"
-                                                                                               name="OldSGC">
-                                                                                        <input type="text"
-                                                                                               hidden
-                                                                                               value="{{$meter->OldSGC}}"
-                                                                                               name="OldSGC">
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            @endif
-
-                                                                            @if($meter_count != 0 && $tariff_count != 0)
-
-                                                                            @else
-
-                                                                            @endif
-
-
-                                                                        </div>
-
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-light"
-                                                                                    data-bs-dismiss="modal">
-                                                                                Close
-                                                                            </button>
-                                                                            @if($meter_count != 0 && $tariff_count != 0)
-                                                                                <button type="submit"
-                                                                                        class="btn btn-primary">Generate
-                                                                                    KCT Tokens
-                                                                                </button>
-                                                                            @else
-
-                                                                            @endif
-
-
-                                                                        </div>
-
-                                                                    </form>
-
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div> <!-- end card -->
-                                                </div> <!-- end col -->
-                                                <a href="#" data-bs-toggle="modal"
-                                                   data-bs-target="#kcttoken"
-                                                   class="btn btn-primary text-white justify-content-end">Generate new
-                                                    KCT Tokens</a>
-                                            </div>
-                                            <div class="card-body">
-                                                <table id="datatable"
-                                                       class="table table-bordered dt-responsive table-responsive nowrap">
-                                                    <thead>
-                                                    <tr>
-                                                        <th scope="col" class="cursor-pointer">ID</th>
-                                                        <th scope="col" class="cursor-pointer">Estate</th>
-                                                        <th scope="col" class="cursor-pointer">MeterNo</th>
-                                                        <th scope="col" class="cursor-pointer">KCT TOKENS</th>
-                                                        <th scope="col" class="cursor-pointer">Action</th>
-                                                        <th scope="col" class="cursor-pointer">Date/Time</th>
 
+                        <div class="row">
+                            <div class="col-xl-6 mr-3 col-sm-12 card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <form action="update-nepa" method="post">
+                                            @csrf
+                                            <div class="row">
 
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
+                                                <h6 class="d-flex justify-content-start my-2">Tariff
+                                                    Information</h6>
 
 
-                                                    @foreach($kcttokens as $data)
+                                                <div class="col-xl-6 col-sm-12"
+                                                     style="position: relative;">
 
-                                                        <tr>
-                                                            <td>{{$data->id}} </td>
-                                                            <td>{{$data->estate->title}}</td>
-                                                            <td>{{$data->meterNo}}</td>
-                                                            <td>{{$data->kct_token}}</td>
+                                                    <h6 class="mb-4">NEPA TARIFF <span
+                                                            class="badge text-bg-secondary">{{$nepa_tariff_title   ?? "Set Tariff"}} | ID - {{$tariff_index_nepa ?? " "}}</span>
+                                                    </h6>
 
-                                                            <td>
-                                                                <a href="send-token-email?email={{$user->email}}&amount={{$data->amount}}&token={{$data->token}}&unit={{$data->unit}}"
-                                                                   onclick="return confirmDelete();"
-                                                                   class="btn btn-primary">Send</a>
-                                                            </td>
-                                                            <script>
-                                                                function confirmDelete() {
-                                                                    return confirm('Are you sure you want to send email to  {{$user->email}}?');
-                                                                }
-                                                            </script>
+                                                    <select class="form-control my-3" name="id">
 
-                                                            <td>{{$data->created_at}}</td>
+                                                        @foreach($tariff as $data)
+                                                            <option
+                                                                value="{{$data->id}}">{{$data->title}}
+                                                                |
+                                                                ID - {{$data->tariff_index}}</option>
+                                                        @endforeach
 
-                                                        </tr>
+                                                        <input name="user_id" hidden
+                                                               value="{{$user->id}}">
 
-                                                    @endforeach
 
+                                                    </select>
 
-                                                    </tbody><!-- end tbody -->
 
-                                                    <tfoot>
+                                                    @if($tariff_count_nepa == 0)
 
-                                                    {{ $vending->links() }}
+                                                        <button type="submit"
+                                                                class="col-12 d-flex w-100 btn btn-primary my-3">
+                                                            Attach Tariff
+                                                        </button>
 
+                                                    @else
 
-                                                    </tfoot>
-                                                </table><!-- end table -->
-                                            </div>
-                                        </div>
+                                                        <a href="detach-nepa-tariff?id={{$tariff_id_nepa}}" class="col-12 d-flex w-100 btn btn-danger my-3">
+                                                            Detach  Tariff
+                                                        </a>
 
-                                    </div>
 
 
-                                    <div class="tab-pane" id="navpills2-settings" role="tabpanel">
+                                                    @endif
 
-                                        <div class="row">
-                                            <div class="col-xl-6 mr-3 col-sm-12 card">
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <form action="update-nepa" method="post">
-                                                            @csrf
-                                                            <div class="row">
 
-                                                                <h6 class="d-flex justify-content-start my-2">Tariff
-                                                                    Information</h6>
 
 
-                                                                <div class="col-xl-6 col-sm-12"
-                                                                     style="position: relative;">
-
-                                                                    <h6 class="mb-4">NEPA TARIFF <span
-                                                                            class="badge text-bg-secondary">{{$nepa_tariff_title   ?? "Set Tariff"}} | ID - {{$tariff_index_nepa ?? " "}}</span>
-                                                                    </h6>
-
-                                                                    <select class="form-control my-3" name="id">
-
-                                                                        @foreach($tariff as $data)
-                                                                            <option
-                                                                                value="{{$data->id}}">{{$data->title}}
-                                                                                |
-                                                                                ID - {{$data->tariff_index}}</option>
-                                                                        @endforeach
-
-                                                                        <input name="user_id" hidden
-                                                                               value="{{$user->id}}">
-
-
-                                                                    </select>
-
-
-                                                                    @if($tariff_count_nepa == 0)
-
-                                                                        <button type="submit"
-                                                                                class="col-12 d-flex w-100 btn btn-primary my-3">
-                                                                            Attach Tariff
-                                                                        </button>
-
-                                                                    @else
-
-                                                                        <a href="detach-nepa-tariff?id={{$tariff_id_nepa}}" class="col-12 d-flex w-100 btn btn-danger my-3">
-                                                                            Detach  Tariff
-                                                                        </a>
-
-
-
-                                                                    @endif
-
-
-
-
-                                                                </div>
-
-
-                                                            </div>
-
-                                                        </form>
-                                                    </div>
                                                 </div>
+
+
                                             </div>
-                                            <div class="col-xl-6 col-sm-12 card">
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <form action="update-gen" method="post">
-                                                            @csrf
-                                                            <div class="row">
 
-                                                                <h6 class="d-flex justify-content-start my-2">Tariff
-                                                                    Information</h6>
-
-
-                                                                <div class="col-xl-6 col-sm-12"
-                                                                     style="position: relative;">
-
-                                                                    <h6 class="mb-4">GENERATOR TARIFF <span
-                                                                            class="badge text-bg-secondary">{{$gen_tariff_title   ?? "Set Tariff"}} | ID - {{$tariff_index_gen ?? " "}}</span>
-                                                                    </h6>
-
-                                                                    <select class="form-control my-3" name="tariff">
-
-                                                                        @foreach($tariff as $data)
-                                                                            <option
-                                                                                value="{{$data->id}}">{{$data->title}}
-                                                                                |
-                                                                                ID - {{$data->tariff_index}}</option>
-                                                                        @endforeach
-
-
-                                                                    </select>
-
-
-                                                                    <input name="user_id" hidden
-                                                                           value="{{$user->id}}">
-
-
-                                                                    @if($tariff_count_gen == 0)
-
-                                                                        <button type="submit"
-                                                                                class="col-12 d-flex w-100 btn btn-primary my-3">
-                                                                            Attach Tariff
-                                                                        </button>
-
-                                                                    @else
-
-                                                                        <a href="detach-gen-tariff?id={{$tariff_id_gen}}" class="col-12 d-flex w-100 btn btn-danger my-3">
-                                                                            Detach  Tariff
-                                                                        </a>
-
-
-
-                                                                    @endif
-
-                                                                </div>
-
-
-                                                            </div>
-
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
+                                        </form>
                                     </div>
-
-
                                 </div>
                             </div>
-                        </div> <!-- end card-->
+                            <div class="col-xl-6 col-sm-12 card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <form action="update-gen" method="post">
+                                            @csrf
+                                            <div class="row">
+
+                                                <h6 class="d-flex justify-content-start my-2">Tariff
+                                                    Information</h6>
+
+
+                                                <div class="col-xl-6 col-sm-12"
+                                                     style="position: relative;">
+
+                                                    <h6 class="mb-4">GENERATOR TARIFF <span
+                                                            class="badge text-bg-secondary">{{$gen_tariff_title   ?? "Set Tariff"}} | ID - {{$tariff_index_gen ?? " "}}</span>
+                                                    </h6>
+
+                                                    <select class="form-control my-3" name="tariff">
+
+                                                        @foreach($tariff as $data)
+                                                            <option
+                                                                value="{{$data->id}}">{{$data->title}}
+                                                                |
+                                                                ID - {{$data->tariff_index}}</option>
+                                                        @endforeach
+
+
+                                                    </select>
+
+
+                                                    <input name="user_id" hidden
+                                                           value="{{$user->id}}">
+
+
+                                                    @if($tariff_count_gen == 0)
+
+                                                        <button type="submit"
+                                                                class="col-12 d-flex w-100 btn btn-primary my-3">
+                                                            Attach Tariff
+                                                        </button>
+
+                                                    @else
+
+                                                        <a href="detach-gen-tariff?id={{$tariff_id_gen}}" class="col-12 d-flex w-100 btn btn-danger my-3">
+                                                            Detach  Tariff
+                                                        </a>
+
+
+
+                                                    @endif
+
+                                                </div>
+
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div> <!-- end col -->
 
 
