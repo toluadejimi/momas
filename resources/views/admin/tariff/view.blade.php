@@ -52,7 +52,7 @@
                                                 aria-label="Close"></button>
                                     </div>
 
-                                    <form action="add-new-tariffstate" method="POST" enctype="multipart/form-data">
+                                    <form action="/admin/add-new-tariffstate" method="POST" enctype="multipart/form-data">
                                         @csrf
 
                                         <div class="modal-body">
@@ -339,7 +339,7 @@
                                                 aria-label="Close"></button>
                                     </div>
 
-                                    <form action="add-new-tariffstate" method="POST" enctype="multipart/form-data">
+                                    <form action="/admin/add-new-tariffstate" method="POST" enctype="multipart/form-data">
                                         @csrf
 
                                         <div class="modal-body">
