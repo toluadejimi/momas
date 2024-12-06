@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Meter;
 
 use App\Http\Controllers\Controller;
+use App\Models\CreditToken;
 use App\Models\Estate;
 use App\Models\KctMeterToken;
 use App\Models\Meter;
@@ -216,12 +217,30 @@ class MeterController extends Controller
 
                         if ($status == "SUCCESS") {
 
-                            $met = new MeterToken ();
+
+                            $order_id = "TRX".random_int(000000000, 9999999999);
+                            $estate_id = Auth::user()->estate_id;
+                            $cdt = new CreditToken();
+                            $cdt->user_id = Auth::user()->id;
+                            $cdt->order_id = $order_id;
+                            $cdt->meterNo = $meterNo;
+                            $cdt->amount =  $total_paid ?? 0;
+                            $cdt->vat = $vat_amount ?? 0;
+                            $cdt->estate_name = Estate::where('id', Auth::user()->estate_id)->first()->title >> "NAME";
+                            $cdt->estate_id = $estate_id;
+                            $cdt->tariff_id = TarrifState::where('estate_id', $estate_id)->first()->tariff_id;
+                            $cdt->vatAmount = $vat_amount;
+                            $cdt->costOfUnit = $request->vending_amount;
+                            $cdt->tariffPerKWatt = $request->vend_amount_kw_per_naira;
+                            $cdt->save();
+
+
+                            $met = new MeterToken();
                             $met->user_id = Auth::user()->id;
                             $met->order_id = $trx;
                             $met->meterNo = $meterNo;
                             $met->token = $token;
-                            $met->amount = $vendong_amount;
+                            $met->amount = $total_paid ?? 0;
                             $met->unit = $unit;
                             $met->kct_tokens = $kct_data['tokens'][0] . "," . $kct_data['tokens'][1];
                             $met->vat = $vat_amount;
