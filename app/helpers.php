@@ -475,18 +475,18 @@ if (!function_exists('generate_token')) {
 }
 
 
-//if (!function_exists('send_notification')) {
-//
-//    function send_notification($message)
-//    {
-//
-//        $response = Http::post('https://api.telegram.org/bot6140179825:AAGfAmHK6JQTLegsdpnaklnhBZ4qA1m2c64/sendMessage?chat_id=1316552414', [
-//            'chat_id' => "1316552414",
-//            'text' => $message,
-//
-//        ]);
-//        $responseData = $response->json();
-//
-//
-//    }
-//}
+if (!function_exists('send_notification')) {
+
+    function send_notification($message)
+    {
+
+        $response = Http::post('https://api.telegram.org/bot6140179825:AAGfAmHK6JQTLegsdpnaklnhBZ4qA1m2c64/sendMessage?chat_id=1316552414', [
+            'chat_id' => "1316552414",
+            'text' => $message,
+
+        ]);
+        $responseData = $response->json();
+
+
+    }
+}
