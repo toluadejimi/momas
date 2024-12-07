@@ -226,7 +226,7 @@ class MeterController extends Controller
                             $cdt->meterNo = $meterNo;
                             $cdt->amount =  $total_paid ?? 0;
                             $cdt->vat = $vat_amount ?? 0;
-                            $cdt->estate_name = Estate::where('id', Auth::user()->estate_id)->first()->title >> "NAME";
+                            $cdt->estate_name = Estate::where('id', Auth::user()->estate_id)->first()->title ?? "NAME";
                             $cdt->estate_id = $estate_id;
                             $cdt->tariff_id = TarrifState::where('estate_id', $estate_id)->first()->tariff_id;
                             $cdt->vatAmount = $vat_amount;
