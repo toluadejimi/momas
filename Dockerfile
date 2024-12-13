@@ -1,54 +1,91 @@
-# Used for prod build.
-FROM php:8.2-fpm as php
+## Use the official PHP 8.2 image with Apache
+#FROM php:8.2-apache
+#
+## Install necessary extensions and dependencies
+#RUN apt-get update && apt-get install -y \
+#    libzip-dev \
+#    libpng-dev \
+#    libjpeg-dev \
+#    libfreetype6-dev \
+#    pkg-config \
+#    unzip \
+#    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+#    && docker-php-ext-install zip pdo_mysql gd
+#
+## Enable Apache mod_rewrite for Laravel
+#RUN a2enmod rewrite
+#
+## Set the working directory in the container
+#WORKDIR /var/www/html
+#
+## Copy Laravel project files to the container
+#COPY . .
+#
+## Install Composer globally
+#RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+#
+## Install Laravel dependencies
+#RUN composer install --no-dev --optimize-autoloader
+#
+## Set permissions for Laravel storage and cache
+#RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+#
+#RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+#
+#
+## Expose port 80
+#EXPOSE 80
+#
+## Start Apache
+#CMD ["apache2-foreground"]
 
-# Set environment variables
-ENV PHP_OPCACHE_ENABLE=1
-ENV PHP_OPCACHE_ENABLE_CLI=0
-ENV PHP_OPCACHE_VALIDATE_TIMESTAMPS=0
-ENV PHP_OPCACHE_REVALIDATE_FREQ=0
 
-# Install dependencies.
-RUN apt-get update && apt-get install -y unzip libpq-dev libcurl4-gnutls-dev nginx libonig-dev
+# Use a Windows-based PHP image with Apache
+FROM mcr.microsoft.com/windows:1809
 
-# Install PHP extensions.
-RUN docker-php-ext-install mysqli pdo pdo_mysql bcmath curl opcache mbstring
+# Install PHP and Apache
+RUN powershell -Command \
+    Invoke-WebRequest -Uri "https://windows.php.net/downloads/releases/php-8.2.10-Win32-vs16-x64.zip" -OutFile "php.zip" ; \
+    Expand-Archive -Path "php.zip" -DestinationPath "C:\\php" ; \
+    Remove-Item -Force "php.zip" ; \
+    [System.Environment]::SetEnvironmentVariable("PATH", $env:PATH + ";C:\\php", [System.EnvironmentVariableTarget]::Machine)
 
-# Copy composer executable.
-COPY --from=composer:2.3.5 /usr/bin/composer /usr/bin/composer
+# Configure Apache (using XAMPP or similar for simplicity)
+RUN powershell -Command \
+    Invoke-WebRequest -Uri "https://www.apachelounge.com/download/VS16/binaries/httpd-2.4.57-win64-VS16.zip" -OutFile "apache.zip" ; \
+    Expand-Archive -Path "apache.zip" -DestinationPath "C:\\Apache24" ; \
+    Remove-Item -Force "apache.zip" ; \
+    [System.Environment]::SetEnvironmentVariable("PATH", $env:PATH + ";C:\\Apache24\\bin", [System.EnvironmentVariableTarget]::Machine)
 
-# Copy configuration files.
-COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
-COPY ./docker/php/php-fpm.conf /usr/local/etc/php-fpm.d/www.conf
-COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
+# Enable mod_rewrite for Laravel
+RUN powershell -Command \
+    Set-Content -Path "C:\\Apache24\\conf\\httpd.conf" -Value \
+    (Get-Content "C:\\Apache24\\conf\\httpd.conf" | ForEach-Object { if ($_ -match '^#LoadModule rewrite_module modules/mod_rewrite.so$') { $_ -replace '^#', '' } else { $_ } })
 
-# Set working directory to /var/www.
-WORKDIR /var/www
+# Set up working directory
+WORKDIR C:/inetpub/wwwroot
 
-# Copy files from current folder to container current folder (set in workdir).
-COPY --chown=www-data:www-data . .
+# Copy Laravel project files to the container
+COPY . .
 
-# Create laravel caching folders.
-RUN mkdir -p /var/www/storage/framework
-RUN mkdir -p /var/www/storage/framework/cache
-RUN mkdir -p /var/www/storage/framework/testing
-RUN mkdir -p /var/www/storage/framework/sessions
-RUN mkdir -p /var/www/storage/framework/views
+# Install Composer
+RUN powershell -Command \
+    Invoke-WebRequest -Uri "https://getcomposer.org/installer" -OutFile "composer-setup.php" ; \
+    C:\\php\\php.exe composer-setup.php ; \
+    Move-Item -Path "composer.phar" -Destination "C:\\php\\composer.phar" ; \
+    [System.Environment]::SetEnvironmentVariable("PATH", $env:PATH + ";C:\\php", [System.EnvironmentVariableTarget]::Machine)
 
-# Fix files ownership.
-RUN chown -R www-data /var/www/storage
-RUN chown -R www-data /var/www/storage/framework
-RUN chown -R www-data /var/www/storage/framework/sessions
+# Install Laravel dependencies
+RUN powershell -Command \
+    C:\\php\\php.exe C:\\php\\composer.phar install --no-dev --optimize-autoloader
 
-# Set correct permission.
-RUN chmod -R 755 /var/www/storage
-RUN chmod -R 755 /var/www/storage/logs
-RUN chmod -R 755 /var/www/storage/framework
-RUN chmod -R 755 /var/www/storage/framework/sessions
-RUN chmod -R 755 /var/www/bootstrap
+# Set permissions for Laravel storage and cache
+RUN powershell -Command \
+    icacls C:\\inetpub\\wwwroot\\storage /grant Users:F /T ; \
+    icacls C:\\inetpub\\wwwroot\\bootstrap\\cache /grant Users:F /T
 
-# Adjust user permission & group
-RUN usermod --uid 1000 www-data
-RUN groupmod --gid 1001 www-data
+# Expose port 80
+EXPOSE 80
 
-# Run the entrypoint file.
-ENTRYPOINT [ "docker/entrypoint.sh" ]
+# Start Apache
+CMD ["C:\\Apache24\\bin\\httpd.exe", "-w", "-f", "C:\\Apache24\\conf\\httpd.conf"]
