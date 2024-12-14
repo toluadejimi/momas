@@ -115,9 +115,9 @@ abstract class ParserAbstract implements Parser {
     protected $semValue;
     /** @var mixed[] Semantic value stack (contains values of tokens and semantic action results) */
     protected array $semStack;
-    /** @var int[] Token start position stack */
+    /** @var int[] token start position stack */
     protected array $tokenStartStack;
-    /** @var int[] Token end position stack */
+    /** @var int[] token end position stack */
     protected array $tokenEndStack;
 
     /** @var ErrorHandler Error handler */
@@ -472,8 +472,8 @@ abstract class ParserAbstract implements Parser {
     /**
      * Get attributes for a node with the given start and end token positions.
      *
-     * @param int $tokenStartPos Token position the node starts at
-     * @param int $tokenEndPos Token position the node ends at
+     * @param int $tokenStartPos token position the node starts at
+     * @param int $tokenEndPos token position the node ends at
      * @return array<string, mixed> Attributes
      */
     protected function getAttributes(int $tokenStartPos, int $tokenEndPos): array {

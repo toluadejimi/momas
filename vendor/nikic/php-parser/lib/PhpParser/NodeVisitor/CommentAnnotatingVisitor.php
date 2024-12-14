@@ -10,15 +10,15 @@ use PhpParser\Token;
 class CommentAnnotatingVisitor extends NodeVisitorAbstract {
     /** @var int Last seen token start position */
     private int $pos = 0;
-    /** @var Token[] Token array */
+    /** @var Token[] token array */
     private array $tokens;
-    /** @var list<int> Token positions of comments */
+    /** @var list<int> token positions of comments */
     private array $commentPositions = [];
 
     /**
      * Create a comment annotation visitor.
      *
-     * @param Token[] $tokens Token array
+     * @param Token[] $tokens token array
      */
     public function __construct(array $tokens) {
         $this->tokens = $tokens;

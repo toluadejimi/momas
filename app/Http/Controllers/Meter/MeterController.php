@@ -536,7 +536,7 @@ class MeterController extends Controller
                     } else {
 
                         Transaction::where('trx_id', $trx)->update([
-                            'service_type' => "Token Purchase",
+                            'service_type' => "token Purchase",
                             'service' => "Meter",
                             'status' => 3,
                             'note' => json_encode($kct_response)
@@ -629,7 +629,7 @@ class MeterController extends Controller
 
 
                     Transaction::where('trx_id', $trx_id)->update([
-                        'service_type' => "Token Purchase",
+                        'service_type' => "token Purchase",
                         'service' => "Meter",
                         'status' => 3,
                         'note' => json_encode($no_kct_response)
@@ -1096,7 +1096,7 @@ class MeterController extends Controller
                 $met->estate_id = $estate_id;
                 $met->save();
 
-                return back()->with('message', "Meter KCT Token has been generated");
+                return back()->with('message', "Meter KCT token has been generated");
 
             }
 
@@ -1159,12 +1159,12 @@ class MeterController extends Controller
                 $token = $no_kct_data['tokens'][0];
                 send_email_token($email, $token, $amount);
 
-                return back()->with('message', "Meter Token has been generated");
+                return back()->with('message', "Meter token has been generated");
 
 
             }
 
-            return back()->with('error', "Meter Token can not be generated");
+            return back()->with('error', "Meter token can not be generated");
 
 
         }

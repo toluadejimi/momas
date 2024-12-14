@@ -21,7 +21,7 @@ class Google2FA
     protected $algorithm = Constants::SHA1;
 
     /**
-     * Length of the Token generated.
+     * Length of the token generated.
      *
      * @var int
      */

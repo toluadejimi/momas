@@ -20,7 +20,7 @@ abstract class CheckCredentials
     protected $server;
 
     /**
-     * Token Repository.
+     * token Repository.
      *
      * @var \Laravel\Passport\TokenRepository
      */

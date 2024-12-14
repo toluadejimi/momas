@@ -60,7 +60,7 @@ class LoginController extends Controller
             }
 
 
-            $token = auth()->user()->createToken('API Token')->accessToken;
+            $token = auth()->user()->createToken('API token')->accessToken;
             $meter = meter();
             $user = user();
             $user['token'] = $token;
@@ -118,7 +118,7 @@ class LoginController extends Controller
             }
 
 
-            $token = auth()->user()->createToken('API Token')->accessToken;
+            $token = auth()->user()->createToken('API token')->accessToken;
             $meter = meter();
             $user = user();
             $user['token'] = $token;
@@ -180,7 +180,7 @@ class LoginController extends Controller
         $pkkey['paystack_public'] = $fl->paystack_public;
 
 
-        $token = auth()->user()->createToken('API Token')->accessToken;
+        $token = auth()->user()->createToken('API token')->accessToken;
         $meter = meter();
         $user = user();
         $user['token'] = $token;

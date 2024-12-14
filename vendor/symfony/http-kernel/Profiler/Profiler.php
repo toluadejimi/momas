@@ -74,7 +74,7 @@ class Profiler implements ResetInterface
      */
     public function loadProfileFromResponse(Response $response): ?Profile
     {
-        if (!$token = $response->headers->get('X-Debug-Token')) {
+        if (!$token = $response->headers->get('X-Debug-token')) {
             return null;
         }
 
@@ -159,11 +159,11 @@ class Profiler implements ResetInterface
             $profile->setVirtualType($request->attributes->get('_virtual_type'));
         }
 
-        if ($prevToken = $response->headers->get('X-Debug-Token')) {
-            $response->headers->set('X-Previous-Debug-Token', $prevToken);
+        if ($prevToken = $response->headers->get('X-Debug-token')) {
+            $response->headers->set('X-Previous-Debug-token', $prevToken);
         }
 
-        $response->headers->set('X-Debug-Token', $profile->getToken());
+        $response->headers->set('X-Debug-token', $profile->getToken());
 
         foreach ($this->collectors as $collector) {
             $collector->collect($request, $response, $exception);

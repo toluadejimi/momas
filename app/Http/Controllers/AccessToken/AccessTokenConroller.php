@@ -46,7 +46,7 @@ class AccessTokenConroller extends Controller
     {
          Token::where('id', $request->id)->delete();
 
-         return back()->with('message', 'Token has been deleted successfully');
+         return back()->with('message', 'token has been deleted successfully');
 
     }
 
@@ -56,7 +56,7 @@ class AccessTokenConroller extends Controller
             'status' => 2,
         ]);
 
-        return back()->with('message', 'Token has been updated successfully');
+        return back()->with('message', 'token has been updated successfully');
 
     }
 
@@ -66,7 +66,7 @@ class AccessTokenConroller extends Controller
             'status' => 0,
         ]);
 
-        return back()->with('message', 'Token has been updated successfully');
+        return back()->with('message', 'token has been updated successfully');
 
     }
 }

@@ -373,7 +373,7 @@ if (!function_exists('send_email_token')) {
         $first_name = User::where('email', $email)->first()->first_name;
         $data = array(
             'fromsender' => 'momas@tomitechltd.com', 'MOMASPAY',
-            'subject' => "Token Purchase",
+            'subject' => "token Purchase",
             'toreceiver' => $email,
             'token' => $token,
             'user' => $first_name,
@@ -400,7 +400,7 @@ if (!function_exists('send_kct_email_token')) {
         $first_name = User::where('email', $email)->first()->first_name;
         $data = array(
             'fromsender' => 'momas@tomitechltd.com', 'MOMASPAY',
-            'subject' => "Token Purchase",
+            'subject' => "token Purchase",
             'toreceiver' => $email,
             'token' => $token,
             'kct_token1' => $kct_token1,
@@ -430,7 +430,7 @@ if (!function_exists('send_token_email')) {
 
         $data = array(
             'fromsender' => 'momas@tomitechltd.com', 'MOMASPAY',
-            'subject' => "Pass Token",
+            'subject' => "Pass token",
             'toreceiver' => $email,
             'token_code' => $token_code,
             'estate' => $estate,

@@ -37,7 +37,7 @@ class TokenPolyfill {
     private static array $identifierTokens;
 
     /**
-     * Create a Token with the given ID and text, as well optional line and position information.
+     * Create a token with the given ID and text, as well optional line and position information.
      */
     final public function __construct(int $id, string $text, int $line = -1, int $pos = -1) {
         $this->id = $id;

@@ -53,7 +53,7 @@ abstract class NodeAbstract implements Node, \JsonSerializable {
      *
      * Requires the 'startTokenPos' attribute to be enabled in the lexer (DISABLED by default).
      *
-     * @return int Token start position (or -1 if not available)
+     * @return int token start position (or -1 if not available)
      */
     public function getStartTokenPos(): int {
         return $this->attributes['startTokenPos'] ?? -1;
@@ -66,7 +66,7 @@ abstract class NodeAbstract implements Node, \JsonSerializable {
      *
      * Requires the 'endTokenPos' attribute to be enabled in the lexer (DISABLED by default).
      *
-     * @return int Token end position (or -1 if not available)
+     * @return int token end position (or -1 if not available)
      */
     public function getEndTokenPos(): int {
         return $this->attributes['endTokenPos'] ?? -1;

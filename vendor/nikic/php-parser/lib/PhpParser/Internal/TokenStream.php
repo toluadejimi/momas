@@ -54,7 +54,7 @@ class TokenStream {
      * During this check whitespace and comments are skipped.
      *
      * @param int $pos Position before which the token should occur
-     * @param int|string $expectedTokenType Token to check for
+     * @param int|string $expectedTokenType token to check for
      *
      * @return bool Whether the expected token was found
      */
@@ -79,7 +79,7 @@ class TokenStream {
      * During this check whitespace and comments are skipped.
      *
      * @param int $pos Position after which the token should occur
-     * @param int|string $expectedTokenType Token to check for
+     * @param int|string $expectedTokenType token to check for
      *
      * @return bool Whether the expected token was found
      */
@@ -137,7 +137,7 @@ class TokenStream {
     /**
      * Return first non-whitespace token position smaller or equal to passed position.
      *
-     * @param int $pos Token position
+     * @param int $pos token position
      * @return int Non-whitespace token position
      */
     public function skipLeftWhitespace(int $pos): int {
@@ -153,7 +153,7 @@ class TokenStream {
     /**
      * Return first non-whitespace position greater or equal to passed position.
      *
-     * @param int $pos Token position
+     * @param int $pos token position
      * @return int Non-whitespace token position
      */
     public function skipRightWhitespace(int $pos): int {
@@ -182,7 +182,7 @@ class TokenStream {
      *
      * @param int $startPos Starting position (inclusive)
      * @param int $endPos Ending position (exclusive)
-     * @param int|string $tokenType Token type to look for
+     * @param int|string $tokenType token type to look for
      * @return bool Whether the token occurs in the given range
      */
     public function haveTokenInRange(int $startPos, int $endPos, $tokenType): bool {
@@ -203,7 +203,7 @@ class TokenStream {
     /**
      * Get indentation before token position.
      *
-     * @param int $pos Token position
+     * @param int $pos token position
      *
      * @return int Indentation depth (in spaces)
      */
@@ -214,8 +214,8 @@ class TokenStream {
     /**
      * Get the code corresponding to a token offset range, optionally adjusted for indentation.
      *
-     * @param int $from Token start position (inclusive)
-     * @param int $to Token end position (exclusive)
+     * @param int $from token start position (inclusive)
+     * @param int $to token end position (exclusive)
      * @param int $indent By how much the code should be indented (can be negative as well)
      *
      * @return string Code corresponding to token range, adjusted for indentation
@@ -246,7 +246,7 @@ class TokenStream {
     /**
      * Precalculate the indentation at every token position.
      *
-     * @return int[] Token position to indentation map
+     * @return int[] token position to indentation map
      */
     private function calcIndentMap(): array {
         $indentMap = [];

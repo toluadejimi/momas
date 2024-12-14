@@ -13,7 +13,7 @@ use stdClass;
 use UnexpectedValueException;
 
 /**
- * JSON Web Token implementation, based on this spec:
+ * JSON Web token implementation, based on this spec:
  * https://tools.ietf.org/html/rfc7519
  *
  * PHP version 5

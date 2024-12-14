@@ -210,7 +210,7 @@ class PassportServiceProvider extends ServiceProvider
     }
 
     /**
-     * Create and configure a Refresh Token grant instance.
+     * Create and configure a Refresh token grant instance.
      *
      * @return \League\OAuth2\Server\Grant\RefreshTokenGrant
      */

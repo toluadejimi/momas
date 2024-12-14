@@ -45,12 +45,12 @@ class EstateController extends Controller
             $data['token'] = $send;
             $data['name'] = $usr->first_name." ".$usr->last_name;
             $data['address'] = $usr->address." ".$usr->city." ".$usr->state;
-            $data['service'] = "Access Token";
+            $data['service'] = "Access token";
             if($send == 0 ){
                return response()->json([
                    'status' => true,
                    'data' => $data,
-                   'message' => "Token Created Successfully, Token sent to visitor"
+                   'message' => "token Created Successfully, token sent to visitor"
                ]);
            }
         }
@@ -59,13 +59,13 @@ class EstateController extends Controller
         $data['token'] = $tok;
         $data['name'] = $usr->first_name." ".$usr->last_name;
         $data['address'] = $usr->address." ".$usr->city." ".$usr->state;
-        $data['service'] = "Access Token";
+        $data['service'] = "Access token";
 
 
         return response()->json([
             'status' => true,
             'data' => $data,
-            'message' => "Token Created Successfully"
+            'message' => "token Created Successfully"
         ]);
 
 
@@ -79,14 +79,14 @@ class EstateController extends Controller
         if($ck == "2"){
             return response()->json([
                 'status' => false,
-                'message' => "Token has already been validated"
+                'message' => "token has already been validated"
             ]);
         }else{
 
             Token::where('id', $request->token_id)->update(['status' => "2"]);
             return response()->json([
                 'status' => true,
-                'message' => "Token Successfully Validated"
+                'message' => "token Successfully Validated"
             ]);
 
         }
@@ -111,7 +111,7 @@ class EstateController extends Controller
         Token::where('id', $request->token_id)->update(['status' => 3]);
         return response()->json([
             'status' => true,
-            'message' => "Token Successfully Disapproved"
+            'message' => "token Successfully Disapproved"
         ]);
 
 
@@ -123,7 +123,7 @@ class EstateController extends Controller
         Token::where('id', $request->token_id)->delete();
         return response()->json([
             'status' => true,
-            'message' => "Token Successfully Deleted"
+            'message' => "token Successfully Deleted"
         ]);
 
 

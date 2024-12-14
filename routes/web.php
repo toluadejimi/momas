@@ -223,7 +223,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
 
 
-    //Meter Token
+    //Meter token
     Route::post('generate-kct-token', [MeterController::class, 'generate_kct_token']);
     Route::post('generate-token', [MeterController::class, 'generate_meter_token']);
     Route::get('detach-meter', [MeterController::class, 'detach_meter']);
@@ -239,7 +239,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
 
 
-    //Token
+    //token
     Route::get('credit-token', [TokenController::class, 'credit_token_index']);
     Route::post('validate-meter', [TokenController::class, 'validate_meter']);
     Route::post('generate-credit-meter-token', [TokenController::class, 'generate_credit_meter_token']);

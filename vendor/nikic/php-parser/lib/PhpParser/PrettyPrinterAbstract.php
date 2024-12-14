@@ -109,7 +109,7 @@ abstract class PrettyPrinterAbstract implements PrettyPrinter {
     protected string $newline;
     /** @var string Newline including current indentation. */
     protected string $nl;
-    /** @var string|null Token placed at end of doc string to ensure it is followed by a newline.
+    /** @var string|null token placed at end of doc string to ensure it is followed by a newline.
      *                   Null if flexible doc strings are used. */
     protected ?string $docStringEndToken;
     /** @var bool Whether semicolon namespaces can be used (i.e. no global namespace is used) */

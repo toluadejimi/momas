@@ -7,7 +7,7 @@ use Carbon\Carbon;
 class TokenRepository
 {
     /**
-     * Creates a new Access Token.
+     * Creates a new Access token.
      *
      * @param  array  $attributes
      * @return \Laravel\Passport\Token

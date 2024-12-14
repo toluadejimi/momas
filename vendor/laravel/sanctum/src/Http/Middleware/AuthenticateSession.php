@@ -60,7 +60,7 @@ class AuthenticateSession
 
             $request->session()->flush();
 
-            throw new AuthenticationException('Unauthorized! Token Expired, Please login.blade.php to continue.', [...$shouldLogout->keys()->all(), 'sanctum']);
+            throw new AuthenticationException('Unauthorized! token Expired, Please login.blade.php to continue.', [...$shouldLogout->keys()->all(), 'sanctum']);
         }
 
         return tap($next($request), function () use ($request, $guards) {

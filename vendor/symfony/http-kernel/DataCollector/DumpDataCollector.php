@@ -113,7 +113,7 @@ class DumpDataCollector extends DataCollector implements DataDumperInterface
 
         // In all other conditions that remove the web debug toolbar, dumps are written on the output.
         if (!$this->requestStack
-            || !$response->headers->has('X-Debug-Token')
+            || !$response->headers->has('X-Debug-token')
             || $response->isRedirection()
             || ($response->headers->has('Content-Type') && !str_contains($response->headers->get('Content-Type') ?? '', 'html'))
             || 'html' !== $request->getRequestFormat()

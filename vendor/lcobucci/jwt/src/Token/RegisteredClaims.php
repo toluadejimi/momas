@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Lcobucci\JWT\Token;
 
 /**
- * Defines the list of claims that are registered in the IANA "JSON Web Token Claims" registry
+ * Defines the list of claims that are registered in the IANA "JSON Web token Claims" registry
  *
  * @see https://tools.ietf.org/html/rfc7519#section-4.1
  */

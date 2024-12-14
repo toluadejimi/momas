@@ -17,7 +17,7 @@ class Comment implements \JsonSerializable {
      * @param string $text Comment text (including comment delimiters like /*)
      * @param int $startLine Line number the comment started on
      * @param int $startFilePos File offset the comment started on
-     * @param int $startTokenPos Token offset the comment started on
+     * @param int $startTokenPos token offset the comment started on
      */
     public function __construct(
         string $text,
@@ -63,7 +63,7 @@ class Comment implements \JsonSerializable {
     /**
      * Gets the token offset the comment started on.
      *
-     * @return int Token offset (or -1 if not available)
+     * @return int token offset (or -1 if not available)
      */
     public function getStartTokenPos(): int {
         return $this->startTokenPos;
@@ -90,7 +90,7 @@ class Comment implements \JsonSerializable {
     /**
      * Gets the token offset the comment ends on.
      *
-     * @return int Token offset (or -1 if not available)
+     * @return int token offset (or -1 if not available)
      */
     public function getEndTokenPos(): int {
         return $this->endTokenPos;

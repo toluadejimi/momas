@@ -1,6 +1,6 @@
 <?php
 /**
- * OAuth 2.0 Bearer Token Response.
+ * OAuth 2.0 Bearer token Response.
  *
  * @author      Alex Bilbie <hello@alexbilbie.com>
  * @copyright   Copyright (c) Alex Bilbie
@@ -66,7 +66,7 @@ class BearerTokenResponse extends AbstractResponseType
     }
 
     /**
-     * Add custom fields to your Bearer Token response here, then override
+     * Add custom fields to your Bearer token response here, then override
      * AuthorizationServer::getResponseType() to pull in your version of
      * this class rather than the default.
      *

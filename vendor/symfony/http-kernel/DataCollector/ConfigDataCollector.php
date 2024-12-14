@@ -45,7 +45,7 @@ class ConfigDataCollector extends DataCollector implements LateDataCollectorInte
         $eol = \DateTimeImmutable::createFromFormat('d/m/Y', '01/'.Kernel::END_OF_LIFE);
 
         $this->data = [
-            'token' => $response->headers->get('X-Debug-Token'),
+            'token' => $response->headers->get('X-Debug-token'),
             'symfony_version' => Kernel::VERSION,
             'symfony_minor_version' => sprintf('%s.%s', Kernel::MAJOR_VERSION, Kernel::MINOR_VERSION),
             'symfony_lts' => 4 === Kernel::MINOR_VERSION,

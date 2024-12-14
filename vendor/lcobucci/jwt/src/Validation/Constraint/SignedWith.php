@@ -22,11 +22,11 @@ final class SignedWith implements SignedWithInterface
         }
 
         if ($token->headers()->get('alg') !== $this->signer->algorithmId()) {
-            throw ConstraintViolation::error('Token signer mismatch', $this);
+            throw ConstraintViolation::error('token signer mismatch', $this);
         }
 
         if (! $this->signer->verify($token->signature()->hash(), $token->payload(), $this->key)) {
-            throw ConstraintViolation::error('Token signature mismatch', $this);
+            throw ConstraintViolation::error('token signature mismatch', $this);
         }
     }
 }

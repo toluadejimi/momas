@@ -22,7 +22,7 @@ abstract class AbstractMatcher
     const CONSTANT_SYNTAX = '^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$';
     const VAR_SYNTAX = '^\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$';
     const MISC_OPERATORS = '+-*/^|&';
-    /** Token values */
+    /** token values */
     const T_OPEN_TAG = 'T_OPEN_TAG';
     const T_VARIABLE = 'T_VARIABLE';
     const T_OBJECT_OPERATOR = 'T_OBJECT_OPERATOR';
