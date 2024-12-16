@@ -6,11 +6,11 @@ use App\Http\Controllers\Bills\BillsController;
 use App\Http\Controllers\Estate\EstateController;
 use App\Http\Controllers\Feature\FeatureController;
 use App\Http\Controllers\Meter\MeterController;
+use App\Http\Controllers\PosController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Service\ServiceController;
 use App\Http\Controllers\Transaction\TransactionController;
 use Illuminate\Support\Facades\Route;
-
 
 
 Route::get('get-estate-tariff', [MeterController::class, 'get_estate_tariff']);
@@ -28,14 +28,10 @@ Route::post('register', [RegisterController::class, 'register']);
 Route::post('reset-password', [RegisterController::class, 'reset_password']);
 
 
-
 Route::post('validate', [MeterController::class, 'validate_meter']);
 
 
-
 Route::get('support', [LoginController::class, 'support']);
-
-
 
 
 Route::post('check-email', [RegisterController::class, 'check_user']);
@@ -46,6 +42,10 @@ Route::get('cable-plan', [BillsController::class, 'get_cable_plan']);
 Route::post('validate-cable', [BillsController::class, 'validate_cable']);
 
 
+//POS
+Route::any('pos/validate', [PosController::class, 'validate_meter']);
+Route::any('pos/buy-token', [PosController::class, 'buy_meter_token']);
+Route::any('pos/retry-meter-token', [PosController::class, 'retry_meter_token']);
 
 
 Route::group(['middleware' => ['auth:api', 'acess']], function () {
@@ -63,18 +63,9 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::post('save-comment', [ServiceController::class, 'save_comment']);
 
 
-
-
-
-
-
-
-
     //Fund Wallet
     Route::post('pay', [TransactionController::class, 'make_payment']);
     Route::get('get-transactions', [TransactionController::class, 'all_transactions']);
-
-
 
 
     //Bills
@@ -94,17 +85,6 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::get('vending-properties', [MeterController::class, 'vending_properties']);
 
 
-
-
-
-
-
-
-
-
-
-
-
     //Estate
     Route::get('get-estate', [EstateController::class, 'get_estate']);
     Route::post('generate-token', [EstateController::class, 'estate_token']);
@@ -115,28 +95,14 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::get('token-list', [EstateController::class, 'token_list']);
 
 
-
-
-
     //Services
     Route::get('get-service', [ServiceController::class, 'get_estate']);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
+
+
+
 
 
 
