@@ -1,5 +1,5 @@
 @php use Illuminate\Support\Facades\Auth; @endphp
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
 
@@ -27,10 +27,12 @@
             background-color: white;
             width: 100%;
         }
+
         .search-result div {
             padding: 8px;
             cursor: pointer;
         }
+
         .search-result div:hover {
             background-color: #f0f0f0;
         }
@@ -85,7 +87,6 @@
                             </a>
 
 
-
                         </div>
                     </li>
 
@@ -129,33 +130,30 @@
                         <li class="menu-title">Menu</li>
 
                         <li>
-                            <a class='tp-link'  href="admin-dashboard">
+                            <a class='tp-link' href="admin-dashboard">
                                 <i data-feather="menu"></i>
                                 <span> Dashboard </span>
                             </a>
                         </li>
 
                         <li>
-                            <a class='tp-link'  href="meter-list">
+                            <a class='tp-link' href="meter-list">
                                 <i data-feather="cpu"></i>
                                 <span> Meter </span>
                             </a>
                         </li>
 
 
-
                         <li>
-                            <a class='tp-link'  href="customers">
+                            <a class='tp-link' href="customers">
                                 <i data-feather="users"></i>
                                 <span> Customers </span>
                             </a>
                         </li>
 
 
-
-
                         <li>
-                            <a class='tp-link'  href="organization">
+                            <a class='tp-link' href="organization">
                                 <i data-feather="folder"></i>
                                 <span> Organization </span>
                             </a>
@@ -163,7 +161,7 @@
 
 
                         <li>
-                            <a class='tp-link'  href="transformer-list">
+                            <a class='tp-link' href="transformer-list">
                                 <i data-feather="box"></i>
                                 <span> Transformer </span>
                             </a>
@@ -171,7 +169,7 @@
 
 
                         <li>
-                            <a class='tp-link'  href="estate">
+                            <a class='tp-link' href="estate">
                                 <i data-feather="home"></i>
                                 <span> Estate </span>
                             </a>
@@ -179,18 +177,15 @@
 
 
                         <li>
-                            <a class='tp-link'  href="estate-service">
+                            <a class='tp-link' href="estate-service">
                                 <i data-feather="layers"></i>
                                 <span> Estate Service </span>
                             </a>
                         </li>
 
 
-
-
-
                         <li>
-                            <a class='tp-link'  href="tariff-list">
+                            <a class='tp-link' href="tariff-list">
                                 <i data-feather="divide-square"></i>
                                 <span> Tariff </span>
                             </a>
@@ -207,10 +202,27 @@
                             <div class="collapse" id="sidebar1">
                                 <ul class="nav-second-level">
                                     <li>
-                                        <a class='tp-link' href='credit-token'>Credit Token</a>
+                                        <a class='tp-link' href='credit-token'>Clear Credit Token </a>
                                     </li>
                                 </ul>
                             </div>
+
+                            <div class="collapse" id="sidebar1">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a class='tp-link' href='tamper-token'> Clear Tamper Token </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="collapse" id="sidebar1">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a class='tp-link' href='compensation-token'> Compensation Token  </a>
+                                    </li>
+                                </ul>
+                            </div>
+
 
                             <div class="collapse" id="sidebar1">
                                 <ul class="nav-second-level">
@@ -223,11 +235,8 @@
                         </li>
 
 
-
-
-
                         <li>
-                            <a class='tp-link'  href="access-token">
+                            <a class='tp-link' href="access-token">
                                 <i data-feather="lock"></i>
                                 <span> Access Token </span>
                             </a>
@@ -235,7 +244,7 @@
 
 
                         <li>
-                            <a class='tp-link'  href="users-list">
+                            <a class='tp-link' href="users-list">
                                 <i data-feather="users"></i>
                                 <span> Users </span>
                             </a>
@@ -253,29 +262,26 @@
                                     <li>
                                         <a class='tp-link' href='report-transaction'>Transactions</a>
                                     </li>
-{{--                                    <li>--}}
-{{--                                        <a class='tp-link' href='report-meter'>Meter</a>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <a class='tp-link' href='report-customers'>Customer</a>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <a class='tp-link' href='report-tariff'>Tariff</a>--}}
-{{--                                    </li>--}}
+                                    {{--                                    <li>--}}
+                                    {{--                                        <a class='tp-link' href='report-meter'>Meter</a>--}}
+                                    {{--                                    </li>--}}
+                                    {{--                                    <li>--}}
+                                    {{--                                        <a class='tp-link' href='report-customers'>Customer</a>--}}
+                                    {{--                                    </li>--}}
+                                    {{--                                    <li>--}}
+                                    {{--                                        <a class='tp-link' href='report-tariff'>Tariff</a>--}}
+                                    {{--                                    </li>--}}
                                 </ul>
                             </div>
                         </li>
 
 
                         <li>
-                            <a class='tp-link'  href="settings">
+                            <a class='tp-link' href="settings">
                                 <i data-feather="settings"></i>
                                 <span> Settings </span>
                             </a>
                         </li>
-
-
-
 
 
                     </ul>
@@ -287,7 +293,7 @@
                         <li class="menu-title">Menu</li>
 
                         <li>
-                            <a class='tp-link'  href="admin-dashboard">
+                            <a class='tp-link' href="admin-dashboard">
                                 <i data-feather="menu"></i>
                                 <span> Dashboard </span>
                             </a>
@@ -295,25 +301,22 @@
 
 
                         <li>
-                            <a class='tp-link'  href="meter-list">
+                            <a class='tp-link' href="meter-list">
                                 <i data-feather="cpu"></i>
                                 <span> Meter </span>
                             </a>
                         </li>
 
                         <li>
-                            <a class='tp-link'  href="customers">
+                            <a class='tp-link' href="customers">
                                 <i data-feather="users"></i>
                                 <span> Customers </span>
                             </a>
                         </li>
 
 
-
-
-
                         <li>
-                            <a class='tp-link'  href="estate-service">
+                            <a class='tp-link' href="estate-service">
                                 <i data-feather="layers"></i>
                                 <span> Estate Service </span>
                             </a>
@@ -321,17 +324,15 @@
 
 
                         <li>
-                            <a class='tp-link'  href="transformer-list">
+                            <a class='tp-link' href="transformer-list">
                                 <i data-feather="box"></i>
                                 <span> Transformer </span>
                             </a>
                         </li>
 
 
-
-
                         <li>
-                            <a class='tp-link'  href="tariff-list">
+                            <a class='tp-link' href="tariff-list">
                                 <i data-feather="divide-square"></i>
                                 <span> Tariff </span>
                             </a>
@@ -346,42 +347,52 @@
                             </a>
 
                             @php
-                            $ptype = \App\Models\Estate::where('id', Auth::user()->estate_id)->first()->ptype;
+                                $ptype = \App\Models\Estate::where('id', Auth::user()->estate_id)->first()->ptype;
                             @endphp
 
 
                             @if($ptype == 2 || $ptype == 3 )
-                            <div class="collapse" id="sidebar1">
-                                <ul class="nav-second-level">
-                                    <li>
-                                        <a class='tp-link' href='credit-token'>Credit Token</a>
-                                    </li>
-                                </ul>
-                            </div>
+                                <div class="collapse" id="sidebar1">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a class='tp-link' href='credit-token'>Clear Credit Token </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="collapse" id="sidebar1">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a class='tp-link' href='tamper-token'> Clear Tamper Token </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="collapse" id="sidebar1">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a class='tp-link' href='compensation-token'> Compensation Token  </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+
                             @else
                             @endif
 
-                            <div class="collapse" id="sidebar1">
-                                <ul class="nav-second-level">
-                                    <li>
-                                        <a class='tp-link' href='#'>Special Token</a>
-                                    </li>
-                                </ul>
-                            </div>
 
                         </li>
 
                         <li>
-                            <a class='tp-link'  href="access-token">
+                            <a class='tp-link' href="access-token">
                                 <i data-feather="lock"></i>
                                 <span> Access Token </span>
                             </a>
                         </li>
 
 
-
                         <li>
-                            <a class='tp-link'  href="users-list">
+                            <a class='tp-link' href="users-list">
                                 <i data-feather="users"></i>
                                 <span> Users </span>
                             </a>
@@ -399,22 +410,22 @@
                                     <li>
                                         <a class='tp-link' href='report-transaction'>Transactions</a>
                                     </li>
-{{--                                    <li>--}}
-{{--                                        <a class='tp-link' href='report-meter'>Meter</a>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <a class='tp-link' href='report-customers'>Customer</a>--}}
-{{--                                    </li>--}}
-{{--                                    <li>--}}
-{{--                                        <a class='tp-link' href='report-tariff'>Tariff</a>--}}
-{{--                                    </li>--}}
+                                    {{--                                    <li>--}}
+                                    {{--                                        <a class='tp-link' href='report-meter'>Meter</a>--}}
+                                    {{--                                    </li>--}}
+                                    {{--                                    <li>--}}
+                                    {{--                                        <a class='tp-link' href='report-customers'>Customer</a>--}}
+                                    {{--                                    </li>--}}
+                                    {{--                                    <li>--}}
+                                    {{--                                        <a class='tp-link' href='report-tariff'>Tariff</a>--}}
+                                    {{--                                    </li>--}}
                                 </ul>
                             </div>
                         </li>
 
 
                         <li>
-                            <a class='tp-link'  href="settings">
+                            <a class='tp-link' href="settings">
                                 <i data-feather="settings"></i>
                                 <span> Settings </span>
                             </a>
@@ -426,9 +437,6 @@
                 @elseif(auth::user()->role == 5)
                 @else
                 @endif
-
-
-
 
 
             </div>
@@ -465,21 +473,18 @@
     </div>
 
 
-
-
     <script>
         let sessionLifetime = {{ config('session.lifetime') }} * 60 * 1000;
         let warningTime = sessionLifetime - (5 * 60 * 1000);
 
-        setTimeout(function() {
+        setTimeout(function () {
             alert('Your session is about to expire. Please save your work!');
         }, warningTime);
 
-        setTimeout(function() {
+        setTimeout(function () {
             window.location.href = '/login';
         }, sessionLifetime);
     </script>
-
 
 
     <!-- ============================================================== -->
@@ -488,7 +493,6 @@
 
 </div>
 <!-- END wrapper -->
-
 
 
 <!-- Vendor -->
@@ -533,8 +537,6 @@
 
 <!-- App js-->
 <script src="{{url('')}}/public/asset/ass/js/app.js"></script>
-
-
 
 
 </body>

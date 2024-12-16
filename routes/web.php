@@ -241,8 +241,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
     //token
     Route::get('credit-token', [TokenController::class, 'credit_token_index']);
+    Route::get('compensation-token', [TokenController::class, 'compensation_index']);
+
     Route::post('validate-meter', [TokenController::class, 'validate_meter']);
+    Route::post('validate-compensation-meter', [TokenController::class, 'validate_compensation_meter']);
+
+
+
+
     Route::post('generate-credit-meter-token', [TokenController::class, 'generate_credit_meter_token']);
+    Route::post('generate-compensation-meter-token', [TokenController::class, 'generate_compensation_meter_token']);
+
+
     Route::any('paystack-check-web', [TokenController::class, 'paystack_verify_web']);
     Route::any('pay-flutter-web', [TokenController::class, 'flutter_verify_web']);
 

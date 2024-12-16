@@ -115,4 +115,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(CreditToken::class);
     }
+
+    public function compensation_token()
+    {
+        return $this->hasMany(CompensationToken::class);
+    }
 }

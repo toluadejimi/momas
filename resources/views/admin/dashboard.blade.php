@@ -192,7 +192,7 @@
 
                                             <tr>
                                                 <td>{{$data->trx_id}}</td>
-                                                <td>{{$data->user->first_name}} {{$data->user->last_name}}</td>
+                                                <td>{{$data->user->first_name ?? null}} {{$data->user->last_name ?? null}}</td>
                                                 <td>
                                                     @if($data->service_type == "meter_token")
                                                         <span class="badge text-bg-dark">Meter Token</span>
