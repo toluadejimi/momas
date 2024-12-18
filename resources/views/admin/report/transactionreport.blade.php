@@ -211,7 +211,7 @@
 
                                         <tr>
                                             <td>{{$data->trx_id}}</td>
-                                            <td><a href="view-user?id={{$data->user->first_name}}">{{$data->user->last_name}}</a></td>
+                                            <td><a href="view-user?id={{$data->user->first_name ?? "name"}}">{{$data->user->last_name ?? "name"}}</a></td>
                                             <td>{{$data->estate->title ?? "Estate"}}</td>
                                             <td>{{number_format($data->amount, 2)}}</td>
                                             <td>{{$data->service}}</td>
@@ -463,7 +463,7 @@
 
                                             <tr>
                                                 <td>{{$data->trx_id}}</td>
-                                                <td><a href="view-user?id={{$data->user->first_name}}">{{$data->user->last_name}}</a></td>
+                                                <td><a href="view-user?id={{$data->user->first_name ?? "Name"}}">{{$data->user->last_name ?? "Name"}}</a></td>
                                                 <td>{{number_format($data->amount, 2)}}</td>
                                                 <td>{{$data->service}}</td>
                                                 <td>
