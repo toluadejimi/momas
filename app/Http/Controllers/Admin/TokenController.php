@@ -573,9 +573,9 @@ class TokenController extends Controller
     public function generate_compensation_meter_token(request $request)
     {
 
-        $order_id = "TRX" . random_int(000000000, 9999999999);
+        $order_id = "COMP".random_int(000000, 999999);
         $estate_id = Estate::where('title', $request->estate_name)->first()->id;
-        $cdt = new CreditToken();
+        $cdt = new CompensationToken();
         $cdt->user_id = $request->user_id;
         $cdt->order_id = $order_id;
         $cdt->meterNo = $request->meterNo;
@@ -625,7 +625,7 @@ class TokenController extends Controller
 
             if ($status == "SUCCESS") {
 
-                $token = $get_token['tokens'][0];
+                $token = $token_data['tokens'][0];
                 $user = User::where('id', $meter->user_id)->first();
                 $email = $user->email;
                 $amount = $request->amount;
@@ -633,7 +633,7 @@ class TokenController extends Controller
 
 
                 $trx = new Transaction();
-                $trx->trx_id = "COMP".random_int(000000, 999999);
+                $trx->trx_id = $order_id;
                 $trx->user_id = $meter->user_id;
                 $trx->estate_id = $estate_id;
                 $trx->pay_type = null;
@@ -644,7 +644,7 @@ class TokenController extends Controller
                 $trx->unit_amount = $request->costOfUnit;
                 $trx->save();
 
-                return redirect("admin/recepit?trx_id=$trx_id");
+                return redirect("admin/recepit?trx_id=$trx->trx_id&type=compensation");
 
 
             } else {
@@ -666,15 +666,14 @@ class TokenController extends Controller
                     'service_type' => "meter",
                     'status' => 3,
                     'tariff_id' => $request->tariff_id,
-                    'note' => json_encode($no_kct_data) . "|" . json_encode($databody)
-
+                    'note' => json_encode($get_token) . "|" . json_encode($databody)
 
                 ]);
 
                 User::where('id', Auth::id())->increment('main_wallet', $trx->amount);
 
 
-                return redirect('admin/credit-token')->with('error', $error['errors'][0]['title'] ?? $no_kct_response->json() . " | " . json_encode($databody));
+                return redirect('admin/credit-token')->with('error', $error['errors'][0]['title'] ?? $get_token->json() . " | " . json_encode($databody));
 
             }
 
@@ -682,7 +681,7 @@ class TokenController extends Controller
         }
 
 
-        return redirect('admin/credit-token')->with('error', $error['errors'][0]['title'] ?? $no_kct_response->json() . " | " . json_encode($databody));
+        return redirect('admin/credit-token')->with('error', $error['errors'][0]['title'] ?? $get_token->json() . " | " . json_encode($databody));
 
 
 
@@ -1140,9 +1139,37 @@ function recepit(request $request)
         return back()->with('error', "Ref can not be empty");
     }
 
-    $trx = CreditToken::where('order_id', $request->trx_id)->first();
-    $user = User::where('id', $trx->user_id)->first();
 
+    if($request->type == "compensation"){
+
+        $trx_comp = CompensationToken::where('order_id', $request->trx_id)->first() ?? null;
+        $user_comp = User::where('id', $trx_comp->user_id)->first() ?? null;
+
+
+        if($trx_comp !=  null){
+
+            $data['full_name'] = $user_comp->first_name . " " . $user_comp->last_name;
+            $data['address'] = $user_comp->address . "," . $user_comp->city . "," . $user_comp->state;
+            $data['phone'] = $user_comp->phone;
+            $data['order_id'] = $trx_comp->order_id;
+            $data['token'] = $trx_comp->token;
+            $data['amount'] = $trx_comp->amount;
+            $data['vat_amount'] = $trx_comp->vatAmount;
+            $data['vend_amount_kw_per_naira'] = $trx_comp->tariffPerKWatt;
+            $data['title'] = "Compensation Token";
+
+
+            return view('admin.recepit', $data);
+
+
+        }
+
+
+    }
+
+
+    $trx = CreditToken::where('order_id', $request->trx_id)->first() ?? null;
+    $user = User::where('id', $trx->user_id)->first() ?? null;
     $data['full_name'] = $user->first_name . " " . $user->last_name;
     $data['address'] = $user->address . "," . $user->city . "," . $user->state;
     $data['phone'] = $user->phone;
@@ -1151,6 +1178,8 @@ function recepit(request $request)
     $data['amount'] = $trx->amount;
     $data['vat_amount'] = $trx->vatAmount;
     $data['vend_amount_kw_per_naira'] = $trx->tariffPerKWatt;
+    $data['title'] = "Credit Token";
+
 
     return view('admin.recepit', $data);
 

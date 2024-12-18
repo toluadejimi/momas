@@ -91,18 +91,20 @@ class PosController extends Controller
 
         }
 
+        
         $data['tariffs'] = $tariffs;
         $pur['min_purchase'] = (int)$min_pur;
         $pur['max_purchase'] = (int)$max_pur;
         $pur['min_vending'] = (int)$minvend;
         $data['purchase'] = $pur;
 
-
-        return response()->json([
-            'status' => true,
-            'data' => $data
-
-        ]);
+         return response()->json([
+                'status' => true,
+                'name' => $data['customer_name'],
+                'address' =>  $data['address'],
+                'maximumAmount' => $pur['max_purchase'],
+                'minimumAmount' => $data['min_purchase']
+        ], 200);
 
 
     }
@@ -119,6 +121,41 @@ class PosController extends Controller
         $unit = $request->vend_amount_kw_per_naira;
         $vendong_amount = $request->vending_amount;
         $vat_amount = $request->vat_amount;
+        $SerialNo = $request->header('serialnumber');
+        $RRN = $request->RRN;
+        $STAN = $request->STAN;
+        $accountBalance = $account_balance;
+        $acquiringInstitutionIdCode = $request->acquiringInstitutionIdCode;
+        $authCode = $request->authCode;
+        $cardCardSequenceNum = $request->cardCardSequenceNum;
+        $cardExpireData = $request->cardExpireData;
+        $forwardingInstCode = $request->forwardingInstCode;
+        $merchantNo = $request->institutionData['merchantNo'];
+        $amount = $request->institutionData['amount'];
+        $accountType = $request->institutionData['accountType'];
+        $merchantName = $request->institutionData['merchantName'];
+        $tid = $request->institutionData['tid'];
+        $pan = $request->pan;
+        $pinBlock = $request->pinBlock;
+        $receiptNumber = $request->receiptNumber;
+        $respCode = $request->respCode;
+        $responseMessage = $request->responseMessage;
+        $status = $request->status;
+        $successResponse = $request->successResponse;
+        $systemTraceAuditNo = $request->systemTraceAuditNo;
+        $terminalId = $request->terminalId;
+        $transactionDate = $request->transactionDate;
+        $transactionDateTime = $request->transactionDateTime;
+        $transactionTime = $request->transactionTime;
+        $transactionType = $request->transactionType;
+        $cardName = $request->cardName;
+        $userID = $request->UserID;
+        $action = $request->meter_info['action'];
+        $access_token = $request->meter_info['access_token'];
+        $disco_type = $request->meter_info['disco_type'];
+        $phone = $request->meter_info['phone'];
+        $email = $request->meter_info['email'];
+        $meterNo = $request->meter_info['meter_no'];
 
 
         $tariff_index = Tariff::where('id', $request->tariff_id)->first()->tariff_index ?? null;
@@ -236,6 +273,35 @@ class PosController extends Controller
                             $kct_token2 = $kct_token[1];
 
                             send_kct_email_token($email, $token, $amount, $kct_token1, $kct_token2);
+
+
+                            return response()->json([
+                                'newTransaction' => [
+                                    'success' => true,
+                                    'transaction' => $trasnaction,
+                                ],
+                                'merchantName' => $mer->merchantName,
+                                'mid' => $mer->mid,
+                                'allTransaction' => null,
+                                'message' => "Transaction initiated successfully",
+                                'merchantDetails' => [
+                                    'merchantName' => $mer->merchantName,
+                                    'serialnumber' => $mer->serialNumber,
+                                    'mid' => $mer->mid,
+                                    'tid' => $mer->tid,
+                                    'merchantaddress' => $mer->merchantaddress
+                                ],
+                                'meter' => $meter ?? null
+                            ], 200);
+
+                            $meter['wallet_balance'] = $var->wallet_balance;
+                            $meter['ref'] = $var->ref;
+                            $meter['amount'] = $var->amount;
+                            $meter['units'] = $var->units;
+                            $meter['meter_token'] = $var->meter_token;
+                            $meter['address'] = $var->address;
+                            $meter['message'] = "successful";
+            
 
                             return response()->json([
                                 'status' => true,
@@ -377,6 +443,28 @@ class PosController extends Controller
 
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function retry_meter_token(request $request)
     {
@@ -623,6 +711,218 @@ class PosController extends Controller
 
 
     }
+
+
+
+   
+
+
+
+    public function buy_token(request $request)
+    {
+
+        $SerialNo = $request->header('serialnumber');
+        $account_balance = user_balance($SerialNo);
+        $RRN = $request->RRN;
+        $STAN = $request->STAN;
+        $accountBalance = $account_balance;
+        $acquiringInstitutionIdCode = $request->acquiringInstitutionIdCode;
+        $authCode = $request->authCode;
+        $cardCardSequenceNum = $request->cardCardSequenceNum;
+        $cardExpireData = $request->cardExpireData;
+        $forwardingInstCode = $request->forwardingInstCode;
+        $merchantNo = $request->institutionData['merchantNo'];
+        $amount = $request->institutionData['amount'];
+        $accountType = $request->institutionData['accountType'];
+        $merchantName = $request->institutionData['merchantName'];
+        $tid = $request->institutionData['tid'];
+        $pan = $request->pan;
+        $pinBlock = $request->pinBlock;
+        $receiptNumber = $request->receiptNumber;
+        $respCode = $request->respCode;
+        $responseMessage = $request->responseMessage;
+        $status = $request->status;
+        $successResponse = $request->successResponse;
+        $systemTraceAuditNo = $request->systemTraceAuditNo;
+        $terminalId = $request->terminalId;
+        $transactionDate = $request->transactionDate;
+        $transactionDateTime = $request->transactionDateTime;
+        $transactionTime = $request->transactionTime;
+        $transactionType = $request->transactionType;
+        $cardName = $request->cardName;
+        $userID = $request->UserID;
+        $action = $request->meter_info['action'];
+        $access_token = $request->meter_info['access_token'];
+        $disco_type = $request->meter_info['disco_type'];
+        $phone = $request->meter_info['phone'];
+        $email = $request->meter_info['email'];
+        $meterNo = $request->meter_info['meter_no'];
+
+
+
+        if($action == "ibdc"){
+
+            $url = env('IBDCURL');
+            $pub_key = env('IBDCPUBKEY');
+            $priv_key = env('IBDCPRIVKEY');
+            $trx = str_pad(mt_rand(0, 999999999999), 12, '0', STR_PAD_LEFT); // Generate a 12-digit reference ID
+            $vendor_code =  env('IBDCVENDORCODE');
+            $hash = generateHash($vendor_code, $meterNo, $trx, $disco_type, $amount, $access_token, $pub_key, $priv_key);
+
+            $databody = array(
+
+            );
+
+            $body = json_encode($databody);
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+
+                CURLOPT_URL => $url."vend_power.php?vendor_code=$vendor_code&reference_id=$trx&meter=$meterNo&access_token=$access_token&disco=$disco_type&phone=$phone&email=$email&response_format=json&hash=$hash&amount=$amount",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+                CURLOPT_POSTFIELDS => $body,
+                CURLOPT_HTTPHEADER => array(
+                    'Accept: application/json',
+                    'Content-Type: application/json',
+                ),
+            ));
+
+            $var = curl_exec($curl);
+            curl_close($curl);
+            $var = json_decode($var);
+            $status = $var->status ?? null;
+            $message = $var->message ?? null;
+
+
+            if($status == "00" && $message == "Successful" ){
+
+                $met = new MeterToken();
+                $met->eletic_company = "ibdc";
+                $met->disco_type = $disco_type;
+                $met->meter_no = $meterNo;
+                $met->ref = $trx;
+                $met->amount = $amount;
+                $met->units = $var->units;
+                $met->meter_token = $var->meter_token;
+                $met->address = $var->address;
+                $met->status = 2;
+                $met->note = "successful";
+                $met->SerialNo = $SerialNo;
+                $met->rrn = $RRN;
+
+                $met->save();
+
+
+                $meter['wallet_balance'] = $var->wallet_balance;
+                $meter['ref'] = $var->ref;
+                $meter['amount'] = $var->amount;
+                $meter['units'] = $var->units;
+                $meter['meter_token'] = $var->meter_token;
+                $meter['address'] = $var->address;
+                $meter['message'] = "successful";
+
+
+            }else{
+
+                $met = new MeterToken();
+                $met->eletic_company = "ibdc";
+                $met->disco_type = $disco_type;
+                $met->meter_no = $meterNo;
+                $met->ref = $trx;
+                $met->amount = $amount;
+                $met->units = $var->units ?? null;
+                $met->meter_token = $var->meter_token ?? null;
+                $met->address = $var->address ?? null;
+                $met->status = 1;
+                $met->note = $message;
+                $met->SerialNo = $SerialNo;
+                $met->rrn = $RRN;
+
+                $met->save();
+
+
+                $meter['wallet_balance'] = null;
+                $meter['ref'] = null;
+                $meter['amount'] = null;
+                $meter['units'] = null;
+                $meter['meter_token'] = null;
+                $meter['message'] = $message;
+
+            }
+
+
+
+        }
+
+
+
+        if ($SerialNo == null) {
+            $message = "Serial Number can not be empty";
+            return error_response($message);
+        }
+
+        $rrn = PosLog::where('RRN', $request->RRN)->first()->log_status ?? null;
+        if ($rrn == 1) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Transaction already successful',
+            ], 422);
+
+        }
+
+
+        $SerialNo = Terminal::where('serialNumber', $SerialNo)->first()->serialNumber ?? null;
+        if ($SerialNo == null) {
+            $message = "No user attached to the serial number | $SerialNo";
+            return error_response($message);
+        }
+
+
+        $trx = PosLog::where('RRN', $request->RRN)->where('log_status', 0)->update([
+            'log_status' => 1,
+        ]) ?? null;
+
+        $user_id = Terminal::where('serialNumber', $SerialNo)->first()->user_id ?? null;
+        $bank_id = Terminal::where('serialNumber', $SerialNo)->first()->bank_id ?? null;
+
+
+        // Get the current time
+        $current_time = time();
+        $one_hour_later = $current_time + 3600; // 3600 seconds = 1 hour
+        $created_at = date('Y-m-d H:i:s', $one_hour_later);
+
+
+        $mer = Terminal::where('serialNumber', $SerialNo)->first() ?? null;
+
+
+
+
+        return response()->json([
+            'newTransaction' => [
+                'success' => true,
+                'transaction' => $trasnaction,
+            ],
+            'merchantName' => $mer->merchantName,
+            'mid' => $mer->mid,
+            'allTransaction' => null,
+            'message' => "Transaction initiated successfully",
+            'merchantDetails' => [
+                'merchantName' => $mer->merchantName,
+                'serialnumber' => $mer->serialNumber,
+                'mid' => $mer->mid,
+                'tid' => $mer->tid,
+                'merchantaddress' => $mer->merchantaddress
+            ],
+            'meter' => $meter ?? null
+        ], 200);
+    }
+
+
 
 
 }

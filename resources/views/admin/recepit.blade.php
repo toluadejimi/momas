@@ -147,7 +147,7 @@
 
 
                             <center>
-                                <p class="mt-2 mb-3"><b>-- Customer Copy --</b></p>
+                                <p class="mt-2 mb-3"><b>{{$title ?? "RECEPIT"}}</b></p>
                             </center><!--End InvoiceTop-->
 
 
