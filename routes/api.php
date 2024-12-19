@@ -18,6 +18,7 @@ Route::get('get-estate-tariff', [MeterController::class, 'get_estate_tariff']);
 Route::get('get-estate', [EstateController::class, 'get_estate']);
 
 
+
 Route::post('reset-password', [LoginController::class, 'reset_password']);
 Route::post('delete-user', [LoginController::class, 'delete_user']);
 
