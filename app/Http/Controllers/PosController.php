@@ -251,21 +251,18 @@ class PosController extends Controller
         $cardCardSequenceNum = $request->cardCardSequenceNum;
         $cardExpireData = $request->cardExpireData;
         $forwardingInstCode = $request->forwardingInstCode;
-        $merchantNo = $request->institutionData['merchantNo'];
         $amount = $request->institutionData['amount'];
-        $accountType = $request->institutionData['accountType'];
-        $merchantName = $request->institutionData['merchantName'];
         $tid = $request->institutionData['tid'];
         $pan = $request->pan;
         $pinBlock = $request->pinBlock;
         $receiptNumber = $request->receiptNumber;
         $respCode = $request->respCode;
         $responseMessage = $request->responseMessage;
-        $status = $request->status;
+        $posstatus = $request->status;
         $successResponse = $request->successResponse;
         $systemTraceAuditNo = $request->systemTraceAuditNo;
         $terminalId = $request->terminalId;
-        $transactionDate = $request->transactionDate;
+        $transactionDattae = $request->transactionDate;
         $transactionDateTime = $request->transactionDateTime;
         $transactionTime = $request->transactionTime;
         $transactionType = $request->transactionType;
@@ -286,8 +283,6 @@ class PosController extends Controller
 
         $estate = Estate::where('id', $estate_id)->first();
         $tariff_id = TarrifState::where('estate_id', $estate_id)->first()->tariff_id ?? null;
-
-
         $meter = Meter::where('MeterNo', $meterNo)->first() ?? null;
         $user = User::where('meterNo', $meterNo)->first() ?? null;
         if ($user == null) {
@@ -297,17 +292,7 @@ class PosController extends Controller
             ], 422);
         }
 
-//
-//        $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first()->duration;
-//        if ($request->min_vend_amount != 0) {
-//            $utl = new UtilitiesPayment();
-//            $utl->user_id = 1;
-//            $utl->estate_id = $estate_id;
-//            $utl->amount = $utility_amount;
-//            $utl->duration = $duration;
-//            $utl->status = 2;
-//            $utl->save();
-//        }
+
 
 
 
@@ -322,258 +307,262 @@ class PosController extends Controller
         $logs->responseMessage = $responseMessage;
         $logs->pan = $pan;
         $logs->responseCode = $respCode;
+        $logs->terminalID = $tid;
+        $logs->trx_date = $transactionDateTime;
+        $logs->status = 0;
+        $logs->trx_time = $transactionTime;
+        $logs->save();
 
 
 
+            if ($meter != null && $meter->NeedKCT == "on") {
+                $databody = [
+                    'meterType' => $meter->KRN1,
+                    'meterNo' => $meterNo,
+                    'sgc' => (int)$meter->OldSGC,
+                    'ti' => $tariff_id, //TRARRRIF INDEX
+                    'amount' => $vend_amount_kw_per_naira,
+                ];
+                $response = Http::withOptions([
+                    'verify' => false,
+                    'timeout' => 10,
+                ])->post('http://169.239.189.91:19071/tokenGen', $databody);
+
+                if ($response->successful()) {
+                    $gdata = $response->json();
+                    $data = json_decode($gdata, true);
+                    $statusm = $data['code'] ?? null;
+
+                    if($posstatus == "00" && $statusm == "SUCCESS" ) {
+                        $token = $data['tokens'][0];
+                        $kctdatabody = [
+                            'meterType' => $meter->KRN1,
+                            'tometerType' => $meter->KRN1,
+                            'meterNo' => $meterNo,
+                            'sgc' => (int)$meter->OldSGC,
+                            'tosgc' => (int)$meter->NewSGC,
+                            'ti' => $tariff_id,
+                            'toti' => 1,
+                            'allow' => false,
+                            'allowkrn' => true,
+                        ];
+
+                        $kct_response = Http::withOptions([
+                            'verify' => false,
+                            'timeout' => 10,
+                        ])->post('http://169.239.189.91:19071/kcttokenGen', $kctdatabody);
+
+                        if ($kct_response->successful()) {
+                            $kct = $kct_response->json();
+                            $kct_data = json_decode($kct, true);
+                            $status = $kct_data['code'] ?? null;
+
+                            if($status == "SUCCESS" ) {
+
+                                $cdt = new CreditToken();
+                                $cdt->user_id = 1;
+                                $cdt->order_id = $RRN;
+                                $cdt->meterNo = $meterNo;
+                                $cdt->amount = $total_paid ?? 0;
+                                $cdt->vat = $vat_amount ?? 0;
+                                $cdt->estate_name = Estate::where('id', $estate_id)->first()->title ?? "NAME";
+                                $cdt->estate_id = $estate_id;
+                                $cdt->tariff_id = $tariff_id;
+                                $cdt->vatAmount = $vat_amount;
+                                $cdt->costOfUnit = $vending_amount;
+                                $cdt->tariffPerKWatt = $vend_amount_kw_per_naira;
+                                $cdt->save();
+
+                                $met = new MeterToken();
+                                $met->user_id = $user->id;
+                                $met->order_id = $RRN;
+                                $met->meterNo = $meterNo;
+                                $met->token = $token;
+                                $met->amount = $total_paid ?? 0;
+                                $met->unit = $vend_amount_kw_per_naira;
+                                $met->kct_tokens = $kct_data['tokens'][0] . "," . $kct_data['tokens'][1];
+                                $met->vat = $vat_amount;
+                                $met->estate_id = $estate_id;
+                                $met->status = 2;
+                                $met->save();
 
 
+                                $trx = new Transaction();
+                                $trx->trx_id = $RRN;
+                                $trx->service = "METER PURCHASE POS";
+                                $trx->service_type = "meter";
+                                $trx->unit_amount = $vending_amount;
+                                $trx->vat = $vat_amount;
+                                $trx->tariff_id = $tariff_id;
+                                $trx->save();
 
 
-        if ($meter != null && $meter->NeedKCT == "on") {
-            $databody = [
-                'meterType' => $meter->KRN1,
-                'meterNo' => $meterNo,
-                'sgc' => (int)$meter->OldSGC,
-                'ti' => $tariff_id, //TRARRRIF INDEX
-                'amount' => $vend_amount_kw_per_naira,
-            ];
-            $response = Http::withOptions([
-                'verify' => false,
-                'timeout' => 10,
-            ])->post('http://169.239.189.91:19071/tokenGen', $databody);
-
-            if ($response->successful()) {
-                $gdata = $response->json();
-                $data = json_decode($gdata, true);
-                $status = $data['code'] ?? null;
-
-                if ($status == "SUCCESS") {
-                    $token = $data['tokens'][0];
-
-                    $kctdatabody = [
-                        'meterType' => $meter->KRN1,
-                        'tometerType' => $meter->KRN1,
-                        'meterNo' => $meterNo,
-                        'sgc' => (int)$meter->OldSGC,
-                        'tosgc' => (int)$meter->NewSGC,
-                        'ti' => $tariff_id,
-                        'toti' => 1,
-                        'allow' => false,
-                        'allowkrn' => true,
-                    ];
-
-                    $kct_response = Http::withOptions([
-                        'verify' => false,
-                        'timeout' => 10,
-                    ])->post('http://169.239.189.91:19071/kcttokenGen', $kctdatabody);
-
-                    if ($kct_response->successful()) {
-                        $kct = $kct_response->json();
-                        $kct_data = json_decode($kct, true);
-                        $status = $kct_data['code'] ?? null;
-
-                        if ($status == "SUCCESS") {
+                                $data2['full_name'] = $user->first_name . " " . $user->last_name;
+                                $data2['address'] = $user->address . "," . $user->city . "," . $user->state;
+                                $data2['service'] = "MOMAS METER";
+                                $data2['order_id'] = $trx;
+                                $data2['token'] = $token;
+                                $data2['amount'] = $total_paid;
+                                $data2['vending_amount'] = $vending_amount;
+                                $data2['vend_amount_kw_per_naira'] = $vend_amount_kw_per_naira;
+                                $data2['kct_token1'] = $kct_data['tokens'][0];
+                                $data2['kct_token2'] = $kct_data['tokens'][1];
+                                $data2['vat_amount'] = $vat_amount;
 
 
-                            $order_id = "POS" . random_int(000000000, 9999999999);
-                            $cdt = new CreditToken();
-                            $cdt->user_id = 1;
-                            $cdt->order_id = $RRN;
-                            $cdt->meterNo = $meterNo;
-                            $cdt->amount = $total_paid ?? 0;
-                            $cdt->vat = $vat_amount ?? 0;
-                            $cdt->estate_name = Estate::where('id', Auth::user()->estate_id)->first()->title ?? "NAME";
-                            $cdt->estate_id = $estate_id;
-                            $cdt->tariff_id = $tariff_id;
-                            $cdt->vatAmount = $vat_amount;
-                            $cdt->costOfUnit = $request->vending_amount;
-                            $cdt->tariffPerKWatt = $request->vend_amount_kw_per_naira;
-                            $cdt->save();
+                                return response()->json([
+                                    'newTransaction' => [
+                                        'success' => true,
+                                        'transaction' => $logs,
+                                    ],
+                                    'message' => "Transaction successfully",
+                                    'meter' => $data2 ?? null
+                                ], 200);
 
 
-                            $met = new MeterToken();
-                            $met->user_id = Auth::user()->id;
-                            $met->order_id = $trx;
-                            $met->meterNo = $meterNo;
-                            $met->token = $token;
-                            $met->amount = $total_paid ?? 0;
-                            $met->unit = $unit;
-                            $met->kct_tokens = $kct_data['tokens'][0] . "," . $kct_data['tokens'][1];
-                            $met->vat = $vat_amount;
-                            $met->estate_id = $estate_id;
-                            $met->status = 2;
-                            $met->save();
+                            }
+                        } else {
 
-                            Transaction::where('trx_id', $trx)->update(['service' => "METER PURCHASE", 'service_type' => "meter", 'unit_amount' => $vendong_amount, 'vat' => $vat_amount, 'tariff_id' => $tariff_index,
-                            ]);
-
-
-                            $trasnaction[''] =
-
-                            $data2['full_name'] = $user->first_name . " " . $user->last_name;
-                            $data2['address'] = $user->address . "," . $user->city . "," . $user->state;
-                            $data2['service'] = "MOMAS METER";
-                            $data2['order_id'] = $trx;
-                            $data2['token'] = $token;
-                            $data2['amount'] = $total_paid;
-                            $data2['vending_amount'] = $vendong_amount;
-                            $data2['vend_amount_kw_per_naira'] = $unit;
-                            $data2['kct_token1'] = $kct_data['tokens'][0];
-                            $data2['kct_token2'] = $kct_data['tokens'][1];
-                            $data2['vat_amount'] = $vat_amount;
+                            $logs = new PosLog();
+                            $logs->rrn = $RRN;
+                            $logs->estate_id = $estate_id;
+                            $logs->cardName = $cardName;
+                            $logs->amount = $amount;
+                            $logs->STAN = $STAN;
+                            $logs->serialNO = $SerialNo;
+                            $logs->expireDate = $cardExpireData;
+                            $logs->responseMessage = "Money Funded but meter not funded";
+                            $logs->pan = $pan;
+                            $logs->responseCode = "03";
+                            $logs->terminalID = $tid;
+                            $logs->trx_date = $transactionDateTime;
+                            $logs->status = 3;
+                            $logs->trx_time = $transactionTime;
+                            $logs->meterNo = $meterNo;
+                            $logs->vend_amount_kw_per_naira = $vend_amount_kw_per_naira;
+                            $logs->vat_amount = $vat_amount;
+                            $logs->save();
 
 
                             return response()->json([
-                                'newTransaction' => [
-                                    'success' => true,
-                                    'transaction' => $trasnaction,
-                                ],
-                                'merchantName' => $mer->merchantName,
-                                'mid' => $mer->mid,
-                                'allTransaction' => null,
-                                'message' => "Transaction initiated successfully",
-                                'merchantDetails' => [
-                                    'merchantName' => $mer->merchantName,
-                                    'serialnumber' => $mer->serialNumber,
-                                    'mid' => $mer->mid,
-                                    'tid' => $mer->tid,
-                                    'merchantaddress' => $mer->merchantaddress
-                                ],
-                                'meter' => $meter ?? null
-                            ], 200);
 
-                            $meter['wallet_balance'] = $var->wallet_balance;
-                            $meter['ref'] = $var->ref;
-                            $meter['amount'] = $var->amount;
-                            $meter['units'] = $var->units;
-                            $meter['meter_token'] = $var->meter_token;
-                            $meter['address'] = $var->address;
-                            $meter['message'] = "successful";
-
-
-                            return response()->json([
-                                'status' => true,
-                                'data' => $data2
-                            ], 200);
-
-
+                                'status' => false,
+                                'message' => "Vending server not connected, Retry again on transaction history",
+                            ], 422);
                         }
-                    } else {
 
-                        Transaction::where('trx_id', $trx)->update([
-                            'service' => "METER PURCHASE",
-                            'service_type' => "meter",
-                            'status' => 3,
-                            'tariff_id' => $request->tariff_id,
-                            'unit_amount' => $vendong_amount,
-                            'note' => $kct_response . "| " . json_encode($databody)
-
-                        ]);
-
-
-                        User::where('id', Auth::id())->increment('main_wallet', $request->amount);
-
-
-                        return response()->json([
-
-                            'status' => false,
-                            'message' => "Vending server not connected, Retry again on transaction history",
-                        ], 422);
                     }
-
-                }
-
-
-            } else {
-
-                return response()->json([
-                    'status' => false,
-                    'message' => "Meter vending failed, Retry again using your wallet"
-                ], 422);
-
-            }
-
-        }
-
-
-        if ($meter != null && $meter->NeedKCT == null) {
-
-            $databody = [
-                'meterType' => $meter->KRN1,
-                'meterNo' => Auth::user()->meterNo,
-                'sgc' => (int)$meter->OldSGC,
-                'ti' => 1,
-                'amount' => $request->amount,
-            ];
-            $no_kct_response = Http::withOptions([
-                'verify' => false,
-                'timeout' => 10,
-            ])->post('http://169.239.189.91:19071/tokenGen', $databody);
-
-
-            if ($no_kct_response->successful()) {
-                $no_kct = $no_kct_response->json();
-                $no_kct_data = json_decode($no_kct, true);
-                $status = $no_kct_data['code'] ?? null;
-
-                if ($status == "SUCCESS") {
-
-                    $no_kct_token = $no_kct_data['tokens'][0];
-                    $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
-                    $met = new MeterToken ();
-                    $met->user_id = Auth::user()->id;
-                    $met->order_id = $trx;
-                    $met->meterNo = $meterNo;
-                    $met->token = $no_kct_token;
-                    $met->amount = $vendong_amount;
-                    $met->unit = $unit;
-                    $met->vat = $vat;
-                    $met->estate_id = Auth::user()->estate_id;
-                    $met->status = 2;
-                    $met->save();
-
-                    Transaction::where('trx_id', $trx)->update(['service' => "METER PURCHASE", 'service_type' => "meter", 'unit_amount' => $vendong_amount]);
-
-                    $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
-                    $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
-                    $data['service'] = "MOMAS METER";
-                    $data['order_id'] = $trx;
-                    $data['token'] = $no_kct_data['tokens'][0];
-                    $data['amount'] = $total_paid;
-                    $data['vending_amount'] = $vendong_amount;
-                    $data['vat_amount'] = $vat_amount;
-                    $data['vend_amount_kw_per_naira'] = $unit;
-                    $email = Auth::user()->email;
-                    $token = $no_kct_data['tokens'][0];
-                    send_email_token($email, $token, $amount);
-
-                    return response()->json([
-                        'status' => true,
-                        'data' => $data
-                    ], 200);
 
 
                 } else {
 
-
-                    Transaction::where('trx_id', $trx)->update([
-                        'service' => "METER PURCHASE",
-                        'service_type' => "meter",
-                        'status' => 3,
-                        'tariff_id' => $request->tariff_id,
-                        'unit_amount' => $vendong_amount,
-                        'note' => $no_kct_response . "|" . json_encode($databody)
-
-
-                    ]);
-
-                    User::where('id', Auth::id())->increment('main_wallet', $request->amount);
-
-
                     return response()->json([
                         'status' => false,
-                        'message' => "Vending server not connected, Retry again on transaction history",
+                        'message' => "Meter vending failed, Retry again using your wallet"
                     ], 422);
+
+                }
+
+            }
+
+
+            if ($meter != null && $meter->NeedKCT == null) {
+
+                $databody = [
+                    'meterType' => $meter->KRN1,
+                    'meterNo' => $meterNo,
+                    'sgc' => (int)$meter->OldSGC,
+                    'ti' => $tariff_id,
+                    'amount' => $vend_amount_kw_per_naira,
+                ];
+                $no_kct_response = Http::withOptions([
+                    'verify' => false,
+                    'timeout' => 10,
+                ])->post('http://169.239.189.91:19071/tokenGen', $databody);
+
+
+                if ($no_kct_response->successful()) {
+                    $no_kct = $no_kct_response->json();
+                    $no_kct_data = json_decode($no_kct, true);
+                    $statusm = $no_kct_data['code'] ?? null;
+
+                    if($posstatus == "00" && $statusm == "SUCCESS" ) {
+
+                        $no_kct_token = $no_kct_data['tokens'][0];
+                        $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
+                        $met = new MeterToken ();
+                        $met->user_id = $user->id;
+                        $met->order_id = $RRN;
+                        $met->meterNo = $meterNo;
+                        $met->token = $no_kct_token;
+                        $met->amount = $vending_amount;
+                        $met->unit = $vend_amount_kw_per_naira;
+                        $met->vat = $vat;
+                        $met->estate_id = $estate_id;
+                        $met->status = 2;
+                        $met->save();
+
+                        $trx = new Transaction();
+                        $trx->trx_id = $RRN;
+                        $trx->service = "METER PURCHASE POS";
+                        $trx->service_type = "meter";
+                        $trx->unit_amount = $vending_amount;
+                        $trx->vat = $vat_amount;
+                        $trx->tariff_id = $tariff_id;
+                        $trx->save();
+
+
+
+                        $data['full_name'] = $user->first_name . " " . $user->last_name;
+                        $data['address'] = $user->address . "," . $user->city . "," . $user->state;
+                        $data['service'] = "MOMAS METER";
+                        $data['order_id'] = $RRN;
+                        $data['token'] = $no_kct_data['tokens'][0];
+                        $data['amount'] = $total_paid;
+                        $data['vending_amount'] = $vending_amount;
+                        $data['vat_amount'] = $vat_amount;
+                        $data['vend_amount_kw_per_naira'] = $vend_amount_kw_per_naira;
+//                        $email = $user->email;
+//                        $token = $no_kct_data['tokens'][0];
+//                        send_email_token($email, $token, $amount);
+
+                        return response()->json([
+                            'status' => true,
+                            'data' => $data
+                        ], 200);
+
+
+                    } else {
+
+
+                        $logs = new PosLog();
+                        $logs->rrn = $RRN;
+                        $logs->estate_id = $estate_id;
+                        $logs->cardName = $cardName;
+                        $logs->amount = $amount;
+                        $logs->STAN = $STAN;
+                        $logs->serialNO = $SerialNo;
+                        $logs->expireDate = $cardExpireData;
+                        $logs->responseMessage = "Money Funded but meter not funded";
+                        $logs->pan = $pan;
+                        $logs->responseCode = "03";
+                        $logs->terminalID = $tid;
+                        $logs->trx_date = $transactionDateTime;
+                        $logs->status = 3;
+                        $logs->trx_time = $transactionTime;
+                        $logs->meterNo = $meterNo;
+                        $logs->vend_amount_kw_per_naira = $vend_amount_kw_per_naira;
+                        $logs->vat_amount = $vat_amount;
+                        $logs->save();
+
+
+                        return response()->json([
+                            'status' => false,
+                            'message' => "Vending server not connected, Retry again on transaction history",
+                        ], 422);
+
+                    }
+
 
                 }
 
@@ -581,7 +570,7 @@ class PosController extends Controller
             }
 
 
-        }
+
 
         return response()->json([
 
