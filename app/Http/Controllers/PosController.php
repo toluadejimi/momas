@@ -241,7 +241,6 @@ class PosController extends Controller
     public function buy_meter_token(request $request)
     {
 
-        $meterNo = $request->meterNo;
         $utility_amount = $request->utility_amount;
         $SerialNo = $request->header('serialnumber');
         $RRN = $request->RRN;
@@ -270,14 +269,18 @@ class PosController extends Controller
         $userID = $request->UserID;
         $estate_id = $request->meter_info['estate_id'];
         $vending_amount = $request->meter_info['vending_amount'];
+        $meterNo = $request->meter_info['meter_no'];
         $vend_amount_kw_per_naira = $request->meter_info['vend_amount_kw_per_naira'];
         $vat_amount = $request->meter_info['vat_amount'];
         $total_paid = $request->meter_info['total_paid_amount'];
 
 
-
-
-
+        if ($meterNo == null) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Meter No can not be null',
+            ], 422);
+        }
 
 
 
@@ -285,14 +288,13 @@ class PosController extends Controller
         $tariff_id = TarrifState::where('estate_id', $estate_id)->first()->tariff_id ?? null;
         $meter = Meter::where('MeterNo', $meterNo)->first() ?? null;
         $user = User::where('meterNo', $meterNo)->first() ?? null;
+
         if ($user == null) {
             return response()->json([
                 'status' => false,
                 'message' => 'Meter Not attached to user',
             ], 422);
         }
-
-
 
 
 
@@ -389,10 +391,10 @@ class PosController extends Controller
 
                                 $trx = new Transaction();
                                 $trx->trx_id = $RRN;
+                                $trx->user_id = $user->id;
                                 $trx->service = "METER PURCHASE POS";
                                 $trx->service_type = "meter";
                                 $trx->unit_amount = $vending_amount;
-                                $trx->vat = $vat_amount;
                                 $trx->tariff_id = $tariff_id;
                                 $trx->save();
 
@@ -503,11 +505,11 @@ class PosController extends Controller
                         $met->save();
 
                         $trx = new Transaction();
+                        $trx->user_id = $user->id;
                         $trx->trx_id = $RRN;
                         $trx->service = "METER PURCHASE POS";
                         $trx->service_type = "meter";
                         $trx->unit_amount = $vending_amount;
-                        $trx->vat = $vat_amount;
                         $trx->tariff_id = $tariff_id;
                         $trx->save();
 
@@ -526,10 +528,17 @@ class PosController extends Controller
 //                        $token = $no_kct_data['tokens'][0];
 //                        send_email_token($email, $token, $amount);
 
+
                         return response()->json([
-                            'status' => true,
-                            'data' => $data
+                            'newTransaction' => [
+                                'success' => true,
+                                'transaction' => $logs,
+                            ],
+                            'message' => "Transaction successfully",
+                            'meter' => $data ?? null
                         ], 200);
+
+
 
 
                     } else {
