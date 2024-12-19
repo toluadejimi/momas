@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('get-estate-tariff', [MeterController::class, 'get_estate_tariff']);
 
+Route::get('get-estate', [EstateController::class, 'get_estate']);
+
 
 Route::post('reset-password', [LoginController::class, 'reset_password']);
 Route::post('delete-user', [LoginController::class, 'delete_user']);
@@ -46,6 +48,8 @@ Route::post('validate-cable', [BillsController::class, 'validate_cable']);
 Route::any('pos/validate', [PosController::class, 'validate_meter']);
 Route::any('pos/buy-token', [PosController::class, 'buy_meter_token']);
 Route::any('pos/retry-meter-token', [PosController::class, 'retry_meter_token']);
+Route::any('pos/eod', [PosController::class, 'eod']);
+
 
 
 Route::group(['middleware' => ['auth:api', 'acess']], function () {

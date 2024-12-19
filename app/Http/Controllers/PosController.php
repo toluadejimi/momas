@@ -4,23 +4,151 @@ namespace App\Http\Controllers;
 
 use App\Models\CreditToken;
 use App\Models\Estate;
+use App\Models\Merchant;
 use App\Models\Meter;
 use App\Models\MeterToken;
-use App\Models\Setting;
+use App\Models\PosLog;
 use App\Models\SpreadPayment;
 use App\Models\Tariff;
 use App\Models\TarrifState;
 use App\Models\Transaction;
 use App\Models\User;
-use App\Models\UtilitiesPayment;
-use App\Models\Utitlity;
-use App\Services\VatCalculator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
 class PosController extends Controller
 {
+
+
+    public function index(request $request)
+    {
+
+        if (auth::user()->role == 0) {
+
+
+            $data['merchants'] = Merchant::all();
+            $data['total_merchants'] = Merchant::count();
+            return view('admin.pos.index', $data);
+
+
+        } elseif (auth::user()->role == 1) {
+
+        } elseif (auth::user()->role == 2) {
+
+        } elseif (auth::user()->role == 3) {
+
+
+        } elseif (auth::user()->role == 4) {
+
+        } elseif (auth::user()->role == 5) {
+
+        } else {
+
+        }
+
+
+    }
+
+
+    public function new_merchant(request $request)
+    {
+
+        if (auth::user()->role == 0) {
+
+            return view('admin.pos.new-merchant');
+
+
+        } elseif (auth::user()->role == 1) {
+
+        } elseif (auth::user()->role == 2) {
+
+        } elseif (auth::user()->role == 3) {
+
+
+        } elseif (auth::user()->role == 4) {
+
+        } elseif (auth::user()->role == 5) {
+
+        } else {
+
+        }
+
+
+    }
+
+    public function add_merchant(request $request)
+    {
+
+        $terminal = Merchant::where('serial_no', $request->serial_no)->first() ?? null;
+        if ($terminal == null) {
+            $ter = new Merchant();
+            $ter->first_name = $request->first_name;
+            $ter->last_name = $request->last_name;
+            $ter->phone_no = $request->phone_no;
+            $ter->serial_no = $request->serial_no;
+            $ter->tid = $request->tid;
+            $ter->state = $request->state;
+            $ter->city = $request->city;
+            $ter->status = 2;
+            $ter->save();
+
+            try{
+
+
+                $curl = curl_init();
+
+                $databody = array(
+                    'serial_no' => $request->serial_no,
+                    'tid' => $request->tid,
+                    );
+
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => 'https://enkpayapp.enkwave.com/api/register-pos',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => $databody,
+                ));
+
+                $var = curl_exec($curl);
+                curl_close($curl);
+                $var = json_decode($var);
+
+
+
+
+            } catch (\Exception $th) {
+                return $th->getMessage();
+            }
+
+
+
+            return back()->with('message', 'Merchant has been created successfully');
+
+
+
+        } else {
+            return back()->with('error', 'Serial No already exist');
+        }
+
+
+    }
+
+    public function delete_merchant(request $request)
+    {
+
+        Merchant::where('id', $request->id)->delete();
+
+        return back()->with('message', 'Merchant has been deleted successfully');
+
+
+    }
+
 
 
 
@@ -91,19 +219,19 @@ class PosController extends Controller
 
         }
 
-        
+
         $data['tariffs'] = $tariffs;
         $pur['min_purchase'] = (int)$min_pur;
         $pur['max_purchase'] = (int)$max_pur;
         $pur['min_vending'] = (int)$minvend;
         $data['purchase'] = $pur;
 
-         return response()->json([
-                'status' => true,
-                'name' => $data['customer_name'],
-                'address' =>  $data['address'],
-                'maximumAmount' => $pur['max_purchase'],
-                'minimumAmount' => $data['min_purchase']
+        return response()->json([
+            'status' => true,
+            'name' => $data['customer_name'],
+            'address' => $data['address'],
+            'maximumAmount' => $pur['max_purchase'],
+            'minimumAmount' => $data['min_purchase']
         ], 200);
 
 
@@ -113,18 +241,11 @@ class PosController extends Controller
     public function buy_meter_token(request $request)
     {
 
-        $amount = $request->amount;
         $meterNo = $request->meterNo;
-        $trx = $request->trxref;
         $utility_amount = $request->utility_amount;
-        $total_paid = $request->total_paid_amount;
-        $unit = $request->vend_amount_kw_per_naira;
-        $vendong_amount = $request->vending_amount;
-        $vat_amount = $request->vat_amount;
         $SerialNo = $request->header('serialnumber');
         $RRN = $request->RRN;
         $STAN = $request->STAN;
-        $accountBalance = $account_balance;
         $acquiringInstitutionIdCode = $request->acquiringInstitutionIdCode;
         $authCode = $request->authCode;
         $cardCardSequenceNum = $request->cardCardSequenceNum;
@@ -150,37 +271,71 @@ class PosController extends Controller
         $transactionType = $request->transactionType;
         $cardName = $request->cardName;
         $userID = $request->UserID;
-        $action = $request->meter_info['action'];
-        $access_token = $request->meter_info['access_token'];
-        $disco_type = $request->meter_info['disco_type'];
-        $phone = $request->meter_info['phone'];
-        $email = $request->meter_info['email'];
-        $meterNo = $request->meter_info['meter_no'];
+        $estate_id = $request->meter_info['estate_id'];
+        $vending_amount = $request->meter_info['vending_amount'];
+        $vend_amount_kw_per_naira = $request->meter_info['vend_amount_kw_per_naira'];
+        $vat_amount = $request->meter_info['vat_amount'];
+        $total_paid = $request->meter_info['total_paid_amount'];
 
 
-        $tariff_index = Tariff::where('id', $request->tariff_id)->first()->tariff_index ?? null;
 
-        $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first()->duration;
-        if ($request->min_vend_amount != 0) {
-            $utl = new UtilitiesPayment();
-            $utl->user_id = Auth::id();
-            $utl->estate_id = Auth::user()->estate_id;
-            $utl->amount = $utility_amount;
-            $utl->duration = $duration;
-            $utl->status = 2;
-            $utl->save();
-        }
+
+
+
+
+
+        $estate = Estate::where('id', $estate_id)->first();
+        $tariff_id = TarrifState::where('estate_id', $estate_id)->first()->tariff_id ?? null;
 
 
         $meter = Meter::where('MeterNo', $meterNo)->first() ?? null;
+        $user = User::where('meterNo', $meterNo)->first() ?? null;
+        if ($user == null) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Meter Not attached to user',
+            ], 422);
+        }
+
+//
+//        $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first()->duration;
+//        if ($request->min_vend_amount != 0) {
+//            $utl = new UtilitiesPayment();
+//            $utl->user_id = 1;
+//            $utl->estate_id = $estate_id;
+//            $utl->amount = $utility_amount;
+//            $utl->duration = $duration;
+//            $utl->status = 2;
+//            $utl->save();
+//        }
+
+
+
+        $logs = new PosLog();
+        $logs->rrn = $RRN;
+        $logs->estate_id = $estate_id;
+        $logs->cardName = $cardName;
+        $logs->amount = $amount;
+        $logs->STAN = $STAN;
+        $logs->serialNO = $SerialNo;
+        $logs->expireDate = $cardExpireData;
+        $logs->responseMessage = $responseMessage;
+        $logs->pan = $pan;
+        $logs->responseCode = $respCode;
+
+
+
+
+
+
 
         if ($meter != null && $meter->NeedKCT == "on") {
             $databody = [
                 'meterType' => $meter->KRN1,
-                'meterNo' => Auth::user()->meterNo,
+                'meterNo' => $meterNo,
                 'sgc' => (int)$meter->OldSGC,
-                'ti' => $tariff_index, //TRARRRIF INDEX
-                'amount' => $unit,
+                'ti' => $tariff_id, //TRARRRIF INDEX
+                'amount' => $vend_amount_kw_per_naira,
             ];
             $response = Http::withOptions([
                 'verify' => false,
@@ -198,10 +353,10 @@ class PosController extends Controller
                     $kctdatabody = [
                         'meterType' => $meter->KRN1,
                         'tometerType' => $meter->KRN1,
-                        'meterNo' => Auth::user()->meterNo,
+                        'meterNo' => $meterNo,
                         'sgc' => (int)$meter->OldSGC,
                         'tosgc' => (int)$meter->NewSGC,
-                        'ti' => $tariff_index,
+                        'ti' => $tariff_id,
                         'toti' => 1,
                         'allow' => false,
                         'allowkrn' => true,
@@ -220,17 +375,16 @@ class PosController extends Controller
                         if ($status == "SUCCESS") {
 
 
-                            $order_id = "TRX".random_int(000000000, 9999999999);
-                            $estate_id = Auth::user()->estate_id;
+                            $order_id = "POS" . random_int(000000000, 9999999999);
                             $cdt = new CreditToken();
-                            $cdt->user_id = Auth::user()->id;
-                            $cdt->order_id = $order_id;
+                            $cdt->user_id = 1;
+                            $cdt->order_id = $RRN;
                             $cdt->meterNo = $meterNo;
-                            $cdt->amount =  $total_paid ?? 0;
+                            $cdt->amount = $total_paid ?? 0;
                             $cdt->vat = $vat_amount ?? 0;
                             $cdt->estate_name = Estate::where('id', Auth::user()->estate_id)->first()->title ?? "NAME";
                             $cdt->estate_id = $estate_id;
-                            $cdt->tariff_id = TarrifState::where('estate_id', $estate_id)->first()->tariff_id;
+                            $cdt->tariff_id = $tariff_id;
                             $cdt->vatAmount = $vat_amount;
                             $cdt->costOfUnit = $request->vending_amount;
                             $cdt->tariffPerKWatt = $request->vend_amount_kw_per_naira;
@@ -246,16 +400,18 @@ class PosController extends Controller
                             $met->unit = $unit;
                             $met->kct_tokens = $kct_data['tokens'][0] . "," . $kct_data['tokens'][1];
                             $met->vat = $vat_amount;
-                            $met->estate_id = Auth::user()->estate_id;
+                            $met->estate_id = $estate_id;
                             $met->status = 2;
                             $met->save();
 
-                            Transaction::where('trx_id', $trx)->update(['service' => "METER PURCHASE", 'service_type' => "meter", 'unit_amount' => $vendong_amount, 'vat' => $vat_amount, 'tariff_id' => $request->tariff_id,
+                            Transaction::where('trx_id', $trx)->update(['service' => "METER PURCHASE", 'service_type' => "meter", 'unit_amount' => $vendong_amount, 'vat' => $vat_amount, 'tariff_id' => $tariff_index,
                             ]);
 
 
-                            $data2['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
-                            $data2['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
+                            $trasnaction[''] =
+
+                            $data2['full_name'] = $user->first_name . " " . $user->last_name;
+                            $data2['address'] = $user->address . "," . $user->city . "," . $user->state;
                             $data2['service'] = "MOMAS METER";
                             $data2['order_id'] = $trx;
                             $data2['token'] = $token;
@@ -265,14 +421,6 @@ class PosController extends Controller
                             $data2['kct_token1'] = $kct_data['tokens'][0];
                             $data2['kct_token2'] = $kct_data['tokens'][1];
                             $data2['vat_amount'] = $vat_amount;
-
-
-                            $email = Auth::user()->email;
-                            $kct_token = $kct_data['tokens'];
-                            $kct_token1 = $kct_token[0];
-                            $kct_token2 = $kct_token[1];
-
-                            send_kct_email_token($email, $token, $amount, $kct_token1, $kct_token2);
 
 
                             return response()->json([
@@ -301,7 +449,7 @@ class PosController extends Controller
                             $meter['meter_token'] = $var->meter_token;
                             $meter['address'] = $var->address;
                             $meter['message'] = "successful";
-            
+
 
                             return response()->json([
                                 'status' => true,
@@ -443,27 +591,6 @@ class PosController extends Controller
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public function retry_meter_token(request $request)
@@ -713,11 +840,6 @@ class PosController extends Controller
     }
 
 
-
-   
-
-
-
     public function buy_token(request $request)
     {
 
@@ -759,25 +881,22 @@ class PosController extends Controller
         $meterNo = $request->meter_info['meter_no'];
 
 
-
-        if($action == "ibdc"){
+        if ($action == "ibdc") {
 
             $url = env('IBDCURL');
             $pub_key = env('IBDCPUBKEY');
             $priv_key = env('IBDCPRIVKEY');
             $trx = str_pad(mt_rand(0, 999999999999), 12, '0', STR_PAD_LEFT); // Generate a 12-digit reference ID
-            $vendor_code =  env('IBDCVENDORCODE');
+            $vendor_code = env('IBDCVENDORCODE');
             $hash = generateHash($vendor_code, $meterNo, $trx, $disco_type, $amount, $access_token, $pub_key, $priv_key);
 
-            $databody = array(
-
-            );
+            $databody = array();
 
             $body = json_encode($databody);
             $curl = curl_init();
             curl_setopt_array($curl, array(
 
-                CURLOPT_URL => $url."vend_power.php?vendor_code=$vendor_code&reference_id=$trx&meter=$meterNo&access_token=$access_token&disco=$disco_type&phone=$phone&email=$email&response_format=json&hash=$hash&amount=$amount",
+                CURLOPT_URL => $url . "vend_power.php?vendor_code=$vendor_code&reference_id=$trx&meter=$meterNo&access_token=$access_token&disco=$disco_type&phone=$phone&email=$email&response_format=json&hash=$hash&amount=$amount",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
@@ -799,7 +918,7 @@ class PosController extends Controller
             $message = $var->message ?? null;
 
 
-            if($status == "00" && $message == "Successful" ){
+            if ($status == "00" && $message == "Successful") {
 
                 $met = new MeterToken();
                 $met->eletic_company = "ibdc";
@@ -827,7 +946,7 @@ class PosController extends Controller
                 $meter['message'] = "successful";
 
 
-            }else{
+            } else {
 
                 $met = new MeterToken();
                 $met->eletic_company = "ibdc";
@@ -856,9 +975,7 @@ class PosController extends Controller
             }
 
 
-
         }
-
 
 
         if ($SerialNo == null) {
@@ -900,8 +1017,6 @@ class PosController extends Controller
         $mer = Terminal::where('serialNumber', $SerialNo)->first() ?? null;
 
 
-
-
         return response()->json([
             'newTransaction' => [
                 'success' => true,
@@ -921,8 +1036,6 @@ class PosController extends Controller
             'meter' => $meter ?? null
         ], 200);
     }
-
-
 
 
 }

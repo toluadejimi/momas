@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\TariffController;
 use App\Http\Controllers\Admin\TokenController;
 use App\Http\Controllers\Estate\EstateServiceController;
 use App\Http\Controllers\Meter\MeterController;
+use App\Http\Controllers\PosController;
 use App\Http\Controllers\Transaction\TransactionController;
 use App\Http\Controllers\Transformer\TransformerController;
 use Illuminate\Support\Facades\Artisan;
@@ -263,6 +264,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
     Route::post('add-new-tariffstate', [TariffController::class, 'add_state_tariff']);
     Route::post('update-tariffstate', [TariffController::class, 'update_tariffstate']);
+
+
+
+
+    //POS
+
+    Route::get('pos-index', [PosController::class, 'index']);
+    Route::get('new-merchant', [PosController::class, 'new_merchant']);
+    Route::post('add-merchant', [PosController::class, 'add_merchant']);
+    Route::get('delete-merchant', [PosController::class, 'delete_merchant']);
+
+
+
 
 
 

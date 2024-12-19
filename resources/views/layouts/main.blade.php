@@ -236,6 +236,14 @@
 
 
                         <li>
+                            <a class='tp-link' href="pos-index">
+                                <i data-feather="credit-card"></i>
+                                <span> POS Merchant </span>
+                            </a>
+                        </li>
+
+
+                        <li>
                             <a class='tp-link' href="access-token">
                                 <i data-feather="lock"></i>
                                 <span> Access Token </span>
