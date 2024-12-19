@@ -16,6 +16,20 @@ class PosLog extends Model
         'status' => 'integer',
     ];
 
+    protected $fillable = [
+
+        'token',
+        'vending_amount',
+        'vat_amount',
+        'vend_amount_kw_per_naira',
+        'meter_no',
+        'status',
+        'address',
+        'name',
+        'merchant_id',
+
+    ];
+
 
 
 }

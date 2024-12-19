@@ -285,6 +285,7 @@ class PosController extends Controller
 
 
         $estate = Estate::where('id', $estate_id)->first();
+        $mer_id = Merchant::where('serial_no', $SerialNo)->first()->id ?? null;
         $tariff_id = TarrifState::where('estate_id', $estate_id)->first()->tariff_id ?? null;
         $meter = Meter::where('MeterNo', $meterNo)->first() ?? null;
         $user = User::where('meterNo', $meterNo)->first() ?? null;
@@ -412,6 +413,23 @@ class PosController extends Controller
                                 $data2['vat_amount'] = $vat_amount;
 
 
+
+                                PosLog::where('rrn', $RRN)->first()->update([
+                                    'token' => $token,
+                                    'kct_token' => $kct_data['tokens'][0]." ".$kct_data['tokens'][1],
+                                    'vending_amount' => $vending_amount,
+                                    'vat_amount' => $vat_amount,
+                                    'vend_amount_kw_per_naira' => $vend_amount_kw_per_naira,
+                                    'meter_no' => $meterNo,
+                                    'address' => $data['address'],
+                                    'name' =>  $data['full_name'],
+                                    'merchant_id' =>  $mer_id,
+
+
+                                    'status' => 2,
+                                ]);
+
+
                                 return response()->json([
                                     'newTransaction' => [
                                         'success' => true,
@@ -527,6 +545,19 @@ class PosController extends Controller
 //                        $email = $user->email;
 //                        $token = $no_kct_data['tokens'][0];
 //                        send_email_token($email, $token, $amount);
+
+
+                        PosLog::where('rrn', $RRN)->first()->update([
+                            'token' => $no_kct_data['tokens'][0],
+                            'vending_amount' => $vending_amount,
+                            'vat_amount' => $vat_amount,
+                            'vend_amount_kw_per_naira' => $vend_amount_kw_per_naira,
+                            'meter_no' => $meterNo,
+                            'address' => $data['address'],
+                            'name' =>  $data['full_name'],
+                            'merchant_id' =>  $mer_id,
+                            'status' => 2,
+                        ]);
 
 
                         return response()->json([
@@ -838,202 +869,169 @@ class PosController extends Controller
     }
 
 
-    public function buy_token(request $request)
+
+    public function get_all_transaction(request $request)
     {
 
-        $SerialNo = $request->header('serialnumber');
-        $account_balance = user_balance($SerialNo);
-        $RRN = $request->RRN;
-        $STAN = $request->STAN;
-        $accountBalance = $account_balance;
-        $acquiringInstitutionIdCode = $request->acquiringInstitutionIdCode;
-        $authCode = $request->authCode;
-        $cardCardSequenceNum = $request->cardCardSequenceNum;
-        $cardExpireData = $request->cardExpireData;
-        $forwardingInstCode = $request->forwardingInstCode;
-        $merchantNo = $request->institutionData['merchantNo'];
-        $amount = $request->institutionData['amount'];
-        $accountType = $request->institutionData['accountType'];
-        $merchantName = $request->institutionData['merchantName'];
-        $tid = $request->institutionData['tid'];
-        $pan = $request->pan;
-        $pinBlock = $request->pinBlock;
-        $receiptNumber = $request->receiptNumber;
-        $respCode = $request->respCode;
-        $responseMessage = $request->responseMessage;
-        $status = $request->status;
-        $successResponse = $request->successResponse;
-        $systemTraceAuditNo = $request->systemTraceAuditNo;
-        $terminalId = $request->terminalId;
-        $transactionDate = $request->transactionDate;
-        $transactionDateTime = $request->transactionDateTime;
-        $transactionTime = $request->transactionTime;
-        $transactionType = $request->transactionType;
-        $cardName = $request->cardName;
-        $userID = $request->UserID;
-        $action = $request->meter_info['action'];
-        $access_token = $request->meter_info['access_token'];
-        $disco_type = $request->meter_info['disco_type'];
-        $phone = $request->meter_info['phone'];
-        $email = $request->meter_info['email'];
-        $meterNo = $request->meter_info['meter_no'];
+        date_default_timezone_set('UTC');
 
+        if ($request->rrn != null) {
 
-        if ($action == "ibdc") {
-
-            $url = env('IBDCURL');
-            $pub_key = env('IBDCPUBKEY');
-            $priv_key = env('IBDCPRIVKEY');
-            $trx = str_pad(mt_rand(0, 999999999999), 12, '0', STR_PAD_LEFT); // Generate a 12-digit reference ID
-            $vendor_code = env('IBDCVENDORCODE');
-            $hash = generateHash($vendor_code, $meterNo, $trx, $disco_type, $amount, $access_token, $pub_key, $priv_key);
-
-            $databody = array();
-
-            $body = json_encode($databody);
-            $curl = curl_init();
-            curl_setopt_array($curl, array(
-
-                CURLOPT_URL => $url . "vend_power.php?vendor_code=$vendor_code&reference_id=$trx&meter=$meterNo&access_token=$access_token&disco=$disco_type&phone=$phone&email=$email&response_format=json&hash=$hash&amount=$amount",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'GET',
-                CURLOPT_POSTFIELDS => $body,
-                CURLOPT_HTTPHEADER => array(
-                    'Accept: application/json',
-                    'Content-Type: application/json',
-                ),
-            ));
-
-            $var = curl_exec($curl);
-            curl_close($curl);
-            $var = json_decode($var);
-            $status = $var->status ?? null;
-            $message = $var->message ?? null;
-
-
-            if ($status == "00" && $message == "Successful") {
-
-                $met = new MeterToken();
-                $met->eletic_company = "ibdc";
-                $met->disco_type = $disco_type;
-                $met->meter_no = $meterNo;
-                $met->ref = $trx;
-                $met->amount = $amount;
-                $met->units = $var->units;
-                $met->meter_token = $var->meter_token;
-                $met->address = $var->address;
-                $met->status = 2;
-                $met->note = "successful";
-                $met->SerialNo = $SerialNo;
-                $met->rrn = $RRN;
-
-                $met->save();
-
-
-                $meter['wallet_balance'] = $var->wallet_balance;
-                $meter['ref'] = $var->ref;
-                $meter['amount'] = $var->amount;
-                $meter['units'] = $var->units;
-                $meter['meter_token'] = $var->meter_token;
-                $meter['address'] = $var->address;
-                $meter['message'] = "successful";
-
+            $SerialNo = $request->header('serialnumber');
+            $data = PosLog::where('RRN', $request->rrn)->get()->makeHidden(['created_at', 'updated_at'])  ?? null;
+            if ($data->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'transaction' => [],
+                    'allTransaction' => null,
+                    'totalSuccessAmount' => null,
+                    'totalFailedAmount' => null,
+                    'totalTransactionAmount' => null,
+                    'message' => "No Record Found",
+                    'error' => null,
+                ], 200);
 
             } else {
 
-                $met = new MeterToken();
-                $met->eletic_company = "ibdc";
-                $met->disco_type = $disco_type;
-                $met->meter_no = $meterNo;
-                $met->ref = $trx;
-                $met->amount = $amount;
-                $met->units = $var->units ?? null;
-                $met->meter_token = $var->meter_token ?? null;
-                $met->address = $var->address ?? null;
-                $met->status = 1;
-                $met->note = $message;
-                $met->SerialNo = $SerialNo;
-                $met->rrn = $RRN;
-
-                $met->save();
+                return response()->json([
+                    'success' => true,
+                    'allTransaction' => $data,
+                ], 200);
+            }
 
 
-                $meter['wallet_balance'] = null;
-                $meter['ref'] = null;
-                $meter['amount'] = null;
-                $meter['units'] = null;
-                $meter['meter_token'] = null;
-                $meter['message'] = $message;
 
+        }
+
+        if ($request->startofday == null && $request->endofday == null) {
+
+            $SerialNo = $request->header('serialnumber');
+            $data = PosLog::where('SerialNo', $SerialNo)->get()->makeHidden(['created_at', 'updated_at']) ?? null;
+            if ($data->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'transaction' => [],
+                    'allTransaction' => null,
+                    'totalSuccessAmount' => null,
+                    'totalFailedAmount' => null,
+                    'totalTransactionAmount' => null,
+                    'message' => "No Record Found",
+                    'error' => null,
+                ], 200);
+
+            } else {
+
+                return response()->json([
+                    'success' => true,
+                    'allTransaction' => $data,
+                ], 200);
             }
 
 
         }
 
 
-        if ($SerialNo == null) {
-            $message = "Serial Number can not be empty";
-            return error_response($message);
+        if ($request->startofday != null && $request->endofday == null) {
+            $SerialNo = $request->header('serialnumber');
+            $data = PosLog::latest()->where('SerialNo', $SerialNo)->whereDate('createdAt', $request->startofday)->get()->makeHidden(['created_at', 'updated_at']) ?? null;
+
+            if ($data->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'transaction' => [],
+                    'allTransaction' => null,
+                    'totalSuccessAmount' => null,
+                    'totalFailedAmount' => null,
+                    'totalTransactionAmount' => null,
+                    'message' => "No Record Found",
+                    'error' => null,
+                ], 200);
+
+            } else {
+
+                return response()->json([
+                    'success' => true,
+                    'allTransaction' => $data,
+                ], 200);
+            }
+
         }
 
-        $rrn = PosLog::where('RRN', $request->RRN)->first()->log_status ?? null;
-        if ($rrn == 1) {
-            return response()->json([
-                'status' => true,
-                'message' => 'Transaction already successful',
-            ], 422);
+
+        if ($request->startofday == null && $request->endofday != null) {
+            $SerialNo = $request->header('serialnumber');
+            $data = PosLog::latest()->where('SerialNo', $SerialNo)->whereDate('createdAt', $request->endofday)->get()->makeHidden(['created_at', 'updated_at']) ?? null;
+
+            if ($data->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'transaction' => [],
+                    'allTransaction' => null,
+                    'totalSuccessAmount' => null,
+                    'totalFailedAmount' => null,
+                    'totalTransactionAmount' => null,
+                    'message' => "No Record Found",
+                    'error' => null,
+                ], 200);
+
+            } else {
+
+                return response()->json([
+                    'success' => true,
+                    'allTransaction' => $data,
+                ], 200);
+            }
 
         }
 
 
-        $SerialNo = Terminal::where('serialNumber', $SerialNo)->first()->serialNumber ?? null;
-        if ($SerialNo == null) {
-            $message = "No user attached to the serial number | $SerialNo";
-            return error_response($message);
+        if ($request->startofday != null && $request->endofday != null) {
+            $SerialNo = $request->header('serialnumber');
+            $data = PosLog::where('SerialNo', $SerialNo)->whereBetween('createdAt', [$request->startofday . ' 00:00:00', $request->endofday . ' 23:59:59'])->get()->makeHidden(['created_at', 'updated_at']) ?? null;
+            if ($data->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'transaction' => [],
+                    'allTransaction' => null,
+                    'totalSuccessAmount' => null,
+                    'totalFailedAmount' => null,
+                    'totalTransactionAmount' => null,
+                    'message' => "No Record Found",
+                    'error' => null,
+                ], 200);
+
+            } else {
+
+                return response()->json([
+                    'success' => true,
+                    'allTransaction' => $data,
+                ], 200);
+            }
+
+
         }
-
-
-        $trx = PosLog::where('RRN', $request->RRN)->where('log_status', 0)->update([
-            'log_status' => 1,
-        ]) ?? null;
-
-        $user_id = Terminal::where('serialNumber', $SerialNo)->first()->user_id ?? null;
-        $bank_id = Terminal::where('serialNumber', $SerialNo)->first()->bank_id ?? null;
-
-
-        // Get the current time
-        $current_time = time();
-        $one_hour_later = $current_time + 3600; // 3600 seconds = 1 hour
-        $created_at = date('Y-m-d H:i:s', $one_hour_later);
-
-
-        $mer = Terminal::where('serialNumber', $SerialNo)->first() ?? null;
-
 
         return response()->json([
-            'newTransaction' => [
-                'success' => true,
-                'transaction' => $trasnaction,
-            ],
-            'merchantName' => $mer->merchantName,
-            'mid' => $mer->mid,
+            'success' => false,
+            'transaction' => [],
             'allTransaction' => null,
-            'message' => "Transaction initiated successfully",
+            'totalSuccessAmount' => null,
+            'totalFailedAmount' => null,
+            'totalTransactionAmount' => null,
+            'message' => "Something Went Wrong",
+            'mid' => null,
             'merchantDetails' => [
-                'merchantName' => $mer->merchantName,
-                'serialnumber' => $mer->serialNumber,
-                'mid' => $mer->mid,
-                'tid' => $mer->tid,
-                'merchantaddress' => $mer->merchantaddress
+                'merchantName' => null,
+                'serialnumber' => null,
+                'mid' => null,
+                'tid' => null,
+                'merchantaddress' => null
             ],
-            'meter' => $meter ?? null
+            'meter' => [],
+            'error' => true,
         ], 200);
-    }
 
+
+    }
 
 }
