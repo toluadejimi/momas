@@ -13,6 +13,11 @@ use App\Http\Controllers\Transaction\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 
+Route::get('get-all-estate', [EstateController::class, 'get_estate']);
+
+
+
+
 Route::get('get-estate-tariff', [MeterController::class, 'get_estate_tariff']);
 
 Route::get('get-estate', [EstateController::class, 'get_estate']);
