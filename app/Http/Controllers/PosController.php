@@ -13,6 +13,7 @@ use App\Models\Tariff;
 use App\Models\TarrifState;
 use App\Models\Transaction;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -488,6 +489,8 @@ class PosController extends Controller
 
             if ($meter != null && $meter->NeedKCT == null) {
 
+                try{
+
                 $databody = [
                     'meterType' => $meter->KRN1,
                     'meterNo' => $meterNo,
@@ -603,6 +606,15 @@ class PosController extends Controller
 
                     }
 
+
+                }
+
+                } catch(Exception $e) {
+
+                    return response()->json([
+                        'status' => false,
+                        'message' => $e->getMessage(),
+                    ], 422);
 
                 }
 
