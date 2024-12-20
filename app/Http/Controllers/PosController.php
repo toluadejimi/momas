@@ -94,7 +94,7 @@ class PosController extends Controller
             $ter->status = 2;
             $ter->save();
 
-            try{
+            try {
 
 
                 $curl = curl_init();
@@ -102,7 +102,7 @@ class PosController extends Controller
                 $databody = array(
                     'serial_no' => $request->serial_no,
                     'tid' => $request->tid,
-                    );
+                );
 
                 curl_setopt_array($curl, array(
                     CURLOPT_URL => 'https://enkpayapp.enkwave.com/api/register-pos',
@@ -121,16 +121,12 @@ class PosController extends Controller
                 $var = json_decode($var);
 
 
-
-
             } catch (\Exception $th) {
                 return $th->getMessage();
             }
 
 
-
             return back()->with('message', 'Merchant has been created successfully');
-
 
 
         } else {
@@ -149,8 +145,6 @@ class PosController extends Controller
 
 
     }
-
-
 
 
     public function validate_meter(request $request)
@@ -284,7 +278,6 @@ class PosController extends Controller
         }
 
 
-
         $estate = Estate::where('id', $estate_id)->first();
         $mer_id = Merchant::where('serial_no', $SerialNo)->first()->id ?? null;
         $tariff_id = TarrifState::where('estate_id', $estate_id)->first()->tariff_id ?? null;
@@ -298,6 +291,15 @@ class PosController extends Controller
             ], 422);
         }
 
+
+
+        $ck_trx = PosLog::where('rrn', $RRN)->first()->status ?? null;
+        if($ck_trx == 2){
+            return response()->json([
+                'status' => false,
+                'message' => 'Transaction already successful',
+            ], 422);
+        }
 
 
         $logs = new PosLog();
@@ -318,8 +320,10 @@ class PosController extends Controller
         $logs->save();
 
 
+        if ($meter != null && $meter->NeedKCT == "on") {
 
-            if ($meter != null && $meter->NeedKCT == "on") {
+            try {
+
                 $databody = [
                     'meterType' => $meter->KRN1,
                     'meterNo' => $meterNo,
@@ -337,7 +341,7 @@ class PosController extends Controller
                     $data = json_decode($gdata, true);
                     $statusm = $data['code'] ?? null;
 
-                    if($posstatus == "00" && $statusm == "SUCCESS" ) {
+                    if ($posstatus == "00" && $statusm == "SUCCESS") {
                         $token = $data['tokens'][0];
                         $kctdatabody = [
                             'meterType' => $meter->KRN1,
@@ -361,7 +365,7 @@ class PosController extends Controller
                             $kct_data = json_decode($kct, true);
                             $status = $kct_data['code'] ?? null;
 
-                            if($status == "SUCCESS" ) {
+                            if ($status == "SUCCESS") {
 
                                 $cdt = new CreditToken();
                                 $cdt->user_id = 1;
@@ -414,17 +418,16 @@ class PosController extends Controller
                                 $data2['vat_amount'] = $vat_amount;
 
 
-
                                 PosLog::where('rrn', $RRN)->first()->update([
                                     'token' => $token,
-                                    'kct_token' => $kct_data['tokens'][0]." ".$kct_data['tokens'][1],
+                                    'kct_token' => $kct_data['tokens'][0] . " " . $kct_data['tokens'][1],
                                     'vending_amount' => $vending_amount,
                                     'vat_amount' => $vat_amount,
                                     'vend_amount_kw_per_naira' => $vend_amount_kw_per_naira,
                                     'meter_no' => $meterNo,
                                     'address' => $data['address'],
-                                    'name' =>  $data['full_name'],
-                                    'merchant_id' =>  $mer_id,
+                                    'name' => $data['full_name'],
+                                    'merchant_id' => $mer_id,
 
 
                                     'status' => 2,
@@ -484,12 +487,22 @@ class PosController extends Controller
 
                 }
 
+
+            } catch (Exception $e) {
+
+                return response()->json([
+                    'status' => false,
+                    'message' => $e->getMessage(),
+                ], 422);
+
             }
 
+        }
 
-            if ($meter != null && $meter->NeedKCT == null) {
 
-                try{
+        if ($meter != null && $meter->NeedKCT == null) {
+
+            try {
 
                 $databody = [
                     'meterType' => $meter->KRN1,
@@ -509,7 +522,7 @@ class PosController extends Controller
                     $no_kct_data = json_decode($no_kct, true);
                     $statusm = $no_kct_data['code'] ?? null;
 
-                    if($posstatus == "00" && $statusm == "SUCCESS" ) {
+                    if ($posstatus == "00" && $statusm == "SUCCESS") {
 
                         $no_kct_token = $no_kct_data['tokens'][0];
                         $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
@@ -535,7 +548,6 @@ class PosController extends Controller
                         $trx->save();
 
 
-
                         $data['full_name'] = $user->first_name . " " . $user->last_name;
                         $data['address'] = $user->address . "," . $user->city . "," . $user->state;
                         $data['service'] = "MOMAS METER";
@@ -557,8 +569,8 @@ class PosController extends Controller
                             'vend_amount_kw_per_naira' => $vend_amount_kw_per_naira,
                             'meter_no' => $meterNo,
                             'address' => $data['address'],
-                            'name' =>  $data['full_name'],
-                            'merchant_id' =>  $mer_id,
+                            'name' => $data['full_name'],
+                            'merchant_id' => $mer_id,
                             'status' => 2,
                         ]);
 
@@ -571,8 +583,6 @@ class PosController extends Controller
                             'message' => "Transaction successfully",
                             'meter' => $data ?? null
                         ], 200);
-
-
 
 
                     } else {
@@ -609,19 +619,17 @@ class PosController extends Controller
 
                 }
 
-                } catch(Exception $e) {
+            } catch (Exception $e) {
 
-                    return response()->json([
-                        'status' => false,
-                        'message' => $e->getMessage(),
-                    ], 422);
-
-                }
-
+                return response()->json([
+                    'status' => false,
+                    'message' => $e->getMessage(),
+                ], 422);
 
             }
 
 
+        }
 
 
         return response()->json([
@@ -881,7 +889,6 @@ class PosController extends Controller
     }
 
 
-
     public function get_all_transaction(request $request)
     {
 
@@ -890,7 +897,7 @@ class PosController extends Controller
         if ($request->rrn != null) {
 
             $SerialNo = $request->header('serialnumber');
-            $data = PosLog::where('RRN', $request->rrn)->get()->makeHidden(['created_at', 'updated_at'])  ?? null;
+            $data = PosLog::where('RRN', $request->rrn)->get()->makeHidden(['created_at', 'updated_at']) ?? null;
             if ($data->isEmpty()) {
                 return response()->json([
                     'success' => false,
@@ -910,7 +917,6 @@ class PosController extends Controller
                     'allTransaction' => $data,
                 ], 200);
             }
-
 
 
         }
