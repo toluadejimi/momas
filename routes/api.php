@@ -54,7 +54,7 @@ Route::post('validate-cable', [BillsController::class, 'validate_cable']);
 Route::any('pos/validate', [PosController::class, 'validate_meter']);
 Route::any('pos/buy-token', [PosController::class, 'buy_meter_token']);
 Route::any('pos/retry-meter-token', [PosController::class, 'retry_meter_token']);
-Route::any('pos/eod', [PosController::class, 'eod']);
+Route::any('pos/eod', [PosController::class, 'get_all_transaction']);
 
 
 
