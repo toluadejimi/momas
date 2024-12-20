@@ -178,6 +178,7 @@ class PosController extends Controller
 
         if ($duration == null || $estate_id == null) {
             $minvend = "Not set";
+
         } else {
 
             $sp = SpreadPayment::where('user_id', $user->id)->where('estate_id', $es_id)->first()->percentage ?? null;
@@ -223,10 +224,7 @@ class PosController extends Controller
 
         return response()->json([
             'status' => true,
-            'name' => $data['customer_name'],
-            'address' => $data['address'],
-            'maximumAmount' => $pur['max_purchase'],
-            'minimumAmount' => $data['min_purchase']
+            'data' => $data,
         ], 200);
 
 
