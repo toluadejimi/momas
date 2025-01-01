@@ -19,46 +19,60 @@ class CustomersImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
 
-        if (auth::user()->role == 3) {
+
+        try{
 
 
-            return new User([
-                'first_name'   => $row['firstname'],
-                'last_name'    => $row['lastname'],
-                'email'        => $row['email'],
-                'address'      => $row['address'],
-                'city'         => $row['city'],
-                'lga'          => $row['lga'],
-                'state'        => $row['state'],
-                'phone'        => $row['phone'],
-                'role'         => 2,
-                'password'     => bcrypt('123456'),
-                'estate_name'  => auth::user()->estate_name,
-                'estate_id'    => auth::user()->estate_id,
-                'status' => 2
-            ]);
 
-        } else {
-            return new User([
+            if (auth::user()->role == 3) {
+                return new User([
+                    'first_name'   => $row['firstname'],
+                    'last_name'    => $row['lastname'],
+                    'email'        => $row['email'],
+                    'address'      => $row['address'],
+                    'state'        => $row['state'],
+                    'phone'        => "+234".$row['phone'],
+                    'account_no'   => $row['accountno'],
+                    'tariffid'     => $row['tariffid'],
+                    'role'         => 2,
+                    'password'     => bcrypt('123456'),
+                    'meterNo'     => $row['meterno'],
+                    'estate_name'  => auth::user()->estate_name,
+                    'estate_id'    => auth::user()->estate_id,
+                    'status' => 2
+                ]);
 
 
-                'first_name' => $row['firstname'],
-                'last_name' => $row['lastname'],
-                'email' => $row['email'],
-                'meterNo' => $row['meterno'],
-                'meterType' => $row['metertype'],
-                'address' => $row['address'],
-                'city' => $row['city'],
-                'lga' => $row['lga'],
-                'state' => $row['state'],
-                'estate_name' => $row['estatename'],
-                'estate_id' => $row['estateid'],
-                'phone' => $row['phone'],
-                'role' => 3,
-                "paswword" => bcrypt('123456')
 
-            ]);
+            } else {
+                return new User([
+
+                    'first_name' => $row['firstname'],
+                    'last_name' => $row['lastname'],
+                    'email' => $row['email'],
+                    'meterNo' => $row['meterno'],
+                    'meterType' => $row['metertype'],
+                    'address' => $row['address'],
+                    'city' => $row['city'],
+                    'lga' => $row['lga'],
+                    'state' => $row['state'],
+                    'estate_name' => $row['estatename'],
+                    'estate_id' => $row['estateid'],
+                    'phone' => "+234".$row['phone'],
+                    'role' => 3,
+                    "paswword" => bcrypt('123456')
+
+
+
+                ]);
+
+            }
+
+        }catch (\Exception $e) {
+            $message = $e->getMessage();
+            send_notification($message);
         }
+
 
 
     }
