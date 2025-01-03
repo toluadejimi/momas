@@ -85,7 +85,7 @@
 
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Transformer</label>
-                                        <select type="text" name="TransformerID" class="form-control" required>
+                                        <select type="text" name="TransformerID" class="form-control" >
                                             <option value=" ">Select</option>
                                             @foreach($transformer as $data)
                                                 <option value="{{$data->id}}">{{$data->Capacity}} KVA </option>
