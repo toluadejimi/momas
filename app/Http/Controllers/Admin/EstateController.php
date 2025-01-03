@@ -40,6 +40,10 @@ class EstateController extends Controller
         $org->lga = $request->lga;
         $org->city = $request->city;
         $org->ptype = $request->ptype;
+        $org->paystack_subaccount = $request->paystack_subaccount;
+        $org->flutterwave_subaccount = $request->flutterwave_subaccount;
+        $org->account_no = $request->account_no;
+        $org->charge_fee = $request->charge_fee;
         $org->status = 2;
         $org->save();
 

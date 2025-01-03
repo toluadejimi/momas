@@ -26,13 +26,13 @@
 
                                 <h6 class="d-flex justify-content-start my-4">Estate Information</h6>
 
-                                <div class="col-xl-4 col-sm-12">
+                                <div class="col-xl-3 col-sm-12">
                                     <label class="my-2">Estate Name</label>
                                     <input type="text" name="title" class="form-control" required>
                                 </div>
 
 
-                                <div class="col-xl-4 col-sm-12">
+                                <div class="col-xl-3 col-sm-12">
                                     <label class="my-2">State</label>
                                     <select type="text" name="state" class="form-control" required>
                                         <option disabled selected>--Select State--</option>
@@ -77,12 +77,12 @@
 
                                 </div>
 
-                                <div class="col-xl-4 col-sm-12">
+                                <div class="col-xl-3 col-sm-12">
                                     <label class="my-2">City</label>
                                     <input type="text" name="city" class="form-control" required>
                                 </div>
 
-                                <div class="col-xl-4 col-sm-12">
+                                <div class="col-xl-3 col-sm-12">
                                     <label class="my-2">LGA</label>
                                     <input type="text" name="lga" class="form-control" required>
 
@@ -91,19 +91,35 @@
 
 
 
-                                <div class="col-xl-4 col-sm-12">
-                                    <label class="my-2">Payment Type</label>
-                                    <select type="text" name="ptype" class="form-control" required>
-                                        <option disabled selected>--Select type--</option>
-                                        <option value="1">APP Only</option>
-                                        <option value="2">Web Only</option>
-                                        <option value="3">App & Web</option>
-                                    </select>
+                            </div>
+
+                            <hr class="my-4">
+
+
+                            <div class="row">
+                                <div class="col-xl-3 col-sm-12">
+                                    <label class="my-2">Paystak Subaccount</label>
+                                    <input type="text" name="paystack_subaccount" class="form-control" required>
+                                </div>
+
+                                <div class="col-xl-3 col-sm-12">
+                                    <label class="my-2">Flutterwave Subaccount</label>
+                                    <input type="text" name="flutterwave_subaccount" class="form-control" required>
+                                </div>
+
+                                <div class="col-xl-3 col-sm-12">
+                                    <label class="my-2">Account No</label>
+                                    <input type="text" name="account_no" class="form-control" required>
+                                </div>
+
+                                <div class="col-xl-3 col-sm-12">
+                                    <label class="my-2">Charge Fee %</label>
+                                    <input type="text" name="charge_fee" class="form-control" required>
                                 </div>
 
 
-
                             </div>
+
 
                             <hr class="my-4">
 
