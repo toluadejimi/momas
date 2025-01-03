@@ -44,6 +44,7 @@ class EstateController extends Controller
         $org->flutterwave_subaccount = $request->flutterwave_subaccount;
         $org->account_no = $request->account_no;
         $org->charge_fee = $request->charge_fee;
+        $org->bank = $request->bank;
         $org->status = 2;
         $org->save();
 
