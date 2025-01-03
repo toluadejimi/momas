@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Imports\CustomersImport;
 use App\Imports\MeterImport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class MeterImportController extends Controller
@@ -14,7 +15,13 @@ class MeterImportController extends Controller
 
     public function import(Request $request)
     {
-        $id = $request->estate_id;
+
+
+        if($request->estate_id == null){
+            $id = Auth::user()->estate_id;
+        }else{
+            $id = $request->estate_id;
+        }
 
 
 //        $request->validate([

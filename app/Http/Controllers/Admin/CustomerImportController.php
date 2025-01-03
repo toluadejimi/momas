@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Imports\CustomersImport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -13,7 +14,14 @@ class CustomerImportController extends Controller
     public function import(Request $request)
     {
 
-        $id = $request->estate_id;
+
+        if($request->estate_id == null){
+            $id = Auth::user()->estate_id;
+        }else{
+            $id = $request->estate_id;
+        }
+
+
         $request->validate([
             'file' => 'required|mimes:csv,xlsx,xls',
         ]);
