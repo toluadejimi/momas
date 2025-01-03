@@ -79,12 +79,12 @@
 
                                 <div class="col-xl-3 col-sm-12">
                                     <label class="my-2">City</label>
-                                    <input type="text" name="city" class="form-control" required>
+                                    <input type="text" name="city" class="form-control" >
                                 </div>
 
                                 <div class="col-xl-3 col-sm-12">
                                     <label class="my-2">LGA</label>
-                                    <input type="text" name="lga" class="form-control" required>
+                                    <input type="text" name="lga" class="form-control" >
 
 
                                 </div>
@@ -99,22 +99,27 @@
                             <div class="row">
                                 <div class="col-xl-3 col-sm-12">
                                     <label class="my-2">Paystak Subaccount</label>
-                                    <input type="text" name="paystack_subaccount" class="form-control" required>
+                                    <input type="text" name="paystack_subaccount" class="form-control" >
                                 </div>
 
                                 <div class="col-xl-3 col-sm-12">
                                     <label class="my-2">Flutterwave Subaccount</label>
-                                    <input type="text" name="flutterwave_subaccount" class="form-control" required>
+                                    <input type="text" name="flutterwave_subaccount" class="form-control" >
+                                </div>
+
+                                <div class="col-xl-3 col-sm-12">
+                                    <label class="my-2">Bank</label>
+                                    <input type="text" name="bank" class="form-control" >
                                 </div>
 
                                 <div class="col-xl-3 col-sm-12">
                                     <label class="my-2">Account No</label>
-                                    <input type="text" name="account_no" class="form-control" required>
+                                    <input type="text" name="account_no" class="form-control" >
                                 </div>
 
                                 <div class="col-xl-3 col-sm-12">
                                     <label class="my-2">Charge Fee %</label>
-                                    <input type="text" name="charge_fee" class="form-control" required>
+                                    <input type="text" name="charge_fee" value="0" class="form-control" >
                                 </div>
 
 
