@@ -10,14 +10,18 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class MeterImportController extends Controller
 {
+
+
     public function import(Request $request)
     {
+        $id = $request->estate_id;
+
 
 //        $request->validate([
 //            'file' => 'required|mimes:csv,xlsx,xls',
 //        ]);
 
-        Excel::import(new MeterImport, $request->file('file'));
+        Excel::import(new MeterImport($id), $request->file('file'));
 
         return redirect()->back()->with('success', 'Meter imported successfully!');
     }

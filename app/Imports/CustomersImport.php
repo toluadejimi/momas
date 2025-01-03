@@ -2,15 +2,27 @@
 
 namespace App\Imports;
 
+use App\Models\Estate;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Illuminate\Http\Request;
 
 
 class CustomersImport implements ToModel, WithHeadingRow
 
 {
+
+
+    protected $id;
+
+    public function __construct($id)
+    {
+        $this->id = $id;
+    }
+
+
     /**
      * @param array $row
      *
@@ -19,9 +31,7 @@ class CustomersImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
 
-
         try{
-
 
 
             if (auth::user()->role == 3) {
@@ -45,23 +55,25 @@ class CustomersImport implements ToModel, WithHeadingRow
 
 
             } else {
+
+
+                $estate_name = Estate::where('id', $this->id)->first()->title;
                 return new User([
 
-                    'first_name' => $row['firstname'],
-                    'last_name' => $row['lastname'],
-                    'email' => $row['email'],
-                    'meterNo' => $row['meterno'],
-                    'meterType' => $row['metertype'],
-                    'address' => $row['address'],
-                    'city' => $row['city'],
-                    'lga' => $row['lga'],
-                    'state' => $row['state'],
-                    'estate_name' => $row['estatename'],
-                    'estate_id' => $row['estateid'],
-                    'phone' => "+234".$row['phone'],
-                    'role' => 3,
-                    "paswword" => bcrypt('123456')
-
+                    'first_name'   => $row['firstname'],
+                    'last_name'    => $row['lastname'],
+                    'email'        => $row['email'],
+                    'address'      => $row['address'],
+                    'state'        => $row['state'],
+                    'phone'        => "+234".$row['phone'],
+                    'account_no'   => $row['accountno'],
+                    'tariffid'     => $row['tariffid'],
+                    'role'         => 2,
+                    'password'     => bcrypt('123456'),
+                    'meterNo'     =>  $row['meterno'],
+                    'estate_name'  => $estate_name,
+                    'estate_id'    => $this->id,
+                    'status' => 2
 
 
                 ]);

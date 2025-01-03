@@ -10,6 +10,16 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class MeterImport implements ToModel, WithHeadingRow
 {
+
+    protected $id;
+
+    public function __construct($id)
+    {
+        $this->id = $id;
+    }
+
+
+
     /**
      * @param array $row
      *
@@ -28,7 +38,7 @@ class MeterImport implements ToModel, WithHeadingRow
             'isamr'   => $row['isamr'],
             'meterModel'    => $row['model'],
             'AccountNo'        => $row['accountno'],
-            'estate_id'    => auth::user()->estate_id,
+            'estate_id'    =>  $this->id,
             'isDualTariff' => $row['isdualtariff'],
             'NewSGC'      => $row['sgc'],
             'OldSGC'         => $row['oldsgc'] ?? null,

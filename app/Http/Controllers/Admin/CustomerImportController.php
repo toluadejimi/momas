@@ -12,12 +12,14 @@ class CustomerImportController extends Controller
 {
     public function import(Request $request)
     {
+
+        $id = $request->estate_id;
         $request->validate([
             'file' => 'required|mimes:csv,xlsx,xls',
         ]);
 
         try {
-            Excel::import(new CustomersImport, $request->file('file'));
+            Excel::import(new CustomersImport($id), $request->file('file'));
 
         } catch (\Exception$th) {
 

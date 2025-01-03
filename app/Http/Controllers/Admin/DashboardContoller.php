@@ -132,6 +132,7 @@ class DashboardContoller extends Controller
 
         $data['users'] = User::latest()->where('status', 2)->where('role', 2)->count();
         $data['users_lists'] = User::latest()->where('role', 2)->paginate('20');
+        $data['estate'] = Estate::latest()->where('status', 2)->get();
 
         return view('admin/user/customer-list', $data);
 

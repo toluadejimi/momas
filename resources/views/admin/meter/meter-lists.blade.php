@@ -94,9 +94,18 @@
 
                                                     <div class="modal-body">
 
-                                                        <p>Click here  to download the sample of file to upload <a href="{{url('')}}/public/asset/meterdataimport.csv">Download here</a></p>
+                                                        <p>Click here  to download the sample of file to upload <a href="{{url('')}}/public/asset/ab.csv">Download here</a></p>
                                                         <label class="mt-3">Choose File</label>
                                                         <input type="file"  class="form-control mb-3" name="file" required>
+
+                                                        <label>Choose Estate</label>
+                                                        <select name="estate_id" required class="form-control">
+                                                            <option value=""> --Select Estate-- </option>
+                                                            @foreach($estate as $data)
+                                                                <option value="{{$data->id}}"> {{$data->title}} </option>
+                                                            @endforeach
+                                                        </select>
+
 
                                                     </div>
 
@@ -338,7 +347,7 @@
 
                                                     <div class="modal-body">
 
-                                                        <p>Click here  to download the sample of file to upload <a href="{{url('')}}/public/asset/meterdataimport.csv">Download here</a></p>
+                                                        <p>Click here  to download the sample of file to upload <a href="{{url('')}}/public/asset/ab.csv">Download here</a></p>
                                                         <label class="mt-3">Choose File</label>
                                                         <input type="file"  class="form-control mb-3" name="file" required>
 
