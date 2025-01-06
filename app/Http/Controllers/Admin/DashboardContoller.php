@@ -64,7 +64,11 @@ class DashboardContoller extends Controller
 
             $data['token'] = Token::where('estate_id', auth::user()->estate_id)->count();
 
+
+
             $estate_name = Estate::where('id', auth::user()->estate_id)->first()->title;
+
+
 
 
             $data['title'] = "Dashboard | $estate_name ";
@@ -130,11 +134,40 @@ class DashboardContoller extends Controller
     {
 
 
-        $data['users'] = User::latest()->where('status', 2)->where('role', 2)->count();
-        $data['users_lists'] = User::latest()->where('role', 2)->paginate('20');
-        $data['estate'] = Estate::latest()->where('status', 2)->get();
 
-        return view('admin/user/customer-list', $data);
+
+        if(auth::user()->role == 0){
+
+            $data['users'] = User::latest()->where('status', 2)->where('role', 2)->count();
+            $data['users_lists'] = User::latest()->where('role', 2)->paginate('20');
+            $data['estate'] = Estate::latest()->where('status', 2)->get();
+
+            return view('admin/user/customer-list', $data);
+
+        } elseif(auth::user()->role == 1){
+
+        } elseif(auth::user()->role == 2){
+
+        } elseif(auth::user()->role == 3){
+
+            $data['users'] = User::latest()->where('estate_id', auth::user()->estate_id)->where('role', 2)->count();
+            $data['users_lists'] = User::latest()->where('estate_id', auth::user()->estate_id)->where('role', 2)->paginate('20');
+            $data['estate'] = Estate::latest()->where('status', 2)->get();
+
+            return view('admin/user/customer-list', $data);
+
+
+        } elseif(auth::user()->role == 4){
+
+        } elseif(auth::user()->role == 5){
+
+        } else{
+
+        }
+
+
+
+
 
     }
 
