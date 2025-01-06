@@ -112,6 +112,7 @@ class EstateController extends Controller
 
     public function estate_update(request $request)
     {
+
         Estate::where('id', $request->id)->update([
             'title' => $request->title,
             'status' => $request->status,
@@ -119,6 +120,14 @@ class EstateController extends Controller
             'city' => $request->city,
             'lga' => $request->lga,
             'ptype' => $request->ptype,
+            'paystack_subaccount' =>  $request->paystack_subaccount,
+            'flutterwave_subaccount' =>  $request->flutterwave_subaccount,
+            'account_no' =>  $request->account_no,
+            'bank' =>  $request->bank,
+            'charge_fee' =>  $request->charge_fee,
+            'charge_fee_percent' =>  $request->charge_fee_percent,
+            'pos_tariff_id' =>  $request->pos_tariff_id,
+            'serial_no' =>  $request->serial_no,
 
         ]);
         return redirect('admin/estate')->with('message','Estate updated successfully');

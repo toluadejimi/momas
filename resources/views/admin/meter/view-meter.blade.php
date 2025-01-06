@@ -48,7 +48,7 @@
 
                                 <div class="col-3">
                                     <label class="my-2">Account No</label>
-                                    <input type="number" name="AccountNo" value="{{$meter->AccountNo}}"
+                                    <input type="text" name="AccountNo" value="{{$meter->AccountNo}}"
                                            class="form-control" required>
                                 </div>
 

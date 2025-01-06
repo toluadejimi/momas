@@ -276,6 +276,18 @@ class TokenController extends Controller
             $costOfUnit = $calculator->calculateCostOfUnit($params);
             $tariffPerKWatt = $calculator->calculateTariffAmountPerKWatt($params);
 
+
+            $est = Estate::where('id', $estate_id)->first();
+            if($est->charge_fee < 0){
+
+                $fee_in_percent  = $est->charge_fee_percent;
+                $fee = ($fee_in_percent / $request->amount) * 100;
+            }else{
+                $fee = $est->charge_fee;
+            }
+
+
+
             $data['vatAmount'] = $vatAmount;
             $data['costOfUnit'] = $costOfUnit;
             $data['tariffPerKWatt'] = $tariffPerKWatt;
@@ -283,7 +295,7 @@ class TokenController extends Controller
             $data['meter'] = $meter;
             $data['estate'] = Estate::where('id', $estate_id)->first();
             $data['preview'] = "on";
-            $data['amount'] = $request->amount;
+            $data['amount'] = $request->amount + $fee;
             $data['vat'] = $vat;
             $data['estate_id'] = $estate_id;
             $data['estate_name'] = $request->estate_id;
@@ -298,6 +310,8 @@ class TokenController extends Controller
         } elseif (auth::user()->role == 2) {
 
         } elseif (auth::user()->role == 3) {
+
+
 
 
             $estate_id = Estate::where('title', $request->estate_id)->first()->id;
@@ -335,13 +349,23 @@ class TokenController extends Controller
             $costOfUnit = $calculator->calculateCostOfUnit($params);
             $tariffPerKWatt = $calculator->calculateTariffAmountPerKWatt($params);
 
+            $est = Estate::where('id', $estate_id)->first();
+            if($est->charge_fee < 0){
+
+                $fee_in_percent  = $est->charge_fee_percent;
+                $fee = ($fee_in_percent / $request->amount) * 100;
+            }else{
+                $fee = $est->charge_fee;
+            }
+
+
             $data['vatAmount'] = $vatAmount;
             $data['costOfUnit'] = $costOfUnit;
             $data['tariffPerKWatt'] = $tariffPerKWatt;
             $data['user'] = $user;
             $data['meter'] = $meter;
             $data['estate'] = Estate::where('id', $estate_id)->first();
-            $data['amount'] = $request->amount;
+            $data['amount'] = $request->amount + $fee;
             $data['vat'] = $vat;
             $data['estate_name'] = $request->estate_id;
             $data['credit_tokens'] = CreditToken::latest()->where('estate_id', Auth::user()->estate_id)->paginate('50');
@@ -386,6 +410,19 @@ class TokenController extends Controller
 
 
         if ($request->pay_type == 'flutterwave') {
+
+
+
+            $estate_id = $request->estate_id;
+            $est = Estate::where('id', $estate_id)->first();
+            if($est->charge_fee < 0){
+
+                $fee_in_percent  = $est->charge_fee_percent;
+                $fee = ($fee_in_percent / $request->amount) * 100;
+            }else{
+                $fee = $est->charge_fee;
+            }
+
 
             $email = Auth::user()->email;
             $phone = Auth::user()->phone ?? "012345678";
@@ -440,6 +477,7 @@ class TokenController extends Controller
             $trx->pay_type = "flutterwave";
             $trx->service_type = $request->service;
             $trx->amount = $request->amount;
+            $trx->fee = $fee;
             $trx->trx_id = $order_id;
             $trx->save();
 
@@ -453,6 +491,22 @@ class TokenController extends Controller
 
 
         if ($request->pay_type == 'paystack') {
+
+            $estate_id = $request->estate_id ?? null;
+            if($estate_id === null){
+                $estate_id =  Auth::user()->estate_id;
+            }
+            $est = Estate::where('id', $estate_id)->first();
+            if($est->charge_fee < 0){
+
+                $fee_in_percent  = $est->charge_fee_percent;
+                $fee = ($fee_in_percent / $request->amount) * 100;
+            }else{
+                $fee = $est->charge_fee;
+            }
+
+
+
             $fl = Setting::where('id', 1)->first();
             $flkey['flutterwave_secret'] = $fl->flutterwave_secret;
             $flkey['flutterwave_public'] = $fl->flutterwave_public;
@@ -464,17 +518,15 @@ class TokenController extends Controller
 
 
             $databody = array(
-                "amount" => $request->amount * 100,
+                "amount" => $request->amount * 100 ,
                 "email" => $email,
                 "ref" => $trx_id,
                 'callback_url' => url('') . "/admin/paystack-check-web",
                 'metadata' => ["ref" => $order_id],
-
             );
 
             $body = json_encode($databody);
             $curl = curl_init();
-
             curl_setopt_array($curl, array(
                 CURLOPT_URL => 'https://api.paystack.co/transaction/initialize',
                 CURLOPT_RETURNTRANSFER => true,
@@ -503,6 +555,7 @@ class TokenController extends Controller
                 $trx->user_id = $request->user_id;
                 $trx->pay_type = "paystack";
                 $trx->amount = $request->amount;
+                $trx->fee = $fee;
                 $trx->trx_id = $order_id;
                 $trx->payment_ref = $var->data->access_code ?? null;
                 $trx->service_type = "credit_token";
@@ -599,6 +652,10 @@ class TokenController extends Controller
         if ($tariff_id == null) {
             return back()->with('error', "Tariff ID not set");
         }
+
+
+
+        dd((int)$request->tariffPerKWatt);
 
 
         $databody = [
@@ -944,6 +1001,9 @@ function flutter_verify_web(request $request)
     $status = $var->status ?? null;
     $ref = $var->data->tx_ref ?? null;
 
+    if($status == null){
+        return redirect("admin/credit-token")->with('error', "something went wrong");
+    }
 
     $ck_transaction = Transaction::where('trx_id', $var->data->tx_ref)->first()->status ?? null;
 

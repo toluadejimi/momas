@@ -439,6 +439,7 @@
 
                                                         <div class="col-xl-6 my-2 col-sm-12">
                                                             <label class="my-2">Amount</label>
+
                                                             <input type="number" disabled value="{{$amount}}" class="form-control mb-3" name="amount" required>
                                                         </div>
 
@@ -555,7 +556,7 @@
                                                                 <option value=" ">--Choose Payment Gateway---</option>
                                                                 <option value="paystack">Pay with Paystack</option>
                                                                 <option value="flutterwave">Pay with Flutterwave</option>
-                                                                <option value="enkpay">Pay with Enkpay</option>
+{{--                                                                <option value="enkpay">Pay with Enkpay</option>--}}
                                                             </select>
                                                         </div>
 

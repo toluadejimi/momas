@@ -442,11 +442,11 @@
 
                                             </div>
 
-                                            <hr class="col-xl-4 col-sm-12">
+{{--                                            <hr class="col-xl-4 col-sm-12">--}}
 
-                                            <button type="submit" class=" d-flex btn btn-primary">
-                                                Update Info
-                                            </button>
+{{--                                            <button type="submit" class=" d-flex btn btn-primary">--}}
+{{--                                                Update Info--}}
+{{--                                            </button>--}}
 
 
                                         </form>

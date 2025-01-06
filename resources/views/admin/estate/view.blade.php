@@ -175,7 +175,43 @@
 
                                 <hr class="my-4">
 
-                                <button type="submit" class="col-2 d-flex btn btn-primary">
+
+                                <div class="row">
+                                    <div class="col-xl-3 col-sm-12">
+                                        <label class="my-2">Paystak Subaccount</label>
+                                        <input type="text" value="{{$org->paystack_subaccount}}" name="paystack_subaccount" class="form-control" >
+                                    </div>
+
+                                    <div class="col-xl-3 col-sm-12">
+                                        <label class="my-2">Flutterwave Subaccount</label>
+                                        <input type="text"  value="{{$org->flutterwave_subaccount}}" name="flutterwave_subaccount" class="form-control" >
+                                    </div>
+
+                                    <div class="col-xl-3 col-sm-12">
+                                        <label class="my-2">Bank</label>
+                                        <input type="text"  value="{{$org->bank}}"  name="bank" class="form-control" >
+                                    </div>
+
+                                    <div class="col-xl-3 col-sm-12">
+                                        <label class="my-2">Account No</label>
+                                        <input type="text" value="{{$org->account_no}}"   name="account_no" class="form-control" >
+                                    </div>
+
+                                    <div class="col-xl-3 col-sm-12">
+                                        <label class="my-2">Charge Fee %</label>
+                                        <input type="number" value="{{$org->charge_fee_percent}}" step="0.01" name="charge_fee_percent"  class="form-control" >
+                                    </div>
+
+                                    <div class="col-xl-3 col-sm-12">
+                                        <label class="my-2">Charge Fee (Flat)</label>
+                                        <input type="number" value="{{$org->charge_fee}}" name="charge_fee"  class="form-control" >
+                                    </div>
+
+
+                                </div>
+
+
+                                <button type="submit" class="col-2 d-flex btn btn-primary my-4">
                                     Update Info
                                 </button>
 

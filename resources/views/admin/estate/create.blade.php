@@ -119,7 +119,12 @@
 
                                 <div class="col-xl-3 col-sm-12">
                                     <label class="my-2">Charge Fee %</label>
-                                    <input type="text" name="charge_fee" value="0" class="form-control" >
+                                    <input type="number" name="charge_fee" value="0" class="form-control" >
+                                </div>
+
+                                <div class="col-xl-3 col-sm-12">
+                                    <label class="my-2">Charge Fee (Flat)</label>
+                                    <input type="number" name="charge_fee" value="0" class="form-control" >
                                 </div>
 
 
