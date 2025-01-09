@@ -101,6 +101,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('view-user', [DashboardContoller::class, 'view_user']);
     Route::post('update-user', [DashboardContoller::class, 'update_user']);
     Route::get('send-token-email', [DashboardContoller::class, 'send_token_email']);
+    Route::post('update-passsword-now', [DashboardContoller::class, 'update_password_now']);
+    Route::get('update_passsword_view', [DashboardContoller::class, 'update_password_view']);
+
+
 
 
     //Estates
@@ -122,6 +126,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('service-activate', [EstateServiceController::class, 'activate_service']);
     Route::post('estate-update-vat', [EstateServiceController::class, 'estate_update_vat']);
     Route::post('estate-update-minpur', [EstateServiceController::class, 'estate_update_minpur']);
+
 
 
 

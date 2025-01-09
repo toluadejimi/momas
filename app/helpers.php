@@ -266,7 +266,7 @@ if (!function_exists('send_login_code')) {
     {
         $first_name = User::where('email', $email)->first()->first_name;
         $data = array(
-            'fromsender' => 'momaspay@memmserve.com', 'MOMASPAY',
+            'fromsender' => env('MAIL_FROM_ADDRESS'), 'MOMASPAY',
             'subject' => "One Time Password",
             'toreceiver' => $email,
             'code' => $code,
@@ -294,7 +294,7 @@ if (!function_exists('send_reset_email_notification')) {
     {
         $first_name = User::where('email', $email)->first()->first_name;
         $data = array(
-            'fromsender' => 'momaspay@memmserve.com', 'MOMASPAY',
+            'fromsender' => env('MAIL_FROM_ADDRESS'), 'MOMASPAY',
             'subject' => "Password Reset Notification",
             'toreceiver' => $email,
             'user' => $first_name,
@@ -321,7 +321,7 @@ if (!function_exists('send_email')) {
     {
         $first_name = User::where('email', $email)->first()->first_name;
         $data = array(
-            'fromsender' => 'momaspay@memmserve.com', 'MOMASPAY',
+            'fromsender' => env('MAIL_FROM_ADDRESS'), 'MOMASPAY',
             'subject' => "One Time Password",
             'toreceiver' => $email,
             'sms_code' => $sms_code,
@@ -346,7 +346,7 @@ if (!function_exists('send_email_reset')) {
     {
         $first_name = User::where('email', $email)->first()->first_name;
         $data = array(
-            'fromsender' => 'momaspay@memmserve.com', 'MOMASPAY',
+            'fromsender' => env('MAIL_FROM_ADDRESS'), 'MOMASPAY',
             'subject' => "One Time Password",
             'toreceiver' => $email,
             'sms_code' => $sms_code,
@@ -372,7 +372,7 @@ if (!function_exists('send_email_token')) {
     {
         $first_name = User::where('email', $email)->first()->first_name;
         $data = array(
-            'fromsender' => 'momaspay@memmserve.com', 'MOMASPAY',
+            'fromsender' => env('MAIL_FROM_ADDRESS'), 'MOMASPAY',
             'subject' => "token Purchase",
             'toreceiver' => $email,
             'token' => $token,
@@ -399,7 +399,7 @@ if (!function_exists('send_kct_email_token')) {
     {
         $first_name = User::where('email', $email)->first()->first_name;
         $data = array(
-            'fromsender' => 'momaspay@memmserve.com', 'MOMASPAY',
+            'fromsender' => env('MAIL_FROM_ADDRESS'), 'MOMASPAY',
             'subject' => "token Purchase",
             'toreceiver' => $email,
             'token' => $token,
@@ -429,7 +429,7 @@ if (!function_exists('send_token_email')) {
 
 
         $data = array(
-            'fromsender' => 'momaspay@memmserve.com', 'MOMASPAY',
+            'fromsender' => env('MAIL_FROM_ADDRESS'), 'MOMASPAY',
             'subject' => "Pass token",
             'toreceiver' => $email,
             'token_code' => $token_code,

@@ -754,11 +754,16 @@ class DashboardContoller extends Controller
     }
 
 
-    public function pending_onboarding(request $request)
+    public function update_password_now(request $request)
     {
-        return view('admin.estate.onboarding-email');
+
+
+
+
 
     }
+
+
 
 
 
