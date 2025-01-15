@@ -52,7 +52,7 @@ class TransformerController extends Controller
 
         if(auth::user()->role == 0){
 
-            $data['estate'] = Estate::where('status', 2)->get();
+            $data['estate'] = Estate::all();
 
         } elseif(auth::user()->role == 1){
 
