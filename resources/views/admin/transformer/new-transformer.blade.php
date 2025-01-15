@@ -57,8 +57,8 @@
 
                                 <div class="col-3">
                                     <label class="my-2">Estate</label>
-                                    <input type="text" readonly class="form-control" value="{{$estate->title}}">
-                                    <input type="text" hidden name="Estate_id" value="{{$estate->id}}">
+                                    <input type="text" readonly class="form-control" value="{{$estate->title ?? "name"}}">
+                                    <input type="text" hidden name="Estate_id" value="{{$estate->id ?? "id"}}">
 
                                 </div>
 
