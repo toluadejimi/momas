@@ -57,8 +57,15 @@
 
                                 <div class="col-3">
                                     <label class="my-2">Estate</label>
-                                    <input type="text" readonly class="form-control" value="{{$estate->title ?? "name"}}">
-                                    <input type="text" hidden name="Estate_id" value="{{$estate->id ?? "id"}}">
+                                    <select name="Estate_id" required class="form-control">
+                                        <option value="">--select estate--</option>
+                                        @foreach($estate as $data)
+                                            <option value="{{$data->id}}">{{$data->title}}</option>
+                                        @endforeach
+
+                                    </select>
+{{--                                    <input type="text" readonly class="form-control" value="{{$estate->title ?? "name"}}">--}}
+{{--                                    <input type="text" hidden name="Estate_id" value="{{$estate->id ?? "id"}}">--}}
 
                                 </div>
 

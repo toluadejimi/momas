@@ -54,7 +54,6 @@ class TransformerController extends Controller
 
             $data['estate'] = Estate::all();
 
-            dd($data['estate'] );
 
         } elseif(auth::user()->role == 1){
 
