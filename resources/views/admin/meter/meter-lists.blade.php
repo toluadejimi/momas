@@ -371,13 +371,13 @@
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <h5 class="card-title text-black mb-0">Latest Meter</h5>
-                                    <div class="justify-content-end">
-                                        <div class="justify-content-end">
-                                            <a href="#" class="btn btn-primary text-white " data-bs-toggle="modal"
-                                               data-bs-target="#staticBackdrop">Import Bulk Meter</a>
-                                            <a href="new-meter" class="btn btn-primary text-white">Add new</a>
-                                        </div>
-                                    </div>
+{{--                                    <div class="justify-content-end">--}}
+{{--                                        <div class="justify-content-end">--}}
+{{--                                            <a href="#" class="btn btn-primary text-white " data-bs-toggle="modal"--}}
+{{--                                               data-bs-target="#staticBackdrop">Import Bulk Meter</a>--}}
+{{--                                            <a href="new-meter" class="btn btn-primary text-white">Add new</a>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
                                 </div>
 
