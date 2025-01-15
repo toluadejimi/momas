@@ -181,56 +181,65 @@
                                                 document.getElementById("tariffSelect3"),
                                                 document.getElementById("tariffSelect4"),
                                             ];
-
                                             const endpoint = "{{url('')}}/api/get-estate-tariff";
 
                                             estateSelect.addEventListener("change", function () {
                                                 const estateId = this.value;
 
-                                                // Reset tariff dropdowns
-                                                tariffSelects.forEach(select => {
+                                                tariffSelects.forEach((select) => {
                                                     select.innerHTML = '<option value="">Choose Tariff</option>';
                                                 });
 
-                                                // If no estate is selected, stop here
                                                 if (!estateId) return;
 
-                                                // Fetch data from the endpoint
                                                 fetch(`${endpoint}?estate_id=${estateId}`)
-                                                    .then(response => {
-                                                        if (!response.ok) {
-                                                            throw new Error("Network response was not ok");
-                                                        }
-                                                        return response.json();
-                                                    })
-                                                    .then(data => {
-                                                        if (data && Array.isArray(data.tariffs)) {
-                                                            tariffSelects.forEach(select => {
-                                                                // Populate tariff dropdowns
-                                                                data.tariffs.forEach(tariff => {
-                                                                    const option = document.createElement("option");
-                                                                    option.value = tariff.id; // Use {{$data->id}}
-                                                                    option.textContent = tariff.title; // Use {{$data->title}}
-                                                                    select.appendChild(option);
+                                                    .then((response) => response.json())
+                                                    .then((data) => {
+                                                        if (data?.tariffs?.length) {
+                                                            tariffSelects.forEach((select) => {
+                                                                data.tariffs.forEach((tariff) => {
+                                                                    select.insertAdjacentHTML(
+                                                                        "beforeend",
+                                                                        `<option value="${tariff.id}">${tariff.title}</option>`
+                                                                    );
                                                                 });
                                                             });
                                                         } else {
-                                                            tariffSelects.forEach(select => {
+                                                            tariffSelects.forEach((select) => {
                                                                 select.innerHTML = '<option value="">No tariffs available</option>';
                                                             });
                                                         }
                                                     })
-                                                    .catch(error => {
+                                                    .catch((error) => {
                                                         console.error("Error fetching tariff data:", error);
-                                                        tariffSelects.forEach(select => {
+                                                        tariffSelects.forEach((select) => {
                                                             select.innerHTML = '<option value="">Error fetching data</option>';
                                                         });
                                                     });
                                             });
+
+                                            document.getElementById('isDualTariff').addEventListener('change', function () {
+                                                const isChecked = this.checked;
+                                                const toggleFields = [
+                                                    'newtar',
+                                                    'newTariffDualContainer',
+                                                    'newSGCDualContainer',
+                                                    'oldTariffDualContainer',
+                                                    'oldSGCDualContainer',
+                                                ];
+
+                                                toggleFields.forEach((id) => {
+                                                    const element = document.getElementById(id);
+                                                    if (element) {
+                                                        element.style.display = isChecked ? 'block' : 'none';
+                                                        const input = element.querySelector('input, select');
+                                                        if (input) {
+                                                            input.required = isChecked;
+                                                        }
+                                                    }
+                                                });
+                                            });
                                         });
-
-
-
 
 
                                     </script>
