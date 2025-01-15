@@ -438,12 +438,16 @@
 
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Old SGC</label>
-                                        <input type="text" name="OldSGC" class="form-control" required>
+                                        <select name="OldSGC" class="form-control" required>
+                                            <option value="600849">MOMAS SGC (6***9)</option>
+                                        </select>
                                     </div>
 
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">New SGC</label>
-                                        <input type="text" name="NewSGC" class="form-control" required>
+                                        <select name="NewSGC" class="form-control" required>
+                                            <option value="600849">MOMAS SGC (6***9)</option>
+                                        </select>
                                     </div>
 
 
