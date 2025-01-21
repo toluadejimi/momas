@@ -15,6 +15,7 @@ use App\Services\VatCalculator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Lcobucci\JWT\Exception;
 
 
 class TokenController extends Controller
@@ -101,7 +102,6 @@ class TokenController extends Controller
 
 
     }
-
 
 
     public function validate_compensation_meter(request $request)
@@ -278,14 +278,13 @@ class TokenController extends Controller
 
 
             $est = Estate::where('id', $estate_id)->first();
-            if($est->charge_fee < 0){
+            if ($est->charge_fee < 0) {
 
-                $fee_in_percent  = $est->charge_fee_percent;
+                $fee_in_percent = $est->charge_fee_percent;
                 $fee = ($fee_in_percent / $request->amount) * 100;
-            }else{
+            } else {
                 $fee = $est->charge_fee;
             }
-
 
 
             $data['vatAmount'] = $vatAmount;
@@ -310,8 +309,6 @@ class TokenController extends Controller
         } elseif (auth::user()->role == 2) {
 
         } elseif (auth::user()->role == 3) {
-
-
 
 
             $estate_id = Estate::where('title', $request->estate_id)->first()->id;
@@ -350,11 +347,11 @@ class TokenController extends Controller
             $tariffPerKWatt = $calculator->calculateTariffAmountPerKWatt($params);
 
             $est = Estate::where('id', $estate_id)->first();
-            if($est->charge_fee < 0){
+            if ($est->charge_fee < 0) {
 
-                $fee_in_percent  = $est->charge_fee_percent;
+                $fee_in_percent = $est->charge_fee_percent;
                 $fee = ($fee_in_percent / $request->amount) * 100;
-            }else{
+            } else {
                 $fee = $est->charge_fee;
             }
 
@@ -392,6 +389,12 @@ class TokenController extends Controller
     public function generate_credit_meter_token(request $request)
     {
 
+
+        try {
+
+
+
+
         $order_id = "TRX" . random_int(000000000, 9999999999);
         $estate_id = Estate::where('title', $request->estate_name)->first()->id;
         $cdt = new CreditToken();
@@ -412,14 +415,13 @@ class TokenController extends Controller
         if ($request->pay_type == 'flutterwave') {
 
 
-
             $estate_id = $request->estate_id;
             $est = Estate::where('id', $estate_id)->first();
-            if($est->charge_fee < 0){
+            if ($est->charge_fee < 0) {
 
-                $fee_in_percent  = $est->charge_fee_percent;
+                $fee_in_percent = $est->charge_fee_percent;
                 $fee = ($fee_in_percent / $request->amount) * 100;
-            }else{
+            } else {
                 $fee = $est->charge_fee;
             }
 
@@ -493,18 +495,17 @@ class TokenController extends Controller
         if ($request->pay_type == 'paystack') {
 
             $estate_id = $request->estate_id ?? null;
-            if($estate_id === null){
-                $estate_id =  Auth::user()->estate_id;
+            if ($estate_id === null) {
+                $estate_id = Auth::user()->estate_id;
             }
             $est = Estate::where('id', $estate_id)->first();
-            if($est->charge_fee < 0){
+            if ($est->charge_fee < 0) {
 
-                $fee_in_percent  = $est->charge_fee_percent;
+                $fee_in_percent = $est->charge_fee_percent;
                 $fee = ($fee_in_percent / $request->amount) * 100;
-            }else{
+            } else {
                 $fee = $est->charge_fee;
             }
-
 
 
             $fl = Setting::where('id', 1)->first();
@@ -518,7 +519,7 @@ class TokenController extends Controller
 
 
             $databody = array(
-                "amount" => $request->amount * 100 ,
+                "amount" => $request->amount * 100,
                 "email" => $email,
                 "ref" => $trx_id,
                 'callback_url' => url('') . "/admin/paystack-check-web",
@@ -620,13 +621,17 @@ class TokenController extends Controller
         }
 
 
+        } catch (Exception $e) {
+            return back()->with('error', $e);
+        }
+
     }
 
 
     public function generate_compensation_meter_token(request $request)
     {
 
-        $order_id = "COMP".random_int(000000, 999999);
+        $order_id = "COMP" . random_int(000000, 999999);
         $estate_id = Estate::where('title', $request->estate_name)->first()->id;
         $cdt = new CompensationToken();
         $cdt->user_id = $request->user_id;
@@ -652,7 +657,6 @@ class TokenController extends Controller
         if ($tariff_id == null) {
             return back()->with('error', "Tariff ID not set");
         }
-
 
 
         dd((int)$request->tariffPerKWatt);
@@ -707,7 +711,7 @@ class TokenController extends Controller
             } else {
 
                 $trx = new Transaction();
-                $trx->trx_id = "COMP".random_int(000000, 999999);
+                $trx->trx_id = "COMP" . random_int(000000, 999999);
                 $trx->user_id = $meter->user_id;
                 $trx->estate_id = $estate_id;
                 $trx->pay_type = null;
@@ -741,510 +745,504 @@ class TokenController extends Controller
         return redirect('admin/credit-token')->with('error', $error['errors'][0]['title'] ?? $get_token->json() . " | " . json_encode($databody));
 
 
+    }
 
 
+    public
+    function paystack_verify_web(request $request)
+    {
+
+        $fl = Setting::where('id', 1)->first();
+        $pksecret = $fl->paystack_secret;
+        $transactionId = $request->reference;
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.paystack.co/transaction/verify/$transactionId",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                "Authorization: Bearer $pksecret",
+                "Cache-Control: no-cache",
+            ),
+        ));
+
+        $var = curl_exec($curl);
+        curl_close($curl);
+        $var = json_decode($var);
+        $status = $var->status ?? null;
+        $ref = $var->data->reference ?? null;
 
 
-
-}
-
-
+        $ck_transaction = Transaction::where('trx_id', $var->data->reference)->first()->status ?? null;
+        if ($ck_transaction == null) {
 
 
-public
-function paystack_verify_web(request $request)
-{
-
-    $fl = Setting::where('id', 1)->first();
-    $pksecret = $fl->paystack_secret;
-    $transactionId = $request->reference;
-
-    $curl = curl_init();
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.paystack.co/transaction/verify/$transactionId",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'GET',
-        CURLOPT_HTTPHEADER => array(
-            "Authorization: Bearer $pksecret",
-            "Cache-Control: no-cache",
-        ),
-    ));
-
-    $var = curl_exec($curl);
-    curl_close($curl);
-    $var = json_decode($var);
-    $status = $var->status ?? null;
-    $ref = $var->data->reference ?? null;
+            if ($status == 'success') {
 
 
-    $ck_transaction = Transaction::where('trx_id', $var->data->reference)->first()->status ?? null;
-    if ($ck_transaction == null) {
+                Transaction::where('trx_id', $var->data->metadata->ref)->update(['status' => 2]);
+                $meterNo = CreditToken::where('order_id', $var->data->metadata->ref)->first()->meterNo;
+                $meter = Meter::where('meterNo', $meterNo)->first();
+                $trx = CreditToken::where('order_id', $var->data->metadata->ref)->first();
+                $traff_id = CreditToken::where('order_id', $var->data->metadata->ref)->first();
 
 
-        if ($status == 'success') {
+                $databody = [
+                    'meterType' => $meter->KRN1,
+                    'meterNo' => $meter->meterNo,
+                    'sgc' => (int)$meter->OldSGC,
+                    'ti' => $trx->tariff_id,
+                    'amount' => (int)$trx->tariffPerKWatt,
+                ];
 
 
-            Transaction::where('trx_id', $var->data->metadata->ref)->update(['status' => 2]);
-            $meterNo = CreditToken::where('order_id', $var->data->metadata->ref)->first()->meterNo;
-            $meter = Meter::where('meterNo', $meterNo)->first();
-            $trx = CreditToken::where('order_id', $var->data->metadata->ref)->first();
-            $traff_id = CreditToken::where('order_id', $var->data->metadata->ref)->first();
+                $no_kct_response = Http::withOptions([
+                    'verify' => false,
+                    'timeout' => 10,
+                ])->post('http://169.239.189.91:19071/tokenGen', $databody);
+                $error = $no_kct_response->json() ?? null;
 
 
-            $databody = [
-                'meterType' => $meter->KRN1,
-                'meterNo' => $meter->meterNo,
-                'sgc' => (int)$meter->OldSGC,
-                'ti' => $trx->tariff_id,
-                'amount' => (int)$trx->tariffPerKWatt,
-            ];
+                if ($no_kct_response->successful()) {
+                    $no_kct = $no_kct_response->json();
+                    $no_kct_data = json_decode($no_kct, true);
+                    $status = $no_kct_data['code'] ?? null;
 
 
-            $no_kct_response = Http::withOptions([
-                'verify' => false,
-                'timeout' => 10,
-            ])->post('http://169.239.189.91:19071/tokenGen', $databody);
-            $error = $no_kct_response->json() ?? null;
+                    if ($status == "SUCCESS") {
+
+                        $no_kct_token = $no_kct_data['tokens'][0];
+                        CreditToken::where('order_id', $var->data->metadata->ref)->update([
+
+                            'token' => $no_kct_token,
+                            'status' => 2
+
+                        ]);
+
+                        $trx_id = $var->data->metadata->ref;
+                        $user = User::where('id', $trx->user_id)->first();
+                        $email = $user->email;
+                        $token = $no_kct_token;
+                        $amount = $trx->amount;
 
 
-            if ($no_kct_response->successful()) {
-                $no_kct = $no_kct_response->json();
-                $no_kct_data = json_decode($no_kct, true);
-                $status = $no_kct_data['code'] ?? null;
+                        send_email_token($email, $token, $amount);
 
 
-                if ($status == "SUCCESS") {
+                        Transaction::where('trx_id', $trx)->update([
+                            'status' => 2,
+                        ]);
 
-                    $no_kct_token = $no_kct_data['tokens'][0];
-                    CreditToken::where('order_id', $var->data->metadata->ref)->update([
-
-                        'token' => $no_kct_token,
-                        'status' => 2
-
-                    ]);
-
-                    $trx_id = $var->data->metadata->ref;
-                    $user = User::where('id', $trx->user_id)->first();
-                    $email = $user->email;
-                    $token = $no_kct_token;
-                    $amount = $trx->amount;
+                        return redirect("admin/recepit?trx_id=$trx_id");
 
 
-                    send_email_token($email, $token, $amount);
+                    } else {
+
+                        Transaction::where('trx_id', $trx)->update([
+                            'service' => "METER PURCHASE",
+                            'service_type' => "meter",
+                            'status' => 3,
+                            'tariff_id' => $request->tariff_id,
+                            'note' => json_encode($no_kct_data) . "|" . json_encode($databody)
 
 
-                    Transaction::where('trx_id', $trx)->update([
-                        'status' => 2,
-                    ]);
+                        ]);
 
-                    return redirect("admin/recepit?trx_id=$trx_id");
+                        User::where('id', Auth::id())->increment('main_wallet', $trx->amount);
 
 
-                } else {
+                        return redirect('admin/credit-token')->with('error', $error['errors'][0]['title'] ?? $no_kct_response->json() . " | " . json_encode($databody));
 
-                    Transaction::where('trx_id', $trx)->update([
-                        'service' => "METER PURCHASE",
-                        'service_type' => "meter",
-                        'status' => 3,
-                        'tariff_id' => $request->tariff_id,
-                        'note' => json_encode($no_kct_data) . "|" . json_encode($databody)
+                    }
 
-
-                    ]);
-
-                    User::where('id', Auth::id())->increment('main_wallet', $trx->amount);
-
-
-                    return redirect('admin/credit-token')->with('error', $error['errors'][0]['title'] ?? $no_kct_response->json() . " | " . json_encode($databody));
 
                 }
+
+
+                return redirect('admin/credit-token')->with('error', $error['errors'][0]['title'] ?? $no_kct_response->json() . " | " . json_encode($databody));
+
+
+            } else {
+                $ref = Transaction::where('trx_id', $var->data->metadata->ref)->first()->trx_id;
+                $url = url('') . "/payment?ref=$ref&status=failure";
+                return redirect($url);
+            }
+
+        }
+
+        if ($ck_transaction == 0) {
+
+            if ($status == 'success') {
+
+
+                Transaction::where('trx_id', $var->data->metadata->ref)->update(['status' => 2]);
+                $meterNo = CreditToken::where('order_id', $var->data->metadata->ref)->first()->meterNo;
+                $meter = Meter::where('meterNo', $meterNo)->first();
+                $trx = CreditToken::where('order_id', $var->data->metadata->ref)->first();
+                $traff_id = CreditToken::where('order_id', $var->data->metadata->ref)->first();
+
+
+                $databody = [
+                    'meterType' => $meter->KRN1,
+                    'meterNo' => $meter->meterNo,
+                    'sgc' => (int)$meter->OldSGC,
+                    'ti' => $trx->tariff_id,
+                    'amount' => $trx->tariffPerKWatt,
+                ];
+                $no_kct_response = Http::withOptions([
+                    'verify' => false,
+                    'timeout' => 10,
+                ])->post('http://169.239.189.91:19071/tokenGen', $databody);
+
+
+                if ($no_kct_response->successful()) {
+                    $no_kct = $no_kct_response->json();
+                    $no_kct_data = json_decode($no_kct, true);
+                    $status = $no_kct_data['code'] ?? null;
+
+                    if ($status == "SUCCESS") {
+
+                        $no_kct_token = $no_kct_data['tokens'][0];
+                        CreditToken::where('order_id', $var->data->metadata->ref)->update([
+
+                            'token' => $no_kct_token,
+                            'status' => 2
+
+                        ]);
+
+                        $trx_id = $var->data->metadata->ref;
+                        $user = User::where('id', $trx->user_id)->first();
+                        $email = $user->email;
+                        $token = $no_kct_token;
+                        $amount = $trx->amount;
+
+
+                        send_email_token($email, $token, $amount);
+
+
+                        Transaction::where('trx_id', $trx)->update([
+                            'status' => 2,
+                        ]);
+
+                        return redirect("admin/recepit?trx_id=$trx_id");
+
+                    } else {
+
+                        Transaction::where('trx_id', $trx)->update([
+                            'service' => "METER PURCHASE",
+                            'service_type' => "meter",
+                            'status' => 3,
+                            'tariff_id' => $request->tariff_id,
+                            'note' => json_encode($no_kct_data) . "|" . json_encode($databody)
+
+
+                        ]);
+
+                        User::where('id', Auth::id())->increment('main_wallet', $trx->amount);
+                        return redirect('admin/credit-token')->with('error', json_encode($no_kct_data) . " | " . json_encode($databody));
+
+                    }
+
+
+                }
+
+
+            } else {
+                $ref = Transaction::where('trx_id', $var->data->metadata->ref)->first()->trx_id;
+                $url = url('') . "/payment?ref=$ref&status=failure";
+                return redirect($url);
+            }
+
+        }
+
+
+    }
+
+
+    public
+    function flutter_verify_web(request $request)
+    {
+
+        $fl = Setting::where('id', 1)->first();
+        $flsecret = $fl->flutterwave_secret;
+        $flkey['flutterwave_public'] = $fl->flutterwave_public;
+        $transactionId = $request->transaction_id;
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.flutterwave.com/v3/transactions/$transactionId/verify",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'Accept: application/json',
+                'Content-Type: application/json',
+                'Authorization: Bearer ' . $flsecret,
+            ),
+        ));
+
+        $var = curl_exec($curl);
+        curl_close($curl);
+        $var = json_decode($var);
+
+        $status = $var->status ?? null;
+        $ref = $var->data->tx_ref ?? null;
+
+        if ($status == null) {
+            return redirect("admin/credit-token")->with('error', "something went wrong");
+        }
+
+        $ck_transaction = Transaction::where('trx_id', $var->data->tx_ref)->first()->status ?? null;
+
+        if ($ck_transaction == null) {
+
+            if ($status == 'success') {
+
+
+                Transaction::where('trx_id', $ref)->update(['status' => 2]);
+                $meterNo = CreditToken::where('order_id', $ref)->first()->meterNo;
+                $meter = Meter::where('meterNo', $meterNo)->first();
+                $trx = CreditToken::where('order_id', $ref)->first();
+                $traff_id = CreditToken::where('order_id', $ref)->first();
+
+
+                $databody = [
+                    'meterType' => $meter->KRN1,
+                    'meterNo' => $meter->meterNo,
+                    'sgc' => (int)$meter->OldSGC,
+                    'ti' => $trx->tariff_id,
+                    'amount' => (int)$trx->tariffPerKWatt,
+                ];
+
+
+                $no_kct_response = Http::withOptions([
+                    'verify' => false,
+                    'timeout' => 10,
+                ])->post('http://169.239.189.91:19071/tokenGen', $databody);
+                $error = $no_kct_response->json() ?? null;
+
+
+                if ($no_kct_response->successful()) {
+                    $no_kct = $no_kct_response->json();
+                    $no_kct_data = json_decode($no_kct, true);
+                    $status = $no_kct_data['code'] ?? null;
+
+
+                    if ($status == "SUCCESS") {
+
+                        $no_kct_token = $no_kct_data['tokens'][0];
+                        CreditToken::where('order_id', $ref)->update([
+
+                            'token' => $no_kct_token,
+                            'status' => 2
+
+                        ]);
+
+                        $trx_id = $ref;
+                        $user = User::where('id', $trx->user_id)->first();
+                        $email = $user->email;
+                        $token = $no_kct_token;
+                        $amount = $trx->amount;
+
+
+                        send_email_token($email, $token, $amount);
+
+
+                        Transaction::where('trx_id', $trx)->update([
+                            'status' => 2,
+                        ]);
+
+                        return redirect("admin/recepit?trx_id=$trx_id");
+
+
+                    } else {
+
+                        Transaction::where('trx_id', $trx)->update([
+                            'service' => "METER PURCHASE",
+                            'service_type' => "meter",
+                            'status' => 3,
+                            'tariff_id' => $request->tariff_id,
+                            'note' => json_encode($no_kct_data) . "|" . json_encode($databody)
+
+
+                        ]);
+
+                        User::where('id', Auth::id())->increment('main_wallet', $trx->amount);
+
+
+                        return redirect('admin/credit-token')->with('error', $error['errors'][0]['title'] ?? $no_kct_response->json() . " | " . json_encode($databody));
+
+                    }
+
+
+                }
+
+
+                return redirect('admin/credit-token')->with('error', $error['errors'][0]['title'] ?? $no_kct_response->json() . " | " . json_encode($databody));
+
+
+            } else {
+                $ref = Transaction::where('trx_id', $ref)->first()->trx_id;
+                $url = url('') . "/payment?ref=$ref&status=failure";
+                return redirect($url);
+            }
+
+        }
+
+        if ($ck_transaction == 0) {
+
+            if ($status == 'success') {
+
+
+                Transaction::where('trx_id', $var->data->metadata->ref)->update(['status' => 2]);
+                $meterNo = CreditToken::where('order_id', $var->data->metadata->ref)->first()->meterNo;
+                $meter = Meter::where('meterNo', $meterNo)->first();
+                $trx = CreditToken::where('order_id', $var->data->metadata->ref)->first();
+                $traff_id = CreditToken::where('order_id', $var->data->metadata->ref)->first();
+
+
+                $databody = [
+                    'meterType' => $meter->KRN1,
+                    'meterNo' => $meter->meterNo,
+                    'sgc' => (int)$meter->OldSGC,
+                    'ti' => $trx->tariff_id,
+                    'amount' => $trx->tariffPerKWatt,
+                ];
+                $no_kct_response = Http::withOptions([
+                    'verify' => false,
+                    'timeout' => 10,
+                ])->post('http://169.239.189.91:19071/tokenGen', $databody);
+
+
+                if ($no_kct_response->successful()) {
+                    $no_kct = $no_kct_response->json();
+                    $no_kct_data = json_decode($no_kct, true);
+                    $status = $no_kct_data['code'] ?? null;
+
+                    if ($status == "SUCCESS") {
+
+                        $no_kct_token = $no_kct_data['tokens'][0];
+                        CreditToken::where('order_id', $var->data->metadata->ref)->update([
+
+                            'token' => $no_kct_token,
+                            'status' => 2
+
+                        ]);
+
+                        $trx_id = $var->data->metadata->ref;
+                        $user = User::where('id', $trx->user_id)->first();
+                        $email = $user->email;
+                        $token = $no_kct_token;
+                        $amount = $trx->amount;
+
+
+                        send_email_token($email, $token, $amount);
+
+
+                        Transaction::where('trx_id', $trx)->update([
+                            'status' => 2,
+                        ]);
+
+                        return redirect("admin/recepit?trx_id=$trx_id");
+
+                    } else {
+
+                        Transaction::where('trx_id', $trx)->update([
+                            'service' => "METER PURCHASE",
+                            'service_type' => "meter",
+                            'status' => 3,
+                            'tariff_id' => $request->tariff_id,
+                            'note' => json_encode($no_kct_data) . "|" . json_encode($databody)
+
+
+                        ]);
+
+                        User::where('id', Auth::id())->increment('main_wallet', $trx->amount);
+                        return redirect('admin/credit-token')->with('error', json_encode($no_kct_data) . " | " . json_encode($databody));
+
+                    }
+
+
+                }
+
+
+            } else {
+                $ref = Transaction::where('trx_id', $ref)->first()->trx_id;
+                $url = url('') . "/payment?ref=$ref&status=failure";
+                return redirect($url);
+            }
+
+        }
+
+
+    }
+
+    public
+    function recepit(request $request)
+    {
+
+
+        if ($request->trx_id == null) {
+            return back()->with('error', "Ref can not be empty");
+        }
+
+
+        if ($request->type == "compensation") {
+
+            $trx_comp = CompensationToken::where('order_id', $request->trx_id)->first() ?? null;
+            $user_comp = User::where('id', $trx_comp->user_id)->first() ?? null;
+
+
+            if ($trx_comp != null) {
+
+                $data['full_name'] = $user_comp->first_name . " " . $user_comp->last_name;
+                $data['address'] = $user_comp->address . "," . $user_comp->city . "," . $user_comp->state;
+                $data['phone'] = $user_comp->phone;
+                $data['order_id'] = $trx_comp->order_id;
+                $data['token'] = $trx_comp->token;
+                $data['amount'] = $trx_comp->amount;
+                $data['vat_amount'] = $trx_comp->vatAmount;
+                $data['vend_amount_kw_per_naira'] = $trx_comp->tariffPerKWatt;
+                $data['title'] = "Compensation Token";
+
+
+                return view('admin.recepit', $data);
 
 
             }
 
 
-            return redirect('admin/credit-token')->with('error', $error['errors'][0]['title'] ?? $no_kct_response->json() . " | " . json_encode($databody));
-
-
-        } else {
-            $ref = Transaction::where('trx_id', $var->data->metadata->ref)->first()->trx_id;
-            $url = url('') . "/payment?ref=$ref&status=failure";
-            return redirect($url);
-        }
-
-    }
-
-    if ($ck_transaction == 0) {
-
-        if ($status == 'success') {
-
-
-            Transaction::where('trx_id', $var->data->metadata->ref)->update(['status' => 2]);
-            $meterNo = CreditToken::where('order_id', $var->data->metadata->ref)->first()->meterNo;
-            $meter = Meter::where('meterNo', $meterNo)->first();
-            $trx = CreditToken::where('order_id', $var->data->metadata->ref)->first();
-            $traff_id = CreditToken::where('order_id', $var->data->metadata->ref)->first();
-
-
-            $databody = [
-                'meterType' => $meter->KRN1,
-                'meterNo' => $meter->meterNo,
-                'sgc' => (int)$meter->OldSGC,
-                'ti' => $trx->tariff_id,
-                'amount' => $trx->tariffPerKWatt,
-            ];
-            $no_kct_response = Http::withOptions([
-                'verify' => false,
-                'timeout' => 10,
-            ])->post('http://169.239.189.91:19071/tokenGen', $databody);
-
-
-            if ($no_kct_response->successful()) {
-                $no_kct = $no_kct_response->json();
-                $no_kct_data = json_decode($no_kct, true);
-                $status = $no_kct_data['code'] ?? null;
-
-                if ($status == "SUCCESS") {
-
-                    $no_kct_token = $no_kct_data['tokens'][0];
-                    CreditToken::where('order_id', $var->data->metadata->ref)->update([
-
-                        'token' => $no_kct_token,
-                        'status' => 2
-
-                    ]);
-
-                    $trx_id = $var->data->metadata->ref;
-                    $user = User::where('id', $trx->user_id)->first();
-                    $email = $user->email;
-                    $token = $no_kct_token;
-                    $amount = $trx->amount;
-
-
-                    send_email_token($email, $token, $amount);
-
-
-                    Transaction::where('trx_id', $trx)->update([
-                        'status' => 2,
-                    ]);
-
-                    return redirect("admin/recepit?trx_id=$trx_id");
-
-                } else {
-
-                    Transaction::where('trx_id', $trx)->update([
-                        'service' => "METER PURCHASE",
-                        'service_type' => "meter",
-                        'status' => 3,
-                        'tariff_id' => $request->tariff_id,
-                        'note' => json_encode($no_kct_data) . "|" . json_encode($databody)
-
-
-                    ]);
-
-                    User::where('id', Auth::id())->increment('main_wallet', $trx->amount);
-                    return redirect('admin/credit-token')->with('error', json_encode($no_kct_data) . " | " . json_encode($databody));
-
-                }
-
-
-            }
-
-
-        } else {
-            $ref = Transaction::where('trx_id', $var->data->metadata->ref)->first()->trx_id;
-            $url = url('') . "/payment?ref=$ref&status=failure";
-            return redirect($url);
-        }
-
-    }
-
-
-}
-
-
-public
-function flutter_verify_web(request $request)
-{
-
-    $fl = Setting::where('id', 1)->first();
-    $flsecret = $fl->flutterwave_secret;
-    $flkey['flutterwave_public'] = $fl->flutterwave_public;
-    $transactionId = $request->transaction_id;
-
-    $curl = curl_init();
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.flutterwave.com/v3/transactions/$transactionId/verify",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'GET',
-        CURLOPT_HTTPHEADER => array(
-            'Accept: application/json',
-            'Content-Type: application/json',
-            'Authorization: Bearer ' . $flsecret,
-        ),
-    ));
-
-    $var = curl_exec($curl);
-    curl_close($curl);
-    $var = json_decode($var);
-
-    $status = $var->status ?? null;
-    $ref = $var->data->tx_ref ?? null;
-
-    if($status == null){
-        return redirect("admin/credit-token")->with('error', "something went wrong");
-    }
-
-    $ck_transaction = Transaction::where('trx_id', $var->data->tx_ref)->first()->status ?? null;
-
-    if ($ck_transaction == null) {
-
-        if ($status == 'success') {
-
-
-            Transaction::where('trx_id', $ref)->update(['status' => 2]);
-            $meterNo = CreditToken::where('order_id', $ref)->first()->meterNo;
-            $meter = Meter::where('meterNo', $meterNo)->first();
-            $trx = CreditToken::where('order_id', $ref)->first();
-            $traff_id = CreditToken::where('order_id', $ref)->first();
-
-
-            $databody = [
-                'meterType' => $meter->KRN1,
-                'meterNo' => $meter->meterNo,
-                'sgc' => (int)$meter->OldSGC,
-                'ti' => $trx->tariff_id,
-                'amount' => (int)$trx->tariffPerKWatt,
-            ];
-
-
-            $no_kct_response = Http::withOptions([
-                'verify' => false,
-                'timeout' => 10,
-            ])->post('http://169.239.189.91:19071/tokenGen', $databody);
-            $error = $no_kct_response->json() ?? null;
-
-
-            if ($no_kct_response->successful()) {
-                $no_kct = $no_kct_response->json();
-                $no_kct_data = json_decode($no_kct, true);
-                $status = $no_kct_data['code'] ?? null;
-
-
-                if ($status == "SUCCESS") {
-
-                    $no_kct_token = $no_kct_data['tokens'][0];
-                    CreditToken::where('order_id', $ref)->update([
-
-                        'token' => $no_kct_token,
-                        'status' => 2
-
-                    ]);
-
-                    $trx_id = $ref;
-                    $user = User::where('id', $trx->user_id)->first();
-                    $email = $user->email;
-                    $token = $no_kct_token;
-                    $amount = $trx->amount;
-
-
-                    send_email_token($email, $token, $amount);
-
-
-                    Transaction::where('trx_id', $trx)->update([
-                        'status' => 2,
-                    ]);
-
-                    return redirect("admin/recepit?trx_id=$trx_id");
-
-
-                } else {
-
-                    Transaction::where('trx_id', $trx)->update([
-                        'service' => "METER PURCHASE",
-                        'service_type' => "meter",
-                        'status' => 3,
-                        'tariff_id' => $request->tariff_id,
-                        'note' => json_encode($no_kct_data) . "|" . json_encode($databody)
-
-
-                    ]);
-
-                    User::where('id', Auth::id())->increment('main_wallet', $trx->amount);
-
-
-                    return redirect('admin/credit-token')->with('error', $error['errors'][0]['title'] ?? $no_kct_response->json() . " | " . json_encode($databody));
-
-                }
-
-
-            }
-
-
-            return redirect('admin/credit-token')->with('error', $error['errors'][0]['title'] ?? $no_kct_response->json() . " | " . json_encode($databody));
-
-
-        } else {
-            $ref = Transaction::where('trx_id', $ref)->first()->trx_id;
-            $url = url('') . "/payment?ref=$ref&status=failure";
-            return redirect($url);
-        }
-
-    }
-
-    if ($ck_transaction == 0) {
-
-        if ($status == 'success') {
-
-
-            Transaction::where('trx_id', $var->data->metadata->ref)->update(['status' => 2]);
-            $meterNo = CreditToken::where('order_id', $var->data->metadata->ref)->first()->meterNo;
-            $meter = Meter::where('meterNo', $meterNo)->first();
-            $trx = CreditToken::where('order_id', $var->data->metadata->ref)->first();
-            $traff_id = CreditToken::where('order_id', $var->data->metadata->ref)->first();
-
-
-            $databody = [
-                'meterType' => $meter->KRN1,
-                'meterNo' => $meter->meterNo,
-                'sgc' => (int)$meter->OldSGC,
-                'ti' => $trx->tariff_id,
-                'amount' => $trx->tariffPerKWatt,
-            ];
-            $no_kct_response = Http::withOptions([
-                'verify' => false,
-                'timeout' => 10,
-            ])->post('http://169.239.189.91:19071/tokenGen', $databody);
-
-
-            if ($no_kct_response->successful()) {
-                $no_kct = $no_kct_response->json();
-                $no_kct_data = json_decode($no_kct, true);
-                $status = $no_kct_data['code'] ?? null;
-
-                if ($status == "SUCCESS") {
-
-                    $no_kct_token = $no_kct_data['tokens'][0];
-                    CreditToken::where('order_id', $var->data->metadata->ref)->update([
-
-                        'token' => $no_kct_token,
-                        'status' => 2
-
-                    ]);
-
-                    $trx_id = $var->data->metadata->ref;
-                    $user = User::where('id', $trx->user_id)->first();
-                    $email = $user->email;
-                    $token = $no_kct_token;
-                    $amount = $trx->amount;
-
-
-                    send_email_token($email, $token, $amount);
-
-
-                    Transaction::where('trx_id', $trx)->update([
-                        'status' => 2,
-                    ]);
-
-                    return redirect("admin/recepit?trx_id=$trx_id");
-
-                } else {
-
-                    Transaction::where('trx_id', $trx)->update([
-                        'service' => "METER PURCHASE",
-                        'service_type' => "meter",
-                        'status' => 3,
-                        'tariff_id' => $request->tariff_id,
-                        'note' => json_encode($no_kct_data) . "|" . json_encode($databody)
-
-
-                    ]);
-
-                    User::where('id', Auth::id())->increment('main_wallet', $trx->amount);
-                    return redirect('admin/credit-token')->with('error', json_encode($no_kct_data) . " | " . json_encode($databody));
-
-                }
-
-
-            }
-
-
-        } else {
-            $ref = Transaction::where('trx_id', $ref)->first()->trx_id;
-            $url = url('') . "/payment?ref=$ref&status=failure";
-            return redirect($url);
-        }
-
-    }
-
-
-}
-
-public
-function recepit(request $request)
-{
-
-
-    if ($request->trx_id == null) {
-        return back()->with('error', "Ref can not be empty");
-    }
-
-
-    if($request->type == "compensation"){
-
-        $trx_comp = CompensationToken::where('order_id', $request->trx_id)->first() ?? null;
-        $user_comp = User::where('id', $trx_comp->user_id)->first() ?? null;
-
-
-        if($trx_comp !=  null){
-
-            $data['full_name'] = $user_comp->first_name . " " . $user_comp->last_name;
-            $data['address'] = $user_comp->address . "," . $user_comp->city . "," . $user_comp->state;
-            $data['phone'] = $user_comp->phone;
-            $data['order_id'] = $trx_comp->order_id;
-            $data['token'] = $trx_comp->token;
-            $data['amount'] = $trx_comp->amount;
-            $data['vat_amount'] = $trx_comp->vatAmount;
-            $data['vend_amount_kw_per_naira'] = $trx_comp->tariffPerKWatt;
-            $data['title'] = "Compensation Token";
-
-
-            return view('admin.recepit', $data);
-
-
         }
 
 
+        $trx = CreditToken::where('order_id', $request->trx_id)->first() ?? null;
+        $user = User::where('id', $trx->user_id)->first() ?? null;
+        $data['full_name'] = $user->first_name . " " . $user->last_name;
+        $data['address'] = $user->address . "," . $user->city . "," . $user->state;
+        $data['phone'] = $user->phone;
+        $data['order_id'] = $trx->order_id;
+        $data['token'] = $trx->token;
+        $data['amount'] = $trx->amount;
+        $data['vat_amount'] = $trx->vatAmount;
+        $data['vend_amount_kw_per_naira'] = $trx->tariffPerKWatt;
+        $data['title'] = "Credit Token";
+
+
+        return view('admin.recepit', $data);
+
+
     }
 
-
-    $trx = CreditToken::where('order_id', $request->trx_id)->first() ?? null;
-    $user = User::where('id', $trx->user_id)->first() ?? null;
-    $data['full_name'] = $user->first_name . " " . $user->last_name;
-    $data['address'] = $user->address . "," . $user->city . "," . $user->state;
-    $data['phone'] = $user->phone;
-    $data['order_id'] = $trx->order_id;
-    $data['token'] = $trx->token;
-    $data['amount'] = $trx->amount;
-    $data['vat_amount'] = $trx->vatAmount;
-    $data['vend_amount_kw_per_naira'] = $trx->tariffPerKWatt;
-    $data['title'] = "Credit Token";
-
-
-    return view('admin.recepit', $data);
-
-
-}
 
 
 }
