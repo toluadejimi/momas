@@ -278,16 +278,20 @@
 
                                     <div class="col-xl-3 col-sm-12"  id="newTariffDualContainer" style="display: none;">
                                         <label class="my-2">New SGC Dual</label>
-                                        <option value="999962">MOMAS Default (9***2)</option>
-                                        <option value="600849">MOMAS System Nig Ltd (6***9)</option>
+                                        <select name="NewSGCDual" class="form-control">
+                                            <option value="999962">MOMAS Default (9***2)</option>
+                                            <option value="600849">MOMAS System Nig Ltd (6***9)</option>
+                                        </select>
 
                                     </div>
 
 
                                     <div class="col-xl-3 col-sm-12" id="newSGCDualContainer" style="display: none;">
                                         <label class="my-2">OLD SGC Dual</label>
-                                        <option value="999962">MOMAS Default (9***2)</option>
-                                        <option value="600849">MOMAS System Nig Ltd (6***9)</option>
+                                        <select name="OldSGCDual" class="form-control">
+                                            <option value="999962">MOMAS Default (9***2)</option>
+                                            <option value="600849">MOMAS System Nig Ltd (6***9)</option>
+                                        </select>
 
                                     </div>
 
@@ -553,16 +557,20 @@
 
                                     <div class="col-xl-3 col-sm-12 mt-2"  id="newTariffDualContainer" style="display: none;">
                                         <label class="my-2">New SGC Dual</label>
-                                        <option value="999962">MOMAS Default (9***2)</option>
-                                        <option value="600849">MOMAS System Nig Ltd (6***9)</option>
+                                        <select name="NewSGCDual" class="form-control">
+                                            <option value="999962">MOMAS Default (9***2)</option>
+                                            <option value="600849">MOMAS System Nig Ltd (6***9)</option>
+                                        </select>
 
                                     </div>
 
 
                                     <div class="col-xl-3 col-sm-12 mt-2" id="newSGCDualContainer" style="display: none;">
                                         <label class="my-2">OLD SGC Dual</label>
-                                        <option value="999962">MOMAS Default (9***2)</option>
-                                        <option value="600849">MOMAS System Nig Ltd (6***9)</option>
+                                        <select name="OldSGCDual" class="form-control">
+                                            <option value="999962">MOMAS Default (9***2)</option>
+                                            <option value="600849">MOMAS System Nig Ltd (6***9)</option>
+                                        </select>
 
                                     </div>
 
