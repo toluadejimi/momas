@@ -392,9 +392,6 @@ class TokenController extends Controller
 
         try {
 
-
-
-
         $order_id = "TRX" . random_int(000000000, 9999999999);
         $estate_id = Estate::where('title', $request->estate_name)->first()->id;
         $cdt = new CreditToken();
