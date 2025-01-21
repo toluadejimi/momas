@@ -2,30 +2,27 @@
 
 namespace App\Exceptions;
 
-use Mail;
 use Throwable;
 use App\Mail\ExceptionOccured;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-
 
 class Handler extends ExceptionHandler
 {
     /**
      * A list of the exception types that are not reported.
      *
-     * @var array>
-
+     * @var array
      */
     protected $dontReport = [
-
+        // Add exceptions here that you don't want to report
     ];
 
     /**
      * A list of the inputs that are never flashed for validation exceptions.
      *
      * @var array
-
      */
     protected $dontFlash = [
         'current_password',
@@ -41,68 +38,45 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            $this->sendEmail($e);
+            if ($this->shouldReport($e)) {
+                $this->sendEmail($e);
+            }
         });
     }
 
     /**
-     * Write code on Method
+     * Send an email when an exception occurs.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application()
+     * @param Throwable $exception
+     * @return void
      */
-
-
-    public function render($request, Throwable $exception)
+    protected function sendEmail(Throwable $exception)
     {
-        if ($exception instanceof \Symfony\Component\HttpKernel\Exception\HttpException && $exception->getStatusCode() === 500) {
-
-            try {
-
-
-                $message = $content['message'] = $exception->getMessage();
-                $file = $content['file'] = $exception->getFile();
-                $line = $content['line'] = $exception->getLine();
-                $trace = $content['trace'] = $exception->getTrace();
-
-                $url = $content['url'] = request()->url();
-                $body = $content['body'] = request()->all();
-                $ip = $content['ip'] = request()->ip();
-
-                $message2 = "Error Message on ETOP AGENCY BANKING";
-                $message = $message2. "\n\nMessage========>" . $message . "\n\nLine========>" . $line . "\n\nFile========>" . $file . "\n\nURL========>" . $url . "\n\nIP========> " . $ip;
-
-                //$message = "Error Message on ENKPAY APP";
-                send_notification($message);
-
-                return view('errors.500');
-
-
-
-
-            } catch (Throwable $exception) {
-                Log::error($exception);
+        try {
+            $adminEmail = config('mail.admin_email'); // Ensure this is set in your .env or config/mail.php
+            if ($adminEmail) {
+                Mail::to($adminEmail)->send(new ExceptionOccured($exception));
             }
-            return response()->view('errors.500', ['exception' => $exception], 500);
+        } catch (Throwable $mailException) {
+            Log::error('Error sending exception email: ' . $mailException->getMessage());
         }
-        return parent::render($request, $exception);
     }
 
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param Throwable $exception
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function render($request, Throwable $exception)
+    {
+        // Handle HTTP 500 errors with a custom view
+        if ($exception instanceof \Symfony\Component\HttpKernel\Exception\HttpException && $exception->getStatusCode() === 500) {
+            return response()->view('errors.500', ['exception' => $exception], 500);
+        }
 
-
-
-
-
-//    public function render($request, Throwable $exception)
-//    {
-//        if ($this->isHttpException($exception)) {
-//            switch ($exception->getStatusCode()) {
-//                case 404:
-//                    return response()->view('errors.404', [], 404);
-//                case 500:
-//                    return response()->view('errors.500', [], 500);
-//            }
-//        }
-//
-//        return parent::render($request, $exception);
-//    }
+        // Handle other exceptions
+        return parent::render($request, $exception);
+    }
 }
