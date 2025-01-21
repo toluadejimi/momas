@@ -28,6 +28,10 @@
 <body>
 <h1>Something Went Wrong</h1>
 <p class="error-code">500</p>
+
+<h6>Error Message</h6>
 <p>{{ $exception->getMessage() ?: 'We are experiencing an issue. Please try again later.' }}</p>
+<p>Please reach out for support</p>
+
 </body>
 </html>
