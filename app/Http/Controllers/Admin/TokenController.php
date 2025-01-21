@@ -492,9 +492,11 @@ class TokenController extends Controller
             return back()->with('error', $e);
         }
 
-        try {
+
 
             if ($request->pay_type == 'paystack') {
+
+                try {
 
                 $estate_id = $request->estate_id ?? null;
                 if ($estate_id === null) {
@@ -572,11 +574,13 @@ class TokenController extends Controller
                 $message = "Payment not available at the moment, Kindly select other payment option";
                 return error($message, $code);
 
+                } catch (Exception $e) {
+                    return back()->with('error', $e);
+                }
+
             }
 
-        } catch (Exception $e) {
-            return back()->with('error', $e);
-        }
+
 
         try {
 
