@@ -488,6 +488,11 @@ class TokenController extends Controller
 
             }
 
+        } catch (Exception $e) {
+            return back()->with('error', $e);
+        }
+
+        try {
 
             if ($request->pay_type == 'paystack') {
 
@@ -569,6 +574,11 @@ class TokenController extends Controller
 
             }
 
+        } catch (Exception $e) {
+            return back()->with('error', $e);
+        }
+
+        try {
 
             if ($request->pay_type == 'remita') {
                 $trx_id = "TRX" . random_int(0000000, 9999999);
@@ -587,7 +597,12 @@ class TokenController extends Controller
                 ], 200);
             }
 
+        } catch (Exception $e) {
+            return back()->with('error', $e);
+        }
 
+
+        try {
             if ($request->pay_type == 'wallet') {
                 $trx_id = "TRX" . random_int(0000000, 9999999);
                 $email = Auth::user()->email;
@@ -621,6 +636,7 @@ class TokenController extends Controller
         } catch (Exception $e) {
             return back()->with('error', $e);
         }
+
 
     }
 
