@@ -50,34 +50,46 @@ class Handler extends ExceptionHandler
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application()
      */
-    public function sendEmail(Throwable $exception)
+
+
+    public function render($request, Throwable $exception)
     {
-        try {
+        if ($exception instanceof \Symfony\Component\HttpKernel\Exception\HttpException && $exception->getStatusCode() === 500) {
 
-            $message = $content['message'] = $exception->getMessage();
-            $file = $content['file'] = $exception->getFile();
-            $line = $content['line'] = $exception->getLine();
-            $trace = $content['trace'] = $exception->getTrace();
-
-            $url = $content['url'] = request()->url();
-            $body = $content['body'] = request()->all();
-            $ip = $content['ip'] = request()->ip();
-
-            $message2 = "Error Message on ETOP AGENCY BANKING";
-            $message = $message2. "\n\nMessage========>" . $message . "\n\nLine========>" . $line . "\n\nFile========>" . $file . "\n\nURL========>" . $url . "\n\nIP========> " . $ip;
-
-            //$message = "Error Message on ENKPAY APP";
-            send_notification($message);
-
-            return view('errors.500');
+            try {
 
 
+                $message = $content['message'] = $exception->getMessage();
+                $file = $content['file'] = $exception->getFile();
+                $line = $content['line'] = $exception->getLine();
+                $trace = $content['trace'] = $exception->getTrace();
+
+                $url = $content['url'] = request()->url();
+                $body = $content['body'] = request()->all();
+                $ip = $content['ip'] = request()->ip();
+
+                $message2 = "Error Message on ETOP AGENCY BANKING";
+                $message = $message2. "\n\nMessage========>" . $message . "\n\nLine========>" . $line . "\n\nFile========>" . $file . "\n\nURL========>" . $url . "\n\nIP========> " . $ip;
+
+                //$message = "Error Message on ENKPAY APP";
+                send_notification($message);
+
+                return view('errors.500');
 
 
-        } catch (Throwable $exception) {
-            Log::error($exception);
+
+
+            } catch (Throwable $exception) {
+                Log::error($exception);
+            }
+            return response()->view('errors.500', ['exception' => $exception], 500);
         }
+        return parent::render($request, $exception);
     }
+
+
+
+
 
 
 //    public function render($request, Throwable $exception)
