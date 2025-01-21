@@ -88,7 +88,7 @@
                                         <select type="text" name="TransformerID" class="form-control" >
                                             <option value=" ">Select</option>
                                             @foreach($transformer as $data)
-                                                <option value="{{$data->id}}">{{$data->Capacity}} KVA </option>
+                                                <option value="{{$data->id}}">{{$data->title}} | {{$data->Capacity}} KVA </option>
                                             @endforeach
                                         </select>
                                     </div>
