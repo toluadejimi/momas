@@ -390,8 +390,6 @@ class TokenController extends Controller
     {
 
 
-        try {
-
         $order_id = "TRX" . random_int(000000000, 9999999999);
         $estate_id = Estate::where('title', $request->estate_name)->first()->id;
         $cdt = new CreditToken();
@@ -409,213 +407,215 @@ class TokenController extends Controller
         $cdt->save();
 
 
-        if ($request->pay_type == 'flutterwave') {
+        try {
+
+            if ($request->pay_type == 'flutterwave') {
 
 
-            $estate_id = $request->estate_id;
-            $est = Estate::where('id', $estate_id)->first();
-            if ($est->charge_fee < 0) {
+                $estate_id = $request->estate_id;
+                $est = Estate::where('id', $estate_id)->first();
+                if ($est->charge_fee < 0) {
 
-                $fee_in_percent = $est->charge_fee_percent;
-                $fee = ($fee_in_percent / $request->amount) * 100;
-            } else {
-                $fee = $est->charge_fee;
-            }
-
-
-            $email = Auth::user()->email;
-            $phone = Auth::user()->phone ?? "012345678";
-            $fl = Setting::where('id', 1)->first();
-            $secretKey = $fl->flutterwave_secret;
-            $fpublic = $fl->flutterwave_public;
-            $url = url('');
-
-            $databody = array(
-                'title' => 'Payment for services',
-                'amount' => $request->amount,
-                'currency' => 'NGN',
-                'redirect_url' => $url . "/admin/pay-flutter-web",
-                'customer' => [
-                    'email' => $email,
-                    'phonenumber' => $phone,
-                    'name' => Auth::user()->first_name . " " . Auth::user()->last_name,
-                ],
-                'tx_ref' => $order_id,
-
-            );
-
-            $body = json_encode($databody);
-            $curl = curl_init();
-
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://api.flutterwave.com/v3/payments',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => $body,
-                CURLOPT_HTTPHEADER => array(
-                    'Accept: application/json',
-                    'Content-Type: application/json',
-                    'Authorization: Bearer ' . $secretKey,
-                ),
-            ));
-
-            $var = curl_exec($curl);
-            curl_close($curl);
-            $var = json_decode($var);
-            $status = $var->status ?? null;
+                    $fee_in_percent = $est->charge_fee_percent;
+                    $fee = ($fee_in_percent / $request->amount) * 100;
+                } else {
+                    $fee = $est->charge_fee;
+                }
 
 
-            $trx = new Transaction();
-            $trx->user_id = Auth::id();
-            $trx->estate_id = Auth::user()->estate_id;
-            $trx->pay_type = "flutterwave";
-            $trx->service_type = $request->service;
-            $trx->amount = $request->amount;
-            $trx->fee = $fee;
-            $trx->trx_id = $order_id;
-            $trx->save();
+                $email = Auth::user()->email;
+                $phone = Auth::user()->phone ?? "012345678";
+                $fl = Setting::where('id', 1)->first();
+                $secretKey = $fl->flutterwave_secret;
+                $fpublic = $fl->flutterwave_public;
+                $url = url('');
 
-            if ($status == "success") {
-                return redirect()->away($var->data->link);
+                $databody = array(
+                    'title' => 'Payment for services',
+                    'amount' => $request->amount,
+                    'currency' => 'NGN',
+                    'redirect_url' => $url . "/admin/pay-flutter-web",
+                    'customer' => [
+                        'email' => $email,
+                        'phonenumber' => $phone,
+                        'name' => Auth::user()->first_name . " " . Auth::user()->last_name,
+                    ],
+                    'tx_ref' => $order_id,
 
-            }
+                );
 
+                $body = json_encode($databody);
+                $curl = curl_init();
 
-        }
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => 'https://api.flutterwave.com/v3/payments',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => $body,
+                    CURLOPT_HTTPHEADER => array(
+                        'Accept: application/json',
+                        'Content-Type: application/json',
+                        'Authorization: Bearer ' . $secretKey,
+                    ),
+                ));
 
-
-        if ($request->pay_type == 'paystack') {
-
-            $estate_id = $request->estate_id ?? null;
-            if ($estate_id === null) {
-                $estate_id = Auth::user()->estate_id;
-            }
-            $est = Estate::where('id', $estate_id)->first();
-            if ($est->charge_fee < 0) {
-
-                $fee_in_percent = $est->charge_fee_percent;
-                $fee = ($fee_in_percent / $request->amount) * 100;
-            } else {
-                $fee = $est->charge_fee;
-            }
-
-
-            $fl = Setting::where('id', 1)->first();
-            $flkey['flutterwave_secret'] = $fl->flutterwave_secret;
-            $flkey['flutterwave_public'] = $fl->flutterwave_public;
-            $paystackkey = $fl->paystack_secret;
-            $pkkey['paystack_public'] = $fl->paystack_public;
-
-            $trx_id = "TRX" . random_int(0000000, 9999999);
-            $email = Auth::user()->email;
-
-
-            $databody = array(
-                "amount" => $request->amount * 100,
-                "email" => $email,
-                "ref" => $trx_id,
-                'callback_url' => url('') . "/admin/paystack-check-web",
-                'metadata' => ["ref" => $order_id],
-            );
-
-            $body = json_encode($databody);
-            $curl = curl_init();
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://api.paystack.co/transaction/initialize',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => $body,
-                CURLOPT_HTTPHEADER => array(
-                    'Accept: application/json',
-                    'Content-Type: application/json',
-                    'Authorization: Bearer ' . $paystackkey,
-                ),
-            ));
-
-            $var = curl_exec($curl);
-            curl_close($curl);
-            $var = json_decode($var);
-            $status = $var->status;
+                $var = curl_exec($curl);
+                curl_close($curl);
+                $var = json_decode($var);
+                $status = $var->status ?? null;
 
 
-            if ($status == true) {
                 $trx = new Transaction();
-                $trx->user_id = $request->user_id;
-                $trx->pay_type = "paystack";
+                $trx->user_id = Auth::id();
+                $trx->estate_id = Auth::user()->estate_id;
+                $trx->pay_type = "flutterwave";
+                $trx->service_type = $request->service;
                 $trx->amount = $request->amount;
                 $trx->fee = $fee;
                 $trx->trx_id = $order_id;
-                $trx->payment_ref = $var->data->access_code ?? null;
-                $trx->service_type = "credit_token";
                 $trx->save();
 
-                return redirect()->away($var->data->authorization_url);
+                if ($status == "success") {
+                    return redirect()->away($var->data->link);
+
+                }
+
 
             }
 
-            $code = 422;
-            $message = "Payment not available at the moment, Kindly select other payment option";
-            return error($message, $code);
 
-        }
+            if ($request->pay_type == 'paystack') {
 
+                $estate_id = $request->estate_id ?? null;
+                if ($estate_id === null) {
+                    $estate_id = Auth::user()->estate_id;
+                }
+                $est = Estate::where('id', $estate_id)->first();
+                if ($est->charge_fee < 0) {
 
-        if ($request->pay_type == 'remita') {
-            $trx_id = "TRX" . random_int(0000000, 9999999);
-            $email = Auth::user()->email;
-            $trx = new Transaction();
-            $trx->user_id = Auth::id();
-            $trx->pay_type = "remita";
-            $trx->service_type = "fund";
-            $trx->amount = $request->amount;
-            $trx->trx_id = $trx_id;
-            $trx->save();
-
-            return response()->json([
-                'status' => true,
-                'url' => url('') . "/pay-remita?amount=$request->amount&trx_id=$trx_id&email=$email"
-            ], 200);
-        }
+                    $fee_in_percent = $est->charge_fee_percent;
+                    $fee = ($fee_in_percent / $request->amount) * 100;
+                } else {
+                    $fee = $est->charge_fee;
+                }
 
 
-        if ($request->pay_type == 'wallet') {
-            $trx_id = "TRX" . random_int(0000000, 9999999);
-            $email = Auth::user()->email;
+                $fl = Setting::where('id', 1)->first();
+                $flkey['flutterwave_secret'] = $fl->flutterwave_secret;
+                $flkey['flutterwave_public'] = $fl->flutterwave_public;
+                $paystackkey = $fl->paystack_secret;
+                $pkkey['paystack_public'] = $fl->paystack_public;
+
+                $trx_id = "TRX" . random_int(0000000, 9999999);
+                $email = Auth::user()->email;
 
 
-            if (Auth::user()->main_wallet < $request->amount) {
+                $databody = array(
+                    "amount" => $request->amount * 100,
+                    "email" => $email,
+                    "ref" => $trx_id,
+                    'callback_url' => url('') . "/admin/paystack-check-web",
+                    'metadata' => ["ref" => $order_id],
+                );
+
+                $body = json_encode($databody);
+                $curl = curl_init();
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => 'https://api.paystack.co/transaction/initialize',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => $body,
+                    CURLOPT_HTTPHEADER => array(
+                        'Accept: application/json',
+                        'Content-Type: application/json',
+                        'Authorization: Bearer ' . $paystackkey,
+                    ),
+                ));
+
+                $var = curl_exec($curl);
+                curl_close($curl);
+                $var = json_decode($var);
+                $status = $var->status;
+
+
+                if ($status == true) {
+                    $trx = new Transaction();
+                    $trx->user_id = $request->user_id;
+                    $trx->pay_type = "paystack";
+                    $trx->amount = $request->amount;
+                    $trx->fee = $fee;
+                    $trx->trx_id = $order_id;
+                    $trx->payment_ref = $var->data->access_code ?? null;
+                    $trx->service_type = "credit_token";
+                    $trx->save();
+
+                    return redirect()->away($var->data->authorization_url);
+
+                }
+
                 $code = 422;
-                $message = "Insufficient Funds";
+                $message = "Payment not available at the moment, Kindly select other payment option";
                 return error($message, $code);
+
             }
 
 
-            User::where('id', Auth::id())->decrement('main_wallet', $request->amount);
+            if ($request->pay_type == 'remita') {
+                $trx_id = "TRX" . random_int(0000000, 9999999);
+                $email = Auth::user()->email;
+                $trx = new Transaction();
+                $trx->user_id = Auth::id();
+                $trx->pay_type = "remita";
+                $trx->service_type = "fund";
+                $trx->amount = $request->amount;
+                $trx->trx_id = $trx_id;
+                $trx->save();
 
-            $trx = new Transaction();
-            $trx->user_id = Auth::id();
-            $trx->pay_type = "wallet";
-            $trx->amount = $request->amount;
-            $trx->service_type = $request->service;
-            $trx->trx_id = $trx_id;
-            $trx->save();
+                return response()->json([
+                    'status' => true,
+                    'url' => url('') . "/pay-remita?amount=$request->amount&trx_id=$trx_id&email=$email"
+                ], 200);
+            }
 
-            return response()->json([
-                'status' => "success",
-                'ref' => $trx_id,
-            ], 200);
 
-        }
+            if ($request->pay_type == 'wallet') {
+                $trx_id = "TRX" . random_int(0000000, 9999999);
+                $email = Auth::user()->email;
+
+
+                if (Auth::user()->main_wallet < $request->amount) {
+                    $code = 422;
+                    $message = "Insufficient Funds";
+                    return error($message, $code);
+                }
+
+
+                User::where('id', Auth::id())->decrement('main_wallet', $request->amount);
+
+                $trx = new Transaction();
+                $trx->user_id = Auth::id();
+                $trx->pay_type = "wallet";
+                $trx->amount = $request->amount;
+                $trx->service_type = $request->service;
+                $trx->trx_id = $trx_id;
+                $trx->save();
+
+                return response()->json([
+                    'status' => "success",
+                    'ref' => $trx_id,
+                ], 200);
+
+            }
 
 
         } catch (Exception $e) {
@@ -1239,7 +1239,6 @@ class TokenController extends Controller
 
 
     }
-
 
 
 }
