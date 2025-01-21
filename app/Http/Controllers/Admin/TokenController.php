@@ -512,11 +512,11 @@ class TokenController extends Controller
                 }
 
 
-                $fl = Setting::where('id', 1)->first();
-                $flkey['flutterwave_secret'] = $fl->flutterwave_secret;
-                $flkey['flutterwave_public'] = $fl->flutterwave_public;
-                $paystackkey = $fl->paystack_secret;
-                $pkkey['paystack_public'] = $fl->paystack_public;
+                $fl = Setting::where('id', 1)->first() ?? null;
+                $flkey['flutterwave_secret'] = $fl->flutterwave_secret ?? null;
+                $flkey['flutterwave_public'] = $fl->flutterwave_public ?? null;
+                $paystackkey = $fl->paystack_secret ?? null;
+                $pkkey['paystack_public'] = $fl->paystack_public ?? null;
 
                 $trx_id = "TRX" . random_int(0000000, 9999999);
                 $email = Auth::user()->email;
