@@ -228,7 +228,7 @@
 
 
                                                                 <input type="text" name="estate_id" value="{{auth::user()->estate_id}}" hidden>
-                                                                <input type="text" name="id" value="{{$data->id}}" >
+                                                                <input hidden type="text" name="id" value="{{$data->id}}" >
 
                                                                 <div class="row">
                                                                     <div class="col-6">
