@@ -250,11 +250,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('compensation-token', [TokenController::class, 'compensation_index']);
     Route::get('tamper-token', [TokenController::class, 'tamper_index']);
     Route::get('kct-token', [TokenController::class, 'kct_token_index']);
+    Route::get('clear-credit-token', [TokenController::class, 'clear_credit_token_preview']);
 
     Route::post('validate-meter', [TokenController::class, 'validate_meter']);
     Route::post('validate-kct-meter', [TokenController::class, 'validate_kct_meter']);
     Route::post('validate-tamper-meter', [TokenController::class, 'validate_tamper_meter']);
     Route::post('validate-compensation-meter', [TokenController::class, 'validate_compensation_meter']);
+    Route::post('validate-clear-credit-meter', [TokenController::class, 'validate_clear_credit_meter']);
 
 
 
@@ -263,6 +265,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::post('generate-compensation-meter-token', [TokenController::class, 'generate_compensation_meter_token']);
     Route::post('generate-tamper-meter-token', [TokenController::class, 'generate_tamper_meter_token']);
     Route::post('generate-kctclear-token', [TokenController::class, 'generate_kctclear_token']);
+    Route::post('generate-clear-credit-meter-token', [TokenController::class, 'generate_clear_credit_meter_token']);
 
 
     Route::any('paystack-check-web', [TokenController::class, 'paystack_verify_web']);
@@ -271,6 +274,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::any('flutter-verify-tamper', [TokenController::class, 'flutter_verify_web_tamper']);
     Route::any('flutter-verify-kct', [TokenController::class, 'flutter_verify_kct']);
     Route::any('pay-flutter-web', [TokenController::class, 'flutter_verify_web']);
+    Route::any('paystack-clear-credit', [TokenController::class, 'paystack_clear_credit']);
+    Route::any('flutter-verify-clear-credit', [TokenController::class, 'flutter_verify_clear_credit']);
+
+
 
 
     Route::any('recepit', [TokenController::class, 'recepit']);
