@@ -1045,6 +1045,8 @@ class TokenController extends Controller
             $vat = TarrifState::where('estate_id', $estate_id)->first()->amount ?? 0;
 
 
+
+
             $calculator = new VatCalculator();
             $params = [
                 'amountText' => $request->amount,
@@ -2334,7 +2336,8 @@ class TokenController extends Controller
                             'status' => 2,
                         ]);
 
-                        return redirect("admin/recepit?trx_id=$trx_id");
+                        $type = "credit_token";
+                        return redirect("admin/recepit?trx_id=$trx_id&type=$type");
 
 
                     } else {
@@ -3129,7 +3132,8 @@ class TokenController extends Controller
                             'status' => 2,
                         ]);
 
-                        return redirect("admin/recepit?trx_id=$trx_id");
+                        $type = "credit_token";
+                        return redirect("admin/recepit?trx_id=$trx_id&type=$type");
 
 
                     } else {
