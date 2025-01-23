@@ -202,10 +202,19 @@
                             <div class="collapse" id="sidebar1">
                                 <ul class="nav-second-level">
                                     <li>
-                                        <a class='tp-link' href='credit-token'>Clear Credit Token </a>
+                                        <a class='tp-link' href='credit-token'>Credit Token </a>
                                     </li>
                                 </ul>
                             </div>
+
+                            <div class="collapse" id="sidebar1">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a class='tp-link' href='kct-token'>Key Change Token</a>
+                                    </li>
+                                </ul>
+                            </div>
+
 
                             <div class="collapse" id="sidebar1">
                                 <ul class="nav-second-level">
@@ -218,20 +227,18 @@
                             <div class="collapse" id="sidebar1">
                                 <ul class="nav-second-level">
                                     <li>
-                                        <a class='tp-link' href='compensation-token'> Compensation Token  </a>
+                                        <a class='tp-link' href='clear-credit-token'> Clear Credit Token </a>
                                     </li>
                                 </ul>
                             </div>
-
 
                             <div class="collapse" id="sidebar1">
                                 <ul class="nav-second-level">
                                     <li>
-                                        <a class='tp-link' href='special-token'>Special Token</a>
+                                        <a class='tp-link' href='compensation-token'> Compensation Token  </a>
                                     </li>
                                 </ul>
                             </div>
-
                         </li>
 
 
@@ -363,7 +370,7 @@
                                 <div class="collapse" id="sidebar1">
                                     <ul class="nav-second-level">
                                         <li>
-                                            <a class='tp-link' href='credit-token'>Clear Credit Token </a>
+                                            <a class='tp-link' href='credit-token'>Credit Token </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -371,7 +378,24 @@
                                 <div class="collapse" id="sidebar1">
                                     <ul class="nav-second-level">
                                         <li>
+                                            <a class='tp-link' href='kct-token'>Key Change Token</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+
+                                <div class="collapse" id="sidebar1">
+                                    <ul class="nav-second-level">
+                                        <li>
                                             <a class='tp-link' href='tamper-token'> Clear Tamper Token </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="collapse" id="sidebar1">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a class='tp-link' href='clear-credit-token'> Clear Credit Token </a>
                                         </li>
                                     </ul>
                                 </div>

@@ -13,7 +13,7 @@
 
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
-                        <h4 class="fs-18 fw-semibold m-0">Credit Token</h4>
+                        <h4 class="fs-18 fw-semibold m-0">KCT Token</h4>
                     </div>
                 </div>
 
@@ -54,11 +54,11 @@
 
 
                                         <div class="d-flex justify-content-between my-4">
-                                            <h5 class="card-title text-black mb-0">Generate Credit Token</h5>
+                                            <h5 class="card-title text-black mb-0">Generate KCT Token</h5>
                                         </div>
 
                                         <div class="col-xl-6 col-sm-12" >
-                                            <form action="validate-meter" method="POST"
+                                            <form action="validate-kct-meter" method="POST"
                                                   enctype="multipart/form-data">
                                                 @csrf
 
@@ -339,6 +339,8 @@
                                                 <th scope="col" class="cursor-pointer">Meter Number</th>
                                                 <th scope="col" class="cursor-pointer">Estate</th>
                                                 <th scope="col" class="cursor-pointer">Amount</th>
+                                                <th scope="col" class="cursor-pointer">KCT1</th>
+                                                <th scope="col" class="cursor-pointer">KCT2</th>
                                                 <th scope="col" class="cursor-pointer">Tariff Index</th>
                                                 <th scope="col" class="cursor-pointer desc">Unit</th>
                                                 <th scope="col" class="cursor-pointer desc">Status</th>
@@ -358,6 +360,8 @@
                                                     <td>{{$data->meterNo}}</a> </td>
                                                     <td>{{$data->estate->title ?? "name"}}</td>
                                                     <td>{{number_format($data->amount, 2)}}</td>
+                                                    <td>{{$data->kct_token1}}</td>
+                                                    <td>{{$data->kct_token2}}</td>
                                                     <td>{{$data->tariff_id}}</td>
                                                     <td>{{$data->tariffPerKWatt}}kw/N</td>
                                                     <td>
@@ -776,6 +780,8 @@
                                                 <th scope="col" class="cursor-pointer">Meter Number</th>
                                                 <th scope="col" class="cursor-pointer">Estate</th>
                                                 <th scope="col" class="cursor-pointer">Amount</th>
+                                                <th scope="col" class="cursor-pointer">KCT1</th>
+                                                <th scope="col" class="cursor-pointer">KCT2</th>
                                                 <th scope="col" class="cursor-pointer">Tariff Index</th>
                                                 <th scope="col" class="cursor-pointer desc">Unit</th>
                                                 <th scope="col" class="cursor-pointer desc">Status</th>
@@ -791,10 +797,12 @@
                                             @foreach($credit_tokens as $data)
 
                                                 <tr>
-                                                    <td><a href="view-user?id={{$data->id}}">{{$data->user->last_name ?? "Name"}} {{$data->user->first_name ?? "Name"}}</a></td>
+                                                    <td><a href="view-user?id={{$data->id}}">{{$data->user->last_name ?? "name"}} {{$data->user->first_name ?? "name"}}</a></td>
                                                     <td>{{$data->meterNo}}</a> </td>
                                                     <td>{{$data->estate->title ?? "name"}}</td>
                                                     <td>{{number_format($data->amount, 2)}}</td>
+                                                    <td>{{$data->kct_token1}}</td>
+                                                    <td>{{$data->kct_token2}}</td>
                                                     <td>{{$data->tariff_id}}</td>
                                                     <td>{{$data->tariffPerKWatt}}kw/N</td>
                                                     <td>

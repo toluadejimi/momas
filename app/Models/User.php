@@ -120,4 +120,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(CompensationToken::class);
     }
+
+    public function tamper_token()
+    {
+        return $this->hasMany(TamperToken::class);
+    }
 }

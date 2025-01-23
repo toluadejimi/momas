@@ -54,7 +54,7 @@
 
 
                                         <div class="d-flex justify-content-between my-4">
-                                            <h5 class="card-title text-black mb-0">Generate Credit Token</h5>
+                                            <h5 class="card-title text-black mb-0">Meter Information</h5>
                                         </div>
 
                                         <div class="col-xl-6 col-sm-12" >
@@ -145,7 +145,7 @@
                                                     <div class="modal-body">
 
                                                         <div class="">
-                                                            <h5 class="card-title text-black mb-0">Credit Token Preview</h5>
+                                                            <h5 class="card-title text-black mb-0">Clear Tamper Preview</h5>
                                                         </div>
 
 

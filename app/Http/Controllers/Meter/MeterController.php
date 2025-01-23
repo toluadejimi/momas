@@ -1049,7 +1049,6 @@ class MeterController extends Controller
     function generate_kct_token(request $request)
     {
 
-
         $meter = Meter::where('meterNo', $request->meterNo)->first() ?? null;
         if ($meter == null) {
             return back()->with('error', "Meter Not found");

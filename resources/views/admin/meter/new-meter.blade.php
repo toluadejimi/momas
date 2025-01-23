@@ -141,7 +141,7 @@
                                     <div class="col-xl-3 col-sm-12" id="oldTariffDualContainer" style="display: none;">
                                         <label class="my-2">Old Tariff  Dual</label>
 
-                                        <select id="tariffSelect4" name="OldTariffDual" class="form-control" required>
+                                        <select id="tariffSelect4" name="OldTariffDual" class="form-control" >
                                             <option value=""></option>
                                         </select>
 
@@ -150,7 +150,7 @@
 
                                     <div class="col-xl-3 col-sm-12" id="newtar" style="display: none;">
                                         <label class="my-2">New Tariff Dual</label>
-                                        <select id="tariffSelect3" name="NewTariffDual" class="form-control" required>
+                                        <select id="tariffSelect3" name="NewTariffDual" class="form-control" >
                                             <option value=""></option>
                                         </select>
 
@@ -160,7 +160,7 @@
 
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">New Tariff</label>
-                                            <select id="tariffSelect1" name="NewTariffID" class="form-control" required>
+                                            <select id="tariffSelect1" name="NewTariffID" class="form-control" >
                                                 <option value=""></option>
                                             </select>
                                     </div>
@@ -168,7 +168,7 @@
                                     <div class="col-xl-3 col-sm-12">
 
                                         <label class="my-2">Old Tariff</label>
-                                        <select id="tariffSelect2" name="OldTariffID" class="form-control" required>
+                                        <select id="tariffSelect2" name="OldTariffID" class="form-control" >
                                             <option value=""></option>
                                         </select>
                                     </div>
@@ -313,7 +313,7 @@
 
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">KRN2</label>
-                                        <select type="text" name="KRN2" class="form-control" required>
+                                        <select type="text" name="KRN2" class="form-control" >
                                             <option value=" ">Select</option>
                                             <option value="STS6">STS6</option>
                                             <option value="STS">STS</option>
@@ -422,7 +422,7 @@
 
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Meter Model</label>
-                                        <select type="text" name="meterModel" class="form-control" required>
+                                        <select type="text" name="meterModel" class="form-control" >
                                             <option value=" ">Select</option>
                                             <option value="prepaid">Prepaid</option>
                                             <option value="postpaid">Postpaid</option>
@@ -431,7 +431,7 @@
 
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Account No</label>
-                                        <input type="text" name="AccountNo" class="form-control" required>
+                                        <input type="text" name="AccountNo" class="form-control" >
                                     </div>
 
                                     <div class="col-xl-3 col-sm-12">
@@ -446,7 +446,7 @@
 
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Transformer</label>
-                                        <select type="text" name="TransformerID" class="form-control" required>
+                                        <select type="text" name="TransformerID" class="form-control" >
                                             <option value=" ">Select</option>
                                             @foreach($transformer as $data)
                                                 <option value="{{$data->id}}">{{$data->Capacity}} KVA </option>
@@ -463,7 +463,7 @@
 
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Old SGC</label>
-                                        <select name="OldSGC" class="form-control" required>
+                                        <select name="OldSGC" class="form-control" >
                                             <option value="999962">MOMAS Default (9***2)</option>
                                             <option value="600849">MOMAS System Nig Ltd (6***9)</option>
                                         </select>
@@ -471,7 +471,7 @@
 
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">New SGC</label>
-                                        <select name="NewSGC" class="form-control" required>
+                                        <select name="NewSGC" class="form-control" >
                                             <option value="999962">MOMAS Default (9***2)</option>
                                             <option value="600849">MOMAS System Nig Ltd (6***9)</option>
                                         </select>

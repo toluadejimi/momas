@@ -13,7 +13,7 @@
 
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
-                        <h4 class="fs-18 fw-semibold m-0">Credit Token</h4>
+                        <h4 class="fs-18 fw-semibold m-0">KCT Token</h4>
                     </div>
                 </div>
 
@@ -54,7 +54,7 @@
 
 
                                         <div class="d-flex justify-content-between my-4">
-                                            <h5 class="card-title text-black mb-0">Generate Credit Token</h5>
+                                            <h5 class="card-title text-black mb-0">Meter Information</h5>
                                         </div>
 
                                         <div class="col-xl-6 col-sm-12" >
@@ -137,15 +137,15 @@
                                         </div>
 
                                         <div class="col-xl-6 col-sm-12" >
-                                            @if($preview == "clear_tamper")
-                                                <form action="generate-tamper-meter-token" method="POST"
+                                            @if($preview == "kct_token")
+                                                <form action="generate-kctclear-token" method="POST"
                                                       enctype="multipart/form-data">
                                                     @csrf
 
                                                     <div class="modal-body">
 
                                                         <div class="">
-                                                            <h5 class="card-title text-black mb-0">Credit Token Preview</h5>
+                                                            <h5 class="card-title text-black mb-0">Kct Token Preview</h5>
                                                         </div>
 
 
@@ -662,9 +662,9 @@
 
                                                 </form>
 
-                                            @elseif($preview == "clear_tamper")
+                                            @elseif($preview == "kct_token")
 
-                                                <form action="generate-tamper-meter-token" method="POST"
+                                                <form action="generate-kct-token" method="POST"
                                                       enctype="multipart/form-data">
                                                     @csrf
 
