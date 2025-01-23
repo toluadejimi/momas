@@ -260,7 +260,7 @@ class TokenController extends Controller
                 'amountText' => $request->amount,
                 'tariffAmount' => $tariffAmount,
                 'utilitiesAmount' => 0,
-                'vat' => $vat,
+                'vat' => 7.5,
             ];
 
             $vatAmount = $calculator->calculateVatAmount($params);
@@ -319,7 +319,7 @@ class TokenController extends Controller
                 'amountText' => $request->amount,
                 'tariffAmount' => $tariffAmount,
                 'utilitiesAmount' => 0,
-                'vat' => $vat,
+                'vat' => 7.5,
             ];
 
             $vatAmount = $calculator->calculateVatAmount($params);
@@ -389,7 +389,7 @@ class TokenController extends Controller
                 'amountText' => $request->amount,
                 'tariffAmount' => $tariffAmount,
                 'utilitiesAmount' => 0,
-                'vat' => $vat,
+                'vat' => 7.5,
             ];
 
             $vatAmount = $calculator->calculateVatAmount($params);
@@ -448,7 +448,7 @@ class TokenController extends Controller
                 'amountText' => $request->amount,
                 'tariffAmount' => $tariffAmount,
                 'utilitiesAmount' => 0,
-                'vat' => $vat,
+                'vat' => 7.5,
             ];
 
             $vatAmount = $calculator->calculateVatAmount($params);
@@ -519,7 +519,7 @@ class TokenController extends Controller
                 'amountText' => $request->amount,
                 'tariffAmount' => $tariffAmount,
                 'utilitiesAmount' => 0,
-                'vat' => $vat,
+                'vat' => 7.5,
             ];
 
             $vatAmount = $calculator->calculateVatAmount($params);
@@ -590,7 +590,7 @@ class TokenController extends Controller
                 'amountText' => $request->amount,
                 'tariffAmount' => $tariffAmount,
                 'utilitiesAmount' => 0,
-                'vat' => $vat,
+                'vat' => 7.5,
             ];
 
             $vatAmount = $calculator->calculateVatAmount($params);
@@ -675,7 +675,7 @@ class TokenController extends Controller
                 'amountText' => $request->amount,
                 'tariffAmount' => $tariffAmount,
                 'utilitiesAmount' => 0,
-                'vat' => $vat,
+                'vat' => 7.5,
             ];
 
             $vatAmount = $calculator->calculateVatAmount($params);
@@ -746,7 +746,7 @@ class TokenController extends Controller
                 'amountText' => $request->amount,
                 'tariffAmount' => $tariffAmount,
                 'utilitiesAmount' => 0,
-                'vat' => $vat,
+                'vat' => 7.5,
             ];
 
             $vatAmount = $calculator->calculateVatAmount($params);
@@ -827,7 +827,7 @@ class TokenController extends Controller
                 'amountText' => $request->amount,
                 'tariffAmount' => $tariffAmount,
                 'utilitiesAmount' => 0,
-                'vat' => $vat,
+                'vat' => 7.5,
             ];
 
             $vatAmount = $calculator->calculateVatAmount($params);
@@ -898,7 +898,7 @@ class TokenController extends Controller
                 'amountText' => $request->amount,
                 'tariffAmount' => $tariffAmount,
                 'utilitiesAmount' => 0,
-                'vat' => $vat,
+                'vat' => 7.5,
             ];
 
             $vatAmount = $calculator->calculateVatAmount($params);
@@ -979,7 +979,7 @@ class TokenController extends Controller
                 'amountText' => $request->amount,
                 'tariffAmount' => $tariffAmount,
                 'utilitiesAmount' => 0,
-                'vat' => $vat,
+                'vat' => 7.5,
             ];
 
             $vatAmount = $calculator->calculateVatAmount($params);
@@ -1050,7 +1050,7 @@ class TokenController extends Controller
                 'amountText' => $request->amount,
                 'tariffAmount' => $tariffAmount,
                 'utilitiesAmount' => 0,
-                'vat' => $vat,
+                'vat' => 7.5,
             ];
 
             $vatAmount = $calculator->calculateVatAmount($params);

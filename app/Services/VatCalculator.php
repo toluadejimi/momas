@@ -24,49 +24,21 @@ class VatCalculator
     public function calculateVatAmount($params)
     {
         $amount = $this->parseAmount($params['amountText'] ?? '');
-        $tariffAmount = $params['tariffAmount'] ?? 0;
-        $utilitiesAmount = $params['utilitiesAmount'] ?? 0;
-        $vat = $params['vat'] ?? 0;
-
-        $amountReceivable = $this->calculateAmountReceivable([
-            'amount' => $amount,
-            'utilitiesAmount' => $utilitiesAmount,
-        ]);
-        $vatUnit = $this->calculateVatUnit($vat);
-        $costOfUnit = $amountReceivable / $vatUnit;
-
-        return $amountReceivable - $costOfUnit;
+        $vatPercentage = $params['vat'] ?? 0;
+        return $amount * ($vatPercentage / (100 + $vatPercentage));
     }
 
     public function calculateCostOfUnit($params)
     {
         $amount = $this->parseAmount($params['amountText'] ?? '');
-        $utilitiesAmount = $params['utilitiesAmount'] ?? 0;
-        $vat = $params['vat'] ?? 0;
-
-        $amountReceivable = $this->calculateAmountReceivable([
-            'amount' => $amount,
-            'utilitiesAmount' => $utilitiesAmount,
-        ]);
-        $vatUnit = $this->calculateVatUnit($vat);
-
-        return $amountReceivable / $vatUnit;
+        $vatAmount = $this->calculateVatAmount($params);
+        return $amount - $vatAmount;
     }
 
     public function calculateTariffAmountPerKWatt($params)
     {
-        $amount = $this->parseAmount($params['amountText'] ?? '');
-        $tariffAmount = $params['tariffAmount'] ?? 0;
-        $utilitiesAmount = $params['utilitiesAmount'] ?? 0;
-        $vat = $params['vat'] ?? 0;
-
-        $amountReceivable = $this->calculateAmountReceivable([
-            'amount' => $amount,
-            'utilitiesAmount' => $utilitiesAmount,
-        ]);
-        $vatUnit = $this->calculateVatUnit($vat);
-        $costOfUnit = $amountReceivable / $vatUnit;
-
-        return $tariffAmount > 0 ? $costOfUnit / $tariffAmount : 0;
+        $costOfUnit = $this->calculateCostOfUnit($params);
+        $rate = $params['tariffAmount'] ?? 0;
+        return $rate > 0 ? $costOfUnit / $rate : 0;
     }
 }
