@@ -98,8 +98,11 @@
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">State</label>
                                         <select type="text" name="state" class="form-control" required>
-                                            <option value="{{$user->state}}">{{$user->state}}</option>
-                                            <option disabled selected>--Select State--</option>
+                                            @if($user->state == null)
+                                                <option disabled selected>--Select State--</option>
+                                            @else
+                                                <option value="{{$user->state}}">{{$user->state}}</option>
+                                            @endif
                                             <option value="Abia">Abia</option>
                                             <option value="Adamawa">Adamawa</option>
                                             <option value="Akwa Ibom">Akwa Ibom</option>
