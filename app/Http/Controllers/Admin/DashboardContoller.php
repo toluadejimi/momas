@@ -659,10 +659,13 @@ class DashboardContoller extends Controller
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'phone' => $request->phone,
-                'address' => $request->addreess,
+                'address' => $request->address,
                 'city' => $request->city,
                 'lga' => $request->lga,
                 'status' => $request->status,
+                'state' => $request->state,
+                'desgination' => $request->desgination,
+
             ]);
 
 
