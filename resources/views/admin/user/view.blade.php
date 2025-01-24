@@ -151,7 +151,7 @@
                                         <label class="my-2">Designation</label>
                                         <input type="text" value="{{$user->desgination}}" name="desgination"
                                                class="form-control"
-                                               required>
+                                               >
                                     </div>
 
 
