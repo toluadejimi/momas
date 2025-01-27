@@ -181,20 +181,19 @@
                                             KCT 2 : <b>{{$token2 ?? "12345678"}}</b></br><br>
                                         @elseif($title == "tamper")
                                             Meter NO : <b>{{$meter_no}}</b></br><br>
-                                            Unit :  <b>{{$unitkwh ?? "0.00"}}KWH</b></br><br>
+                                            Unit :  <b>{{$unit ?? "0.00"}}KWH</b></br><br>
                                             Token : <b>{{$token ?? "12345678"}}</b></br><br>
                                         @elseif($title == "clear_credit_token")
                                             Meter NO : <b>{{$meter_no}}</b></br><br>
-                                            Unit :  <b>{{$unitkwh ?? "0.00"}}KWH</b></br><br>
+                                            Unit :  <b>{{$unit ?? "0.00"}}KWH</b></br><br>
                                             Token : <b>{{$token ?? "12345678"}}</b></br><br>
 
                                         @else
-
                                             Amount : <b>₦ {{number_format($amount, 2) }}</b></br><br>
                                             Tariff Amt : <b>₦ {{number_format($tariff_amount, 2) }}</b></br><br>
                                             Meter NO : <b>{{$meter_no}}</b></br><br>
                                             Vat :  <b>{{$vat_amount ?? "0.00"}}</b></br><br>
-                                            Unit :  <b>{{$unitkwh ?? "0.00"}}KWH</b></br><br>
+                                            Unit :  <b>{{$unit ?? "0.00"}}KWH</b></br><br>
                                             Token : <b>{{$token ?? "12345678"}}</b></br><br>
                                         @endif
 
