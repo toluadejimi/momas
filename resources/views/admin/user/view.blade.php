@@ -205,16 +205,16 @@
 
 
                                                 <label class="my-2">Choose Meter</label>
-                                                @if($meter_count > 0)
+                                                @if($meter_count == 0)
                                                     <span
-                                                        class="badge text-bg-danger">{{$user->meterNo}}</span>
+                                                        class="badge text-bg-danger">No meter found</span>
                                                 @else
-                                                    <span class="badge text-bg-danger">No meter found</span>
+                                                    <span class="badge text-bg-danger">{{$meterNo}}</span>
                                                 @endif
 
 
                                                 <input type="text" name="meterNo"
-                                                       value="{{$user->meterNo }}" id="searchMeter"
+                                                       value="{{$meterNo }}" id="searchMeter"
                                                        placeholder="Type meter number..." class="form-control" required
                                                        autocomplete="off">
                                                 <div id="meterResult" class="search-result"></div>
@@ -288,16 +288,16 @@
 
 
 
-                                            @if($user->meterNo == null)
+                                            @if($meterNo == null)
 
-                                                <div class="col-xl-3 col-sm-12">
+                                                <div class="col-xl-4 col-sm-12">
                                                     <button type="submit" class="col-12 d-flex w-100 btn btn-primary my-3">
-                                                        Update
+                                                        Attach Meter
                                                     </button>
                                                 </div>
 
                                             @else
-                                                <a href="detach-meter?meterNo={{$user->meterNo}}" class="col-4 d-flex  btn btn-danger my-3">
+                                                <a href="detach-meter?meterNo={{$meterNo}}" class="col-4 d-flex  btn btn-danger my-3">
                                                     Detach Meter
                                                 </a>
                                             @endif

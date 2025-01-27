@@ -24,6 +24,10 @@ Route::get('/clear', function(){
 });
 
 
+Route::get('/get-tariffs/{estate_id}', function ($estate_id) {
+    $tariffs = App\Models\TarrifState::where('estate_id', $estate_id)->get(['amount', 'tariff_id']);
+    return response()->json($tariffs);
+});
 
 
 Route::any('verify2fa', [AuthController::class, 'verify2fa']);

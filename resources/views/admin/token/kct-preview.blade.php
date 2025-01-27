@@ -177,9 +177,12 @@
                                                         <div class="row">
 
                                                             <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Tariff/KW </label>
-                                                                <input required name="tariffPerKWatt" value="{{number_format($tariffPerKWatt,2)}}" hidden="">
-                                                                <h6>{{number_format($tariffPerKWatt, 2)}}</h6>
+                                                                <label class="my-2">Unit</label>
+                                                                @php
+                                                                    $unnit = $costOfUnit / $tarrif_amount;
+                                                                @endphp
+                                                                <input required name="unit" value="{{number_format($unnit,2)}}" hidden="">
+                                                                <h6>{{number_format($unnit, 2)}}kw/h</h6>
                                                             </div>
 
                                                             <div class="col-xl-4 my-2 col-sm-12">
@@ -191,13 +194,14 @@
                                                             <div class="col-xl-4 my-2 col-sm-12">
                                                                 <label class="my-2">Cost Of Unit</label>
                                                                 <input required name="costOfUnit" value="{{number_format($costOfUnit,2)}}" hidden="">
-                                                                <h6>{{number_format($costOfUnit, 2)}} Kw/h</h6>
+                                                                <h6>{{number_format($costOfUnit, 2)}}</h6>
                                                             </div>
 
                                                             <input required name="vat" value="{{$vat}}" hidden="">
                                                             <input required name="estate_id" value="{{$estate_id}}" hidden="">
                                                             <input required name="estate_name" value="{{$estate_name}}" hidden="">
                                                             <input required name="amount" value="{{$amount}}" hidden="">
+                                                            <input required name="tariff_amount" value="{{$tarrif_amount}}" hidden="">
 
 
 
@@ -268,10 +272,14 @@
 
                                                         <div class="row">
 
+
                                                             <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Tariff/KW </label>
-                                                                <input required name="tariffPerKWatt" value="{{number_format($tariffPerKWatt,2)}}" hidden="">
-                                                                <h6>{{number_format($tariffPerKWatt, 2)}}</h6>
+                                                                <label class="my-2">Unit</label>
+                                                                @php
+                                                                    $unnit = $costOfUnit / $tarrif_amount;
+                                                                @endphp
+                                                                <input required name="unit" value="{{number_format($unnit,2)}}" hidden="">
+                                                                <h6>{{number_format($unnit, 2)}}kw/h</h6>
                                                             </div>
 
                                                             <div class="col-xl-4 my-2 col-sm-12">
@@ -283,13 +291,14 @@
                                                             <div class="col-xl-4 my-2 col-sm-12">
                                                                 <label class="my-2">Cost Of Unit</label>
                                                                 <input required name="costOfUnit" value="{{number_format($costOfUnit,2)}}" hidden="">
-                                                                <h6>{{number_format($costOfUnit, 2)}} Kw/h</h6>
+                                                                <h6>{{number_format($costOfUnit, 2)}}</h6>
                                                             </div>
 
                                                             <input required name="vat" value="{{$vat}}" hidden="">
                                                             <input required name="estate_id" value="{{$estate_id}}" hidden="">
                                                             <input required name="estate_name" value="{{$estate_name}}" hidden="">
                                                             <input required name="amount" value="{{$amount}}" hidden="">
+                                                            <input required name="tariff_amount" value="{{$tarrif_amount}}" hidden="">
 
 
 
@@ -610,10 +619,14 @@
 
                                                         <div class="row">
 
+
                                                             <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Tariff/KW </label>
-                                                                <input required name="tariffPerKWatt" value="{{$tariffPerKWatt}}" hidden="">
-                                                                <h6>{{number_format($tariffPerKWatt, 2)}}</h6>
+                                                                <label class="my-2">Unit</label>
+                                                                @php
+                                                                    $unnit = $costOfUnit / $tarrif_amount;
+                                                                @endphp
+                                                                <input required name="unit" value="{{number_format($unnit,2)}}" hidden="">
+                                                                <h6>{{number_format($unnit, 2)}}kw/h</h6>
                                                             </div>
 
                                                             <div class="col-xl-4 my-2 col-sm-12">
@@ -625,13 +638,15 @@
                                                             <div class="col-xl-4 my-2 col-sm-12">
                                                                 <label class="my-2">Cost Of Unit</label>
                                                                 <input required name="costOfUnit" value="{{number_format($costOfUnit,2)}}" hidden="">
-                                                                <h6>{{number_format($costOfUnit, 2)}} Kw/h</h6>
+                                                                <h6>{{number_format($costOfUnit, 2)}}</h6>
                                                             </div>
 
                                                             <input required name="vat" value="{{$vat}}" hidden="">
                                                             <input required name="estate_id" value="{{$estate_id}}" hidden="">
                                                             <input required name="estate_name" value="{{$estate_name}}" hidden="">
                                                             <input required name="amount" value="{{$amount}}" hidden="">
+                                                            <input required name="tariff_amount" value="{{$tarrif_amount}}" hidden="">
+
 
 
 
@@ -664,14 +679,14 @@
 
                                             @elseif($preview == "kct_token")
 
-                                                <form action="generate-kct-token" method="POST"
+                                                <form action="generate-kctclear-token" method="POST"
                                                       enctype="multipart/form-data">
                                                     @csrf
 
                                                     <div class="modal-body">
 
                                                         <div class="">
-                                                            <h5 class="card-title text-black mb-0">Credit Token Preview</h5>
+                                                            <h5 class="card-title text-black mb-0">KCT Token Preview</h5>
                                                         </div>
 
 
@@ -702,10 +717,14 @@
 
                                                         <div class="row">
 
+
                                                             <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Tariff/KW </label>
-                                                                <input required name="tariffPerKWatt" value="{{$tariffPerKWatt}}" hidden="">
-                                                                <h6>{{number_format($tariffPerKWatt, 2)}}</h6>
+                                                                <label class="my-2">Unit</label>
+                                                                @php
+                                                                    $unnit = $costOfUnit / $tarrif_amount;
+                                                                @endphp
+                                                                <input required name="unit" value="{{number_format($unnit,2)}}" hidden="">
+                                                                <h6>{{number_format($unnit, 2)}}kw/h</h6>
                                                             </div>
 
                                                             <div class="col-xl-4 my-2 col-sm-12">
@@ -717,13 +736,16 @@
                                                             <div class="col-xl-4 my-2 col-sm-12">
                                                                 <label class="my-2">Cost Of Unit</label>
                                                                 <input required name="costOfUnit" value="{{number_format($costOfUnit,2)}}" hidden="">
-                                                                <h6>{{number_format($costOfUnit, 2)}} Kw/h</h6>
+                                                                <h6>{{number_format($costOfUnit, 2)}}</h6>
                                                             </div>
 
                                                             <input required name="vat" value="{{$vat}}" hidden="">
                                                             <input required name="estate_id" value="{{$estate_id}}" hidden="">
                                                             <input required name="estate_name" value="{{$estate_name}}" hidden="">
                                                             <input required name="amount" value="{{$amount}}" hidden="">
+                                                            <input required name="tariff_amount" value="{{$tarrif_amount}}" hidden="">
+
+
 
 
 
@@ -796,7 +818,7 @@
                                                     <td>{{$data->estate->title ?? "name"}}</td>
                                                     <td>{{number_format($data->amount, 2)}}</td>
                                                     <td>{{$data->tariff_id}}</td>
-                                                    <td>{{$data->tariffPerKWatt}}kw/N</td>
+                                                    <td>{{$data->unitkwh}}kw/N</td>
                                                     <td>
                                                         @if($data->status == 2)
                                                             <span class="badge text-bg-primary">Successful</span>

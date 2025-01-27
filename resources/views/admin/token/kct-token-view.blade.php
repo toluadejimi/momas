@@ -68,25 +68,86 @@
                                                         <div class="row">
                                                             <div class="col-xl-6 my-2 col-sm-12">
                                                                 <label class="my-2">Estate</label>
-                                                                <input class="form-control" required name="estate_id" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
-                                                                <datalist id="datalistOptions">
+                                                                <select class="form-control" required name="estate_id"
+                                                                        id="estate_id">
+                                                                    <option value="">--Select Estate--</option>
                                                                     @foreach($estate as $data)
-                                                                        <option value="{{$data->title}}">
+                                                                        <option
+                                                                            value="{{$data->id}}">{{$data->title}}</option>
                                                                     @endforeach
-                                                                </datalist>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-xl-6 my-2 col-sm-12">
+                                                                <label class="my-2">Tariff Amount</label>
+                                                                <select class="form-control" required name="tariff_id"
+                                                                        id="tariff_id" disabled>
+                                                                    <option value="">--Select Tariff--</option>
+                                                                </select>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-xl-6 my-2 col-sm-12">
                                                             <label class="my-2">Enter Meter No</label>
-                                                            <input type="number" class="form-control mb-3" name="meterNo" required>
+                                                            <input type="number" class="form-control mb-3"
+                                                                   name="meterNo" id="meterNo" required disabled>
                                                         </div>
+
+
+                                                        <script
+                                                            src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+                                                        <script>
+                                                            $(document).ready(function () {
+                                                                $('#estate_id').on('change', function () {
+                                                                    let estateId = $(this).val();
+                                                                    let tariffSelect = $('#tariff_id');
+                                                                    let meterNoField = $('#meterNo');
+
+                                                                    tariffSelect.attr('disabled', true).html('<option value="">--Select Tariff--</option>');
+                                                                    meterNoField.attr('disabled', true);
+
+                                                                    if (estateId) {
+                                                                        // Fetch the tariffs based on the selected estate
+                                                                        $.ajax({
+                                                                            url: '/get-tariffs/' + estateId, // Replace with your route
+                                                                            method: 'GET',
+                                                                            success: function (response) {
+                                                                                // Populate the tariffs dropdown
+                                                                                response.forEach(function (tariff) {
+                                                                                    tariffSelect.append(new Option(tariff.amount, tariff.tariff_id));
+                                                                                });
+                                                                                tariffSelect.attr('disabled', false);
+                                                                            },
+                                                                            error: function () {
+                                                                                alert('Failed to load tariffs. Please try again.');
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                });
+
+                                                                $('#tariff_id').on('change', function () {
+                                                                    let tariffId = $(this).val();
+                                                                    let meterNoField = $('#meterNo');
+
+                                                                    if (tariffId) {
+                                                                        meterNoField.attr('disabled', false);
+                                                                    } else {
+                                                                        meterNoField.attr('disabled', true);
+                                                                    }
+                                                                });
+                                                            });
+                                                        </script>
 
 
                                                         <div class="col-xl-6 my-2 col-sm-12">
                                                             <label class="my-2">Amount</label>
-                                                            <input type="number" class="form-control mb-3" name="amount" required>
+                                                            <input type="number" class="form-control mb-3" name="amount"
+                                                                   required>
                                                         </div>
+
 
 
                                                     @else
@@ -176,10 +237,14 @@
 
                                                         <div class="row">
 
+
                                                             <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Tariff/KW </label>
-                                                                <input required name="tariffPerKWatt" value="{{number_format($tariffPerKWatt,2)}}" hidden="">
-                                                                <h6>{{number_format($tariffPerKWatt, 2)}}</h6>
+                                                                <label class="my-2">Unit</label>
+                                                                @php
+                                                                    $unnit = $costOfUnit / $tarrif_amount;
+                                                                @endphp
+                                                                <input required name="unit" value="{{number_format($unnit,2)}}" hidden="">
+                                                                <h6>{{number_format($unnit, 2)}}kw/h</h6>
                                                             </div>
 
                                                             <div class="col-xl-4 my-2 col-sm-12">
@@ -191,13 +256,15 @@
                                                             <div class="col-xl-4 my-2 col-sm-12">
                                                                 <label class="my-2">Cost Of Unit</label>
                                                                 <input required name="costOfUnit" value="{{number_format($costOfUnit,2)}}" hidden="">
-                                                                <h6>{{number_format($costOfUnit, 2)}} Kw/h</h6>
+                                                                <h6>{{number_format($costOfUnit, 2)}}</h6>
                                                             </div>
 
                                                             <input required name="vat" value="{{$vat}}" hidden="">
                                                             <input required name="estate_id" value="{{$estate_id}}" hidden="">
                                                             <input required name="estate_name" value="{{$estate_name}}" hidden="">
                                                             <input required name="amount" value="{{$amount}}" hidden="">
+                                                            <input required name="tariff_amount" value="{{$tarrif_amount}}" hidden="">
+
 
 
 
@@ -268,10 +335,14 @@
 
                                                         <div class="row">
 
+
                                                             <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Tariff/KW </label>
-                                                                <input required name="tariffPerKWatt" value="{{number_format($tariffPerKWatt,2)}}" hidden="">
-                                                                <h6>{{number_format($tariffPerKWatt, 2)}}</h6>
+                                                                <label class="my-2">Unit</label>
+                                                                @php
+                                                                    $unnit = $costOfUnit / $tarrif_amount;
+                                                                @endphp
+                                                                <input required name="unit" value="{{number_format($unnit,2)}}" hidden="">
+                                                                <h6>{{number_format($unnit, 2)}}kw/h</h6>
                                                             </div>
 
                                                             <div class="col-xl-4 my-2 col-sm-12">
@@ -283,13 +354,16 @@
                                                             <div class="col-xl-4 my-2 col-sm-12">
                                                                 <label class="my-2">Cost Of Unit</label>
                                                                 <input required name="costOfUnit" value="{{number_format($costOfUnit,2)}}" hidden="">
-                                                                <h6>{{number_format($costOfUnit, 2)}} Kw/h</h6>
+                                                                <h6>{{number_format($costOfUnit, 2)}}</h6>
                                                             </div>
 
                                                             <input required name="vat" value="{{$vat}}" hidden="">
                                                             <input required name="estate_id" value="{{$estate_id}}" hidden="">
                                                             <input required name="estate_name" value="{{$estate_name}}" hidden="">
                                                             <input required name="amount" value="{{$amount}}" hidden="">
+                                                            <input required name="tariff_amount" value="{{$tarrif_amount}}" hidden="">
+
+
 
 
 
@@ -496,7 +570,7 @@
                                         </div>
 
                                         <div class="col-xl-6 col-sm-12" >
-                                            <form action="validate-meter" method="POST"
+                                            <form action="validate-kct-meter" method="POST"
                                                   enctype="multipart/form-data">
                                                 @csrf
 
@@ -506,20 +580,41 @@
                                                         <div class="row">
                                                             <div class="col-xl-6 my-2 col-sm-12">
                                                                 <label class="my-2">Estate</label>
-                                                                <input class="form-control" required name="estate_id" value="{{$title}}" readonly>
+                                                                <input  class="form-control" value="{{$title}}" disabled required name="estate_id">
+                                                                <input  class="form-control" value="{{$estate_id}}" hidden required name="estate_id">
 
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="row">
+                                                            <div class="col-xl-6 my-2 col-sm-12">
+                                                                <label class="my-2">Tariff Amount</label>
+                                                                <select class="form-control" required name="tariff_id">
+                                                                    <option value="">--Select Tariff--
+                                                                    </option>
+                                                                    @foreach($tariff as $data)
+                                                                        <option value="{{$data->tariff_id}}">{{$data->amount}}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-xl-6 my-2 col-sm-12">
                                                             <label class="my-2">Enter Meter No</label>
-                                                            <input type="number" class="form-control mb-3" name="meterNo" required>
+                                                            <input type="number"
+                                                                   class="form-control mb-3"
+                                                                   name="meterNo" id="meterNo" required>
                                                         </div>
+
 
 
                                                         <div class="col-xl-6 my-2 col-sm-12">
                                                             <label class="my-2">Amount</label>
-                                                            <input type="number" class="form-control mb-3" name="amount" required>
+                                                            <input type="number"
+                                                                   class="form-control mb-3"
+                                                                   name="amount" required>
                                                         </div>
 
 
@@ -794,7 +889,7 @@
                                             <tbody>
 
 
-                                            @foreach($credit_tokens as $data)
+                                            @foreach($kct_tokens as $data)
 
                                                 <tr>
                                                     <td><a href="view-user?id={{$data->id}}">{{$data->user->last_name ?? "name"}} {{$data->user->first_name ?? "name"}}</a></td>
@@ -804,7 +899,7 @@
                                                     <td>{{$data->kct_token1}}</td>
                                                     <td>{{$data->kct_token2}}</td>
                                                     <td>{{$data->tariff_id}}</td>
-                                                    <td>{{$data->tariffPerKWatt}}kw/N</td>
+                                                    <td>{{$data->unitkwh}}kw/N</td>
                                                     <td>
                                                         @if($data->status == 2)
                                                             <span class="badge text-bg-primary">Successful</span>

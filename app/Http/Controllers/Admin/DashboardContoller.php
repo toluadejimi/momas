@@ -600,15 +600,11 @@ class DashboardContoller extends Controller
         $data['meters'] = Meter::all();
         $data['tariff_count'] = Tariff::where('user_id', $request->id)->count();
         $data['tariffs'] = Tariff::where('user_id', $request->id)->get();
-        $data['meter_count'] = Meter::where('user_id', $request->id)->count();
         $data['meter_no']= Meter::where('user_id', $request->id)->first()->MeterNo ?? null;
         $data['kcttokens'] = KctMeterToken::where('user_id', $request->id)->get();
         $data['meter'] = Meter::where('user_id', $request->id)->first() ?? null;
         $data['estate_title'] = Estate::where('id', $data['user']->estate_id)->first()->title ?? null;
         $data['ptype'] = Estate::where('id', $data['user']->estate_id)->first()->ptype ?? null;
-
-
-
 
         $data['tariff'] = Tariff::where('estate_id', $data['user']->estate_id)->where('user_id', null)->get();
         $data['nepa_tariff_title'] = Tariff::where('user_id', $request->id)->where('type', "nepa")->first()->title ?? null;
@@ -616,18 +612,28 @@ class DashboardContoller extends Controller
         $data['tariff_index_nepa'] = Tariff::where('user_id', $request->id)->where('type', "nepa")->first()->tariff_index ?? null;
         $data['tariff_index_gen'] = Tariff::where('user_id', $request->id)->where('type', "gen")->first()->tariff_index ?? null;
 
-
-
         $data['tariff_count_nepa'] = Tariff::where('user_id', $request->id)->where('type', "nepa")->count() ?? null;
         $data['tariff_count_gen'] = Tariff::where('user_id', $request->id)->where('type', "gen")->count() ?? null;
 
 
         $data['tariff_id_nepa'] = Tariff::where('user_id', $request->id)->where('type', "nepa")->first()->id ?? null;
         $data['tariff_id_gen'] = Tariff::where('user_id', $request->id)->where('type', "gen")->first()->id ?? null;
-
-
-
         $data['percentage'] = SpreadPayment::where('user_id', $request->id)->first()->percentage ?? null;
+
+
+        $ck_meter = Meter::where('MeterNo', $data['user']->meterNo)->first() ?? null;
+        $ck_user_id = Meter::where('MeterNo', $data['user']->meterNo)->first()->user_id ?? null;
+
+
+        if($ck_meter != null && $ck_user_id == null ){
+            Meter::where('MeterNo', $data['user']->meterNo)->update(['user_id' =>$request->id ]);
+        }
+
+
+        $data['meter_count'] = Meter::where('MeterNo', $data['user']->meterNo)->count();
+
+
+        $data['meterNo'] =  Meter::where('MeterNo', $data['user']->meterNo)->first()->meterNo ?? null;
 
 
         return view('admin/user/view', $data);

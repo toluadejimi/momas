@@ -160,7 +160,7 @@
                                     <p>
                                         C/Name : <b>{{$full_name ?? "Customer Name"}}</b></br><br>
                                         C/Address : <b>{{$address ?? "Customer Address"}}</b></br><br>
-                                        C/phone :  <b>{{$phone ?? "12345678"}}</b></br>
+                                        Date :  <b>{{$date ?? "12345678"}}</b></br>
                                     </p>
                                 </div>
                             </div><!--End Invoice Mid-->
@@ -172,13 +172,29 @@
 
                                 <div class="info mt-4">
                                     <p>
-                                        Amount : <b>₦ {{number_format($amount, 2) }}</b></br><br>
-                                        Vat :  <b>{{$vat_amount ?? "0.00"}}</b></br><br>
-                                        Unit :  <b>{{$vend_amount_kw_per_naira ?? "0.00"}}Kw/N</b></br><br>
-                                        @if($title == "KCT Token")
+
+
+
+                                        @if($title == "kct_token")
+                                            Meter NO : <b>{{$meter_no}}</b></br><br>
                                             KCT 1 : <b>{{$token1 ?? "12345678"}}</b></br><br>
                                             KCT 2 : <b>{{$token2 ?? "12345678"}}</b></br><br>
+                                        @elseif($title == "tamper")
+                                            Meter NO : <b>{{$meter_no}}</b></br><br>
+                                            Unit :  <b>{{$unitkwh ?? "0.00"}}KWH</b></br><br>
+                                            Token : <b>{{$token ?? "12345678"}}</b></br><br>
+                                        @elseif($title == "clear_credit_token")
+                                            Meter NO : <b>{{$meter_no}}</b></br><br>
+                                            Unit :  <b>{{$unitkwh ?? "0.00"}}KWH</b></br><br>
+                                            Token : <b>{{$token ?? "12345678"}}</b></br><br>
+
                                         @else
+
+                                            Amount : <b>₦ {{number_format($amount, 2) }}</b></br><br>
+                                            Tariff Amt : <b>₦ {{number_format($tariff_amount, 2) }}</b></br><br>
+                                            Meter NO : <b>{{$meter_no}}</b></br><br>
+                                            Vat :  <b>{{$vat_amount ?? "0.00"}}</b></br><br>
+                                            Unit :  <b>{{$unitkwh ?? "0.00"}}KWH</b></br><br>
                                             Token : <b>{{$token ?? "12345678"}}</b></br><br>
                                         @endif
 
@@ -363,7 +379,7 @@
 
 
                             <center>
-                                <p class="mt-2 mb-3"><b>-- Customer Copy --</b></p>
+                                <p class="mt-2 mb-3"><b>{{$title ?? "RECEPIT"}}</b></p>
                             </center><!--End InvoiceTop-->
 
 
@@ -376,7 +392,7 @@
                                     <p>
                                         C/Name : <b>{{$full_name ?? "Customer Name"}}</b></br><br>
                                         C/Address : <b>{{$address ?? "Customer Address"}}</b></br><br>
-                                        C/phone :  <b>{{$phone ?? "12345678"}}</b></br>
+                                        Date :  <b>{{$date ?? "12345678"}}</b></br>
                                     </p>
                                 </div>
                             </div><!--End Invoice Mid-->
@@ -388,11 +404,31 @@
 
                                 <div class="info mt-4">
                                     <p>
-                                        Amount : <b>₦ {{number_format($amount, 2) }}</b></br><br>
-                                        Vat :  <b>{{$vat_amount ?? "0.00"}}</b></br><br>
-                                        Unit :  <b>{{$vend_amount_kw_per_naira ?? "0.00"}}Kw/N</b></br><br>
-                                        Token : <b>{{$token ?? "12345678"}}</b></br><br>
 
+
+
+                                        @if($title == "kct_token")
+                                            Meter NO : <b>{{$meter_no}}</b></br><br>
+                                            KCT 1 : <b>{{$token1 ?? "12345678"}}</b></br><br>
+                                            KCT 2 : <b>{{$token2 ?? "12345678"}}</b></br><br>
+                                        @elseif($title == "tamper")
+                                            Meter NO : <b>{{$meter_no}}</b></br><br>
+                                            Unit :  <b>{{$unitkwh ?? "0.00"}}KWH</b></br><br>
+                                            Token : <b>{{$token ?? "12345678"}}</b></br><br>
+                                        @elseif($title == "clear_credit_token")
+                                            Meter NO : <b>{{$meter_no}}</b></br><br>
+                                            Unit :  <b>{{$unitkwh ?? "0.00"}}KWH</b></br><br>
+                                            Token : <b>{{$token ?? "12345678"}}</b></br><br>
+
+                                        @else
+
+                                            Amount : <b>₦ {{number_format($amount, 2) }}</b></br><br>
+                                            Tariff Amt : <b>₦ {{number_format($tariff_amount, 2) }}</b></br><br>
+                                            Meter NO : <b>{{$meter_no}}</b></br><br>
+                                            Vat :  <b>{{$vat_amount ?? "0.00"}}</b></br><br>
+                                            Unit :  <b>{{$unitkwh ?? "0.00"}}KWH</b></br><br>
+                                            Token : <b>{{$token ?? "12345678"}}</b></br><br>
+                                        @endif
 
                                     </p>
                                 </div>
