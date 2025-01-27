@@ -1,0 +1,10 @@
+meterNo,metersimno,transid,status,meterModel,accountno,isamr,model,isdualtariff,sgc,oldsgc,newsgcdual,oldsgcdual,newtariffdual,oldtariffdual,krn1,krn2,needkct,credittypeid
+12345678,001,1,2,demomem,demo,0,0,0,000001,0,0,0,0,0,0,STS6,STS6,gas
+,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
