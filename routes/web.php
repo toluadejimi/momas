@@ -285,6 +285,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
 
     Route::any('recepit', [TokenController::class, 'recepit']);
+    Route::any('retry-generate-tamper-token', [TokenController::class, 'retry_generate_tamper-token']);
+
 
 
 
