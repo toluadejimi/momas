@@ -152,12 +152,12 @@
                         </li>
 
 
-                        <li>
-                            <a class='tp-link' href="organization">
-                                <i data-feather="folder"></i>
-                                <span> Organization </span>
-                            </a>
-                        </li>
+{{--                        <li>--}}
+{{--                            <a class='tp-link' href="organization">--}}
+{{--                                <i data-feather="folder"></i>--}}
+{{--                                <span> Organization </span>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
 
 
                         <li>
