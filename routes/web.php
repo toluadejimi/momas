@@ -53,6 +53,7 @@ Route::get('/', function () {
 Route::post('login-now', [AuthController::class, 'login_now']);
 Route::any('logout', [AuthController::class, 'log_out']);
 Route::post('verify-code', [AuthController::class, 'verify_code']);
+Route::get('resend_email_code', [AuthController::class, 'resend_email_code']);
 
 
 Route::get('/search-meters', [MeterController::class, 'searchMeters']);
@@ -71,14 +72,12 @@ Route::any('auth_login', [AuthController::class, 'login.blade.php']);
 Route::any('resend_code', [AuthController::class, 'resend_code']);
 Route::any('verify_code', [AuthController::class, 'verify_code']);
 Route::get('code', [AuthController::class, 'code']);
+Route::get('auth-code', [AuthController::class, 'auth_code']);
 
 
 
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
-
-
-
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'blockaccess']], function () {
 
     Route::get('onboarding-email', [DashboardContoller::class, 'onboarding_email']);
 

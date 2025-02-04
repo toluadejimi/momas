@@ -53,7 +53,6 @@ class AuthController extends Controller
 
         $two_fa = User::where('email', $request->email)->first()->two_fa;
 
-
         $credentials = request(['email', 'password']);
 
         if (!auth()->attempt($credentials)) {
@@ -85,15 +84,13 @@ class AuthController extends Controller
             $renderer = new Png();
             $writer = new Writer($renderer);
             $qrCodeImage = base64_encode($writer->writeString($qrCodeUrl));
-
             return view('auth.twofactor', compact('qrCodeUrl', 'qrCodeImage', 'user'));
-
         }
 
 
         if ($request->emailauth == "on" && $request->googleauth == null) {
 
-            $code = random_int(0000, 9999);
+            $code = random_int(00000, 99999);
             $email = $request->email;
             User::where('email', $request->email)->update(['code' => $code]);
 
@@ -108,19 +105,37 @@ class AuthController extends Controller
     }
 
 
+
+    public function resend_email_code(request $request)
+    {
+        $code = Auth::user()->code;
+        $email = Auth::user()->email;
+        send_login_code($email, $code);
+        return view('auth.code', compact('code', 'email'));
+
+    }
+
+
     public function code()
     {
         return view('code');
     }
 
 
+
+    public function auth_code(request $request)
+    {
+        $email = Auth::user()->email;
+        return view('auth.code', compact( 'email'));
+
+    }
+
     public function verify_code(request $request)
     {
         $usr = User::where('id', Auth::id())->first();
 
         if ($request->code != $usr->code) {
-            auth::logout();
-            return redirect('/')->with('error', 'Invalid OTP Code');
+            return redirect('/auth-code')->with('error', 'Invalid OTP Code');
         }
 
 
@@ -131,10 +146,9 @@ class AuthController extends Controller
         }
 
         if ($usr->role == 1 || $usr->role == 0) {
-            $date = date('Y:M:D h:i:s');
-            $message = "MOMAS LOGIN  ======>>>>>  " . $usr->first_name . " " . $usr->last_name . " | login to the dashboard | at $date";
-            send_notification($message);
+            User::where('id', Auth::id())->update(['can_login' => 1]);
             return redirect('admin/admin-dashboard')->with('message', "Welcome Admin!");
+
         } else {
             return redirect('/')->with('error', "You don\'t have permission");
         }
@@ -161,6 +175,7 @@ class AuthController extends Controller
 
     public function log_out(request $request)
     {
+        User::where('id', Auth::id())->update(['can_login' => 0]);
         Auth::logout();
         return redirect('/');
     }
@@ -192,7 +207,7 @@ class AuthController extends Controller
 
         if ($isValid) {
             $request->session()->put('2fa_verified', true);
-            User::where('id', Auth::id())->update(['two_fa' => 1]);
+            User::where('id', Auth::id())->update(['two_fa' => 1, 'can_login' => 1]);
             return redirect('admin/admin-dashboard');
         } else {
             return redirect('verify2fa-code')->withErrors(['otp' => 'Invalid verification code.']);
