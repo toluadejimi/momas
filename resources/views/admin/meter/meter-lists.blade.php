@@ -1,8 +1,6 @@
 @extends('layouts.main')
 @section('content')
 
-
-
     @if(auth::user()->role == 0)
         <div class="content">
 
@@ -46,8 +44,11 @@
                                     <div class="d-flex align-items-center mb-2">
                                         <div
                                             class="bg-secondary-subtle rounded-circle p-2 me-2 border border-dashed border-secondary">
-                                            <svg width="20" height="20" viewBox="0 0 100 105" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M50 0C22.4444 0 0 21.21 0 47.25C0 67.7775 13.8889 85.26 33.3333 91.7175V105H44.4444V94.185C46.2778 94.5 48.1111 94.5 50 94.5C51.8889 94.5 53.7222 94.5 55.5556 94.185V105H66.6667V91.7175C86.1111 85.2075 100 67.725 100 47.25C100 21.21 77.5556 0 50 0ZM62.5 63L45.8333 78.75L37.5 70.875L44.4444 64.3125L37.5 57.75L54.1667 42L62.5 49.875L55.5556 56.4375L62.5 63ZM72.2222 36.75H27.7778V26.25H72.2222V36.75Z" fill="#E50086" fill-opacity="0.52"/>
+                                            <svg width="20" height="20" viewBox="0 0 100 105" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M50 0C22.4444 0 0 21.21 0 47.25C0 67.7775 13.8889 85.26 33.3333 91.7175V105H44.4444V94.185C46.2778 94.5 48.1111 94.5 50 94.5C51.8889 94.5 53.7222 94.5 55.5556 94.185V105H66.6667V91.7175C86.1111 85.2075 100 67.725 100 47.25C100 21.21 77.5556 0 50 0ZM62.5 63L45.8333 78.75L37.5 70.875L44.4444 64.3125L37.5 57.75L54.1667 42L62.5 49.875L55.5556 56.4375L62.5 63ZM72.2222 36.75H27.7778V26.25H72.2222V36.75Z"
+                                                    fill="#E50086" fill-opacity="0.52"/>
                                             </svg>
 
                                         </div>
@@ -65,6 +66,59 @@
                         </div>
                     </div>
 
+                    <div class="col-md-12 col-xl-12">
+
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="row">
+
+                                    <div class="element-box">
+
+                                        <h6 class="element-header ">Filter</h6>
+
+                                        <form action="filter-by-estate" method="post">
+                                            @csrf
+
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <label>Choose Estate</label>
+                                                    <select  class="form-control" required name="estate_id">
+
+                                                        <option value=" ">All</option>
+                                                        @foreach($estate as $data)
+                                                            <option value="{{$data->id}}">{{$data->title}}</option>
+                                                        @endforeach
+
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-2 mt-3">
+                                                    <button type="submit" class="btn btn-primary w-100">Filter
+                                                    </button>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="col-4 mt-4 row">
+
+
+
+                                            </div>
+
+
+                                        </form>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
 
 
                 </div>
@@ -86,23 +140,29 @@
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5"
                                                         id="staticBackdropLabel">Import Bulk Meter</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
                                                 </div>
 
-                                                <form action="{{ route('meters.import') }}" method="POST" enctype="multipart/form-data">
+                                                <form action="{{ route('meters.import') }}" method="POST"
+                                                      enctype="multipart/form-data">
                                                     @csrf
 
                                                     <div class="modal-body">
 
-                                                        <p>Click here  to download the sample of file to upload <a href="{{url('')}}/public/asset/ab.csv">Download here</a></p>
+                                                        <p>Click here to download the sample of file to upload <a
+                                                                href="{{url('')}}/public/asset/ab.csv">Download here</a>
+                                                        </p>
                                                         <label class="mt-3">Choose File</label>
-                                                        <input type="file"  class="form-control mb-3" name="file" required>
+                                                        <input type="file" class="form-control mb-3" name="file"
+                                                               required>
 
                                                         <label>Choose Estate</label>
                                                         <select name="estate_id" required class="form-control">
-                                                            <option value=""> --Select Estate-- </option>
+                                                            <option value=""> --Select Estate--</option>
                                                             @foreach($estate as $data)
-                                                                <option value="{{$data->id}}"> {{$data->title}} </option>
+                                                                <option
+                                                                    value="{{$data->id}}"> {{$data->title}} </option>
                                                             @endforeach
                                                         </select>
 
@@ -110,8 +170,12 @@
                                                     </div>
 
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary">Import bulk Meters</button>
+                                                        <button type="button" class="btn btn-light"
+                                                                data-bs-dismiss="modal">Close
+                                                        </button>
+                                                        <button type="submit" class="btn btn-primary">Import bulk
+                                                            Meters
+                                                        </button>
                                                     </div>
 
                                                 </form>
@@ -138,11 +202,16 @@
                                 </div>
 
 
+                            </div>
+
+
+                            <div>
+
 
                             </div>
 
                             <div class="card-body">
-                                <table  class="table table-striped table-bordered dt-responsive nowrap">
+                                <table class="table table-striped table-bordered dt-responsive nowrap">
                                     <thead>
                                     <tr>
                                         <th scope="col" class="cursor-pointer">Meter No</th>
@@ -158,7 +227,6 @@
                                         <th scope="col" class="cursor-pointer desc">Action</th>
 
 
-
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -167,7 +235,7 @@
                                     @foreach($meter_lists as $data)
 
                                         <tr>
-                                            <td><a href="view-meter?id={{$data->id}}"> {{$data->meterNo}} </a> </td>
+                                            <td><a href="view-meter?id={{$data->id}}"> {{$data->meterNo}} </a></td>
                                             <td>
                                                 {{strtoupper($data->meterModel)}}
                                             </td>
@@ -187,7 +255,9 @@
                                             <td>{{$data->created_at}}</td>
 
                                             @if(auth::user()->role == 0)
-                                                <td><a href="meter-delete?id={{$data->id}}"  onclick="return confirmDelete();" class="btn btn-danger">Delete</a> </td>
+                                                <td><a href="meter-delete?id={{$data->id}}"
+                                                       onclick="return confirmDelete();"
+                                                       class="btn btn-danger">Delete</a></td>
                                                 <script>
                                                     function confirmDelete() {
                                                         return confirm('Are you sure you want to delete this item?');
@@ -196,7 +266,9 @@
                                             @endif
 
                                             @if($data->status == 2)
-                                                <td><a href="meter-deactivate?id={{$data->id}}"  onclick="return confirmupdate();" class="btn btn-warning">Deactivate Meter</a>
+                                                <td><a href="meter-deactivate?id={{$data->id}}"
+                                                       onclick="return confirmupdate();" class="btn btn-warning">Deactivate
+                                                        Meter</a>
 
                                                     <script>
                                                         function confirmupdate() {
@@ -205,11 +277,12 @@
                                                     </script>
 
 
-
                                                 </td>
                                             @else
 
-                                                <td><a href="meter-activate?id={{$data->id}}"  onclick="return confirmupdate();" class="btn btn-primary">Activate Meter</a>
+                                                <td><a href="meter-activate?id={{$data->id}}"
+                                                       onclick="return confirmupdate();" class="btn btn-primary">Activate
+                                                        Meter</a>
 
                                                     <script>
                                                         function confirmupdate() {
@@ -218,12 +291,8 @@
                                                     </script>
 
 
-
                                                 </td>
                                             @endif
-
-
-
 
 
                                         </tr>
@@ -247,7 +316,6 @@
                 </div>
 
 
-
             </div>
 
 
@@ -259,7 +327,6 @@
 
             <!-- Start Content-->
             <div class="container-fluid">
-
 
 
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
@@ -299,8 +366,11 @@
                                     <div class="d-flex align-items-center mb-2">
                                         <div
                                             class="bg-secondary-subtle rounded-circle p-2 me-2 border border-dashed border-secondary">
-                                            <svg width="20" height="20" viewBox="0 0 100 105" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M50 0C22.4444 0 0 21.21 0 47.25C0 67.7775 13.8889 85.26 33.3333 91.7175V105H44.4444V94.185C46.2778 94.5 48.1111 94.5 50 94.5C51.8889 94.5 53.7222 94.5 55.5556 94.185V105H66.6667V91.7175C86.1111 85.2075 100 67.725 100 47.25C100 21.21 77.5556 0 50 0ZM62.5 63L45.8333 78.75L37.5 70.875L44.4444 64.3125L37.5 57.75L54.1667 42L62.5 49.875L55.5556 56.4375L62.5 63ZM72.2222 36.75H27.7778V26.25H72.2222V36.75Z" fill="#E50086" fill-opacity="0.52"/>
+                                            <svg width="20" height="20" viewBox="0 0 100 105" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M50 0C22.4444 0 0 21.21 0 47.25C0 67.7775 13.8889 85.26 33.3333 91.7175V105H44.4444V94.185C46.2778 94.5 48.1111 94.5 50 94.5C51.8889 94.5 53.7222 94.5 55.5556 94.185V105H66.6667V91.7175C86.1111 85.2075 100 67.725 100 47.25C100 21.21 77.5556 0 50 0ZM62.5 63L45.8333 78.75L37.5 70.875L44.4444 64.3125L37.5 57.75L54.1667 42L62.5 49.875L55.5556 56.4375L62.5 63ZM72.2222 36.75H27.7778V26.25H72.2222V36.75Z"
+                                                    fill="#E50086" fill-opacity="0.52"/>
                                             </svg>
 
                                         </div>
@@ -317,7 +387,6 @@
                             </div>
                         </div>
                     </div>
-
 
 
                 </div>
@@ -339,23 +408,32 @@
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5"
                                                         id="staticBackdropLabel">Import Bulk Meter</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
                                                 </div>
 
-                                                <form action="{{ route('meters.import') }}" method="POST" enctype="multipart/form-data">
+                                                <form action="{{ route('meters.import') }}" method="POST"
+                                                      enctype="multipart/form-data">
                                                     @csrf
 
                                                     <div class="modal-body">
 
-                                                        <p>Click here  to download the sample of file to upload <a href="{{url('')}}/public/asset/ab.csv">Download here</a></p>
+                                                        <p>Click here to download the sample of file to upload <a
+                                                                href="{{url('')}}/public/asset/ab.csv">Download here</a>
+                                                        </p>
                                                         <label class="mt-3">Choose File</label>
-                                                        <input type="file"  class="form-control mb-3" name="file" required>
+                                                        <input type="file" class="form-control mb-3" name="file"
+                                                               required>
 
                                                     </div>
 
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary">Import Bulk Meters</button>
+                                                        <button type="button" class="btn btn-light"
+                                                                data-bs-dismiss="modal">Close
+                                                        </button>
+                                                        <button type="submit" class="btn btn-primary">Import Bulk
+                                                            Meters
+                                                        </button>
                                                     </div>
 
                                                 </form>
@@ -371,16 +449,15 @@
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <h5 class="card-title text-black mb-0">Latest Meter</h5>
-{{--                                    <div class="justify-content-end">--}}
-{{--                                        <div class="justify-content-end">--}}
-{{--                                            <a href="#" class="btn btn-primary text-white " data-bs-toggle="modal"--}}
-{{--                                               data-bs-target="#staticBackdrop">Import Bulk Meter</a>--}}
-{{--                                            <a href="new-meter" class="btn btn-primary text-white">Add new</a>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
+                                    {{--                                    <div class="justify-content-end">--}}
+                                    {{--                                        <div class="justify-content-end">--}}
+                                    {{--                                            <a href="#" class="btn btn-primary text-white " data-bs-toggle="modal"--}}
+                                    {{--                                               data-bs-target="#staticBackdrop">Import Bulk Meter</a>--}}
+                                    {{--                                            <a href="new-meter" class="btn btn-primary text-white">Add new</a>--}}
+                                    {{--                                        </div>--}}
+                                    {{--                                    </div>--}}
 
                                 </div>
-
 
 
                             </div>
@@ -410,7 +487,7 @@
                                     @foreach($meter_lists as $data)
 
                                         <tr>
-                                            <td><a href="view-meter?id={{$data->id}}"> {{$data->meterNo}} </a> </td>
+                                            <td><a href="view-meter?id={{$data->id}}"> {{$data->meterNo}} </a></td>
                                             <td>
                                                 {{strtoupper($data->meterModel)}}
                                             </td>
@@ -430,7 +507,9 @@
                                             <td>{{$data->created_at}}</td>
 
                                             @if(auth::user()->role == 0)
-                                                <td><a href="meter-delete?id={{$data->id}}"  onclick="return confirmDelete();" class="btn btn-danger">Delete</a> </td>
+                                                <td><a href="meter-delete?id={{$data->id}}"
+                                                       onclick="return confirmDelete();"
+                                                       class="btn btn-danger">Delete</a></td>
                                                 <script>
                                                     function confirmDelete() {
                                                         return confirm('Are you sure you want to delete this item?');
@@ -439,7 +518,9 @@
                                             @endif
 
                                             @if($data->status == 2)
-                                                <td><a href="meter-deactivate?id={{$data->id}}"  onclick="return confirmupdate();" class="btn btn-warning">Deactivate Meter</a>
+                                                <td><a href="meter-deactivate?id={{$data->id}}"
+                                                       onclick="return confirmupdate();" class="btn btn-warning">Deactivate
+                                                        Meter</a>
 
                                                     <script>
                                                         function confirmupdate() {
@@ -448,11 +529,12 @@
                                                     </script>
 
 
-
                                                 </td>
                                             @else
 
-                                                <td><a href="meter-activate?id={{$data->id}}"  onclick="return confirmupdate();" class="btn btn-primary">Activate Meter</a>
+                                                <td><a href="meter-activate?id={{$data->id}}"
+                                                       onclick="return confirmupdate();" class="btn btn-primary">Activate
+                                                        Meter</a>
 
                                                     <script>
                                                         function confirmupdate() {
@@ -491,8 +573,5 @@
     @elseif(auth::user()->role == 5)
     @else
     @endif
-
-
-
 
 @endsection

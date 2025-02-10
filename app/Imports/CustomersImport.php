@@ -43,7 +43,7 @@ class CustomersImport implements ToModel, WithHeadingRow
                     'state'        => $row['state'],
                     'phone'        => "+234".$row['phone'],
                     'account_no'   => $row['accountno'],
-                    'tariffid'     => $row['tariffid'],
+                    'source'     => $row['source'],
                     'role'         => 2,
                     'password'     => bcrypt('123456'),
                     'meterNo'     => $row['meterno'],

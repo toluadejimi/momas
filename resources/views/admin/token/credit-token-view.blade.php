@@ -73,76 +73,91 @@
                                                                     @endforeach
                                                                 </select>
                                                             </div>
-                                                        </div>
 
-                                                        <div class="row">
+
                                                             <div class="col-xl-6 my-2 col-sm-12">
-                                                                <label class="my-2">Tariff Amount</label>
-                                                                <select class="form-control" required name="tariff_id"
-                                                                        id="tariff_id" disabled>
-                                                                    <option value="">--Select Tariff--</option>
-                                                                </select>
+                                                                <label class="my-2">Enter Meter No</label>
+                                                                <input type="number" class="form-control mb-3"
+                                                                       name="meterNo" id="meterNo" required>
                                                             </div>
+
+
+
+                                                                <div class="col-xl-6 my-2 col-sm-12">
+                                                                    <label class="my-2">Power Source</label>
+                                                                    <select class="form-control" required
+                                                                            name="tariff_id"
+                                                                            id="tariff_id" disabled>
+                                                                        <option value="">--Select Tariff--</option>
+                                                                    </select>
+                                                                </div>
+
+
+                                                            <div class="col-xl-6 my-2 col-sm-12">
+                                                                <label class="my-2">Amount</label>
+                                                                <input type="number" class="form-control mb-3" name="amount"
+                                                                       required>
+                                                            </div>
+
+
                                                         </div>
 
-                                                        <div class="col-xl-6 my-2 col-sm-12">
-                                                            <label class="my-2">Enter Meter No</label>
-                                                            <input type="number" class="form-control mb-3"
-                                                                   name="meterNo" id="meterNo" required disabled>
-                                                        </div>
 
-
-                                                        <script
-                                                            src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
                                                         <script>
                                                             $(document).ready(function () {
-                                                                $('#estate_id').on('change', function () {
-                                                                    let estateId = $(this).val();
-                                                                    let tariffSelect = $('#tariff_id');
-                                                                    let meterNoField = $('#meterNo');
 
-                                                                    tariffSelect.attr('disabled', true).html('<option value="">--Select Tariff--</option>');
-                                                                    meterNoField.attr('disabled', true);
+                                                                $('#estate_id, #meterNo').on('change input', function () {
+                                                                    // Get the estate_id and meterNo values
+                                                                    var estate_id = $('#estate_id').val();
+                                                                    var meterNo = $('#meterNo').val();
 
-                                                                    if (estateId) {
-                                                                        // Fetch the tariffs based on the selected estate
+                                                                    // Check if both values are selected/entered
+                                                                    if (estate_id && meterNo) {
+                                                                        // Perform the AJAX call to fetch power source
                                                                         $.ajax({
-                                                                            url: '/get-tariffs/' + estateId, // Replace with your route
+                                                                            url: '/fetch-tariff', // Change this to your endpoint
                                                                             method: 'GET',
+                                                                            data: {
+                                                                                estate_id: estate_id,
+                                                                                meterNo: meterNo
+                                                                            },
                                                                             success: function (response) {
-                                                                                // Populate the tariffs dropdown
-                                                                                response.forEach(function (tariff) {
-                                                                                    tariffSelect.append(new Option(tariff.amount, tariff.tariff_id));
-                                                                                });
-                                                                                tariffSelect.attr('disabled', false);
+                                                                                if (response && response.tariffs) {
+
+                                                                                    console.log(response);
+                                                                                    var tariffSelect = $('#tariff_id');
+                                                                                    tariffSelect.empty(); // Clear existing options
+                                                                                    tariffSelect.append('<option value="">--Select Tariff--</option>'); // Default option
+
+                                                                                    // Add the returned tariffs to the dropdown
+                                                                                    response.tariffs.forEach(function (tariff) {
+                                                                                        tariffSelect.append('<option value="' + tariff.id + '">' + tariff.type + '</option>');
+                                                                                    });
+
+                                                                                    // Enable the dropdown
+                                                                                    tariffSelect.prop('disabled', false);
+                                                                                } else {
+                                                                                    // If no tariffs, disable and clear the dropdown
+                                                                                    $('#tariff_id').prop('disabled', true).empty();
+                                                                                }
                                                                             },
                                                                             error: function () {
-                                                                                alert('Failed to load tariffs. Please try again.');
+                                                                                // In case of an error, disable and clear the dropdown
+                                                                                $('#tariff_id').prop('disabled', true).empty();
                                                                             }
                                                                         });
-                                                                    }
-                                                                });
-
-                                                                $('#tariff_id').on('change', function () {
-                                                                    let tariffId = $(this).val();
-                                                                    let meterNoField = $('#meterNo');
-
-                                                                    if (tariffId) {
-                                                                        meterNoField.attr('disabled', false);
                                                                     } else {
-                                                                        meterNoField.attr('disabled', true);
+                                                                        // If estate_id or meterNo are empty, disable and clear the dropdown
+                                                                        $('#tariff_id').prop('disabled', true).empty();
                                                                     }
                                                                 });
                                                             });
+
                                                         </script>
 
 
-                                                        <div class="col-xl-6 my-2 col-sm-12">
-                                                            <label class="my-2">Amount</label>
-                                                            <input type="number" class="form-control mb-3" name="amount"
-                                                                   required>
-                                                        </div>
+
 
                                                     @else
                                                         <div class="col-xl-6 my-2 col-sm-12">
@@ -184,7 +199,6 @@
 
                                             </form>
                                         </div>
-
 
 
                                     </div>
@@ -363,12 +377,15 @@
 
                                                                     @if($preview == null)
 
-
                                                                         <div class="row">
                                                                             <div class="col-xl-6 my-2 col-sm-12">
                                                                                 <label class="my-2">Estate</label>
-                                                                                <input  class="form-control" value="{{$title}}" disabled required name="estate_id">
-                                                                                <input  class="form-control" value="{{$estate_id}}" hidden required name="estate_id">
+                                                                                <input class="form-control"
+                                                                                       value="{{$title}}" disabled
+                                                                                       required name="estate_id">
+                                                                                <input class="form-control"
+                                                                                       value="{{$estate_id}}" hidden
+                                                                                       required name="estate_id">
 
                                                                             </div>
                                                                         </div>
@@ -376,12 +393,15 @@
 
                                                                         <div class="row">
                                                                             <div class="col-xl-6 my-2 col-sm-12">
-                                                                                <label class="my-2">Tariff Amount</label>
-                                                                                <select class="form-control" required name="tariff_id">
+                                                                                <label class="my-2">Tariff
+                                                                                    Amount</label>
+                                                                                <select class="form-control" required
+                                                                                        name="tariff_id">
                                                                                     <option value="">--Select Tariff--
                                                                                     </option>
                                                                                     @foreach($tariff as $data)
-                                                                                        <option value="{{$data->tariff_id}}">{{$data->amount}}
+                                                                                        <option
+                                                                                            value="{{$data->tariff_id}}">{{$data->amount}}
                                                                                         </option>
                                                                                     @endforeach
                                                                                 </select>
@@ -403,8 +423,6 @@
                                                                                    class="form-control mb-3"
                                                                                    name="amount" required>
                                                                         </div>
-
-
 
                                                                     @else
                                                                         <div class="col-xl-6 my-2 col-sm-12">
@@ -468,7 +486,6 @@
                                                     @endif
 
 
-
                                                 </div>
 
 
@@ -477,8 +494,6 @@
 
 
                                     </div>
-
-
 
 
                                     <hr>

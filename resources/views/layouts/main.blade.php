@@ -10,6 +10,8 @@
     <meta name="author" content="Momaspay"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{url('')}}/public/asset/ass/images/favicon.ico">
 

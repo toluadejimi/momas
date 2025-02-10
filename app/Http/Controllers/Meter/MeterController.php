@@ -840,8 +840,37 @@ class MeterController extends Controller
     }
 
 
-    public
-    function list_meter(request $request)
+    public function filter_by_estate(request $request)
+    {
+
+        if (auth::user()->role == 0) {
+
+            $data['meters'] = Meter::count();
+            $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('estate_id',$request->estate_id)->paginate('20');
+            $data['estate'] = Estate::where('status', 2)->get();
+            return view('admin/meter/meter-lists', $data);
+
+        } elseif (auth::user()->role == 1) {
+
+
+        } elseif (auth::user()->role == 2) {
+
+        } elseif (auth::user()->role == 3) {
+            $data['meters'] = Meter::count();
+            $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('estate_id', auth::user()->estate_id)->paginate('20');
+            return view('admin/meter/meter-lists', $data);
+
+        } elseif (auth::user()->role == 4) {
+
+        } elseif (auth::user()->role == 5) {
+
+        } else {
+
+        }
+
+
+    }
+        public function list_meter(request $request)
     {
 
         if (auth::user()->role == 0) {
@@ -859,6 +888,8 @@ class MeterController extends Controller
         } elseif (auth::user()->role == 3) {
             $data['meters'] = Meter::count();
             $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('estate_id', auth::user()->estate_id)->paginate('20');
+            $data['estate'] = Estate::where('status', 2)->get();
+
             return view('admin/meter/meter-lists', $data);
 
         } elseif (auth::user()->role == 4) {
@@ -1183,6 +1214,27 @@ class MeterController extends Controller
 
         return back()->with('message', 'Meter has been successfully detached');
 
+    }
+
+
+    public function fetchTariff(request $request)
+    {
+        $estate_id = $request->input('estate_id');
+        $meterNo = $request->input('meterNo');
+
+        $user_id = User::where('meterNo', $meterNo)->first()->id ?? null;
+
+        if($user_id == null){
+            return response()->json([
+                'message' => "Meter not configured properly"
+            ], 422);
+
+        }
+
+        $tariffs = Tariff::where('estate_id', $estate_id)
+            ->where('user_id', $user_id)
+            ->get(['id', 'type']);
+        return response()->json(['tariffs' => $tariffs]);
     }
 
 
