@@ -255,7 +255,7 @@
 
                                                     <td>
                                                         @if($data->status == 2)
-                                                            <a href="recepit?trx_id={{$data->order_id}}"
+                                                            <a href="recepit?trx_id={{$data->order_id}}&type=credit_token"
                                                                onclick="return confirmreprint();"
                                                                class="btn btn-primary">Reprint</a>
                                                             <script>
@@ -549,7 +549,7 @@
 
                                                     <td>
                                                         @if($data->status == 2)
-                                                            <a href="recepit?trx_id={{$data->order_id}}"
+                                                            <a href="recepit?trx_id={{$data->order_id}}&type=credit_token"
                                                                onclick="return confirmreprint();"
                                                                class="btn btn-primary">Reprint</a>
                                                             <script>
