@@ -209,11 +209,6 @@ class TariffController extends Controller
 
             Tariff::where('id', $request->id)->update([
                 'title' => $request->title,
-                'estate_tariff_cost' => $request->estate_tariff_cost,
-                'estate_id' => $request->estate_id,
-                'OldTariffDual' => $request->OldTariffDual,
-                'NewTariffDual' => $request->NewTariffDual,
-                'isDualTariff' => $request->isDualTariff,
             ]);
 
 
@@ -221,9 +216,6 @@ class TariffController extends Controller
 
             Tariff::where('id', $request->id)->update([
                 'title' => $request->title,
-                'estate_tariff_cost' => $request->estate_tariff_cost,
-                'estate_id' => $request->estate_id,
-                'isDualTariff' => $request->isDualTariff,
             ]);
 
         }
