@@ -139,6 +139,30 @@
                         </li>
 
                         <li>
+                            <a class='tp-link' href="estate">
+                                <i data-feather="home"></i>
+                                <span> Estate </span>
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a class='tp-link' href="transformer-list">
+                                <i data-feather="box"></i>
+                                <span> Transformer </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class='tp-link' href="tariff-list">
+                                <i data-feather="divide-square"></i>
+                                <span> Tariff </span>
+                            </a>
+                        </li>
+
+
+
+                        <li>
                             <a class='tp-link' href="meter-list">
                                 <i data-feather="cpu"></i>
                                 <span> Meter </span>
@@ -162,20 +186,10 @@
 {{--                        </li>--}}
 
 
-                        <li>
-                            <a class='tp-link' href="transformer-list">
-                                <i data-feather="box"></i>
-                                <span> Transformer </span>
-                            </a>
-                        </li>
 
 
-                        <li>
-                            <a class='tp-link' href="estate">
-                                <i data-feather="home"></i>
-                                <span> Estate </span>
-                            </a>
-                        </li>
+
+
 
 
                         <li>
@@ -186,12 +200,7 @@
                         </li>
 
 
-                        <li>
-                            <a class='tp-link' href="tariff-list">
-                                <i data-feather="divide-square"></i>
-                                <span> Tariff </span>
-                            </a>
-                        </li>
+
 
 
                         <li>
@@ -318,6 +327,14 @@
 
 
                         <li>
+                            <a class='tp-link' href="transformer-list">
+                                <i data-feather="box"></i>
+                                <span> Transformer </span>
+                            </a>
+                        </li>
+
+
+                        <li>
                             <a class='tp-link' href="meter-list">
                                 <i data-feather="cpu"></i>
                                 <span> Meter </span>
@@ -340,12 +357,7 @@
                         </li>
 
 
-                        <li>
-                            <a class='tp-link' href="transformer-list">
-                                <i data-feather="box"></i>
-                                <span> Transformer </span>
-                            </a>
-                        </li>
+
 
 
 {{--                        <li>--}}
