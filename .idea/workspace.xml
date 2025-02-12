@@ -5,19 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df462c8f-229d-4527-915f-ee2aade1fa51" name="Changes" comment="pusgggghhh">
-      <change beforePath="$PROJECT_DIR$/.idea/momas.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/momas.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PosController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PosController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/pos/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pos/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/pos/new-merchant.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pos/new-merchant.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/main.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/CustomerImportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/CustomerImportController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardContoller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardContoller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/TariffController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/TariffController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Meter/MeterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Meter/MeterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Imports/CustomersImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/CustomersImport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/tariff/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/tariff/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/tariff/new-tariff.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/tariff/new-tariff.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/token/credit-token-view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/token/credit-token-view.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/user/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/user/view.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerConfigs">
+    <option name="configs">
+      <option value="$PROJECT_DIR$/../logresell/composer.json" />
+    </option>
   </component>
   <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
@@ -177,6 +187,134 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/cli-parser" />
       <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
       <path value="$PROJECT_DIR$/vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/fidry/cpu-core-counter" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/league/uri-interfaces" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/league/mime-type-detection" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/mockery/mockery" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/league/commonmark" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/league/flysystem-local" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/laravel/sail" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/hamcrest/hamcrest-php" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/polyfill-uuid" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/league/uri" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/league/config" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/composer" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/psr/clock" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/laravel/pail" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/laravel/prompts" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/laravel/serializable-closure" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/nunomaduro/collision" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/laravel/framework" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/nunomaduro/termwind" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/laravel/pint" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/laravel/tinker" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/laravel/breeze" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/ta-tikoma/phpunit-architecture-test" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/cli-parser" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/laracasts/flash" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/realrashid/sweet-alert" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/nette/schema" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/uid" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpunit/php-invoker" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/pestphp/pest-plugin" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpstan/phpdoc-parser" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/staabm/side-effects-detector" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/error-handler" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/brianium/paratest" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/mailer" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/pestphp/pest-plugin-laravel" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/pestphp/pest-plugin-mutate" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/jean85/pretty-package-versions" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/guzzlehttp/uri-template" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/dflydev/dot-access-data" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/voku/portable-ascii" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/ramsey/collection" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/carbonphp/carbon-doctrine-types" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/nette/utils" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/graham-campbell/result-type" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/fruitcake/php-cors" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/code-unit" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/pestphp/pest" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/clock" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/polyfill-php83" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/psy/psysh" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/dragonmantank/cron-expression" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/fakerphp/faker" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/tijsverkoyen/css-to-inline-styles" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/brick/math" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/pestphp/pest-plugin-arch" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/doctrine/lexer" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -191,31 +329,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Applications/XAMPP/xamppfiles/htdocs/project/momas",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Applications/XAMPP/xamppfiles/htdocs/project/momas/resources/views/admin/recepit&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/views/admin/pos" />
+      <recent name="$PROJECT_DIR$/resources/views/admin/recepit" />
       <recent name="$PROJECT_DIR$/resources/views/admin/token" />
+      <recent name="$PROJECT_DIR$/resources/views/admin/pos" />
       <recent name="$PROJECT_DIR$/public/asset/img" />
       <recent name="$PROJECT_DIR$/resources/views/auth" />
-      <recent name="$PROJECT_DIR$/resources/views/emails" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/admin/recepit" />
       <recent name="$PROJECT_DIR$/resources/views/admin" />
       <recent name="$PROJECT_DIR$/app/Http/Controllers" />
     </key>
@@ -223,6 +362,15 @@
   <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
+      <method v="2" />
+    </configuration>
+    <configuration name="/Applications/XAMPP/xamppfiles/htdocs/project/logresell/vendor/pestphp/pest/bin/pest" type="PestRunConfigurationType">
+      <option name="pestRunnerSettings">
+        <PestRunner configuration_file="$PROJECT_DIR$/../logresell/phpunit.xml" scope="ConfigurationFile" use_alternative_configuration_file="true" />
+      </option>
+      <option name="runnerSettings">
+        <PhpTestRunnerSettings configuration_file="$PROJECT_DIR$/../logresell/phpunit.xml" scope="ConfigurationFile" use_alternative_configuration_file="true" />
+      </option>
       <method v="2" />
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
@@ -345,350 +493,18 @@
       <workItem from="1734344175545" duration="1926000" />
       <workItem from="1734513676450" duration="8930000" />
       <workItem from="1734621786425" duration="592000" />
-    </task>
-    <task id="LOCAL-00401" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732781536449</created>
-      <option name="number" value="00401" />
-      <option name="presentableId" value="LOCAL-00401" />
-      <option name="project" value="LOCAL" />
-      <updated>1732781536449</updated>
-    </task>
-    <task id="LOCAL-00402" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732781822350</created>
-      <option name="number" value="00402" />
-      <option name="presentableId" value="LOCAL-00402" />
-      <option name="project" value="LOCAL" />
-      <updated>1732781822350</updated>
-    </task>
-    <task id="LOCAL-00403" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732782309818</created>
-      <option name="number" value="00403" />
-      <option name="presentableId" value="LOCAL-00403" />
-      <option name="project" value="LOCAL" />
-      <updated>1732782309818</updated>
-    </task>
-    <task id="LOCAL-00404" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732782525945</created>
-      <option name="number" value="00404" />
-      <option name="presentableId" value="LOCAL-00404" />
-      <option name="project" value="LOCAL" />
-      <updated>1732782525945</updated>
-    </task>
-    <task id="LOCAL-00405" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732782671365</created>
-      <option name="number" value="00405" />
-      <option name="presentableId" value="LOCAL-00405" />
-      <option name="project" value="LOCAL" />
-      <updated>1732782671365</updated>
-    </task>
-    <task id="LOCAL-00406" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732782892477</created>
-      <option name="number" value="00406" />
-      <option name="presentableId" value="LOCAL-00406" />
-      <option name="project" value="LOCAL" />
-      <updated>1732782892477</updated>
-    </task>
-    <task id="LOCAL-00407" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732783146461</created>
-      <option name="number" value="00407" />
-      <option name="presentableId" value="LOCAL-00407" />
-      <option name="project" value="LOCAL" />
-      <updated>1732783146461</updated>
-    </task>
-    <task id="LOCAL-00408" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732783437491</created>
-      <option name="number" value="00408" />
-      <option name="presentableId" value="LOCAL-00408" />
-      <option name="project" value="LOCAL" />
-      <updated>1732783437491</updated>
-    </task>
-    <task id="LOCAL-00409" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732784041409</created>
-      <option name="number" value="00409" />
-      <option name="presentableId" value="LOCAL-00409" />
-      <option name="project" value="LOCAL" />
-      <updated>1732784041409</updated>
-    </task>
-    <task id="LOCAL-00410" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732784395540</created>
-      <option name="number" value="00410" />
-      <option name="presentableId" value="LOCAL-00410" />
-      <option name="project" value="LOCAL" />
-      <updated>1732784395540</updated>
-    </task>
-    <task id="LOCAL-00411" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732784740049</created>
-      <option name="number" value="00411" />
-      <option name="presentableId" value="LOCAL-00411" />
-      <option name="project" value="LOCAL" />
-      <updated>1732784740049</updated>
-    </task>
-    <task id="LOCAL-00412" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732789527875</created>
-      <option name="number" value="00412" />
-      <option name="presentableId" value="LOCAL-00412" />
-      <option name="project" value="LOCAL" />
-      <updated>1732789527875</updated>
-    </task>
-    <task id="LOCAL-00413" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732789872082</created>
-      <option name="number" value="00413" />
-      <option name="presentableId" value="LOCAL-00413" />
-      <option name="project" value="LOCAL" />
-      <updated>1732789872083</updated>
-    </task>
-    <task id="LOCAL-00414" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732797132643</created>
-      <option name="number" value="00414" />
-      <option name="presentableId" value="LOCAL-00414" />
-      <option name="project" value="LOCAL" />
-      <updated>1732797132643</updated>
-    </task>
-    <task id="LOCAL-00415" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732797943047</created>
-      <option name="number" value="00415" />
-      <option name="presentableId" value="LOCAL-00415" />
-      <option name="project" value="LOCAL" />
-      <updated>1732797943047</updated>
-    </task>
-    <task id="LOCAL-00416" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732798570887</created>
-      <option name="number" value="00416" />
-      <option name="presentableId" value="LOCAL-00416" />
-      <option name="project" value="LOCAL" />
-      <updated>1732798570887</updated>
-    </task>
-    <task id="LOCAL-00417" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732798825100</created>
-      <option name="number" value="00417" />
-      <option name="presentableId" value="LOCAL-00417" />
-      <option name="project" value="LOCAL" />
-      <updated>1732798825100</updated>
-    </task>
-    <task id="LOCAL-00418" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732799737475</created>
-      <option name="number" value="00418" />
-      <option name="presentableId" value="LOCAL-00418" />
-      <option name="project" value="LOCAL" />
-      <updated>1732799737475</updated>
-    </task>
-    <task id="LOCAL-00419" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732799793952</created>
-      <option name="number" value="00419" />
-      <option name="presentableId" value="LOCAL-00419" />
-      <option name="project" value="LOCAL" />
-      <updated>1732799793952</updated>
-    </task>
-    <task id="LOCAL-00420" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732817403015</created>
-      <option name="number" value="00420" />
-      <option name="presentableId" value="LOCAL-00420" />
-      <option name="project" value="LOCAL" />
-      <updated>1732817403015</updated>
-    </task>
-    <task id="LOCAL-00421" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732817933223</created>
-      <option name="number" value="00421" />
-      <option name="presentableId" value="LOCAL-00421" />
-      <option name="project" value="LOCAL" />
-      <updated>1732817933223</updated>
-    </task>
-    <task id="LOCAL-00422" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732858980107</created>
-      <option name="number" value="00422" />
-      <option name="presentableId" value="LOCAL-00422" />
-      <option name="project" value="LOCAL" />
-      <updated>1732858980107</updated>
-    </task>
-    <task id="LOCAL-00423" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732859471858</created>
-      <option name="number" value="00423" />
-      <option name="presentableId" value="LOCAL-00423" />
-      <option name="project" value="LOCAL" />
-      <updated>1732859471858</updated>
-    </task>
-    <task id="LOCAL-00424" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732861368732</created>
-      <option name="number" value="00424" />
-      <option name="presentableId" value="LOCAL-00424" />
-      <option name="project" value="LOCAL" />
-      <updated>1732861368732</updated>
-    </task>
-    <task id="LOCAL-00425" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732861705965</created>
-      <option name="number" value="00425" />
-      <option name="presentableId" value="LOCAL-00425" />
-      <option name="project" value="LOCAL" />
-      <updated>1732861705965</updated>
-    </task>
-    <task id="LOCAL-00426" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1732861809899</created>
-      <option name="number" value="00426" />
-      <option name="presentableId" value="LOCAL-00426" />
-      <option name="project" value="LOCAL" />
-      <updated>1732861809899</updated>
-    </task>
-    <task id="LOCAL-00427" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1733134991319</created>
-      <option name="number" value="00427" />
-      <option name="presentableId" value="LOCAL-00427" />
-      <option name="project" value="LOCAL" />
-      <updated>1733134991320</updated>
-    </task>
-    <task id="LOCAL-00428" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1733246634877</created>
-      <option name="number" value="00428" />
-      <option name="presentableId" value="LOCAL-00428" />
-      <option name="project" value="LOCAL" />
-      <updated>1733246634877</updated>
-    </task>
-    <task id="LOCAL-00429" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1733474588458</created>
-      <option name="number" value="00429" />
-      <option name="presentableId" value="LOCAL-00429" />
-      <option name="project" value="LOCAL" />
-      <updated>1733474588459</updated>
-    </task>
-    <task id="LOCAL-00430" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1733475734446</created>
-      <option name="number" value="00430" />
-      <option name="presentableId" value="LOCAL-00430" />
-      <option name="project" value="LOCAL" />
-      <updated>1733475734446</updated>
-    </task>
-    <task id="LOCAL-00431" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1733476289152</created>
-      <option name="number" value="00431" />
-      <option name="presentableId" value="LOCAL-00431" />
-      <option name="project" value="LOCAL" />
-      <updated>1733476289152</updated>
-    </task>
-    <task id="LOCAL-00432" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1733482150450</created>
-      <option name="number" value="00432" />
-      <option name="presentableId" value="LOCAL-00432" />
-      <option name="project" value="LOCAL" />
-      <updated>1733482150450</updated>
-    </task>
-    <task id="LOCAL-00433" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1733482605210</created>
-      <option name="number" value="00433" />
-      <option name="presentableId" value="LOCAL-00433" />
-      <option name="project" value="LOCAL" />
-      <updated>1733482605210</updated>
-    </task>
-    <task id="LOCAL-00434" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1733483124073</created>
-      <option name="number" value="00434" />
-      <option name="presentableId" value="LOCAL-00434" />
-      <option name="project" value="LOCAL" />
-      <updated>1733483124074</updated>
-    </task>
-    <task id="LOCAL-00435" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1733483193843</created>
-      <option name="number" value="00435" />
-      <option name="presentableId" value="LOCAL-00435" />
-      <option name="project" value="LOCAL" />
-      <updated>1733483193843</updated>
-    </task>
-    <task id="LOCAL-00436" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1733483296106</created>
-      <option name="number" value="00436" />
-      <option name="presentableId" value="LOCAL-00436" />
-      <option name="project" value="LOCAL" />
-      <updated>1733483296106</updated>
-    </task>
-    <task id="LOCAL-00437" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1733486308580</created>
-      <option name="number" value="00437" />
-      <option name="presentableId" value="LOCAL-00437" />
-      <option name="project" value="LOCAL" />
-      <updated>1733486308580</updated>
-    </task>
-    <task id="LOCAL-00438" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1733486476052</created>
-      <option name="number" value="00438" />
-      <option name="presentableId" value="LOCAL-00438" />
-      <option name="project" value="LOCAL" />
-      <updated>1733486476052</updated>
-    </task>
-    <task id="LOCAL-00439" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1733513206126</created>
-      <option name="number" value="00439" />
-      <option name="presentableId" value="LOCAL-00439" />
-      <option name="project" value="LOCAL" />
-      <updated>1733513206126</updated>
-    </task>
-    <task id="LOCAL-00440" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1733513739729</created>
-      <option name="number" value="00440" />
-      <option name="presentableId" value="LOCAL-00440" />
-      <option name="project" value="LOCAL" />
-      <updated>1733513739729</updated>
-    </task>
-    <task id="LOCAL-00441" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1733561566473</created>
-      <option name="number" value="00441" />
-      <option name="presentableId" value="LOCAL-00441" />
-      <option name="project" value="LOCAL" />
-      <updated>1733561566473</updated>
-    </task>
-    <task id="LOCAL-00442" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1734117882228</created>
-      <option name="number" value="00442" />
-      <option name="presentableId" value="LOCAL-00442" />
-      <option name="project" value="LOCAL" />
-      <updated>1734117882228</updated>
-    </task>
-    <task id="LOCAL-00443" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1734164719802</created>
-      <option name="number" value="00443" />
-      <option name="presentableId" value="LOCAL-00443" />
-      <option name="project" value="LOCAL" />
-      <updated>1734164719803</updated>
+      <workItem from="1734642225597" duration="8568000" />
+      <workItem from="1735331990723" duration="201000" />
+      <workItem from="1735500507488" duration="586000" />
+      <workItem from="1735710657225" duration="22786000" />
+      <workItem from="1736795652101" duration="451000" />
+      <workItem from="1736943449953" duration="4831000" />
+      <workItem from="1737540972759" duration="18228000" />
+      <workItem from="1737715914287" duration="30237000" />
+      <workItem from="1738265972298" duration="1652000" />
+      <workItem from="1738395788475" duration="26000" />
+      <workItem from="1738760731578" duration="23000" />
+      <workItem from="1739011048870" duration="16672000" />
     </task>
     <task id="LOCAL-00444" summary="pusgggghhh">
       <option name="closed" value="true" />
@@ -738,7 +554,351 @@
       <option name="project" value="LOCAL" />
       <updated>1734521939049</updated>
     </task>
-    <option name="localTasksCounter" value="450" />
+    <task id="LOCAL-00450" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1734643882868</created>
+      <option name="number" value="00450" />
+      <option name="presentableId" value="LOCAL-00450" />
+      <option name="project" value="LOCAL" />
+      <updated>1734643882868</updated>
+    </task>
+    <task id="LOCAL-00451" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1734644054214</created>
+      <option name="number" value="00451" />
+      <option name="presentableId" value="LOCAL-00451" />
+      <option name="project" value="LOCAL" />
+      <updated>1734644054214</updated>
+    </task>
+    <task id="LOCAL-00452" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1734644285996</created>
+      <option name="number" value="00452" />
+      <option name="presentableId" value="LOCAL-00452" />
+      <option name="project" value="LOCAL" />
+      <updated>1734644285996</updated>
+    </task>
+    <task id="LOCAL-00453" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1734646996705</created>
+      <option name="number" value="00453" />
+      <option name="presentableId" value="LOCAL-00453" />
+      <option name="project" value="LOCAL" />
+      <updated>1734646996705</updated>
+    </task>
+    <task id="LOCAL-00454" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1734648019956</created>
+      <option name="number" value="00454" />
+      <option name="presentableId" value="LOCAL-00454" />
+      <option name="project" value="LOCAL" />
+      <updated>1734648019956</updated>
+    </task>
+    <task id="LOCAL-00455" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1734650029850</created>
+      <option name="number" value="00455" />
+      <option name="presentableId" value="LOCAL-00455" />
+      <option name="project" value="LOCAL" />
+      <updated>1734650029850</updated>
+    </task>
+    <task id="LOCAL-00456" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1734665250041</created>
+      <option name="number" value="00456" />
+      <option name="presentableId" value="LOCAL-00456" />
+      <option name="project" value="LOCAL" />
+      <updated>1734665250041</updated>
+    </task>
+    <task id="LOCAL-00457" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1734665724512</created>
+      <option name="number" value="00457" />
+      <option name="presentableId" value="LOCAL-00457" />
+      <option name="project" value="LOCAL" />
+      <updated>1734665724512</updated>
+    </task>
+    <task id="LOCAL-00458" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1734666038288</created>
+      <option name="number" value="00458" />
+      <option name="presentableId" value="LOCAL-00458" />
+      <option name="project" value="LOCAL" />
+      <updated>1734666038288</updated>
+    </task>
+    <task id="LOCAL-00459" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1734671566513</created>
+      <option name="number" value="00459" />
+      <option name="presentableId" value="LOCAL-00459" />
+      <option name="project" value="LOCAL" />
+      <updated>1734671566513</updated>
+    </task>
+    <task id="LOCAL-00460" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1735713738610</created>
+      <option name="number" value="00460" />
+      <option name="presentableId" value="LOCAL-00460" />
+      <option name="project" value="LOCAL" />
+      <updated>1735713738610</updated>
+    </task>
+    <task id="LOCAL-00461" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1735719648147</created>
+      <option name="number" value="00461" />
+      <option name="presentableId" value="LOCAL-00461" />
+      <option name="project" value="LOCAL" />
+      <updated>1735719648147</updated>
+    </task>
+    <task id="LOCAL-00462" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1735902962069</created>
+      <option name="number" value="00462" />
+      <option name="presentableId" value="LOCAL-00462" />
+      <option name="project" value="LOCAL" />
+      <updated>1735902962069</updated>
+    </task>
+    <task id="LOCAL-00463" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1735903372809</created>
+      <option name="number" value="00463" />
+      <option name="presentableId" value="LOCAL-00463" />
+      <option name="project" value="LOCAL" />
+      <updated>1735903372809</updated>
+    </task>
+    <task id="LOCAL-00464" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1735915032825</created>
+      <option name="number" value="00464" />
+      <option name="presentableId" value="LOCAL-00464" />
+      <option name="project" value="LOCAL" />
+      <updated>1735915032825</updated>
+    </task>
+    <task id="LOCAL-00465" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1735915416604</created>
+      <option name="number" value="00465" />
+      <option name="presentableId" value="LOCAL-00465" />
+      <option name="project" value="LOCAL" />
+      <updated>1735915416604</updated>
+    </task>
+    <task id="LOCAL-00466" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1735915508276</created>
+      <option name="number" value="00466" />
+      <option name="presentableId" value="LOCAL-00466" />
+      <option name="project" value="LOCAL" />
+      <updated>1735915508276</updated>
+    </task>
+    <task id="LOCAL-00467" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1735918263188</created>
+      <option name="number" value="00467" />
+      <option name="presentableId" value="LOCAL-00467" />
+      <option name="project" value="LOCAL" />
+      <updated>1735918263189</updated>
+    </task>
+    <task id="LOCAL-00468" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1736148833870</created>
+      <option name="number" value="00468" />
+      <option name="presentableId" value="LOCAL-00468" />
+      <option name="project" value="LOCAL" />
+      <updated>1736148833870</updated>
+    </task>
+    <task id="LOCAL-00469" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1736157855757</created>
+      <option name="number" value="00469" />
+      <option name="presentableId" value="LOCAL-00469" />
+      <option name="project" value="LOCAL" />
+      <updated>1736157855757</updated>
+    </task>
+    <task id="LOCAL-00470" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1736419311899</created>
+      <option name="number" value="00470" />
+      <option name="presentableId" value="LOCAL-00470" />
+      <option name="project" value="LOCAL" />
+      <updated>1736419311899</updated>
+    </task>
+    <task id="LOCAL-00471" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1736613522102</created>
+      <option name="number" value="00471" />
+      <option name="presentableId" value="LOCAL-00471" />
+      <option name="project" value="LOCAL" />
+      <updated>1736613522102</updated>
+    </task>
+    <task id="LOCAL-00472" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1736943550295</created>
+      <option name="number" value="00472" />
+      <option name="presentableId" value="LOCAL-00472" />
+      <option name="project" value="LOCAL" />
+      <updated>1736943550295</updated>
+    </task>
+    <task id="LOCAL-00473" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1736945674009</created>
+      <option name="number" value="00473" />
+      <option name="presentableId" value="LOCAL-00473" />
+      <option name="project" value="LOCAL" />
+      <updated>1736945674009</updated>
+    </task>
+    <task id="LOCAL-00474" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1736945754592</created>
+      <option name="number" value="00474" />
+      <option name="presentableId" value="LOCAL-00474" />
+      <option name="project" value="LOCAL" />
+      <updated>1736945754592</updated>
+    </task>
+    <task id="LOCAL-00475" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1736945979476</created>
+      <option name="number" value="00475" />
+      <option name="presentableId" value="LOCAL-00475" />
+      <option name="project" value="LOCAL" />
+      <updated>1736945979476</updated>
+    </task>
+    <task id="LOCAL-00476" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1736946154331</created>
+      <option name="number" value="00476" />
+      <option name="presentableId" value="LOCAL-00476" />
+      <option name="project" value="LOCAL" />
+      <updated>1736946154331</updated>
+    </task>
+    <task id="LOCAL-00477" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1736946236876</created>
+      <option name="number" value="00477" />
+      <option name="presentableId" value="LOCAL-00477" />
+      <option name="project" value="LOCAL" />
+      <updated>1736946236876</updated>
+    </task>
+    <task id="LOCAL-00478" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1736946588905</created>
+      <option name="number" value="00478" />
+      <option name="presentableId" value="LOCAL-00478" />
+      <option name="project" value="LOCAL" />
+      <updated>1736946588905</updated>
+    </task>
+    <task id="LOCAL-00479" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1736947019599</created>
+      <option name="number" value="00479" />
+      <option name="presentableId" value="LOCAL-00479" />
+      <option name="project" value="LOCAL" />
+      <updated>1736947019599</updated>
+    </task>
+    <task id="LOCAL-00480" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1736950337789</created>
+      <option name="number" value="00480" />
+      <option name="presentableId" value="LOCAL-00480" />
+      <option name="project" value="LOCAL" />
+      <updated>1736950337789</updated>
+    </task>
+    <task id="LOCAL-00481" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1737635820637</created>
+      <option name="number" value="00481" />
+      <option name="presentableId" value="LOCAL-00481" />
+      <option name="project" value="LOCAL" />
+      <updated>1737635820639</updated>
+    </task>
+    <task id="LOCAL-00482" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1737640122954</created>
+      <option name="number" value="00482" />
+      <option name="presentableId" value="LOCAL-00482" />
+      <option name="project" value="LOCAL" />
+      <updated>1737640122954</updated>
+    </task>
+    <task id="LOCAL-00483" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1737646604758</created>
+      <option name="number" value="00483" />
+      <option name="presentableId" value="LOCAL-00483" />
+      <option name="project" value="LOCAL" />
+      <updated>1737646604759</updated>
+    </task>
+    <task id="LOCAL-00484" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1737647671641</created>
+      <option name="number" value="00484" />
+      <option name="presentableId" value="LOCAL-00484" />
+      <option name="project" value="LOCAL" />
+      <updated>1737647671641</updated>
+    </task>
+    <task id="LOCAL-00485" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1737716076945</created>
+      <option name="number" value="00485" />
+      <option name="presentableId" value="LOCAL-00485" />
+      <option name="project" value="LOCAL" />
+      <updated>1737716076946</updated>
+    </task>
+    <task id="LOCAL-00486" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1737716158992</created>
+      <option name="number" value="00486" />
+      <option name="presentableId" value="LOCAL-00486" />
+      <option name="project" value="LOCAL" />
+      <updated>1737716158992</updated>
+    </task>
+    <task id="LOCAL-00487" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1737716261285</created>
+      <option name="number" value="00487" />
+      <option name="presentableId" value="LOCAL-00487" />
+      <option name="project" value="LOCAL" />
+      <updated>1737716261285</updated>
+    </task>
+    <task id="LOCAL-00488" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1737987830450</created>
+      <option name="number" value="00488" />
+      <option name="presentableId" value="LOCAL-00488" />
+      <option name="project" value="LOCAL" />
+      <updated>1737987830450</updated>
+    </task>
+    <task id="LOCAL-00489" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1737996283977</created>
+      <option name="number" value="00489" />
+      <option name="presentableId" value="LOCAL-00489" />
+      <option name="project" value="LOCAL" />
+      <updated>1737996283977</updated>
+    </task>
+    <task id="LOCAL-00490" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1737998961276</created>
+      <option name="number" value="00490" />
+      <option name="presentableId" value="LOCAL-00490" />
+      <option name="project" value="LOCAL" />
+      <updated>1737998961277</updated>
+    </task>
+    <task id="LOCAL-00491" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1738087543436</created>
+      <option name="number" value="00491" />
+      <option name="presentableId" value="LOCAL-00491" />
+      <option name="project" value="LOCAL" />
+      <updated>1738087543436</updated>
+    </task>
+    <task id="LOCAL-00492" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739171607548</created>
+      <option name="number" value="00492" />
+      <option name="presentableId" value="LOCAL-00492" />
+      <option name="project" value="LOCAL" />
+      <updated>1739171607548</updated>
+    </task>
+    <option name="localTasksCounter" value="493" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -795,7 +955,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardContoller.php</url>
-          <line>182</line>
+          <line>197</line>
           <properties>
             <option name="className" value="\App\Http\Controllers\Admin\DashboardContoller" />
             <option name="methodName" value="new_customer" />
@@ -804,7 +964,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardContoller.php</url>
-          <line>218</line>
+          <line>231</line>
           <properties>
             <option name="className" value="\App\Http\Controllers\Admin\DashboardContoller" />
             <option name="methodName" value="add_new_customer" />
@@ -813,7 +973,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Meter/MeterController.php</url>
-          <line>809</line>
+          <line>829</line>
           <properties>
             <option name="className" value="\App\Http\Controllers\Meter\MeterController" />
             <option name="methodName" value="reprint_meter_token" />
@@ -822,7 +982,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Meter/MeterController.php</url>
-          <line>875</line>
+          <line>896</line>
           <properties>
             <option name="className" value="\App\Http\Controllers\Meter\MeterController" />
             <option name="methodName" value="new_meter" />
@@ -831,16 +991,61 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/PosController.php</url>
-          <line>22</line>
+          <line>24</line>
           <properties>
             <option name="className" value="\App\Http\Controllers\PosController" />
             <option name="methodName" value="index" />
           </properties>
           <option name="timeStamp" value="45" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/PosController.php</url>
+          <line>642</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\PosController" />
+            <option name="methodName" value="retry_meter_token" />
+          </properties>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
+          <line>3753</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\Admin\TokenController" />
+            <option name="methodName" value="recepit" />
+          </properties>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Meter/MeterController.php</url>
+          <line>51</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\Meter\MeterController" />
+            <option name="methodName" value="searchMeter" />
+          </properties>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
+          <line>1034</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\Admin\TokenController" />
+            <option name="methodName" value="generate_credit_meter_token" />
+          </properties>
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
+          <line>1851</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\Admin\TokenController" />
+            <option name="methodName" value="generate_clear_credit_meter_token" />
+          </properties>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/layouts/main.blade.php</url>
-          <line>44</line>
+          <line>46</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -865,7 +1070,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/layouts/main.blade.php</url>
-          <line>469</line>
+          <line>495</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -875,12 +1080,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/admin/estate/view.blade.php</url>
-          <line>490</line>
+          <line>526</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardContoller.php</url>
-          <line>359</line>
+          <line>360</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -900,7 +1105,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Meter/MeterController.php</url>
-          <line>758</line>
+          <line>778</line>
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -915,18 +1120,38 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Meter/MeterController.php</url>
-          <line>174</line>
+          <line>194</line>
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Meter/MeterController.php</url>
-          <line>615</line>
+          <line>635</line>
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/resources/views/admin/token/credit-token-view.blade.php</url>
-          <line>366</line>
-          <option name="timeStamp" value="44" />
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/PosController.php</url>
+          <line>500</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
+          <line>3639</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
+          <line>1321</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
+          <line>959</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
+          <line>497</line>
+          <option name="timeStamp" value="53" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -106,15 +106,11 @@
 
                                                         <script>
                                                             $(document).ready(function () {
-
                                                                 $('#estate_id, #meterNo').on('change input', function () {
-                                                                    // Get the estate_id and meterNo values
                                                                     var estate_id = $('#estate_id').val();
                                                                     var meterNo = $('#meterNo').val();
 
-                                                                    // Check if both values are selected/entered
                                                                     if (estate_id && meterNo) {
-                                                                        // Perform the AJAX call to fetch power source
                                                                         $.ajax({
                                                                             url: '/fetch-tariff', // Change this to your endpoint
                                                                             method: 'GET',
@@ -123,32 +119,41 @@
                                                                                 meterNo: meterNo
                                                                             },
                                                                             success: function (response) {
-                                                                                if (response && response.tariffs) {
+                                                                                // Check if response is 1, 2, or 3
+                                                                                if (response == 1) {
+                                                                                    alert("Error: User is not attached to any estate.");
+                                                                                    return;
+                                                                                }
+                                                                                if(response == 2){
+                                                                                    alert("Error: Estate does not have any tariff");
+                                                                                    return;
+                                                                                }
+                                                                                if(response == 3){
+                                                                                    alert("Error: Tariff index not set for customer.");
+                                                                                    return;
+                                                                                }
 
+                                                                                if (response && response.tariffs) {
                                                                                     console.log(response);
                                                                                     var tariffSelect = $('#tariff_id');
-                                                                                    tariffSelect.empty(); // Clear existing options
-                                                                                    tariffSelect.append('<option value="">--Select Tariff--</option>'); // Default option
+                                                                                    tariffSelect.empty();
+                                                                                    tariffSelect.append('<option value="">--Select Tariff--</option>');
 
-                                                                                    // Add the returned tariffs to the dropdown
                                                                                     response.tariffs.forEach(function (tariff) {
                                                                                         tariffSelect.append('<option value="' + tariff.id + '">' + tariff.type + '</option>');
                                                                                     });
 
-                                                                                    // Enable the dropdown
                                                                                     tariffSelect.prop('disabled', false);
                                                                                 } else {
-                                                                                    // If no tariffs, disable and clear the dropdown
                                                                                     $('#tariff_id').prop('disabled', true).empty();
                                                                                 }
                                                                             },
                                                                             error: function () {
-                                                                                // In case of an error, disable and clear the dropdown
                                                                                 $('#tariff_id').prop('disabled', true).empty();
+                                                                                alert("Error fetching tariff data. Please try again.");
                                                                             }
                                                                         });
                                                                     } else {
-                                                                        // If estate_id or meterNo are empty, disable and clear the dropdown
                                                                         $('#tariff_id').prop('disabled', true).empty();
                                                                     }
                                                                 });

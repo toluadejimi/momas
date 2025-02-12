@@ -22,12 +22,18 @@ class CustomerImportController extends Controller
         }
 
 
+
         $request->validate([
-            'file' => 'required|mimes:csv,xlsx,xls',
+            'file' => 'required|file|mimes:csv,txt,xlsx,xls'
         ]);
 
+
+
         try {
+            \Log::info('Import process started.');
             Excel::import(new CustomersImport($id), $request->file('file'));
+            \Log::info('Import process finished.');
+
 
         } catch (\Exception$th) {
 

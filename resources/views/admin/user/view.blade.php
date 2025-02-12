@@ -356,136 +356,136 @@
 
 
 
-                    <div class="col-xl-12">
+{{--                    <div class="col-xl-12">--}}
 
-                        <div class="row">
-                            <div class="col-xl-6 mr-3 col-sm-12 card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <form action="update-nepa" method="post">
-                                            @csrf
-                                            <div class="row">
+{{--                        <div class="row">--}}
+{{--                            <div class="col-xl-6 mr-3 col-sm-12 card">--}}
+{{--                                <div class="card-body">--}}
+{{--                                    <div class="row">--}}
+{{--                                        <form action="update-nepa" method="post">--}}
+{{--                                            @csrf--}}
+{{--                                            <div class="row">--}}
 
-                                                <h6 class="d-flex justify-content-start my-2">Tariff
-                                                    Information</h6>
-
-
-                                                <div class="col-xl-6 col-sm-12"
-                                                     style="position: relative;">
-
-                                                    <h6 class="mb-4">NEPA TARIFF <span
-                                                            class="badge text-bg-secondary">{{$nepa_tariff_title   ?? "Set Tariff"}} | ID - {{$tariff_index_nepa ?? " "}}</span>
-                                                    </h6>
-
-                                                    <select class="form-control my-3" name="id">
-
-                                                        @foreach($tariff as $data)
-                                                            <option
-                                                                value="{{$data->id}}">{{$data->title}}
-                                                                |
-                                                                ID - {{$data->tariff_index}}</option>
-                                                        @endforeach
-
-                                                        <input name="user_id" hidden
-                                                               value="{{$user->id}}">
+{{--                                                <h6 class="d-flex justify-content-start my-2">Tariff--}}
+{{--                                                    Information</h6>--}}
 
 
-                                                    </select>
+{{--                                                <div class="col-xl-6 col-sm-12"--}}
+{{--                                                     style="position: relative;">--}}
+
+{{--                                                    <h6 class="mb-4">NEPA TARIFF <span--}}
+{{--                                                            class="badge text-bg-secondary">{{$nepa_tariff_title   ?? "Set Tariff"}} | ID - {{$tariff_index_nepa ?? " "}}</span>--}}
+{{--                                                    </h6>--}}
+
+{{--                                                    <select class="form-control my-3" name="id">--}}
+
+{{--                                                        @foreach($tariff as $data)--}}
+{{--                                                            <option--}}
+{{--                                                                value="{{$data->id}}">{{$data->title}}--}}
+{{--                                                                |--}}
+{{--                                                                ID - {{$data->tariff_index}}</option>--}}
+{{--                                                        @endforeach--}}
+
+{{--                                                        <input name="user_id" hidden--}}
+{{--                                                               value="{{$user->id}}">--}}
 
 
-                                                    @if($tariff_count_nepa == 0)
-
-                                                        <button type="submit"
-                                                                class="col-12 d-flex w-100 btn btn-primary my-3">
-                                                            Attach Tariff
-                                                        </button>
-
-                                                    @else
-
-                                                        <a href="detach-nepa-tariff?id={{$tariff_id_nepa}}" class="col-12 d-flex w-100 btn btn-danger my-3">
-                                                            Detach  Tariff
-                                                        </a>
+{{--                                                    </select>--}}
 
 
+{{--                                                    @if($tariff_count_nepa == 0)--}}
 
-                                                    @endif
+{{--                                                        <button type="submit"--}}
+{{--                                                                class="col-12 d-flex w-100 btn btn-primary my-3">--}}
+{{--                                                            Attach Tariff--}}
+{{--                                                        </button>--}}
+
+{{--                                                    @else--}}
+
+{{--                                                        <a href="detach-nepa-tariff?id={{$tariff_id_nepa}}" class="col-12 d-flex w-100 btn btn-danger my-3">--}}
+{{--                                                            Detach  Tariff--}}
+{{--                                                        </a>--}}
 
 
 
-
-                                                </div>
-
-
-                                            </div>
-
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-sm-12 card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <form action="update-gen" method="post">
-                                            @csrf
-                                            <div class="row">
-
-                                                <h6 class="d-flex justify-content-start my-2">Tariff
-                                                    Information</h6>
-
-
-                                                <div class="col-xl-6 col-sm-12"
-                                                     style="position: relative;">
-
-                                                    <h6 class="mb-4">GENERATOR TARIFF <span
-                                                            class="badge text-bg-secondary">{{$gen_tariff_title   ?? "Set Tariff"}} | ID - {{$tariff_index_gen ?? " "}}</span>
-                                                    </h6>
-
-                                                    <select class="form-control my-3" name="tariff">
-
-                                                        @foreach($tariff as $data)
-                                                            <option
-                                                                value="{{$data->id}}">{{$data->title}}
-                                                                |
-                                                                ID - {{$data->tariff_index}}</option>
-                                                        @endforeach
-
-
-                                                    </select>
-
-
-                                                    <input name="user_id" hidden
-                                                           value="{{$user->id}}">
-
-
-                                                    @if($tariff_count_gen == 0)
-
-                                                        <button type="submit"
-                                                                class="col-12 d-flex w-100 btn btn-primary my-3">
-                                                            Attach Tariff
-                                                        </button>
-
-                                                    @else
-
-                                                        <a href="detach-gen-tariff?id={{$tariff_id_gen}}" class="col-12 d-flex w-100 btn btn-danger my-3">
-                                                            Detach  Tariff
-                                                        </a>
+{{--                                                    @endif--}}
 
 
 
-                                                    @endif
 
-                                                </div>
+{{--                                                </div>--}}
 
 
-                                            </div>
+{{--                                            </div>--}}
 
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+{{--                                        </form>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-xl-6 col-sm-12 card">--}}
+{{--                                <div class="card-body">--}}
+{{--                                    <div class="row">--}}
+{{--                                        <form action="update-gen" method="post">--}}
+{{--                                            @csrf--}}
+{{--                                            <div class="row">--}}
 
-                    </div> <!-- end col -->
+{{--                                                <h6 class="d-flex justify-content-start my-2">Tariff--}}
+{{--                                                    Information</h6>--}}
+
+
+{{--                                                <div class="col-xl-6 col-sm-12"--}}
+{{--                                                     style="position: relative;">--}}
+
+{{--                                                    <h6 class="mb-4">GENERATOR TARIFF <span--}}
+{{--                                                            class="badge text-bg-secondary">{{$gen_tariff_title   ?? "Set Tariff"}} | ID - {{$tariff_index_gen ?? " "}}</span>--}}
+{{--                                                    </h6>--}}
+
+{{--                                                    <select class="form-control my-3" name="tariff">--}}
+
+{{--                                                        @foreach($tariff as $data)--}}
+{{--                                                            <option--}}
+{{--                                                                value="{{$data->id}}">{{$data->title}}--}}
+{{--                                                                |--}}
+{{--                                                                ID - {{$data->tariff_index}}</option>--}}
+{{--                                                        @endforeach--}}
+
+
+{{--                                                    </select>--}}
+
+
+{{--                                                    <input name="user_id" hidden--}}
+{{--                                                           value="{{$user->id}}">--}}
+
+
+{{--                                                    @if($tariff_count_gen == 0)--}}
+
+{{--                                                        <button type="submit"--}}
+{{--                                                                class="col-12 d-flex w-100 btn btn-primary my-3">--}}
+{{--                                                            Attach Tariff--}}
+{{--                                                        </button>--}}
+
+{{--                                                    @else--}}
+
+{{--                                                        <a href="detach-gen-tariff?id={{$tariff_id_gen}}" class="col-12 d-flex w-100 btn btn-danger my-3">--}}
+{{--                                                            Detach  Tariff--}}
+{{--                                                        </a>--}}
+
+
+
+{{--                                                    @endif--}}
+
+{{--                                                </div>--}}
+
+
+{{--                                            </div>--}}
+
+{{--                                        </form>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+{{--                    </div> <!-- end col -->--}}
 
 
 

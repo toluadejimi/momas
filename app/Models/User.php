@@ -31,10 +31,20 @@ class User extends Authenticatable
         'state',
         'estate',
         'phone',
+        'state',
+        'estate',
+        'phone',
         'estate_name',
         'estate_id',
         'status',
-        'google2fa_secret'
+        'google2fa_secret',
+        'nepa_source',
+        'gen_source',
+        'tariffidnepa',
+        'tariffidgen',
+        'gen_source_amount',
+        'nepa_source_amount',
+
 
     ];
 

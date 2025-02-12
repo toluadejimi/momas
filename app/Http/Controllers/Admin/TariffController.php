@@ -89,6 +89,7 @@ class TariffController extends Controller
         $tr->estate_id = $request->estate_id;
         $tr->status = 2;
         $tr->tariff_index = $request->tariff_index;
+        $tr->type = $request->tariff_source;
         $tr->save();
 
         $tr = Tariff::where('id', $tr->id)->first();

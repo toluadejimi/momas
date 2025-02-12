@@ -35,6 +35,7 @@ class CustomersImport implements ToModel, WithHeadingRow
 
 
             if (auth::user()->role == 3) {
+                \Log::info('Row being processed: ', $row);
                 return new User([
                     'first_name'   => $row['firstname'],
                     'last_name'    => $row['lastname'],
@@ -43,7 +44,6 @@ class CustomersImport implements ToModel, WithHeadingRow
                     'state'        => $row['state'],
                     'phone'        => "+234".$row['phone'],
                     'account_no'   => $row['accountno'],
-                    'source'     => $row['source'],
                     'role'         => 2,
                     'password'     => bcrypt('123456'),
                     'meterNo'     => $row['meterno'],
@@ -67,7 +67,6 @@ class CustomersImport implements ToModel, WithHeadingRow
                     'state'        => $row['state'],
                     'phone'        => "+234".$row['phone'],
                     'account_no'   => $row['accountno'],
-                    'tariffid'     => $row['tariffid'],
                     'role'         => 2,
                     'password'     => bcrypt('123456'),
                     'meterNo'     =>  $row['meterno'],
@@ -80,9 +79,8 @@ class CustomersImport implements ToModel, WithHeadingRow
 
             }
 
-        }catch (\Exception $e) {
-            $message = $e->getMessage();
-            send_notification($message);
+        } catch (\Exception $e) {
+            \Log::error('Error inserting row: ' . $e->getMessage());
         }
 
 

@@ -11,6 +11,7 @@ use App\Models\KctToken;
 use App\Models\Meter;
 use App\Models\Setting;
 use App\Models\TamperToken;
+use App\Models\Tariff;
 use App\Models\TarrifState;
 use App\Models\Transaction;
 use App\Models\User;
@@ -496,6 +497,8 @@ class TokenController extends Controller
 
         if (auth::user()->role == 0) {
 
+
+
             $estate_id = Estate::where('id', $request->estate_id)->first()->id;
             $meter = Meter::where('meterNo', $request->meterNo)->first() ?? null;
             $user = User::where('meterNo', $request->meterNo)->first() ?? null;
@@ -513,24 +516,8 @@ class TokenController extends Controller
 
 
 
-
-            if ($meter == null) {
-                return back()->with('error', 'Meter not found on our system');
-            }
-            if ($meter->estate_id != $estate_id) {
-                return back()->with('error', 'Meter not does not belong to estate selected');
-            }
-            if ($request->amount < 1000) {
-                return back()->with('error', 'Amount can not be less than NGN 1,000');
-            }
-
-            if ($user == null) {
-                return back()->with('error', 'Meter has not been attached to any customer');
-            }
-
-
-            $tariffAmount = TarrifState::where('estate_id', $estate_id)->first()->amount ?? 0;
-            $vat = TarrifState::where('estate_id', $estate_id)->first()->amount ?? 0;
+            $tariffAmount = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
+            $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
 
 
             $calculator = new VatCalculator();
@@ -569,8 +556,6 @@ class TokenController extends Controller
             $data['estate_name'] = $request->estate_id;
             $data['tarrif_amount'] = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount;
             $data['credit_tokens'] = CreditToken::latest()->paginate('50');
-
-
             return view('admin.token.credit-token-preview', $data);
 
 
@@ -620,8 +605,8 @@ class TokenController extends Controller
             }
 
 
-            $tariffAmount = TarrifState::where('estate_id', $estate_id)->first()->amount ?? 0;
-            $vat = TarrifState::where('estate_id', $estate_id)->first()->amount ?? 0;
+            $tariffAmount = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
+            $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
 
 
             $calculator = new VatCalculator();

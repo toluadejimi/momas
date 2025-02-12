@@ -116,15 +116,35 @@ class MeterController extends Controller
         $min_pur = Estate::where('id', $request->estateId)->first()->min_pur ?? null;
         $max_pur = Estate::where('id', $request->estateId)->first()->max_pur ?? null;
         $data['min_purchase'] = (int)$min_pur;
-        $tariffs = Tariff::select('id', 'type', 'estate_id', 'title')
-            ->where('user_id', $user->id)
-            ->get();
-        foreach ($tariffs as $tariff) {
-            $tariffState = TarrifState::where('tariff_id', $tariff->id)->first();
-            $tariff->amount = $tariffState ? $tariffState->amount : null;
-            $tariff->vat = $tariffState ? $tariffState->vat : null;
-
+        $user_info = User::where('meterNo', $request->meterNo)->first();
+        $estate_id = $user_info->estate_id ?? null;
+        if($estate_id == null){
+            return back()->with('error', "User not attached to any estate");
         }
+        $title = Tariff::where('estate_id', $user_info->estate_id)->title ?? null;
+        if($title == null){
+            return back()->with('error', "Set a tariff for estate selected");
+        }
+
+        $tariff_index = User::where('id', $user_info->tariffid)->first()->tariff_index ?? null;
+        if($tariff_index == null){
+            return back()->with('error', "Tariff Index not set for Customer");
+        }
+
+        $get_tariffs = Tariff::where('user_id', $user_info->id)->first() ?? null;
+        if($get_tariffs == null){
+            $tarf = new Tariff();
+            $tarf->title = $title;
+            $tarf->tariff_index = $user_info->tariffid;
+            $tarf->tariff_index = $user_info->tariffid;
+            $tarf->estate_id = $user_info->estate_id;
+            $tarf->user_id = $user_info->id;
+            $tarf->type = $user_info->source;
+            $tarf->status = 1;
+            $tarf->save();
+        }
+
+        $tariffs = Tariff::where('user_id', $user_info->id)->get();
 
         $data['tariffs'] = $tariffs;
         $pur['min_purchase'] = (int)$min_pur;
@@ -1222,18 +1242,20 @@ class MeterController extends Controller
         $estate_id = $request->input('estate_id');
         $meterNo = $request->input('meterNo');
 
-        $user_id = User::where('meterNo', $meterNo)->first()->id ?? null;
 
-        if($user_id == null){
-            return response()->json([
-                'message' => "Meter not configured properly"
-            ], 422);
 
+        $user_info = User::where('meterNo', $request->meterNo)->first();
+        $estate_id = $user_info->estate_id ?? null;
+        if($estate_id == null){
+            return 1;
         }
 
-        $tariffs = Tariff::where('estate_id', $estate_id)
-            ->where('user_id', $user_id)
-            ->get(['id', 'type']);
+        $title = Tariff::where('estate_id', $user_info->estate_id)->first()->title ?? null;
+        if($title == null){
+            return 2;
+        }
+
+        $tariffs = Tariff::where('estate_id', $user_info->estate_id)->get(['id', 'type']);
         return response()->json(['tariffs' => $tariffs]);
     }
 

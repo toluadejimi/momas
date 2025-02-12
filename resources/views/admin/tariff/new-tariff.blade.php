@@ -75,6 +75,17 @@
                                     </div>
 
 
+                                    <div class="col-xl-4 col-sm-12">
+                                        <label class="my-2">Source</label>
+                                        <select class="form-control" name="tariff_source" required>
+                                            <option value="">--Select Source--</option>
+                                            <option value="nepa">Nepa</option>
+                                            <option value="gen">Generator</option>
+                                        </select>
+
+                                    </div>
+
+
 
                                     <div class="col-xl-4 col-sm-12">
                                         <label class="my-2">Tariff Index</label>
