@@ -118,7 +118,7 @@
                                 <div class="col-2" id="oldTariffDualContainer" style="display: none;">
                                     <label class="my-2">Old Tariff Dual</label>
                                     <select name="OldTariffDual" class="form-control">
-                                        <option value="{{$meter->OldTariffDual}}">{{strtoupper($meter->OldTariffDual)}}</option>
+                                        <option value="{{$meter->OldTariffDualID}}">{{strtoupper($meter->OldTariffDualID)}}</option>
                                         @foreach($tariffdual as $data)
                                             <option value="{{$data->OldTariffDual}}">{{$data->title}}</option>
                                         @endforeach
@@ -129,9 +129,9 @@
 
 
                                 <div class="col-2" id="newtar" style="display: none;">
-                                    <label class="my-2">New Tariff Dual</label>
+                                    <label class="my-2">New Tariff Dual ID</label>
                                     <select name="NewTariffDual" class="form-control">
-                                        <option value="{{$meter->NewTariffDual}}">{{strtoupper($meter->NewTariffDual)}}</option>
+                                        <option value="{{$meter->NewTariffDualID}}">{{strtoupper($meter->NewTariffDualID)}}</option>
                                         @foreach($tariffdual as $data)
                                             <option value="{{$data->NewTariffDual}}">{{$data->title}}</option>
                                         @endforeach
@@ -144,7 +144,7 @@
                                 <div class="col-2">
                                     <label class="my-2">New Tariff</label>
                                     <select name="NewTariffID" class="form-control">
-                                        <option value="{{$meter->NewTariffID}}">{{strtoupper($NewTariffID)}}</option>
+                                        <option value="{{$meter->NewTariffID}}">{{strtoupper($meter->NewTariffID)}}</option>
                                         @foreach($tariff as $data)
                                             <option value="{{$data->id}}">{{$data->title}}</option>
                                         @endforeach
@@ -154,7 +154,7 @@
                                 <div class="col-2">
                                     <label class="my-2">Old Tariff</label>
                                     <select type="text" name="OldTariffID" class="form-control" required>
-                                        <option value="{{$meter->OldTariffID}}">{{strtoupper($OldTariffID)}}</option>
+                                        <option value="{{$meter->OldTariffID}}">{{strtoupper($meter->OldTariffID)}}</option>
                                         @foreach($tariff as $data)
                                             <option value="{{$data->id}}">{{$data->title}} </option>
                                         @endforeach

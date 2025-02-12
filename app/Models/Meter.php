@@ -24,6 +24,7 @@ class Meter extends Model
         'OldSGC',
         'NewTariffID',
         'NewTariffDualID',
+        'OldTariffDualID',
         'OldTariffID',
         'NewSGCDual',
         'OldSGCDual',

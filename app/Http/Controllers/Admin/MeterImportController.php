@@ -17,9 +17,9 @@ class MeterImportController extends Controller
     {
 
 
-        if($request->estate_id == null){
+        if ($request->estate_id == null) {
             $id = Auth::user()->estate_id;
-        }else{
+        } else {
             $id = $request->estate_id;
         }
 
@@ -28,8 +28,25 @@ class MeterImportController extends Controller
 //            'file' => 'required|mimes:csv,xlsx,xls',
 //        ]);
 
-        Excel::import(new MeterImport($id), $request->file('file'));
+        try {
+            \Log::info('Import process started.');
+            Excel::import(new MeterImport($id), $request->file('file'));
+            \Log::info('Import process finished.');
 
-        return redirect()->back()->with('success', 'Meter imported successfully!');
+            return redirect()->back()->with('success', 'Meter imported successfully!');
+
+
+        } catch (\Exception$th) {
+
+            $errorMessage = $th->getMessage();
+
+            if (str_contains($errorMessage, 'Duplicate entry')) {
+                preg_match("/Duplicate entry '([^']+)'/", $errorMessage, $matches);
+                return back()->with('error', 'Duplicate entry found');
+
+            }
+        }
     }
+
+
 }
