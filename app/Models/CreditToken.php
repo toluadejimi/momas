@@ -18,4 +18,9 @@ class CreditToken extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class, 'trx_id', 'trx_id');
+    }
 }

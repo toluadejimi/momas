@@ -34,4 +34,9 @@ class Transaction extends Model
     {
         return $this->belongsTo(Estate::class);
     }
+
+    public function creditToken()
+    {
+        return $this->hasOne(CreditToken::class, 'trx_id', 'trx_id');
+    }
 }

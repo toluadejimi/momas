@@ -190,6 +190,7 @@
                                     <tr>
                                         <th scope="col" class="cursor-pointer">Trx ID</th>
                                         <th scope="col" class="cursor-pointer">Trx Type</th>
+                                        <th scope="col" class="cursor-pointer">Meter No</th>
                                         <th scope="col" class="cursor-pointer">Customer</th>
                                         <th scope="col" class="cursor-pointer">Estate</th>
                                         <th scope="col" class="cursor-pointer">Amount</th>
@@ -227,21 +228,60 @@
                                                                     <div class="modal-body">
 
                                                                     <div class="row">
-                                                                        <div class="col-6">
+                                                                        <div class="col-4">
 
                                                                             <label>Transaction ID</label>
                                                                             <div>{{$data->trx_id}}</div>
 
                                                                         </div>
 
-                                                                        <div class="col-6">
-
+                                                                        @if($data->service_type == "credit_token")
+                                                                        <div class="col-4">
                                                                             <label>Meter No</label>
-                                                                            <div>{{$data->trx_id}}</div>
+                                                                            <div>{{$data->creditToken->meterNo ?? "123456"}}</div>
+                                                                        </div>
+                                                                        @endif
 
+                                                                        <div class="col-4">
+                                                                            <label>Amount</label>
+                                                                            <div>NGN {{number_format($data->amount, 2)}}</div>
                                                                         </div>
 
                                                                     </div>
+
+                                                                        <hr>
+
+                                                                        <div class="row">
+
+                                                                            @if($data->pay_type == "paystack")
+                                                                                <div class="col-4">
+                                                                                    <label>Pay Channel</label>
+                                                                                    <div>{{"Paystack"}}</div>
+                                                                                </div>
+
+                                                                                <div class="col-4">
+                                                                                    <label>Pay Ref</label>
+                                                                                    <div>{{$data->payment_ref}}</div>
+                                                                                </div>
+                                                                            @endif
+
+                                                                                <div class="col-4">
+
+                                                                                    <label>Customer Name</label>
+                                                                                    <div>{{$data->user->last_name ?? "name"}}</div>
+
+                                                                                </div>
+
+                                                                        </div>
+
+                                                                        <hr>
+
+                                                                        <div class="row">
+
+
+
+                                                                        </div>
+
 
                                                                     </div>
 
@@ -266,6 +306,14 @@
                                                 @else
                                                 @endif
                                             </td>
+
+
+                                            <td>
+                                                <div>{{$data->creditToken->meterNo ?? "123456"}}</div>
+                                            </td>
+
+
+
                                             <td><a href="view-user?id={{$data->user->first_name ?? "name"}}">{{$data->user->last_name ?? "name"}}</a></td>
                                             <td>{{$data->estate->title ?? "Estate"}}</td>
                                             <td>{{number_format($data->amount, 2)}}</td>
