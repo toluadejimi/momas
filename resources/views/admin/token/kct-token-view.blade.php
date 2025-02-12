@@ -77,83 +77,102 @@
                                                                     @endforeach
                                                                 </select>
                                                             </div>
-                                                        </div>
 
-                                                        <div class="row">
+
                                                             <div class="col-xl-6 my-2 col-sm-12">
-                                                                <label class="my-2">Tariff Amount</label>
-                                                                <select class="form-control" required name="tariff_id"
+                                                                <label class="my-2">Enter Meter No</label>
+                                                                <input type="number" class="form-control mb-3"
+                                                                       name="meterNo" id="meterNo" required>
+                                                            </div>
+
+
+
+                                                            <div class="col-xl-6 my-2 col-sm-12">
+                                                                <label class="my-2">Power Source</label>
+                                                                <select class="form-control" required
+                                                                        name="tariff_id"
                                                                         id="tariff_id" disabled>
                                                                     <option value="">--Select Tariff--</option>
                                                                 </select>
                                                             </div>
+
+
+                                                            <div class="col-xl-6 my-2 col-sm-12">
+                                                                <label class="my-2">Amount</label>
+                                                                <input type="number" class="form-control mb-3" name="amount"
+                                                                       required>
+                                                            </div>
+
+
                                                         </div>
 
-                                                        <div class="col-xl-6 my-2 col-sm-12">
-                                                            <label class="my-2">Enter Meter No</label>
-                                                            <input type="number" class="form-control mb-3"
-                                                                   name="meterNo" id="meterNo" required disabled>
-                                                        </div>
 
-
-                                                        <script
-                                                            src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
                                                         <script>
                                                             $(document).ready(function () {
-                                                                $('#estate_id').on('change', function () {
-                                                                    let estateId = $(this).val();
-                                                                    let tariffSelect = $('#tariff_id');
-                                                                    let meterNoField = $('#meterNo');
+                                                                $('#estate_id, #meterNo').on('change input', function () {
+                                                                    var estate_id = $('#estate_id').val();
+                                                                    var meterNo = $('#meterNo').val();
 
-                                                                    tariffSelect.attr('disabled', true).html('<option value="">--Select Tariff--</option>');
-                                                                    meterNoField.attr('disabled', true);
-
-                                                                    if (estateId) {
-                                                                        // Fetch the tariffs based on the selected estate
+                                                                    if (estate_id && meterNo) {
                                                                         $.ajax({
-                                                                            url: '/get-tariffs/' + estateId, // Replace with your route
+                                                                            url: '/fetch-tariff', // Change this to your endpoint
                                                                             method: 'GET',
+                                                                            data: {
+                                                                                estate_id: estate_id,
+                                                                                meterNo: meterNo
+                                                                            },
                                                                             success: function (response) {
-                                                                                // Populate the tariffs dropdown
-                                                                                response.forEach(function (tariff) {
-                                                                                    tariffSelect.append(new Option(tariff.amount, tariff.tariff_id));
-                                                                                });
-                                                                                tariffSelect.attr('disabled', false);
+                                                                                // Check if response is 1, 2, or 3
+                                                                                if (response == 1) {
+                                                                                    alert("Error: User is not attached to any estate.");
+                                                                                    return;
+                                                                                }
+                                                                                if(response == 2){
+                                                                                    alert("Error: Estate does not have any tariff");
+                                                                                    return;
+                                                                                }
+                                                                                if(response == 3){
+                                                                                    alert("Error: Tariff index not set for customer.");
+                                                                                    return;
+                                                                                }
+
+                                                                                if (response && response.tariffs) {
+                                                                                    console.log(response);
+                                                                                    var tariffSelect = $('#tariff_id');
+                                                                                    tariffSelect.empty();
+                                                                                    tariffSelect.append('<option value="">--Select Tariff--</option>');
+
+                                                                                    response.tariffs.forEach(function (tariff) {
+                                                                                        tariffSelect.append('<option value="' + tariff.id + '">' + tariff.type + '</option>');
+                                                                                    });
+
+                                                                                    tariffSelect.prop('disabled', false);
+                                                                                } else {
+                                                                                    $('#tariff_id').prop('disabled', true).empty();
+                                                                                }
                                                                             },
                                                                             error: function () {
-                                                                                alert('Failed to load tariffs. Please try again.');
+                                                                                $('#tariff_id').prop('disabled', true).empty();
+                                                                                alert("Error fetching tariff data. Please try again.");
                                                                             }
                                                                         });
-                                                                    }
-                                                                });
-
-                                                                $('#tariff_id').on('change', function () {
-                                                                    let tariffId = $(this).val();
-                                                                    let meterNoField = $('#meterNo');
-
-                                                                    if (tariffId) {
-                                                                        meterNoField.attr('disabled', false);
                                                                     } else {
-                                                                        meterNoField.attr('disabled', true);
+                                                                        $('#tariff_id').prop('disabled', true).empty();
                                                                     }
                                                                 });
                                                             });
+
                                                         </script>
 
-
-                                                        <div class="col-xl-6 my-2 col-sm-12">
-                                                            <label class="my-2">Amount</label>
-                                                            <input type="number" class="form-control mb-3" name="amount"
-                                                                   required>
-                                                        </div>
 
 
 
                                                     @else
                                                         <div class="col-xl-6 my-2 col-sm-12">
                                                             <label class="my-2">Enter Meter No</label>
-                                                            <input type="number" disabled class="form-control mb-3"  value="{{$meter->meterNo}}" name="meterNo" required>
+                                                            <input type="number" disabled class="form-control mb-3"
+                                                                   value="{{$meter->meterNo}}" name="meterNo" required>
                                                         </div>
 
 
@@ -161,7 +180,8 @@
 
                                                         <div class="col-xl-6 my-2 col-sm-12">
                                                             <label class="my-2">Amount</label>
-                                                            <input type="number" disabled value="{{$amount}}" class="form-control mb-3" name="amount" required>
+                                                            <input type="number" disabled value="{{$amount}}"
+                                                                   class="form-control mb-3" name="amount" required>
                                                         </div>
 
                                                     @endif
@@ -171,11 +191,10 @@
 
                                                     @if($preview == null)
 
-
                                                         <div class="col-xl-6 my-2 col-sm-12">
-                                                            <button type="submit" class="btn btn-primary">Continue</button>
+                                                            <button type="submit" class="btn btn-primary">Continue
+                                                            </button>
                                                         </div>
-
 
                                                     @else
 
@@ -184,14 +203,8 @@
                                                     @endif
 
 
-
-
-
-
-
-
-
                                                 </div>
+
 
 
                                             </form>
@@ -580,48 +593,111 @@
                                                         <div class="row">
                                                             <div class="col-xl-6 my-2 col-sm-12">
                                                                 <label class="my-2">Estate</label>
-                                                                <input  class="form-control" value="{{$title}}" disabled required name="estate_id">
-                                                                <input  class="form-control" value="{{$estate_id}}" hidden required name="estate_id">
-
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="row">
-                                                            <div class="col-xl-6 my-2 col-sm-12">
-                                                                <label class="my-2">Tariff Amount</label>
-                                                                <select class="form-control" required name="tariff_id">
-                                                                    <option value="">--Select Tariff--
-                                                                    </option>
-                                                                    @foreach($tariff as $data)
-                                                                        <option value="{{$data->tariff_id}}">{{$data->amount}}
-                                                                        </option>
+                                                                <select class="form-control" required name="estate_id"
+                                                                        id="estate_id">
+                                                                    <option value="">--Select Estate--</option>
+                                                                    @foreach($estate as $data)
+                                                                        <option
+                                                                            value="{{$data->id}}">{{$data->title}}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
+
+
+                                                            <div class="col-xl-6 my-2 col-sm-12">
+                                                                <label class="my-2">Enter Meter No</label>
+                                                                <input type="number" class="form-control mb-3"
+                                                                       name="meterNo" id="meterNo" required>
+                                                            </div>
+
+
+
+                                                            <div class="col-xl-6 my-2 col-sm-12">
+                                                                <label class="my-2">Power Source</label>
+                                                                <select class="form-control" required
+                                                                        name="tariff_id"
+                                                                        id="tariff_id" disabled>
+                                                                    <option value="">--Select Tariff--</option>
+                                                                </select>
+                                                            </div>
+
+
+                                                            <div class="col-xl-6 my-2 col-sm-12">
+                                                                <label class="my-2">Amount</label>
+                                                                <input type="number" class="form-control mb-3" name="amount"
+                                                                       required>
+                                                            </div>
+
+
                                                         </div>
 
-                                                        <div class="col-xl-6 my-2 col-sm-12">
-                                                            <label class="my-2">Enter Meter No</label>
-                                                            <input type="number"
-                                                                   class="form-control mb-3"
-                                                                   name="meterNo" id="meterNo" required>
-                                                        </div>
 
 
+                                                        <script>
+                                                            $(document).ready(function () {
+                                                                $('#estate_id, #meterNo').on('change input', function () {
+                                                                    var estate_id = $('#estate_id').val();
+                                                                    var meterNo = $('#meterNo').val();
 
-                                                        <div class="col-xl-6 my-2 col-sm-12">
-                                                            <label class="my-2">Amount</label>
-                                                            <input type="number"
-                                                                   class="form-control mb-3"
-                                                                   name="amount" required>
-                                                        </div>
+                                                                    if (estate_id && meterNo) {
+                                                                        $.ajax({
+                                                                            url: '/fetch-tariff', // Change this to your endpoint
+                                                                            method: 'GET',
+                                                                            data: {
+                                                                                estate_id: estate_id,
+                                                                                meterNo: meterNo
+                                                                            },
+                                                                            success: function (response) {
+                                                                                // Check if response is 1, 2, or 3
+                                                                                if (response == 1) {
+                                                                                    alert("Error: User is not attached to any estate.");
+                                                                                    return;
+                                                                                }
+                                                                                if(response == 2){
+                                                                                    alert("Error: Estate does not have any tariff");
+                                                                                    return;
+                                                                                }
+                                                                                if(response == 3){
+                                                                                    alert("Error: Tariff index not set for customer.");
+                                                                                    return;
+                                                                                }
+
+                                                                                if (response && response.tariffs) {
+                                                                                    console.log(response);
+                                                                                    var tariffSelect = $('#tariff_id');
+                                                                                    tariffSelect.empty();
+                                                                                    tariffSelect.append('<option value="">--Select Tariff--</option>');
+
+                                                                                    response.tariffs.forEach(function (tariff) {
+                                                                                        tariffSelect.append('<option value="' + tariff.id + '">' + tariff.type + '</option>');
+                                                                                    });
+
+                                                                                    tariffSelect.prop('disabled', false);
+                                                                                } else {
+                                                                                    $('#tariff_id').prop('disabled', true).empty();
+                                                                                }
+                                                                            },
+                                                                            error: function () {
+                                                                                $('#tariff_id').prop('disabled', true).empty();
+                                                                                alert("Error fetching tariff data. Please try again.");
+                                                                            }
+                                                                        });
+                                                                    } else {
+                                                                        $('#tariff_id').prop('disabled', true).empty();
+                                                                    }
+                                                                });
+                                                            });
+
+                                                        </script>
+
+
 
 
                                                     @else
                                                         <div class="col-xl-6 my-2 col-sm-12">
                                                             <label class="my-2">Enter Meter No</label>
-                                                            <input type="number" disabled class="form-control mb-3"  value="{{$meter->meterNo}}" name="meterNo" required>
+                                                            <input type="number" disabled class="form-control mb-3"
+                                                                   value="{{$meter->meterNo}}" name="meterNo" required>
                                                         </div>
 
 
@@ -629,8 +705,8 @@
 
                                                         <div class="col-xl-6 my-2 col-sm-12">
                                                             <label class="my-2">Amount</label>
-
-                                                            <input type="number" disabled value="{{$amount}}" class="form-control mb-3" name="amount" required>
+                                                            <input type="number" disabled value="{{$amount}}"
+                                                                   class="form-control mb-3" name="amount" required>
                                                         </div>
 
                                                     @endif
@@ -640,24 +716,16 @@
 
                                                     @if($preview == null)
 
-
                                                         <div class="col-xl-6 my-2 col-sm-12">
-                                                            <button type="submit" class="btn btn-primary">Continue</button>
+                                                            <button type="submit" class="btn btn-primary">Continue
+                                                            </button>
                                                         </div>
-
 
                                                     @else
 
 
 
                                                     @endif
-
-
-
-
-
-
-
 
 
                                                 </div>
@@ -677,86 +745,147 @@
 
                                                     <div class="modal-body">
 
-                                                        <div class="">
-                                                            <h5 class="card-title text-black mb-0">Credit Token Preview</h5>
-                                                        </div>
+                                                        @if($preview == null)
+                                                            <div class="row">
+                                                                <div class="col-xl-6 my-2 col-sm-12">
+                                                                    <label class="my-2">Estate</label>
+                                                                    <select class="form-control" required name="estate_id"
+                                                                            id="estate_id">
+                                                                        <option value="">--Select Estate--</option>
+                                                                        @foreach($estate as $data)
+                                                                            <option
+                                                                                value="{{$data->id}}">{{$data->title}}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
 
 
-                                                        <div class="row">
-                                                            <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Estate</label>
-                                                                <input required  name="estate_id" value="{{$estate->title}}" hidden="">
-                                                                <h6>{{$estate->title}}</h6>
+                                                                <div class="col-xl-6 my-2 col-sm-12">
+                                                                    <label class="my-2">Enter Meter No</label>
+                                                                    <input type="number" class="form-control mb-3"
+                                                                           name="meterNo" id="meterNo" required>
+                                                                </div>
+
+
+
+                                                                <div class="col-xl-6 my-2 col-sm-12">
+                                                                    <label class="my-2">Power Source</label>
+                                                                    <select class="form-control" required
+                                                                            name="tariff_id"
+                                                                            id="tariff_id" disabled>
+                                                                        <option value="">--Select Tariff--</option>
+                                                                    </select>
+                                                                </div>
+
+
+                                                                <div class="col-xl-6 my-2 col-sm-12">
+                                                                    <label class="my-2">Amount</label>
+                                                                    <input type="number" class="form-control mb-3" name="amount"
+                                                                           required>
+                                                                </div>
+
+
                                                             </div>
 
-                                                            <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Customer</label>
-                                                                <input required name="user_id" value="{{$user->id}}" hidden="">
-                                                                <h6>{{$user->first_name}} {{$user->last_name}}</h6>
+
+
+                                                            <script>
+                                                                $(document).ready(function () {
+                                                                    $('#estate_id, #meterNo').on('change input', function () {
+                                                                        var estate_id = $('#estate_id').val();
+                                                                        var meterNo = $('#meterNo').val();
+
+                                                                        if (estate_id && meterNo) {
+                                                                            $.ajax({
+                                                                                url: '/fetch-tariff', // Change this to your endpoint
+                                                                                method: 'GET',
+                                                                                data: {
+                                                                                    estate_id: estate_id,
+                                                                                    meterNo: meterNo
+                                                                                },
+                                                                                success: function (response) {
+                                                                                    // Check if response is 1, 2, or 3
+                                                                                    if (response == 1) {
+                                                                                        alert("Error: User is not attached to any estate.");
+                                                                                        return;
+                                                                                    }
+                                                                                    if(response == 2){
+                                                                                        alert("Error: Estate does not have any tariff");
+                                                                                        return;
+                                                                                    }
+                                                                                    if(response == 3){
+                                                                                        alert("Error: Tariff index not set for customer.");
+                                                                                        return;
+                                                                                    }
+
+                                                                                    if (response && response.tariffs) {
+                                                                                        console.log(response);
+                                                                                        var tariffSelect = $('#tariff_id');
+                                                                                        tariffSelect.empty();
+                                                                                        tariffSelect.append('<option value="">--Select Tariff--</option>');
+
+                                                                                        response.tariffs.forEach(function (tariff) {
+                                                                                            tariffSelect.append('<option value="' + tariff.id + '">' + tariff.type + '</option>');
+                                                                                        });
+
+                                                                                        tariffSelect.prop('disabled', false);
+                                                                                    } else {
+                                                                                        $('#tariff_id').prop('disabled', true).empty();
+                                                                                    }
+                                                                                },
+                                                                                error: function () {
+                                                                                    $('#tariff_id').prop('disabled', true).empty();
+                                                                                    alert("Error fetching tariff data. Please try again.");
+                                                                                }
+                                                                            });
+                                                                        } else {
+                                                                            $('#tariff_id').prop('disabled', true).empty();
+                                                                        }
+                                                                    });
+                                                                });
+
+                                                            </script>
+
+
+
+
+                                                        @else
+                                                            <div class="col-xl-6 my-2 col-sm-12">
+                                                                <label class="my-2">Enter Meter No</label>
+                                                                <input type="number" disabled class="form-control mb-3"
+                                                                       value="{{$meter->meterNo}}" name="meterNo" required>
                                                             </div>
 
-                                                            <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Meter No</label>
-                                                                <input required name="meterNo" value="{{$meter->meterNo}}" hidden="">
-                                                                <h6>{{$meter->meterNo}}</h6>
+
+
+
+                                                            <div class="col-xl-6 my-2 col-sm-12">
+                                                                <label class="my-2">Amount</label>
+                                                                <input type="number" disabled value="{{$amount}}"
+                                                                       class="form-control mb-3" name="amount" required>
                                                             </div>
 
-                                                        </div>
+                                                        @endif
 
 
 
-                                                        <hr>
 
-                                                        <div class="row">
+                                                        @if($preview == null)
 
-                                                            <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Tariff/KW </label>
-                                                                <input required name="tariffPerKWatt" value="{{$tariffPerKWatt}}" hidden="">
-                                                                <h6>{{number_format($tariffPerKWatt, 2)}}</h6>
+                                                            <div class="col-xl-6 my-2 col-sm-12">
+                                                                <button type="submit" class="btn btn-primary">Continue
+                                                                </button>
                                                             </div>
 
-                                                            <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Vat Amount</label>
-                                                                <input required name="vatAmount" value="{{number_format($vatAmount,2)}}" hidden="">
-                                                                <h6>{{number_format($vatAmount, 2)}}</h6>
-                                                            </div>
-
-                                                            <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Cost Of Unit</label>
-                                                                <input required name="costOfUnit" value="{{number_format($costOfUnit,2)}}" hidden="">
-                                                                <h6>{{number_format($costOfUnit, 2)}} Kw/h</h6>
-                                                            </div>
-
-                                                            <input required name="vat" value="{{$vat}}" hidden="">
-                                                            <input required name="estate_id" value="{{$estate_id}}" hidden="">
-                                                            <input required name="estate_name" value="{{$estate_name}}" hidden="">
-                                                            <input required name="amount" value="{{$amount}}" hidden="">
+                                                        @else
 
 
 
-
-                                                        </div>
-
-                                                        <hr>
-
-
-                                                        <div class="col-xl-4 my-4 d-flex justify-content-start col-sm-12">
-                                                            <select  class="form-control" required name="pay_type" >
-                                                                <option value=" ">--Choose Payment Gateway---</option>
-                                                                <option value="paystack">Pay with Paystack</option>
-                                                                <option value="flutterwave">Pay with Flutterwave</option>
-{{--                                                                <option value="enkpay">Pay with Enkpay</option>--}}
-                                                            </select>
-                                                        </div>
-
-
-                                                        <div class="col-xl-12 my-4 d-flex justify-content-start col-sm-12">
-                                                            <button type="submit" class="btn btn-primary">Pay Now</button>
-                                                        </div>
-
+                                                        @endif
 
 
                                                     </div>
+
 
 
                                                 </form>
@@ -769,87 +898,146 @@
 
                                                     <div class="modal-body">
 
-                                                        <div class="">
-                                                            <h5 class="card-title text-black mb-0">Credit Token Preview</h5>
-                                                        </div>
+                                                        @if($preview == null)
+                                                            <div class="row">
+                                                                <div class="col-xl-6 my-2 col-sm-12">
+                                                                    <label class="my-2">Estate</label>
+                                                                    <select class="form-control" required name="estate_id"
+                                                                            id="estate_id">
+                                                                        <option value="">--Select Estate--</option>
+                                                                        @foreach($estate as $data)
+                                                                            <option
+                                                                                value="{{$data->id}}">{{$data->title}}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
 
 
-                                                        <div class="row">
-                                                            <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Estate</label>
-                                                                <input required  name="estate_id" value="{{$estate->title}}" hidden="">
-                                                                <h6>{{$estate->title}}</h6>
+                                                                <div class="col-xl-6 my-2 col-sm-12">
+                                                                    <label class="my-2">Enter Meter No</label>
+                                                                    <input type="number" class="form-control mb-3"
+                                                                           name="meterNo" id="meterNo" required>
+                                                                </div>
+
+
+
+                                                                <div class="col-xl-6 my-2 col-sm-12">
+                                                                    <label class="my-2">Power Source</label>
+                                                                    <select class="form-control" required
+                                                                            name="tariff_id"
+                                                                            id="tariff_id" disabled>
+                                                                        <option value="">--Select Tariff--</option>
+                                                                    </select>
+                                                                </div>
+
+
+                                                                <div class="col-xl-6 my-2 col-sm-12">
+                                                                    <label class="my-2">Amount</label>
+                                                                    <input type="number" class="form-control mb-3" name="amount"
+                                                                           required>
+                                                                </div>
+
+
                                                             </div>
 
-                                                            <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Customer</label>
-                                                                <input required name="user_id" value="{{$user->id}}" hidden="">
-                                                                <h6>{{$user->first_name}} {{$user->last_name}}</h6>
+
+
+                                                            <script>
+                                                                $(document).ready(function () {
+                                                                    $('#estate_id, #meterNo').on('change input', function () {
+                                                                        var estate_id = $('#estate_id').val();
+                                                                        var meterNo = $('#meterNo').val();
+
+                                                                        if (estate_id && meterNo) {
+                                                                            $.ajax({
+                                                                                url: '/fetch-tariff', // Change this to your endpoint
+                                                                                method: 'GET',
+                                                                                data: {
+                                                                                    estate_id: estate_id,
+                                                                                    meterNo: meterNo
+                                                                                },
+                                                                                success: function (response) {
+                                                                                    // Check if response is 1, 2, or 3
+                                                                                    if (response == 1) {
+                                                                                        alert("Error: User is not attached to any estate.");
+                                                                                        return;
+                                                                                    }
+                                                                                    if(response == 2){
+                                                                                        alert("Error: Estate does not have any tariff");
+                                                                                        return;
+                                                                                    }
+                                                                                    if(response == 3){
+                                                                                        alert("Error: Tariff index not set for customer.");
+                                                                                        return;
+                                                                                    }
+
+                                                                                    if (response && response.tariffs) {
+                                                                                        console.log(response);
+                                                                                        var tariffSelect = $('#tariff_id');
+                                                                                        tariffSelect.empty();
+                                                                                        tariffSelect.append('<option value="">--Select Tariff--</option>');
+
+                                                                                        response.tariffs.forEach(function (tariff) {
+                                                                                            tariffSelect.append('<option value="' + tariff.id + '">' + tariff.type + '</option>');
+                                                                                        });
+
+                                                                                        tariffSelect.prop('disabled', false);
+                                                                                    } else {
+                                                                                        $('#tariff_id').prop('disabled', true).empty();
+                                                                                    }
+                                                                                },
+                                                                                error: function () {
+                                                                                    $('#tariff_id').prop('disabled', true).empty();
+                                                                                    alert("Error fetching tariff data. Please try again.");
+                                                                                }
+                                                                            });
+                                                                        } else {
+                                                                            $('#tariff_id').prop('disabled', true).empty();
+                                                                        }
+                                                                    });
+                                                                });
+
+                                                            </script>
+
+
+
+
+                                                        @else
+                                                            <div class="col-xl-6 my-2 col-sm-12">
+                                                                <label class="my-2">Enter Meter No</label>
+                                                                <input type="number" disabled class="form-control mb-3"
+                                                                       value="{{$meter->meterNo}}" name="meterNo" required>
                                                             </div>
 
-                                                            <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Meter No</label>
-                                                                <input required name="meterNo" value="{{$meter->meterNo}}" hidden="">
-                                                                <h6>{{$meter->meterNo}}</h6>
+
+
+
+                                                            <div class="col-xl-6 my-2 col-sm-12">
+                                                                <label class="my-2">Amount</label>
+                                                                <input type="number" disabled value="{{$amount}}"
+                                                                       class="form-control mb-3" name="amount" required>
                                                             </div>
 
-                                                        </div>
+                                                        @endif
 
 
 
-                                                        <hr>
 
-                                                        <div class="row">
+                                                        @if($preview == null)
 
-                                                            <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Tariff/KW </label>
-                                                                <input required name="tariffPerKWatt" value="{{$tariffPerKWatt}}" hidden="">
-                                                                <h6>{{number_format($tariffPerKWatt, 2)}}</h6>
+                                                            <div class="col-xl-6 my-2 col-sm-12">
+                                                                <button type="submit" class="btn btn-primary">Continue
+                                                                </button>
                                                             </div>
 
-                                                            <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Vat Amount</label>
-                                                                <input required name="vatAmount" value="{{number_format($vatAmount,2)}}" hidden="">
-                                                                <h6>{{number_format($vatAmount, 2)}}</h6>
-                                                            </div>
-
-                                                            <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Cost Of Unit</label>
-                                                                <input required name="costOfUnit" value="{{number_format($costOfUnit,2)}}" hidden="">
-                                                                <h6>{{number_format($costOfUnit, 2)}} Kw/h</h6>
-                                                            </div>
-
-                                                            <input required name="vat" value="{{$vat}}" hidden="">
-                                                            <input required name="estate_id" value="{{$estate_id}}" hidden="">
-                                                            <input required name="estate_name" value="{{$estate_name}}" hidden="">
-                                                            <input required name="amount" value="{{$amount}}" hidden="">
+                                                        @else
 
 
 
-
-                                                        </div>
-
-                                                        <hr>
-
-
-                                                        <div class="col-xl-4 my-4 d-flex justify-content-start col-sm-12">
-                                                            <select  class="form-control" required name="pay_type" >
-                                                                <option value=" ">--Choose Payment Gateway---</option>
-                                                                <option value="paystack">Pay with Paystack</option>
-                                                                <option value="flutterwave">Pay with Flutterwave</option>
-                                                                {{--                                                                <option value="enkpay">Pay with Enkpay</option>--}}
-                                                            </select>
-                                                        </div>
-
-
-                                                        <div class="col-xl-12 my-4 d-flex justify-content-start col-sm-12">
-                                                            <button type="submit" class="btn btn-primary">Pay Now</button>
-                                                        </div>
-
+                                                        @endif
 
 
                                                     </div>
-
 
                                                 </form>
 

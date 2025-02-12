@@ -5,19 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df462c8f-229d-4527-915f-ee2aade1fa51" name="Changes" comment="pusgggghhh">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/CustomerImportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/CustomerImportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardContoller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardContoller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/TariffController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/TariffController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Meter/MeterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Meter/MeterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Imports/CustomersImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/CustomersImport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/tariff/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/tariff/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/tariff/new-tariff.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/tariff/new-tariff.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/token/credit-token-view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/token/credit-token-view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/user/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/user/view.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/token/kct-token-view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/token/kct-token-view.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -504,15 +493,7 @@
       <workItem from="1738265972298" duration="1652000" />
       <workItem from="1738395788475" duration="26000" />
       <workItem from="1738760731578" duration="23000" />
-      <workItem from="1739011048870" duration="16672000" />
-    </task>
-    <task id="LOCAL-00444" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1734165123904</created>
-      <option name="number" value="00444" />
-      <option name="presentableId" value="LOCAL-00444" />
-      <option name="project" value="LOCAL" />
-      <updated>1734165123904</updated>
+      <workItem from="1739011048870" duration="18440000" />
     </task>
     <task id="LOCAL-00445" summary="pusgggghhh">
       <option name="closed" value="true" />
@@ -898,7 +879,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739171607548</updated>
     </task>
-    <option name="localTasksCounter" value="493" />
+    <task id="LOCAL-00493" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739343114812</created>
+      <option name="number" value="00493" />
+      <option name="presentableId" value="LOCAL-00493" />
+      <option name="project" value="LOCAL" />
+      <updated>1739343114812</updated>
+    </task>
+    <option name="localTasksCounter" value="494" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1009,7 +998,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
-          <line>3753</line>
+          <line>3743</line>
           <properties>
             <option name="className" value="\App\Http\Controllers\Admin\TokenController" />
             <option name="methodName" value="recepit" />
@@ -1027,7 +1016,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
-          <line>1034</line>
+          <line>1024</line>
           <properties>
             <option name="className" value="\App\Http\Controllers\Admin\TokenController" />
             <option name="methodName" value="generate_credit_meter_token" />
@@ -1036,7 +1025,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
-          <line>1851</line>
+          <line>1841</line>
           <properties>
             <option name="className" value="\App\Http\Controllers\Admin\TokenController" />
             <option name="methodName" value="generate_clear_credit_meter_token" />
@@ -1135,17 +1124,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
-          <line>3639</line>
+          <line>3629</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
-          <line>1321</line>
+          <line>1311</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
-          <line>959</line>
+          <line>949</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
