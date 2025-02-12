@@ -1035,12 +1035,12 @@ class TokenController extends Controller
         }
 
         $amount = $request->amount - $fee;
-        $order_id = "TRX" . random_int(000000000, 9999999999);
+        $trx_id = "TRX" . random_int(000000000, 9999999999);
         $estate_id = Estate::where('id', $request->estate_name)->first()->id;
 
         $cdt = new CreditToken();
         $cdt->user_id = $request->user_id;
-        $cdt->order_id = $order_id;
+        $cdt->trx_id = $trx_id;
         $cdt->meterNo = $request->meterNo;
         $cdt->amount = $amount;
         $cdt->amount_charged = $request->amount;
@@ -1091,7 +1091,7 @@ class TokenController extends Controller
                         'phonenumber' => $phone,
                         'name' => Auth::user()->first_name . " " . Auth::user()->last_name,
                     ],
-                    'tx_ref' => $order_id,
+                    'tx_ref' => $trx_id,
 
                 );
 
@@ -1128,7 +1128,7 @@ class TokenController extends Controller
                 $trx->service_type = $request->service;
                 $trx->amount = $request->amount;
                 $trx->fee = $fee;
-                $trx->trx_id = $order_id;
+                $trx->trx_id = $trx_id;
                 $trx->save();
 
                 if ($status == "success") {
@@ -1177,7 +1177,7 @@ class TokenController extends Controller
                     "email" => $email,
                     "ref" => $trx_id,
                     'callback_url' => url('') . "/admin/paystack-check-web",
-                    'metadata' => ["ref" => $order_id],
+                    'metadata' => ["ref" => $trx_id],
                 );
 
                 $body = json_encode($databody);
@@ -1211,7 +1211,7 @@ class TokenController extends Controller
                     $trx->pay_type = "paystack";
                     $trx->amount = $request->amount;
                     $trx->fee = $fee;
-                    $trx->trx_id = $order_id;
+                    $trx->trx_id = $trx_id;
                     $trx->payment_ref = $var->data->access_code ?? null;
                     $trx->service_type = "credit_token";
                     $trx->save();
@@ -1306,12 +1306,12 @@ class TokenController extends Controller
         }
 
         $amount = $request->amount - $fee;
-        $order_id = "TRX" . random_int(000000000, 9999999999);
+        $trx_id = "TRX" . random_int(000000000, 9999999999);
         $estate_id = Estate::where('id', $request->estate_name)->first()->id;
 
         $cdt = new TamperToken();
         $cdt->user_id = $request->user_id;
-        $cdt->order_id = $order_id;
+        $cdt->trx_id = $trx_id;
         $cdt->meterNo = $request->meterNo;
         $cdt->amount = $amount;
         $cdt->amount_charged = $request->amount;
@@ -1362,7 +1362,7 @@ class TokenController extends Controller
                         'phonenumber' => $phone,
                         'name' => Auth::user()->first_name . " " . Auth::user()->last_name,
                     ],
-                    'tx_ref' => $order_id,
+                    'tx_ref' => $trx_id,
 
                 );
 
@@ -1399,7 +1399,7 @@ class TokenController extends Controller
                 $trx->service_type = $request->service;
                 $trx->amount = $request->amount;
                 $trx->fee = $fee;
-                $trx->trx_id = $order_id;
+                $trx->trx_id = $trx_id;
                 $trx->save();
 
                 if ($status == "success") {
@@ -1448,7 +1448,7 @@ class TokenController extends Controller
                     "email" => $email,
                     "ref" => $trx_id,
                     'callback_url' => url('') . "/admin/paystack-check-web-tamper",
-                    'metadata' => ["ref" => $order_id],
+                    'metadata' => ["ref" => $trx_id],
                 );
 
                 $body = json_encode($databody);
@@ -1482,7 +1482,7 @@ class TokenController extends Controller
                     $trx->pay_type = "paystack";
                     $trx->amount = $request->amount;
                     $trx->fee = $fee;
-                    $trx->trx_id = $order_id;
+                    $trx->trx_id = $trx_id;
                     $trx->payment_ref = $var->data->access_code ?? null;
                     $trx->service_type = "credit_token";
                     $trx->save();
@@ -1577,12 +1577,12 @@ class TokenController extends Controller
         }
 
         $amount = $request->amount - $fee;
-        $order_id = "TRX" . random_int(000000000, 9999999999);
+        $trx_id = "TRX" . random_int(000000000, 9999999999);
         $estate_id = Estate::where('id', $request->estate_name)->first()->id;
 
         $cdt = new KctToken();
         $cdt->user_id = $request->user_id;
-        $cdt->order_id = $order_id;
+        $cdt->trx_id = $trx_id;
         $cdt->meterNo = $request->meterNo;
         $cdt->amount = $amount;
         $cdt->amount_charged = $request->amount;
@@ -1638,7 +1638,7 @@ class TokenController extends Controller
                         'phonenumber' => $phone,
                         'name' => Auth::user()->first_name . " " . Auth::user()->last_name,
                     ],
-                    'tx_ref' => $order_id,
+                    'tx_ref' => $trx_id,
 
                 );
 
@@ -1675,7 +1675,7 @@ class TokenController extends Controller
                 $trx->service_type = $request->service;
                 $trx->amount = $request->amount;
                 $trx->fee = $fee;
-                $trx->trx_id = $order_id;
+                $trx->trx_id = $trx_id;
                 $trx->save();
 
                 if ($status == "success") {
@@ -1724,7 +1724,7 @@ class TokenController extends Controller
                     "email" => $email,
                     "ref" => $trx_id,
                     'callback_url' => url('') . "/admin/paystack-check-kct",
-                    'metadata' => ["ref" => $order_id],
+                    'metadata' => ["ref" => $trx_id],
                 );
 
                 $body = json_encode($databody);
@@ -1758,7 +1758,7 @@ class TokenController extends Controller
                     $trx->pay_type = "paystack";
                     $trx->amount = $request->amount;
                     $trx->fee = $fee;
-                    $trx->trx_id = $order_id;
+                    $trx->trx_id = $trx_id;
                     $trx->payment_ref = $var->data->access_code ?? null;
                     $trx->service_type = "credit_token";
                     $trx->save();
@@ -1842,12 +1842,12 @@ class TokenController extends Controller
     public function generate_clear_credit_meter_token(request $request)
     {
 
-        $order_id = "TRX" . random_int(000000000, 9999999999);
+        $trx_id = "TRX" . random_int(000000000, 9999999999);
         $estate_id = TarrifState::where('estate_id', $request->estate_name)->first()->id;
         $cdt = new ClearcreditToken();
         $cdt->user_id = $request->user_id;
         $cdt->tariff_amount = $request->tariff_amount;
-        $cdt->order_id = $order_id;
+        $cdt->trx_id = $trx_id;
         $cdt->meterNo = $request->meterNo;
         $cdt->amount = $request->amount;
         $cdt->vat = $request->vat;
@@ -1894,7 +1894,7 @@ class TokenController extends Controller
                         'phonenumber' => $phone,
                         'name' => Auth::user()->first_name . " " . Auth::user()->last_name,
                     ],
-                    'tx_ref' => $order_id,
+                    'tx_ref' => $trx_id,
 
                 );
 
@@ -1931,7 +1931,7 @@ class TokenController extends Controller
                 $trx->service_type = $request->service;
                 $trx->amount = $request->amount;
                 $trx->fee = $fee;
-                $trx->trx_id = $order_id;
+                $trx->trx_id = $trx_id;
                 $trx->save();
 
                 if ($status == "success") {
@@ -1980,7 +1980,7 @@ class TokenController extends Controller
                     "email" => $email,
                     "ref" => $trx_id,
                     'callback_url' => url('') . "/admin/paystack-clear-credit",
-                    'metadata' => ["ref" => $order_id],
+                    'metadata' => ["ref" => $trx_id],
                 );
 
                 $body = json_encode($databody);
@@ -2014,7 +2014,7 @@ class TokenController extends Controller
                     $trx->pay_type = "paystack";
                     $trx->amount = $request->amount;
                     $trx->fee = $fee;
-                    $trx->trx_id = $order_id;
+                    $trx->trx_id = $trx_id;
                     $trx->payment_ref = $var->data->access_code ?? null;
                     $trx->service_type = "credit_token";
                     $trx->save();
@@ -2100,11 +2100,11 @@ class TokenController extends Controller
     public function generate_compensation_meter_token(request $request)
     {
 
-        $order_id = "COMP" . random_int(000000, 999999);
+        $trx_id = "COMP" . random_int(000000, 999999);
         $estate_id = Estate::where('title', $request->estate_name)->first()->id;
         $cdt = new CompensationToken();
         $cdt->user_id = $request->user_id;
-        $cdt->order_id = $order_id;
+        $cdt->trx_id = $trx_id;
         $cdt->meterNo = $request->meterNo;
         $cdt->amount = $request->amount;
         $cdt->vat = $request->vat;
@@ -2160,7 +2160,7 @@ class TokenController extends Controller
 
 
                 $trx = new Transaction();
-                $trx->trx_id = $order_id;
+                $trx->trx_id = $trx_id;
                 $trx->user_id = $meter->user_id;
                 $trx->estate_id = $estate_id;
                 $trx->pay_type = null;
@@ -2251,10 +2251,10 @@ class TokenController extends Controller
 
 
                 Transaction::where('trx_id', $var->data->metadata->ref)->update(['status' => 2]);
-                $meterNo = CreditToken::where('order_id', $var->data->metadata->ref)->first()->meterNo;
+                $meterNo = CreditToken::where('trx_id', $var->data->metadata->ref)->first()->meterNo;
                 $meter = Meter::where('meterNo', $meterNo)->first();
-                $trx = CreditToken::where('order_id', $var->data->metadata->ref)->first();
-                $traff_id = CreditToken::where('order_id', $var->data->metadata->ref)->first();
+                $trx = CreditToken::where('trx_id', $var->data->metadata->ref)->first();
+                $traff_id = CreditToken::where('trx_id', $var->data->metadata->ref)->first();
 
 
                 $databody = [
@@ -2282,7 +2282,7 @@ class TokenController extends Controller
                     if ($status == "SUCCESS") {
 
                         $no_kct_token = $no_kct_data['tokens'][0];
-                        CreditToken::where('order_id', $var->data->metadata->ref)->update([
+                        CreditToken::where('trx_id', $var->data->metadata->ref)->update([
 
                             'token' => $no_kct_token,
                             'status' => 2
@@ -2347,10 +2347,10 @@ class TokenController extends Controller
 
 
                 Transaction::where('trx_id', $var->data->metadata->ref)->update(['status' => 2]);
-                $meterNo = CreditToken::where('order_id', $var->data->metadata->ref)->first()->meterNo;
+                $meterNo = CreditToken::where('trx_id', $var->data->metadata->ref)->first()->meterNo;
                 $meter = Meter::where('meterNo', $meterNo)->first();
-                $trx = CreditToken::where('order_id', $var->data->metadata->ref)->first();
-                $traff_id = CreditToken::where('order_id', $var->data->metadata->ref)->first();
+                $trx = CreditToken::where('trx_id', $var->data->metadata->ref)->first();
+                $traff_id = CreditToken::where('trx_id', $var->data->metadata->ref)->first();
 
 
                 $databody = [
@@ -2374,7 +2374,7 @@ class TokenController extends Controller
                     if ($status == "SUCCESS") {
 
                         $no_kct_token = $no_kct_data['tokens'][0];
-                        CreditToken::where('order_id', $var->data->metadata->ref)->update([
+                        CreditToken::where('trx_id', $var->data->metadata->ref)->update([
 
                             'token' => $no_kct_token,
                             'status' => 2
@@ -2467,20 +2467,20 @@ class TokenController extends Controller
 
             if ($status == 'success') {
 
-                $meterNo = KctToken::where('order_id', $var->data->metadata->ref)->first()->meterNo;
+                $meterNo = KctToken::where('trx_id', $var->data->metadata->ref)->first()->meterNo;
                 $meter = Meter::where('meterNo', $meterNo)->first();
-                $trx = KctToken::where('order_id', $var->data->metadata->ref)->first();
-                $traff_id = KctToken::where('order_id', $var->data->metadata->ref)->first();
+                $trx = KctToken::where('trx_id', $var->data->metadata->ref)->first();
+                $traff_id = KctToken::where('trx_id', $var->data->metadata->ref)->first();
                 $ck_transaction = Transaction::where('trx_id', $var->data->metadata->ref)->first()->status ?? null;
 
 
                 if ($ck_transaction == null || $ck_transaction == 0) {
 
                     if ($status == 'success') {
-                        $meterNo = KctToken::where('order_id', $ref)->first()->meterNo;
+                        $meterNo = KctToken::where('trx_id', $ref)->first()->meterNo;
                         $meter = Meter::where('meterNo', $meterNo)->first();
-                        $trx = KctToken::where('order_id', $ref)->first();
-                        $traff_id = KctToken::where('order_id', $ref)->first();
+                        $trx = KctToken::where('trx_id', $ref)->first();
+                        $traff_id = KctToken::where('trx_id', $ref)->first();
 
                         if ($meter != null && $meter->NeedKCT == "on") {
                             $databody = [
@@ -2518,7 +2518,7 @@ class TokenController extends Controller
 
                                 if ($status == "SUCCESS") {
 
-                                    KctToken::where('order_id', $ref)->update([
+                                    KctToken::where('trx_id', $ref)->update([
                                         'kct_token1' => $kct_data['tokens'][0],
                                         'kct_token2' => $kct_data['tokens'][1],
                                         'status' => 2
@@ -2577,10 +2577,10 @@ class TokenController extends Controller
 
 
                 Transaction::where('trx_id', $var->data->metadata->ref)->update(['status' => 2]);
-                $meterNo = CreditToken::where('order_id', $var->data->metadata->ref)->first()->meterNo;
+                $meterNo = CreditToken::where('trx_id', $var->data->metadata->ref)->first()->meterNo;
                 $meter = Meter::where('meterNo', $meterNo)->first();
-                $trx = CreditToken::where('order_id', $var->data->metadata->ref)->first();
-                $traff_id = CreditToken::where('order_id', $var->data->metadata->ref)->first();
+                $trx = CreditToken::where('trx_id', $var->data->metadata->ref)->first();
+                $traff_id = CreditToken::where('trx_id', $var->data->metadata->ref)->first();
 
 
                 $databody = [
@@ -2604,7 +2604,7 @@ class TokenController extends Controller
                     if ($status == "SUCCESS") {
 
                         $no_kct_token = $no_kct_data['tokens'][0];
-                        CreditToken::where('order_id', $var->data->metadata->ref)->update([
+                        CreditToken::where('trx_id', $var->data->metadata->ref)->update([
 
                             'token' => $no_kct_token,
                             'status' => 2
@@ -2694,10 +2694,10 @@ class TokenController extends Controller
 
 
                 Transaction::where('trx_id', $var->data->metadata->ref)->update(['status' => 2]);
-                $meterNo = TamperToken::where('order_id', $var->data->metadata->ref)->first()->meterNo;
+                $meterNo = TamperToken::where('trx_id', $var->data->metadata->ref)->first()->meterNo;
                 $meter = Meter::where('meterNo', $meterNo)->first();
-                $trx = TamperToken::where('order_id', $var->data->metadata->ref)->first();
-                $traff_id = TamperToken::where('order_id', $var->data->metadata->ref)->first();
+                $trx = TamperToken::where('trx_id', $var->data->metadata->ref)->first();
+                $traff_id = TamperToken::where('trx_id', $var->data->metadata->ref)->first();
 
 
                 $databody = [
@@ -2726,7 +2726,7 @@ class TokenController extends Controller
                     if ($status == "SUCCESS") {
 
                         $no_kct_token = $no_kct_data['tokens'][0];
-                        TamperToken::where('order_id', $var->data->metadata->ref)->update([
+                        TamperToken::where('trx_id', $var->data->metadata->ref)->update([
                             'token' => $no_kct_token,
                             'status' => 2
                         ]);
@@ -2786,10 +2786,10 @@ class TokenController extends Controller
 
 
                 Transaction::where('trx_id', $var->data->metadata->ref)->update(['status' => 2]);
-                $meterNo = TamperToken::where('order_id', $var->data->metadata->ref)->first()->meterNo;
+                $meterNo = TamperToken::where('trx_id', $var->data->metadata->ref)->first()->meterNo;
                 $meter = Meter::where('meterNo', $meterNo)->first();
-                $trx = TamperToken::where('order_id', $var->data->metadata->ref)->first();
-                $traff_id = TamperToken::where('order_id', $var->data->metadata->ref)->first();
+                $trx = TamperToken::where('trx_id', $var->data->metadata->ref)->first();
+                $traff_id = TamperToken::where('trx_id', $var->data->metadata->ref)->first();
 
 
                 $databody = [
@@ -2814,7 +2814,7 @@ class TokenController extends Controller
                     if ($status == "SUCCESS") {
 
                         $no_kct_token = $no_kct_data['tokens'][0];
-                        TamperToken::where('order_id', $var->data->metadata->ref)->update([
+                        TamperToken::where('trx_id', $var->data->metadata->ref)->update([
 
                             'token' => $no_kct_token,
                             'status' => 2
@@ -2903,10 +2903,10 @@ class TokenController extends Controller
 
 
                 Transaction::where('trx_id', $var->data->metadata->ref)->update(['status' => 2]);
-                $meterNo = ClearcreditToken::where('order_id', $var->data->metadata->ref)->first()->meterNo;
+                $meterNo = ClearcreditToken::where('trx_id', $var->data->metadata->ref)->first()->meterNo;
                 $meter = Meter::where('meterNo', $meterNo)->first();
-                $trx = ClearcreditToken::where('order_id', $var->data->metadata->ref)->first();
-                $traff_id = ClearcreditToken::where('order_id', $var->data->metadata->ref)->first();
+                $trx = ClearcreditToken::where('trx_id', $var->data->metadata->ref)->first();
+                $traff_id = ClearcreditToken::where('trx_id', $var->data->metadata->ref)->first();
                 $amount = (float) number_format((float)$trx->tariffPerKWatt, 2, '.', '');
 
 
@@ -2936,7 +2936,7 @@ class TokenController extends Controller
                     if ($status == "SUCCESS") {
 
                         $no_kct_token = $no_kct_data['tokens'][0];
-                        ClearcreditToken::where('order_id', $var->data->metadata->ref)->update([
+                        ClearcreditToken::where('trx_id', $var->data->metadata->ref)->update([
 
                             'token' => $no_kct_token,
                             'status' => 2
@@ -3043,10 +3043,10 @@ class TokenController extends Controller
 
 
                 Transaction::where('trx_id', $ref)->update(['status' => 2]);
-                $meterNo = CreditToken::where('order_id', $ref)->first()->meterNo;
+                $meterNo = CreditToken::where('trx_id', $ref)->first()->meterNo;
                 $meter = Meter::where('meterNo', $meterNo)->first();
-                $trx = CreditToken::where('order_id', $ref)->first();
-                $traff_id = CreditToken::where('order_id', $ref)->first();
+                $trx = CreditToken::where('trx_id', $ref)->first();
+                $traff_id = CreditToken::where('trx_id', $ref)->first();
 
 
                 $databody = [
@@ -3074,7 +3074,7 @@ class TokenController extends Controller
                     if ($status == "SUCCESS") {
 
                         $no_kct_token = $no_kct_data['tokens'][0];
-                        CreditToken::where('order_id', $ref)->update([
+                        CreditToken::where('trx_id', $ref)->update([
 
                             'token' => $no_kct_token,
                             'status' => 2
@@ -3139,10 +3139,10 @@ class TokenController extends Controller
 
 
                 Transaction::where('trx_id', $var->data->metadata->ref)->update(['status' => 2]);
-                $meterNo = CreditToken::where('order_id', $var->data->metadata->ref)->first()->meterNo;
+                $meterNo = CreditToken::where('trx_id', $var->data->metadata->ref)->first()->meterNo;
                 $meter = Meter::where('meterNo', $meterNo)->first();
-                $trx = CreditToken::where('order_id', $var->data->metadata->ref)->first();
-                $traff_id = CreditToken::where('order_id', $var->data->metadata->ref)->first();
+                $trx = CreditToken::where('trx_id', $var->data->metadata->ref)->first();
+                $traff_id = CreditToken::where('trx_id', $var->data->metadata->ref)->first();
 
 
                 $databody = [
@@ -3166,7 +3166,7 @@ class TokenController extends Controller
                     if ($status == "SUCCESS") {
 
                         $no_kct_token = $no_kct_data['tokens'][0];
-                        CreditToken::where('order_id', $var->data->metadata->ref)->update([
+                        CreditToken::where('trx_id', $var->data->metadata->ref)->update([
 
                             'token' => $no_kct_token,
                             'status' => 2
@@ -3267,10 +3267,10 @@ class TokenController extends Controller
             if ($status == 'success') {
 
                 Transaction::where('trx_id', $ref)->update(['status' => 2]);
-                $meterNo = TamperToken::where('order_id', $ref)->first()->meterNo;
+                $meterNo = TamperToken::where('trx_id', $ref)->first()->meterNo;
                 $meter = Meter::where('meterNo', $meterNo)->first();
-                $trx = TamperToken::where('order_id', $ref)->first();
-                $traff_id = TamperToken::where('order_id', $ref)->first();
+                $trx = TamperToken::where('trx_id', $ref)->first();
+                $traff_id = TamperToken::where('trx_id', $ref)->first();
 
 
                 $databody = [
@@ -3299,7 +3299,7 @@ class TokenController extends Controller
                     if ($status == "SUCCESS") {
 
                         $no_kct_token = $no_kct_data['tokens'][0];
-                        TamperToken::where('order_id', $ref)->update([
+                        TamperToken::where('trx_id', $ref)->update([
 
                             'token' => $no_kct_token,
                             'status' => 2
@@ -3365,10 +3365,10 @@ class TokenController extends Controller
 
 
                 Transaction::where('trx_id', $var->data->metadata->ref)->update(['status' => 2]);
-                $meterNo = TamperToken::where('order_id', $var->data->metadata->ref)->first()->meterNo;
+                $meterNo = TamperToken::where('trx_id', $var->data->metadata->ref)->first()->meterNo;
                 $meter = Meter::where('meterNo', $meterNo)->first();
-                $trx = TamperToken::where('order_id', $var->data->metadata->ref)->first();
-                $traff_id = TamperToken::where('order_id', $var->data->metadata->ref)->first();
+                $trx = TamperToken::where('trx_id', $var->data->metadata->ref)->first();
+                $traff_id = TamperToken::where('trx_id', $var->data->metadata->ref)->first();
 
 
                 $databody = [
@@ -3393,7 +3393,7 @@ class TokenController extends Controller
                     if ($status == "SUCCESS") {
 
                         $no_kct_token = $no_kct_data['tokens'][0];
-                        TamperToken::where('order_id', $var->data->metadata->ref)->update([
+                        TamperToken::where('trx_id', $var->data->metadata->ref)->update([
 
                             'token' => $no_kct_token,
                             'status' => 2
@@ -3493,10 +3493,10 @@ class TokenController extends Controller
             if ($status == 'success') {
 
                 Transaction::where('trx_id', $ref)->update(['status' => 2]);
-                $meterNo = ClearcreditToken::where('order_id', $ref)->first()->meterNo;
+                $meterNo = ClearcreditToken::where('trx_id', $ref)->first()->meterNo;
                 $meter = Meter::where('meterNo', $meterNo)->first();
-                $trx = ClearcreditToken::where('order_id', $ref)->first();
-                $traff_id = ClearcreditToken::where('order_id', $ref)->first();
+                $trx = ClearcreditToken::where('trx_id', $ref)->first();
+                $traff_id = ClearcreditToken::where('trx_id', $ref)->first();
 
 
                 $databody = [
@@ -3525,7 +3525,7 @@ class TokenController extends Controller
                     if ($status == "SUCCESS") {
 
                         $no_kct_token = $no_kct_data['tokens'][0];
-                        ClearcreditToken::where('order_id', $ref)->update([
+                        ClearcreditToken::where('trx_id', $ref)->update([
 
                             'token' => $no_kct_token,
                             'status' => 2
@@ -3632,10 +3632,10 @@ class TokenController extends Controller
             if ($status == 'success') {
 
                 Transaction::where('trx_id', $ref)->update(['status' => 2]);
-                $meterNo = KctToken::where('order_id', $ref)->first()->meterNo;
+                $meterNo = KctToken::where('trx_id', $ref)->first()->meterNo;
                 $meter = Meter::where('meterNo', $meterNo)->first();
-                $trx = KctToken::where('order_id', $ref)->first();
-                $traff_id = KctToken::where('order_id', $ref)->first();
+                $trx = KctToken::where('trx_id', $ref)->first();
+                $traff_id = KctToken::where('trx_id', $ref)->first();
 
                 if ($meter != null && $meter->NeedKCT == "on") {
                     $databody = [
@@ -3683,7 +3683,7 @@ class TokenController extends Controller
 
                                 if ($status == "SUCCESS") {
 
-                                    TamperToken::where('order_id', $ref)->update([
+                                    TamperToken::where('trx_id', $ref)->update([
                                         'token' => $token,
                                         'kct_token1' => $kct_data['tokens'][0],
                                         'kct_token2' => $kct_data['tokens'][1],
@@ -3752,7 +3752,7 @@ class TokenController extends Controller
 
         if ($request->type == "credit_token") {
 
-            $trx_comp = CreditToken::where('order_id', $request->trx_id)->first() ?? null;
+            $trx_comp = CreditToken::where('trx_id', $request->trx_id)->first() ?? null;
             $user_comp = User::where('id', $trx_comp->user_id)->first() ?? null;
 
 
@@ -3761,7 +3761,7 @@ class TokenController extends Controller
                 $data['full_name'] = $user_comp->first_name . " " . $user_comp->last_name;
                 $data['address'] = $user_comp->address . "," . $user_comp->city . "," . $user_comp->state;
                 $data['phone'] = $user_comp->phone;
-                $data['order_id'] = $trx_comp->order_id;
+                $data['trx_id'] = $trx_comp->trx_id;
                 $data['token'] = $trx_comp->token;
                 $data['amount'] = $trx_comp->amount;
                 $data['vat_amount'] = $trx_comp->vatAmount;
@@ -3782,7 +3782,7 @@ class TokenController extends Controller
 
         if ($request->type == "tamper") {
 
-            $trx_comp = TamperToken::where('order_id', $request->trx_id)->first() ?? null;
+            $trx_comp = TamperToken::where('trx_id', $request->trx_id)->first() ?? null;
             $user_comp = User::where('id', $trx_comp->user_id)->first() ?? null;
 
 
@@ -3791,7 +3791,7 @@ class TokenController extends Controller
                 $data['full_name'] = $user_comp->first_name . " " . $user_comp->last_name;
                 $data['address'] = $user_comp->address . "," . $user_comp->city . "," . $user_comp->state;
                 $data['phone'] = $user_comp->phone;
-                $data['order_id'] = $trx_comp->order_id;
+                $data['trx_id'] = $trx_comp->trx_id;
                 $data['token'] = $trx_comp->token;
                 $data['amount'] = $trx_comp->amount;
                 $data['vat_amount'] = $trx_comp->vatAmount;
@@ -3815,7 +3815,7 @@ class TokenController extends Controller
 
         if ($request->type == "clear_credit_token") {
 
-            $trx_comp = ClearcreditToken::where('order_id', $request->trx_id)->first() ?? null;
+            $trx_comp = ClearcreditToken::where('trx_id', $request->trx_id)->first() ?? null;
             $user_comp = User::where('id', $trx_comp->user_id)->first() ?? null;
 
 
@@ -3824,7 +3824,7 @@ class TokenController extends Controller
                 $data['full_name'] = $user_comp->first_name . " " . $user_comp->last_name;
                 $data['address'] = $user_comp->address . "," . $user_comp->city . "," . $user_comp->state;
                 $data['phone'] = $user_comp->phone;
-                $data['order_id'] = $trx_comp->order_id;
+                $data['trx_id'] = $trx_comp->trx_id;
                 $data['token'] = $trx_comp->token;
                 $data['amount'] = $trx_comp->amount;
                 $data['vat_amount'] = $trx_comp->vatAmount;
@@ -3845,13 +3845,13 @@ class TokenController extends Controller
         }
 
         if ($request->type == "kct_token"){
-            $trx = KctToken::where('order_id', $request->trx_id)->first() ?? null;
+            $trx = KctToken::where('trx_id', $request->trx_id)->first() ?? null;
             $user = User::where('id', $trx->user_id)->first() ?? null;
             $user = User::where('id', $trx->user_id)->first() ?? null;
             $data['full_name'] = $user->first_name . " " . $user->last_name;
             $data['address'] = $user->address . "," . $user->city . "," . $user->state;
             $data['phone'] = $user->phone;
-            $data['order_id'] = $trx->order_id;
+            $data['trx_id'] = $trx->trx_id;
             $data['token1'] = $trx->kct_token1;
             $data['token2'] = $trx->kct_token2;
             $data['amount'] = $trx->amount;

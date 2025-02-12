@@ -367,7 +367,7 @@ class PosController extends Controller
 
                                 $cdt = new CreditToken();
                                 $cdt->user_id = 1;
-                                $cdt->order_id = $RRN;
+                                $cdt->trx_id = $RRN;
                                 $cdt->meterNo = $meterNo;
                                 $cdt->amount = $total_paid ?? 0;
                                 $cdt->vat = $vat_amount ?? 0;
@@ -381,7 +381,7 @@ class PosController extends Controller
 
                                 $met = new MeterToken();
                                 $met->user_id = $user->id;
-                                $met->order_id = $RRN;
+                                $met->trx_id = $RRN;
                                 $met->meterNo = $meterNo;
                                 $met->token = $token;
                                 $met->amount = $total_paid ?? 0;
@@ -406,7 +406,7 @@ class PosController extends Controller
                                 $data2['full_name'] = $user->first_name . " " . $user->last_name;
                                 $data2['address'] = $user->address . "," . $user->city . "," . $user->state;
                                 $data2['service'] = "MOMAS METER";
-                                $data2['order_id'] = $trx;
+                                $data2['trx_id'] = $trx;
                                 $data2['token'] = $token;
                                 $data2['amount'] = $total_paid;
                                 $data2['vending_amount'] = $vending_amount;
@@ -526,7 +526,7 @@ class PosController extends Controller
                         $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
                         $met = new MeterToken ();
                         $met->user_id = $user->id;
-                        $met->order_id = $RRN;
+                        $met->trx_id = $RRN;
                         $met->meterNo = $meterNo;
                         $met->token = $no_kct_token;
                         $met->amount = $vending_amount;
@@ -549,7 +549,7 @@ class PosController extends Controller
                         $data['full_name'] = $user->first_name . " " . $user->last_name;
                         $data['address'] = $user->address . "," . $user->city . "," . $user->state;
                         $data['service'] = "MOMAS METER";
-                        $data['order_id'] = $RRN;
+                        $data['trx_id'] = $RRN;
                         $data['token'] = $no_kct_data['tokens'][0];
                         $data['amount'] = $total_paid;
                         $data['vending_amount'] = $vending_amount;
@@ -719,7 +719,7 @@ class PosController extends Controller
 
                             $met = new MeterToken ();
                             $met->user_id = $trx->user_id;
-                            $met->order_id = $trx->trx_id;
+                            $met->trx_id = $trx->trx_id;
                             $met->meterNo = $meter->meterNo;
                             $met->token = $token;
                             $met->amount = $trx->amount;
@@ -736,7 +736,7 @@ class PosController extends Controller
                             $data2['full_name'] = $user->first_name . " " . $user->last_name;
                             $data2['address'] = $user->address . "," . $user->city . "," . $user->state;
                             $data2['service'] = "MOMAS METER";
-                            $data2['order_id'] = $trx_id;
+                            $data2['trx_id'] = $trx_id;
                             $data2['token'] = $token;
                             $data2['amount'] = "$trx->amount";
                             $data2['vending_amount'] = "$trx->vending_amount";
@@ -819,7 +819,7 @@ class PosController extends Controller
                     $no_kct_token = $no_kct_data['tokens'][0];
                     $met = new MeterToken ();
                     $met->user_id = $trx->user_id;
-                    $met->order_id = $trx->trx_id;
+                    $met->trx_id = $trx->trx_id;
                     $met->meterNo = $meter->meterNo;
                     $met->token = $no_kct_token;
                     $met->amount = $trx->amount;
@@ -835,7 +835,7 @@ class PosController extends Controller
                     $data['full_name'] = $user->first_name . " " . $user->last_name;
                     $data['address'] = $user->address . "," . $user->city . "," . $user->state;
                     $data['service'] = "MOMAS METER";
-                    $data['order_id'] = $trx_id;
+                    $data['trx_id'] = $trx_id;
                     $data['token'] = $no_kct_token;
                     $data['amount'] = "$trx->amount";
                     $data['vending_amount'] = "$trx->vending_amount";

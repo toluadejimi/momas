@@ -238,11 +238,11 @@ class MeterController extends Controller
                         if ($status == "SUCCESS") {
 
 
-                            $order_id = "TRX".random_int(000000000, 9999999999);
+                            $trx_id = "TRX".random_int(000000000, 9999999999);
                             $estate_id = Auth::user()->estate_id;
                             $cdt = new CreditToken();
                             $cdt->user_id = Auth::user()->id;
-                            $cdt->order_id = $order_id;
+                            $cdt->trx_id = $trx_id;
                             $cdt->meterNo = $meterNo;
                             $cdt->amount =  $total_paid ?? 0;
                             $cdt->vat = $vat_amount ?? 0;
@@ -257,7 +257,7 @@ class MeterController extends Controller
 
                             $met = new MeterToken();
                             $met->user_id = Auth::user()->id;
-                            $met->order_id = $trx;
+                            $met->trx_id = $trx;
                             $met->meterNo = $meterNo;
                             $met->token = $token;
                             $met->amount = $total_paid ?? 0;
@@ -275,7 +275,7 @@ class MeterController extends Controller
                             $data2['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
                             $data2['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
                             $data2['service'] = "MOMAS METER";
-                            $data2['order_id'] = $trx;
+                            $data2['trx_id'] = $trx;
                             $data2['token'] = $token;
                             $data2['amount'] = $total_paid;
                             $data2['vending_amount'] = $vendong_amount;
@@ -363,7 +363,7 @@ class MeterController extends Controller
                     $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
                     $met = new MeterToken ();
                     $met->user_id = Auth::user()->id;
-                    $met->order_id = $trx;
+                    $met->trx_id = $trx;
                     $met->meterNo = $meterNo;
                     $met->token = $no_kct_token;
                     $met->amount = $vendong_amount;
@@ -378,7 +378,7 @@ class MeterController extends Controller
                     $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
                     $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
                     $data['service'] = "MOMAS METER";
-                    $data['order_id'] = $trx;
+                    $data['trx_id'] = $trx;
                     $data['token'] = $no_kct_data['tokens'][0];
                     $data['amount'] = $total_paid;
                     $data['vending_amount'] = $vendong_amount;
@@ -512,7 +512,7 @@ class MeterController extends Controller
 
                             $met = new MeterToken ();
                             $met->user_id = $trx->user_id;
-                            $met->order_id = $trx->trx_id;
+                            $met->trx_id = $trx->trx_id;
                             $met->meterNo = $meter->meterNo;
                             $met->token = $token;
                             $met->amount = $trx->amount;
@@ -529,7 +529,7 @@ class MeterController extends Controller
                             $data2['full_name'] = $user->first_name . " " . $user->last_name;
                             $data2['address'] = $user->address . "," . $user->city . "," . $user->state;
                             $data2['service'] = "MOMAS METER";
-                            $data2['order_id'] = $trx_id;
+                            $data2['trx_id'] = $trx_id;
                             $data2['token'] = $token;
                             $data2['amount'] = "$trx->amount";
                             $data2['vending_amount'] = "$trx->vending_amount";
@@ -612,7 +612,7 @@ class MeterController extends Controller
                     $no_kct_token = $no_kct_data['tokens'][0];
                     $met = new MeterToken ();
                     $met->user_id = $trx->user_id;
-                    $met->order_id = $trx->trx_id;
+                    $met->trx_id = $trx->trx_id;
                     $met->meterNo = $meter->meterNo;
                     $met->token = $no_kct_token;
                     $met->amount = $trx->amount;
@@ -628,7 +628,7 @@ class MeterController extends Controller
                     $data['full_name'] = $user->first_name . " " . $user->last_name;
                     $data['address'] = $user->address . "," . $user->city . "," . $user->state;
                     $data['service'] = "MOMAS METER";
-                    $data['order_id'] = $trx_id;
+                    $data['trx_id'] = $trx_id;
                     $data['token'] = $no_kct_token;
                     $data['amount'] = "$trx->amount";
                     $data['vending_amount'] = "$trx->vending_amount";
@@ -715,7 +715,7 @@ class MeterController extends Controller
         $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
         $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
         $data['service'] = "MOMAS";
-        $data['order_id'] = $trx;
+        $data['trx_id'] = $trx;
         $data['token'] = "123456944885756";
         $data['amount'] = $amount;
         $data['date'] = $dater;
@@ -723,7 +723,7 @@ class MeterController extends Controller
 
         $ved = new MeterToken();
         $ved->user_id = Auth::id();
-        $ved->order_id = $trx;
+        $ved->trx_id = $trx;
         $ved->meterNo = $meterNo;
         $ved->token = "123456944885756";
         $ved->estate_id = $estate_id;
@@ -780,7 +780,7 @@ class MeterController extends Controller
 //            $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
 //            $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
 //            $data['service'] = "MOMAS";
-//            $data['order_id'] = $trx;
+//            $data['trx_id'] = $trx;
 //            $data['token'] = $var->recieptNumber;
 //            $data['amount'] = $amount;
 //            $data['date'] = $dater;
@@ -788,7 +788,7 @@ class MeterController extends Controller
 //
 //            $ved = new MeterToken();
 //            $ved->user_id = Auth::id();
-//            $ved->order_id = $trx;
+//            $ved->trx_id = $trx;
 //            $ved->meterNo = $meterNo;
 //            $ved->token = $var->recieptNumber;
 //            $ved->estate_id = $estate_id;
@@ -1196,7 +1196,7 @@ class MeterController extends Controller
 
                 $met = new MeterToken ();
                 $met->user_id = $request->user_id;
-                $met->order_id = $trx;
+                $met->trx_id = $trx;
                 $met->meterNo = $request->MeterNo;
                 $met->amount = $request->amount;
                 $met->vat = $vat;

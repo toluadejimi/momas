@@ -466,7 +466,7 @@
 
                                                     <td>
                                                         @if($data->status == 2)
-                                                            <a href="recepit?trx_id={{$data->order_id}}"  onclick="return confirmreprint();" class="btn btn-primary">Reprint</a>
+                                                            <a href="recepit?trx_id={{$data->trx_id}}"  onclick="return confirmreprint();" class="btn btn-primary">Reprint</a>
                                                             <script>
 
                                                                 function confirmreprint() {
@@ -476,7 +476,7 @@
 
                                                         @elseif($data->status == 0)
 
-                                                            <a href="retry-generate-token?trx_id={{$data->order_id}}"  onclick="return confirmgenertetoken();" class="btn btn-secondary">Generate Token</a>
+                                                            <a href="retry-generate-token?trx_id={{$data->trx_id}}"  onclick="return confirmgenertetoken();" class="btn btn-secondary">Generate Token</a>
                                                             <script>
 
                                                                 function confirmgenertetoken() {
@@ -1103,7 +1103,7 @@
 
                                                     <td>
                                                         @if($data->status == 2)
-                                                            <a href="recepit?trx_id={{$data->order_id}}"  onclick="return confirmreprint();" class="btn btn-primary">Reprint</a>
+                                                            <a href="recepit?trx_id={{$data->trx_id}}"  onclick="return confirmreprint();" class="btn btn-primary">Reprint</a>
                                                             <script>
 
                                                                 function confirmreprint() {
@@ -1113,7 +1113,7 @@
 
                                                         @elseif($data->status == 0)
 
-                                                            <a href="retry-generate-token?trx_id={{$data->order_id}}"  onclick="return confirmgenertetoken();" class="btn btn-secondary">Generate Token</a>
+                                                            <a href="retry-generate-token?trx_id={{$data->trx_id}}"  onclick="return confirmgenertetoken();" class="btn btn-secondary">Generate Token</a>
                                                             <script>
 
                                                                 function confirmgenertetoken() {

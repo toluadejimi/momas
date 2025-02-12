@@ -189,12 +189,11 @@
                                     <thead>
                                     <tr>
                                         <th scope="col" class="cursor-pointer">Trx ID</th>
+                                        <th scope="col" class="cursor-pointer">Trx Type</th>
                                         <th scope="col" class="cursor-pointer">Customer</th>
                                         <th scope="col" class="cursor-pointer">Estate</th>
                                         <th scope="col" class="cursor-pointer">Amount</th>
-                                        <th scope="col" class="cursor-pointer">Type</th>
                                         <th scope="col" class="cursor-pointer">Status</th>
-                                        <th scope="col" class="cursor-pointer">Note</th>
                                         <th scope="col" class="cursor-pointer desc">Date</th>
 
 
@@ -206,11 +205,71 @@
                                     @foreach($transactions as $data)
 
                                         <tr>
-                                            <td>{{$data->trx_id}}</td>
+                                            <td><a href="#" class="" data-bs-toggle="modal"
+                                                data-bs-target="#staticBackdrop{{$data->trx_id}}">{{$data->trx_id}}</a>
+
+
+                                                <div class="col-xl-6">
+                                                    <div class="card">
+                                                        <div class="modal fade" id="staticBackdrop{{$data->trx_id}}"
+                                                             data-bs-backdrop="static" data-bs-keyboard="false"
+                                                             tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                                             aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5"
+                                                                            id="staticBackdropLabel">{{$data->trx_id}}</h1>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+
+
+                                                                    <div class="modal-body">
+
+                                                                    <div class="row">
+                                                                        <div class="col-6">
+
+                                                                            <label>Transaction ID</label>
+                                                                            <div>{{$data->trx_id}}</div>
+
+                                                                        </div>
+
+                                                                        @if($data->)
+                                                                        <div class="col-6">
+
+                                                                            <label>Meter No</label>
+                                                                            <div>{{$data->trx_id}}</div>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    </div>
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </td>
+
+
+
+
+                                            <td>
+                                                @if($data->service_type == "credit_token")
+                                                    <span class="badge text-bg-primary">Credit Token</span>
+                                                @elseif($data->service_type == "vtu")
+                                                    <span class="badge text-bg-primary">VAS</span>
+                                                @else
+                                                @endif
+                                            </td>
                                             <td><a href="view-user?id={{$data->user->first_name ?? "name"}}">{{$data->user->last_name ?? "name"}}</a></td>
                                             <td>{{$data->estate->title ?? "Estate"}}</td>
                                             <td>{{number_format($data->amount, 2)}}</td>
-                                            <td>{{$data->service}}</td>
                                             <td>
                                                 @if($data->status == 2)
                                                     <span class="badge text-bg-primary">Approved</span>
@@ -219,9 +278,7 @@
                                                 @elseif($data->status == 3)
                                                     <span class="badge text-bg-dark">Refunded</span>
                                                 @endif
-
                                             </td>
-                                            <td>{{$data->note}}</td>
                                             <td>{{$data->created_at}}</td>
 
                                         </tr>
