@@ -234,7 +234,6 @@
 
                                                                         </div>
 
-                                                                        @if($data->)
                                                                         <div class="col-6">
 
                                                                             <label>Meter No</label>
