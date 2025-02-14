@@ -107,7 +107,7 @@
                                         <form id="loginForm" action="verify2fa"  method="post"  class="my-4">
                                             @csrf
                                             <div class="form-group mb-3">
-                                                <input class="form-control" name="otp" type="number" placeholder="Enter OTP Code" >
+                                                <input class="form-control" name="otp" type="number" required placeholder="Enter OTP Code" >
                                             </div>
 
 
