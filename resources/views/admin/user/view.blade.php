@@ -36,7 +36,60 @@
                 </div>
 
 
-                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <!-- Modal -->
+                            <div class="modal fade" id="staticBackdrop"
+                                 data-bs-backdrop="static" data-bs-keyboard="false"
+                                 tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5"
+                                                id="staticBackdropLabel">Update Email</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+
+                                        <form action="update_user_email" method="POST">
+                                            @csrf
+
+                                            <div class="modal-body">
+
+                                                <p>Update Email</p>
+                                                <label class="mt-3">Old Email</label>
+                                                <input name="old_email" class="form-control" readonly value="{{$user->email}}">
+
+                                                <label class="mt-3">New Email</label>
+                                                <input type="email" name="email" class="form-control" required >
+
+
+                                                <label class="mt-3">Confirm Email</label>
+                                                <input type="email" name="confirm_email" class="form-control" required>
+
+
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-light"
+                                                        data-bs-dismiss="modal">Close
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">Update Email
+                                                </button>
+                                            </div>
+
+                                        </form>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- end card -->
+                    </div> <!-- end col -->
+
+
+
+                    <div class="row">
 
                     <div class="card">
 
@@ -61,60 +114,6 @@
 
 
                                         </div>
-
-
-                                        <div class="col-xl-6">
-                                            <div class="card">
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="staticBackdrop"
-                                                     data-bs-backdrop="static" data-bs-keyboard="false"
-                                                     tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                                     aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h1 class="modal-title fs-5"
-                                                                    id="staticBackdropLabel">Update Email</h1>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                        aria-label="Close"></button>
-                                                            </div>
-
-                                                            <form action="update_user_email" method="POST"
-                                                                  enctype="multipart/form-data">
-                                                                @csrf
-
-                                                                <div class="modal-body">
-
-                                                                    <p>Update Email</p>
-                                                                    <label class="mt-3">Old Email</label>
-                                                                    <input name="old_email" class="form-control" readonly value="{{$user->email}}">
-
-                                                                    <label class="mt-3">New Email</label>
-                                                                    <input name="email" class="form-control" >
-
-
-                                                                    <label class="mt-3">Confirm Email</label>
-                                                                    <input name="confirm_email" class="form-control">
-
-
-                                                                </div>
-
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-light"
-                                                                            data-bs-dismiss="modal">Close
-                                                                    </button>
-                                                                    <button type="submit" class="btn btn-primary">Update Email
-                                                                    </button>
-                                                                </div>
-
-                                                            </form>
-
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> <!-- end card -->
-                                        </div> <!-- end col -->
 
 
 

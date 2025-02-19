@@ -28,7 +28,9 @@ class MeterImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
 
+
         if (auth::user()->role == 3) {
+
 
             return new Meter([
                 'meterNo'   => $row['meterno'],
@@ -51,15 +53,14 @@ class MeterImport implements ToModel, WithHeadingRow
                 'NewTariffDualID'          => $row['newtariffindexdual'] ?? null,
                 'OldTariffDualID'          => $row['oldtariffindexdual'] ?? null,
                 'estate_id'    =>  Auth::user()->estate_id,
-
             ]);
 
 
         }else{
 
 
-            return new Meter([
 
+            return new Meter([
 
                 'meterNo'   => $row['meterno'],
                 'MeterSIMNo'   => $row['metersimno'],
@@ -80,11 +81,12 @@ class MeterImport implements ToModel, WithHeadingRow
                 'OldTariffID'      => $row['oldtariffindex'] ?? null,
                 'NewTariffDualID'          => $row['newtariffindexdual'] ?? null,
                 'OldTariffDualID'          => $row['oldtariffindexdual'] ?? null,
-                'estate_id'    =>  $this->id,
+                'estate_id'   =>  $this->id,
 
             ]);
 
         }
+
 
 
     }

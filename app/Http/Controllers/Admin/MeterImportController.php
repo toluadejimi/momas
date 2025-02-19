@@ -30,7 +30,9 @@ class MeterImportController extends Controller
 
         try {
             \Log::info('Import process started.');
-            Excel::import(new MeterImport($id), $request->file('file'));
+
+             Excel::import(new MeterImport($id), $request->file('file'));
+
             \Log::info('Import process finished.');
 
             return redirect()->back()->with('success', 'Meter imported successfully!');
