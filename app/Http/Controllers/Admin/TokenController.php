@@ -1027,12 +1027,15 @@ class TokenController extends Controller
 
 
         $est = Estate::where('id', $request->estate_name)->first();
-        if ($est->charge_fee < 0) {
-            $fee_in_percent = $est->charge_fee_percent;
-            $fee = ($fee_in_percent / $request->amount) * 100;
-        } else {
-            $fee = $est->charge_fee;
+
+
+        if($est->charge_fee_flat == null){
+            $fee  = ($est->charge_fee_precent / 100) * (int)$request->amount;
+        }else{
+            $fee  = $est->charge_fee_flat;
         }
+
+
 
         $amount = $request->amount - $fee;
         $trx_id = "TRX" . random_int(000000000, 9999999999);
@@ -1043,7 +1046,7 @@ class TokenController extends Controller
         $cdt->trx_id = $trx_id;
         $cdt->meterNo = $request->meterNo;
         $cdt->amount = $amount;
-        $cdt->amount_charged = $request->amount;
+        $cdt->amount_charged = $request->amount + $fee;
         $cdt->fee = $fee;
         $cdt->vat = $request->vat;
         $cdt->estate_name = Estate::where('id', $request->estate_name)->first()->title;;
@@ -1065,12 +1068,10 @@ class TokenController extends Controller
 
                 $estate_id = $request->estate_id;
                 $est = Estate::where('id', $estate_id)->first();
-                if ($est->charge_fee < 0) {
-
-                    $fee_in_percent = $est->charge_fee_percent;
-                    $fee = ($fee_in_percent / $request->amount) * 100;
-                } else {
-                    $fee = $est->charge_fee;
+                if($est->charge_fee_flat == null){
+                    $fee  = ($est->charge_fee_precent / 100) * (int)$request->amount;
+                }else{
+                    $fee  = $est->charge_fee_flat;
                 }
 
 
@@ -1083,7 +1084,7 @@ class TokenController extends Controller
 
                 $databody = array(
                     'title' => 'Payment for services',
-                    'amount' => $request->amount,
+                    'amount' => $request->amount + $fee,
                     'currency' => 'NGN',
                     'redirect_url' => $url . "/admin/pay-flutter-web",
                     'customer' => [
@@ -1153,13 +1154,12 @@ class TokenController extends Controller
                     $estate_id = Auth::user()->estate_id;
                 }
                 $est = Estate::where('id', $estate_id)->first();
-                if ($est->charge_fee < 0) {
-
-                    $fee_in_percent = $est->charge_fee_percent;
-                    $fee = ($fee_in_percent / $request->amount) * 100;
-                } else {
-                    $fee = $est->charge_fee;
+                if($est->charge_fee_flat == null){
+                    $fee  = ($est->charge_fee_precent / 100) * (int)$request->amount;
+                }else{
+                    $fee  = $est->charge_fee_flat;
                 }
+
 
 
                 $fl = Setting::where('id', 1)->first();
@@ -1168,12 +1168,9 @@ class TokenController extends Controller
                 $paystackkey = $fl->paystack_secret;
                 $pkkey['paystack_public'] = $fl->paystack_public;
 
-                $trx_id = "TRX" . random_int(0000000, 9999999);
                 $email = Auth::user()->email;
-
-
                 $databody = array(
-                    "amount" => $request->amount * 100,
+                    "amount" => ($request->amount + $fee) * 100,
                     "email" => $email,
                     "ref" => $trx_id,
                     'callback_url' => url('') . "/admin/paystack-check-web",

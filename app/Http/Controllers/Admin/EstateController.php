@@ -124,6 +124,11 @@ class EstateController extends Controller
     public function estate_update(request $request)
     {
 
+        if($request->charge_fee_flat != null && $request->charge_fee_precent != null){
+            return back()->with('error','Enter only one charge fee');
+        }
+
+
         Estate::where('id', $request->id)->update([
             'title' => $request->title,
             'status' => $request->status,
@@ -135,8 +140,9 @@ class EstateController extends Controller
             'flutterwave_subaccount' =>  $request->flutterwave_subaccount,
             'account_no' =>  $request->account_no,
             'bank' =>  $request->bank,
-            'charge_fee' =>  $request->charge_fee,
-            'charge_fee_percent' =>  $request->charge_fee_percent,
+            'account_name' =>  $request->account_name,
+            'charge_fee_flat' =>  $request->charge_fee_flat,
+            'charge_fee_precent' =>  $request->charge_fee_precent,
             'pos_tariff_id' =>  $request->pos_tariff_id,
             'serial_no' =>  $request->serial_no,
 

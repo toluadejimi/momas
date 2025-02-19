@@ -193,18 +193,24 @@
                                     </div>
 
                                     <div class="col-xl-3 col-sm-12">
+                                        <label class="my-2">Account Name</label>
+                                        <input type="text" value="{{$org->account_name}}"   name="account_no" class="form-control" >
+                                    </div>
+
+
+                                    <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Account No</label>
                                         <input type="text" value="{{$org->account_no}}"   name="account_no" class="form-control" >
                                     </div>
 
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Charge Fee %</label>
-                                        <input type="number" value="{{$org->charge_fee_percent}}" step="0.01" name="charge_fee_percent"  class="form-control" >
+                                        <input type="number" value="{{$org->charge_fee_precent}}" step="0.01" name="charge_fee_precent"  class="form-control" >
                                     </div>
 
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Charge Fee (Flat)</label>
-                                        <input type="number" value="{{$org->charge_fee}}" name="charge_fee"  class="form-control" >
+                                        <input type="number" value="{{$org->charge_fee_flat}}" name="charge_fee_flat"  class="form-control" >
                                     </div>
 
 
