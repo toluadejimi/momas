@@ -28,6 +28,84 @@
                 @endif
 
 
+
+
+
+
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <!-- Modal -->
+                            <div class="modal fade" id="staticBackdrop"
+                                 data-bs-backdrop="static" data-bs-keyboard="false"
+                                 tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5"
+                                                id="staticBackdropLabel">Setup Paystack Information</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+
+                                        <form action="setup_paystack" method="POST">
+                                            @csrf
+
+                                            <div class="modal-body">
+
+
+
+                                                <div class="row">
+                                                    <div class="col-xl-6 col-sm-12">
+                                                        <label class="my-2">Bank</label>
+                                                        <select name="">
+
+
+                                                        </select>
+                                                        <input type="text"  value=""  name="bank" class="form-control" >
+                                                    </div>
+
+                                                    <div class="col-xl-6 col-sm-12">
+                                                        <label class="my-2">Account Name</label>
+                                                        <input type="text" value=""   name="account_no" class="form-control" >
+                                                    </div>
+
+
+                                                    <div class="col-xl-6 col-sm-12">
+                                                        <label class="my-2">Account No</label>
+                                                        <input type="text" value=""   name="account_no" class="form-control" >
+                                                    </div>
+
+
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-light"
+                                                        data-bs-dismiss="modal">Close
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">Update Email
+                                                </button>
+                                            </div>
+
+                                        </form>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- end card -->
+                    </div> <!-- end col -->
+
+
+
+
+
+
+
+
+
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
                         <h4 class="fs-18 fw-semibold m-0">Add New Estate</h4>
@@ -96,6 +174,9 @@
                 </div>
 
 
+
+
+
                 <div class="row">
 
                     <div class="card">
@@ -106,7 +187,22 @@
                                 @csrf
 
                                 <div class="row">
-                                    <h6 class="d-flex justify-content-start my-4">Estate Information</h6>
+                                    <div class="card-header">
+                                        <div class="d-flex justify-content-between">
+                                            <h6 class="d-flex justify-content-start my-4">Estate Information</h6>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="justify-content-end">
+                                                    <div class="justify-content-end">
+                                                        <a href="#" class="btn btn-primary text-white " data-bs-toggle="modal"
+                                                           data-bs-target="#staticBackdrop">Paystack Split Payment</a>
+                                                        <a href="#" class="btn btn-primary text-white">FlutterWave Splitpayment</a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
 
                                     <div class="col-4">
                                         <label class="my-2">Estate Name</label>
@@ -187,21 +283,7 @@
                                         <input type="text"  value="{{$org->flutterwave_subaccount}}" name="flutterwave_subaccount" class="form-control" >
                                     </div>
 
-                                    <div class="col-xl-3 col-sm-12">
-                                        <label class="my-2">Bank</label>
-                                        <input type="text"  value="{{$org->bank}}"  name="bank" class="form-control" >
-                                    </div>
 
-                                    <div class="col-xl-3 col-sm-12">
-                                        <label class="my-2">Account Name</label>
-                                        <input type="text" value="{{$org->account_name}}"   name="account_no" class="form-control" >
-                                    </div>
-
-
-                                    <div class="col-xl-3 col-sm-12">
-                                        <label class="my-2">Account No</label>
-                                        <input type="text" value="{{$org->account_no}}"   name="account_no" class="form-control" >
-                                    </div>
 
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Charge Fee %</label>

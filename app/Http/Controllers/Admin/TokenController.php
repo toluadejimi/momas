@@ -1587,7 +1587,7 @@ class TokenController extends Controller
         $cdt->meterNo = $request->meterNo;
         $cdt->amount = $amount;
         $cdt->amount_charged = $request->amount;
-        $cdt->fee = $fee;
+        $cdt->fee = $fee ?? 0;
         $cdt->vat = $request->vat;
         $cdt->estate_name = Estate::where('id', $request->estate_name)->first()->title;;
         $cdt->estate_id = $estate_id;
@@ -2249,8 +2249,6 @@ class TokenController extends Controller
 
 
             if ($status == 'success') {
-
-
                 $databody = array(
                     'name' => "Halfsies",
                     'type' => "percentage",
@@ -2277,6 +2275,7 @@ class TokenController extends Controller
                         'Accept: application/json',
                         'Content-Type: application/json',
                         'Authorization: Bearer ' . $paystackkey,
+                        'Cache-Control: no-cache'
                     ),
                 ));
 

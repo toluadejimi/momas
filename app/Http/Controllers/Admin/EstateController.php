@@ -10,6 +10,7 @@ use App\Models\Setting;
 use App\Models\Tariff;
 use App\Models\User;
 use App\Models\Utitlity;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,6 +40,49 @@ class EstateController extends Controller
         }
 
 
+        dd($request->all());
+
+        $fl = Setting::where('id', 1)->first();
+        $pksecret = $fl->paystack_secret;
+
+
+        $data = [
+            'business_name'         => $request->title,
+            'settlement_bank'       => $request->settlement_bank,
+            'account_number'        => $request->account_number,
+            'percentage_charge'     => $request->percentage_charge,
+            'description'           => $request->description ?? '',
+            'primary_contact_email' => $request->primary_contact_email,
+            'primary_contact_name'  => $request->primary_contact_name,
+        ];
+
+        try {
+            $client = new Client();
+
+            $response = $client->post('https://api.paystack.co/subaccount', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $pksecret,
+                    'Content-Type'  => 'application/json',
+                ],
+                'json' => $data,
+            ]);
+
+            $body = json_decode($response->getBody(), true);
+
+
+            dd($body);
+
+            return response()->json($body);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status'  => false,
+                'message' => 'Subaccount creation failed',
+                'error'   => $e->getMessage(),
+            ], 500);
+        }
+
+
+
 
 
         $org = new estate();
@@ -59,6 +103,8 @@ class EstateController extends Controller
         $org->status = 2;
         $org->save();
 
+
+
         return redirect('admin/estate')->with('message','Estate created successfully');
     }
 
@@ -70,7 +116,29 @@ class EstateController extends Controller
 
         if(auth::user()->role == 0){
 
+            try {
+                $client = new Client();
+
+                $response = $client->get('https://api.paystack.co/bank', [
+                    'headers' => [
+                        'Authorization' => 'Bearer ' . env('PAYSTACK_SECRET_KEY'),
+                        'Accept'        => 'application/json',
+                    ],
+                ]);
+
+                $banks = json_decode($response->getBody(), true);
+
+            } catch (\Exception $e) {
+                return response()->json([
+                    'status'  => false,
+                    'message' => 'Unable to fetch banks',
+                    'error'   => $e->getMessage(),
+                ], 500);
+            }
+
             $data['org'] = Estate::where('id', $request->id)->first();
+            $data['paystackbank'] = $banks;
+
             $data['tar'] = Tariff::where('estate_id', $request->id)->first();
             $data['utl'] = Utitlity::where('estate_id', $request->id)->first() ?? null;
             $data['total_utility'] = Utitlity::where('estate_id', $request->id)->sum('amount');
