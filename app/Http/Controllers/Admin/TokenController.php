@@ -520,9 +520,14 @@ class TokenController extends Controller
             $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
 
 
+            $percn = (2.5 / 100 ) * (int)$request->amount;
+            $perc_amount = $request->amount - $percn;
+
+
+
             $calculator = new VatCalculator();
             $params = [
-                'amountText' => $request->amount,
+                'amountText' =>  $perc_amount,
                 'tariffAmount' => $tariffAmount,
                 'utilitiesAmount' => 0,
                 'vat' => 7.5,
@@ -535,7 +540,6 @@ class TokenController extends Controller
 
             $est = Estate::where('id', $estate_id)->first();
             if ($est->charge_fee < 0) {
-
                 $fee_in_percent = $est->charge_fee_percent;
                 $fee = ($fee_in_percent / $request->amount) * 100;
             } else {
@@ -1024,7 +1028,6 @@ class TokenController extends Controller
     //Generate
     public function generate_credit_meter_token(request $request)
     {
-
 
 
 
@@ -2247,6 +2250,66 @@ class TokenController extends Controller
 
 
             if ($status == 'success') {
+
+
+                $databody = array(
+                    'name' => "Halfsies",
+                    'type' => "percentage",
+                    'currency' => "NGN",
+                    'subaccounts' => [[
+                        "subaccount" => "ACCT_6uujpqtzmnufzkw",
+                        "share" => 50
+                    ]]
+                );
+
+                $body = json_encode($databody);
+                $curl = curl_init();
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => 'https://api.paystack.co/split',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => $body,
+                    CURLOPT_HTTPHEADER => array(
+                        'Accept: application/json',
+                        'Content-Type: application/json',
+                        'Authorization: Bearer ' . $paystackkey,
+                    ),
+                ));
+
+                $var = curl_exec($curl);
+                curl_close($curl);
+                $var = json_decode($var);
+                $status = $var->status;
+
+
+                $url = "";
+                $fields = [
+
+                ];
+
+                $fields_string = http_build_query($fields);
+                $ch = curl_init();
+
+                //set the url, number of POST vars, POST data
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                    "Authorization: Bearer SECRET_KEY",
+                    "Cache-Control: no-cache",
+                ));
+
+                //So that curl_exec returns the contents of the cURL; rather than echoing it
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+                //execute post
+                $result = curl_exec($ch);
+                echo $result;
 
 
                 Transaction::where('trx_id', $var->data->metadata->ref)->update(['status' => 2]);

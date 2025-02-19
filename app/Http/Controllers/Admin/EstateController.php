@@ -119,8 +119,6 @@ class EstateController extends Controller
 
 
 
-
-
     public function estate_update(request $request)
     {
 
