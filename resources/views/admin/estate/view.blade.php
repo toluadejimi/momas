@@ -65,6 +65,10 @@
                                                     <div class="col-xl-6 col-sm-12">
                                                         <label class="my-2">Account No</label>
                                                         <input type="text" name="account_no" id="account_no" class="form-control" placeholder="Enter account number">
+                                                        <input type="text" name="id" value="{{$org->id}}" hidden>
+
+
+
                                                     </div>
 
                                                     <div class="col-xl-6 col-sm-12">
@@ -112,8 +116,6 @@
                                                     });
                                                 });
                                             </script>
-
-
 
 
 
@@ -227,8 +229,8 @@
                                                 <div class="justify-content-end">
                                                     <div class="justify-content-end">
                                                         <a href="#" class="btn btn-primary text-white " data-bs-toggle="modal"
-                                                           data-bs-target="#staticBackdrop">Paystack Split Payment</a>
-                                                        <a href="#" class="btn btn-primary text-white">FlutterWave Splitpayment</a>
+                                                           data-bs-target="#staticBackdrop">Paystack Payment</a>
+                                                        <a href="#" class="btn btn-primary text-white">FlutterWave payment</a>
                                                     </div>
                                                 </div>
 

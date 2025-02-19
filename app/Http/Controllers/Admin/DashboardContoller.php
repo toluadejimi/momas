@@ -788,6 +788,108 @@ class DashboardContoller extends Controller
     }
 
 
+    public function setup_paystack(request $request)
+    {
+
+        $estate = Estate::where('id', $request->id)->first() ?? null;
+
+
+        if($estate->paystack_subaccount == null){
+            $fl = Setting::where('id', 1)->first();
+            $pksecret = $fl->paystack_secret;
+
+            $data = [
+                'business_name'         => $estate->title,
+                'settlement_bank'       => $request->bank,
+                'account_number'        => $request->account_no,
+                'percentage_charge'     => 1,
+                'description'           => $request->description ?? '',
+            ];
+
+
+            try {
+
+                $client = new Client();
+
+                $response = $client->post('https://api.paystack.co/subaccount', [
+                    'headers' => [
+                        'Authorization' => 'Bearer ' . $pksecret,
+                        'Content-Type'  => 'application/json',
+                    ],
+                    'json' => $data,
+                ]);
+
+                $body = json_decode($response->getBody(), true);
+                if ($body['status'] ?? false) {
+                    Estate::where('id', $request->id)->update([
+                        'paystack_subaccount' => $body['data']['subaccount_code'],
+                    ]);
+                    return back()->with('message', 'Paystack Subaccount has been successfully created');
+                }
+                return back()->with('error', 'Failed to create subaccount: ' . ($body['message'] ?? 'Unknown error'));
+
+
+            } catch (\Exception $e) {
+                return response()->json([
+                    'status'  => false,
+                    'message' => 'Subaccount creation failed',
+                    'error'   => $e->getMessage(),
+                ], 500);
+            }
+
+
+        }else{
+
+            $fl = Setting::where('id', 1)->first();
+            $pksecret = $fl->paystack_secret;
+
+            $client = new Client();
+            $paystackSecret = env('PAYSTACK_SECRET_KEY');
+
+            $data = [
+                'settlement_bank'       => $request->bank,
+                'account_number'        => $request->account_no,
+                'percentage_charge'     => 1,
+            ];
+
+
+            try {
+                $response = $client->put("https://api.paystack.co/subaccount/{$estate->paystack_subaccount}", [
+                    'headers' => [
+                        'Authorization' => 'Bearer ' . $pksecret,
+                        'Content-Type'  => 'application/json',
+                    ],
+                    'json' => $data,
+                ]);
+
+                $body = json_decode($response->getBody(), true);
+
+                if ($body['status'] ?? false) {
+                    return back()->with('message', 'Account details has been successfully updated');
+                }
+
+                return back()->with('error', 'Error updating account details');
+
+
+            } catch (\Exception $e) {
+                return response()->json([
+                    'status'  => false,
+                    'message' => 'Request failed',
+                    'error'   => $e->getMessage(),
+                ], 500);
+            }
+
+
+
+        }
+
+
+    }
+
+
+
+
+
 
 
 }
