@@ -160,7 +160,7 @@
                                         <div class="col-xl-3 col-sm-12">
                                             <label class="my-2">City</label>
                                             <input type="text" value="{{$user->city}}" name="city" class="form-control"
-                                                   required>
+                                                   >
                                         </div>
 
                                         <div class="col-xl-3 col-sm-12">
@@ -215,7 +215,7 @@
                                         <div class="col-xl-3 col-sm-12">
                                             <label class="my-2">LGA</label>
                                             <input type="text" value="{{$user->lga}}" name="lga" class="form-control"
-                                                   required>
+                                                   >
                                         </div>
 
                                         <div class="col-xl-3 col-sm-12">
