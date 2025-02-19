@@ -136,8 +136,12 @@ class EstateController extends Controller
                 ], 500);
             }
 
+
             $data['org'] = Estate::where('id', $request->id)->first();
+
             $data['paystackbank'] = $banks;
+
+
 
             $data['tar'] = Tariff::where('estate_id', $request->id)->first();
             $data['utl'] = Utitlity::where('estate_id', $request->id)->first() ?? null;

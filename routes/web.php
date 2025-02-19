@@ -36,6 +36,7 @@ Route::get('/get-tariffs/{estate_id}', function ($estate_id) {
 
 Route::any('verify2fa', [AuthController::class, 'verify2fa']);
 Route::any('verify2fa-code', [AuthController::class, 'verify2fa_view']);
+Route::any('resolve-account', [DashboardContoller::class, 'resolve_account']);
 
 
 

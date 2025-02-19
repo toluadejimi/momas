@@ -19,6 +19,7 @@ use App\Models\Transaction;
 use App\Models\User;
 use App\Models\UtilitiesPayment;
 use App\Models\Utitlity;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -746,6 +747,47 @@ class DashboardContoller extends Controller
 
 
     }
+
+
+    public function resolve_account(request $request)
+    {
+
+
+        $fl = Setting::where('id', 1)->first();
+        $pksecret = $fl->paystack_secret;
+
+        $request->validate([
+            'account_number' => 'required|digits:10',
+            'bank_code'      => 'required'
+        ]);
+
+        try {
+            $client = new Client();
+            $response = $client->get('https://api.paystack.co/bank/resolve', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $pksecret,
+                    'Accept'        => 'application/json',
+                ],
+                'query' => [
+                    'account_number' => $request->account_number,
+                    'bank_code'      => $request->bank_code,
+                ],
+            ]);
+
+            $result = json_decode($response->getBody(), true);
+            return response()->json($result);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status'  => false,
+                'message' => 'Unable to resolve account details.',
+                'error'   => $e->getMessage(),
+            ], 500);
+        }
+
+
+    }
+
+
 
 
 }

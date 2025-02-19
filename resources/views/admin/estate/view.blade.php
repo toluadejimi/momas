@@ -51,46 +51,79 @@
                                             @csrf
 
                                             <div class="modal-body">
-
-
-
                                                 <div class="row">
+                                                    <!-- Bank select -->
                                                     <div class="col-xl-6 col-sm-12">
                                                         <label class="my-2">Bank</label>
-                                                        <select name="">
-
-
+                                                        <select name="bank" id="bank-select" class="form-control">
+                                                            @foreach($paystackbank['data'] as $bank)
+                                                                <option value="{{ $bank['code'] }}">{{ $bank['name'] }}</option>
+                                                            @endforeach
                                                         </select>
-                                                        <input type="text"  value=""  name="bank" class="form-control" >
+                                                    </div>
+
+                                                    <div class="col-xl-6 col-sm-12">
+                                                        <label class="my-2">Account No</label>
+                                                        <input type="text" name="account_no" id="account_no" class="form-control" placeholder="Enter account number">
                                                     </div>
 
                                                     <div class="col-xl-6 col-sm-12">
                                                         <label class="my-2">Account Name</label>
-                                                        <input type="text" value=""   name="account_no" class="form-control" >
+                                                        <input type="text" name="account_name" id="account_name" class="form-control" placeholder="Account name will appear here" readonly>
                                                     </div>
-
-
-                                                    <div class="col-xl-6 col-sm-12">
-                                                        <label class="my-2">Account No</label>
-                                                        <input type="text" value=""   name="account_no" class="form-control" >
-                                                    </div>
-
-
                                                 </div>
-
-
                                             </div>
+
+
+
+
+                                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                            <script>
+                                                $(document).ready(function(){
+                                                    // When the account number input loses focus
+                                                    $('#account_no').on('blur', function(){
+                                                        var accountNo = $(this).val().trim();
+                                                        var bankCode   = $('#bank-select').val();
+
+                                                        // Make sure the account number is of typical length (usually 10 digits in Nigeria)
+                                                        if(accountNo.length === 10 && bankCode) {
+                                                            $.ajax({
+                                                                url: '/resolve-account', // This is your custom API route
+                                                                method: 'GET',
+                                                                data: {
+                                                                    account_number: accountNo,
+                                                                    bank_code: bankCode
+                                                                },
+                                                                success: function(response) {
+                                                                    if(response.status) {
+                                                                        // Assuming Paystack returns a data object with account_name
+                                                                        $('#account_name').val(response.data.account_name);
+                                                                    } else {
+                                                                        alert('Could not retrieve account details.');
+                                                                        $('#account_name').val('');
+                                                                    }
+                                                                },
+                                                                error: function() {
+                                                                    alert('An error occurred while resolving the account.');
+                                                                    $('#account_name').val('');
+                                                                }
+                                                            });
+                                                        }
+                                                    });
+                                                });
+                                            </script>
+
+
+
+
+
+
 
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-light"
-                                                        data-bs-dismiss="modal">Close
-                                                </button>
-                                                <button type="submit" class="btn btn-primary">Update Email
-                                                </button>
+                                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Update Paystack Info</button>
                                             </div>
-
                                         </form>
-
 
                                     </div>
                                 </div>
