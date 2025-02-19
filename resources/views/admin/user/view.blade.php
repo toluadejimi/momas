@@ -141,7 +141,7 @@
 
                                         <div class="col-xl-3 col-sm-12">
                                             <label class="my-2">Phone</label>
-                                            <input type="number" value="{{$user->phone}}" name="phone" class="form-control"
+                                            <input type="text" value="{{$user->phone}}" name="phone" class="form-control"
                                                    required>
                                         </div>
 
