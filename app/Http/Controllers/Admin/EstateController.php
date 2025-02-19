@@ -34,6 +34,13 @@ class EstateController extends Controller
     public function estate_store(request $request)
     {
 
+        if($request->charge_fee_flat != null && $request->charge_fee_percent != null){
+            return back()->with('error','Enter only one charge fee');
+        }
+
+
+
+
         $org = new estate();
         $org->title = $request->title;
         $org->state = $request->state;
@@ -43,8 +50,12 @@ class EstateController extends Controller
         $org->paystack_subaccount = $request->paystack_subaccount;
         $org->flutterwave_subaccount = $request->flutterwave_subaccount;
         $org->account_no = $request->account_no;
-        $org->charge_fee = $request->charge_fee;
+        $org->charge_fee_precent = $request->charge_fee_precent;
+        $org->charge_fee_flat = $request->charge_fee_flat;
         $org->bank = $request->bank;
+        $org->account_name = $request->account_name;
+        $org->account_no = $request->account_no;
+        $org->ptype = $request->ptype;
         $org->status = 2;
         $org->save();
 

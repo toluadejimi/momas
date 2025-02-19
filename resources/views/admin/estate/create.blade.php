@@ -109,22 +109,47 @@
 
                                 <div class="col-xl-3 col-sm-12">
                                     <label class="my-2">Bank</label>
-                                    <input type="text" name="bank" class="form-control" >
+                                    <select class="form-control" name="bank">
+                                        @php $banks = \App\Models\Bank::all(); @endphp
+                                        <option value=" ">--Select Bank---</option>
+                                    @foreach($banks as $data)
+                                            <option value="{{$data->bankName}}">{{$data->bankName}}</option>
+                                        @endforeach
+
+                                    </select>
                                 </div>
+
 
                                 <div class="col-xl-3 col-sm-12">
                                     <label class="my-2">Account No</label>
                                     <input type="text" name="account_no" class="form-control" >
                                 </div>
 
+
+                                <div class="col-xl-3 col-sm-12">
+                                    <label class="my-2">Account Name</label>
+                                    <input type="text" name="account_name" class="form-control" >
+                                </div>
+
                                 <div class="col-xl-3 col-sm-12">
                                     <label class="my-2">Charge Fee %</label>
-                                    <input type="number" name="charge_fee" value="0" class="form-control" >
+                                    <input type="number" name="charge_fee_percent"  class="form-control" >
                                 </div>
 
                                 <div class="col-xl-3 col-sm-12">
                                     <label class="my-2">Charge Fee (Flat)</label>
-                                    <input type="number" name="charge_fee" value="0" class="form-control" >
+                                    <input type="number" name="charge_fee_flat"  class="form-control" >
+                                </div>
+
+                                <div class="col-3">
+                                    <label class="my-2">Payment Type</label>
+                                    <select type="text" name="ptype" class="form-control" required>
+                                            <option value="">--select type---</option>
+                                            <option value="1">APP Only</option>
+                                            <option value="2">Web Only</option>
+                                            <option value="3">App & Web</option>
+                                    </select>
+
                                 </div>
 
 
