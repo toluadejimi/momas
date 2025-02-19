@@ -645,6 +645,32 @@ class DashboardContoller extends Controller
         ]);
 
 
+        return back()->with('message', "User updated successfully");
+
+    }
+    public function update_user_email(request $request)
+    {
+
+        if($request->email  != $request->confirm_email){
+            return back()->with('error', "Email Incorrect");
+        }
+
+
+
+
+        User::where('email', $request->old_email)->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'city' => $request->city,
+            'lga' => $request->lga,
+            'status' => $request->status,
+            'state' => $request->state,
+            'desgination' => $request->desgination,
+        ]);
+
 
         return back()->with('message', "User updated successfully");
 

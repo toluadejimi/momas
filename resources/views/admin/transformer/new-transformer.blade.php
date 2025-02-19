@@ -16,19 +16,17 @@
                 </div>
 
 
+
+
                 <div class="row">
-
                     <div class="card">
-
                         <div class="card-body">
-
                             <form action="add-new-transformer" method="post">
                                 @csrf
 
                                 <div class="row">
 
                                     <h6 class="d-flex justify-content-start my-4">Transformer Information</h6>
-
 
                                     <div class="col-3">
                                         <label class="my-2">Title</label>

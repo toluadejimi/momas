@@ -35,25 +35,23 @@ class MeterImport implements ToModel, WithHeadingRow
                 'MeterSIMNo'   => $row['metersimno'],
                 'transid'   => $row['transid'],
                 'accountno'   => $row['accountno'],
-                'isamr'   => $row['isamr'],
                 'meterModel'    => $row['model'],
                 'AccountNo'        => $row['accountno'],
-                'estate_id'    =>  Auth::user()->estate_id,
                 'isDualTariff' => $row['isdualtariff'],
                 'NewSGC'      => $row['sgc'],
                 'OldSGC'         => $row['oldsgc'] ?? null,
                 'NewSGCDual'      => $row['newsgcdual'] ?? null,
                 'OldSGCDual'      => $row['oldsgcdual'] ?? null,
-                'NewTariffDual'          => $row['newtariffdual'] ?? null,
-                'OldTariffDual'          => $row['oldtariffdual'] ?? null,
-                'NewTariffID'      => $row['newtariffindex'] ?? null,
-                'OldTariffID'      => $row['oldtariffindex'] ?? null,
-                'NewTariffDualID'          => $row['newtariffindexdual'] ?? null,
-                'OldTariffDualID'          => $row['oldtariffindexdual'] ?? null,
                 'KRN1'         => $row['krn1'],
                 'KRN2'     => $row['krn2'],
                 'NeedKCT'  => $row['needkct'],
                 'CreditTypeID'  => $row['credittypeid'],
+                'NewTariffID'      => $row['newtariffindex'] ?? null,
+                'OldTariffID'      => $row['oldtariffindex'] ?? null,
+                'NewTariffDualID'          => $row['newtariffindexdual'] ?? null,
+                'OldTariffDualID'          => $row['oldtariffindexdual'] ?? null,
+                'estate_id'    =>  Auth::user()->estate_id,
+
             ]);
 
 
@@ -62,29 +60,28 @@ class MeterImport implements ToModel, WithHeadingRow
 
             return new Meter([
 
+
                 'meterNo'   => $row['meterno'],
                 'MeterSIMNo'   => $row['metersimno'],
                 'transid'   => $row['transid'],
                 'accountno'   => $row['accountno'],
-                'isamr'   => $row['isamr'],
                 'meterModel'    => $row['model'],
                 'AccountNo'        => $row['accountno'],
-                'estate_id'    =>  $this->id,
                 'isDualTariff' => $row['isdualtariff'],
                 'NewSGC'      => $row['sgc'],
                 'OldSGC'         => $row['oldsgc'] ?? null,
                 'NewSGCDual'      => $row['newsgcdual'] ?? null,
                 'OldSGCDual'      => $row['oldsgcdual'] ?? null,
-                'NewTariffDual'          => $row['newtariffdual'] ?? null,
-                'OldTariffDual'          => $row['oldtariffdual'] ?? null,
-                'NewTariffID'      => $row['newtariffindex'] ?? null,
-                'OldTariffID'      => $row['oldtariffindex'] ?? null,
-                'NewTariffDualID'          => $row['newtariffindexdual'] ?? null,
-                'OldTariffDualID'          => $row['oldtariffindexdual'] ?? null,
                 'KRN1'         => $row['krn1'],
                 'KRN2'     => $row['krn2'],
                 'NeedKCT'  => $row['needkct'],
                 'CreditTypeID'  => $row['credittypeid'],
+                'NewTariffID'      => $row['newtariffindex'] ?? null,
+                'OldTariffID'      => $row['oldtariffindex'] ?? null,
+                'NewTariffDualID'          => $row['newtariffindexdual'] ?? null,
+                'OldTariffDualID'          => $row['oldtariffindexdual'] ?? null,
+                'estate_id'    =>  $this->id,
+
             ]);
 
         }

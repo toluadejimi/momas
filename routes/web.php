@@ -107,6 +107,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'blockaccess']], fun
     Route::get('user-delete', [DashboardContoller::class, 'delete_user']);
     Route::get('view-user', [DashboardContoller::class, 'view_user']);
     Route::post('update-user', [DashboardContoller::class, 'update_user']);
+    Route::post('update_user_email', [DashboardContoller::class, 'update_user_email']);
     Route::get('send-token-email', [DashboardContoller::class, 'send_token_email']);
     Route::post('update-passsword-now', [DashboardContoller::class, 'update_password_now']);
     Route::get('update_passsword_view', [DashboardContoller::class, 'update_password_view']);
