@@ -86,7 +86,7 @@
 
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">State</label>
-                                        <select type="text" name="state" class="form-control">
+                                        <select type="text" name="State" class="form-control">
                                             <option disabled selected>--Select State--</option>
                                             <option value="Abia">Abia</option>
                                             <option value="Adamawa">Adamawa</option>
@@ -224,7 +224,8 @@
                                     <div class="col-3">
                                         <label class="my-2">Estate</label>
                                         @php $estate_name = Estate::where('id', Auth::user()->estate_id)->first()->title @endphp
-                                        <input value="{{$estate_name}}" name="Estate_id" class="form-control" readonly>
+                                        <input value="{{$estate_name}}" name="estate" class="form-control" readonly>
+                                        <input value="{{Auth::user()->estate_id}}" name="Estate_id" class="form-control" hidden>
 
                                     </div>
 

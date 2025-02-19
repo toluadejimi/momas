@@ -108,7 +108,7 @@
                                             @csrf
                                             <div class="form-group mb-3">
                                                 <input class="form-control" name="otp" type="number" required placeholder="Enter OTP Code" >
-                                            </div>
+                                            </div>etop
 
 
                                             <div class="form-group mb-0 row">

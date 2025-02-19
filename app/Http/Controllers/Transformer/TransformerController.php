@@ -72,7 +72,6 @@ class TransformerController extends Controller
         }
 
 
-
         return view('admin/transformer/new-transformer', $data);
     }
 
