@@ -799,7 +799,7 @@ class DashboardContoller extends Controller
             $pksecret = $fl->paystack_secret;
 
             $data = [
-                'business_name'         => $estate->title,
+                'business_name'         => $request->account_name,
                 'settlement_bank'       => $request->bank,
                 'account_number'        => $request->account_no,
                 'percentage_charge'     => 1,
