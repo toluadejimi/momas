@@ -498,7 +498,6 @@ class TokenController extends Controller
         if (auth::user()->role == 0) {
 
 
-
             $estate_id = Estate::where('id', $request->estate_id)->first()->id;
             $meter = Meter::where('meterNo', $request->meterNo)->first() ?? null;
             $user = User::where('meterNo', $request->meterNo)->first() ?? null;
@@ -1051,7 +1050,7 @@ class TokenController extends Controller
         $cdt->trx_id = $trx_id;
         $cdt->meterNo = $request->meterNo;
         $cdt->amount = $amount;
-        $cdt->amount_charged = $request->amount + $fee;
+        $cdt->amount_charged = $request->amount;
         $cdt->fee = $fee;
         $cdt->vat = $request->vat;
         $cdt->estate_name = Estate::where('id', $request->estate_name)->first()->title;;
@@ -1089,7 +1088,7 @@ class TokenController extends Controller
 
                 $databody = array(
                     'title' => 'Payment for services',
-                    'amount' => $request->amount + $fee,
+                    'amount' => $request->amount,
                     'currency' => 'NGN',
                     'redirect_url' => $url . "/admin/pay-flutter-web",
                     'customer' => [
@@ -1175,7 +1174,7 @@ class TokenController extends Controller
 
                 $email = Auth::user()->email;
                 $databody = array(
-                    "amount" => ($request->amount + $fee) * 100,
+                    "amount" => $request->amount * 100,
                     "email" => $email,
                     "ref" => $trx_id,
                     'callback_url' => url('') . "/admin/paystack-check-web",
