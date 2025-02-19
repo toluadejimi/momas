@@ -631,10 +631,10 @@ class DashboardContoller extends Controller
     public function update_user(request $request)
     {
 
-
         User::where('email', $request->email)->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
+            'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
             'city' => $request->city,
@@ -642,8 +642,8 @@ class DashboardContoller extends Controller
             'status' => $request->status,
             'state' => $request->state,
             'desgination' => $request->desgination,
-
         ]);
+
 
 
         return back()->with('message', "User updated successfully");

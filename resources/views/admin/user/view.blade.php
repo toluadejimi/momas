@@ -49,11 +49,9 @@
 
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">First Name</label>
-                                        <input type="text" value="{{$user->first_name}}" name="first_name"
-                                               class="form-control" required>
+                                        <input type="text" value="{{$user->first_name}}" name="first_name" class="form-control" required>
 
-                                        <input type="text" value="{{$user->email}}" name="email"
-                                               hidden>
+                                        <input type="text" value="{{$user->email}}" name="email"  hidden>
 
 
                                     </div>
@@ -66,9 +64,8 @@
 
                                     <div class="col-xl-3 col-sm-12">
                                         <label class="my-2">Email</label>
-                                        <input type="email" disabled value="{{$user->email}}" name="email"
-                                               class="form-control"
-                                               required>
+                                        <input type="email" value="{{$user->email}}" name="email" class="form-control" required>
+
                                     </div>
 
                                     <div class="col-xl-3 col-sm-12">
