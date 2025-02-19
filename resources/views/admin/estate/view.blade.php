@@ -71,7 +71,7 @@
 
                                                     </div>
 
-                                                    <div class="col-xl-6 col-sm-12">
+                                                    <div class="col-xl-12 col-sm-12">
                                                         <label class="my-2">Account Name</label>
                                                         <input type="text" name="account_name" id="account_name" class="form-control" placeholder="Account name will appear here" readonly>
                                                     </div>
