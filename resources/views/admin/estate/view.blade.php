@@ -581,6 +581,9 @@
                                             </div>
                                         </div>
 
+
+                                        <input  name="estate_id" value="{{$org->id}}" hidden="">
+
                                         <input type="hidden" id="utilities-data" name="utilities_data">
 
                                         <hr class="my-4">

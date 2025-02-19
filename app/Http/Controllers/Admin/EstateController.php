@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Estate;
-use App\Models\Feature;
 use App\Models\Meter;
 use App\Models\Setting;
 use App\Models\Tariff;
@@ -35,8 +34,8 @@ class EstateController extends Controller
     public function estate_store(request $request)
     {
 
-        if($request->charge_fee_flat != null && $request->charge_fee_percent != null){
-            return back()->with('error','Enter only one charge fee');
+        if ($request->charge_fee_flat != null && $request->charge_fee_percent != null) {
+            return back()->with('error', 'Enter only one charge fee');
         }
 
 
@@ -47,13 +46,13 @@ class EstateController extends Controller
 
 
         $data = [
-            'business_name'         => $request->title,
-            'settlement_bank'       => $request->settlement_bank,
-            'account_number'        => $request->account_number,
-            'percentage_charge'     => $request->percentage_charge,
-            'description'           => $request->description ?? '',
+            'business_name' => $request->title,
+            'settlement_bank' => $request->settlement_bank,
+            'account_number' => $request->account_number,
+            'percentage_charge' => $request->percentage_charge,
+            'description' => $request->description ?? '',
             'primary_contact_email' => $request->primary_contact_email,
-            'primary_contact_name'  => $request->primary_contact_name,
+            'primary_contact_name' => $request->primary_contact_name,
         ];
 
         try {
@@ -62,7 +61,7 @@ class EstateController extends Controller
             $response = $client->post('https://api.paystack.co/subaccount', [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $pksecret,
-                    'Content-Type'  => 'application/json',
+                    'Content-Type' => 'application/json',
                 ],
                 'json' => $data,
             ]);
@@ -75,14 +74,11 @@ class EstateController extends Controller
             return response()->json($body);
         } catch (\Exception $e) {
             return response()->json([
-                'status'  => false,
+                'status' => false,
                 'message' => 'Subaccount creation failed',
-                'error'   => $e->getMessage(),
+                'error' => $e->getMessage(),
             ], 500);
         }
-
-
-
 
 
         $org = new estate();
@@ -104,8 +100,7 @@ class EstateController extends Controller
         $org->save();
 
 
-
-        return redirect('admin/estate')->with('message','Estate created successfully');
+        return redirect('admin/estate')->with('message', 'Estate created successfully');
     }
 
 
@@ -113,8 +108,7 @@ class EstateController extends Controller
     {
 
 
-
-        if(auth::user()->role == 0){
+        if (auth::user()->role == 0) {
 
             try {
                 $client = new Client();
@@ -122,7 +116,7 @@ class EstateController extends Controller
                 $response = $client->get('https://api.paystack.co/bank', [
                     'headers' => [
                         'Authorization' => 'Bearer ' . env('PAYSTACK_SECRET_KEY'),
-                        'Accept'        => 'application/json',
+                        'Accept' => 'application/json',
                     ],
                 ]);
 
@@ -130,9 +124,9 @@ class EstateController extends Controller
 
             } catch (\Exception $e) {
                 return response()->json([
-                    'status'  => false,
+                    'status' => false,
                     'message' => 'Unable to fetch banks',
-                    'error'   => $e->getMessage(),
+                    'error' => $e->getMessage(),
                 ], 500);
             }
 
@@ -140,7 +134,6 @@ class EstateController extends Controller
             $data['org'] = Estate::where('id', $request->id)->first();
 
             $data['paystackbank'] = $banks;
-
 
 
             $data['tar'] = Tariff::where('estate_id', $request->id)->first();
@@ -151,14 +144,12 @@ class EstateController extends Controller
             $data['customers'] = User::where('estate_id', $request->id)->count() ?? null;
 
 
+        } elseif (auth::user()->role == 1) {
 
-        } elseif(auth::user()->role == 1){
 
+        } elseif (auth::user()->role == 2) {
 
-        } elseif(auth::user()->role == 2){
-
-        } elseif(auth::user()->role == 3){
-
+        } elseif (auth::user()->role == 3) {
 
 
             $data['org'] = Estate::where('id', auth::user()->estate_id)->first();
@@ -167,15 +158,14 @@ class EstateController extends Controller
             $data['total_utility'] = Utitlity::where('estate_id', auth::user()->estate_id)->sum('amount');
 
 
-
             $data['utility'] = Utitlity::where('estate_id', auth::user()->estate_id)->get() ?? null;
 
 
-        } elseif(auth::user()->role == 4){
+        } elseif (auth::user()->role == 4) {
 
-        } elseif(auth::user()->role == 5){
+        } elseif (auth::user()->role == 5) {
 
-        } else{
+        } else {
 
         }
 
@@ -183,19 +173,11 @@ class EstateController extends Controller
     }
 
 
-
-
-
-
-
-
-
-
     public function estate_update(request $request)
     {
 
-        if($request->charge_fee_flat != null && $request->charge_fee_precent != null){
-            return back()->with('error','Enter only one charge fee');
+        if ($request->charge_fee_flat != null && $request->charge_fee_precent != null) {
+            return back()->with('error', 'Enter only one charge fee');
         }
 
 
@@ -206,30 +188,25 @@ class EstateController extends Controller
             'city' => $request->city,
             'lga' => $request->lga,
             'ptype' => $request->ptype,
-            'paystack_subaccount' =>  $request->paystack_subaccount,
-            'flutterwave_subaccount' =>  $request->flutterwave_subaccount,
-            'account_no' =>  $request->account_no,
-            'bank' =>  $request->bank,
-            'account_name' =>  $request->account_name,
-            'charge_fee_flat' =>  $request->charge_fee_flat,
-            'charge_fee_precent' =>  $request->charge_fee_precent,
-            'pos_tariff_id' =>  $request->pos_tariff_id,
-            'serial_no' =>  $request->serial_no,
+            'paystack_subaccount' => $request->paystack_subaccount,
+            'flutterwave_subaccount' => $request->flutterwave_subaccount,
+            'account_no' => $request->account_no,
+            'bank' => $request->bank,
+            'account_name' => $request->account_name,
+            'charge_fee_flat' => $request->charge_fee_flat,
+            'charge_fee_precent' => $request->charge_fee_precent,
+            'pos_tariff_id' => $request->pos_tariff_id,
+            'serial_no' => $request->serial_no,
 
         ]);
-        return redirect('admin/estate')->with('message','Estate updated successfully');
+        return redirect('admin/estate')->with('message', 'Estate updated successfully');
     }
-
-
-
-
-
 
 
     public function estate_delete(request $request)
     {
         Estate::where('id', $request->id)->delete();
-        return redirect('admin/estate')->with('message','Estate deleted successfully');
+        return redirect('admin/estate')->with('message', 'Estate deleted successfully');
     }
 
     public function estate_update_tariff(request $request)
@@ -243,29 +220,38 @@ class EstateController extends Controller
         ]);
 
 
-        return back()->with('message','Tariff updated successfully');
+        return back()->with('message', 'Tariff updated successfully');
     }
 
     public function estate_update_utilities(request $request)
     {
 
-        $utilitiesData = json_decode($request->input('utilities_data'), true);
-        if (is_array($utilitiesData)) {
-            foreach ($utilitiesData as $utility) {
-                if (!empty($utility['title']) && !empty($utility['amount'])) {
-                    Utitlity::create([
-                        'title' => $utility['title'],
-                        'amount' => $utility['amount'],
-                        'duration' => $request->duration,
-                        'estate_id' => auth::user()->estate_id,
 
-                    ]);
+        try {
+
+            $utilitiesData = json_decode($request->input('utilities_data'), true);
+            if (is_array($utilitiesData)) {
+                foreach ($utilitiesData as $utility) {
+                    if (!empty($utility['title']) && !empty($utility['amount'])) {
+                        Utitlity::create([
+                            'title' => $utility['title'],
+                            'amount' => $utility['amount'],
+                            'duration' => $request->duration,
+                            'estate_id' => $request->estate_id,
+
+                        ]);
+                    }
                 }
             }
+
+            return back()->with('message', 'Utilities updated successfully');
+
+
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage());
         }
 
 
-        return redirect()->back()->with('success', 'Utilities updated successfully');
 
 
     }
@@ -275,17 +261,15 @@ class EstateController extends Controller
     {
 
 
-                    Estate::where('id', $request->id)->update([
-                        'duration' => $request->duration,
-                    ]);
+        Estate::where('id', $request->id)->update([
+            'duration' => $request->duration,
+        ]);
 
 
         return redirect()->back()->with('success', 'Duration updated successfully');
 
 
     }
-
-
 
 
     public function estate_deactivate(request $request)
@@ -308,9 +292,6 @@ class EstateController extends Controller
 
 
     }
-
-
-
 
 
 }

@@ -1702,7 +1702,6 @@ class TokenController extends Controller
                 }
                 $est = Estate::where('id', $estate_id)->first();
                 if ($est->charge_fee < 0) {
-
                     $fee_in_percent = $est->charge_fee_percent;
                     $fee = ($fee_in_percent / $request->amount) * 100;
                 } else {
@@ -1725,6 +1724,7 @@ class TokenController extends Controller
                     "email" => $email,
                     "ref" => $trx_id,
                     'callback_url' => url('') . "/admin/paystack-check-kct",
+                    'split_code' => $est->paystack_subaccount,
                     'metadata' => ["ref" => $trx_id],
                 );
 
