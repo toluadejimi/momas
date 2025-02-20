@@ -131,6 +131,8 @@
                                             <td>{{$data->created_at}}</td>
                                         </tr>
 
+
+
                                         {{ $tariff_logs->links() }}
 
                                         @endforeach
