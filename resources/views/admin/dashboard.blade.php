@@ -5,7 +5,7 @@
 
 
 
-    @if(auth::user()->role == 0)
+    @if(Auth::user()->role == 0)
         <div class="content">
             <div class="container-fluid">
 
