@@ -1154,13 +1154,15 @@ class TokenController extends Controller
 
         if ($request->pay_type == 'paystack') {
 
-            try {
+//            try {
 
                 $estate_id = $request->estate_id ?? null;
                 if ($estate_id === null) {
                     $estate_id = Auth::user()->estate_id;
                 }
                 $est = Estate::where('id', $estate_id)->first();
+
+
                 if($est->charge_fee_flat == null){
                     $fee  = ($est->charge_fee_precent / 100) * (int)$request->amount;
                 }else{
@@ -1179,9 +1181,8 @@ class TokenController extends Controller
                     "email" => $customer_email,
                     "ref" => $trx_id,
                     'callback_url' => url('') . "/admin/paystack-check-web",
-                    'split_code' => $est->paystack_subaccount,
+                    'subaccount' => $est->paystack_subaccount,
                     'metadata' => ["ref" => $trx_id],
-
                 );
 
                 $body = json_encode($databody);
@@ -1209,6 +1210,7 @@ class TokenController extends Controller
                 $status = $var->status;
 
 
+
                 if ($status == true) {
                     $trx = new Transaction();
                     $trx->user_id = $request->user_id;
@@ -1228,9 +1230,9 @@ class TokenController extends Controller
                 $message = "Payment not available at the moment, Kindly select other payment option";
                 return error($message, $code);
 
-            } catch (Exception $e) {
-                return back()->with('error', $e);
-            }
+//            } catch (Exception $e) {
+//                return back()->with('error', $e);
+//            }
 
         }
 
@@ -2246,6 +2248,8 @@ class TokenController extends Controller
         $var = json_decode($var);
         $status = $var->status ?? null;
         $ref = $var->data->reference ?? null;
+
+        dd($var);
 
 
         $ck_transaction = Transaction::where('trx_id', $var->data->reference)->first()->status ?? null;
