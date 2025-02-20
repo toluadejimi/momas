@@ -1154,7 +1154,7 @@ class MeterController extends Controller
             }
 
 
-            return back()->with('error', "An error occured");
+            return back()->with('error', "An error occurred");
 
 
         }

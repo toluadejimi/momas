@@ -247,7 +247,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'blockaccess']], fun
 
 
     //Meter token
-    Route::post('generate-kct-token', [MeterController::class, 'generate_kct_token']);
+    Route::post('generate-kct-token', [MeterController::class, 'kct_token']);
     Route::post('generate-token', [MeterController::class, 'generate_meter_token']);
     Route::get('detach-meter', [MeterController::class, 'detach_meter']);
 

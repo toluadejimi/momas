@@ -1033,6 +1033,7 @@ class TokenController extends Controller
         $est = Estate::where('id', $request->estate_name)->first();
 
 
+
         if($est->charge_fee_flat == null){
             $fee  = ($est->charge_fee_precent / 100) * (int)$request->amount;
         }else{
@@ -1040,6 +1041,7 @@ class TokenController extends Controller
         }
 
 
+        $customer_email = User::where('meterNo', $request->meterNo)->first()->email;
 
         $amount = $request->amount - $fee;
         $trx_id = "TRX" . random_int(000000000, 9999999999);
@@ -1051,6 +1053,7 @@ class TokenController extends Controller
         $cdt->meterNo = $request->meterNo;
         $cdt->amount = $amount;
         $cdt->amount_charged = $request->amount;
+        $cdt->customer_email = $customer_email;
         $cdt->fee = $fee;
         $cdt->vat = $request->vat;
         $cdt->estate_name = Estate::where('id', $request->estate_name)->first()->title;;
@@ -1092,7 +1095,7 @@ class TokenController extends Controller
                     'currency' => 'NGN',
                     'redirect_url' => $url . "/admin/pay-flutter-web",
                     'customer' => [
-                        'email' => $email,
+                        'email' => $customer_email,
                         'phonenumber' => $phone,
                         'name' => Auth::user()->first_name . " " . Auth::user()->last_name,
                     ],
@@ -1165,20 +1168,20 @@ class TokenController extends Controller
                 }
 
 
-
                 $fl = Setting::where('id', 1)->first();
                 $flkey['flutterwave_secret'] = $fl->flutterwave_secret;
                 $flkey['flutterwave_public'] = $fl->flutterwave_public;
                 $paystackkey = $fl->paystack_secret;
                 $pkkey['paystack_public'] = $fl->paystack_public;
 
-                $email = Auth::user()->email;
                 $databody = array(
                     "amount" => $request->amount * 100,
-                    "email" => $email,
+                    "email" => $customer_email,
                     "ref" => $trx_id,
                     'callback_url' => url('') . "/admin/paystack-check-web",
+                    'split_code' => $est->paystack_subaccount,
                     'metadata' => ["ref" => $trx_id],
+
                 );
 
                 $body = json_encode($databody);
@@ -1701,6 +1704,7 @@ class TokenController extends Controller
                     $estate_id = Auth::user()->estate_id;
                 }
                 $est = Estate::where('id', $estate_id)->first();
+
                 if ($est->charge_fee < 0) {
                     $fee_in_percent = $est->charge_fee_percent;
                     $fee = ($fee_in_percent / $request->amount) * 100;
@@ -3756,9 +3760,7 @@ class TokenController extends Controller
             $trx_comp = CreditToken::where('trx_id', $request->trx_id)->first() ?? null;
             $user_comp = User::where('id', $trx_comp->user_id)->first() ?? null;
 
-
             if ($trx_comp != null) {
-
                 $data['full_name'] = $user_comp->first_name . " " . $user_comp->last_name;
                 $data['address'] = $user_comp->address . "," . $user_comp->city . "," . $user_comp->state;
                 $data['phone'] = $user_comp->phone;
