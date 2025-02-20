@@ -2249,7 +2249,6 @@ class TokenController extends Controller
         $status = $var->status ?? null;
         $ref = $var->data->reference ?? null;
 
-        dd($var);
 
 
         $ck_transaction = Transaction::where('trx_id', $var->data->reference)->first()->status ?? null;
@@ -2259,7 +2258,7 @@ class TokenController extends Controller
             if ($status == 'success') {
 
 
-                Transaction::where('trx_id', $var->data->metadata->ref)->update(['status' => 2]);
+                Transaction::where('trx_id', $var->data->metadata->ref)->update(['status' => 2, 'payment_ref' => $ref]);
                 $meterNo = CreditToken::where('trx_id', $var->data->metadata->ref)->first()->meterNo;
                 $meter = Meter::where('meterNo', $meterNo)->first();
                 $trx = CreditToken::where('trx_id', $var->data->metadata->ref)->first();
