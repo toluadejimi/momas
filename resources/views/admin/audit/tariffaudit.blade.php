@@ -133,6 +133,7 @@
 
 
 
+
                                         {{ $tariff_logs->links() }}
 
                                         @endforeach
