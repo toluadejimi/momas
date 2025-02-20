@@ -427,6 +427,23 @@ class DashboardContoller extends Controller
 
     }
 
+
+    public function admin_fee_update(request $request)
+    {
+        Setting::where('id', 1)->update([
+            'admin_fee' => $request->admin_fee,
+            'kct_fee' => $request->kct_fee,
+            'clear_tamper_fee' => $request->clear_tamper_fee,
+            'clear_credit_fee' => $request->clear_credit_fee,
+        ]);
+
+        return redirect('admin/settings')->with('message', "Fee has been updated");
+
+    }
+
+
+
+
     public function support_set(request $request)
     {
         Setting::where('id', 1)->update([

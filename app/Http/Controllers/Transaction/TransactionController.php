@@ -584,24 +584,18 @@ class TransactionController extends Controller
             }
 
 
-
             return back()->with('error', 'Select a field');
-
-
 
         }
 
 
         if (Auth::user()->role == 3) {
 
-
             $rrn = $request->rrn;
             $startofday = $request->from;
             $endofday = $request->to;
             $transaction_type = $request->transaction_type;
             $status = $request->status;
-
-
 
             if($startofday != null && $endofday != null &&  $rrn == null && $transaction_type == null && $status == null){
 
@@ -614,7 +608,6 @@ class TransactionController extends Controller
                 $data['total'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
                     ->where('estate_id', Auth::user()->estate_id)
                     ->sum('amount') ?? 0;
-
 
                 return view('admin.report.transactionreport', $data);
 
@@ -639,9 +632,7 @@ class TransactionController extends Controller
                     ])->paginate('50')
                     ->sum('amount') ?? 0;
 
-
                 return view('admin.report.transactionreport', $data);
-
 
             }
 

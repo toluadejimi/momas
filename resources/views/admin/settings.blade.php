@@ -303,6 +303,64 @@
                 </div>
 
 
+                <div class="row">
+
+                    <div class="card">
+
+                        <div class="card-body">
+
+                            <form action="admin-fee-update" method="post">
+                                @csrf
+
+                                <div class="row">
+
+                                    <h6 class="d-flex justify-content-start my-4">Administrative Charge</h6>
+
+                                    <div class="col-3">
+                                        <label class="my-2">Charge</label>
+                                        <input type="text" name="admin_fee" class="form-control" value="{{$set->admin_fee}}">
+                                    </div>
+
+                                    <div class="col-3">
+                                        <label class="my-2">KCT Fee</label>
+                                        <input type="text" name="kct_fee" class="form-control" value="{{$set->kct_fee}}">
+                                    </div>
+
+                                    <div class="col-3">
+                                        <label class="my-2">Clear Tamper Fee</label>
+                                        <input type="text" name="clear_tamper_fee" class="form-control" value="{{$set->clear_tamper_fee}}">
+                                    </div>
+
+                                    <div class="col-3">
+                                        <label class="my-2">Clear Credit Fee</label>
+                                        <input type="text" name="clear_credit_fee" class="form-control" value="{{$set->clear_credit_fee}}">
+                                    </div>
+
+
+
+
+                                </div>
+
+
+                                <hr class="my-4">
+
+                                <button type="submit" class="col-2 d-flex btn btn-primary">
+                                    Update Fee
+                                </button>
+
+
+                            </form>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
             </div>
 
 

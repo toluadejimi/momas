@@ -217,6 +217,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'blockaccess']], fun
     Route::get('settings', [DashboardContoller::class, 'settings']);
     Route::post('features', [DashboardContoller::class, 'update_feat']);
     Route::post('payment-keys', [DashboardContoller::class, 'update_pay']);
+    Route::post('admin-fee-update', [DashboardContoller::class, 'admin_fee_update']);
     Route::post('support-set', [DashboardContoller::class, 'support_set']);
     Route::get('update-utility', [DashboardContoller::class, 'update_utility']);
     Route::get('delete-utility', [DashboardContoller::class, 'delete_utility']);
