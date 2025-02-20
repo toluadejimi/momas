@@ -97,39 +97,7 @@
 
 
                             <div class="row">
-                                <div class="col-xl-3 col-sm-12">
-                                    <label class="my-2">Paystak Subaccount</label>
-                                    <input type="text" name="paystack_subaccount" class="form-control" >
-                                </div>
 
-                                <div class="col-xl-3 col-sm-12">
-                                    <label class="my-2">Flutterwave Subaccount</label>
-                                    <input type="text" name="flutterwave_subaccount" class="form-control" >
-                                </div>
-
-                                <div class="col-xl-3 col-sm-12">
-                                    <label class="my-2">Bank</label>
-                                    <select class="form-control" name="bank">
-                                        @php $banks = \App\Models\Bank::all(); @endphp
-                                        <option value=" ">--Select Bank---</option>
-                                    @foreach($banks as $data)
-                                            <option value="{{$data->bankName}}">{{$data->bankName}}</option>
-                                        @endforeach
-
-                                    </select>
-                                </div>
-
-
-                                <div class="col-xl-3 col-sm-12">
-                                    <label class="my-2">Account No</label>
-                                    <input type="text" name="account_no" class="form-control" >
-                                </div>
-
-
-                                <div class="col-xl-3 col-sm-12">
-                                    <label class="my-2">Account Name</label>
-                                    <input type="text" name="account_name" class="form-control" >
-                                </div>
 
                                 <div class="col-xl-3 col-sm-12">
                                     <label class="my-2">Charge Fee %</label>
@@ -161,9 +129,6 @@
                             <button type="submit" class="col-2 d-flex btn btn-primary">
                                 Create
                             </button>
-
-
-
 
 
 
