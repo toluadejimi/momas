@@ -98,11 +98,11 @@
                                         <div class="row">
                                             <div class="col-3">
                                                 <label>Date From</label>
-                                                <input type="date" class="form-control" required name="from">
+                                                <input type="date" class="form-control"  name="from">
                                             </div>
                                             <div class="col-3">
                                                 <label>Date To</label>
-                                                <input type="date" class="form-control"  required name="to">
+                                                <input type="date" class="form-control"   name="to">
                                             </div>
                                             <div class="col-3">
                                                 <label>Transaction Type</label>
@@ -132,28 +132,52 @@
                                                 </select>
 
                                             </div>
+
                                         </div>
 
-                                        <div class="row my-3">
+                                            <div class="row my-2">
+
+                                                <div class="col-3">
+                                                    <label>Estate</label>
+                                                    <select class="form-control" name="estate_id">
+                                                        <option value="">Select Estate</option>
+                                                        <option value="all">All Estate</option>
+                                                        @foreach($estate as $data)
+                                                            <option value="{{$data->id}}">{{$data->title}}</option>
+                                                        @endforeach
+
+                                                    </select>
+
+                                                </div>
+
+                                                <div class="col-3">
+                                                    <label>Meter</label>
+                                                    <input type="text" class="form-control" name="meterNo"
+                                                           placeholder="Enter MeterNo">
+
+                                                </div>
+
+                                                <div class="col-3">
+                                                    <label>Transaction Refrence</label>
+                                                    <input type="text" class="form-control" name="rrn"
+                                                           placeholder="Enter Transaction Refrence">
+
+                                                </div>
+
+                                                <div class="col-3 mt-3 row">
+                                                    <div class="col">
+                                                        <button type="submit" class="btn btn-primary w-100">Submit</button>
+                                                    </div>
 
 
-                                            <div class="col-4">
-                                                <label>Transaction Refrence</label>
-                                                <input type="text" class="form-control" name="rrn"
-                                                       placeholder="Enter Transaction Refrence">
-
-                                            </div>
-
-                                            <div class="col-4 mt-4 row">
-                                                <div class="col">
-                                                    <button type="submit" class="btn btn-primary w-100">Submit</button>
                                                 </div>
 
 
-                                            </div>
+
 
 
                                         </div>
+
 
 
                                     </form>

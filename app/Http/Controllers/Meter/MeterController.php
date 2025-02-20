@@ -994,6 +994,8 @@ class MeterController extends Controller
         $data['OldTariffID'] = Tariff::where('id', $data['meter']->OldTariffID)->first()->title ?? null;
         $data['tariffdual'] = Tariff::latest()->where('isDualTariff', "on")->get();
 
+        $data['transactions'] = CreditToken::latest()->where('meterNo', $data['meter']->meterNo)->paginate(20);
+
         return view('admin/meter/view-meter', $data);
 
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Transaction;
 
 use App\Http\Controllers\Controller;
+use App\Models\Estate;
 use App\Models\Setting;
 use App\Models\Transaction;
 use App\Models\User;
@@ -402,6 +403,7 @@ class TransactionController extends Controller
 
             $data['transactions'] = Transaction::latest()->paginate('20');
             $data['total'] = Transaction::where('status', 2)->sum('amount');
+            $data['estate'] = Estate::all();
 
             return view('admin.report.transactionreport', $data);
 
@@ -442,6 +444,9 @@ class TransactionController extends Controller
             $endofday = $request->to;
             $transaction_type = $request->transaction_type;
             $status = $request->status;
+            $estate_id = $request->estate_id;
+            $data['estate'] = Estate::all();
+
 
 
 
@@ -453,6 +458,64 @@ class TransactionController extends Controller
                     ->paginate(50);
 
                 $data['total'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->sum('amount') ?? 0;
+
+
+                return view('admin.report.transactionreport', $data);
+
+            }
+
+
+            if($estate_id != null){
+
+                if($estate_id == "all"){
+
+                    $data['transactions'] =Transaction::
+                        latest()
+                        ->take(50000)
+                        ->paginate(50);
+
+                    $data['total'] = Transaction::sum('amount') ?? 0;
+
+
+                    return view('admin.report.transactionreport', $data);
+                }
+
+                $data['transactions'] =Transaction::where('estate_id', $estate_id)
+                    ->latest()
+                    ->take(50000)
+                    ->paginate(50);
+
+                $data['total'] = Transaction::where('estate_id', $estate_id)
+                    ->sum('amount') ?? 0;
+
+
+                return view('admin.report.transactionreport', $data);
+
+            }
+
+
+            if($estate_id != null){
+
+                if($estate_id == "all"){
+
+                    $data['transactions'] =Transaction::
+                    latest()
+                        ->take(50000)
+                        ->paginate(50);
+
+                    $data['total'] = Transaction::sum('amount') ?? 0;
+
+
+                    return view('admin.report.transactionreport', $data);
+                }
+
+                $data['transactions'] =Transaction::where('estate_id', $estate_id)
+                    ->latest()
+                    ->take(50000)
+                    ->paginate(50);
+
+                $data['total'] = Transaction::where('estate_id', $estate_id)
                     ->sum('amount') ?? 0;
 
 

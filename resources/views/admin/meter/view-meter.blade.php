@@ -291,6 +291,184 @@
 
             </div>
 
+            <div class="row">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card overflow-hidden">
+
+                                    <div class="card-header">
+                                        <div class="d-flex justify-content-between">
+                                            <h5 class="card-title text-black mb-0">All Transaction</h5>
+                                            <a href="/export-metertransactions?meterNo={{$meter->meterNo}}" class="btn btn-primary mb-3">Export</a>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col" class="cursor-pointer">Trx ID</th>
+                                                    <th scope="col" class="cursor-pointer">Meter No</th>
+                                                    <th scope="col" class="cursor-pointer">Customer</th>
+                                                    <th scope="col" class="cursor-pointer">Estate</th>
+                                                    <th scope="col" class="cursor-pointer">Amount</th>
+                                                    <th scope="col" class="cursor-pointer">Status</th>
+                                                    <th scope="col" class="cursor-pointer desc">Date</th>
+
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+
+
+                                                @foreach($transactions as $data)
+
+                                                    <tr>
+                                                        <td><a href="#" class="" data-bs-toggle="modal"
+                                                               data-bs-target="#staticBackdrop{{$data->trx_id}}">{{$data->trx_id}}</a>
+
+                                                            <div class="col-xl-6">
+                                                                <div class="card">
+                                                                    <div class="modal fade" id="staticBackdrop{{$data->trx_id}}"
+                                                                         data-bs-backdrop="static" data-bs-keyboard="false"
+                                                                         tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                                                         aria-hidden="true">
+                                                                        <div class="modal-dialog modal-dialog-centered">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h1 class="modal-title fs-5"
+                                                                                        id="staticBackdropLabel">{{$data->trx_id}}</h1>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                </div>
+
+
+                                                                                <div class="modal-body">
+
+                                                                                    <div class="row">
+                                                                                        <div class="col-4">
+
+                                                                                            <label>Transaction ID</label>
+                                                                                            <div>{{$data->trx_id}}</div>
+
+                                                                                        </div>
+
+                                                                                        @if($data->service_type == "credit_token")
+                                                                                            <div class="col-4">
+                                                                                                <label>Meter No</label>
+                                                                                                <div>{{$data->creditToken->meterNo ?? "123456"}}</div>
+                                                                                            </div>
+                                                                                        @endif
+
+                                                                                        <div class="col-4">
+                                                                                            <label>Amount</label>
+                                                                                            <div>NGN {{number_format($data->amount, 2)}}</div>
+                                                                                        </div>
+
+                                                                                    </div>
+
+                                                                                    <hr>
+
+                                                                                    <div class="row">
+
+                                                                                        @if($data->pay_type == "paystack")
+                                                                                            <div class="col-4">
+                                                                                                <label>Pay Channel</label>
+                                                                                                <div>{{"Paystack"}}</div>
+                                                                                            </div>
+
+                                                                                            <div class="col-4">
+                                                                                                <label>Pay Ref</label>
+                                                                                                <div>{{$data->payment_ref}}</div>
+                                                                                            </div>
+                                                                                        @endif
+
+                                                                                        <div class="col-4">
+
+                                                                                            <label>Customer Name</label>
+                                                                                            <div>{{$data->user->last_name ?? "name"}}</div>
+
+                                                                                        </div>
+
+                                                                                    </div>
+
+                                                                                    <hr>
+
+
+
+                                                                                    <div class="row">
+
+
+
+                                                                                    </div>
+
+
+                                                                                </div>
+
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </td>
+
+
+
+
+                                                        <td>
+                                                            <div>{{$data->meterNo ?? "123456"}}</div>
+                                                        </td>
+
+                                                        <td><a href="view-user?id={{$data->user->first_name ?? "name"}}">{{$data->user->last_name ?? "name"}}</a></td>
+                                                        <td>{{$data->estate->title ?? "Estate"}}</td>
+                                                        <td>{{number_format($data->amount, 2)}}</td>
+                                                        <td>
+                                                            @if($data->status == 2)
+                                                                <span class="badge text-bg-primary">Approved</span>
+                                                            @elseif($data->status == 0)
+                                                                <span class="badge text-bg-dark">Pending</span>
+                                                            @elseif($data->status == 3)
+                                                                <span class="badge text-bg-dark">Refunded</span>
+                                                            @endif
+                                                        </td>
+                                                        <td>{{$data->created_at}}</td>
+
+                                                    </tr>
+
+                                                @endforeach
+
+
+                                                </tbody><!-- end tbody -->
+
+                                                <tfoot>
+
+                                                {{ $transactions->links() }}
+
+
+                                                </tfoot>
+                                            </table><!-- end table -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+
+
 
         </div>
 

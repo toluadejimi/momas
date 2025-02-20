@@ -74,4 +74,9 @@ class Meter extends Model
     {
         return $this->belongsTo(Transformer::class);
     }
+
+    public function credit_token()
+    {
+        return $this->belongsTo(CreditToken::class);
+    }
 }

@@ -1,11 +1,13 @@
 <?php
 
+use App\Exports\MeterTransactionExport;
 use App\Http\Controllers\AccessToken\AccessTokenConroller;
 use App\Http\Controllers\Admin\AssetController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CustomerImportController;
 use App\Http\Controllers\Admin\DashboardContoller;
 use App\Http\Controllers\Admin\EstateController;
+use App\Http\Controllers\Admin\ExportControler;
 use App\Http\Controllers\Admin\MeterImportController;
 use App\Http\Controllers\Admin\TariffController;
 use App\Http\Controllers\Admin\TokenController;
@@ -17,11 +19,13 @@ use App\Http\Controllers\Transaction\TransactionController;
 use App\Http\Controllers\Transformer\TransformerController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 
 
 Route::get('/fetch-tariff', [MeterController::class, 'fetchTariff']);
+Route::get('export-metertransactions', [ExportControler::class, 'exportmetertransactions']);
 
 
 Route::get('/clear', function(){

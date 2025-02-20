@@ -23,4 +23,9 @@ class CreditToken extends Model
     {
         return $this->belongsTo(Transaction::class, 'trx_id', 'trx_id');
     }
+
+    public function meter()
+    {
+        return $this->belongsTo(Meter::class);
+    }
 }

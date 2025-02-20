@@ -293,13 +293,13 @@ class TariffController extends Controller
 
 
         $ttf = TarrifState::find($request->id);
-
         if ($ttf) {
             $ttf->status = $request->status;
             $ttf->amount = $request->amount;
             $ttf->estate_id = $ttf->estate_id;
             $ttf->save();
         }
+
 
         return back()->with('message', "Tariff state updated successful");
 
