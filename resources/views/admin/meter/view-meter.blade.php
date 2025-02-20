@@ -79,7 +79,39 @@
 
 
                                 <div class="col-3 mt-4">
-                                    <input  type="checkbox" id="isDualTariff" name="isDualTariff" class="form-check-input" style="border: 10px">
+                                    @if($meter->isDualTariff == 1)
+                                        <input type="checkbox" id="isDualTariff" checked name="isDualTariff" class="form-check-input" style="border: 10px">
+
+                                        <script>
+                                            document.getElementById('isDualTariff').addEventListener('change', function () {
+                                                var isChecked = this.checked;
+                                                document.getElementById('newtar').style.display = isChecked ? 'block' : 'none';
+                                                document.getElementById('newTariffDualContainer').style.display = isChecked ? 'block' : 'none';
+                                                document.getElementById('newSGCDualContainer').style.display = isChecked ? 'block' : 'none';
+                                                document.getElementById('oldTariffDualContainer').style.display = isChecked ? 'block' : 'none';
+                                                document.getElementById('oldSGCDualContainer').style.display = isChecked ? 'block' : 'none';
+
+
+                                            });
+                                        </script>
+
+                                    @else
+                                        <input  type="checkbox" id="isDualTariff" name="isDualTariff" class="form-check-input" style="border: 10px">
+
+                                        <script>
+                                            document.getElementById('isDualTariff').addEventListener('change', function () {
+                                                var isChecked = this.checked;
+                                                document.getElementById('newtar').style.display = isChecked ? 'block' : 'none';
+                                                document.getElementById('newTariffDualContainer').style.display = isChecked ? 'block' : 'none';
+                                                document.getElementById('newSGCDualContainer').style.display = isChecked ? 'block' : 'none';
+                                                document.getElementById('oldTariffDualContainer').style.display = isChecked ? 'block' : 'none';
+                                                document.getElementById('oldSGCDualContainer').style.display = isChecked ? 'block' : 'none';
+
+
+                                            });
+                                        </script>
+
+                                    @endif
                                     <label class="form-check-label">Is Dual Tariff</label>
 
                                 </div>
@@ -97,18 +129,7 @@
 
 
 
-                                <script>
-                                    document.getElementById('isDualTariff').addEventListener('change', function () {
-                                        var isChecked = this.checked;
-                                        document.getElementById('newtar').style.display = isChecked ? 'block' : 'none';
-                                        document.getElementById('newTariffDualContainer').style.display = isChecked ? 'block' : 'none';
-                                        document.getElementById('newSGCDualContainer').style.display = isChecked ? 'block' : 'none';
-                                        document.getElementById('oldTariffDualContainer').style.display = isChecked ? 'block' : 'none';
-                                        document.getElementById('oldSGCDualContainer').style.display = isChecked ? 'block' : 'none';
 
-
-                                    });
-                                </script>
 
 
                                 <hr class="my-4">
@@ -241,9 +262,8 @@
 
 
                                 <div class="col-3 mt-4">
-                                    @if($meter->NeedKCT == "on")
-
-                                        <input type="checkbox" name="NeedKCT" checked class="form-check-input"
+                                    @if($meter->NeedKCT == "on" || $meter->NeedKCT == 1)
+                                        <input type="checkbox"  name="NeedKCT" checked class="form-check-input"
                                                style="border: 10px">
                                         <label class="form-check-label">Need KCT</label>
                                     @else
