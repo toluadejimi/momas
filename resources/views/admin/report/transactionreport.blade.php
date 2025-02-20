@@ -150,12 +150,6 @@
 
                                                 </div>
 
-                                                <div class="col-3">
-                                                    <label>Meter</label>
-                                                    <input type="text" class="form-control" name="meterNo"
-                                                           placeholder="Enter MeterNo">
-
-                                                </div>
 
                                                 <div class="col-3">
                                                     <label>Transaction Refrence</label>
