@@ -467,6 +467,16 @@ class TransactionController extends Controller
 
             }
 
+            if($rrn != null){
+
+                $data['transactions'] =Transaction::where('trx_id', $rrn)->paginate(50);
+                $data['total'] = Transaction::where('trx_id', $rrn)->sum('amount') ?? 0;
+
+                return view('admin.report.transactionreport', $data);
+
+
+            }
+
 
             if($estate_id != null){
 
