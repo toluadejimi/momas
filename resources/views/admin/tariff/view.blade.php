@@ -170,8 +170,8 @@
 
                         <div class="card-body">
 
-                            <form action="update-the-tariff" method="post">
-                                @csrf
+{{--                            <form action="update-the-tariff" method="post">--}}
+{{--                                @csrf--}}
 
 
                                 <div class="row">
@@ -196,8 +196,6 @@
                                                data-bs-target="#updatestate{{$data->id}}">
                                                 <h6>{{$data->amount}}</h6></a>
 
-
-
                                             <div class="modal fade" id="updatestate{{$data->id}}"
                                                  data-bs-backdrop="static" data-bs-keyboard="false"
                                                  tabindex="-1" aria-labelledby="staticBackdropLabel"
@@ -221,6 +219,7 @@
                                                                 <input type="number" class="form-control mb-3"
                                                                        value="{{$data->amount}}" name="amount" required>
 
+                                                                <input value="{{$data->id}}" name="id" required>
 
                                                                 <label class="my-1">Vat %</label>
                                                                 <input type="number" class="form-control mb-3"
@@ -304,7 +303,7 @@
 
                                     @endforeach
                                 </div>
-                            </form>
+{{--                            </form>--}}
 
                         </div>
                     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Auditlog;
 use App\Models\Estate;
 use App\Models\Meter;
 use App\Models\MeterToken;
@@ -92,6 +93,7 @@ class TariffController extends Controller
         $tr->type = $request->tariff_source;
         $tr->save();
 
+
         $tr = Tariff::where('id', $tr->id)->first();
 
         return redirect("/admin/view-tariff?id=$tr->id")->with('message', "Tariff created successfully");
@@ -117,6 +119,14 @@ class TariffController extends Controller
 
     public function view_tariff(request $request)
     {
+
+        $chk_active = TarrifState::where('tariff_id', $request->id)->where('status', 2)->count();
+        if($chk_active > 1){
+            TarrifState::where('tariff_id',$request->id)->update(['status' => 0]);
+            TarrifState::where('tariff_id',$request->id)->first()->update(['status' => 2]);
+
+        }
+
 
         $tr = Tariff::where('id', $request->id)->first();
         $tstate = TarrifState::where('tariff_id', $request->id)->get();
@@ -145,6 +155,8 @@ class TariffController extends Controller
             $tr->estate_id = $request->estate_id;
             $tr->vat = $request->vat;
             $tr->save();
+
+
 
             $ck_count = TarrifState::where('tariff_id', $request->id)->count();
             if($ck_count == 1){
@@ -279,27 +291,16 @@ class TariffController extends Controller
     {
 
 
-
-        if($request->status == 2){
-
-            $update1 =  TarrifState::where('estate_id', $request->estate_id)->where('status', 2)->update(['status' => 0]);
-
-            if($update1 == 0){
-               $update2 =  TarrifState::where('estate_id', $request->estate_id)->where('id', $request->id)->update(['status' => 2]);
-
-               dd($update2, $update1, $request->estate_id, $request->id);
-
-            }
-
-
-            return back()->with('message', "Tariff state updated successful");
-
-        }else{
-            TarrifState::where('estate_id', $request->estate_id)->where('id', $request->id)->update(['status' => 2]);
-
-            return back()->with('message', "Tariff state updated successful");
-
+        $ttf = TarrifState::find($request->id);
+        if ($ttf) {
+            $ttf->status = $request->status;
+            $ttf->save();
         }
+
+        return back()->with('message', "Tariff state updated successful");
+
+
+
 
     }
 
