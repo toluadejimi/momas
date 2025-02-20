@@ -24,7 +24,7 @@ class TariffController extends Controller
     {
 
 
-        if(auth::user()->role == 0){
+        if(Auth::user()->role == 0){
 
             $data['tariff_list'] = Tariff::latest()->paginate(20);
             $data['tariffis'] = Tariff::all();
@@ -37,23 +37,23 @@ class TariffController extends Controller
 
 
 
-        } elseif(auth::user()->role == 1){
+        } elseif(Auth::user()->role == 1){
 
-        } elseif(auth::user()->role == 2){
+        } elseif(Auth::user()->role == 2){
 
-        } elseif(auth::user()->role == 3){
+        } elseif(Auth::user()->role == 3){
 
-            $data['tariff_list'] = Tariff::latest()->where('estate_id', auth::user()->estate_id)->get();
-            $data['tariffis'] = Tariff::latest()->latest()->where('estate_id', auth::user()->estate_id)->get();
-            $data['tarifftariffis'] = Tariff::where('estate_id', auth::user()->estate_id)->count();
+            $data['tariff_list'] = Tariff::latest()->where('estate_id', Auth::user()->estate_id)->get();
+            $data['tariffis'] = Tariff::latest()->latest()->where('estate_id', Auth::user()->estate_id)->get();
+            $data['tarifftariffis'] = Tariff::where('estate_id', Auth::user()->estate_id)->count();
             $data['estate']  = Estate::all();
 
             return view('admin/tariff/index', $data);
 
 
-        } elseif(auth::user()->role == 4){
+        } elseif(Auth::user()->role == 4){
 
-        } elseif(auth::user()->role == 5){
+        } elseif(Auth::user()->role == 5){
 
         } else{
 

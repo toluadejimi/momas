@@ -25,7 +25,7 @@ class PosController extends Controller
     public function index(request $request)
     {
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
 
             $data['merchants'] = Merchant::all();
@@ -33,16 +33,16 @@ class PosController extends Controller
             return view('admin.pos.index', $data);
 
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
+        } elseif (Auth::user()->role == 3) {
 
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 
@@ -55,21 +55,21 @@ class PosController extends Controller
     public function new_merchant(request $request)
     {
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
             return view('admin.pos.new-merchant');
 
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
+        } elseif (Auth::user()->role == 3) {
 
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 

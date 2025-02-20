@@ -103,7 +103,7 @@
                                     <th scope="col" class="cursor-pointer">Organization</th>
                                     <th scope="col" class="cursor-pointer">Estate</th>
                                     <th scope="col" class="cursor-pointer">Status</th>
-                                    @if(auth::user()->role == 0)
+                                    @if(Auth::user()->role == 0)
                                     <th scope="col" class="cursor-pointer desc">Action</th>
                                     @endif
 
@@ -131,7 +131,7 @@
 
                                         </td>
 
-                                        @if(auth::user()->role == 0)
+                                        @if(Auth::user()->role == 0)
                                         <td><a href="asset-delete?id={{$data->id}}" onclick="return confirmDelete();" class="btn btn-danger">Delete</a> </td>
 
                                         <script>

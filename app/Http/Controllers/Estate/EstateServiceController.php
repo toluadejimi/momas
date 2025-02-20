@@ -22,7 +22,7 @@ class EstateServiceController extends Controller
 
 
 
-        if(auth::user()->role == 0){
+        if(Auth::user()->role == 0){
 
             $data['services'] = EstateService::latest()->paginate(20);
             $data['service_count'] = EstateService::count();
@@ -38,11 +38,11 @@ class EstateServiceController extends Controller
 
 
 
-        } elseif(auth::user()->role == 1){
+        } elseif(Auth::user()->role == 1){
 
-        } elseif(auth::user()->role == 2){
+        } elseif(Auth::user()->role == 2){
 
-        } elseif(auth::user()->role == 3){
+        } elseif(Auth::user()->role == 3){
 
             $data['services'] = EstateService::latest()->where('estate_id', Auth::user()->estate_id)->paginate(20);
             $data['service_count'] = EstateService::where('estate_id', Auth::user()->estate_id)->count();
@@ -54,9 +54,9 @@ class EstateServiceController extends Controller
 
             return view('admin.estate.service-list', $data);
 
-        } elseif(auth::user()->role == 4){
+        } elseif(Auth::user()->role == 4){
 
-        } elseif(auth::user()->role == 5){
+        } elseif(Auth::user()->role == 5){
 
         } else{
 

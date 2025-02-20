@@ -30,7 +30,7 @@ class TokenController extends Controller
     {
 
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
 
             $data['estate'] = Estate::all();
@@ -41,11 +41,11 @@ class TokenController extends Controller
             return view('admin.token.credit-token-view', $data);
 
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
+        } elseif (Auth::user()->role == 3) {
 
 
             $data['estate_id'] = Auth::user()->estate_id;
@@ -57,9 +57,9 @@ class TokenController extends Controller
             return view('admin.token.credit-token-view', $data);
 
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 
@@ -73,7 +73,7 @@ class TokenController extends Controller
     {
 
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
 
             $data['estate'] = Estate::all();
@@ -83,11 +83,11 @@ class TokenController extends Controller
             return view('admin.token.compensation-token-view', $data);
 
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
+        } elseif (Auth::user()->role == 3) {
 
 
             $data['estate_id'] = Auth::user()->estate_id;
@@ -98,9 +98,9 @@ class TokenController extends Controller
             return view('admin.token.compensation-token-view', $data);
 
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 
@@ -113,7 +113,7 @@ class TokenController extends Controller
     {
 
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
 
             $data['estate'] = Estate::all();
@@ -124,11 +124,11 @@ class TokenController extends Controller
             return view('admin.token.tamper-token-view', $data);
 
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
+        } elseif (Auth::user()->role == 3) {
 
 
             $data['estate_id'] = Auth::user()->estate_id;
@@ -140,9 +140,9 @@ class TokenController extends Controller
             return view('admin.token.tamper-token-view', $data);
 
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 
@@ -155,7 +155,7 @@ class TokenController extends Controller
     {
 
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
 
             $data['estate'] = Estate::all();
@@ -166,11 +166,11 @@ class TokenController extends Controller
             return view('admin.token.kct-token-view', $data);
 
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
+        } elseif (Auth::user()->role == 3) {
 
 
             $data['estate_id'] = Auth::user()->estate_id;
@@ -182,9 +182,9 @@ class TokenController extends Controller
             return view('admin.token.kct-token-view', $data);
 
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 
@@ -194,7 +194,7 @@ class TokenController extends Controller
     }
     public function clear_credit_token_preview()
     {
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
 
             $data['estate'] = Estate::all();
@@ -204,11 +204,11 @@ class TokenController extends Controller
             return view('admin.token.clear-credit-token-view', $data);
 
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
+        } elseif (Auth::user()->role == 3) {
 
 
             $data['estate_id'] = Auth::user()->estate_id;
@@ -219,9 +219,9 @@ class TokenController extends Controller
             return view('admin.token.clear-credit-token-view', $data);
 
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 
@@ -236,7 +236,7 @@ class TokenController extends Controller
     {
 
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
 
             $estate_id = Estate::where('title', $request->estate_id)->first()->id;
@@ -291,11 +291,11 @@ class TokenController extends Controller
             return view('admin.token.compensation-token-view', $data);
 
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
+        } elseif (Auth::user()->role == 3) {
 
 
             $estate_id = Estate::where('title', $request->estate_id)->first()->id;
@@ -351,9 +351,9 @@ class TokenController extends Controller
             return view('admin.token.compensation-token-view', $data);
 
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 
@@ -365,7 +365,7 @@ class TokenController extends Controller
     {
 
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
 
             $estate_id = Estate::where('title', $request->estate_id)->first()->id;
@@ -420,11 +420,11 @@ class TokenController extends Controller
             return view('admin.token.clear-credit-token-view', $data);
 
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
+        } elseif (Auth::user()->role == 3) {
 
 
             $estate_id = Estate::where('title', $request->estate_id)->first()->id;
@@ -480,9 +480,9 @@ class TokenController extends Controller
             return view('admin.token.clear-credit-token-view', $data);
 
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 
@@ -495,7 +495,7 @@ class TokenController extends Controller
     {
 
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
 
             $estate_id = Estate::where('id', $request->estate_id)->first()->id;
@@ -562,11 +562,11 @@ class TokenController extends Controller
             return view('admin.token.credit-token-preview', $data);
 
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
+        } elseif (Auth::user()->role == 3) {
 
             $estate_id = Estate::where('id', Auth::user()->estate_id)->first()->id;
             $meter = Meter::where('meterNo', $request->meterNo)->first() ?? null;
@@ -654,9 +654,9 @@ class TokenController extends Controller
             return view('admin.token.credit-token-preview', $data);
 
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 
@@ -670,7 +670,7 @@ class TokenController extends Controller
     {
 
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
 
             $estate_id = Estate::where('id', $request->estate_id)->first()->id;
@@ -749,11 +749,11 @@ class TokenController extends Controller
             return view('admin.token.kct-preview', $data);
 
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
+        } elseif (Auth::user()->role == 3) {
 
 
             $estate_id = Estate::where('id', Auth::user()->estate_id)->first()->id;
@@ -833,9 +833,9 @@ class TokenController extends Controller
             return view('admin.token.kct-preview', $data);
 
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 
@@ -849,7 +849,7 @@ class TokenController extends Controller
     {
 
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
 
             $estate_id = Estate::where('id', $request->estate_id)->first()->id;
@@ -928,11 +928,11 @@ class TokenController extends Controller
             return view('admin.token.tamper-preview', $data);
 
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
+        } elseif (Auth::user()->role == 3) {
 
 
             $estate_id = Estate::where('id', Auth::user()->estate_id)->first()->id;
@@ -1011,9 +1011,9 @@ class TokenController extends Controller
             return view('admin.token.tamper-preview', $data);
 
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 

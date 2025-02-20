@@ -3,7 +3,7 @@
 
 
 
-    @if(auth::user()->role == 0)
+    @if(Auth::user()->role == 0)
 
         <div class="content">
 
@@ -80,7 +80,7 @@
                                 <div class="d-flex justify-content-between">
                                     <h5 class="card-title text-black mb-0">Latest Transaction</h5>
 
-                                    @if(auth::user()->role == 0)
+                                    @if(Auth::user()->role == 0)
                                         <a href="new-user" class="btn btn-primary text-white justify-content-end">Add new</a>
                                     @else
                                     @endif
@@ -105,7 +105,7 @@
                                         <th scope="col" class="cursor-pointer">Designation</th>
                                         <th scope="col" class="cursor-pointer">Status</th>
                                         <th scope="col" class="cursor-pointer desc">Date Registered</th>
-                                        @if(auth::user()->role == 0)
+                                        @if(Auth::user()->role == 0)
                                             <th scope="col" class="cursor-pointer desc">Action</th>
                                         @endif
 
@@ -150,7 +150,7 @@
                                             </td>
                                             <td>{{$data->created_at}}</td>
 
-                                            @if(auth::user()->role == 0)
+                                            @if(Auth::user()->role == 0)
                                                 <td><a href="user-delete?id={{$data->id}}" onclick="return confirmDelete();" class="btn btn-danger">Delete</a>
 
                                                     <script>
@@ -216,7 +216,7 @@
 
 
 
-    @elseif(auth::user()->role == 1)
+    @elseif(Auth::user()->role == 1)
         <div class="content">
 
             <!-- Start Content-->
@@ -292,7 +292,7 @@
                                 <div class="d-flex justify-content-between">
                                     <h5 class="card-title text-black mb-0">Latest Transaction</h5>
 
-                                    @if(auth::user()->role == 0)
+                                    @if(Auth::user()->role == 0)
                                         <a href="new-user" class="btn btn-primary text-white justify-content-end">Add new</a>
                                     @else
                                     @endif
@@ -317,7 +317,7 @@
                                         <th scope="col" class="cursor-pointer">Type</th>
                                         <th scope="col" class="cursor-pointer">Status</th>
                                         <th scope="col" class="cursor-pointer desc">Date Registered</th>
-                                        @if(auth::user()->role == 0)
+                                        @if(Auth::user()->role == 0)
                                             <th scope="col" class="cursor-pointer desc">Action</th>
                                         @endif
 
@@ -360,7 +360,7 @@
                                             </td>
                                             <td>{{$data->created_at}}</td>
 
-                                            @if(auth::user()->role == 0)
+                                            @if(Auth::user()->role == 0)
                                                 <td><a href="user-delete?id={{$data->id}}" onclick="return confirmDelete();" class="btn btn-danger">Delete</a>
 
                                                     <script>
@@ -396,8 +396,8 @@
 
 
         </div> <!-- container-fluid -->
-    @elseif(auth::user()->role == 2)
-    @elseif(auth::user()->role == 3)
+    @elseif(Auth::user()->role == 2)
+    @elseif(Auth::user()->role == 3)
         <div class="content">
 
             <!-- Start Content-->
@@ -473,7 +473,7 @@
                                 <div class="d-flex justify-content-between">
                                     <h5 class="card-title text-black mb-0">Latest Transaction</h5>
 
-                                    @if(auth::user()->role == 0)
+                                    @if(Auth::user()->role == 0)
                                         <a href="new-user" class="btn btn-primary text-white justify-content-end">Add new</a>
                                     @else
                                     @endif
@@ -498,7 +498,7 @@
                                         <th scope="col" class="cursor-pointer">Designation</th>
                                         <th scope="col" class="cursor-pointer">Status</th>
                                         <th scope="col" class="cursor-pointer desc">Date Registered</th>
-                                        @if(auth::user()->role == 3)
+                                        @if(Auth::user()->role == 3)
                                             <th scope="col" class="cursor-pointer desc">Action</th>
                                         @endif
 
@@ -544,7 +544,7 @@
                                             </td>
                                             <td>{{$data->created_at}}</td>
 
-                                            @if(auth::user()->role == 3)
+                                            @if(Auth::user()->role == 3)
                                                 <td><a href="user-delete?id={{$data->id}}" onclick="return confirmDelete();" class="btn btn-danger">Delete</a>
 
                                                     <script>
@@ -607,8 +607,8 @@
 
 
         </div> <!-- container-fluid -->
-    @elseif(auth::user()->role == 4)
-    @elseif(auth::user()->role == 5)
+    @elseif(Auth::user()->role == 4)
+    @elseif(Auth::user()->role == 5)
     @else
     @endif
 

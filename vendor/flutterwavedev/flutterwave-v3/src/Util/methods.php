@@ -35,7 +35,7 @@ return [
     'Misc' => Misc::class,
     'momo' => MobileMoney::class,
     'mpesa' => Mpesa::class,
-    'preauth' => Preauth::class,
+    'preauth' => PreAuth::class,
     'tokenize' => TokenizedCharge::class,
     'transfer' => Transfer::class,
     'ussd' => Ussd::class,

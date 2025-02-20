@@ -34,7 +34,7 @@ class CustomersImport implements ToModel, WithHeadingRow
         try{
 
 
-            if (auth::user()->role == 3) {
+            if (Auth::user()->role == 3) {
                 \Log::info('Row being processed: ', $row);
                 return new User([
                     'first_name'   => $row['firstname'],
@@ -47,8 +47,8 @@ class CustomersImport implements ToModel, WithHeadingRow
                     'role'         => 2,
                     'password'     => bcrypt('123456'),
                     'meterNo'     => $row['meterno'],
-                    'estate_name'  => auth::user()->estate_name,
-                    'estate_id'    => auth::user()->estate_id,
+                    'estate_name'  => Auth::user()->estate_name,
+                    'estate_id'    => Auth::user()->estate_id,
                     'status' => 2
                 ]);
 

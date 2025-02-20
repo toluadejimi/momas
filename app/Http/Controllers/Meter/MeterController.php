@@ -863,26 +863,26 @@ class MeterController extends Controller
     public function filter_by_estate(request $request)
     {
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
             $data['meters'] = Meter::count();
             $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('estate_id',$request->estate_id)->paginate('20');
             $data['estate'] = Estate::where('status', 2)->get();
             return view('admin/meter/meter-lists', $data);
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
+        } elseif (Auth::user()->role == 3) {
             $data['meters'] = Meter::count();
-            $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('estate_id', auth::user()->estate_id)->paginate('20');
+            $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('estate_id', Auth::user()->estate_id)->paginate('20');
             return view('admin/meter/meter-lists', $data);
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 
@@ -893,28 +893,28 @@ class MeterController extends Controller
         public function list_meter(request $request)
     {
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
             $data['meters'] = Meter::count();
             $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->paginate('20');
             $data['estate'] = Estate::where('status', 2)->get();
             return view('admin/meter/meter-lists', $data);
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
+        } elseif (Auth::user()->role == 3) {
             $data['meters'] = Meter::count();
-            $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('estate_id', auth::user()->estate_id)->paginate('20');
+            $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('estate_id', Auth::user()->estate_id)->paginate('20');
             $data['estate'] = Estate::where('status', 2)->get();
 
             return view('admin/meter/meter-lists', $data);
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 
@@ -929,7 +929,7 @@ class MeterController extends Controller
     {
 
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
             $data['estate'] = Estate::where('status', 2)->get();
             $data['transformer'] = Transformer::latest()->where('status', 2)->get();
@@ -939,26 +939,26 @@ class MeterController extends Controller
 
             return view('admin/meter/new-meter', $data);
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
+        } elseif (Auth::user()->role == 3) {
 
-            $data['estate'] = Estate::where('id', auth::user()->estate_id)->first();
-            $data['transformer'] = Transformer::latest()->where('estate_id', auth::user()->estate_id)->get();
-            $data['tariff'] = Tariff::latest()->where('status', 2)->where('estate_id', auth::user()->estate_id)->get();
+            $data['estate'] = Estate::where('id', Auth::user()->estate_id)->first();
+            $data['transformer'] = Transformer::latest()->where('estate_id', Auth::user()->estate_id)->get();
+            $data['tariff'] = Tariff::latest()->where('status', 2)->where('estate_id', Auth::user()->estate_id)->get();
             $data['tariffdual'] = Tariff::latest()->where('isDualTariff', "on")->get();
-            $data['meter'] = TarrifState::where('id', auth::user()->estate_id)->first();
+            $data['meter'] = TarrifState::where('id', Auth::user()->estate_id)->first();
 
 
             return view('admin/meter/new-meter', $data);
 
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 

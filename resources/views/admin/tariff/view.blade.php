@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
 
-    @if(auth::user()->role == 0)
+    @if(Auth::user()->role == 0)
         <div class="content">
 
             <!-- Start Content-->
@@ -226,7 +226,7 @@
                                                                        value="{{$data->vat}}" name="vat" required>
 
 
-                                                                <input type="text" name="estate_id" value="{{auth::user()->estate_id}}" hidden>
+                                                                <input type="text" name="estate_id" value="{{Auth::user()->estate_id}}" hidden>
                                                                 <input hidden type="text" name="id" value="{{$data->id}}" >
 
                                                                 <div class="row">
@@ -315,9 +315,9 @@
             </div>
 
         </div>
-    @elseif(auth::user()->role == 1)
-    @elseif(auth::user()->role == 2)
-    @elseif(auth::user()->role == 3)
+    @elseif(Auth::user()->role == 1)
+    @elseif(Auth::user()->role == 2)
+    @elseif(Auth::user()->role == 3)
         <div class="content">
 
             <!-- Start Content-->
@@ -452,7 +452,7 @@
                                         <label class="my-2">Tariff Title</label>
                                         <input type="text" value="{{$tr->title ?? "name"}}" name="title"
                                                class="form-control" required>
-                                        <input type="text" name="estate_id" value="{{auth::user()->estate_id}}" hidden>
+                                        <input type="text" name="estate_id" value="{{Auth::user()->estate_id}}" hidden>
                                         <input type="text" name="id" value="{{$tr->id}}" hidden>
 
 
@@ -530,7 +530,7 @@
                                                                 <input type="number" class="form-control mb-3"
                                                                        value="{{$data->amount}}" name="amount" required>
 
-                                                                <input type="text" name="estate_id" value="{{auth::user()->estate_id}}" hidden>
+                                                                <input type="text" name="estate_id" value="{{Auth::user()->estate_id}}" hidden>
                                                                 <input type="text" name="id" value="{{$data->id}}" hidden>
 
 
@@ -632,8 +632,8 @@
         </div>
 
 
-    @elseif(auth::user()->role == 4)
-    @elseif(auth::user()->role == 5)
+    @elseif(Auth::user()->role == 4)
+    @elseif(Auth::user()->role == 5)
     @else
     @endif
 

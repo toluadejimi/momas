@@ -2,7 +2,7 @@
 @section('content')
 
 
-    @if(auth::user()->role == 0)
+    @if(Auth::user()->role == 0)
         <div class="content">
 
             <!-- Start Content-->
@@ -131,9 +131,9 @@
 
 
         </div> <!-- container-fluid -->
-    @elseif(auth::user()->role == 1)
-    @elseif(auth::user()->role == 2)
-    @elseif(auth::user()->role == 3)
+    @elseif(Auth::user()->role == 1)
+    @elseif(Auth::user()->role == 2)
+    @elseif(Auth::user()->role == 3)
         <div class="content">
 
             <!-- Start Content-->
@@ -187,7 +187,7 @@
                                     <div class="col-3">
                                         <label class="my-2">Tariff Title</label>
                                         <input type="text" value="TF" name="title" class="form-control" required>
-                                        <input type="text" name="estate_id" value="{{auth::user()->estate_id}}"  hidden >
+                                        <input type="text" name="estate_id" value="{{Auth::user()->estate_id}}"  hidden >
 
                                     </div>
 
@@ -233,8 +233,8 @@
 
 
         </div> <!-- container-fluid -->
-    @elseif(auth::user()->role == 4)
-    @elseif(auth::user()->role == 5)
+    @elseif(Auth::user()->role == 4)
+    @elseif(Auth::user()->role == 5)
     @else
     @endif
 

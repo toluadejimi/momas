@@ -108,7 +108,7 @@ class EstateController extends Controller
     {
 
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
             try {
                 $client = new Client();
@@ -144,26 +144,26 @@ class EstateController extends Controller
             $data['customers'] = User::where('estate_id', $request->id)->count() ?? null;
 
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
-
-
-            $data['org'] = Estate::where('id', auth::user()->estate_id)->first();
-            $data['tar'] = Tariff::where('estate_id', auth::user()->estate_id)->first();
-            $data['utl'] = Utitlity::where('estate_id', auth::user()->estate_id)->first() ?? null;
-            $data['total_utility'] = Utitlity::where('estate_id', auth::user()->estate_id)->sum('amount');
+        } elseif (Auth::user()->role == 3) {
 
 
-            $data['utility'] = Utitlity::where('estate_id', auth::user()->estate_id)->get() ?? null;
+            $data['org'] = Estate::where('id', Auth::user()->estate_id)->first();
+            $data['tar'] = Tariff::where('estate_id', Auth::user()->estate_id)->first();
+            $data['utl'] = Utitlity::where('estate_id', Auth::user()->estate_id)->first() ?? null;
+            $data['total_utility'] = Utitlity::where('estate_id', Auth::user()->estate_id)->sum('amount');
 
 
-        } elseif (auth::user()->role == 4) {
+            $data['utility'] = Utitlity::where('estate_id', Auth::user()->estate_id)->get() ?? null;
 
-        } elseif (auth::user()->role == 5) {
+
+        } elseif (Auth::user()->role == 4) {
+
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 

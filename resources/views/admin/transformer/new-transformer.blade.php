@@ -2,7 +2,7 @@
 @extends('layouts.main')
 @section('content')
 
-    @if(auth::user()->role == 0)
+    @if(Auth::user()->role == 0)
 
         <div class="content">
 
@@ -163,7 +163,7 @@
 
         </div>
 
-    @else(auth::user()->role == 1)
+    @else(Auth::user()->role == 1)
 
         <div class="content">
 

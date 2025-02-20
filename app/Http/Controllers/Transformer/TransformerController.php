@@ -17,26 +17,26 @@ class TransformerController extends Controller
     {
 
 
-        if(auth::user()->role == 0){
+        if(Auth::user()->role == 0){
 
             $data['transformer_list'] = Transformer::latest()->where('status', 2)->paginate(20);
             $data['transformer'] = Transformer::latest()->where('status', 2)->count();
             return view('admin/transformer/transformer-list', $data);
 
-        } elseif(auth::user()->role == 1){
+        } elseif(Auth::user()->role == 1){
 
-        } elseif(auth::user()->role == 2){
+        } elseif(Auth::user()->role == 2){
 
-        } elseif(auth::user()->role == 3){
+        } elseif(Auth::user()->role == 3){
 
-            $data['transformer_list'] = Transformer::latest()->where('Estate_id', auth::user()->estate_id)->where('status', 2)->paginate(20);
-            $data['transformer'] = Transformer::latest()->where('Estate_id', auth::user()->estate_id)->where('status', 2)->count();
+            $data['transformer_list'] = Transformer::latest()->where('Estate_id', Auth::user()->estate_id)->where('status', 2)->paginate(20);
+            $data['transformer'] = Transformer::latest()->where('Estate_id', Auth::user()->estate_id)->where('status', 2)->count();
             return view('admin/transformer/transformer-list', $data);
 
 
-        } elseif(auth::user()->role == 4){
+        } elseif(Auth::user()->role == 4){
 
-        } elseif(auth::user()->role == 5){
+        } elseif(Auth::user()->role == 5){
 
         } else{
 
@@ -50,22 +50,22 @@ class TransformerController extends Controller
     public function new_transformer()
     {
 
-        if(auth::user()->role == 0){
+        if(Auth::user()->role == 0){
 
             $data['estate'] = Estate::all();
 
 
-        } elseif(auth::user()->role == 1){
+        } elseif(Auth::user()->role == 1){
 
-        } elseif(auth::user()->role == 2){
+        } elseif(Auth::user()->role == 2){
 
-        } elseif(auth::user()->role == 3){
+        } elseif(Auth::user()->role == 3){
 
             $data['estate'] = Estate::where('status', 2)->where('id', Auth::user()->estate_id)->first();
 
-        } elseif(auth::user()->role == 4){
+        } elseif(Auth::user()->role == 4){
 
-        } elseif(auth::user()->role == 5){
+        } elseif(Auth::user()->role == 5){
 
         } else{
 

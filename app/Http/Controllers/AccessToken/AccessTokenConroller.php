@@ -12,7 +12,7 @@ class AccessTokenConroller extends Controller
     public function index(request $request)
     {
 
-        if(auth::user()->role == 0){
+        if(Auth::user()->role == 0){
 
             $data['token'] = Token::latest()->paginate(20);
             $data['token_count'] = Token::count();
@@ -23,20 +23,20 @@ class AccessTokenConroller extends Controller
             return view('admin.estatetoken.token_view', $data);
 
 
-        } elseif(auth::user()->role == 1){
+        } elseif(Auth::user()->role == 1){
 
-        } elseif(auth::user()->role == 2){
+        } elseif(Auth::user()->role == 2){
 
-        } elseif(auth::user()->role == 3){
+        } elseif(Auth::user()->role == 3){
 
-            $data['token'] = Token::latest()->where('estate_id', auth::user()->estate_id)->paginate(20);
-            $data['token_count'] = Token::where('estate_id', auth::user()->estate_id)->count();
+            $data['token'] = Token::latest()->where('estate_id', Auth::user()->estate_id)->paginate(20);
+            $data['token_count'] = Token::where('estate_id', Auth::user()->estate_id)->count();
             return view('admin.estatetoken.token_view', $data);
 
 
-        } elseif(auth::user()->role == 4){
+        } elseif(Auth::user()->role == 4){
 
-        } elseif(auth::user()->role == 5){
+        } elseif(Auth::user()->role == 5){
 
         }
     }

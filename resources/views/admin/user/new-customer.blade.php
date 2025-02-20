@@ -3,7 +3,7 @@
 
 
 
-    @if(auth::user()->role == 0)
+    @if(Auth::user()->role == 0)
         <div class="content">
 
             <!-- Start Content-->
@@ -277,9 +277,9 @@
 
 
         </div> <!-- container-fluid -->
-    @elseif(auth::user()->role == 1)
-    @elseif(auth::user()->role == 2)
-    @elseif(auth::user()->role == 3)
+    @elseif(Auth::user()->role == 1)
+    @elseif(Auth::user()->role == 2)
+    @elseif(Auth::user()->role == 3)
         <div class="content">
 
             <!-- Start Content-->
@@ -469,8 +469,8 @@
 
         </div> <!-- container-fluid -->
 
-    @elseif(auth::user()->role == 4)
-    @elseif(auth::user()->role == 5)
+    @elseif(Auth::user()->role == 4)
+    @elseif(Auth::user()->role == 5)
     @else
     @endif
 

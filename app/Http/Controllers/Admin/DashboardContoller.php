@@ -28,7 +28,7 @@ class DashboardContoller extends Controller
 
     public function index()
     {
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
             $data['users'] = User::where('status', 2)->count();
             $data['meter'] = Meter::count();
@@ -42,40 +42,40 @@ class DashboardContoller extends Controller
 
             return view('admin.dashboard', $data);
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
+        } elseif (Auth::user()->role == 3) {
 
             $data['users'] = User::where([
                 'status' => 2,
-                'estate_id' => auth::user()->estate_id,
+                'estate_id' => Auth::user()->estate_id,
                 'role' => 3,
             ])->count();
 
 
             $data['customers'] = User::where([
                 'status' => 2,
-                'estate_id' => auth::user()->estate_id,
+                'estate_id' => Auth::user()->estate_id,
                 'role' => 2,
             ])->count();
 
-            $data['meter'] = Meter::where('estate_id', auth::user()->estate_id)->count();
+            $data['meter'] = Meter::where('estate_id', Auth::user()->estate_id)->count();
 
-            $data['token'] = Token::where('estate_id', auth::user()->estate_id)->count();
+            $data['token'] = Token::where('estate_id', Auth::user()->estate_id)->count();
 
 
-            $estate_name = Estate::where('id', auth::user()->estate_id)->first()->title;
+            $estate_name = Estate::where('id', Auth::user()->estate_id)->first()->title;
 
 
             $data['title'] = "Dashboard | $estate_name ";
 
             return view('admin.dashboard', $data);
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 
@@ -88,32 +88,32 @@ class DashboardContoller extends Controller
     public function list_users()
     {
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
             $data['users'] = User::latest()->where('status', 2)->count();
             $data['users_lists'] = User::latest()->where('role', '!=', 2)->paginate('20');
             return view('admin/user/user-list', $data);
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
+        } elseif (Auth::user()->role == 3) {
 
             $data['users'] = User::where([
                 'role' => 3,
-                'estate_id' => auth::user()->estate_id,
+                'estate_id' => Auth::user()->estate_id,
             ])->orWhere('role', 4)->count();
             $data['users_lists'] = User::where([
                 'role' => 3,
-                'estate_id' => auth::user()->estate_id,
+                'estate_id' => Auth::user()->estate_id,
             ])->ORwhere('role', 4)->paginate('20');
             return view('admin/user/user-list', $data);
 
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 
@@ -127,7 +127,7 @@ class DashboardContoller extends Controller
     {
 
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
             $data['users'] = User::latest()->where('status', 2)->where('role', 2)->count();
             $data['users_lists'] = User::latest()->where('role', 2)->paginate('20');
@@ -135,22 +135,22 @@ class DashboardContoller extends Controller
 
             return view('admin/user/customer-list', $data);
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
+        } elseif (Auth::user()->role == 3) {
 
-            $data['users'] = User::latest()->where('estate_id', auth::user()->estate_id)->where('role', 2)->count();
-            $data['users_lists'] = User::latest()->where('estate_id', auth::user()->estate_id)->where('role', 2)->paginate('20');
+            $data['users'] = User::latest()->where('estate_id', Auth::user()->estate_id)->where('role', 2)->count();
+            $data['users_lists'] = User::latest()->where('estate_id', Auth::user()->estate_id)->where('role', 2)->paginate('20');
             $data['estate'] = Estate::latest()->where('status', 2)->get();
 
             return view('admin/user/customer-list', $data);
 
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 
@@ -164,29 +164,29 @@ class DashboardContoller extends Controller
     {
 
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
             $data['estate'] = Estate::all();
             $data['meters'] = Meter::all();
             return view('admin/user/new-user', $data);
 
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
+        } elseif (Auth::user()->role == 3) {
 
-            $data['estate'] = Estate::where('id', auth::user()->estate_id)->first();
+            $data['estate'] = Estate::where('id', Auth::user()->estate_id)->first();
             $data['meters'] = Meter::all();
 
             return view('admin/user/new-user', $data);
 
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 
@@ -200,27 +200,27 @@ class DashboardContoller extends Controller
     {
 
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
             $data['estate'] = Estate::all();
             $data['meters'] = Meter::all();
             return view('admin/user/new-customer', $data);
 
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
 
-        } elseif (auth::user()->role == 3) {
-            $data['estate'] = Estate::where('id', auth::user()->estate_id)->first();
-            $data['meters'] = Meter::where('id', auth::user()->estate_id)->get();
+        } elseif (Auth::user()->role == 3) {
+            $data['estate'] = Estate::where('id', Auth::user()->estate_id)->first();
+            $data['meters'] = Meter::where('id', Auth::user()->estate_id)->get();
             return view('admin/user/new-customer', $data);
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 
@@ -359,35 +359,35 @@ class DashboardContoller extends Controller
     {
 
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
             $data['fea'] = Feature::where('id', 1)->first();
             $data['set'] = Setting::where('id', 1)->first();
             return view('admin/settings', $data);
 
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
             $data['fea'] = Feature::where('id', 1)->first();
             $data['set'] = Setting::where('id', 1)->first();
             return view('admin/settings', $data);
 
 
-        } elseif (auth::user()->role == 2) {
+        } elseif (Auth::user()->role == 2) {
 
-        } elseif (auth::user()->role == 3) {
+        } elseif (Auth::user()->role == 3) {
 
-            $data['org'] = Estate::where('id', auth::user()->estate_id)->first();
-            $data['tar'] = Tariff::where('estate_id', auth::user()->estate_id)->first();
-            $data['utl'] = Utitlity::where('estate_id', auth::user()->estate_id)->first() ?? null;
-            $data['total_utility'] = Utitlity::where('estate_id', auth::user()->estate_id)->sum('amount');
-            $data['utility'] = Utitlity::where('estate_id', auth::user()->estate_id)->get() ?? null;
+            $data['org'] = Estate::where('id', Auth::user()->estate_id)->first();
+            $data['tar'] = Tariff::where('estate_id', Auth::user()->estate_id)->first();
+            $data['utl'] = Utitlity::where('estate_id', Auth::user()->estate_id)->first() ?? null;
+            $data['total_utility'] = Utitlity::where('estate_id', Auth::user()->estate_id)->sum('amount');
+            $data['utility'] = Utitlity::where('estate_id', Auth::user()->estate_id)->get() ?? null;
             return view('admin/settings', $data);
 
 
-        } elseif (auth::user()->role == 4) {
+        } elseif (Auth::user()->role == 4) {
 
-        } elseif (auth::user()->role == 5) {
+        } elseif (Auth::user()->role == 5) {
 
         } else {
 

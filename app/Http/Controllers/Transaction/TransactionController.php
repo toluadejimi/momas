@@ -398,7 +398,7 @@ class TransactionController extends Controller
     {
 
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
             $data['transactions'] = Transaction::latest()->paginate('20');
             $data['total'] = Transaction::where('status', 2)->sum('amount');
@@ -406,24 +406,24 @@ class TransactionController extends Controller
             return view('admin.report.transactionreport', $data);
 
 
-        } elseif (auth::user()->role == 1) {
+        } elseif (Auth::user()->role == 1) {
 
         } elseif
-        (auth::user()->role == 2) {
+        (Auth::user()->role == 2) {
 
         } elseif
-        (auth::user()->role == 3) {
+        (Auth::user()->role == 3) {
 
-            $data['transactions'] = Transaction::latest()->where('estate_id', auth::user()->estate_id)->paginate('20');
-            $data['total'] = Transaction::where('status', 2)->where('estate_id', auth::user()->estate_id)->sum('amount');
+            $data['transactions'] = Transaction::latest()->where('estate_id', Auth::user()->estate_id)->paginate('20');
+            $data['total'] = Transaction::where('status', 2)->where('estate_id', Auth::user()->estate_id)->sum('amount');
 
             return view('admin.report.transactionreport', $data);
 
         } elseif
-        (auth::user()->role == 4) {
+        (Auth::user()->role == 4) {
 
         } elseif
-        (auth::user()->role == 5) {
+        (Auth::user()->role == 5) {
 
         }
 
@@ -434,7 +434,7 @@ class TransactionController extends Controller
     public function search_trx(request $request)
     {
 
-        if (auth::user()->role == 0) {
+        if (Auth::user()->role == 0) {
 
 
             $rrn = $request->rrn;
@@ -510,7 +510,7 @@ class TransactionController extends Controller
         }
 
 
-        if (auth::user()->role == 3) {
+        if (Auth::user()->role == 3) {
 
 
             $rrn = $request->rrn;
@@ -525,12 +525,12 @@ class TransactionController extends Controller
 
                 $data['transactions'] =Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
                     ->latest()
-                    ->where('estate_id', auth::user()->estate_id)
+                    ->where('estate_id', Auth::user()->estate_id)
                     ->take(50000)
                     ->paginate(50);
 
                 $data['total'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
-                    ->where('estate_id', auth::user()->estate_id)
+                    ->where('estate_id', Auth::user()->estate_id)
                     ->sum('amount') ?? 0;
 
 
@@ -546,14 +546,14 @@ class TransactionController extends Controller
                     ->where([
                         'status' => $status,
                         'service_type' => $transaction_type,
-                        'estate_id' => auth::user()->estate_id
+                        'estate_id' => Auth::user()->estate_id
                     ])->paginate('50') ?? null;
 
                 $data['total'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
                     ->where([
                         'status' => $status,
                         'service_type' => $transaction_type,
-                        'estate_id' => auth::user()->estate_id
+                        'estate_id' => Auth::user()->estate_id
                     ])->paginate('50')
                     ->sum('amount') ?? 0;
 
@@ -570,7 +570,7 @@ class TransactionController extends Controller
                 where([
                     'status' => $status,
                     'service_type' => $transaction_type,
-                    'estate_id' => auth::user()->estate_id
+                    'estate_id' => Auth::user()->estate_id
                 ])->paginate('50') ?? null;
 
 
@@ -578,7 +578,7 @@ class TransactionController extends Controller
                 where([
                     'status' => $status,
                     'service_type' => $transaction_type,
-                    'estate_id' => auth::user()->estate_id
+                    'estate_id' => Auth::user()->estate_id
 
                 ])->sum('amount') ?? 0;
 

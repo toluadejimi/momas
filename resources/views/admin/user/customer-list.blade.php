@@ -4,7 +4,7 @@
     <div class="content">
 
 
-        @if(auth::user()->role == 0)
+        @if(Auth::user()->role == 0)
             <div class="container-fluid">
 
 
@@ -151,7 +151,7 @@
                                         <th scope="col" class="cursor-pointer">Estate</th>
                                         <th scope="col" class="cursor-pointer">Status</th>
                                         <th scope="col" class="cursor-pointer desc">Date Registered</th>
-                                        @if(auth::user()->role == 0)
+                                        @if(Auth::user()->role == 0)
                                             <th scope="col" class="cursor-pointer desc">Action</th>
                                         @endif
 
@@ -181,7 +181,7 @@
                                             </td>
                                             <td>{{$data->created_at}}</td>
 
-                                            @if(auth::user()->role == 0)
+                                            @if(Auth::user()->role == 0)
                                                 <td><a href="user-delete?id={{$data->id}}"
                                                        onclick="return confirmDelete();"
                                                        class="btn btn-danger">Delete</a>
@@ -217,9 +217,9 @@
 
 
             </div>
-        @elseif(auth::user()->role == 1)
-        @elseif(auth::user()->role == 2)
-        @elseif(auth::user()->role == 3)
+        @elseif(Auth::user()->role == 1)
+        @elseif(Auth::user()->role == 2)
+        @elseif(Auth::user()->role == 3)
             <div class="container-fluid">
 
 
@@ -357,7 +357,7 @@
                                         <th scope="col" class="cursor-pointer">Email</th>
                                         <th scope="col" class="cursor-pointer">Status</th>
                                         <th scope="col" class="cursor-pointer desc">Date Registered</th>
-                                        @if(auth::user()->role == 0)
+                                        @if(Auth::user()->role == 0)
                                             <th scope="col" class="cursor-pointer desc">Action</th>
                                         @endif
 
@@ -386,7 +386,7 @@
                                             </td>
                                             <td>{{$data->created_at}}</td>
 
-                                            @if(auth::user()->role == 0)
+                                            @if(Auth::user()->role == 0)
                                                 <td><a href="user-delete?id={{$data->id}}"
                                                        onclick="return confirmDelete();"
                                                        class="btn btn-danger">Delete</a>
@@ -421,18 +421,18 @@
 
 
             </div>
-        @elseif(auth::user()->role == 4)
-        @elseif(auth::user()->role == 5)
+        @elseif(Auth::user()->role == 4)
+        @elseif(Auth::user()->role == 5)
         @else
         @endif
 
 
-        @if(auth::user()->role == 0)
-        @elseif(auth::user()->role == 1)
-        @elseif(auth::user()->role == 2)
-        @elseif(auth::user()->role == 3)
-        @elseif(auth::user()->role == 4)
-        @elseif(auth::user()->role == 5)
+        @if(Auth::user()->role == 0)
+        @elseif(Auth::user()->role == 1)
+        @elseif(Auth::user()->role == 2)
+        @elseif(Auth::user()->role == 3)
+        @elseif(Auth::user()->role == 4)
+        @elseif(Auth::user()->role == 5)
         @else
         @endif
 

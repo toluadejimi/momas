@@ -3,7 +3,7 @@
 
 
 
-    @if(auth::user()->role == 0)
+    @if(Auth::user()->role == 0)
 
         <div class="content">
 
@@ -156,9 +156,9 @@
 
         </div>
 
-    @elseif(auth::user()->role == 1)
-    @elseif(auth::user()->role == 2)
-    @elseif(auth::user()->role == 3)
+    @elseif(Auth::user()->role == 1)
+    @elseif(Auth::user()->role == 2)
+    @elseif(Auth::user()->role == 3)
         <div class="content">
 
             <!-- Start Content-->
@@ -167,7 +167,7 @@
 
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     <div class="flex-grow-1">
-                        <h4 class="fs-18 fw-semibold m-0">Transaction Report | {{auth::user()->estate_name}}</h4>
+                        <h4 class="fs-18 fw-semibold m-0">Transaction Report | {{Auth::user()->estate_name}}</h4>
                     </div>
                 </div>
 
@@ -405,8 +405,8 @@
             </div> <!-- container-fluid -->
 
         </div>
-    @elseif(auth::user()->role == 4)
-    @elseif(auth::user()->role == 5)
+    @elseif(Auth::user()->role == 4)
+    @elseif(Auth::user()->role == 5)
     @else
     @endif
 

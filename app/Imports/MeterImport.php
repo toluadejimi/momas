@@ -29,7 +29,7 @@ class MeterImport implements ToModel, WithHeadingRow
     {
 
 
-        if (auth::user()->role == 3) {
+        if (Auth::user()->role == 3) {
 
 
             return new Meter([
