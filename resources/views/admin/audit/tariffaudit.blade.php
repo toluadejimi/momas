@@ -103,12 +103,12 @@
                                     <tr>
                                         <th scope="col" class="cursor-pointer">ID</th>
                                         <th scope="col" class="cursor-pointer">User</th>
+                                        <th scope="col" class="cursor-pointer">Estate</th>
                                         <th scope="col" class="cursor-pointer">Event</th>
                                         <th scope="col" class="cursor-pointer">Old Value</th>
                                         <th scope="col" class="cursor-pointer">New Value</th>
                                         <th scope="col" class="cursor-pointer">Url</th>
                                         <th scope="col" class="cursor-pointer">Ip Address</th>
-                                        <th scope="col" class="cursor-pointer">User Agent</th>
                                         <th scope="col" class="cursor-pointer desc">Date/Time</th>
 
 
@@ -121,13 +121,19 @@
 
                                         <tr>
                                             <td>{{$data->id}}</td>
-                                            <td>{{$data->user->first_name}} {{$data->user->last_name}}</td>
+                                            <td>
+                                                {{ \App\Models\User::where('id', $data->user_id)->value('first_name') }}
+                                                {{ \App\Models\User::where('id', $data->user_id)->value('last_name') }}
+                                            </td>
+
+                                            <td>
+                                                {{ \App\Models\Estate::where('id', $data->estate_id)->value('title') }}
+                                            </td>
                                             <td>{{$data->event}}</td>
                                             <td>{{json_encode($data->old_values)}}</td>
                                             <td>{{json_encode($data->new_values)}}</td>
                                             <td>{{$data->url}}</td>
                                             <td>{{$data->ip_address}}</td>
-                                            <td>{{$data->user_agent}}</td>
                                             <td>{{$data->created_at}}</td>
                                         </tr>
 

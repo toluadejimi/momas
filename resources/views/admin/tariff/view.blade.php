@@ -219,14 +219,14 @@
                                                                 <input type="number" class="form-control mb-3"
                                                                        value="{{$data->amount}}" name="amount" required>
 
-                                                                <input value="{{$data->id}}" name="id" required>
+                                                                <input value="{{$data->id}}" hidden="" name="id" required>
 
                                                                 <label class="my-1">Vat %</label>
                                                                 <input type="number" class="form-control mb-3"
-                                                                       value="{{$data->vat}}" name="vat" required>
+                                                                       value="{{$data->vat}}" name="vat" readonly>
 
 
-                                                                <input type="text" name="estate_id" value="{{Auth::user()->estate_id}}" hidden>
+                                                                <input type="text" name="estate_id" value="{{$data->estate_id}}" hidden>
                                                                 <input hidden type="text" name="id" value="{{$data->id}}" >
 
                                                                 <div class="row">
@@ -530,9 +530,7 @@
                                                                 <input type="number" class="form-control mb-3"
                                                                        value="{{$data->amount}}" name="amount" required>
 
-                                                                <input type="text" name="estate_id" value="{{Auth::user()->estate_id}}" hidden>
-                                                                <input type="text" name="id" value="{{$data->id}}" hidden>
-
+                                                                <input name="id" hidden value="{{$data->id}}">
 
 
                                                                 <label class="my-1">Vat %</label>
