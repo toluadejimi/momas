@@ -171,6 +171,8 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
 
+
+
     ])->toArray(),
 
     /*
