@@ -105,6 +105,7 @@
                                     @foreach($transformer_list as $data)
 
                                         <tr>
+                                            <td>{{$data->id ?? "id"}}</td>
                                             <td><a href="view-transformer?id={{$data->id}}">{{$data->Title}}</a></td>
                                             <td>{{$data->State ?? "state"}}</td>
                                             <td>{{$data->City ?? "city"}}</td>

@@ -303,6 +303,31 @@
 
 
                         <li>
+                            <a href="charts-mixed.html#sidebarBaseui2" data-bs-toggle="collapse">
+                                <i data-feather="package"></i>
+                                <span> Audits </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarBaseui2">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a class='tp-link' href='tariff_audit'>Tariff</a>
+                                    </li>
+                                    {{--                                    <li>--}}
+                                    {{--                                        <a class='tp-link' href='report-meter'>Meter</a>--}}
+                                    {{--                                    </li>--}}
+                                    {{--                                    <li>--}}
+                                    {{--                                        <a class='tp-link' href='report-customers'>Customer</a>--}}
+                                    {{--                                    </li>--}}
+                                    {{--                                    <li>--}}
+                                    {{--                                        <a class='tp-link' href='report-tariff'>Tariff</a>--}}
+                                    {{--                                    </li>--}}
+                                </ul>
+                            </div>
+                        </li>
+
+
+                        <li>
                             <a class='tp-link' href="settings">
                                 <i data-feather="settings"></i>
                                 <span> Settings </span>

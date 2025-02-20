@@ -3,7 +3,11 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
+<<<<<<< HEAD
         'reference' => 'b37db07e45668e73fb87ee8cb4c6531c3c40834d',
+=======
+        'reference' => 'c753d6aec33583b3880813b2fa08955466cd6a46',
+>>>>>>> 829d9e7bfc111acff2d066e0492d0f28b5b4a6d6
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -445,7 +449,11 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
+<<<<<<< HEAD
             'reference' => 'b37db07e45668e73fb87ee8cb4c6531c3c40834d',
+=======
+            'reference' => 'c753d6aec33583b3880813b2fa08955466cd6a46',
+>>>>>>> 829d9e7bfc111acff2d066e0492d0f28b5b4a6d6
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -758,9 +766,9 @@
             'dev_requirement' => false,
         ),
         'owen-it/laravel-auditing' => array(
-            'pretty_version' => 'v13.6.8',
-            'version' => '13.6.8.0',
-            'reference' => '28ecd2d5cc05c3619f99af42611877f54371af20',
+            'pretty_version' => 'v13.7.1',
+            'version' => '13.7.1.0',
+            'reference' => '627a7b7ddd2aa2d026be328595efa31301ad7d02',
             'type' => 'package',
             'install_path' => __DIR__ . '/../owen-it/laravel-auditing',
             'aliases' => array(),
@@ -1057,8 +1065,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '3.0.0',
-                1 => '1.0|2.0|3.0',
+                0 => '1.0|2.0|3.0',
+                1 => '3.0.0',
             ),
         ),
         'psr/simple-cache' => array(

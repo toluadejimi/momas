@@ -135,4 +135,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(TamperToken::class);
     }
+
+    public function audit()
+    {
+        return $this->hasMany(Audit::class);
+    }
 }

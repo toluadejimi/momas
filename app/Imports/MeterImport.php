@@ -64,7 +64,7 @@ class MeterImport implements ToModel, WithHeadingRow
 
                 'meterNo'   => $row['meterno'],
                 'MeterSIMNo'   => $row['metersimno'],
-                'transid'   => $row['transid'],
+                'TransformerID'   => $row['transid'],
                 'accountno'   => $row['accountno'],
                 'meterModel'    => $row['model'],
                 'AccountNo'        => $row['accountno'],

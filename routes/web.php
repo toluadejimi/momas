@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\EstateController;
 use App\Http\Controllers\Admin\MeterImportController;
 use App\Http\Controllers\Admin\TariffController;
 use App\Http\Controllers\Admin\TokenController;
+use App\Http\Controllers\AuditlogController;
 use App\Http\Controllers\Estate\EstateServiceController;
 use App\Http\Controllers\Meter\MeterController;
 use App\Http\Controllers\PosController;
@@ -310,6 +311,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'blockaccess']], fun
     Route::post('add-merchant', [PosController::class, 'add_merchant']);
     Route::get('delete-merchant', [PosController::class, 'delete_merchant']);
 
+
+
+    //Audit
+    Route::get('tariff_audit', [AuditlogController::class, 'tariff_audit']);
 
 
 

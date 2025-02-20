@@ -7,17 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 
 
-class TarrifState extends Model implements Auditable
+class Audit extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
 
-    protected $fillable = [
-        'status'
-    ];
 
-    protected $casts = [
-        'amount' => 'double',
-        'vat' => 'double',
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
-    ];
+
 }
