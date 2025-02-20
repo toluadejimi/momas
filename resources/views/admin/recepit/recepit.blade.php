@@ -176,19 +176,22 @@
 
 
                                         @if($title == "kct_token")
+                                            TRX ID : <b>{{$ref}}</b></br><br>
                                             Meter NO : <b>{{$meter_no}}</b></br><br>
                                             KCT 1 : <b>{{$token1 ?? "12345678"}}</b></br><br>
                                             KCT 2 : <b>{{$token2 ?? "12345678"}}</b></br><br>
                                         @elseif($title == "tamper")
+                                            TRX ID : <b>{{$ref}}</b></br><br>
                                             Meter NO : <b>{{$meter_no}}</b></br><br>
                                             Unit :  <b>{{$unit ?? "0.00"}}KWH</b></br><br>
                                             Token : <b>{{$token ?? "12345678"}}</b></br><br>
                                         @elseif($title == "clear_credit_token")
+                                            TRX ID : <b>{{$ref}}</b></br><br>
                                             Meter NO : <b>{{$meter_no}}</b></br><br>
                                             Unit :  <b>{{$unit ?? "0.00"}}KWH</b></br><br>
                                             Token : <b>{{$token ?? "12345678"}}</b></br><br>
-
                                         @else
+                                            TRX ID : <b>{{$ref}}</b></br><br>
                                             Amount : <b>₦ {{number_format($amount, 2) }}</b></br><br>
                                             Tariff Amt : <b>₦ {{number_format($tariff_amount, 2) }}</b></br><br>
                                             Meter NO : <b>{{$meter_no}}</b></br><br>

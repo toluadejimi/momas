@@ -3764,13 +3764,14 @@ class TokenController extends Controller
                 $data['phone'] = $user_comp->phone;
                 $data['trx_id'] = $trx_comp->trx_id;
                 $data['token'] = $trx_comp->token;
-                $data['amount'] = $trx_comp->amount;
+                $data['ref'] = $trx_comp->trx_id;
+                $data['amount'] = $trx_comp->amount_charged;
                 $data['vat_amount'] = $trx_comp->vatAmount;
                 $data['vend_amount_kw_per_naira'] = $trx_comp->tariffPerKWatt;
                 $data['tariff_amount'] = $trx_comp->tariff_amount;
                 $data['unit'] = $trx_comp->unitkwh;
                 $data['title'] = "Credit Token";
-                $data['date'] = date('D-M-Y');
+                $data['date'] = date('d-m-y h:i:s');
                 $data['meter_no'] = $trx_comp->meterNo;
 
                 return view('admin/recepit.recepit', $data);
