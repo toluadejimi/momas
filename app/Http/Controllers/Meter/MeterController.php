@@ -58,6 +58,112 @@ class MeterController extends Controller
 
 
 
+
+    public function validate_mobile_meter(request $request)
+    {
+        $user = User::where('meterNo', $request->meterNo)->first() ?? null;
+
+
+        $meter = Meter::where('meterNo', $request->meterNo)->where('estate_id', $request->estateId)->first() ?? null;
+        if ($meter == null) {
+            $message = "Validation Failed, please check meter number or estate selected";
+            $code = 422;
+            return error($message, $code);
+        }
+
+
+        $get_tar = Tariff::where('estate_id', $user->estate_id)->where('status', 2)->first() ?? null;
+        if ($get_tar == null) {
+            $message = "Tariff not properly configured";
+            $code = 422;
+            return error($message, $code);
+        }
+
+
+        $data['customer_name'] = $user->first_name . " " . $user->last_name;
+        $data['address'] = $user->address . ", " . $user->city . ", " . $user->state;
+        // $data['meter_type'] = $meter_type;
+
+        $es_id = $request->estateId ?? null;
+        $duration = Estate::where('id', $es_id)->first()->duration ?? null;
+        $estate_id = $es_id;
+        $user_id = $user->id;
+
+        if ($duration == null || $estate_id == null) {
+            $minvend = "Not set";
+        } else {
+
+            $sp = SpreadPayment::where('user_id', $user->id)->where('estate_id', $es_id)->first()->percentage ?? null;
+            if ($sp != null) {
+                $percentage = $sp / 100;
+                $vend = vend($duration, $estate_id, $user_id);
+                $get_vend = $percentage * $vend;
+                $minvend = $get_vend;
+
+            } else {
+
+
+                $get_vend = vend($duration, $estate_id, $user_id);
+                if ($get_vend == null) {
+                    $minvend = "Not set";
+                } else {
+                    $minvend = $get_vend;
+                }
+
+            }
+
+        }
+
+        $min_pur = Estate::where('id', $request->estateId)->first()->min_pur ?? null;
+        $max_pur = Estate::where('id', $request->estateId)->first()->max_pur ?? null;
+        $data['min_purchase'] = (int)$min_pur;
+        $user_info = User::where('meterNo', $request->meterNo)->first();
+        $estate_id = $user_info->estate_id ?? null;
+        if($estate_id == null){
+
+            $message = "User not attached to any estate";
+            $code = 422;
+            return error($message, $code);
+
+        }
+        $title = Tariff::where('estate_id', $user_info->estate_id)->first()->title ?? null;
+
+        if($title == null){
+
+            $message = "Set a tariff for estate selected";
+            $code = 422;
+            return error($message, $code);
+
+        }
+
+
+
+
+        $tariffs = Tariff::select('')->where('estate_id', $user_info->estate_id)->get();
+
+        $data['tariffs'] = $tariffs;
+        $pur['min_purchase'] = (int)$min_pur;
+        $pur['max_purchase'] = (int)$max_pur;
+        $pur['min_vending'] = (int)$minvend;
+        $data['purchase'] = $pur;
+
+
+        return response()->json([
+            'status' => true,
+            'data' => $data
+
+        ]);
+
+
+    }
+
+
+
+
+
+
+
+
     public function validate_meter(request $request)
     {
         $user = User::where('meterNo', $request->meterNo)->first() ?? null;
@@ -71,7 +177,7 @@ class MeterController extends Controller
         }
 
 
-        $get_tar = Tariff::where('user_id', $user->id)->first() ?? null;
+        $get_tar = Tariff::where('estate_id', $user->estate_id)->where('status', 2)->first() ?? null;
         if ($get_tar == null) {
             $message = "Tariff not properly configured";
             $code = 422;
@@ -121,7 +227,7 @@ class MeterController extends Controller
         if($estate_id == null){
             return back()->with('error', "User not attached to any estate");
         }
-        $title = Tariff::where('estate_id', $user_info->estate_id)->title ?? null;
+        $title = Tariff::where('estate_id', $user_info->estate_id)->first()->title ?? null;
         if($title == null){
             return back()->with('error', "Set a tariff for estate selected");
         }

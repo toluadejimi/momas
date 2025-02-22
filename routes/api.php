@@ -45,7 +45,7 @@ Route::get('support', [LoginController::class, 'support']);
 Route::post('check-email', [RegisterController::class, 'check_user']);
 Route::post('validate-email', [RegisterController::class, 'validate_email']);
 Route::post('register', [RegisterController::class, 'register']);
-Route::post('validate', [MeterController::class, 'validate_meter']);
+Route::post('validate', [MeterController::class, 'validate_mobile_meter']);
 Route::get('cable-plan', [BillsController::class, 'get_cable_plan']);
 Route::post('validate-cable', [BillsController::class, 'validate_cable']);
 

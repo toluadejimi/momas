@@ -83,6 +83,8 @@ Route::any('resend_code', [AuthController::class, 'resend_code']);
 Route::any('verify_code', [AuthController::class, 'verify_code']);
 Route::get('code', [AuthController::class, 'code']);
 Route::get('auth-code', [AuthController::class, 'auth_code']);
+Route::get('forgot_password', [AuthController::class, 'forgot_password']);
+Route::get('auth-code', [AuthController::class, 'auth_code']);
 
 
 
