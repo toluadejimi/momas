@@ -139,7 +139,7 @@ class MeterController extends Controller
 
 
 
-        $tariffs = Tariff::select('')->where('estate_id', $user_info->estate_id)->get();
+        $tariffs = Tariff::where('estate_id', $user_info->estate_id)->get();
 
         $data['tariffs'] = $tariffs;
         $pur['min_purchase'] = (int)$min_pur;
