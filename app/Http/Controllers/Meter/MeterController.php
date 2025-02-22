@@ -80,8 +80,7 @@ class MeterController extends Controller
         }
 
 
-        $data['customer_name'] = $user->first_name . " " . $user->last_name;
-        $data['address'] = $user->address . ", " . $user->city . ", " . $user->state;
+
         // $data['meter_type'] = $meter_type;
 
         $es_id = $request->estateId ?? null;
@@ -141,12 +140,27 @@ class MeterController extends Controller
 
         $tariffs = Tariff::where('estate_id', $user_info->estate_id)->get();
 
+
+
+        $data['customer_name'] = $user->first_name . " " . $user->last_name;
+        $data['address'] = $user->address . ", " . $user->city . ", " . $user->state;
         $data['tariffs'] = $tariffs;
+        $tariffAmounts = TarrifState::whereIn('tariff_id', $tariffs->pluck('id'))
+            ->pluck('amount', 'tariff_id', 'vat');
+        $tariffVats = TarrifState::whereIn('tariff_id', $tariffs->pluck('id'))
+            ->pluck('tariff_id', 'vat');
+
+        $tariffs->transform(function ($tariffs) use ($tariffAmounts, $tariffVats) {
+            $tariffs->amount = $tariffAmounts[$tariffs->id] ?? null;
+            $tariffs->vat = 0.75;
+            return $tariffs;
+        });
+
+
         $pur['min_purchase'] = (int)$min_pur;
         $pur['max_purchase'] = (int)$max_pur;
         $pur['min_vending'] = (int)$minvend;
         $data['purchase'] = $pur;
-
 
         return response()->json([
             'status' => true,
