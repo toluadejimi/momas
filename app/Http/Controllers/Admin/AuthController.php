@@ -218,7 +218,7 @@ class AuthController extends Controller
     public function forgot_password(Request $request)
     {
 
-        return view('')
+        return view('');
     }
 
 
