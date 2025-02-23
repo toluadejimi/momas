@@ -16,8 +16,10 @@ use App\Models\Transformer;
 use App\Models\User;
 use App\Models\UtilitiesPayment;
 use App\Models\Utitlity;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class MeterController extends Controller
@@ -283,6 +285,22 @@ class MeterController extends Controller
     public function buy_meter_token(request $request)
     {
 
+//
+//        {
+//            vending_amount: 1179.0697674418604,
+//            trxref: TRXFLW7058731,
+//            meterType: ,
+//            estate_id: 5,
+//            meterNo: 62319052270,
+//            tariff_id: 7,
+//            vend_amount_kw_per_naira: 58.95348837209302,
+//            total_paid_amount: 7300,
+//            utility_amount: 6000,
+//            vat_amount: 88.43023255813954
+//        }
+
+
+
         $amount = $request->amount;
         $meterNo = $request->meterNo;
         $trx = $request->trxref;
@@ -291,25 +309,51 @@ class MeterController extends Controller
         $unit = $request->vend_amount_kw_per_naira;
         $vendong_amount = $request->vending_amount;
         $vat_amount = $request->vat_amount;
+        $tariff_id = $request->tariff_id;
 
 
         $tariff_index = Tariff::where('id', $request->tariff_id)->first()->tariff_index ?? null;
 
-        $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first()->duration;
-        if ($request->min_vend_amount != 0) {
+        $duration = Estate::where('id', Auth::user()->estate_id)->first()->duration ?? null;
+        if($duration == "weekly" && $utility_amount > 0){
             $utl = new UtilitiesPayment();
             $utl->user_id = Auth::id();
             $utl->estate_id = Auth::user()->estate_id;
             $utl->amount = $utility_amount;
-            $utl->duration = $duration;
+            $utl->duration = "weekly";
             $utl->status = 2;
             $utl->save();
+
+        }elseif ($duration == "monthly" && $utility_amount > 0){
+
+            $utl = new UtilitiesPayment();
+            $utl->user_id = Auth::id();
+            $utl->estate_id = Auth::user()->estate_id;
+            $utl->amount = $utility_amount;
+            $utl->duration = "monthly";
+            $utl->status = 2;
+            $utl->save();
+
+        }elseif ($duration == "yearly" && $utility_amount > 0){
+
+            $utl = new UtilitiesPayment();
+            $utl->user_id = Auth::id();
+            $utl->estate_id = Auth::user()->estate_id;
+            $utl->amount = $utility_amount;
+            $utl->duration = "yearly";
+            $utl->status = 2;
+            $utl->save();
+
+
         }
+
+
+
 
 
         $meter = Meter::where('MeterNo', $meterNo)->first() ?? null;
 
-        if ($meter != null && $meter->NeedKCT == "on") {
+        if ($meter != null && $meter->NeedKCT == "on" || $meter->NeedKCT == 1) {
             $databody = [
                 'meterType' => $meter->KRN1,
                 'meterNo' => Auth::user()->meterNo,
@@ -322,6 +366,9 @@ class MeterController extends Controller
                 'timeout' => 10,
             ])->post('http://169.239.189.91:19071/tokenGen', $databody);
 
+
+
+
             if ($response->successful()) {
                 $gdata = $response->json();
                 $data = json_decode($gdata, true);
@@ -333,7 +380,7 @@ class MeterController extends Controller
                     $kctdatabody = [
                         'meterType' => $meter->KRN1,
                         'tometerType' => $meter->KRN1,
-                        'meterNo' => Auth::user()->meterNo,
+                        'meterNo' => $request->meterNo,
                         'sgc' => (int)$meter->OldSGC,
                         'tosgc' => (int)$meter->NewSGC,
                         'ti' => $tariff_index,
@@ -351,6 +398,10 @@ class MeterController extends Controller
                         $kct = $kct_response->json();
                         $kct_data = json_decode($kct, true);
                         $status = $kct_data['code'] ?? null;
+
+
+
+
 
                         if ($status == "SUCCESS") {
 
@@ -454,7 +505,8 @@ class MeterController extends Controller
         }
 
 
-        if ($meter != null && $meter->NeedKCT == null) {
+        if ($meter != null && $meter->NeedKCT == null || $meter->NeedKCT == 0) {
+
 
             $databody = [
                 'meterType' => $meter->KRN1,
@@ -478,19 +530,24 @@ class MeterController extends Controller
 
                     $no_kct_token = $no_kct_data['tokens'][0];
                     $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
-                    $met = new MeterToken ();
+                    $met = new CreditToken();
                     $met->user_id = Auth::user()->id;
                     $met->trx_id = $trx;
                     $met->meterNo = $meterNo;
                     $met->token = $no_kct_token;
-                    $met->amount = $vendong_amount;
-                    $met->unit = $unit;
-                    $met->vat = $vat;
+                    $met->amount = $total_paid;
+                    $met->vatAmount = round($vat_amount, 2);
+                    $met->costOfUnit = round($vendong_amount, 2);
+                    $met->unitkwh = round($unit, 2);
+                    $met->estate_name = Estate::where('id', $request->estate_id)->first()->title;
+                    $met->vat = 0;
+                    $met->tariff_amount = TarrifState::where('tariff_id', $tariff_id)->first()->amount ?? 0;
                     $met->estate_id = Auth::user()->estate_id;
+                    $met->amount_charged = $total_paid;
                     $met->status = 2;
                     $met->save();
 
-                    Transaction::where('trx_id', $trx)->update(['service' => "METER PURCHASE", 'service_type' => "meter", 'unit_amount' => $vendong_amount]);
+                    Transaction::where('trx_id', $trx)->update(['service' => "METER PURCHASE", 'service_type' => "credit_token", 'unit_amount' => $vendong_amount]);
 
                     $data['full_name'] = Auth::user()->first_name . " " . Auth::user()->last_name;
                     $data['address'] = Auth::user()->address . "," . Auth::user()->city . "," . Auth::user()->state;
@@ -498,12 +555,12 @@ class MeterController extends Controller
                     $data['trx_id'] = $trx;
                     $data['token'] = $no_kct_data['tokens'][0];
                     $data['amount'] = $total_paid;
-                    $data['vending_amount'] = $vendong_amount;
-                    $data['vat_amount'] = $vat_amount;
-                    $data['vend_amount_kw_per_naira'] = $unit;
+                    $data['vending_amount'] = round($vendong_amount, 2);
+                    $data['vat_amount'] = round($vat_amount, 2);
+                    $data['vend_amount_kw_per_naira'] = round($unit, 2);
                     $email = Auth::user()->email;
                     $token = $no_kct_data['tokens'][0];
-                    send_email_token($email, $token, $amount);
+                    //send_email_token($email, $token, $amount);
 
                     return response()->json([
                         'status' => true,
