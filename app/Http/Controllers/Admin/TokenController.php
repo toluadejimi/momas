@@ -524,6 +524,8 @@ class TokenController extends Controller
 
 
 
+
+
             $calculator = new VatCalculator();
             $params = [
                 'amountText' =>  $perc_amount,

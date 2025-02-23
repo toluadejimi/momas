@@ -145,9 +145,9 @@ class MeterController extends Controller
         $data['customer_name'] = $user->first_name . " " . $user->last_name;
         $data['address'] = $user->address . ", " . $user->city . ", " . $user->state;
         $data['tariffs'] = $tariffs;
-        $tariffAmounts = TarrifState::whereIn('tariff_id', $tariffs->pluck('id'))
+        $tariffAmounts = TarrifState::whereIn('tariff_id', $tariffs->pluck('id'))->where('status', 2)
             ->pluck('amount', 'tariff_id', 'vat');
-        $tariffVats = TarrifState::whereIn('tariff_id', $tariffs->pluck('id'))
+        $tariffVats = TarrifState::whereIn('tariff_id', $tariffs->pluck('id'))->where('status', 2)
             ->pluck('tariff_id', 'vat');
 
         $tariffs->transform(function ($tariffs) use ($tariffAmounts, $tariffVats) {
