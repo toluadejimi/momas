@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class MeterController extends Controller
 {
@@ -555,9 +556,15 @@ class MeterController extends Controller
                     $data['trx_id'] = $trx;
                     $data['token'] = $no_kct_data['tokens'][0];
                     $data['amount'] = $total_paid;
-                    $data['vending_amount'] = round($vendong_amount, 2);
-                    $data['vat_amount'] = round($vat_amount, 2);
-                    $data['vend_amount_kw_per_naira'] = round($unit, 2);
+
+                    $vend_amount =  round($vendong_amount, 2);
+                    $vatt = round($vat_amount, 2);
+                    $uun = round($unit, 2);
+
+
+                    $data['vending_amount'] = "$vend_amount";
+                    $data['vat_amount'] = "$vatt";
+                    $data['vend_amount_kw_per_naira'] = "$uun";
                     $email = Auth::user()->email;
                     $token = $no_kct_data['tokens'][0];
                     //send_email_token($email, $token, $amount);
