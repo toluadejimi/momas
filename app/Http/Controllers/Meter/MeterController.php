@@ -556,6 +556,7 @@ class MeterController extends Controller
                     $data['trx_id'] = $trx;
                     $data['token'] = $no_kct_data['tokens'][0];
                     $data['amount'] = $total_paid;
+                    $data['meterNo'] = $request->meterNo;
 
                     $vend_amount =  round($vendong_amount, 2);
                     $vatt = round($vat_amount, 2);
