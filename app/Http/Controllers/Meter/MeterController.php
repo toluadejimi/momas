@@ -175,9 +175,6 @@ class MeterController extends Controller
 
 
 
-
-
-
     public function validate_meter(request $request)
     {
         $user = User::where('meterNo', $request->meterNo)->first() ?? null;

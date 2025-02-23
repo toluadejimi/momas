@@ -1034,8 +1034,6 @@ class TokenController extends Controller
 
         $est = Estate::where('id', $request->estate_name)->first();
 
-
-
         if($est->charge_fee_flat == null){
             $fee  = ($est->charge_fee_precent / 100) * (int)$request->amount;
         }else{
