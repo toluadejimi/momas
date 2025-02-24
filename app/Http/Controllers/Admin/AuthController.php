@@ -8,6 +8,8 @@ use BaconQrCode\Renderer\Image\Png;
 use BaconQrCode\Writer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Mockery\Exception;
 
 
 class AuthController extends Controller
@@ -217,8 +219,86 @@ class AuthController extends Controller
 
     public function forgot_password(Request $request)
     {
+        return view('auth.forgot-password');
+    }
 
-        return view('');
+
+
+    public function email_forgot_password(Request $request)
+    {
+
+
+        $email = $request->email;
+        $first_name = User::where('email', $email)->first()->first_name ?? null;
+        $code = User::where('email', $email)->first()->code ?? null;
+
+        $url = url('')."/resetpassword?email=$email&code=$code";
+        if($first_name == null){
+            return back()->with('error', 'User not found');
+        }
+
+        $data = array(
+            'fromsender' => env('MAIL_FROM_ADDRESS'), 'MOMASPAY',
+            'subject' => "Reset Email Address",
+            'toreceiver' => $email,
+            'url' => $url,
+            'user' => $first_name,
+        );
+
+        try{
+
+        Mail::send('emails.forgotpassword', ["data1" => $data], function ($message) use ($data) {
+            $message->from($data['fromsender']);
+            $message->to($data['toreceiver']);
+            $message->subject($data['subject']);
+        });
+
+        }catch (\Exception $e){
+            return back()->with('error', $e->getMessage());
+        }
+
+
+        return view('auth.email-success');
+
+
+    }
+
+
+    public function reset_password(Request $request)
+    {
+        $email = $request->email;
+        $code = $request->code;
+        return view('auth.reset-password', compact('email', 'code'));
+    }
+
+
+    public function reset_password_now(Request $request)
+    {
+
+        if($request->password != $request->confirm_password){
+            return back()->with('error', 'Password incorrect');
+        }
+
+        $email = $request->email;
+        $user = User::where('email', $email)->first() ?? null;
+        $udercode = User::where('email', $email)->first()->code ?? null;
+        if($user == null){
+            return response()->json([
+                'message' => 'user_not_found'
+            ], 422);
+        }
+
+        if($udercode != $request->code){
+            return response()->json([
+                'message' => 'Code does not match'
+            ], 422);
+        }
+            if($request->password != $request->confirm_password){
+            return back()->with('error', 'Password incorrect');
+        }
+
+        User::where('email', $request->email)->update(['password' => bcrypt($request->password)]);
+        return redirect('/')->with('message', 'Password Reset Successfully');
     }
 
 

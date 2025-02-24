@@ -83,7 +83,11 @@ Route::any('resend_code', [AuthController::class, 'resend_code']);
 Route::any('verify_code', [AuthController::class, 'verify_code']);
 Route::get('code', [AuthController::class, 'code']);
 Route::get('auth-code', [AuthController::class, 'auth_code']);
-Route::get('forgot_password', [AuthController::class, 'forgot_password']);
+Route::get('forget-password', [AuthController::class, 'forgot_password']);
+Route::post('email-forget-password', [AuthController::class, 'email_forgot_password']);
+Route::get('resetpassword', [AuthController::class, 'reset_password']);
+Route::post('resetpasswordnow', [AuthController::class, 'reset_password_now']);
+Route::get('verifyemail', [AuthController::class, 'verifyemail']);
 Route::get('auth-code', [AuthController::class, 'auth_code']);
 
 
