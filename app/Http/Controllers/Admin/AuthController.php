@@ -14,8 +14,6 @@ use Mockery\Exception;
 
 class AuthController extends Controller
 {
-
-
     public function admin_login()
     {
 
@@ -25,7 +23,6 @@ class AuthController extends Controller
             return redirect('admin/admin-dashboard');
         }
     }
-
 
     public function login_now(request $request)
     {
