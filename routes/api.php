@@ -37,6 +37,7 @@ Route::post('reset-password', [RegisterController::class, 'reset_password']);
 
 
 Route::post('validate', [MeterController::class, 'validate_meter']);
+Route::post('enkpay_webhook', [TransactionController::class, 'enkpay_webhook']);
 
 
 Route::get('support', [LoginController::class, 'support']);
@@ -64,6 +65,14 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::get('features', [FeatureController::class, 'features']);
     Route::get('promotion', [FeatureController::class, 'promotion']);
     Route::get('getUser', [LoginController::class, 'get_user']);
+
+    Route::get('get-account', [TransactionController::class, 'get_account_details']);
+
+
+
+
+
+
 
 
     //Services

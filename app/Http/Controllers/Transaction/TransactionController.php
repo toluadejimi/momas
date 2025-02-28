@@ -9,6 +9,8 @@ use App\Models\Setting;
 use App\Models\TarrifState;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\VirtualAccount;
+use App\Models\VirtualAccountTransaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -937,6 +939,63 @@ class TransactionController extends Controller
 
 
         }
+
+
+
+    }
+
+    public function get_account_details(request $request)
+    {
+
+        $amount = Setting::where('id', 1)->first()->first()->admin_fee;
+        $key = Setting::where('id', 1)->first()->first()->enkpay_key;
+        $trx_id = "MOMAS".random_int(000000, 999999);
+        $email = Auth::user()->email;
+        $pt = "momas";
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://web.sprintpay.online/pay?amount=$amount&key=$key&ref=$trx_id&email=$email&platform=$pt",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 20,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+            ),
+        ));
+
+        $var = curl_exec($curl);
+        curl_close($curl);
+        $var = json_decode($var);
+
+        $va = new VirtualAccountTransaction();
+        $va->user_id = Auth::id();
+        $va->v_account_no = $var->account_no;
+        $va->v_account_name = $var->account_name;
+        $va->amount = $var->amount;
+        $va->v_bank_name = $var->bank;
+        $va->status = 0;
+        $va->save();
+
+
+        return response()->json([
+            'status' => true,
+            'bank' => $var->bank,
+            'account_no' => $var->account_no,
+            'account_name' => $var->account_name,
+            'amount' => $var->amount,
+        ]);
+
+
+    }
+
+
+    public function enkpay_webhook(request $request)
+    {
 
 
 
