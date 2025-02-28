@@ -60,12 +60,30 @@ class LoginController extends Controller
             }
 
 
+            $admin_fee_get = UtilitiesPayment::where('user_id', Auth::id())
+                ->where('type', 'admin_fee')
+                ->whereMonth('created_at', Carbon::now()->month)
+                ->whereYear('created_at', Carbon::now()->year)
+                ->latest('created_at')
+                ->first();
+
+            if($admin_fee_get){
+                $admin_fee =  "1";
+            }else{
+                $admin_fee = "0";
+            }
+
+
+
+
             $token = auth()->user()->createToken('API token')->accessToken;
             $meter = meter();
             $user = user();
             $user['token'] = $token;
             $user['meter'] = $meter;
             $user['tariff'] = $tariffs;
+            $user['monthly_admin_fee'] = $admin_fee;
+
 
 
 
@@ -127,9 +145,9 @@ class LoginController extends Controller
                 ->first();
 
             if($admin_fee_get){
-                $admin_fee =  1;
+                $admin_fee =  "1";
             }else{
-                $admin_fee = 0;
+                $admin_fee = "0";
             }
 
 
@@ -193,6 +211,20 @@ class LoginController extends Controller
         $pkkey['paystack_secret'] = $fl->paystack_secret;
         $pkkey['paystack_public'] = $fl->paystack_public;
 
+        $admin_fee_get = UtilitiesPayment::where('user_id', Auth::id())
+            ->where('type', 'admin_fee')
+            ->whereMonth('created_at', Carbon::now()->month)
+            ->whereYear('created_at', Carbon::now()->year)
+            ->latest('created_at')
+            ->first();
+
+        if($admin_fee_get){
+            $admin_fee =  "1";
+        }else{
+            $admin_fee = "0";
+        }
+
+
 
         $token = auth()->user()->createToken('API token')->accessToken;
         $meter = meter();
@@ -201,6 +233,11 @@ class LoginController extends Controller
         $user['meter'] = $meter;
         $user['flutterwave_keys'] =  $flkey;
         $user['paystack_keys'] =  $pkkey;
+        $user['monthly_admin_fee'] = $admin_fee;
+
+
+
+
 
 
 
