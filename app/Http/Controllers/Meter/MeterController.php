@@ -212,24 +212,12 @@ class MeterController extends Controller
             $minvend = "Not set";
         } else {
 
-            $sp = SpreadPayment::where('user_id', $user->id)->where('estate_id', $es_id)->first()->percentage ?? null;
-            if ($sp != null) {
-                $percentage = $sp / 100;
-                $vend = vend($duration, $estate_id, $user_id);
-                $get_vend = $percentage * $vend;
-                $minvend = $get_vend;
-
-            } else {
-
-
                 $get_vend = vend($duration, $estate_id, $user_id);
                 if ($get_vend == null) {
                     $minvend = "Not set";
                 } else {
                     $minvend = $get_vend;
                 }
-
-            }
 
         }
 
