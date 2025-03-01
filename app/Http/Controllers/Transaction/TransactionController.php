@@ -1004,7 +1004,10 @@ class TransactionController extends Controller
 
         $get_user_id = VirtualAccountTransaction::where('v_account_no', $request->account_no)->first()->user_id;
         $amount = $request->amount - 100;
-        $update_payment = VirtualAccountTransaction::where('v_account_no', $request->account_no)->where('amount', $amount)->update(['status' => 2]);
+
+        $update_payment = VirtualAccountTransaction::where('v_account_no', $request->account_no)->where('amount', $request->amount)->update(['status' => 2]);
+
+
         if($update_payment){
             $user = User::where('id', $get_user_id)->first();
             $utl = new UtilitiesPayment();
@@ -1024,6 +1027,9 @@ class TransactionController extends Controller
                 'status' => true,
                 'message' => "Transaction Completed"
             ]);
+
+
+
         }
 
 
