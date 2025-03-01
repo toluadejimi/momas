@@ -208,6 +208,9 @@ class MeterController extends Controller
         $estate_id = $es_id;
         $user_id = $user->id;
 
+
+        dd($duration, $estate_id, $user_id);
+
         if ($duration == null || $estate_id == null) {
             $minvend = "Not set";
         } else {
