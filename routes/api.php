@@ -25,6 +25,10 @@ Route::get('get-estate', [EstateController::class, 'get_estate']);
 
 
 Route::post('reset-password', [LoginController::class, 'reset_password']);
+
+Route::any('e-fund', [TransactionController::class, 'enkpay_webhook']);
+
+
 Route::post('delete-user', [LoginController::class, 'delete_user']);
 
 

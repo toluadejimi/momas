@@ -286,6 +286,29 @@ if (!function_exists('send_login_code')) {
 }
 
 
+function payment_email($email, $type, $amount, $duration)
+{
+    $first_name = User::where('email', $email)->first()->first_name;
+    $data = array(
+        'fromsender' => env('MAIL_FROM_ADDRESS'), 'MOMASPAY',
+        'subject' => "One Time Password",
+        'toreceiver' => $email,
+        'type' => $type,
+        'amount' => $amount,
+        'user' => $first_name,
+    );
+
+    Mail::send('emails.payment', ["data1" => $data], function ($message) use ($data) {
+        $message->from($data['fromsender']);
+        $message->to($data['toreceiver']);
+        $message->subject($data['subject']);
+    });
+
+
+    return 0;
+
+
+}
 
 
 if (!function_exists('send_reset_email_notification')) {
@@ -311,8 +334,6 @@ if (!function_exists('send_reset_email_notification')) {
 
     }
 }
-
-
 
 
 if (!function_exists('send_email')) {

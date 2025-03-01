@@ -9,6 +9,7 @@ use App\Models\Setting;
 use App\Models\TarrifState;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\UtilitiesPayment;
 use App\Models\VirtualAccount;
 use App\Models\VirtualAccountTransaction;
 use Carbon\Carbon;
@@ -972,6 +973,9 @@ class TransactionController extends Controller
         curl_close($curl);
         $var = json_decode($var);
 
+
+        VirtualAccountTransaction::where('v_account_no', $request->account_no)->delete();
+
         $va = new VirtualAccountTransaction();
         $va->user_id = Auth::id();
         $va->v_account_no = $var->account_no;
@@ -996,6 +1000,39 @@ class TransactionController extends Controller
 
     public function enkpay_webhook(request $request)
     {
+
+
+        $get_user_id = VirtualAccountTransaction::where('v_account_no', $request->account_no)->first()->user_id;
+        $amount = $request->amount - 100;
+        $update_payment = VirtualAccountTransaction::where('v_account_no', $request->account_no)->where('amount', $amount)->update(['status' => 2]);
+        if($update_payment){
+            $user = User::where('id', $get_user_id)->first();
+            $utl = new UtilitiesPayment();
+            $utl->estate_id = $user->estate_id;
+            $utl->user_id = $get_user_id;
+            $utl->amount = $amount;
+            $utl->duration = "monthly";
+            $utl->type = "admin_fee";
+            $utl->status = 2;
+            $utl->save();
+
+            $type = "Monthly Administration Fee";
+            $duration = Carbon::now()->format('F');
+            payment_email($user->email, $type, $amount, $duration);
+
+            return response()->json([
+                'status' => true,
+                'messafe' => "Transaction Completed"
+            ]);
+        }
+
+
+
+
+
+
+
+
 
 
 
