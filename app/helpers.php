@@ -237,7 +237,7 @@ if (!function_exists('vend')) {
                 }
                 $ftotal = $totalck - $total;
 
-                dd($ftotal);
+                dd($chk_pay, $ftotal);
 
 
                 return $ftotal;
