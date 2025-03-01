@@ -295,6 +295,7 @@ function payment_email($email, $type, $amount, $duration)
         'toreceiver' => $email,
         'type' => $type,
         'amount' => $amount,
+        'duration' => $duration,
         'user' => $first_name,
     );
 
