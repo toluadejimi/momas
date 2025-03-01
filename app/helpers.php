@@ -183,7 +183,7 @@ if (!function_exists('vend')) {
                 foreach ($chk_pay as $data) {
                     $totalck += $data->amount;
                 }
-                $ftotal = $totalck - $total;
+                $ftotal = $totalck;
                 return $ftotal;
             }
 
@@ -207,7 +207,7 @@ if (!function_exists('vend')) {
                 foreach ($chk_pay as $data) {
                     $totalck += $data->amount;
                 }
-                $ftotal = $totalck - $total;
+                $ftotal = $totalck;
 
 
 
@@ -235,9 +235,7 @@ if (!function_exists('vend')) {
                 foreach ($chk_pay as $data) {
                     $totalck += $data->amount;
                 }
-                $ftotal = $totalck - $total;
-
-                dd($chk_pay, $ftotal);
+                $ftotal = $totalck;
 
 
                 return $ftotal;
@@ -262,7 +260,7 @@ if (!function_exists('vend')) {
                 foreach ($chk_pay as $data) {
                     $totalck += $data->amount;
                 }
-                $ftotal = $totalck - $total;
+                $ftotal = $totalck;
                 return $ftotal;
             }
 
