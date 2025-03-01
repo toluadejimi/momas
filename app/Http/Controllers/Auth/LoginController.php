@@ -68,9 +68,9 @@ class LoginController extends Controller
                 ->first();
 
             if($admin_fee_get){
-                $admin_fee =  "0";
+                $admin_fee =  "1";
             }else{
-                $admin_fee = "1";
+                $admin_fee = "0";
             }
 
 
@@ -145,9 +145,9 @@ class LoginController extends Controller
                 ->first();
 
             if($admin_fee_get){
-                $admin_fee =  "0";
+                $admin_fee =  "1";
             }else{
-                $admin_fee = "1";
+                $admin_fee = "0";
             }
 
 
@@ -219,9 +219,9 @@ class LoginController extends Controller
             ->first();
 
         if($admin_fee_get){
-            $admin_fee =  "0";
+            $admin_fee =  "1";
         }else{
-            $admin_fee = "1";
+            $admin_fee = "0";
         }
 
 
