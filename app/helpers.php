@@ -209,7 +209,6 @@ if (!function_exists('vend')) {
                 }
                 $ftotal = $totalck - $total;
 
-                dd($ftotal);
 
 
                 return $ftotal;
@@ -237,6 +236,10 @@ if (!function_exists('vend')) {
                     $totalck += $data->amount;
                 }
                 $ftotal = $totalck - $total;
+
+                dd($ftotal);
+
+
                 return $ftotal;
             }
 
