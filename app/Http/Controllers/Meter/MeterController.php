@@ -401,7 +401,7 @@ class MeterController extends Controller
                         if ($status == "SUCCESS") {
 
 
-                            $trx_id = "TRX".random_int(000000000, 9999999999);
+                            $trx_id = "TRX".random_int(00000, 999999);
                             $estate_id = Auth::user()->estate_id;
                             $cdt = new CreditToken();
                             $cdt->user_id = Auth::user()->id;
