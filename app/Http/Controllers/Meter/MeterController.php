@@ -97,7 +97,6 @@ class MeterController extends Controller
             $minvend = "Not set";
         } else {
 
-            dd($duration, $estate_id, $user_id);
 
             $get_vend = vend($duration, $estate_id, $user_id);
                 if ($get_vend == null) {

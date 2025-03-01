@@ -208,6 +208,10 @@ if (!function_exists('vend')) {
                     $totalck += $data->amount;
                 }
                 $ftotal = $totalck - $total;
+
+                dd($ftotal);
+
+
                 return $ftotal;
 
 
