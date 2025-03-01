@@ -299,38 +299,50 @@ class MeterController extends Controller
 
         $duration = Estate::where('id', Auth::user()->estate_id)->first()->duration ?? null;
         if($duration == "weekly" && $utility_amount > 0){
-            $utl = new UtilitiesPayment();
-            $utl->user_id = Auth::id();
-            $utl->estate_id = Auth::user()->estate_id;
-            $utl->amount = $utility_amount;
-            $utl->duration = "weekly";
-            $utl->status = 2;
-            $utl->save();
 
-        }elseif ($duration == "monthly" && $utility_amount > 0){
+                UtilitiesPayment::where('user_id', Auth::id())->where('estate_id', Auth::user()->estate_id)->decrement('amount', $trx->utility_amount);
+                $trx = new Transaction();
+                $trx->user_id = Auth::id();
+                $trx->pay_type = "utility";
+                $trx->amount = $request->utility_amount;
+                $trx->fee = 0;
+                $trx->status = 2;
+                $trx->trx_id = "UTL".random_int(0000, 9999);
+                $trx->payment_ref = 0 ?? null;
+                $trx->service_type = "utility_payment";
+                $trx->save();
 
-            $utl = new UtilitiesPayment();
-            $utl->user_id = Auth::id();
-            $utl->estate_id = Auth::user()->estate_id;
-            $utl->amount = $utility_amount;
-            $utl->duration = "monthly";
-            $utl->status = 2;
-            $utl->save();
+
+            }elseif ($duration == "monthly" && $utility_amount > 0){
+
+            UtilitiesPayment::where('user_id', Auth::id())->where('estate_id', Auth::user()->estate_id)->decrement('amount', $trx->utility_amount);
+            $trx = new Transaction();
+            $trx->user_id = Auth::id();
+            $trx->pay_type = "utility";
+            $trx->amount = $request->utility_amount;
+            $trx->fee = 0;
+            $trx->status = 2;
+            $trx->trx_id = "UTL".random_int(0000, 9999);
+            $trx->payment_ref = 0 ?? null;
+            $trx->service_type = "utility_payment";
+            $trx->save();
 
         }elseif ($duration == "yearly" && $utility_amount > 0){
 
-            $utl = new UtilitiesPayment();
-            $utl->user_id = Auth::id();
-            $utl->estate_id = Auth::user()->estate_id;
-            $utl->amount = $utility_amount;
-            $utl->duration = "yearly";
-            $utl->status = 2;
-            $utl->save();
+            UtilitiesPayment::where('user_id', Auth::id())->where('estate_id', Auth::user()->estate_id)->decrement('amount', $trx->utility_amount);
+            $trx = new Transaction();
+            $trx->user_id = Auth::id();
+            $trx->pay_type = "utility";
+            $trx->amount = $request->utility_amount;
+            $trx->fee = 0;
+            $trx->status = 2;
+            $trx->trx_id = "UTL".random_int(0000, 9999);
+            $trx->payment_ref = 0 ?? null;
+            $trx->service_type = "utility_payment";
+            $trx->save();
 
 
         }
-
-
 
 
 

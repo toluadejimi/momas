@@ -2371,22 +2371,6 @@ class TokenController extends Controller
 
 
 
-
-                if($trx->utility_id != null){
-                    UtilitiesPayment::where('id', $trx->utility_id)->decrement('amount', $trx->utility_amount);
-                    $trx = new Transaction();
-                    $trx->user_id = $user->id;
-                    $trx->pay_type = "paystack";
-                    $trx->amount = $request->utility_amount;
-                    $trx->fee = 0;
-                    $trx->status = 2;
-                    $trx->trx_id = "UTL".random_int(0000, 9999);
-                    $trx->payment_ref = 0 ?? null;
-                    $trx->service_type = "utility_payment";
-                    $trx->save();
-                }
-
-
                 $databody = [
                     'meterType' => $meter->KRN1,
                     'meterNo' => $meter->meterNo,
