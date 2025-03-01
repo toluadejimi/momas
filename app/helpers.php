@@ -291,13 +291,14 @@ function payment_email($email, $type, $amount, $duration)
     $first_name = User::where('email', $email)->first()->first_name;
     $data = array(
         'fromsender' => env('MAIL_FROM_ADDRESS'), 'MOMASPAY',
-        'subject' => "One Time Password",
+        'subject' => "Payment Notification",
         'toreceiver' => $email,
         'type' => $type,
         'amount' => $amount,
         'duration' => $duration,
         'user' => $first_name,
     );
+
 
     Mail::send('emails.payment', ["data1" => $data], function ($message) use ($data) {
         $message->from($data['fromsender']);
