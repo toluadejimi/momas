@@ -73,6 +73,7 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::get('get-account', [TransactionController::class, 'get_account_details']);
 
 
+    Route::any('admin-fee-check', [TransactionController::class, 'check_admin_fee']);
 
 
 

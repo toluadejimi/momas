@@ -1005,6 +1005,23 @@ class TransactionController extends Controller
     }
 
 
+
+
+    public function check_admin_fee(request $request)
+    {
+        $admin_fee_get = UtilitiesPayment::where('user_id', Auth::id())
+            ->where('type', 'admin_fee')
+            ->whereMonth('created_at', Carbon::now()->month)
+            ->whereYear('created_at', Carbon::now()->year)
+            ->latest('created_at')
+            ->first();
+
+        if($admin_fee_get){
+            $admin_fee =  "1";
+        }else{
+            $admin_fee = "0";
+        }
+    }
     public function enkpay_webhook(request $request)
     {
 
