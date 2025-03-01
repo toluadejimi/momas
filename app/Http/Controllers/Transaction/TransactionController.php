@@ -1017,9 +1017,18 @@ class TransactionController extends Controller
             ->first();
 
         if($admin_fee_get){
-            $admin_fee =  "1";
+
+            return response()->json([
+                'status' => true,
+                'monthly_admin_fee' => "1"
+            ]);
+
         }else{
-            $admin_fee = "0";
+
+            return response()->json([
+                'status' => false,
+                'monthly_admin_fee' => "0"
+            ]);
         }
     }
     public function enkpay_webhook(request $request)
