@@ -431,6 +431,10 @@ class TransactionController extends Controller
             $email = Auth::user()->email;
 
 
+            if($request->utility_amount < 0){
+                $get_utility_id = UtilitiesPayment::where('user_id', Auth::id())->where('type','utilities')->first()->id;
+            }
+
             $databody = array(
                 "amount" => $request->amount * 100,
                 "email" => $email,
@@ -470,6 +474,9 @@ class TransactionController extends Controller
                 $trx = new Transaction();
                 $trx->user_id = Auth::id();
                 $trx->pay_type = "paystack";
+                $trx->estate_id = Auth::user()->estate_id;
+                $trx->utility_id = $get_utility_id;
+                $trx->utility_amount = $request->utility_amount;
                 $trx->amount = $request->amount;
                 $trx->trx_id = $trx_id;
                 $trx->payment_ref = $var->data->access_code ?? null;
