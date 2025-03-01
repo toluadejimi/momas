@@ -1257,11 +1257,12 @@ class MeterController extends Controller
 
         $duration = Utitlity::where('estate_id', Auth::user()->estate_id)->first()->duration ?? null;
         $estate_id = Auth::user()->estate_id ?? null;
+        $user_id = Auth::id();
 
         if ($duration == null || $estate_id == null) {
             $minvend = "Not set";
         } else {
-            $get_vend = vend($duration, $estate_id);
+            $get_vend = vend($duration, $estate_id, $user_id);
             if ($get_vend == null) {
                 $minvend = "Not set";
             } else {
