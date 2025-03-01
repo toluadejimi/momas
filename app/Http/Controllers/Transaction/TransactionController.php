@@ -1030,6 +1030,12 @@ class TransactionController extends Controller
 
 
 
+        }else{
+
+            return response()->json([
+                'status' => false,
+                'message' => "something went wrong"
+            ], 422);
         }
 
 
