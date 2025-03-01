@@ -1022,7 +1022,7 @@ class TransactionController extends Controller
 
             return response()->json([
                 'status' => true,
-                'messafe' => "Transaction Completed"
+                'message' => "Transaction Completed"
             ]);
         }
 
