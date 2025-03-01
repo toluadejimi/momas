@@ -300,7 +300,7 @@ class MeterController extends Controller
         $duration = Estate::where('id', Auth::user()->estate_id)->first()->duration ?? null;
         if($duration == "weekly" && $utility_amount > 0){
 
-                UtilitiesPayment::where('user_id', Auth::id())->where('estate_id', Auth::user()->estate_id)->decrement('amount', $trx->utility_amount);
+                UtilitiesPayment::where('user_id', Auth::id())->where('estate_id', Auth::user()->estate_id)->decrement('amount', $utility_amount);
                 $trx = new Transaction();
                 $trx->user_id = Auth::id();
                 $trx->pay_type = "utility";
@@ -315,7 +315,7 @@ class MeterController extends Controller
 
             }elseif ($duration == "monthly" && $utility_amount > 0){
 
-            UtilitiesPayment::where('user_id', Auth::id())->where('estate_id', Auth::user()->estate_id)->decrement('amount', $trx->utility_amount);
+            UtilitiesPayment::where('user_id', Auth::id())->where('estate_id', Auth::user()->estate_id)->decrement('amount', $utility_amount);
             $trx = new Transaction();
             $trx->user_id = Auth::id();
             $trx->pay_type = "utility";
@@ -329,7 +329,7 @@ class MeterController extends Controller
 
         }elseif ($duration == "yearly" && $utility_amount > 0){
 
-            UtilitiesPayment::where('user_id', Auth::id())->where('estate_id', Auth::user()->estate_id)->decrement('amount', $trx->utility_amount);
+            UtilitiesPayment::where('user_id', Auth::id())->where('estate_id', Auth::user()->estate_id)->decrement('amount', $utility_amount);
             $trx = new Transaction();
             $trx->user_id = Auth::id();
             $trx->pay_type = "utility";
