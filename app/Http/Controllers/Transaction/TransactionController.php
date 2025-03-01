@@ -1006,8 +1006,6 @@ class TransactionController extends Controller
         $amount = $request->amount - 100;
 
         $update_payment = VirtualAccountTransaction::where('v_account_no', $request->account_no)->where('amount', $request->amount)->update(['status' => 2]);
-
-
         if($update_payment){
             $user = User::where('id', $get_user_id)->first();
             $utl = new UtilitiesPayment();

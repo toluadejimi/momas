@@ -15,6 +15,7 @@ use App\Models\Tariff;
 use App\Models\TarrifState;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\UtilitiesPayment;
 use App\Services\VatCalculator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -1176,6 +1177,10 @@ class TokenController extends Controller
                 $paystackkey = $fl->paystack_secret;
                 $pkkey['paystack_public'] = $fl->paystack_public;
 
+                if($request->utility_amount < 0){
+                    $get_utility_id = UtilitiesPayment::where('user_id', Auth::id())->where('type','utilities')->first()->id;
+                }
+
                 $databody = array(
                     "amount" => $request->amount * 100,
                     "email" => $customer_email,
@@ -1218,6 +1223,7 @@ class TokenController extends Controller
                     $trx->amount = $request->amount;
                     $trx->fee = $fee;
                     $trx->trx_id = $trx_id;
+                    $trx->utility_id = $get_utility_id ?? null;
                     $trx->payment_ref = $var->data->access_code ?? null;
                     $trx->service_type = "credit_token";
                     $trx->save();
@@ -2026,6 +2032,7 @@ class TokenController extends Controller
                     $trx->service_type = "credit_token";
                     $trx->save();
 
+
                     return redirect()->away($var->data->authorization_url);
 
                 }
@@ -2249,8 +2256,6 @@ class TokenController extends Controller
         $status = $var->status ?? null;
         $ref = $var->data->reference ?? null;
 
-
-
         $ck_transaction = Transaction::where('trx_id', $var->data->reference)->first()->status ?? null;
         if ($ck_transaction == null) {
 
@@ -2362,6 +2367,24 @@ class TokenController extends Controller
                 $meter = Meter::where('meterNo', $meterNo)->first();
                 $trx = CreditToken::where('trx_id', $var->data->metadata->ref)->first();
                 $traff_id = CreditToken::where('trx_id', $var->data->metadata->ref)->first();
+                $user = User::where('meterNo', $meterNo)->first();
+
+
+
+
+                if($trx->utility_id != null){
+                    UtilitiesPayment::where('id', $trx->utility_id)->decrement('amount', $trx->utility_amount);
+                    $trx = new Transaction();
+                    $trx->user_id = $user->id;
+                    $trx->pay_type = "paystack";
+                    $trx->amount = $request->utility_amount;
+                    $trx->fee = 0;
+                    $trx->status = 2;
+                    $trx->trx_id = "UTL".random_int(0000, 9999);
+                    $trx->payment_ref = 0 ?? null;
+                    $trx->service_type = "utility_payment";
+                    $trx->save();
+                }
 
 
                 $databody = [
