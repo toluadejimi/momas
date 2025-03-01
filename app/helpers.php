@@ -170,7 +170,9 @@ if (!function_exists('vend')) {
             $total = total_utility($estate_id);
             $chk_pay = UtilitiesPayment::where([
                 'user_id' => $user_id,
-                'estate_id' => $estate_id
+                'estate_id' => $estate_id,
+                'type' => "utilities",
+                'status' => 0
             ])->whereDate('created_at', Carbon::today())->get() ?? null;
 
 
@@ -192,7 +194,9 @@ if (!function_exists('vend')) {
             $total = total_utility($estate_id);
             $chk_pay = UtilitiesPayment::where([
                 'user_id' => $user_id,
-                'estate_id' => $estate_id
+                'estate_id' => $estate_id,
+                'type' => "utilities",
+                'status' => 0
             ])->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get() ?? null;
 
 
@@ -216,7 +220,9 @@ if (!function_exists('vend')) {
             $total = total_utility($estate_id);
             $chk_pay = UtilitiesPayment::where([
                 'user_id' => $user_id,
-                'estate_id' => $estate_id
+                'estate_id' => $estate_id,
+                'type' => "utilities",
+                'status' => 0
             ])->whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->get() ?? null;
 
             if ($chk_pay == null || $chk_pay->isEmpty()) {
@@ -234,12 +240,12 @@ if (!function_exists('vend')) {
 
 
         if ($duration == "yearly") {
-
-
             $total = total_utility($estate_id);
             $chk_pay = UtilitiesPayment::where([
                 'user_id' => $user_id,
-                'estate_id' => $estate_id
+                'estate_id' => $estate_id,
+                'type' => "utilities",
+                'status' => 0
             ])->whereBetween('created_at', [Carbon::now()->startOfYear(), Carbon::now()->endOfYear()])->get() ?? null;
 
             if ($chk_pay == null || $chk_pay->isEmpty()) {
