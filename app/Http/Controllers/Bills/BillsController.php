@@ -57,6 +57,9 @@ class BillsController extends Controller
 
         if ($status == false) {
 
+            $message = $var;
+            send_notification($message);
+
             if ($var->message = "Insufficient Funds, Fund your main wallet") {
                 $message = "Airtime Purchase not successful, Try again later";
                 $code = 422;
@@ -66,6 +69,8 @@ class BillsController extends Controller
 
         }
 
+        $message = $var;
+        send_notification($message);
 
     }
 
@@ -120,6 +125,10 @@ class BillsController extends Controller
 
         }
 
+
+        $message = $var;
+        send_notification($message);
+
     }
 
 
@@ -167,6 +176,9 @@ class BillsController extends Controller
             ]);
 
         }
+
+        $message = $var;
+        send_notification($message);
     }
 
 
@@ -215,6 +227,9 @@ class BillsController extends Controller
                 ]);
 
             }
+
+            $message = $var;
+            send_notification($message);
 
         }
 
@@ -300,6 +315,9 @@ class BillsController extends Controller
 
         }
 
+        $message = $var;
+        send_notification($message);
+
     }
 
 
@@ -363,6 +381,9 @@ class BillsController extends Controller
 
 
             }
+
+            $message = $var;
+            send_notification($message);
 
 
         }
