@@ -56,6 +56,9 @@ if (!function_exists('token')) {
         if ($status == true) {
             return $var->Authorization;
         } else {
+
+            $message = $var;
+            send_notification($message);
             return false;
         }
     }
