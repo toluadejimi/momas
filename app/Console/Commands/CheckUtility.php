@@ -71,10 +71,17 @@ class CheckUtility extends Command
             DB::beginTransaction();
             try {
 
+                $newAmount = $payment->amount + $estate->total_utility_amount;
 
-                $payment->amount += $estate->total_utility_amount;
-                $payment->next_due_date = $nextDueDate;
-                $payment->save();
+                $newPayment = UtilitiesPayment::create([
+                    'type'          => 'utilities',
+                    'amount'        => $payment->amount,
+                    'total_amount'  => $newAmount,
+                    'duration'      => $payment->duration,
+                    'next_due_date' => $nextDueDate,
+                    'estate_id'     => $payment->estate_id
+                ]);
+
 
                 $mssage = "Updated UtilityPayment ID: {$payment->id} | New Amount: {$payment->amount} | Next Due Date: {$payment->next_due_date}";
                 send_notification($mssage);
