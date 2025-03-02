@@ -231,6 +231,7 @@ class LoginController extends Controller
                 $utli->amount = $utility_amount;
                 $utli->next_due_date = $nextDueDate;
                 $utli->duration = $duration;
+                $utli->total_amount = $utility_amount;
                 $utli->type = "utilities";
                 $utli->save();
 
