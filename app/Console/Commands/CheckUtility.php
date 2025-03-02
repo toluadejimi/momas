@@ -2,7 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Estate;
+use App\Models\UtilitiesPayment;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CheckUtility extends Command
 {
@@ -25,7 +30,67 @@ class CheckUtility extends Command
      */
     public function handle()
     {
-        $mesage = "hello";
-        send_notification($mesage);
+
+        $utilityPayments = UtilitiesPayment::where('type', 'utilities')->get();
+
+        foreach ($utilityPayments as $payment) {
+            $estate = Estate::find($payment->estate_id);
+
+            if (!$estate) {
+
+                $mssage = "Estate not found for UtilityPayment ID: {$payment->id}";
+                send_notification($mssage);
+
+                Log::warning("Estate not found for UtilityPayment ID: {$payment->id}");
+                continue;
+
+
+            }
+
+            $nextDueDate = Carbon::parse($payment->next_due_date);
+            switch ($payment->duration) {
+                case 'weekly':
+                    $nextDueDate->addWeek();
+                    break;
+                case 'monthly':
+                    $nextDueDate->addMonth();
+                    break;
+                case 'yearly':
+                    $nextDueDate->addYear();
+                    break;
+                default:
+
+
+                    $mssage = "Unknown duration '{$payment->duration}' for UtilityPayment ID: {$payment->id}";
+                    send_notification($mssage);
+
+                    Log::warning("Unknown duration '{$payment->duration}' for UtilityPayment ID: {$payment->id}");
+                    continue;
+            }
+
+            DB::beginTransaction();
+            try {
+
+
+                $payment->amount += $estate->total_utility_amount;
+                $payment->next_due_date = $nextDueDate;
+                $payment->save();
+
+                $mssage = "Updated UtilityPayment ID: {$payment->id} | New Amount: {$payment->amount} | Next Due Date: {$payment->next_due_date}";
+                send_notification($mssage);
+
+                Log::info("Updated UtilityPayment ID: {$payment->id} | New Amount: {$payment->amount} | Next Due Date: {$payment->next_due_date}");
+
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();
+                Log::error("Error updating UtilityPayment ID: {$payment->id} - " . $e->getMessage());
+            }
+        }
+
+        $this->info('Utility payment check completed.');
+
+
+
     }
 }
