@@ -85,8 +85,8 @@ class LoginController extends Controller
 
             }else{
 
-                $utility_amount = Estate::where('estate_id', Auth::user()->estate_id)->first()->total_utility_amount;
-                $duration = Estate::where('estate_id', Auth::user()->estate_id)->first()->duration;
+                $utility_amount = Estate::where('id', Auth::user()->estate_id)->first()->total_utility_amount;
+                $duration = Estate::where('id', Auth::user()->estate_id)->first()->duration;
 
                 $nextDueDate = null;
                 switch ($duration) {
@@ -204,8 +204,8 @@ class LoginController extends Controller
 
             }else{
 
-                $utility_amount = Estate::where('estate_id', Auth::user()->estate_id)->first()->total_utility_amount;
-                $duration = Estate::where('estate_id', Auth::user()->estate_id)->first()->duration;
+                $utility_amount = Estate::where('id', Auth::user()->estate_id)->first()->total_utility_amount;
+                $duration = Estate::where('id', Auth::user()->estate_id)->first()->duration;
 
                 $nextDueDate = null;
                 switch ($duration) {
