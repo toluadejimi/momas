@@ -130,7 +130,7 @@ class LoginController extends Controller
                 ->where('type', 'admin_fee')
                 ->whereMonth('created_at', Carbon::now()->month)
                 ->whereYear('created_at', Carbon::now()->year)
-                ->first()->status;
+                ->first()->status ?? null;
 
             $former_admin_fee_date = UtilitiesPayment::where('user_id', Auth::id())
                 ->where('type', 'admin_fee')
