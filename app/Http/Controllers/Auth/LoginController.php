@@ -139,7 +139,9 @@ class LoginController extends Controller
                 ->first()->created_at;
 
 
-            if($ck_admin_fee && $ck_admin_fee_status == 2 ){
+            if($ck_admin_fee){
+
+            }elseif($ck_admin_fee && $ck_admin_fee_status == 2 ){
 
                 $duration = "monthly";
                 $nextDueDate =  $former_admin_fee_date;
