@@ -136,7 +136,7 @@ class LoginController extends Controller
                 ->where('type', 'admin_fee')
                 ->whereMonth('created_at', Carbon::now()->month)
                 ->whereYear('created_at', Carbon::now()->year)
-                ->first()->created_at;
+                ->first()->created_at ?? null;
 
 
             if($ck_admin_fee){
@@ -383,7 +383,7 @@ class LoginController extends Controller
                 ->where('type', 'admin_fee')
                 ->whereMonth('created_at', Carbon::now()->month)
                 ->whereYear('created_at', Carbon::now()->year)
-                ->first()->created_at;
+                ->first()->created_at ?? null;
 
 
 
