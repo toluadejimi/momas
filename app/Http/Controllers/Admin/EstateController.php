@@ -244,6 +244,9 @@ class EstateController extends Controller
                 }
             }
 
+            $utility_amount = Utitlity::where('estate_id', $request->estate_id)->sum('amount');
+            Estate::where('id', $request->id)->update('total_utility_amount', $utility_amount);
+
             return back()->with('message', 'Utilities updated successfully');
 
 

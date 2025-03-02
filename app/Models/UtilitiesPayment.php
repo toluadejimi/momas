@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class UtilitiesPayment extends Model
 {
     use HasFactory;
+    protected $fillable = ['type', 'amount', 'duration', 'next_due_date', 'estate_id'];
+
 }

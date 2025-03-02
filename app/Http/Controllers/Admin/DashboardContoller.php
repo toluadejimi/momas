@@ -399,8 +399,6 @@ class DashboardContoller extends Controller
     public function update_utility(request $request)
     {
 
-
-
         Utitlity::where('id', $request->id)->update(['title' => $request->title, 'amount' => $request->amount]);
         return back()->with('message', 'Utility Updated Successfully');
 
