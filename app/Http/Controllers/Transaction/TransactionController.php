@@ -1022,7 +1022,7 @@ class TransactionController extends Controller
         }else{
 
             return response()->json([
-                'status' => false,
+                'status' => true,
                 'monthly_admin_fee' => "0"
             ]);
         }
