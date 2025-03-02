@@ -172,7 +172,38 @@ class LoginController extends Controller
                 $utli->save();
 
 
-            }else{
+            }elseif($ck_admin_fee && $ck_admin_fee_status == null){
+
+            $duration = "monthly";
+            $nextDueDate =  Carbon::now();
+            switch ($duration) {
+                case 'weekly':
+                    $nextDueDate->addWeek();
+                    break;
+                case 'monthly':
+                    $nextDueDate->addMonth();
+                    break;
+                case 'yearly':
+                    $nextDueDate->addYear();
+                    break;
+                default:
+                    $mssage = "Unknown duration '{$duration}'";
+                    send_notification($mssage);
+
+            }
+
+            $utli = new UtilitiesPayment();
+            $utli->estate_id = Auth::user()->estate_id;
+            $utli->user_id = Auth::id();
+            $utli->amount = $admin_fee_amount;
+            $utli->next_due_date = $nextDueDate;
+            $utli->duration = $duration;
+            $utli->total_amount = $admin_fee_amount;
+            $utli->type = "admin_fee";
+            $utli->save();
+
+
+        }else{
 
                 $duration = "monthly";
                 $nextDueDate =  Carbon::now();
@@ -230,6 +261,15 @@ class LoginController extends Controller
         }
 
 
+
+
+
+
+
+
+
+
+
         if($request->meterNo == null) {
             $credentials = request(['email', 'password']);
 
@@ -282,7 +322,6 @@ class LoginController extends Controller
                 $admin_fee = "0";
             }
 
-
             $ck_utility = UtilitiesPayment::where('user_id', Auth::id())->where('type', 'utilities')->first();
             if($ck_utility){
 
@@ -296,7 +335,7 @@ class LoginController extends Controller
                 $utility_amount = Estate::where('id', Auth::user()->estate_id)->first()->total_utility_amount;
                 $duration = Estate::where('id', Auth::user()->estate_id)->first()->duration;
 
-                $nextDueDate =  Carbon::now();
+                $nextDueDate = Carbon::now();
                 switch ($duration) {
                     case 'weekly':
                         $nextDueDate->addWeek();
@@ -319,12 +358,11 @@ class LoginController extends Controller
                 $utli->amount = $utility_amount;
                 $utli->next_due_date = $nextDueDate;
                 $utli->duration = $duration;
-                $utli->total_amount = $utility_amount;
                 $utli->type = "utilities";
+                $utli->total_amount = $utility_amount;
                 $utli->save();
 
             }
-
 
 
             //checkAdmin fee
@@ -339,7 +377,7 @@ class LoginController extends Controller
                 ->where('type', 'admin_fee')
                 ->whereMonth('created_at', Carbon::now()->month)
                 ->whereYear('created_at', Carbon::now()->year)
-                ->first()->status;
+                ->first()->status ?? null;
 
             $former_admin_fee_date = UtilitiesPayment::where('user_id', Auth::id())
                 ->where('type', 'admin_fee')
@@ -351,7 +389,7 @@ class LoginController extends Controller
 
             if($ck_admin_fee){
 
-            }elseif($ck_admin_fee && $ck_admin_fee_status == 2 ){
+            }elseif($ck_admin_fee && $ck_admin_fee_status == 2){
 
                 $duration = "monthly";
                 $nextDueDate =  $former_admin_fee_date;
@@ -382,7 +420,40 @@ class LoginController extends Controller
                 $utli->save();
 
 
-            }else{
+            }elseif($ck_admin_fee && $ck_admin_fee_status == null){
+
+                $duration = "monthly";
+                $nextDueDate =  Carbon::now();
+                switch ($duration) {
+                    case 'weekly':
+                        $nextDueDate->addWeek();
+                        break;
+                    case 'monthly':
+                        $nextDueDate->addMonth();
+                        break;
+                    case 'yearly':
+                        $nextDueDate->addYear();
+                        break;
+                    default:
+                        $mssage = "Unknown duration '{$duration}'";
+                        send_notification($mssage);
+
+                }
+
+                $utli = new UtilitiesPayment();
+                $utli->estate_id = Auth::user()->estate_id;
+                $utli->user_id = Auth::id();
+                $utli->amount = $admin_fee_amount;
+                $utli->next_due_date = $nextDueDate;
+                $utli->duration = $duration;
+                $utli->total_amount = $admin_fee_amount;
+                $utli->type = "admin_fee";
+                $utli->save();
+
+
+            }
+
+            else{
 
                 $duration = "monthly";
                 $nextDueDate =  Carbon::now();
