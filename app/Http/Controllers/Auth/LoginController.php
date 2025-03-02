@@ -88,7 +88,7 @@ class LoginController extends Controller
                 $utility_amount = Estate::where('id', Auth::user()->estate_id)->first()->total_utility_amount;
                 $duration = Estate::where('id', Auth::user()->estate_id)->first()->duration;
 
-                $nextDueDate = null;
+                $nextDueDate = $ck_utility->next_due_date ? Carbon::parse($ck_utility->next_due_date) : Carbon::now();
                 switch ($duration) {
                     case 'weekly':
                         $nextDueDate->addWeek();
@@ -207,7 +207,7 @@ class LoginController extends Controller
                 $utility_amount = Estate::where('id', Auth::user()->estate_id)->first()->total_utility_amount;
                 $duration = Estate::where('id', Auth::user()->estate_id)->first()->duration;
 
-                $nextDueDate = null;
+                $nextDueDate = $ck_utility->next_due_date ? Carbon::parse($ck_utility->next_due_date) : Carbon::now();
                 switch ($duration) {
                     case 'weekly':
                         $nextDueDate->addWeek();
