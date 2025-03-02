@@ -348,7 +348,10 @@ class LoginController extends Controller
                 ->first()->created_at;
 
 
-            if($ck_admin_fee && $ck_admin_fee_status == 2 ){
+
+            if($ck_admin_fee){
+
+            }elseif($ck_admin_fee && $ck_admin_fee_status == 2 ){
 
                 $duration = "monthly";
                 $nextDueDate =  $former_admin_fee_date;
@@ -375,7 +378,7 @@ class LoginController extends Controller
                 $utli->next_due_date = $nextDueDate;
                 $utli->duration = $duration;
                 $utli->total_amount = $admin_fee_amount;
-                $utli->type = "utilities";
+                $utli->type = "admin_fee";
                 $utli->save();
 
 
@@ -411,6 +414,8 @@ class LoginController extends Controller
 
 
             }
+
+
 
             $token = auth()->user()->createToken('API token')->accessToken;
             $meter = meter();
