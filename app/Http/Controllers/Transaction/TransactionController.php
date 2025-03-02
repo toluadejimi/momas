@@ -1010,9 +1010,9 @@ class TransactionController extends Controller
             ->whereMonth('created_at', Carbon::now()->month)
             ->whereYear('created_at', Carbon::now()->year)
             ->latest('created_at')
-            ->first();
+            ->first()->status;
 
-        if($admin_fee_get){
+        if($admin_fee_get->status == 2){
 
             return response()->json([
                 'status' => true,
