@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Estate;
 use App\Models\Setting;
 use App\Models\Tariff;
 use App\Models\TariffState;
@@ -12,6 +13,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Meter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Laravel\Passport\Passport;
 use App\Models\OauthAccessToken;
 use App\Http\Controllers\Controller;
@@ -71,6 +73,47 @@ class LoginController extends Controller
                 $admin_fee =  "1";
             }else{
                 $admin_fee = "0";
+            }
+
+            $ck_utility = UtilitiesPayment::where('user_id', Auth::id())->where('type', 'utilities')->first();
+            if($ck_utility){
+
+
+
+
+
+
+            }else{
+
+                $utility_amount = Estate::where('estate_id', Auth::user()->estate_id)->first()->total_utility_amount;
+                $duration = Estate::where('estate_id', Auth::user()->estate_id)->first()->duration;
+
+                $nextDueDate = null;
+                switch ($duration) {
+                    case 'weekly':
+                        $nextDueDate->addWeek();
+                        break;
+                    case 'monthly':
+                        $nextDueDate->addMonth();
+                        break;
+                    case 'yearly':
+                        $nextDueDate->addYear();
+                        break;
+                    default:
+                        $mssage = "Unknown duration '{$duration}'";
+                        send_notification($mssage);
+
+                }
+
+                $utli = new UtilitiesPayment();
+                $utli->estate_id = Auth::user()->estate_id;
+                $utli->user_id = Auth::id();
+                $utli->amount = $utility_amount;
+                $utli->next_due_date = $nextDueDate;
+                $utli->duration = $duration;
+                $utli->type = "utilities";
+                $utli->save();
+
             }
 
 
@@ -150,6 +193,47 @@ class LoginController extends Controller
                 $admin_fee = "0";
             }
 
+
+            $ck_utility = UtilitiesPayment::where('user_id', Auth::id())->where('type', 'utilities')->first();
+            if($ck_utility){
+
+
+
+
+
+
+            }else{
+
+                $utility_amount = Estate::where('estate_id', Auth::user()->estate_id)->first()->total_utility_amount;
+                $duration = Estate::where('estate_id', Auth::user()->estate_id)->first()->duration;
+
+                $nextDueDate = null;
+                switch ($duration) {
+                    case 'weekly':
+                        $nextDueDate->addWeek();
+                        break;
+                    case 'monthly':
+                        $nextDueDate->addMonth();
+                        break;
+                    case 'yearly':
+                        $nextDueDate->addYear();
+                        break;
+                    default:
+                        $mssage = "Unknown duration '{$duration}'";
+                        send_notification($mssage);
+
+                }
+
+                $utli = new UtilitiesPayment();
+                $utli->estate_id = Auth::user()->estate_id;
+                $utli->user_id = Auth::id();
+                $utli->amount = $utility_amount;
+                $utli->next_due_date = $nextDueDate;
+                $utli->duration = $duration;
+                $utli->type = "utilities";
+                $utli->save();
+
+            }
 
 
             $token = auth()->user()->createToken('API token')->accessToken;
