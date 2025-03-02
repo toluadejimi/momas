@@ -1012,7 +1012,7 @@ class TransactionController extends Controller
             ->latest('created_at')
             ->first()->status;
 
-        if($admin_fee_get->status == "2"){
+        if($admin_fee_get == 2){
 
             return response()->json([
                 'status' => true,
