@@ -1,14 +1,12 @@
+@php use App\Models\Estate;use App\Models\User; @endphp
 @extends('layouts.main')
 @section('content')
-
-
 
     @if(Auth::user()->role == 0)
         <div class="content">
 
             <!-- Start Content-->
             <div class="container-fluid">
-
 
 
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
@@ -38,7 +36,6 @@
                 @endif
 
 
-
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="card overflow-hidden">
@@ -57,7 +54,7 @@
                                             <h5 class="card-title text-black mb-0">Generate KCT Token</h5>
                                         </div>
 
-                                        <div class="col-xl-6 col-sm-12" >
+                                        <div class="col-xl-6 col-sm-12">
                                             <form action="validate-kct-meter" method="POST"
                                                   enctype="multipart/form-data">
                                                 @csrf
@@ -86,7 +83,6 @@
                                                             </div>
 
 
-
                                                             <div class="col-xl-6 my-2 col-sm-12">
                                                                 <label class="my-2">Power Source</label>
                                                                 <select class="form-control" required
@@ -99,7 +95,8 @@
 
                                                             <div class="col-xl-6 my-2 col-sm-12">
                                                                 <label class="my-2">Amount</label>
-                                                                <input type="number" class="form-control mb-3" name="amount"
+                                                                <input type="number" value="{{$kct_amount}}"
+                                                                       class="form-control mb-3" readonly name="amount"
                                                                        required>
                                                             </div>
 
@@ -128,11 +125,11 @@
                                                                                     alert("Error: User is not attached to any estate.");
                                                                                     return;
                                                                                 }
-                                                                                if(response == 2){
+                                                                                if (response == 2) {
                                                                                     alert("Error: Estate does not have any tariff");
                                                                                     return;
                                                                                 }
-                                                                                if(response == 3){
+                                                                                if (response == 3) {
                                                                                     alert("Error: Tariff index not set for customer.");
                                                                                     return;
                                                                                 }
@@ -164,9 +161,6 @@
                                                             });
 
                                                         </script>
-
-
-
 
                                                     @else
                                                         <div class="col-xl-6 my-2 col-sm-12">
@@ -206,11 +200,10 @@
                                                 </div>
 
 
-
                                             </form>
                                         </div>
 
-                                        <div class="col-xl-6 col-sm-12" >
+                                        <div class="col-xl-6 col-sm-12">
                                             @if($preview == "clear_tamper")
                                                 <form action="generate-tamper-meter-token" method="POST"
                                                       enctype="multipart/form-data">
@@ -219,31 +212,34 @@
                                                     <div class="modal-body">
 
                                                         <div class="">
-                                                            <h5 class="card-title text-black mb-0">Credit Token Preview</h5>
+                                                            <h5 class="card-title text-black mb-0">Credit Token
+                                                                Preview</h5>
                                                         </div>
 
 
                                                         <div class="row">
                                                             <div class="col-xl-4 my-2 col-sm-12">
                                                                 <label class="my-2">Estate</label>
-                                                                <input required  name="estate_id" value="{{$estate->title}}" hidden="">
+                                                                <input required name="estate_id"
+                                                                       value="{{$estate->title}}" hidden="">
                                                                 <h6>{{$estate->title}}</h6>
                                                             </div>
 
                                                             <div class="col-xl-4 my-2 col-sm-12">
                                                                 <label class="my-2">Customer</label>
-                                                                <input required name="user_id" value="{{$user->id}}" hidden="">
+                                                                <input required name="user_id" value="{{$user->id}}"
+                                                                       hidden="">
                                                                 <h6>{{$user->first_name}} {{$user->last_name}}</h6>
                                                             </div>
 
                                                             <div class="col-xl-4 my-2 col-sm-12">
                                                                 <label class="my-2">Meter No</label>
-                                                                <input required name="meterNo" value="{{$meter->meterNo}}" hidden="">
+                                                                <input required name="meterNo"
+                                                                       value="{{$meter->meterNo}}" hidden="">
                                                                 <h6>{{$meter->meterNo}}</h6>
                                                             </div>
 
                                                         </div>
-
 
 
                                                         <hr>
@@ -256,30 +252,35 @@
                                                                 @php
                                                                     $unnit = $costOfUnit / $tarrif_amount;
                                                                 @endphp
-                                                                <input required name="unit" value="{{number_format($unnit,2)}}" hidden="">
+                                                                <input required name="unit"
+                                                                       value="{{number_format($unnit,2)}}" hidden="">
                                                                 <h6>{{number_format($unnit, 2)}}kw/h</h6>
                                                             </div>
 
                                                             <div class="col-xl-4 my-2 col-sm-12">
                                                                 <label class="my-2">Vat Amount</label>
-                                                                <input required name="vatAmount" value="{{number_format($vatAmount,2)}}" hidden="">
+                                                                <input required name="vatAmount"
+                                                                       value="{{number_format($vatAmount,2)}}"
+                                                                       hidden="">
                                                                 <h6>{{number_format($vatAmount, 2)}}</h6>
                                                             </div>
 
                                                             <div class="col-xl-4 my-2 col-sm-12">
                                                                 <label class="my-2">Cost Of Unit</label>
-                                                                <input required name="costOfUnit" value="{{number_format($costOfUnit,2)}}" hidden="">
+                                                                <input required name="costOfUnit"
+                                                                       value="{{number_format($costOfUnit,2)}}"
+                                                                       hidden="">
                                                                 <h6>{{number_format($costOfUnit, 2)}}</h6>
                                                             </div>
 
                                                             <input required name="vat" value="{{$vat}}" hidden="">
-                                                            <input required name="estate_id" value="{{$estate_id}}" hidden="">
-                                                            <input required name="estate_name" value="{{$estate_name}}" hidden="">
+                                                            <input required name="estate_id" value="{{$estate_id}}"
+                                                                   hidden="">
+                                                            <input required name="estate_name" value="{{$estate_name}}"
+                                                                   hidden="">
                                                             <input required name="amount" value="{{$amount}}" hidden="">
-                                                            <input required name="tariff_amount" value="{{$tarrif_amount}}" hidden="">
-
-
-
+                                                            <input required name="tariff_amount"
+                                                                   value="{{$tarrif_amount}}" hidden="">
 
 
                                                         </div>
@@ -287,20 +288,23 @@
                                                         <hr>
 
 
-                                                        <div class="col-xl-4 my-4 d-flex justify-content-start col-sm-12">
-                                                            <select  class="form-control" required name="pay_type" >
+                                                        <div
+                                                            class="col-xl-4 my-4 d-flex justify-content-start col-sm-12">
+                                                            <select class="form-control" required name="pay_type">
                                                                 <option value=" ">--Choose Payment Gateway---</option>
                                                                 <option value="paystack">Pay with Paystack</option>
-                                                                <option value="flutterwave">Pay with Flutterwave</option>
+                                                                <option value="flutterwave">Pay with Flutterwave
+                                                                </option>
                                                                 <option value="enkpay">Pay with Enkpay</option>
                                                             </select>
                                                         </div>
 
 
-                                                        <div class="col-xl-12 my-4 d-flex justify-content-start col-sm-12">
-                                                            <button type="submit" class="btn btn-primary">Pay Now</button>
+                                                        <div
+                                                            class="col-xl-12 my-4 d-flex justify-content-start col-sm-12">
+                                                            <button type="submit" class="btn btn-primary">Pay Now
+                                                            </button>
                                                         </div>
-
 
 
                                                     </div>
@@ -317,31 +321,34 @@
                                                     <div class="modal-body">
 
                                                         <div class="">
-                                                            <h5 class="card-title text-black mb-0">Credit Token Preview</h5>
+                                                            <h5 class="card-title text-black mb-0">Credit Token
+                                                                Preview</h5>
                                                         </div>
 
 
                                                         <div class="row">
                                                             <div class="col-xl-4 my-2 col-sm-12">
                                                                 <label class="my-2">Estate</label>
-                                                                <input required  name="estate_id" value="{{$estate->title}}" hidden="">
+                                                                <input required name="estate_id"
+                                                                       value="{{$estate->title}}" hidden="">
                                                                 <h6>{{$estate->title}}</h6>
                                                             </div>
 
                                                             <div class="col-xl-4 my-2 col-sm-12">
                                                                 <label class="my-2">Customer</label>
-                                                                <input required name="user_id" value="{{$user->id}}" hidden="">
+                                                                <input required name="user_id" value="{{$user->id}}"
+                                                                       hidden="">
                                                                 <h6>{{$user->first_name}} {{$user->last_name}}</h6>
                                                             </div>
 
                                                             <div class="col-xl-4 my-2 col-sm-12">
                                                                 <label class="my-2">Meter No</label>
-                                                                <input required name="meterNo" value="{{$meter->meterNo}}" hidden="">
+                                                                <input required name="meterNo"
+                                                                       value="{{$meter->meterNo}}" hidden="">
                                                                 <h6>{{$meter->meterNo}}</h6>
                                                             </div>
 
                                                         </div>
-
 
 
                                                         <hr>
@@ -354,31 +361,35 @@
                                                                 @php
                                                                     $unnit = $costOfUnit / $tarrif_amount;
                                                                 @endphp
-                                                                <input required name="unit" value="{{number_format($unnit,2)}}" hidden="">
+                                                                <input required name="unit"
+                                                                       value="{{number_format($unnit,2)}}" hidden="">
                                                                 <h6>{{number_format($unnit, 2)}}kw/h</h6>
                                                             </div>
 
                                                             <div class="col-xl-4 my-2 col-sm-12">
                                                                 <label class="my-2">Vat Amount</label>
-                                                                <input required name="vatAmount" value="{{number_format($vatAmount,2)}}" hidden="">
+                                                                <input required name="vatAmount"
+                                                                       value="{{number_format($vatAmount,2)}}"
+                                                                       hidden="">
                                                                 <h6>{{number_format($vatAmount, 2)}}</h6>
                                                             </div>
 
                                                             <div class="col-xl-4 my-2 col-sm-12">
                                                                 <label class="my-2">Cost Of Unit</label>
-                                                                <input required name="costOfUnit" value="{{number_format($costOfUnit,2)}}" hidden="">
+                                                                <input required name="costOfUnit"
+                                                                       value="{{number_format($costOfUnit,2)}}"
+                                                                       hidden="">
                                                                 <h6>{{number_format($costOfUnit, 2)}}</h6>
                                                             </div>
 
                                                             <input required name="vat" value="{{$vat}}" hidden="">
-                                                            <input required name="estate_id" value="{{$estate_id}}" hidden="">
-                                                            <input required name="estate_name" value="{{$estate_name}}" hidden="">
+                                                            <input required name="estate_id" value="{{$estate_id}}"
+                                                                   hidden="">
+                                                            <input required name="estate_name" value="{{$estate_name}}"
+                                                                   hidden="">
                                                             <input required name="amount" value="{{$amount}}" hidden="">
-                                                            <input required name="tariff_amount" value="{{$tarrif_amount}}" hidden="">
-
-
-
-
+                                                            <input required name="tariff_amount"
+                                                                   value="{{$tarrif_amount}}" hidden="">
 
 
                                                         </div>
@@ -386,20 +397,23 @@
                                                         <hr>
 
 
-                                                        <div class="col-xl-4 my-4 d-flex justify-content-start col-sm-12">
-                                                            <select  class="form-control" required name="pay_type" >
+                                                        <div
+                                                            class="col-xl-4 my-4 d-flex justify-content-start col-sm-12">
+                                                            <select class="form-control" required name="pay_type">
                                                                 <option value=" ">--Choose Payment Gateway---</option>
                                                                 <option value="paystack">Pay with Paystack</option>
-                                                                <option value="flutterwave">Pay with Flutterwave</option>
+                                                                <option value="flutterwave">Pay with Flutterwave
+                                                                </option>
                                                                 <option value="enkpay">Pay with Enkpay</option>
                                                             </select>
                                                         </div>
 
 
-                                                        <div class="col-xl-12 my-4 d-flex justify-content-start col-sm-12">
-                                                            <button type="submit" class="btn btn-primary">Pay Now</button>
+                                                        <div
+                                                            class="col-xl-12 my-4 d-flex justify-content-start col-sm-12">
+                                                            <button type="submit" class="btn btn-primary">Pay Now
+                                                            </button>
                                                         </div>
-
 
 
                                                     </div>
@@ -412,7 +426,6 @@
 
                                             @endif
                                         </div>
-
 
 
                                     </div>
@@ -428,8 +441,6 @@
                                                 <th scope="col" class="cursor-pointer">Amount</th>
                                                 <th scope="col" class="cursor-pointer">KCT1</th>
                                                 <th scope="col" class="cursor-pointer">KCT2</th>
-                                                <th scope="col" class="cursor-pointer">Tariff Index</th>
-                                                <th scope="col" class="cursor-pointer desc">Unit</th>
                                                 <th scope="col" class="cursor-pointer desc">Status</th>
                                                 <th scope="col" class="cursor-pointer desc">Date/Time</th>
                                                 <th scope="col" class="cursor-pointer desc">Action</th>
@@ -443,14 +454,26 @@
                                             @foreach($credit_tokens as $data)
 
                                                 <tr>
-                                                    <td><a href="view-user?id={{$data->id}}">{{$data->user->last_name ?? "name"}} {{$data->user->first_name ?? "name"}}</a></td>
+                                                    <td>
+                                                        @php
+                                                            $user = User::where('id', $data->user_id)->first();
+                                                        @endphp
+                                                        <a href="view-user?id={{$data->user_id}}">{{$user->last_name ?? "name"}} {{$user->first_name ?? "name"}}</a>
+
+                                                    </td>
                                                     <td>{{$data->meterNo}}</a> </td>
-                                                    <td>{{$data->estate->title ?? "name"}}</td>
+
+                                                    <td>
+
+                                                        @php
+                                                            $estate = Estate::where('id', $data->estate_id)->first();
+                                                        @endphp
+                                                        {{$estate->title ?? "name"}}
+
+                                                    </td>
                                                     <td>{{number_format($data->amount, 2)}}</td>
                                                     <td>{{$data->kct_token1}}</td>
                                                     <td>{{$data->kct_token2}}</td>
-                                                    <td>{{$data->tariff_id}}</td>
-                                                    <td>{{$data->tariffPerKWatt}}kw/N</td>
                                                     <td>
                                                         @if($data->status == 2)
                                                             <span class="badge text-bg-primary">Successful</span>
@@ -466,7 +489,9 @@
 
                                                     <td>
                                                         @if($data->status == 2)
-                                                            <a href="recepit?trx_id={{$data->trx_id}}"  onclick="return confirmreprint();" class="btn btn-primary">Reprint</a>
+                                                            <a href="recepit?trx_id={{$data->trx_id}}"
+                                                               onclick="return confirmreprint();"
+                                                               class="btn btn-primary">Reprint</a>
                                                             <script>
 
                                                                 function confirmreprint() {
@@ -476,7 +501,9 @@
 
                                                         @elseif($data->status == 0)
 
-                                                            <a href="retry-generate-token?trx_id={{$data->trx_id}}"  onclick="return confirmgenertetoken();" class="btn btn-secondary">Generate Token</a>
+                                                            <a href="retry-generate-token?trx_id={{$data->trx_id}}"
+                                                               onclick="return confirmgenertetoken();"
+                                                               class="btn btn-secondary">Generate Token</a>
                                                             <script>
 
                                                                 function confirmgenertetoken() {
@@ -491,8 +518,6 @@
                                                     </td>
 
 
-
-
                                                 </tr>
 
                                             @endforeach
@@ -501,7 +526,6 @@
                                             </tbody><!-- end tbody -->
 
                                             <tfoot>
-
 
 
                                             </tfoot>
@@ -527,12 +551,10 @@
     @elseif(Auth::user()->role == 2)
     @elseif(Auth::user()->role == 3)
 
-
         <div class="content">
 
             <!-- Start Content-->
             <div class="container-fluid">
-
 
 
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
@@ -562,7 +584,6 @@
                 @endif
 
 
-
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="card overflow-hidden">
@@ -582,7 +603,7 @@
                                             <h5 class="card-title text-black mb-0">Generate Credit Token</h5>
                                         </div>
 
-                                        <div class="col-xl-6 col-sm-12" >
+                                        <div class="col-xl-6 col-sm-12">
                                             <form action="validate-kct-meter" method="POST"
                                                   enctype="multipart/form-data">
                                                 @csrf
@@ -611,7 +632,6 @@
                                                             </div>
 
 
-
                                                             <div class="col-xl-6 my-2 col-sm-12">
                                                                 <label class="my-2">Power Source</label>
                                                                 <select class="form-control" required
@@ -624,7 +644,8 @@
 
                                                             <div class="col-xl-6 my-2 col-sm-12">
                                                                 <label class="my-2">Amount</label>
-                                                                <input type="number" class="form-control mb-3" name="amount"
+                                                                <input type="number" class="form-control mb-3"
+                                                                       name="amount"
                                                                        required>
                                                             </div>
 
@@ -653,11 +674,11 @@
                                                                                     alert("Error: User is not attached to any estate.");
                                                                                     return;
                                                                                 }
-                                                                                if(response == 2){
+                                                                                if (response == 2) {
                                                                                     alert("Error: Estate does not have any tariff");
                                                                                     return;
                                                                                 }
-                                                                                if(response == 3){
+                                                                                if (response == 3) {
                                                                                     alert("Error: Tariff index not set for customer.");
                                                                                     return;
                                                                                 }
@@ -689,9 +710,6 @@
                                                             });
 
                                                         </script>
-
-
-
 
                                                     @else
                                                         <div class="col-xl-6 my-2 col-sm-12">
@@ -734,7 +752,7 @@
                                             </form>
                                         </div>
 
-                                        <div class="col-xl-6 col-sm-12" >
+                                        <div class="col-xl-6 col-sm-12">
                                             @if($preview == null)
 
 
@@ -749,7 +767,8 @@
                                                             <div class="row">
                                                                 <div class="col-xl-6 my-2 col-sm-12">
                                                                     <label class="my-2">Estate</label>
-                                                                    <select class="form-control" required name="estate_id"
+                                                                    <select class="form-control" required
+                                                                            name="estate_id"
                                                                             id="estate_id">
                                                                         <option value="">--Select Estate--</option>
                                                                         @foreach($estate as $data)
@@ -767,7 +786,6 @@
                                                                 </div>
 
 
-
                                                                 <div class="col-xl-6 my-2 col-sm-12">
                                                                     <label class="my-2">Power Source</label>
                                                                     <select class="form-control" required
@@ -780,7 +798,8 @@
 
                                                                 <div class="col-xl-6 my-2 col-sm-12">
                                                                     <label class="my-2">Amount</label>
-                                                                    <input type="number" class="form-control mb-3" name="amount"
+                                                                    <input type="number" class="form-control mb-3"
+                                                                           name="amount"
                                                                            required>
                                                                 </div>
 
@@ -809,11 +828,11 @@
                                                                                         alert("Error: User is not attached to any estate.");
                                                                                         return;
                                                                                     }
-                                                                                    if(response == 2){
+                                                                                    if (response == 2) {
                                                                                         alert("Error: Estate does not have any tariff");
                                                                                         return;
                                                                                     }
-                                                                                    if(response == 3){
+                                                                                    if (response == 3) {
                                                                                         alert("Error: Tariff index not set for customer.");
                                                                                         return;
                                                                                     }
@@ -846,14 +865,12 @@
 
                                                             </script>
 
-
-
-
                                                         @else
                                                             <div class="col-xl-6 my-2 col-sm-12">
                                                                 <label class="my-2">Enter Meter No</label>
                                                                 <input type="number" disabled class="form-control mb-3"
-                                                                       value="{{$meter->meterNo}}" name="meterNo" required>
+                                                                       value="{{$meter->meterNo}}" name="meterNo"
+                                                                       required>
                                                             </div>
 
 
@@ -885,7 +902,6 @@
 
 
                                                     </div>
-
 
 
                                                 </form>
@@ -902,7 +918,8 @@
                                                             <div class="row">
                                                                 <div class="col-xl-6 my-2 col-sm-12">
                                                                     <label class="my-2">Estate</label>
-                                                                    <select class="form-control" required name="estate_id"
+                                                                    <select class="form-control" required
+                                                                            name="estate_id"
                                                                             id="estate_id">
                                                                         <option value="">--Select Estate--</option>
                                                                         @foreach($estate as $data)
@@ -920,7 +937,6 @@
                                                                 </div>
 
 
-
                                                                 <div class="col-xl-6 my-2 col-sm-12">
                                                                     <label class="my-2">Power Source</label>
                                                                     <select class="form-control" required
@@ -933,7 +949,8 @@
 
                                                                 <div class="col-xl-6 my-2 col-sm-12">
                                                                     <label class="my-2">Amount</label>
-                                                                    <input type="number" class="form-control mb-3" name="amount"
+                                                                    <input type="number" class="form-control mb-3"
+                                                                           name="amount"
                                                                            required>
                                                                 </div>
 
@@ -962,11 +979,11 @@
                                                                                         alert("Error: User is not attached to any estate.");
                                                                                         return;
                                                                                     }
-                                                                                    if(response == 2){
+                                                                                    if (response == 2) {
                                                                                         alert("Error: Estate does not have any tariff");
                                                                                         return;
                                                                                     }
-                                                                                    if(response == 3){
+                                                                                    if (response == 3) {
                                                                                         alert("Error: Tariff index not set for customer.");
                                                                                         return;
                                                                                     }
@@ -999,14 +1016,12 @@
 
                                                             </script>
 
-
-
-
                                                         @else
                                                             <div class="col-xl-6 my-2 col-sm-12">
                                                                 <label class="my-2">Enter Meter No</label>
                                                                 <input type="number" disabled class="form-control mb-3"
-                                                                       value="{{$meter->meterNo}}" name="meterNo" required>
+                                                                       value="{{$meter->meterNo}}" name="meterNo"
+                                                                       required>
                                                             </div>
 
 
@@ -1041,14 +1056,11 @@
 
                                                 </form>
 
-
                                             @endif
                                         </div>
 
 
-
                                     </div>
-
 
 
                                     <hr>
@@ -1080,7 +1092,9 @@
                                             @foreach($kct_tokens as $data)
 
                                                 <tr>
-                                                    <td><a href="view-user?id={{$data->id}}">{{$data->user->last_name ?? "name"}} {{$data->user->first_name ?? "name"}}</a></td>
+                                                    <td>
+                                                        <a href="view-user?id={{$data->id}}">{{$data->user->last_name ?? "name"}} {{$data->user->first_name ?? "name"}}</a>
+                                                    </td>
                                                     <td>{{$data->meterNo}}</a> </td>
                                                     <td>{{$data->estate->title ?? "name"}}</td>
                                                     <td>{{number_format($data->amount, 2)}}</td>
@@ -1103,7 +1117,9 @@
 
                                                     <td>
                                                         @if($data->status == 2)
-                                                            <a href="recepit?trx_id={{$data->trx_id}}"  onclick="return confirmreprint();" class="btn btn-primary">Reprint</a>
+                                                            <a href="recepit?trx_id={{$data->trx_id}}"
+                                                               onclick="return confirmreprint();"
+                                                               class="btn btn-primary">Reprint</a>
                                                             <script>
 
                                                                 function confirmreprint() {
@@ -1113,7 +1129,9 @@
 
                                                         @elseif($data->status == 0)
 
-                                                            <a href="retry-generate-token?trx_id={{$data->trx_id}}"  onclick="return confirmgenertetoken();" class="btn btn-secondary">Generate Token</a>
+                                                            <a href="retry-generate-token?trx_id={{$data->trx_id}}"
+                                                               onclick="return confirmgenertetoken();"
+                                                               class="btn btn-secondary">Generate Token</a>
                                                             <script>
 
                                                                 function confirmgenertetoken() {
@@ -1128,8 +1146,6 @@
                                                     </td>
 
 
-
-
                                                 </tr>
 
                                             @endforeach
@@ -1138,7 +1154,6 @@
                                             </tbody><!-- end tbody -->
 
                                             <tfoot>
-
 
 
                                             </tfoot>
@@ -1159,15 +1174,9 @@
 
         </div>
 
-
     @elseif(Auth::user()->role == 4)
     @elseif(Auth::user()->role == 5)
     @else
     @endif
-
-
-
-
-
 
 @endsection

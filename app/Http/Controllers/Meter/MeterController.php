@@ -1041,10 +1041,21 @@ class MeterController extends Controller
 
         if (Auth::user()->role == 0) {
 
-            $data['meters'] = Meter::count();
-            $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('estate_id',$request->estate_id)->paginate('20');
-            $data['estate'] = Estate::where('status', 2)->get();
-            return view('admin/meter/meter-lists', $data);
+            if($request->meterNo == null){
+
+                $data['meters'] = Meter::count();
+                $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('estate_id',$request->estate_id)->paginate('20');
+                $data['estate'] = Estate::where('status', 2)->get();
+                return view('admin/meter/meter-lists', $data);
+
+            }else{
+                $data['meters'] = Meter::count();
+                $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('meterNo',$request->meterNo)->paginate('20');
+                $data['estate'] = Estate::where('status', 2)->get();
+                return view('admin/meter/meter-lists', $data);
+            }
+
+
 
         } elseif (Auth::user()->role == 1) {
 
@@ -1052,9 +1063,21 @@ class MeterController extends Controller
         } elseif (Auth::user()->role == 2) {
 
         } elseif (Auth::user()->role == 3) {
-            $data['meters'] = Meter::count();
-            $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('estate_id', Auth::user()->estate_id)->paginate('20');
-            return view('admin/meter/meter-lists', $data);
+
+            if($request->meterNo == null) {
+
+                $data['meters'] = Meter::count();
+                $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('estate_id', Auth::user()->estate_id)->paginate('20');
+                return view('admin/meter/meter-lists', $data);
+
+            }else{
+
+                $data['meters'] = Meter::count();
+                $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('meterNo', $request->meterNo)->paginate('20');
+                return view('admin/meter/meter-lists', $data);
+            }
+
+
 
         } elseif (Auth::user()->role == 4) {
 
@@ -1187,6 +1210,7 @@ class MeterController extends Controller
     public
     function update_meter_info(request $request)
     {
+
 
         $meter = Meter::find($request->id);
         $meter->update($request->all());

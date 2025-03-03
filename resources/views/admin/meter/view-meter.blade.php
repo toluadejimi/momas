@@ -251,12 +251,12 @@
 
                                 <div class="col-3">
                                     <label class="my-2">KRN1</label>
-                                    <input type="text" value="{{$meter->krn1}}" name="KRN1" class="form-control" required>
+                                    <input type="text" value="{{$meter->KRN1}}" name="KRN1" class="form-control" required>
                                 </div>
 
                                 <div class="col-3">
                                     <label class="my-2">KRN2</label>
-                                    <input type="text" value="STS6" name="KRN2" class="form-control" required>
+                                    <input type="text" value="{{$meter->KRN2}}" name="KRN2" class="form-control" required>
                                 </div>
 
 

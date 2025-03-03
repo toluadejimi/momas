@@ -175,7 +175,7 @@
 
 
 
-                                        @if($title == "kct_token")
+                                        @if($title == "KCT TOKEN")
                                             TRX ID : <b>{{$ref}}</b></br><br>
                                             Meter NO : <b>{{$meter_no}}</b></br><br>
                                             KCT 1 : <b>{{$token1 ?? "12345678"}}</b></br><br>

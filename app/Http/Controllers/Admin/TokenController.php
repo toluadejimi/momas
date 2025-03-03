@@ -11,7 +11,6 @@ use App\Models\KctToken;
 use App\Models\Meter;
 use App\Models\Setting;
 use App\Models\TamperToken;
-use App\Models\Tariff;
 use App\Models\TarrifState;
 use App\Models\Transaction;
 use App\Models\User;
@@ -164,6 +163,7 @@ class TokenController extends Controller
             $data['estate'] = Estate::all();
             $data['preview'] = null;
             $data['credit_tokens'] = KctToken::latest()->paginate('50');
+            $data['kct_amount'] = Setting::where('id', 1)->first()->kct_fee;
 
 
             return view('admin.token.kct-token-view', $data);
@@ -180,6 +180,7 @@ class TokenController extends Controller
             $data['title'] = Estate::where('id', Auth::user()->estate_id)->first()->title;
             $data['preview'] = null;
             $data['tariff'] = TarrifState::where('estate_id', user()->estate_id)->get();
+            $data['kct_amount'] = Setting::where('id', 1)->first()->kct_fee;
             $data['credit_tokens'] = KctToken::latest()->where('estate_id', Auth::user()->estate_id)->paginate('50');
 
             return view('admin.token.kct-token-view', $data);
@@ -195,6 +196,7 @@ class TokenController extends Controller
 
 
     }
+
     public function clear_credit_token_preview()
     {
         if (Auth::user()->role == 0) {
@@ -364,6 +366,7 @@ class TokenController extends Controller
 
 
     }
+
     public function validate_clear_credit_meter(request $request)
     {
 
@@ -508,30 +511,26 @@ class TokenController extends Controller
             $ck_meter = Meter::where('MeterNo', $request->meterNo)->first() ?? null;
             $ck_user_id = Meter::where('MeterNo', $request->meterNo)->first()->user_id ?? null;
 
-            if($user == null && $ck_meter == null){
+            if ($user == null && $ck_meter == null) {
                 return back()->with('error', 'Meter has not properly configured to user');
             }
 
-            if($ck_meter != null && $ck_user_id == null ){
-                Meter::where('MeterNo', $request->meterNo)->update(['user_id' =>$user->id ]);
+            if ($ck_meter != null && $ck_user_id == null) {
+                Meter::where('MeterNo', $request->meterNo)->update(['user_id' => $user->id]);
             }
-
 
 
             $tariffAmount = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
             $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
 
 
-            $percn = (2.5 / 100 ) * (int)$request->amount;
+            $percn = (2.5 / 100) * (int)$request->amount;
             $perc_amount = $request->amount - $percn;
-
-
-
 
 
             $calculator = new VatCalculator();
             $params = [
-                'amountText' =>  $perc_amount,
+                'amountText' => $perc_amount,
                 'tariffAmount' => $tariffAmount,
                 'utilitiesAmount' => 0,
                 'vat' => 7.5,
@@ -579,18 +578,17 @@ class TokenController extends Controller
             $ck_meter = Meter::where('MeterNo', $request->meterNo)->first() ?? null;
             $ck_user_id = Meter::where('MeterNo', $request->meterNo)->first()->user_id ?? null;
 
-            if($user == null && $ck_meter == null){
+            if ($user == null && $ck_meter == null) {
                 return back()->with('error', 'Meter has not properly configured to user');
             }
 
-            if($ck_meter != null && $ck_user_id == null ){
-                Meter::where('MeterNo', $request->meterNo)->update(['user_id' =>$user->id ]);
+            if ($ck_meter != null && $ck_user_id == null) {
+                Meter::where('MeterNo', $request->meterNo)->update(['user_id' => $user->id]);
             }
 
 
-
-            if($ck_meter != null && $ck_user_id == null ){
-                Meter::where('MeterNo', $request->meterNo)->update(['user_id' =>$user->id ]);
+            if ($ck_meter != null && $ck_user_id == null) {
+                Meter::where('MeterNo', $request->meterNo)->update(['user_id' => $user->id]);
             }
 
 
@@ -654,8 +652,6 @@ class TokenController extends Controller
             $data['credit_tokens'] = CreditToken::latest()->paginate('50');
 
 
-
-
             return view('admin.token.credit-token-preview', $data);
 
 
@@ -666,7 +662,6 @@ class TokenController extends Controller
         } else {
 
         }
-
 
 
     }
@@ -685,12 +680,16 @@ class TokenController extends Controller
             $ck_meter = Meter::where('MeterNo', $request->meterNo)->first() ?? null;
             $ck_user_id = Meter::where('MeterNo', $request->meterNo)->first()->user_id ?? null;
 
-            if($user == null && $ck_meter == null){
+            if ($user == null && $ck_meter == null) {
                 return back()->with('error', 'Meter has not properly configured to user');
             }
 
-            if($ck_meter != null && $ck_user_id == null ){
-                Meter::where('MeterNo', $request->meterNo)->update(['user_id' =>$user->id ]);
+            if ($ck_meter->NeedKCT == null || $ck_meter->NeedKCT == 0) {
+                return back()->with('error', 'NeedKCT is not activated for meter');
+            }
+
+            if ($ck_meter != null && $ck_user_id == null) {
+                Meter::where('MeterNo', $request->meterNo)->update(['user_id' => $user->id]);
             }
 
 
@@ -700,9 +699,7 @@ class TokenController extends Controller
             if ($meter->estate_id != $estate_id) {
                 return back()->with('error', 'Meter not does not belong to estate selected');
             }
-            if ($request->amount < 1000) {
-                return back()->with('error', 'Amount can not be less than NGN 1,000');
-            }
+
 
             if ($user == null) {
                 return back()->with('error', 'Meter has not been attached to any customer');
@@ -768,12 +765,12 @@ class TokenController extends Controller
             $ck_meter = Meter::where('MeterNo', $request->meterNo)->first() ?? null;
             $ck_user_id = Meter::where('MeterNo', $request->meterNo)->first()->user_id ?? null;
 
-            if($user == null && $ck_meter == null){
+            if ($user == null && $ck_meter == null) {
                 return back()->with('error', 'Meter has not properly configured to user');
             }
 
-            if($ck_meter != null && $ck_user_id == null ){
-                Meter::where('MeterNo', $request->meterNo)->update(['user_id' =>$user->id ]);
+            if ($ck_meter != null && $ck_user_id == null) {
+                Meter::where('MeterNo', $request->meterNo)->update(['user_id' => $user->id]);
             }
 
 
@@ -783,9 +780,7 @@ class TokenController extends Controller
             if ($meter->estate_id != $estate_id) {
                 return back()->with('error', 'Meter not does not belong to estate selected');
             }
-            if ($request->amount < 1000) {
-                return back()->with('error', 'Amount can not be less than NGN 1,000');
-            }
+
 
             if ($user == null) {
                 return back()->with('error', 'Meter has not been attached to any customer');
@@ -833,8 +828,6 @@ class TokenController extends Controller
             $data['credit_tokens'] = KctToken::latest()->paginate('50');
 
 
-
-
             return view('admin.token.kct-preview', $data);
 
 
@@ -845,7 +838,6 @@ class TokenController extends Controller
         } else {
 
         }
-
 
 
     }
@@ -863,12 +855,12 @@ class TokenController extends Controller
             $ck_meter = Meter::where('MeterNo', $request->meterNo)->first() ?? null;
             $ck_user_id = Meter::where('MeterNo', $request->meterNo)->first()->user_id ?? null;
 
-            if($user == null && $ck_meter == null){
+            if ($user == null && $ck_meter == null) {
                 return back()->with('error', 'Meter has not properly configured to user');
             }
 
-            if($ck_meter != null && $ck_user_id == null ){
-                Meter::where('MeterNo', $request->meterNo)->update(['user_id' =>$user->id ]);
+            if ($ck_meter != null && $ck_user_id == null) {
+                Meter::where('MeterNo', $request->meterNo)->update(['user_id' => $user->id]);
             }
 
 
@@ -944,12 +936,12 @@ class TokenController extends Controller
             $ck_meter = Meter::where('MeterNo', $request->meterNo)->first() ?? null;
             $ck_user_id = Meter::where('MeterNo', $request->meterNo)->first()->user_id ?? null;
 
-            if($user == null && $ck_meter == null){
+            if ($user == null && $ck_meter == null) {
                 return back()->with('error', 'Meter has not properly configured to user');
             }
 
-            if($ck_meter != null && $ck_user_id == null ){
-                Meter::where('MeterNo', $request->meterNo)->update(['user_id' =>$user->id ]);
+            if ($ck_meter != null && $ck_user_id == null) {
+                Meter::where('MeterNo', $request->meterNo)->update(['user_id' => $user->id]);
             }
 
 
@@ -1008,7 +1000,6 @@ class TokenController extends Controller
             $data['preview'] = "clear_tamper";
 
 
-
             return view('admin.token.tamper-preview', $data);
 
 
@@ -1024,19 +1015,17 @@ class TokenController extends Controller
     }
 
 
-
     //Generate
     public function generate_credit_meter_token(request $request)
     {
 
 
-
         $est = Estate::where('id', $request->estate_name)->first();
 
-        if($est->charge_fee_flat == null){
-            $fee  = ($est->charge_fee_precent / 100) * (int)$request->amount;
-        }else{
-            $fee  = $est->charge_fee_flat;
+        if ($est->charge_fee_flat == null) {
+            $fee = ($est->charge_fee_precent / 100) * (int)$request->amount;
+        } else {
+            $fee = $est->charge_fee_flat;
         }
 
 
@@ -1066,7 +1055,6 @@ class TokenController extends Controller
         $cdt->save();
 
 
-
         try {
 
             if ($request->pay_type == 'flutterwave') {
@@ -1074,10 +1062,10 @@ class TokenController extends Controller
 
                 $estate_id = $request->estate_id;
                 $est = Estate::where('id', $estate_id)->first();
-                if($est->charge_fee_flat == null){
-                    $fee  = ($est->charge_fee_precent / 100) * (int)$request->amount;
-                }else{
-                    $fee  = $est->charge_fee_flat;
+                if ($est->charge_fee_flat == null) {
+                    $fee = ($est->charge_fee_precent / 100) * (int)$request->amount;
+                } else {
+                    $fee = $est->charge_fee_flat;
                 }
 
 
@@ -1155,84 +1143,83 @@ class TokenController extends Controller
 
 //            try {
 
-                $estate_id = $request->estate_id ?? null;
-                if ($estate_id === null) {
-                    $estate_id = Auth::user()->estate_id;
-                }
-                $est = Estate::where('id', $estate_id)->first();
+            $estate_id = $request->estate_id ?? null;
+            if ($estate_id === null) {
+                $estate_id = Auth::user()->estate_id;
+            }
+            $est = Estate::where('id', $estate_id)->first();
 
 
-                if($est->charge_fee_flat == null){
-                    $fee  = ($est->charge_fee_precent / 100) * (int)$request->amount;
-                }else{
-                    $fee  = $est->charge_fee_flat;
-                }
+            if ($est->charge_fee_flat == null) {
+                $fee = ($est->charge_fee_precent / 100) * (int)$request->amount;
+            } else {
+                $fee = $est->charge_fee_flat;
+            }
 
 
-                $fl = Setting::where('id', 1)->first();
-                $flkey['flutterwave_secret'] = $fl->flutterwave_secret;
-                $flkey['flutterwave_public'] = $fl->flutterwave_public;
-                $paystackkey = $fl->paystack_secret;
-                $pkkey['paystack_public'] = $fl->paystack_public;
+            $fl = Setting::where('id', 1)->first();
+            $flkey['flutterwave_secret'] = $fl->flutterwave_secret;
+            $flkey['flutterwave_public'] = $fl->flutterwave_public;
+            $paystackkey = $fl->paystack_secret;
+            $pkkey['paystack_public'] = $fl->paystack_public;
 
-                if($request->utility_amount < 0){
-                    $get_utility_id = UtilitiesPayment::where('user_id', Auth::id())->where('type','utilities')->first()->id;
-                }
+            if ($request->utility_amount < 0) {
+                $get_utility_id = UtilitiesPayment::where('user_id', Auth::id())->where('type', 'utilities')->first()->id;
+            }
 
-                $databody = array(
-                    "amount" => $request->amount * 100,
-                    "email" => $customer_email,
-                    "ref" => $trx_id,
-                    'callback_url' => url('') . "/admin/paystack-check-web",
-                    'subaccount' => $est->paystack_subaccount,
-                    'metadata' => ["ref" => $trx_id],
-                );
+            $databody = array(
+                "amount" => $request->amount * 100,
+                "email" => $customer_email,
+                "ref" => $trx_id,
+                'callback_url' => url('') . "/admin/paystack-check-web",
+                'subaccount' => $est->paystack_subaccount,
+                'metadata' => ["ref" => $trx_id],
+            );
 
-                $body = json_encode($databody);
-                $curl = curl_init();
-                curl_setopt_array($curl, array(
-                    CURLOPT_URL => 'https://api.paystack.co/transaction/initialize',
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => '',
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 0,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => 'POST',
-                    CURLOPT_POSTFIELDS => $body,
-                    CURLOPT_HTTPHEADER => array(
-                        'Accept: application/json',
-                        'Content-Type: application/json',
-                        'Authorization: Bearer ' . $paystackkey,
-                    ),
-                ));
+            $body = json_encode($databody);
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://api.paystack.co/transaction/initialize',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => $body,
+                CURLOPT_HTTPHEADER => array(
+                    'Accept: application/json',
+                    'Content-Type: application/json',
+                    'Authorization: Bearer ' . $paystackkey,
+                ),
+            ));
 
-                $var = curl_exec($curl);
-                curl_close($curl);
-                $var = json_decode($var);
-                $status = $var->status;
+            $var = curl_exec($curl);
+            curl_close($curl);
+            $var = json_decode($var);
+            $status = $var->status;
 
 
+            if ($status == true) {
+                $trx = new Transaction();
+                $trx->user_id = $request->user_id;
+                $trx->pay_type = "paystack";
+                $trx->amount = $request->amount;
+                $trx->fee = $fee;
+                $trx->trx_id = $trx_id;
+                $trx->utility_id = $get_utility_id ?? null;
+                $trx->payment_ref = $var->data->access_code ?? null;
+                $trx->service_type = "credit_token";
+                $trx->save();
 
-                if ($status == true) {
-                    $trx = new Transaction();
-                    $trx->user_id = $request->user_id;
-                    $trx->pay_type = "paystack";
-                    $trx->amount = $request->amount;
-                    $trx->fee = $fee;
-                    $trx->trx_id = $trx_id;
-                    $trx->utility_id = $get_utility_id ?? null;
-                    $trx->payment_ref = $var->data->access_code ?? null;
-                    $trx->service_type = "credit_token";
-                    $trx->save();
+                return redirect()->away($var->data->authorization_url);
 
-                    return redirect()->away($var->data->authorization_url);
+            }
 
-                }
-
-                $code = 422;
-                $message = "Payment not available at the moment, Kindly select other payment option";
-                return error($message, $code);
+            $code = 422;
+            $message = "Payment not available at the moment, Kindly select other payment option";
+            return error($message, $code);
 
 //            } catch (Exception $e) {
 //                return back()->with('error', $e);
@@ -1580,7 +1567,6 @@ class TokenController extends Controller
         if ($request->pay_type == 'vend') {
 
 
-
             try {
 
 
@@ -1625,10 +1611,8 @@ class TokenController extends Controller
                         $user = User::where('id', $trx->user_id)->first();
                         $email = $user->email;
                         $token = $no_kct_token;
-                        $amount = $trx->amount;
 
-
-                        send_email_token($email, $token, $amount);
+                        send_email_token_others($email, $token, $meterNo);
 
 
                         Transaction::where('trx_id', $trx)->update([
@@ -1672,14 +1656,19 @@ class TokenController extends Controller
 
 
         $est = Estate::where('id', $request->estate_name)->first();
-        if ($est->charge_fee < 0) {
-            $fee_in_percent = $est->charge_fee_percent;
-            $fee = ($fee_in_percent / $request->amount) * 100;
-        } else {
-            $fee = $est->charge_fee;
+
+        if ($request->amount != 0) {
+            if ($est->charge_fee < 0) {
+                $fee_in_percent = $est->charge_fee_percent;
+                $fee = ($fee_in_percent / $request->amount) * 100;
+            } else {
+                $fee = $est->charge_fee;
+            }
+            $amount = $request->amount - $fee;
+
         }
 
-        $amount = $request->amount - $fee;
+
         $trx_id = "TRX" . random_int(000000000, 9999999999);
         $estate_id = Estate::where('id', $request->estate_name)->first()->id;
 
@@ -1687,18 +1676,18 @@ class TokenController extends Controller
         $cdt->user_id = $request->user_id;
         $cdt->trx_id = $trx_id;
         $cdt->meterNo = $request->meterNo;
-        $cdt->amount = $amount;
-        $cdt->amount_charged = $request->amount;
+        $cdt->amount = $amount ?? 0;
+        $cdt->amount_charged = $request->amount ?? 0;
         $cdt->fee = $fee ?? 0;
-        $cdt->vat = $request->vat;
+        $cdt->vat = $request->vat ?? 0;
         $cdt->estate_name = Estate::where('id', $request->estate_name)->first()->title;;
         $cdt->estate_id = $estate_id;
         $cdt->tariff_id = TarrifState::where('amount', $request->tariff_amount)->first()->tariff_id;
-        $cdt->tariff_amount = $request->tariff_amount;
-        $cdt->vatAmount = $request->vatAmount;
-        $cdt->costOfUnit = $request->costOfUnit;
-        $cdt->unitkwh = $request->unit;
-        $cdt->tariffPerKWatt = $request->tariffPerKWatt;
+        $cdt->tariff_amount = $request->tariff_amount ?? 0;
+        $cdt->vatAmount = $request->vatAmount ?? 0;
+        $cdt->costOfUnit = $request->costOfUnit ?? 0;
+        $cdt->unitkwh = $request->unit ?? 0;
+        $cdt->tariffPerKWatt = $request->tariffPerKWatt ?? 0;
         $cdt->save();
 
 
@@ -1942,7 +1931,98 @@ class TokenController extends Controller
         }
 
 
+        if ($request->pay_type == 'vend') {
+
+
+            try {
+
+                $meterNo = KctToken::where('trx_id', $trx_id)->first()->meterNo;
+                $meter = Meter::where('meterNo', $meterNo)->first();
+                $trx = KctToken::where('trx_id', $trx_id)->first();
+                $traff_id = KctToken::where('trx_id', $trx_id)->first();
+
+                if ($meter != null && $meter->NeedKCT == "on") {
+                    $databody = [
+                        'meterType' => $meter->KRN1,
+                        'meterNo' => $meterNo,
+                        'sgc' => (int)$meter->OldSGC,
+                        'ti' => $trx->tariff_id, //TRARRRIF INDEX
+                        'amount' => (float)$trx->tariffPerKWatt,
+                    ];
+
+
+                    $kctdatabody = [
+                        'meterType' => $meter->KRN1,
+                        'tometerType' => $meter->KRN1,
+                        'meterNo' => $meterNo,
+                        'sgc' => (int)$meter->OldSGC,
+                        'tosgc' => (int)$meter->NewSGC,
+                        'ti' => $trx->tariff_id,
+                        'toti' => 1,
+                        'allow' => false,
+                        'allowkrn' => true,
+                    ];
+
+                    $kct_response = Http::withOptions([
+                        'verify' => false,
+                        'timeout' => 10,
+                    ])->post('http://169.239.189.91:19071/kcttokenGen', $kctdatabody);
+
+
+                    if ($kct_response->successful()) {
+                        $kct = $kct_response->json();
+                        $kct_data = json_decode($kct, true);
+                        $status = $kct_data['code'] ?? null;
+
+
+                        if ($status == "SUCCESS") {
+
+                            KctToken::where('trx_id', $trx_id)->update([
+                                'kct_token1' => $kct_data['tokens'][0],
+                                'kct_token2' => $kct_data['tokens'][1],
+                                'status' => 2
+                            ]);
+
+
+                            Transaction::where('trx_id', $trx_id)->update([
+                                'status' => 2,
+                            ]);
+
+                            $token = "kct_token";
+                            return redirect("admin/recepit?trx_id=$trx_id&type=$token");
+
+
+                        } else {
+
+                            Transaction::where('trx_id', $trx_id)->update([
+                                'service' => "METER PURCHASE",
+                                'service_type' => "meter",
+                                'status' => 3,
+                                'tariff_id' => $request->tariff_id,
+                                'note' => json_encode($kct_data) . "|" . json_encode($databody)
+
+
+                            ]);
+
+
+                            return redirect('admin/credit-token')->with('error', $error['errors'][0]['title'] ?? $kct_response->json() . " | " . json_encode($databody));
+
+                        }
+
+
+                    }
+                }
+
+
+            } catch (Exception $e) {
+                return back()->with('error', $e);
+
+            }
+        }
+
+
     }
+
     public function generate_clear_credit_meter_token(request $request)
     {
 
@@ -1962,7 +2042,6 @@ class TokenController extends Controller
         $cdt->costOfUnit = $request->costOfUnit;
         $cdt->tariffPerKWatt = $request->tariffPerKWatt;
         $cdt->save();
-
 
 
         try {
@@ -2370,9 +2449,6 @@ class TokenController extends Controller
                 ];
 
 
-
-
-
                 $no_kct_response = Http::withOptions([
                     'verify' => false,
                     'timeout' => 10,
@@ -2459,7 +2535,6 @@ class TokenController extends Controller
                 $trx = CreditToken::where('trx_id', $var->data->metadata->ref)->first();
                 $traff_id = CreditToken::where('trx_id', $var->data->metadata->ref)->first();
                 $user = User::where('meterNo', $meterNo)->first();
-
 
 
                 $databody = [
@@ -2977,6 +3052,7 @@ class TokenController extends Controller
 
 
     }
+
     public function paystack_clear_credit(request $request)
     {
         $fl = Setting::where('id', 1)->first();
@@ -3016,7 +3092,7 @@ class TokenController extends Controller
                 $meter = Meter::where('meterNo', $meterNo)->first();
                 $trx = ClearcreditToken::where('trx_id', $var->data->metadata->ref)->first();
                 $traff_id = ClearcreditToken::where('trx_id', $var->data->metadata->ref)->first();
-                $amount = (float) number_format((float)$trx->tariffPerKWatt, 2, '.', '');
+                $amount = (float)number_format((float)$trx->tariffPerKWatt, 2, '.', '');
 
 
                 $databody = [
@@ -3103,7 +3179,6 @@ class TokenController extends Controller
             }
 
         }
-
 
 
     }
@@ -3433,7 +3508,6 @@ class TokenController extends Controller
                         return redirect("admin/recepit?trx_id=$trx_id&type=$type");
 
 
-
                     } else {
 
                         Transaction::where('trx_id', $trx)->update([
@@ -3556,6 +3630,7 @@ class TokenController extends Controller
 
 
     }
+
     public function flutter_verify_clear_credit(request $request)
     {
 
@@ -3613,7 +3688,7 @@ class TokenController extends Controller
                     'meterNo' => $meter->meterNo,
                     'sgc' => (int)$meter->OldSGC,
                     'ti' => $trx->tariff_id,
-                    'amount' => (float) number_format((float)$trx->tariffPerKWatt, 2, '.', ''),
+                    'amount' => (float)number_format((float)$trx->tariffPerKWatt, 2, '.', ''),
                     "sbc" => 1,
                 ];
 
@@ -3691,7 +3766,6 @@ class TokenController extends Controller
             }
 
         }
-
 
 
     }
@@ -3910,8 +3984,6 @@ class TokenController extends Controller
                 $data['date'] = date('d-m-y h:i:s');
                 $data['meter_no'] = $trx_comp->meterNo;
 
-
-
                 return view('admin/recepit.recepit', $data);
 
 
@@ -3939,9 +4011,8 @@ class TokenController extends Controller
                 $data['tariff_amount'] = $trx_comp->tariff_amount;
                 $data['vend_amount_kw_per_naira'] = $trx_comp->tariffPerKWatt;
                 $data['title'] = "Clear Credit Token";
-                $data['date'] = date('D-M-Y');
+                $data['date'] = date('d-m-y h:i:s');
                 $data['meter_no'] = $trx_comp->meterNo;
-
 
 
                 return view('admin/recepit.recepit', $data);
@@ -3952,14 +4023,14 @@ class TokenController extends Controller
 
         }
 
-        if ($request->type == "kct_token"){
+        if ($request->type == "kct_token") {
             $trx = KctToken::where('trx_id', $request->trx_id)->first() ?? null;
             $user = User::where('id', $trx->user_id)->first() ?? null;
             $user = User::where('id', $trx->user_id)->first() ?? null;
             $data['full_name'] = $user->first_name . " " . $user->last_name;
             $data['address'] = $user->address . "," . $user->city . "," . $user->state;
             $data['phone'] = $user->phone;
-            $data['trx_id'] = $trx->trx_id;
+            $data['ref'] = $trx->trx_id;
             $data['token1'] = $trx->kct_token1;
             $data['token2'] = $trx->kct_token2;
             $data['amount'] = $trx->amount;
@@ -3968,8 +4039,8 @@ class TokenController extends Controller
             $data['tariff_amount'] = $trx->tariff_amount;
             $data['meter_no'] = $trx->meterNo;
             $data['unit'] = $trx->unitkwh;
-            $data['title'] = "kct_token";
-            $data['date'] = date('D-M-Y');
+            $data['title'] = "KCT TOKEN";
+            $data['date'] = date('d-m-y h:i:s');
             return view('admin/recepit.recepit', $data);
         }
 

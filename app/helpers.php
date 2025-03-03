@@ -430,6 +430,33 @@ if (!function_exists('send_email_token')) {
 }
 
 
+if (!function_exists('send_email_token_others')) {
+
+    function send_email_token_others($email, $token, $meterNo)
+    {
+        $first_name = User::where('email', $email)->first()->first_name;
+        $data = array(
+            'fromsender' => env('MAIL_FROM_ADDRESS'), 'MOMASPAY',
+            'subject' => "token Purchase",
+            'toreceiver' => $email,
+            'token' => $token,
+            'user' => $first_name,
+            'meterNo' => $meterNo
+        );
+
+        Mail::send('emails.vendtokenothers', ["data1" => $data], function ($message) use ($data) {
+            $message->from($data['fromsender']);
+            $message->to($data['toreceiver']);
+            $message->subject($data['subject']);
+        });
+
+
+        return 0;
+
+    }
+}
+
+
 if (!function_exists('send_kct_email_token')) {
 
     function send_kct_email_token($email, $token, $amount, $kct_token1, $kct_token2)

@@ -172,57 +172,75 @@
 
 
 
-                                                        <hr>
+                                                        @if($amount > 0)
+                                                            <div class="row">
 
-                                                        <div class="row">
+                                                                <div class="col-xl-4 my-2 col-sm-12">
+                                                                    <label class="my-2">Unit</label>
+                                                                    @php
+                                                                        $unnit = $costOfUnit / $tarrif_amount;
+                                                                    @endphp
+                                                                    <input required name="unit" value="{{number_format($unnit,2)}}" hidden="">
+                                                                    <h6>{{number_format($unnit, 2)}}kw/h</h6>
+                                                                </div>
 
-                                                            <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Unit</label>
-                                                                @php
-                                                                    $unnit = $costOfUnit / $tarrif_amount;
-                                                                @endphp
-                                                                <input required name="unit" value="{{number_format($unnit,2)}}" hidden="">
-                                                                <h6>{{number_format($unnit, 2)}}kw/h</h6>
+                                                                <div class="col-xl-4 my-2 col-sm-12">
+                                                                    <label class="my-2">Vat Amount</label>
+                                                                    <input required name="vatAmount" value="{{number_format($vatAmount,2)}}" hidden="">
+                                                                    <h6>{{number_format($vatAmount, 2)}}</h6>
+                                                                </div>
+
+                                                                <div class="col-xl-4 my-2 col-sm-12">
+                                                                    <label class="my-2">Cost Of Unit</label>
+                                                                    <input required name="costOfUnit" value="{{number_format($costOfUnit,2)}}" hidden="">
+                                                                    <h6>{{number_format($costOfUnit, 2)}}</h6>
+                                                                </div>
+
+                                                                <input required name="vat" value="{{$vat}}" hidden="">
+                                                                <input required name="estate_id" value="{{$estate_id}}" hidden="">
+                                                                <input required name="estate_name" value="{{$estate_name}}" hidden="">
+                                                                <input required name="amount" value="{{$amount}}" hidden="">
+                                                                <input required name="tariff_amount" value="{{$tarrif_amount}}" hidden="">
+
+
+
+
                                                             </div>
 
-                                                            <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Vat Amount</label>
-                                                                <input required name="vatAmount" value="{{number_format($vatAmount,2)}}" hidden="">
-                                                                <h6>{{number_format($vatAmount, 2)}}</h6>
+                                                            <hr>
+
+
+                                                            <div class="col-xl-4 my-4 d-flex justify-content-start col-sm-12">
+                                                                <select  class="form-control" required name="pay_type" >
+                                                                    <option value=" ">--Choose Payment Gateway---</option>
+                                                                    <option value="paystack">Pay with Paystack</option>
+                                                                    <option value="flutterwave">Pay with Flutterwave</option>
+                                                                    <option value="enkpay">Pay with Enkpay</option>
+                                                                </select>
                                                             </div>
 
-                                                            <div class="col-xl-4 my-2 col-sm-12">
-                                                                <label class="my-2">Cost Of Unit</label>
-                                                                <input required name="costOfUnit" value="{{number_format($costOfUnit,2)}}" hidden="">
-                                                                <h6>{{number_format($costOfUnit, 2)}}</h6>
+
+                                                            <div class="col-xl-12 my-4 d-flex justify-content-start col-sm-12">
+                                                                <button type="submit" class="btn btn-primary">Pay Now</button>
                                                             </div>
 
-                                                            <input required name="vat" value="{{$vat}}" hidden="">
+                                                        @else
+
                                                             <input required name="estate_id" value="{{$estate_id}}" hidden="">
                                                             <input required name="estate_name" value="{{$estate_name}}" hidden="">
                                                             <input required name="amount" value="{{$amount}}" hidden="">
                                                             <input required name="tariff_amount" value="{{$tarrif_amount}}" hidden="">
+                                                            <input required name="pay_type" value="vend" hidden="">
 
 
+                                                        @endif
 
-
-                                                        </div>
 
                                                         <hr>
 
 
-                                                        <div class="col-xl-4 my-4 d-flex justify-content-start col-sm-12">
-                                                            <select  class="form-control" required name="pay_type" >
-                                                                <option value=" ">--Choose Payment Gateway---</option>
-                                                                <option value="paystack">Pay with Paystack</option>
-                                                                <option value="flutterwave">Pay with Flutterwave</option>
-                                                                <option value="enkpay">Pay with Enkpay</option>
-                                                            </select>
-                                                        </div>
-
-
                                                         <div class="col-xl-12 my-4 d-flex justify-content-start col-sm-12">
-                                                            <button type="submit" class="btn btn-primary">Pay Now</button>
+                                                            <button type="submit" class="btn btn-primary">Vend Now</button>
                                                         </div>
 
 

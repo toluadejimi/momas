@@ -77,7 +77,7 @@
 
                                         <h6 class="element-header ">Filter</h6>
 
-                                        <form action="filter-by-estate" method="post">
+                                        <form action="filter-meter" method="post">
                                             @csrf
 
                                             <div class="row">
@@ -91,6 +91,12 @@
                                                         @endforeach
 
                                                     </select>
+                                                </div>
+
+
+                                                <div class="col-3">
+                                                    <label>Enter Meter No</label>
+                                                    <input type="number" class="form-control" name="meterNo">
                                                 </div>
 
                                                 <div class="col-2 mt-3">
@@ -387,6 +393,67 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-md-12 col-xl-12">
+
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="row">
+
+                                    <div class="element-box">
+
+                                        <h6 class="element-header ">Filter</h6>
+
+                                        <form action="filter-meter" method="post">
+                                            @csrf
+
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <label>Choose Estate</label>
+                                                    <select  class="form-control" required name="estate_id">
+
+                                                        <option value=" ">All</option>
+                                                        @foreach($estate as $data)
+                                                            <option value="{{$data->id}}">{{$data->title}}</option>
+                                                        @endforeach
+
+                                                    </select>
+                                                </div>
+
+
+                                                <div class="col-3">
+                                                    <label>Enter Meter No</label>
+                                                    <input type="number" class="form-control" name="meterNo">
+                                                </div>
+
+                                                <div class="col-2 mt-3">
+                                                    <button type="submit" class="btn btn-primary w-100">Filter
+                                                    </button>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="col-4 mt-4 row">
+
+
+
+                                            </div>
+
+
+                                        </form>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
 
 
                 </div>
