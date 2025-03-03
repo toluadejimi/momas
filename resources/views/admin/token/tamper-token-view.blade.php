@@ -95,7 +95,7 @@
 
                                                             <div class="col-xl-6 my-2 col-sm-12">
                                                                 <label class="my-2">Amount</label>
-                                                                <input type="number" class="form-control mb-3" name="amount"
+                                                                <input type="number" class="form-control mb-3" value="{{$tamper_amount}}" readonly name="amount"
                                                                        required>
                                                             </div>
 

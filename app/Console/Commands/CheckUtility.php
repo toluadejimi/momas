@@ -64,8 +64,7 @@ class CheckUtility extends Command
                     $mssage = "Unknown duration '{$payment->duration}' for UtilityPayment ID: {$payment->id}";
                     send_notification($mssage);
 
-                    Log::warning("Unknown duration '{$payment->duration}' for UtilityPayment ID: {$payment->id}");
-                    continue;
+
             }
 
             DB::beginTransaction();

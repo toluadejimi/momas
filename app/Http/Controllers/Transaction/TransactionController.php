@@ -950,7 +950,6 @@ class TransactionController extends Controller
 
     public function get_account_details(request $request)
     {
-
         $amount = Setting::where('id', 1)->first()->first()->admin_fee;
         $key = Setting::where('id', 1)->first()->first()->enkpay_key;
         $trx_id = "MOMAS".random_int(000000, 999999);

@@ -119,6 +119,7 @@ class TokenController extends Controller
 
             $data['estate'] = Estate::all();
             $data['preview'] = null;
+            $data['tamper_amount'] = Setting::where('id', 1)->first()->clear_tamper_fee;
             $data['credit_tokens'] = TamperToken::latest()->paginate('50');
 
 
@@ -136,6 +137,7 @@ class TokenController extends Controller
             $data['tariff'] = TarrifState::where('estate_id', user()->estate_id)->get();
             $data['title'] = Estate::where('id', Auth::user()->estate_id)->first()->title;
             $data['preview'] = null;
+            $data['tamper_amount'] = Setting::where('id', 1)->first()->clear_tamper_fee;
             $data['credit_tokens'] = TamperToken::latest()->where('estate_id', Auth::user()->estate_id)->paginate('50');
 
             return view('admin.token.tamper-token-view', $data);
@@ -876,9 +878,7 @@ class TokenController extends Controller
             if ($meter->estate_id != $estate_id) {
                 return back()->with('error', 'Meter not does not belong to estate selected');
             }
-            if ($request->amount < 1000) {
-                return back()->with('error', 'Amount can not be less than NGN 1,000');
-            }
+
 
             if ($user == null) {
                 return back()->with('error', 'Meter has not been attached to any customer');
@@ -959,9 +959,7 @@ class TokenController extends Controller
             if ($meter->estate_id != $estate_id) {
                 return back()->with('error', 'Meter not does not belong to estate selected');
             }
-            if ($request->amount < 1000) {
-                return back()->with('error', 'Amount can not be less than NGN 1,000');
-            }
+
 
             if ($user == null) {
                 return back()->with('error', 'Meter has not been attached to any customer');
@@ -1310,14 +1308,20 @@ class TokenController extends Controller
 
 
         $est = Estate::where('id', $request->estate_name)->first();
-        if ($est->charge_fee < 0) {
-            $fee_in_percent = $est->charge_fee_percent;
-            $fee = ($fee_in_percent / $request->amount) * 100;
-        } else {
-            $fee = $est->charge_fee;
+
+        if ($request->amount > 0) {
+
+            if ($est->charge_fee < 0) {
+                $fee_in_percent = $est->charge_fee_percent;
+                $fee = ($fee_in_percent / $request->amount) * 100;
+            } else {
+                $fee = $est->charge_fee;
+            }
+
         }
 
-        $amount = $request->amount - $fee;
+
+        $amount = $request->amount ?? 0;
         $trx_id = "TRX" . random_int(000000000, 9999999999);
         $estate_id = Estate::where('id', $request->estate_name)->first()->id;
 
@@ -1325,10 +1329,10 @@ class TokenController extends Controller
         $cdt->user_id = $request->user_id;
         $cdt->trx_id = $trx_id;
         $cdt->meterNo = $request->meterNo;
-        $cdt->amount = $amount;
-        $cdt->amount_charged = $request->amount;
-        $cdt->fee = $fee;
-        $cdt->vat = $request->vat;
+        $cdt->amount = $amount ?? 0;
+        $cdt->amount_charged = $request->amount ?? 0;
+        $cdt->fee = 0;
+        $cdt->vat = $request->vat ?? 0;
         $cdt->estate_name = Estate::where('id', $request->estate_name)->first()->title;;
         $cdt->estate_id = $estate_id;
         $cdt->tariff_id = TarrifState::where('amount', $request->tariff_amount)->first()->tariff_id;
@@ -1338,7 +1342,6 @@ class TokenController extends Controller
         $cdt->unitkwh = $request->unit;
         $cdt->tariffPerKWatt = $request->tariffPerKWatt;
         $cdt->save();
-
 
 
         try {
@@ -1574,6 +1577,94 @@ class TokenController extends Controller
         }
 
 
+        if ($request->pay_type == 'vend') {
+
+
+
+            try {
+
+
+                $meterNo = $request->meterNo;
+                $meter = Meter::where('meterNo', $meterNo)->first();
+                $trx = TamperToken::where('trx_id', $trx_id)->first();
+                $traff_id = TamperToken::where('trx_id', $trx_id)->first();
+
+
+                $databody = [
+                    'meterType' => $meter->KRN1,
+                    'meterNo' => $meter->meterNo,
+                    'sgc' => (int)$meter->OldSGC,
+                    'ti' => $trx->tariff_id,
+                    'sbc' => 5,
+                    'amount' => (int)$trx->tariffPerKWatt,
+                ];
+
+
+                $no_kct_response = Http::withOptions([
+                    'verify' => false,
+                    'timeout' => 10,
+                ])->post('http://169.239.189.91:19071/msetokenGen', $databody);
+                $error = $no_kct_response->json() ?? null;
+
+
+                if ($no_kct_response->successful()) {
+                    $no_kct = $no_kct_response->json();
+                    $no_kct_data = json_decode($no_kct, true);
+                    $status = $no_kct_data['code'] ?? null;
+
+
+                    if ($status == "SUCCESS") {
+
+                        $no_kct_token = $no_kct_data['tokens'][0];
+                        TamperToken::where('trx_id', $trx_id)->update([
+                            'token' => $no_kct_token,
+                            'status' => 2
+                        ]);
+
+                        $trx_id = $trx_id;
+                        $user = User::where('id', $trx->user_id)->first();
+                        $email = $user->email;
+                        $token = $no_kct_token;
+                        $amount = $trx->amount;
+
+
+                        send_email_token($email, $token, $amount);
+
+
+                        Transaction::where('trx_id', $trx)->update([
+                            'status' => 2,
+                        ]);
+
+                        $type = "tamper";
+                        return redirect("admin/recepit?trx_id=$trx_id&type=$type");
+
+                    } else {
+
+                        Transaction::where('trx_id', $trx)->update([
+                            'service' => "TAMPER TOKEN PURCHASE",
+                            'service_type' => "meter",
+                            'status' => 3,
+                            'tariff_id' => $request->tariff_id,
+                            'note' => json_encode($no_kct_data) . "|" . json_encode($databody)
+                        ]);
+
+                        User::where('id', Auth::id())->increment('main_wallet', $trx->amount);
+
+
+                        return redirect('admin/tamper-token')->with('error', $error['errors'][0]['title'] ?? $no_kct_response->json() . " | " . json_encode($databody));
+                    }
+
+
+                    $code = 422;
+                    $message = "Payment not available at the moment, Kindly select other payment option";
+                    return error($message, $code);
+
+
+                }
+            } catch (Exception $e) {
+                return back()->with('error', $e);
+            }
+        }
     }
 
     public function generate_kctclear_token(request $request)
@@ -3808,7 +3899,7 @@ class TokenController extends Controller
                 $data['full_name'] = $user_comp->first_name . " " . $user_comp->last_name;
                 $data['address'] = $user_comp->address . "," . $user_comp->city . "," . $user_comp->state;
                 $data['phone'] = $user_comp->phone;
-                $data['trx_id'] = $trx_comp->trx_id;
+                $data['ref'] = $trx_comp->trx_id;
                 $data['token'] = $trx_comp->token;
                 $data['amount'] = $trx_comp->amount;
                 $data['vat_amount'] = $trx_comp->vatAmount;
@@ -3816,7 +3907,7 @@ class TokenController extends Controller
                 $data['tariff_amount'] = $trx_comp->tariff_amount;
                 $data['unit'] = $trx_comp->unitkwh;
                 $data['title'] = "Clear Tamper Token";
-                $data['date'] = date('D-M-Y');
+                $data['date'] = date('d-m-y h:i:s');
                 $data['meter_no'] = $trx_comp->meterNo;
 
 
