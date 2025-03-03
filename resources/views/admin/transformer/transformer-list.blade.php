@@ -89,7 +89,8 @@
                                        class="table table-striped table-bordered dt-responsive nowrap">
                                     <thead>
                                     <tr>
-                                        <th scope="col" class="cursor-pointer">Title</th>
+                                        <th scope="col" class="cursor-pointer">ID</th>
+                                        <th scope="col" class="cursor-pointer">Estate</th>
                                         <th scope="col" class="cursor-pointer">State</th>
                                         <th scope="col" class="cursor-pointer">City</th>
                                         <th scope="col" class="cursor-pointer">Estate</th>
