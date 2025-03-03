@@ -185,10 +185,9 @@
                                             Meter NO : <b>{{$meter_no}}</b></br><br>
 {{--                                            Unit :  <b>{{$unit ?? "0.00"}}KWH</b></br><br>--}}
                                             Token : <b>{{$token ?? "12345678"}}</b></br><br>
-                                        @elseif($title == "clear_credit_token")
+                                        @elseif($title == "Clear Credit Token")
                                             TRX ID : <b>{{$ref}}</b></br><br>
                                             Meter NO : <b>{{$meter_no}}</b></br><br>
-                                            Unit :  <b>{{$unit ?? "0.00"}}KWH</b></br><br>
                                             Token : <b>{{$token ?? "12345678"}}</b></br><br>
                                         @else
                                             TRX ID : <b>{{$ref}}</b></br><br>

@@ -69,6 +69,50 @@ class TokenController extends Controller
     }
 
 
+    public function clear_credit_token_index()
+    {
+
+
+        if (Auth::user()->role == 0) {
+
+
+            $data['estate'] = Estate::all();
+            $data['preview'] = null;
+            $data['credit_tokens'] = ClearcreditToken::latest()->paginate('50');
+            $data['amount'] = Setting::where('id', 1)->first()->clear_credit_fee;
+
+            return view('admin.token.clear-credit-token-view', $data);
+
+
+        } elseif (Auth::user()->role == 1) {
+
+        } elseif (Auth::user()->role == 2) {
+
+        } elseif (Auth::user()->role == 3) {
+
+
+            $data['estate_id'] = Auth::user()->estate_id;
+            $data['title'] = Estate::where('id', Auth::user()->estate_id)->first()->title;
+            $data['preview'] = null;
+            $data['credit_tokens'] = ClearcreditToken::latest()->where('estate_id', Auth::user()->estate_id)->paginate('50');
+            $data['amount'] = Setting::where('id', 1)->first()->clear_credit_fee;
+
+
+            return view('admin.token.clear-credit-token-view', $data);
+
+
+        } elseif (Auth::user()->role == 4) {
+
+        } elseif (Auth::user()->role == 5) {
+
+        } else {
+
+        }
+
+
+    }
+
+
     public function compensation_index()
     {
 
@@ -153,6 +197,9 @@ class TokenController extends Controller
 
     }
 
+
+
+
     public function kct_token_index()
     {
 
@@ -197,43 +244,6 @@ class TokenController extends Controller
 
     }
 
-    public function clear_credit_token_preview()
-    {
-        if (Auth::user()->role == 0) {
-
-
-            $data['estate'] = Estate::all();
-            $data['preview'] = null;
-            $data['credit_tokens'] = ClearcreditToken::latest()->paginate('50');
-
-            return view('admin.token.clear-credit-token-view', $data);
-
-
-        } elseif (Auth::user()->role == 1) {
-
-        } elseif (Auth::user()->role == 2) {
-
-        } elseif (Auth::user()->role == 3) {
-
-
-            $data['estate_id'] = Auth::user()->estate_id;
-            $data['title'] = Estate::where('id', Auth::user()->estate_id)->first()->title;
-            $data['preview'] = null;
-            $data['credit_tokens'] = ClearcreditToken::latest()->where('estate_id', Auth::user()->estate_id)->paginate('50');
-
-            return view('admin.token.clear-credit-token-view', $data);
-
-
-        } elseif (Auth::user()->role == 4) {
-
-        } elseif (Auth::user()->role == 5) {
-
-        } else {
-
-        }
-
-
-    }
 
 
     //Validate
@@ -374,7 +384,7 @@ class TokenController extends Controller
         if (Auth::user()->role == 0) {
 
 
-            $estate_id = Estate::where('title', $request->estate_id)->first()->id;
+            $estate_id = $request->estate_id;
             $meter = Meter::where('meterNo', $request->meterNo)->first() ?? null;
             $user = User::where('meterNo', $request->meterNo)->first() ?? null;
 
@@ -384,9 +394,7 @@ class TokenController extends Controller
             if ($meter->estate_id != $estate_id) {
                 return back()->with('error', 'Meter not does not belong to estate selected');
             }
-            if ($request->amount < 1000) {
-                return back()->with('error', 'Amount can not be less than NGN 1,000');
-            }
+
 
             if ($user == null) {
                 return back()->with('error', 'Meter has not been attached to any customer');
@@ -423,7 +431,7 @@ class TokenController extends Controller
             $data['credit_tokens'] = ClearcreditToken::latest()->paginate('50');
 
 
-            return view('admin.token.clear-credit-token-view', $data);
+            return view('admin.token.clear-credit-preview', $data);
 
 
         } elseif (Auth::user()->role == 1) {
@@ -1612,7 +1620,7 @@ class TokenController extends Controller
                         $email = $user->email;
                         $token = $no_kct_token;
 
-                        send_email_token_others($email, $token, $meterNo);
+                        send_email_kct_token($email, $token, $meterNo);
 
 
                         Transaction::where('trx_id', $trx)->update([
@@ -2030,14 +2038,12 @@ class TokenController extends Controller
         $estate_id = TarrifState::where('estate_id', $request->estate_name)->first()->id;
         $cdt = new ClearcreditToken();
         $cdt->user_id = $request->user_id;
-        $cdt->tariff_amount = $request->tariff_amount;
         $cdt->trx_id = $trx_id;
         $cdt->meterNo = $request->meterNo;
         $cdt->amount = $request->amount;
         $cdt->vat = $request->vat;
         $cdt->estate_name = $request->estate_name;
-        $cdt->estate_id = $estate_id;
-        $cdt->tariff_id = TarrifState::where('estate_id', $estate_id)->first()->tariff_id;
+        $cdt->estate_id = $request->estate_name;
         $cdt->vatAmount = $request->vatAmount;
         $cdt->costOfUnit = $request->costOfUnit;
         $cdt->tariffPerKWatt = $request->tariffPerKWatt;
@@ -2045,6 +2051,102 @@ class TokenController extends Controller
 
 
         try {
+
+            if ($request->pay_type == 'vend') {
+
+                    Transaction::where('trx_id', $trx_id)->update(['status' => 2]);
+                    $meterNo = ClearcreditToken::where('trx_id', $trx_id)->first()->meterNo;
+                    $meter = Meter::where('meterNo', $meterNo)->first();
+                    $trx = ClearcreditToken::where('trx_id', $trx_id)->first();
+                    $traff_id = ClearcreditToken::where('trx_id', $trx_id)->first();
+                    $amount = (float)number_format((float)$trx->tariffPerKWatt, 2, '.', '');
+
+
+                    $databody = [
+                        'meterType' => $meter->KRN1,
+                        'meterNo' => $meter->meterNo,
+                        'sgc' => (int)$meter->OldSGC,
+                        'ti' => $trx->tariff_id,
+                        'sbc' => 1,
+                        'amount' => $amount,
+                    ];
+
+
+                    $no_kct_response = Http::withOptions([
+                        'verify' => false,
+                        'timeout' => 10,
+                    ])->post('http://169.239.189.91:19071/msetokenGen', $databody);
+                    $error = $no_kct_response->json() ?? null;
+
+
+                    if ($no_kct_response->successful()) {
+                        $no_kct = $no_kct_response->json();
+                        $no_kct_data = json_decode($no_kct, true);
+                        $status = $no_kct_data['code'] ?? null;
+
+
+                        if ($status == "SUCCESS") {
+
+                            $no_kct_token = $no_kct_data['tokens'][0];
+                            ClearcreditToken::where('trx_id', $trx_id)->update([
+
+                                'token' => $no_kct_token,
+                                'status' => 2
+
+                            ]);
+
+                            $trx_id = $trx_id;
+                            $user = User::where('id', $trx->user_id)->first();
+                            $email = $user->email;
+                            $token = $no_kct_token;
+                            $title = "Clear Credit Token";
+
+
+                            send_email_token_others($email, $token, $meterNo, $title);
+
+
+                            Transaction::where('trx_id', $trx_id)->update([
+                                'status' => 2,
+                            ]);
+
+                            $type = "clear_credit";
+                            return redirect("admin/recepit?trx_id=$trx_id&type=$type");
+
+
+                        } else {
+
+                            Transaction::where('trx_id', $trx)->update([
+                                'service' => "CLEAR CREDIT TOKEN PURCHASE",
+                                'service_type' => "meter",
+                                'status' => 3,
+                                'tariff_id' => $request->tariff_id,
+                                'note' => json_encode($no_kct_data) . "|" . json_encode($databody)
+
+
+                            ]);
+
+                            User::where('id', Auth::id())->increment('main_wallet', $trx->amount);
+
+
+                            return redirect('admin/clear-credit-token')->with('error', $error['errors'][0]['title'] ?? $no_kct_response->json() . " | " . json_encode($databody));
+
+                        }
+
+
+                    }
+
+
+                    return redirect('admin/clear-credit-token')->with('error', $error['errors'][0]['title'] ?? $no_kct_response->json() . " | " . json_encode($databody));
+
+
+            }
+
+        }catch (Exception $e) {
+                return back()->with('error', $e);
+            }
+
+
+            try {
 
             if ($request->pay_type == 'flutterwave') {
 
@@ -3993,7 +4095,7 @@ class TokenController extends Controller
         }
 
 
-        if ($request->type == "clear_credit_token") {
+        if ($request->type == "clear_credit") {
 
             $trx_comp = ClearcreditToken::where('trx_id', $request->trx_id)->first() ?? null;
             $user_comp = User::where('id', $trx_comp->user_id)->first() ?? null;
@@ -4004,7 +4106,7 @@ class TokenController extends Controller
                 $data['full_name'] = $user_comp->first_name . " " . $user_comp->last_name;
                 $data['address'] = $user_comp->address . "," . $user_comp->city . "," . $user_comp->state;
                 $data['phone'] = $user_comp->phone;
-                $data['trx_id'] = $trx_comp->trx_id;
+                $data['ref'] = $trx_comp->trx_id;
                 $data['token'] = $trx_comp->token;
                 $data['amount'] = $trx_comp->amount;
                 $data['vat_amount'] = $trx_comp->vatAmount;

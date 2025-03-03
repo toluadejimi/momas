@@ -461,6 +461,10 @@
                                                         <a href="view-user?id={{$data->user_id}}">{{$user->last_name ?? "name"}} {{$user->first_name ?? "name"}}</a>
 
                                                     </td>
+
+
+
+
                                                     <td>{{$data->meterNo}}</a> </td>
 
                                                     <td>
