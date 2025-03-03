@@ -93,7 +93,6 @@
                                         <th scope="col" class="cursor-pointer">Estate</th>
                                         <th scope="col" class="cursor-pointer">State</th>
                                         <th scope="col" class="cursor-pointer">City</th>
-                                        <th scope="col" class="cursor-pointer">Estate</th>
                                         <th scope="col" class="cursor-pointer">Capacity</th>
                                         <th scope="col" class="cursor-pointer desc">Date Registered</th>
                                         <th scope="col" class="cursor-pointer desc">Action</th>
@@ -110,7 +109,6 @@
                                             <td><a href="view-transformer?id={{$data->id}}">{{$data->Title}}</a></td>
                                             <td>{{$data->State ?? "state"}}</td>
                                             <td>{{$data->City ?? "city"}}</td>
-                                            <td>{{$data->estate ?? "Estate"}}</td>
                                             <td>{{$data->Capacity ?? "Capacity"}} KVA</td>
                                             <td>{{$data->created_at}}</td>
                                             <td><a href="transformer-delete?id={{$data->id}}" onclick="return confirmDelete();" class="btn btn-danger">Delete</a>
