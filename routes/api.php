@@ -101,6 +101,7 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
 
     //
     Route::post('buy-meter', [MeterController::class, 'buy_meter_token']);
+    Route::post('request-meter', [MeterController::class, 'request_meter']);
     Route::post('retry-meter', [MeterController::class, 'retry_meter_token']);
 
     Route::post('buy-meter-others', [MeterController::class, 'pay_for_others_meter_token']);

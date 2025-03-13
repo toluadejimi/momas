@@ -7,8 +7,8 @@ use App\Models\CreditToken;
 use App\Models\Estate;
 use App\Models\KctMeterToken;
 use App\Models\Meter;
+use App\Models\MeterRequest;
 use App\Models\MeterToken;
-use App\Models\SpreadPayment;
 use App\Models\Tariff;
 use App\Models\TarrifState;
 use App\Models\Transaction;
@@ -16,12 +16,9 @@ use App\Models\Transformer;
 use App\Models\User;
 use App\Models\UtilitiesPayment;
 use App\Models\Utitlity;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Str;
 
 class MeterController extends Controller
 {
@@ -55,11 +52,9 @@ class MeterController extends Controller
     public function searchMeter(request $request)
     {
         $query = $request->get('q');
-        $meters = Meter::where('meterNo', 'LIKE', '%' . $query . '%')->where('user_id',  null)->get();
+        $meters = Meter::where('meterNo', 'LIKE', '%' . $query . '%')->where('user_id', null)->get();
         return response()->json($meters);
     }
-
-
 
 
     public function validate_mobile_meter(request $request)
@@ -83,7 +78,6 @@ class MeterController extends Controller
         }
 
 
-
         // $data['meter_type'] = $meter_type;
 
         $es_id = $request->estateId ?? null;
@@ -92,18 +86,17 @@ class MeterController extends Controller
         $user_id = $user->id;
 
 
-
         if ($duration == null || $estate_id == null) {
             $minvend = "Not set";
         } else {
 
 
             $get_vend = vend($duration, $estate_id, $user_id);
-                if ($get_vend == null) {
-                    $minvend = "Not set";
-                } else {
-                    $minvend = $get_vend;
-                }
+            if ($get_vend == null) {
+                $minvend = "Not set";
+            } else {
+                $minvend = $get_vend;
+            }
 
 
         }
@@ -113,7 +106,7 @@ class MeterController extends Controller
         $data['min_purchase'] = (int)$min_pur;
         $user_info = User::where('meterNo', $request->meterNo)->first();
         $estate_id = $user_info->estate_id ?? null;
-        if($estate_id == null){
+        if ($estate_id == null) {
 
             $message = "User not attached to any estate";
             $code = 422;
@@ -122,7 +115,7 @@ class MeterController extends Controller
         }
         $title = Tariff::where('estate_id', $user_info->estate_id)->first()->title ?? null;
 
-        if($title == null){
+        if ($title == null) {
 
             $message = "Set a tariff for estate selected";
             $code = 422;
@@ -131,10 +124,7 @@ class MeterController extends Controller
         }
 
 
-
-
         $tariffs = Tariff::where('estate_id', $user_info->estate_id)->get();
-
 
 
         $data['customer_name'] = $user->first_name . " " . $user->last_name;
@@ -165,9 +155,6 @@ class MeterController extends Controller
 
 
     }
-
-
-
 
 
     public function validate_meter(request $request)
@@ -201,17 +188,16 @@ class MeterController extends Controller
         $user_id = $user->id;
 
 
-
         if ($duration == null || $estate_id == null) {
             $minvend = "Not set";
         } else {
 
-                $get_vend = vend($duration, $estate_id, $user_id);
-                if ($get_vend == null) {
-                    $minvend = "Not set";
-                } else {
-                    $minvend = $get_vend;
-                }
+            $get_vend = vend($duration, $estate_id, $user_id);
+            if ($get_vend == null) {
+                $minvend = "Not set";
+            } else {
+                $minvend = $get_vend;
+            }
 
         }
 
@@ -220,21 +206,21 @@ class MeterController extends Controller
         $data['min_purchase'] = (int)$min_pur;
         $user_info = User::where('meterNo', $request->meterNo)->first();
         $estate_id = $user_info->estate_id ?? null;
-        if($estate_id == null){
+        if ($estate_id == null) {
             return back()->with('error', "User not attached to any estate");
         }
         $title = Tariff::where('estate_id', $user_info->estate_id)->first()->title ?? null;
-        if($title == null){
+        if ($title == null) {
             return back()->with('error', "Set a tariff for estate selected");
         }
 
         $tariff_index = User::where('id', $user_info->tariffid)->first()->tariff_index ?? null;
-        if($tariff_index == null){
+        if ($tariff_index == null) {
             return back()->with('error', "Tariff Index not set for Customer");
         }
 
         $get_tariffs = Tariff::where('user_id', $user_info->id)->first() ?? null;
-        if($get_tariffs == null){
+        if ($get_tariffs == null) {
             $tarf = new Tariff();
             $tarf->title = $title;
             $tarf->tariff_index = $user_info->tariffid;
@@ -265,6 +251,7 @@ class MeterController extends Controller
     }
 
 
+{
     public function buy_meter_token(request $request)
     {
 
@@ -283,7 +270,6 @@ class MeterController extends Controller
 //        }
 
 
-
         $amount = $request->amount;
         $meterNo = $request->meterNo;
         $trx = $request->trxref;
@@ -298,22 +284,7 @@ class MeterController extends Controller
         $tariff_index = Tariff::where('id', $request->tariff_id)->first()->tariff_index ?? null;
 
         $duration = Estate::where('id', Auth::user()->estate_id)->first()->duration ?? null;
-        if($duration == "weekly" && $utility_amount > 0){
-
-                UtilitiesPayment::where('user_id', Auth::id())->where('estate_id', Auth::user()->estate_id)->decrement('amount', $utility_amount);
-                $trx = new Transaction();
-                $trx->user_id = Auth::id();
-                $trx->pay_type = "utility";
-                $trx->amount = $request->utility_amount;
-                $trx->fee = 0;
-                $trx->status = 2;
-                $trx->trx_id = "UTL".random_int(0000, 9999);
-                $trx->payment_ref = 0 ?? null;
-                $trx->service_type = "utility_payment";
-                $trx->save();
-
-
-            }elseif ($duration == "monthly" && $utility_amount > 0){
+        if ($duration == "weekly" && $utility_amount > 0) {
 
             UtilitiesPayment::where('user_id', Auth::id())->where('estate_id', Auth::user()->estate_id)->decrement('amount', $utility_amount);
             $trx = new Transaction();
@@ -322,12 +293,13 @@ class MeterController extends Controller
             $trx->amount = $request->utility_amount;
             $trx->fee = 0;
             $trx->status = 2;
-            $trx->trx_id = "UTL".random_int(0000, 9999);
+            $trx->trx_id = "UTL" . random_int(0000, 9999);
             $trx->payment_ref = 0 ?? null;
             $trx->service_type = "utility_payment";
             $trx->save();
 
-        }elseif ($duration == "yearly" && $utility_amount > 0){
+
+        } elseif ($duration == "monthly" && $utility_amount > 0) {
 
             UtilitiesPayment::where('user_id', Auth::id())->where('estate_id', Auth::user()->estate_id)->decrement('amount', $utility_amount);
             $trx = new Transaction();
@@ -336,14 +308,27 @@ class MeterController extends Controller
             $trx->amount = $request->utility_amount;
             $trx->fee = 0;
             $trx->status = 2;
-            $trx->trx_id = "UTL".random_int(0000, 9999);
+            $trx->trx_id = "UTL" . random_int(0000, 9999);
+            $trx->payment_ref = 0 ?? null;
+            $trx->service_type = "utility_payment";
+            $trx->save();
+
+        } elseif ($duration == "yearly" && $utility_amount > 0) {
+
+            UtilitiesPayment::where('user_id', Auth::id())->where('estate_id', Auth::user()->estate_id)->decrement('amount', $utility_amount);
+            $trx = new Transaction();
+            $trx->user_id = Auth::id();
+            $trx->pay_type = "utility";
+            $trx->amount = $request->utility_amount;
+            $trx->fee = 0;
+            $trx->status = 2;
+            $trx->trx_id = "UTL" . random_int(0000, 9999);
             $trx->payment_ref = 0 ?? null;
             $trx->service_type = "utility_payment";
             $trx->save();
 
 
         }
-
 
 
         $meter = Meter::where('MeterNo', $meterNo)->first() ?? null;
@@ -360,8 +345,6 @@ class MeterController extends Controller
                 'verify' => false,
                 'timeout' => 10,
             ])->post('http://169.239.189.91:19071/tokenGen', $databody);
-
-
 
 
             if ($response->successful()) {
@@ -395,19 +378,16 @@ class MeterController extends Controller
                         $status = $kct_data['code'] ?? null;
 
 
-
-
-
                         if ($status == "SUCCESS") {
 
 
-                            $trx_id = "TRX".random_int(00000, 999999);
+                            $trx_id = "TRX" . random_int(00000, 999999);
                             $estate_id = Auth::user()->estate_id;
                             $cdt = new CreditToken();
                             $cdt->user_id = Auth::user()->id;
                             $cdt->trx_id = $trx_id;
                             $cdt->meterNo = $meterNo;
-                            $cdt->amount =  $total_paid ?? 0;
+                            $cdt->amount = $total_paid ?? 0;
                             $cdt->vat = $vat_amount ?? 0;
                             $cdt->estate_name = Estate::where('id', Auth::user()->estate_id)->first()->title ?? "NAME";
                             $cdt->estate_id = $estate_id;
@@ -552,7 +532,7 @@ class MeterController extends Controller
                     $data['amount'] = $total_paid;
                     $data['meterNo'] = $request->meterNo;
 
-                    $vend_amount =  round($vendong_amount, 2);
+                    $vend_amount = round($vendong_amount, 2);
                     $vatt = round($vat_amount, 2);
                     $uun = round($unit, 2);
 
@@ -1041,20 +1021,19 @@ class MeterController extends Controller
 
         if (Auth::user()->role == 0) {
 
-            if($request->meterNo == null){
+            if ($request->meterNo == null) {
 
                 $data['meters'] = Meter::count();
-                $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('estate_id',$request->estate_id)->paginate('20');
+                $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('estate_id', $request->estate_id)->paginate('20');
                 $data['estate'] = Estate::where('status', 2)->get();
                 return view('admin/meter/meter-lists', $data);
 
-            }else{
+            } else {
                 $data['meters'] = Meter::count();
-                $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('meterNo',$request->meterNo)->paginate('20');
+                $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('meterNo', $request->meterNo)->paginate('20');
                 $data['estate'] = Estate::where('status', 2)->get();
                 return view('admin/meter/meter-lists', $data);
             }
-
 
 
         } elseif (Auth::user()->role == 1) {
@@ -1064,19 +1043,18 @@ class MeterController extends Controller
 
         } elseif (Auth::user()->role == 3) {
 
-            if($request->meterNo == null) {
+            if ($request->meterNo == null) {
 
                 $data['meters'] = Meter::count();
                 $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('estate_id', Auth::user()->estate_id)->paginate('20');
                 return view('admin/meter/meter-lists', $data);
 
-            }else{
+            } else {
 
                 $data['meters'] = Meter::count();
                 $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('meterNo', $request->meterNo)->paginate('20');
                 return view('admin/meter/meter-lists', $data);
             }
-
 
 
         } elseif (Auth::user()->role == 4) {
@@ -1089,7 +1067,8 @@ class MeterController extends Controller
 
 
     }
-        public function list_meter(request $request)
+
+    public function list_meter(request $request)
     {
 
         if (Auth::user()->role == 0) {
@@ -1446,20 +1425,52 @@ class MeterController extends Controller
         $meterNo = $request->input('meterNo');
 
 
-
         $user_info = User::where('meterNo', $request->meterNo)->first();
         $estate_id = $user_info->estate_id ?? null;
-        if($estate_id == null){
+        if ($estate_id == null) {
             return 1;
         }
 
         $title = Tariff::where('estate_id', $user_info->estate_id)->first()->title ?? null;
-        if($title == null){
+        if ($title == null) {
             return 2;
         }
 
         $tariffs = Tariff::where('estate_id', $user_info->estate_id)->get(['id', 'type']);
         return response()->json(['tariffs' => $tariffs]);
+    }
+
+
+    public function request_meter(request $request)
+    {
+
+
+        $ck_email = MeterRequest::where('email', $request->email)->where('status', 0)->first() ?? null;
+        if ($ck_email) {
+
+
+            return response()->json([
+                'status' => false,
+                'message' => "Your request is processing...."
+            ], 422);
+
+
+        } else {
+
+            $met = new MeterRequest();
+            $met->user_id = Auth::user()->id;
+            $met->email = $request->email;
+            $met->fullName = $request->fullName;
+            $met->phoneNumber = $request->phoneNumber;
+            $met->address = $request->address;
+            $met->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => "We have received your request, We will get back to you shortly"
+            ], 422);
+
+        }
     }
 
 
