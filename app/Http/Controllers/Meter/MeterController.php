@@ -249,9 +249,6 @@ class MeterController extends Controller
 
 
     }
-
-
-{
     public function buy_meter_token(request $request)
     {
 
