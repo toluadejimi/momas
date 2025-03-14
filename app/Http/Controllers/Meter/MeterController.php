@@ -1449,7 +1449,7 @@ class MeterController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => "Your request is processing...."
-            ], 422);
+            ], 200);
 
 
         } else {
