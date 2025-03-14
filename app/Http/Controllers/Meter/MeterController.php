@@ -1465,7 +1465,7 @@ class MeterController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => "We have received your request, We will get back to you shortly"
-            ], 422);
+            ], 200);
 
         }
     }
