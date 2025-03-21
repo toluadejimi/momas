@@ -611,7 +611,7 @@ class MeterController extends Controller
         }
 
 
-        $user_wallet = User::where('id', Auth::id())->main_wallet;
+        $user_wallet = User::where('id', Auth::id())->first()->main_wallet;
         if($user_wallet < $trx->amount){
             return response()->json([
                 'status' => false,
