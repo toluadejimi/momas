@@ -862,7 +862,7 @@ class PosController extends Controller
                         'note' => json_encode($no_kct_response)
                     ]);
 
-                    User::where('id', Auth::id())->increment('main_wallet', $trx->unit_amount);
+                    User::where('id', Auth::id())->increment('main_wallet', $trx->amount);
                     return response()->json([
                         'status' => false,
                         'message' => "Meter vending failed, Retry again on transaction history"
