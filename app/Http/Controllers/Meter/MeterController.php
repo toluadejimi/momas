@@ -610,11 +610,22 @@ class MeterController extends Controller
 
         }
 
+
+        $user_wallet = User::where('id', Auth::id())->main_wallet;
+        if($user_wallet < $trx->amount){
+            return response()->json([
+                'status' => false,
+                'message' => "Insufficient Funds to retry vending",
+            ], 422);
+        }
+
+
+
         $tariff_index = Tariff::where('id', $trx->tariff_id)->first()->tariff_index ?? null;
         $user = User::where('id', $trx->user_id)->first();
         $meter = Meter::where('user_id', $trx->user_id)->first();
 
-        User::where('id', $user->id)->decrement('main_wallet', $trx->unit_amount);
+        User::where('id', $user->id)->decrement('main_wallet', $trx->amount);
 
 
         if ($meter != null && $meter->NeedKCT == "on") {
