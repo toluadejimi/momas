@@ -625,7 +625,6 @@ class MeterController extends Controller
         $user = User::where('id', $trx->user_id)->first();
         $meter = Meter::where('user_id', $trx->user_id)->first();
 
-        User::where('id', $user->id)->decrement('main_wallet', $trx->amount);
 
 
         if ($meter != null && $meter->NeedKCT == "on") {
@@ -707,6 +706,10 @@ class MeterController extends Controller
                             $kct_token = $kct_data['tokens'];
                             $kct_token1 = $kct_token[0];
                             $kct_token2 = $kct_token[1];
+
+
+                            User::where('id', $user->id)->decrement('main_wallet', $trx->amount);
+
 
                             send_kct_email_token($email, $token, $amount, $kct_token1, $kct_token2);
 
@@ -802,6 +805,9 @@ class MeterController extends Controller
                     $email = $user->email;
 
                     send_email_token($email, $no_kct_token, $amount);
+
+                    User::where('id', $user->id)->decrement('main_wallet', $trx->amount);
+
 
                     return response()->json([
                         'status' => true,
