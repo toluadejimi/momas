@@ -555,6 +555,20 @@ class TransactionController extends Controller
 
     }
 
+    public function get_trx(request $request)
+    {
+
+        $get_trx = Transaction::where('id', $request->id)-first();
+        $token = CreditToken::select('meterNo', 'token')->where('trx_id', $get_trx->trx_id)->first();
+        $get_trx['token'] = $token;
+
+        return response()->json([
+            'status' => true,
+            'data' => $get_trx,
+        ], 200);
+
+    }
+
 
     public function estate_transactions(request $request)
     {
