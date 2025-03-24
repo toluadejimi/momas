@@ -15,7 +15,7 @@ class Transaction extends Model
         'debit' => 'integer',
         'credit' => 'integer',
         'balance' => 'integer',
-        'amount' => 'integer',
+        'amount' => 'string',
         'fee' => 'integer',
         'from_user_id' => 'integer',
         'main_wallet' => 'integer',
