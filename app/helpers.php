@@ -570,7 +570,7 @@ if (!function_exists('send_notification')) {
     function send_notification($message)
     {
 
-        $response = Http::post('https://api.telegram.org/bot7299035085:AAFwYaaTTQBnv6TBC-fMvZAyL1FQ-0oFYBY/sendMessage?chat_id=1316552414', [
+        $response = Http::post('https://api.telegram.org/bot8199899919:AAECnCVRt27WEqryCWGck8pP7GPxWa_zJ_8/sendMessage?chat_id=1316552414', [
             'chat_id' => "1316552414",
             'text' => $message,
 
