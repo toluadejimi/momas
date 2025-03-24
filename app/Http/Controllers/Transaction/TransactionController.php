@@ -557,10 +557,11 @@ class TransactionController extends Controller
 
     public function get_trx(request $request)
     {
-
         $get_trx = Transaction::where('id', $request->id)->first();
-        $token = CreditToken::select('meterNo', 'token')->where('trx_id', $get_trx->trx_id)->first();
+        $meterNo = CreditToken::where('trx_id', $get_trx->trx_id)->first()->meterNo;
+        $token = CreditToken::where('trx_id', $get_trx->trx_id)->first()->token;
         $get_trx['token'] = $token;
+        $get_trx['meterNo'] = $meterNo;
 
         return response()->json([
             'status' => true,
