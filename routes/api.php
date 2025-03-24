@@ -61,6 +61,8 @@ Route::any('pos/buy-token', [PosController::class, 'buy_meter_token']);
 Route::any('pos/retry-meter-token', [PosController::class, 'retry_meter_token']);
 Route::any('pos/eod', [PosController::class, 'get_all_transaction']);
 
+Route::post('get-trx', [TransactionController::class, 'get_trx']);
+
 
 
 Route::group(['middleware' => ['auth:api', 'acess']], function () {
@@ -90,7 +92,6 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     //Fund Wallet
     Route::post('pay', [TransactionController::class, 'make_payment']);
     Route::get('get-transactions', [TransactionController::class, 'all_transactions']);
-    Route::post('get-trx', [TransactionController::class, 'get_trx']);
 
 
 
