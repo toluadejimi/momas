@@ -14,11 +14,6 @@ class BillsController extends Controller
     public function buy_airtime(request $request)
     {
 
-
-
-
-
-
         $token = token();
         $databody = array(
             "service_id" => $request->service_id,
@@ -52,10 +47,11 @@ class BillsController extends Controller
         $status = $var->status ?? null;
 
 
-        Transaction::where('trx_id', $request->ref)->update(['service_type' => "Airtime Purchase", 'service' => "Airtime", 'status' => 2]);
 
 
         if ($status == true) {
+
+            Transaction::where('trx_id', $request->ref)->update(['service_type' => "Airtime Purchase", 'service' => "Airtime", 'status' => 2]);
 
             $message = "Airtime Purchase successful";
             return success($message);
@@ -297,7 +293,6 @@ class BillsController extends Controller
         ));
 
         $var = curl_exec($curl);
-        dd($var);
 
         curl_close($curl);
         $var = json_decode($var);
