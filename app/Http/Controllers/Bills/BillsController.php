@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Bills;
 
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -67,6 +68,7 @@ class BillsController extends Controller
             send_notification($message);
 
             if ($var->message = "Insufficient Funds, Fund your main wallet") {
+                User::where('id', Auth::id())->increment('main_wallet', $request->amount);
                 $message = "Airtime Purchase not successful, Try again later";
                 $code = 422;
                 return error($message, $code);
@@ -244,7 +246,7 @@ class BillsController extends Controller
 
         $token = token();
 
-        if($request->quantity != null){
+        if ($request->quantity != null) {
 
             $databody = array(
 
@@ -259,7 +261,7 @@ class BillsController extends Controller
         }
 
 
-        if($request->subscription_type != null){
+        if ($request->subscription_type != null) {
 
             $databody = array(
 
@@ -272,10 +274,6 @@ class BillsController extends Controller
             );
 
         }
-
-
-
-
 
 
         $body = json_encode($databody);
@@ -311,17 +309,26 @@ class BillsController extends Controller
 
 
         if ($status == true) {
-            return response()->json([
-                'status' => true,
-                'data' => $var->data,
-
-            ]);
+            $message = "Cable Purchase successful";
+            return success($message);
 
         }
 
-        $message = $var;
-        send_notification($message);
 
+
+        if ($status == false) {
+
+            if ($var->message = "Insufficient Funds, Fund your main wallet") {
+                User::where('id', Auth::id())->increment('main_wallet', $request->amount);
+                $message = $var;
+                send_notification($message);
+                $message = "Cable Purchase not successful, Try again later";
+                $code = 422;
+                return error($message, $code);
+            }
+
+
+        }
     }
 
 
@@ -378,6 +385,7 @@ class BillsController extends Controller
             if ($status == false) {
 
                 if ($var->message = "Insufficient Funds, Fund your main wallet") {
+                    User::where('id', Auth::id())->increment('main_wallet', $request->amount);
                     $message = "Data Purchase not successful, Try again later";
                     $code = 422;
                     return error($message, $code);
