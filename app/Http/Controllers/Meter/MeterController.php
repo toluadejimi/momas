@@ -252,24 +252,9 @@ class MeterController extends Controller
     public function buy_meter_token(request $request)
     {
 
-//
-//        {
-//            vending_amount: 1179.0697674418604,
-//            trxref: TRXFLW7058731,
-//            meterType: ,
-//            estate_id: 5,
-//            meterNo: 62319052270,
-//            tariff_id: 7,
-//            vend_amount_kw_per_naira: 58.95348837209302,
-//            total_paid_amount: 7300,
-//            utility_amount: 6000,
-//            vat_amount: 88.43023255813954
-//        }
-
-
         $amount = $request->amount;
         $meterNo = $request->meterNo;
-        $trx = $request->trxref;
+        $trx = $request->trxref ?? $request->ref;
         $utility_amount = $request->utility_amount;
         $total_paid = $request->total_paid_amount;
         $unit = $request->vend_amount_kw_per_naira;
@@ -279,10 +264,8 @@ class MeterController extends Controller
 
 
         $tariff_index = Tariff::where('id', $request->tariff_id)->first()->tariff_index ?? null;
-
         $duration = Estate::where('id', Auth::user()->estate_id)->first()->duration ?? null;
         if ($duration == "weekly" && $utility_amount > 0) {
-
             UtilitiesPayment::where('user_id', Auth::id())->where('estate_id', Auth::user()->estate_id)->decrement('amount', $utility_amount);
             $trx = new Transaction();
             $trx->user_id = Auth::id();
@@ -294,8 +277,6 @@ class MeterController extends Controller
             $trx->payment_ref = 0 ?? null;
             $trx->service_type = "utility_payment";
             $trx->save();
-
-
         } elseif ($duration == "monthly" && $utility_amount > 0) {
 
             UtilitiesPayment::where('user_id', Auth::id())->where('estate_id', Auth::user()->estate_id)->decrement('amount', $utility_amount);
