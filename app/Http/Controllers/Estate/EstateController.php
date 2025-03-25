@@ -28,6 +28,16 @@ class EstateController extends Controller
 
     public function estate_token(request $request){
 
+
+
+        $request->validate([
+            'email' => 'required|email'
+        ], [
+            'email.required' => 'The email field is required.',
+            'email.email' => 'Enter a valid email address.',
+        ]);
+
+
         $user_id = Auth::id();
         $visitor = $request->qty;
         $email = $request->email;
