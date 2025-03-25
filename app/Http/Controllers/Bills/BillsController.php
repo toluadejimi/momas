@@ -16,10 +16,6 @@ class BillsController extends Controller
 
 
 
-        $message = json_encode($request->all());
-        return success($message);
-
-
 
 
         $token = token();
@@ -55,7 +51,7 @@ class BillsController extends Controller
         $status = $var->status ?? null;
 
 
-        Transaction::where('trx_id', $request->trxref)->update(['service_type' => "Airtime Purchase", 'service' => "Airtime", 'status' => 2]);
+        Transaction::where('trx_id', $request->ref)->update(['service_type' => "Airtime Purchase", 'service' => "Airtime", 'status' => 2]);
 
 
         if ($status == true) {
@@ -311,7 +307,7 @@ class BillsController extends Controller
 
         $status = $var->status ?? null;
 
-        Transaction::where('trx_id', $request->trxref)->update(['service_type' => "Cable Purchase", 'service' => "Cable", 'status' => 2]);
+        Transaction::where('trx_id', $request->ref)->update(['service_type' => "Cable Purchase", 'service' => "Cable", 'status' => 2]);
 
 
         if ($status == true) {
@@ -370,7 +366,7 @@ class BillsController extends Controller
             $status = $var->status ?? null;
 
 
-            Transaction::where('trx_id', $request->trxref)->update(['service_type' => "Data Purchase", 'service' => "Data", 'status' => 2]);
+            Transaction::where('trx_id', $request->ref)->update(['service_type' => "Data Purchase", 'service' => "Data", 'status' => 2]);
 
 
             if ($status == true) {
