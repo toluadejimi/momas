@@ -14,6 +14,14 @@ class BillsController extends Controller
     {
 
 
+
+
+        $message = json_encode($request->all());
+        return success($message);
+
+
+
+
         $token = token();
         $databody = array(
             "service_id" => $request->service_id,
@@ -51,6 +59,7 @@ class BillsController extends Controller
 
 
         if ($status == true) {
+
             $message = "Airtime Purchase successful";
             return success($message);
 
