@@ -38,9 +38,6 @@ class EstateController extends Controller
             return back()->with('error', 'Enter only one charge fee');
         }
 
-
-        dd($request->all());
-
         $fl = Setting::where('id', 1)->first();
         $pksecret = $fl->paystack_secret;
 
