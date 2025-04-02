@@ -99,7 +99,7 @@ class EstateController extends Controller
 
         $id = $org->id;
 
-        return view('view-estate', compact('id'));
+        return view('admin.estate.view', compact('id'));
     }
 
 
