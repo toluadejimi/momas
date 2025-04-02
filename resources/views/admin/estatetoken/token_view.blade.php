@@ -150,16 +150,16 @@
                                     @foreach($token as $data)
 
                                         <tr>
-                                            <td>{{$data->user->first_name}}  {{$data->user->last_name}}</td>
-                                            <td>{{$data->token}}</td>
+                                            <td>{{$data->user->first_name ?? "name"}}  {{$data->user->last_name ?? "name"}}</td>
+                                            <td>{{$data->token ?? "data"}}</td>
                                             <td>{{$data->estate->title ?? "NAME"}}</td>
-                                            <td>{{$data->visitor}}</td>
+                                            <td>{{$data->visitor  ?? "data"}}</td>
                                             @if($data->email != null)
-                                                <td>{{$data->email}}</td>
+                                                <td>{{$data->email  ?? "data"}}</td>
                                             @else
                                                 <td>No email provided</td>
                                             @endif
-                                            <td>{{$data->created_at}}</td>
+                                            <td>{{$data->created_at  ?? "data"}}</td>
                                             <td>
                                                 @if($data->status == 2)
                                                     <span class="badge text-bg-primary">Activated</span>
