@@ -727,7 +727,6 @@ class DashboardContoller extends Controller
 
         if ($status == null && $usr == null) {
 
-            dd('hello');
 
             $sms_code = random_int(0000, 9999);
             $email = $request->email;
