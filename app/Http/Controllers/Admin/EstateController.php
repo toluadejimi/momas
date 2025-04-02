@@ -64,17 +64,11 @@ class EstateController extends Controller
             ]);
 
             $body = json_decode($response->getBody(), true);
-
-
-            dd($body);
-
             return response()->json($body);
         } catch (\Exception $e) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Subaccount creation failed',
-                'error' => $e->getMessage(),
-            ], 500);
+
+            return redirect('admin/estate')->with('error', $e->getMessage());
+
         }
 
 
@@ -120,11 +114,9 @@ class EstateController extends Controller
                 $banks = json_decode($response->getBody(), true);
 
             } catch (\Exception $e) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Unable to fetch banks',
-                    'error' => $e->getMessage(),
-                ], 500);
+
+                return redirect('admin/estate')->with('error', $e->getMessage());
+
             }
 
 
