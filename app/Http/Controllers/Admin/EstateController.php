@@ -38,38 +38,45 @@ class EstateController extends Controller
             return back()->with('error', 'Enter only one charge fee');
         }
 
-        $fl = Setting::where('id', 1)->first();
-        $pksecret = $fl->paystack_secret;
+
+        if($request->account_number != null){
+
+            $fl = Setting::where('id', 1)->first();
+            $pksecret = $fl->paystack_secret;
 
 
-        $data = [
-            'business_name' => $request->title,
-            'settlement_bank' => $request->settlement_bank,
-            'account_number' => $request->account_number,
-            'percentage_charge' => $request->percentage_charge,
-            'description' => $request->description ?? '',
-            'primary_contact_email' => $request->primary_contact_email,
-            'primary_contact_name' => $request->primary_contact_name,
-        ];
+            $data = [
+                'business_name' => $request->title,
+                'settlement_bank' => $request->settlement_bank,
+                'account_number' => $request->account_number,
+                'percentage_charge' => $request->percentage_charge,
+                'description' => $request->description ?? '',
+                'primary_contact_email' => $request->primary_contact_email,
+                'primary_contact_name' => $request->primary_contact_name,
+            ];
 
-        try {
-            $client = new Client();
+            try {
+                $client = new Client();
 
-            $response = $client->post('https://api.paystack.co/subaccount', [
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $pksecret,
-                    'Content-Type' => 'application/json',
-                ],
-                'json' => $data,
-            ]);
+                $response = $client->post('https://api.paystack.co/subaccount', [
+                    'headers' => [
+                        'Authorization' => 'Bearer ' . $pksecret,
+                        'Content-Type' => 'application/json',
+                    ],
+                    'json' => $data,
+                ]);
 
-            $body = json_decode($response->getBody(), true);
-            return response()->json($body);
-        } catch (\Exception $e) {
+                $body = json_decode($response->getBody(), true);
+                return response()->json($body);
+            } catch (\Exception $e) {
 
-            return redirect('admin/estate')->with('error', $e->getMessage());
+                return redirect('admin/estate')->with('error', $e->getMessage());
+
+            }
 
         }
+
+
 
 
         $org = new estate();
