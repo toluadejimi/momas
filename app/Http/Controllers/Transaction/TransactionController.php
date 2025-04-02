@@ -1092,6 +1092,295 @@ class TransactionController extends Controller
     }
 
 
+    public function utility_payment(request $request)
+    {
+
+        $data['total_pending'] = UtilitiesPayment::where('status', 0)->sum('total_amount');
+        $data['total_completed'] = UtilitiesPayment::where('status', 2)->sum('total_amount');
+        $data['payment'] = UtilitiesPayment::latest()->take('1000')->paginate(50);
+        $data['estate'] = Estate::all();
+        $data['customer'] = User::latest()->where('status', 2)->get();
+
+        return view('admin.report.payment', $data);
+
+
+
+
+    }
+
+    public function uncomplete_payment(request $request)
+    {
+
+        UtilitiesPayment::where('id', $request->id)->update(['status' => 0]);
+        return back()->with('message', "Payment has been updated successfully");
+
+    }
+
+    public function complete_payment(request $request)
+    {
+        UtilitiesPayment::where('id', $request->id)->update(['status' => 2]);
+        return back()->with('message', "Payment has been updated successfully");
+
+    }
+
+
+    public function search_utility_trx(request $request)
+    {
+
+        if (Auth::user()->role == 0) {
+
+
+            $customer = $request->user_id;
+            $startofday = $request->from;
+            $endofday = $request->to;
+            $transaction_type = $request->type;
+            $status = $request->status;
+            $estate_id = $request->estate_id;
+            $data['estate'] = Estate::all();
+
+
+
+
+            if($startofday != null && $endofday != null &&  $customer == null && $transaction_type == null && $status == null){
+
+                $data['payment'] =UtilitiesPayment::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->latest()
+                    ->take(50000)
+                    ->paginate(50);
+
+                $data['total_pending'] = UtilitiesPayment::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->where('status', 0)
+                    ->sum('amount') ?? 0;
+
+                $data['total_completed'] = UtilitiesPayment::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->where('status', 2)
+                    ->sum('amount') ?? 0;
+
+
+                $data['estate'] = Estate::all();
+                $data['customer'] = User::latest()->where('status', 2)->get();
+
+
+                return view('admin.report.payment', $data);
+
+            }
+
+            if($customer != null){
+
+
+
+                $data['payment'] =UtilitiesPayment::where('user_id', $customer)->paginate(50);
+                $data['total_pending'] = UtilitiesPayment::where('status', 0)->sum('amount') ?? 0;
+                $data['total_completed'] = UtilitiesPayment::where('status', 2)->sum('amount') ?? 0;
+
+                $data['estate'] = Estate::all();
+                $data['customer'] = User::latest()->where('status', 2)->get();
+
+                return view('admin.report.payment', $data);
+
+
+            }
+
+
+            if($estate_id != null){
+
+                if($estate_id == "all"){
+
+                    $data['payment'] =UtilitiesPayment::
+                     latest()
+                        ->take(50000)
+                        ->paginate(50);
+
+                    $data['total_pending'] = UtilitiesPayment::where('status', 0)->sum('amount') ?? 0;
+                    $data['total_completed'] = UtilitiesPayment::where('status', 2)->sum('amount') ?? 0;
+
+                    $data['estate'] = Estate::all();
+                    $data['customer'] = User::latest()->where('status', 2)->get();
+
+
+                    return view('admin.report.payment', $data);
+                }
+
+                $data['payment'] =UtilitiesPayment::where('estate_id', $estate_id)
+                    ->latest()
+                    ->take(50000)
+                    ->paginate(50);
+
+                $data['total_completed'] = UtilitiesPayment::where('estate_id', $estate_id)->where('status', 2)
+                    ->sum('amount') ?? 0;
+
+                $data['total_pending'] = UtilitiesPayment::where('estate_id', $estate_id)->where('status', 0)
+                    ->sum('amount') ?? 0;
+
+                $data['estate'] = Estate::all();
+                $data['customer'] = User::latest()->where('status', 2)->get();
+
+
+                return view('admin.report.payment', $data);
+
+            }
+
+
+            if($startofday != null && $endofday != null &&  $customer == null && $type != null && $status == null){
+
+
+                $data['payment'] = UtilitiesPayment::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->latest()
+                    ->take(50000)
+                    ->where('type', $type)
+                    ->paginate(50);
+
+                $data['total_completed'] = UtilitiesPayment::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->where('service_type', $type)
+                    ->where('status', 2)
+                    ->sum('amount') ?? 0;
+
+                $data['total_pending'] = UtilitiesPayment::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->where('service_type', $type)
+                    ->where('status', 0)
+                    ->sum('amount') ?? 0;
+
+                $data['estate'] = Estate::all();
+                $data['customer'] = User::latest()->where('status', 2)->get();
+
+
+                return view('admin.report.payment', $data);
+
+
+            }
+
+
+
+            if($startofday != null && $endofday != null &&  $customer == null && $type != null && $status != null){
+                $data['payment'] = UtilitiesPayment::latest()->take(50000)->whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])->
+                where([
+                    'status' => $status,
+                    'service_type' => $type,
+                ])->paginate('50') ?? null;
+
+
+                $data['total_completed'] = UtilitiesPayment::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])->
+                where([
+                    'status' => $status,
+                    'service_type' => $type,
+                ])->sum('amount') ?? 0;
+
+                $data['total_pending'] = UtilitiesPayment::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])->
+                where([
+                    'status' => $status,
+                    'service_type' => $type,
+                ])->sum('amount') ?? 0;
+
+                $data['estate'] = Estate::all();
+                $data['customer'] = User::latest()->where('status', 2)->get();
+
+
+                return view('admin.report.payment', $data);
+
+            }
+
+
+            return back()->with('error', 'Select a field');
+
+        }
+
+
+        if (Auth::user()->role == 3) {
+
+            $rrn = $request->rrn;
+            $startofday = $request->from;
+            $endofday = $request->to;
+            $transaction_type = $request->transaction_type;
+            $status = $request->status;
+
+            if($startofday != null && $endofday != null &&  $rrn == null && $transaction_type == null && $status == null){
+
+                $data['transactions'] =Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->latest()
+                    ->where('estate_id', Auth::user()->estate_id)
+                    ->take(50000)
+                    ->paginate(50);
+
+                $data['total'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->where('estate_id', Auth::user()->estate_id)
+                    ->sum('amount') ?? 0;
+
+                return view('admin.report.transactionreport', $data);
+
+                $data['estate'] = Estate::all();
+                $data['customer'] = User::latest()->where('status', 2)->get();
+
+            }
+
+
+            if($startofday != null && $endofday != null &&  $rrn == null && $transaction_type != null && $status == null){
+
+
+                $data['transactions'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->where([
+                        'status' => $status,
+                        'service_type' => $transaction_type,
+                        'estate_id' => Auth::user()->estate_id
+                    ])->paginate('50') ?? null;
+
+                $data['total'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->where([
+                        'status' => $status,
+                        'service_type' => $transaction_type,
+                        'estate_id' => Auth::user()->estate_id
+                    ])->paginate('50')
+                    ->sum('amount') ?? 0;
+
+                $data['estate'] = Estate::all();
+                $data['customer'] = User::latest()->where('status', 2)->get();
+
+                return view('admin.report.transactionreport', $data);
+
+            }
+
+
+
+            if($startofday != null && $endofday != null &&  $rrn == null && $transaction_type != null && $status != null){
+                $data['transactions'] = Transaction::latest()->take(50000)->whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])->
+                where([
+                    'status' => $status,
+                    'service_type' => $transaction_type,
+                    'estate_id' => Auth::user()->estate_id
+                ])->paginate('50') ?? null;
+
+
+                $data['total'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])->
+                where([
+                    'status' => $status,
+                    'service_type' => $transaction_type,
+                    'estate_id' => Auth::user()->estate_id
+
+                ])->sum('amount') ?? 0;
+
+                $data['estate'] = Estate::all();
+                $data['customer'] = User::latest()->where('status', 2)->get();
+
+
+                return view('admin.report.payment', $data);
+
+            }
+
+
+
+            return back()->with('error', 'Select a field');
+
+
+
+        }
+
+
+
+    }
+
+
+
+
+
 
 }
 

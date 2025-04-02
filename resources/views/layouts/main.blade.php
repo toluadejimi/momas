@@ -288,6 +288,11 @@
                                     <li>
                                         <a class='tp-link' href='report-transaction'>Transactions</a>
                                     </li>
+
+                                    <li>
+                                        <a class='tp-link' href='utility-payment'>Utility Payments</a>
+                                    </li>
+
                                     {{--                                    <li>--}}
                                     {{--                                        <a class='tp-link' href='report-meter'>Meter</a>--}}
                                     {{--                                    </li>--}}

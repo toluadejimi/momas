@@ -265,6 +265,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'blockaccess']], fun
     //REPORT
     Route::get('report-transaction', [TransactionController::class, 'transaction_reports']);
     Route::post('search-trx', [TransactionController::class, 'search_trx']);
+    Route::post('search-utility-trx', [TransactionController::class, 'search_utility_trx']);
+    Route::get('utility-payment', [TransactionController::class, 'utility_payment']);
+    Route::get('uncomplete-payment', [TransactionController::class, 'uncomplete_payment']);
+    Route::get('complete-payment', [TransactionController::class, 'complete_payment']);
 
 
 
