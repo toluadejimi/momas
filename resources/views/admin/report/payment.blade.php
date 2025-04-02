@@ -336,7 +336,7 @@
 
 
 
-                                            <td><a href="view-user?id={{$data->user->first_name ?? "name"}}">{{$data->user->last_name ?? "name"}}</a></td>
+                                            <td><a href="view-user?id={{$data->user->first_name ?? "name"}}">{{$data->user->first_name ?? "name"}} {{$data->user->last_name ?? "name"}}</a></td>
                                             <td>{{$data->estate->title ?? "Estate"}}</td>
                                             <td>{{number_format($data->amount, 2)}}</td>
                                             <td>
