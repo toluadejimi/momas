@@ -97,9 +97,8 @@ class EstateController extends Controller
         $org->status = 2;
         $org->save();
 
-        $id = $org->id;
 
-        return view('admin.estate.view', compact('id'));
+        return redirect('admin/estate')->with('message', 'Estate created successfully');
     }
 
 
