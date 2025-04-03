@@ -983,7 +983,6 @@ class TransactionController extends Controller
         $va->user_id = Auth::id();
         $va->v_account_no = $var->account_no;
         $va->v_account_name = $var->account_name;
-        $va->amount = $var->amount;
         $va->amount = $var->amount - 100;
         $va->type = "admin_fee";
         $va->v_bank_name = $var->bank;
