@@ -66,7 +66,7 @@ class DashboardContoller extends Controller
             $data['token'] = Token::where('estate_id', Auth::user()->estate_id)->count();
 
 
-            $estate_name = Estate::where('id', Auth::user()->estate_id)->first()->title;
+            $estate_name = Estate::where('id', Auth::user()->estate_id)->first()->title ?? "Estate";
 
 
             $data['title'] = "Dashboard | $estate_name ";
