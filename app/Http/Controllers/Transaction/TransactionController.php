@@ -6,16 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\CreditToken;
 use App\Models\Estate;
 use App\Models\Setting;
-use App\Models\TarrifState;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\UtilitiesPayment;
-use App\Models\VirtualAccount;
 use App\Models\VirtualAccountTransaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Lcobucci\JWT\Exception;
 
 class TransactionController extends Controller
 {
@@ -348,8 +345,6 @@ class TransactionController extends Controller
 //        }
 
 
-
-
         if ($request->pay_type == 'flutterwave') {
             $trx_id = "TRXFLW" . random_int(0000000, 9999999);
             $email = Auth::user()->email;
@@ -429,8 +424,6 @@ class TransactionController extends Controller
 
             $trx_id = "TRX" . random_int(0000000, 9999999);
             $email = Auth::user()->email;
-
-
 
 
             $databody = array(
@@ -739,11 +732,9 @@ class TransactionController extends Controller
             $data['estate'] = Estate::all();
 
 
+            if ($startofday != null && $endofday != null && $rrn == null && $transaction_type == null && $status == null) {
 
-
-            if($startofday != null && $endofday != null &&  $rrn == null && $transaction_type == null && $status == null){
-
-                $data['transactions'] =Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                $data['transactions'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
                     ->latest()
                     ->where('status', 2)
                     ->take(50000)
@@ -758,9 +749,9 @@ class TransactionController extends Controller
 
             }
 
-            if($rrn != null){
+            if ($rrn != null) {
 
-                $data['transactions'] =Transaction::where('trx_id', $rrn)->paginate(50);
+                $data['transactions'] = Transaction::where('trx_id', $rrn)->paginate(50);
                 $data['total'] = Transaction::where('trx_id', $rrn)->sum('amount') ?? 0;
 
                 return view('admin.report.transactionreport', $data);
@@ -769,12 +760,12 @@ class TransactionController extends Controller
             }
 
 
-            if($estate_id != null){
+            if ($estate_id != null) {
 
-                if($estate_id == "all"){
+                if ($estate_id == "all") {
 
-                    $data['transactions'] =Transaction::
-                        latest()
+                    $data['transactions'] = Transaction::
+                    latest()
                         ->where('status', 2)
                         ->take(50000)
                         ->paginate(50);
@@ -785,7 +776,7 @@ class TransactionController extends Controller
                     return view('admin.report.transactionreport', $data);
                 }
 
-                $data['transactions'] =Transaction::where('estate_id', $estate_id)
+                $data['transactions'] = Transaction::where('estate_id', $estate_id)
                     ->latest()
                     ->where('status', 2)
                     ->take(50000)
@@ -800,12 +791,12 @@ class TransactionController extends Controller
             }
 
 
-            if($estate_id != null){
+            if ($estate_id != null) {
 
-                if($estate_id == "all"){
+                if ($estate_id == "all") {
 
-                    $data['transactions'] =Transaction::
-                     latest()
+                    $data['transactions'] = Transaction::
+                    latest()
                         ->where('status', 2)
                         ->take(50000)
                         ->paginate(50);
@@ -816,14 +807,14 @@ class TransactionController extends Controller
                     return view('admin.report.transactionreport', $data);
                 }
 
-                $data['transactions'] =Transaction::where('estate_id', $estate_id)
+                $data['transactions'] = Transaction::where('estate_id', $estate_id)
                     ->latest()
                     ->where('status', 2)
                     ->take(50000)
                     ->paginate(50);
 
                 $data['total'] = Transaction::where('estate_id', $estate_id)
-                   ->where('status', 2)
+                    ->where('status', 2)
                     ->sum('amount') ?? 0;
 
 
@@ -832,7 +823,7 @@ class TransactionController extends Controller
             }
 
 
-            if($startofday != null && $endofday != null &&  $rrn == null && $transaction_type != null && $status == null){
+            if ($startofday != null && $endofday != null && $rrn == null && $transaction_type != null && $status == null) {
 
 
                 $data['transactions'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
@@ -854,8 +845,7 @@ class TransactionController extends Controller
             }
 
 
-
-            if($startofday != null && $endofday != null &&  $rrn == null && $transaction_type != null && $status != null){
+            if ($startofday != null && $endofday != null && $rrn == null && $transaction_type != null && $status != null) {
                 $data['transactions'] = Transaction::latest()->take(50000)->whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])->
                 where([
                     'status' => $status,
@@ -888,9 +878,9 @@ class TransactionController extends Controller
             $transaction_type = $request->transaction_type;
             $status = $request->status;
 
-            if($startofday != null && $endofday != null &&  $rrn == null && $transaction_type == null && $status == null){
+            if ($startofday != null && $endofday != null && $rrn == null && $transaction_type == null && $status == null) {
 
-                $data['transactions'] =Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                $data['transactions'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
                     ->latest()
                     ->where('estate_id', Auth::user()->estate_id)
                     ->take(50000)
@@ -905,7 +895,7 @@ class TransactionController extends Controller
             }
 
 
-            if($startofday != null && $endofday != null &&  $rrn == null && $transaction_type != null && $status == null){
+            if ($startofday != null && $endofday != null && $rrn == null && $transaction_type != null && $status == null) {
 
 
                 $data['transactions'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
@@ -928,8 +918,7 @@ class TransactionController extends Controller
             }
 
 
-
-            if($startofday != null && $endofday != null &&  $rrn == null && $transaction_type != null && $status != null){
+            if ($startofday != null && $endofday != null && $rrn == null && $transaction_type != null && $status != null) {
                 $data['transactions'] = Transaction::latest()->take(50000)->whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])->
                 where([
                     'status' => $status,
@@ -952,13 +941,10 @@ class TransactionController extends Controller
             }
 
 
-
             return back()->with('error', 'Select a field');
 
 
-
         }
-
 
 
     }
@@ -967,7 +953,7 @@ class TransactionController extends Controller
     {
         $amount = Setting::where('id', 1)->first()->first()->admin_fee;
         $key = Setting::where('id', 1)->first()->first()->enkpay_key;
-        $trx_id = "MOMAS".random_int(000000, 999999);
+        $trx_id = "MOMAS" . random_int(000000, 999999);
         $email = Auth::user()->email;
         $pt = "momas";
 
@@ -1017,8 +1003,6 @@ class TransactionController extends Controller
     }
 
 
-
-
     public function check_admin_fee(request $request)
     {
         $admin_fee_get = UtilitiesPayment::where('user_id', Auth::id())
@@ -1028,14 +1012,14 @@ class TransactionController extends Controller
             ->latest('created_at')
             ->first()->status;
 
-        if($admin_fee_get == 2){
+        if ($admin_fee_get == 2) {
 
             return response()->json([
                 'status' => true,
                 'monthly_admin_fee' => "1"
             ]);
 
-        }else{
+        } else {
 
             return response()->json([
                 'status' => true,
@@ -1043,28 +1027,81 @@ class TransactionController extends Controller
             ]);
         }
     }
+
     public function enkpay_webhook(request $request)
     {
 
 
         $get_user_id = VirtualAccountTransaction::where('v_account_no', $request->account_no)->first()->user_id;
+        $get_pay_type = VirtualAccountTransaction::where('v_account_no', $request->account_no)->first()->type ?? null;
+
         $amount = $request->amount - 100;
 
-        $update_payment = VirtualAccountTransaction::where('v_account_no', $request->account_no)->where('amount', $request->amount)->update(['status' => 2]);
-        if($update_payment){
-            $user = User::where('id', $get_user_id)->first();
-            $utl = new UtilitiesPayment();
-            $utl->estate_id = $user->estate_id;
-            $utl->user_id = $get_user_id;
-            $utl->amount = $amount;
-            $utl->duration = "monthly";
-            $utl->type = "admin_fee";
-            $utl->status = 2;
-            $utl->save();
+        if ($get_pay_type == "admin_fee") {
 
-            $type = "Monthly Administration Fee";
-            $duration = Carbon::now()->format('F');
-            payment_email($user->email, $type, $amount, $duration);
+            $update_payment = VirtualAccountTransaction::where('v_account_no', $request->account_no)->where('amount', $request->amount)->update(['status' => 2, 'session_id' => $request->session_id]);
+            if ($update_payment) {
+                $user = User::where('id', $get_user_id)->first();
+                $utl = new UtilitiesPayment();
+                $utl->estate_id = $user->estate_id;
+                $utl->user_id = $get_user_id;
+                $utl->amount = $amount;
+                $utl->duration = "monthly";
+                $utl->type = "admin_fee";
+                $utl->status = 2;
+                $utl->save();
+
+                $type = "Monthly Administration Fee";
+                $duration = Carbon::now()->format('F');
+                payment_email($user->email, $type, $amount, $duration);
+
+                return response()->json([
+                    'status' => true,
+                    'message' => "Transaction Completed"
+                ]);
+
+
+            } else {
+
+                return response()->json([
+                    'status' => false,
+                    'message' => "something went wrong"
+                ], 422);
+            }
+
+        }
+
+
+        if ($get_pay_type == "wallet_funding") {
+
+            $update_payment = VirtualAccountTransaction::where('v_account_no', $request->account_no)->where('amount', $request->amount)->update(['status' => 2, 'session_id' => $request->session_id]);
+            if ($update_payment) {
+                return response()->json([
+                    'status' => true,
+                    'message' => "Transaction Completed"
+                ]);
+            } else {
+
+                return response()->json([
+                    'status' => false,
+                    'message' => "something went wrong"
+                ], 422);
+            }
+
+        }
+
+
+        if ($get_pay_type == null) {
+
+            $va = new VirtualAccountTransaction();
+            $va->v_account_no = $request->account_no;
+            $va->v_account_name = "woven";
+            $va->amount = $request->amount;
+            $va->type = "wallet_funding";
+            $va->v_bank_name = "VFD";
+            $va->session_id = $request->session_id;
+            $va->status = 2;
+            $va->save();
 
             return response()->json([
                 'status' => true,
@@ -1072,23 +1109,7 @@ class TransactionController extends Controller
             ]);
 
 
-
-        }else{
-
-            return response()->json([
-                'status' => false,
-                'message' => "something went wrong"
-            ], 422);
         }
-
-
-
-
-
-
-
-
-
 
 
     }
@@ -1104,8 +1125,6 @@ class TransactionController extends Controller
         $data['customer'] = User::latest()->where('status', 2)->get();
 
         return view('admin.report.payment', $data);
-
-
 
 
     }
@@ -1156,11 +1175,9 @@ class TransactionController extends Controller
             $data['estate'] = Estate::all();
 
 
+            if ($startofday != null && $endofday != null && $customer == null && $transaction_type == null && $status == null) {
 
-
-            if($startofday != null && $endofday != null &&  $customer == null && $transaction_type == null && $status == null){
-
-                $data['payment'] =UtilitiesPayment::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                $data['payment'] = UtilitiesPayment::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
                     ->latest()
                     ->take(50000)
                     ->paginate(50);
@@ -1182,11 +1199,10 @@ class TransactionController extends Controller
 
             }
 
-            if($customer != null){
+            if ($customer != null) {
 
 
-
-                $data['payment'] =UtilitiesPayment::where('user_id', $customer)->paginate(50);
+                $data['payment'] = UtilitiesPayment::where('user_id', $customer)->paginate(50);
                 $data['total_pending'] = UtilitiesPayment::where('status', 0)->sum('amount') ?? 0;
                 $data['total_completed'] = UtilitiesPayment::where('status', 2)->sum('amount') ?? 0;
 
@@ -1199,12 +1215,12 @@ class TransactionController extends Controller
             }
 
 
-            if($estate_id != null){
+            if ($estate_id != null) {
 
-                if($estate_id == "all"){
+                if ($estate_id == "all") {
 
-                    $data['payment'] =UtilitiesPayment::
-                     latest()
+                    $data['payment'] = UtilitiesPayment::
+                    latest()
                         ->take(50000)
                         ->paginate(50);
 
@@ -1218,7 +1234,7 @@ class TransactionController extends Controller
                     return view('admin.report.payment', $data);
                 }
 
-                $data['payment'] =UtilitiesPayment::where('estate_id', $estate_id)
+                $data['payment'] = UtilitiesPayment::where('estate_id', $estate_id)
                     ->latest()
                     ->take(50000)
                     ->paginate(50);
@@ -1238,7 +1254,7 @@ class TransactionController extends Controller
             }
 
 
-            if($startofday != null && $endofday != null &&  $customer == null && $type != null && $status == null){
+            if ($startofday != null && $endofday != null && $customer == null && $type != null && $status == null) {
 
 
                 $data['payment'] = UtilitiesPayment::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
@@ -1267,8 +1283,7 @@ class TransactionController extends Controller
             }
 
 
-
-            if($startofday != null && $endofday != null &&  $customer == null && $type != null && $status != null){
+            if ($startofday != null && $endofday != null && $customer == null && $type != null && $status != null) {
                 $data['payment'] = UtilitiesPayment::latest()->take(50000)->whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])->
                 where([
                     'status' => $status,
@@ -1310,9 +1325,9 @@ class TransactionController extends Controller
             $transaction_type = $request->transaction_type;
             $status = $request->status;
 
-            if($startofday != null && $endofday != null &&  $rrn == null && $transaction_type == null && $status == null){
+            if ($startofday != null && $endofday != null && $rrn == null && $transaction_type == null && $status == null) {
 
-                $data['transactions'] =Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                $data['transactions'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
                     ->latest()
                     ->where('estate_id', Auth::user()->estate_id)
                     ->take(50000)
@@ -1330,7 +1345,7 @@ class TransactionController extends Controller
             }
 
 
-            if($startofday != null && $endofday != null &&  $rrn == null && $transaction_type != null && $status == null){
+            if ($startofday != null && $endofday != null && $rrn == null && $transaction_type != null && $status == null) {
 
 
                 $data['transactions'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
@@ -1356,8 +1371,7 @@ class TransactionController extends Controller
             }
 
 
-
-            if($startofday != null && $endofday != null &&  $rrn == null && $transaction_type != null && $status != null){
+            if ($startofday != null && $endofday != null && $rrn == null && $transaction_type != null && $status != null) {
                 $data['transactions'] = Transaction::latest()->take(50000)->whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])->
                 where([
                     'status' => $status,
@@ -1383,17 +1397,31 @@ class TransactionController extends Controller
             }
 
 
-
             return back()->with('error', 'Select a field');
 
 
-
         }
+    }
 
+
+    public function fund_wallet(request $request)
+    {
+
+        $amount = $request->amount;
+        $key = Setting::where('id', 1)->first()->first()->enkpay_key;
+        $trx_id = "MOMASFUND" . random_int(000000, 999999);
+        $email = Auth::user()->email;
+        $pt = "momas";
+
+
+        $url = "https://web.sprintpay.online/pay?amount=$amount&key=$key&ref=$trx_id&email=$email";
+
+
+
+        return redirect()->away($url);
 
 
     }
-
 
 
 

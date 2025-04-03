@@ -126,9 +126,60 @@
 
                                     <div class="d-flex align-items-center">
                                         <h3 class="mb-0 fs-24 text-black me-2">₦{{number_format($total_withdrawal)}}</h3>
-                                        <a href="fund-account" class="btn btn-primary">Fund Wallet</a>
+                                        <a href="#" data-bs-toggle="modal"
+                                           data-bs-target="#staticBackdrop" class="btn btn-primary">Fund Wallet</a>
 
                                     </div>
+
+
+
+
+                                    <div class="col-xl-6">
+                                        <div class="card">
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="staticBackdrop"
+                                                 data-bs-backdrop="static" data-bs-keyboard="false"
+                                                 tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                                 aria-hidden="true">
+
+
+
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5"
+                                                                id="staticBackdropLabel">Fund Wallet</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
+                                                        </div>
+
+                                                        <form action="/fund_wallet" method="POST" enctype="multipart/form-data">
+                                                            @csrf
+
+                                                            <div class="modal-body">
+
+                                                                <label class="my-1">Enter Amount to fund </label>
+                                                                <input type="number"  class="form-control mb-3" name="amount" required>
+
+
+                                                            </div>
+
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close
+                                                                </button>
+                                                                <button type="submit" class="btn btn-primary">Continue</button>
+                                                            </div>
+
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end card -->
+                                    </div>
+
+
+
 
                                 </div>
                             </div>
