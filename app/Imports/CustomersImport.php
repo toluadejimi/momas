@@ -31,11 +31,10 @@ class CustomersImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
 
-        try{
+
 
 
             if (Auth::user()->role == 3) {
-                \Log::info('Row being processed: ', $row);
                 return new User([
                     'first_name'   => $row['firstname'],
                     'last_name'    => $row['lastname'],
@@ -78,10 +77,6 @@ class CustomersImport implements ToModel, WithHeadingRow
                 ]);
 
             }
-
-        } catch (\Exception $e) {
-            \Log::error('Error inserting row: ' . $e->getMessage());
-        }
 
 
 

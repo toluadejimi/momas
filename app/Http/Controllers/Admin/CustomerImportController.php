@@ -32,8 +32,6 @@ class CustomerImportController extends Controller
         try {
             Excel::import(new CustomersImport($id), $request->file('file'));
 
-            return back()->with('message', 'Users imported successfully!');
-
         } catch (\Exception$th) {
 
             $errorMessage = $th->getMessage();
@@ -41,6 +39,9 @@ class CustomerImportController extends Controller
 
 
         }
+
+        return back()->with('message', 'Users imported successfully!');
+
 
     }
 }
