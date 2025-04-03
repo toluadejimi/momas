@@ -30,24 +30,17 @@ class CustomerImportController extends Controller
 
 
         try {
-            \Log::info('Import process started.');
             Excel::import(new CustomersImport($id), $request->file('file'));
-            \Log::info('Import process finished.');
 
+            return back()->with('message', 'Users imported successfully!');
 
         } catch (\Exception$th) {
 
             $errorMessage = $th->getMessage();
-
-            if (str_contains($errorMessage, 'Duplicate entry')) {
-                preg_match("/Duplicate entry '([^']+)'/", $errorMessage, $matches);
-                return back()->with('error', 'Duplicate entry found');
-
-            }
+            return back()->with('error', $th->getMessage());
 
 
         }
 
-        return back()->with('success', 'Users imported successfully!');
     }
 }

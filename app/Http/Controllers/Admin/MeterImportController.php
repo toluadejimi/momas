@@ -24,30 +24,29 @@ class MeterImportController extends Controller
         }
 
 
-//        $request->validate([
-//            'file' => 'required|mimes:csv,xlsx,xls',
-//        ]);
+        $request->validate([
+            'file' => 'required|mimes:csv,xlsx,xls',
+        ]);
 
         try {
-            \Log::info('Import process started.');
+
+
 
              Excel::import(new MeterImport($id), $request->file('file'));
 
-            \Log::info('Import process finished.');
-
-            return redirect()->back()->with('success', 'Meter imported successfully!');
+            return redirect()->back()->with('message', 'Meter imported successfully!');
 
 
         } catch (\Exception$th) {
 
             $errorMessage = $th->getMessage();
 
-            if (str_contains($errorMessage, 'Duplicate entry')) {
-                preg_match("/Duplicate entry '([^']+)'/", $errorMessage, $matches);
-                return back()->with('error', 'Duplicate entry found');
 
-            }
+            return back()->with('error', $th->getMessage());
+
         }
+
+
     }
 
 

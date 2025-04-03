@@ -157,7 +157,7 @@
                                                     <div class="modal-body">
 
                                                         <p>Click here to download the sample of file to upload <a
-                                                                href="{{url('')}}/public/asset/ab.csv">Download here</a>
+                                                                href="{{url('')}}/public/asset/meter_upload_sample.csv">Download here</a>
                                                         </p>
                                                         <label class="mt-3">Choose File</label>
                                                         <input type="file" class="form-control mb-3" name="file"
@@ -486,7 +486,7 @@
                                                     <div class="modal-body">
 
                                                         <p>Click here to download the sample of file to upload <a
-                                                                href="{{url('')}}/public/asset/ab.csv">Download here</a>
+                                                                href="{{url('')}}/public/asset/meter_upload_sample.csv">Download here</a>
                                                         </p>
                                                         <label class="mt-3">Choose File</label>
                                                         <input type="file" class="form-control mb-3" name="file"

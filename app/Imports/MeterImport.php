@@ -4,6 +4,8 @@ namespace App\Imports;
 
 use App\Models\Meter;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -29,15 +31,15 @@ class MeterImport implements ToModel, WithHeadingRow
     {
 
 
-        if (Auth::user()->role == 3) {
 
+        if (Auth::user()->role == 3) {
 
             return new Meter([
                 'meterNo'   => $row['meterno'],
                 'MeterSIMNo'   => $row['metersimno'],
                 'transid'   => $row['transid'],
                 'accountno'   => $row['accountno'],
-                'meterModel'    => $row['model'],
+                'meterModel'    => $row['metermodel'],
                 'AccountNo'        => $row['accountno'],
                 'isDualTariff' => $row['isdualtariff'],
                 'NewSGC'      => $row['sgc'],
@@ -66,7 +68,7 @@ class MeterImport implements ToModel, WithHeadingRow
                 'MeterSIMNo'   => $row['metersimno'],
                 'TransformerID'   => $row['transid'],
                 'accountno'   => $row['accountno'],
-                'meterModel'    => $row['model'],
+                'meterModel'    => $row['metermodel'],
                 'AccountNo'        => $row['accountno'],
                 'isDualTariff' => $row['isdualtariff'],
                 'NewSGC'      => $row['sgc'],
@@ -86,6 +88,7 @@ class MeterImport implements ToModel, WithHeadingRow
             ]);
 
         }
+
 
 
 
