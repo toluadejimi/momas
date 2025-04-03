@@ -1031,12 +1031,12 @@ class TransactionController extends Controller
     {
 
 
-        $get_user_id = VirtualAccountTransaction::where('v_account_no', $request->account_no)->first()->user_id;
+        $get_user_id = VirtualAccountTransaction::where('v_account_no', $request->account_no)->first()->user_id ?? null;
         $get_pay_type = VirtualAccountTransaction::where('v_account_no', $request->account_no)->first()->type ?? null;
 
         $amount = $request->amount - 100;
 
-        if ($get_pay_type == "admin_fee") {
+        if ($get_pay_type == "admin_fee" && $get_user_id != null) {
 
             $update_payment = VirtualAccountTransaction::where('v_account_no', $request->account_no)->where('amount', $request->amount)->update(['status' => 2, 'session_id' => $request->session_id]);
             if ($update_payment) {
@@ -1071,7 +1071,7 @@ class TransactionController extends Controller
         }
 
 
-        if ($get_pay_type == "wallet_funding") {
+        if ($get_pay_type == "wallet_funding" && $get_user_id != null) {
 
             $update_payment = VirtualAccountTransaction::where('v_account_no', $request->account_no)->where('amount', $request->amount)->update(['status' => 2, 'session_id' => $request->session_id]);
             if ($update_payment) {
@@ -1090,7 +1090,7 @@ class TransactionController extends Controller
         }
 
 
-        if ($get_pay_type == null) {
+        if ($get_pay_type == null && $get_user_id == null) {
 
             $va = new VirtualAccountTransaction();
             $va->v_account_no = $request->account_no;
