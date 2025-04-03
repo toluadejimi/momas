@@ -131,6 +131,12 @@ class User extends Authenticatable
         return $this->hasMany(UtilitiesPayment::class);
     }
 
+
+    public function virtual_account_trasnaction()
+    {
+        return $this->hasMany(VirtualAccountTransaction::class);
+    }
+
     public function compensation_token()
     {
         return $this->hasMany(CompensationToken::class);
