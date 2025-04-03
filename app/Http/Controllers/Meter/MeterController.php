@@ -60,6 +60,7 @@ class MeterController extends Controller
     public function validate_mobile_meter(request $request)
     {
         $user = User::where('meterNo', $request->meterNo)->first() ?? null;
+        $get_user_estate_id = User::where('meterNo', $request->meterNo)->first()->estate_id ?? null;
 
 
         $meter = Meter::where('meterNo', $request->meterNo)->where('estate_id', $request->estateId)->first() ?? null;
@@ -70,9 +71,8 @@ class MeterController extends Controller
         }
 
 
-        if($user->estate_id == null){
-
-            $message = "Estate is not attached to user";
+        if($get_user_estate_id == null){
+            $message = "User is not properly attached to estate";
             $code = 422;
             return error($message, $code);
 
@@ -80,7 +80,7 @@ class MeterController extends Controller
 
 
 
-        $get_tar = Tariff::where('estate_id', $user->estate_id)->where('status', 2)->first() ?? null;
+        $get_tar = Tariff::where('estate_id', $get_user_estate_id)->where('status', 2)->first() ?? null;
         if ($get_tar == null) {
             $message = "Tariff not properly configured";
             $code = 422;
