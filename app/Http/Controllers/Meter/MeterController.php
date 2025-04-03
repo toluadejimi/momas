@@ -72,7 +72,7 @@ class MeterController extends Controller
 
 
         if($get_user_estate_id == null){
-            $message = "User is not properly attached to estate";
+            $message = "Customer is not properly attached to estate";
             $code = 422;
             return error($message, $code);
 
