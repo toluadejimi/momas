@@ -607,7 +607,7 @@ if (!function_exists('generate_token')) {
         $tok->token = $get_token;
         $tok->visitor = $visitor;
         $tok->estate_id = $estate_id;
-        $tok->email = $email;
+        $tok->email = $email ?? Auth::user()->email;
         $tok->address = $usr->address . " " . $usr->city . " " . $usr->state;
         $tok->valid_date = $valid_date;
 

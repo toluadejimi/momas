@@ -29,6 +29,7 @@ class EstateController extends Controller
     public function estate_token(request $request){
 
 
+
         $user_id = Auth::id();
         $visitor = $request->qty;
         $email = $request->email;
