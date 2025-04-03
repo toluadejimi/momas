@@ -138,13 +138,7 @@ class AuthController extends Controller
         }
 
 
-        if ($request->type == "onboarding") {
-            if ($usr->status == 0) {
-                return redirect('admin/pending-onboarding');
-            }
-        }
-
-        if ($usr->role == 1 || $usr->role == 0) {
+        if ($usr->role == 1 || $usr->role == 0 || $usr->role == 3) {
             User::where('id', Auth::id())->update(['can_login' => 1]);
             return redirect('admin/admin-dashboard')->with('message', "Welcome Admin!");
 
