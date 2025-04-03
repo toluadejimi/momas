@@ -29,15 +29,6 @@ class EstateController extends Controller
     public function estate_token(request $request){
 
 
-
-        $request->validate([
-            'email' => 'required|email'
-        ], [
-            'email.required' => 'The email field is required.',
-            'email.email' => 'Enter a valid email address.',
-        ]);
-
-
         $user_id = Auth::id();
         $visitor = $request->qty;
         $email = $request->email;
@@ -48,6 +39,15 @@ class EstateController extends Controller
 
         $tok = generate_token($user_id, $visitor, $email, $valid_date, $estate_id);
         if($can_send == 1){
+
+            $request->validate([
+                'email' => 'required|email'
+            ], [
+                'email.required' => 'The email field is required.',
+                'email.email' => 'Enter a valid email address.',
+            ]);
+
+
             $usr = User::where('id', Auth::id())->first();
             $token_code = $tok;
             $estate = Estate::where('id', $estate_id)->first()->title ?? null;
