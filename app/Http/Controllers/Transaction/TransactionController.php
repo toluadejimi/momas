@@ -1124,6 +1124,21 @@ class TransactionController extends Controller
     }
 
 
+    public function enkpay_payment(request $request)
+    {
+
+        $data['balance'] = get_balance();
+        $data['transaction'] = VirtualAccountTransaction::latest()->take(1000)->paginate('50');
+        $data['total_withdrawal'] = VirtualAccountTransaction::where('status', 4)->sum('amount');
+        $data['total_funded'] = VirtualAccountTransaction::where('status', 5)->sum('amount');
+        $data['customer'] = User::latest()->where('status', 2)->get();
+
+
+        return view('admin.report.enkpay-payment', $data);
+
+    }
+
+
     public function search_utility_trx(request $request)
     {
 

@@ -269,6 +269,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'blockaccess']], fun
     Route::get('utility-payment', [TransactionController::class, 'utility_payment']);
     Route::get('uncomplete-payment', [TransactionController::class, 'uncomplete_payment']);
     Route::get('complete-payment', [TransactionController::class, 'complete_payment']);
+    Route::get('enkpay-payment', [TransactionController::class, 'enkpay_payment']);
 
 
 

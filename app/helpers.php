@@ -67,6 +67,60 @@ if (!function_exists('token')) {
 }
 
 
+if (!function_exists('get_balance')) {
+
+    function get_balance()
+    {
+
+        $email = env('ENKPAYEMAIL');
+        $passsword = env('ENKPAYPASSWORD');
+
+
+        $databody = array(
+            "email" => $email,
+            "password" => $passsword,
+
+        );
+
+        $body = json_encode($databody);
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://enkpayapp.enkwave.com/api/email-login',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $body,
+            CURLOPT_HTTPHEADER => array(
+                'Accept: application/json',
+                'Content-Type: application/json'
+            ),
+        ));
+
+        $var = curl_exec($curl);
+        curl_close($curl);
+        $var = json_decode($var);
+        $status = $var->status ?? null;
+
+
+        if ($status == false) {
+            return $var->data->main_wallet;
+        } else {
+
+            $message = $var;
+            send_notification($message);
+            return false;
+        }
+    }
+
+
+}
+
+
 if (!function_exists('error')) {
 
     function error($message, $code)
