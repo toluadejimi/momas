@@ -70,6 +70,16 @@ class MeterController extends Controller
         }
 
 
+        if($user->estate_id == null){
+
+            $message = "Estate is not attached to user";
+            $code = 422;
+            return error($message, $code);
+
+        }
+
+
+
         $get_tar = Tariff::where('estate_id', $user->estate_id)->where('status', 2)->first() ?? null;
         if ($get_tar == null) {
             $message = "Tariff not properly configured";
