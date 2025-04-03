@@ -258,6 +258,7 @@
                                     <thead>
                                     <tr>
                                         <th scope="col" class="cursor-pointer">Trx ID</th>
+                                        <th scope="col" class="cursor-pointer">Payment Type</th>
                                         <th scope="col" class="cursor-pointer">Account No</th>
                                         <th scope="col" class="cursor-pointer">Bank</th>
                                         <th scope="col" class="cursor-pointer">Customer</th>
