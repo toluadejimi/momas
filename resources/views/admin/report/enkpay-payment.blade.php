@@ -275,6 +275,15 @@
 
                                         <tr>
                                             <td>{{$data->id }}</td>
+                                            <td>
+                                                @if($data->type == "admin_fee")
+                                                    <span class="badge text-bg-success">Admin Fee</span>
+                                                @elseif($data->type == "wallet_funding")
+                                                    <span class="badge text-bg-success">Wallet Funding</span>
+                                                @elseif($data->type == "withdrawal")
+                                                    <span class="badge text-bg-primary">Withdrawal</span>
+                                                @endif
+                                            </td>
                                             <td>{{$data->v_account_no }}</td>
                                             <td>{{$data->v_bank_name }}</td>
                                             <td><a href="view-user?id={{$data->user->first_name ?? "name"}}">{{$data->user->first_name ?? "name"}} {{$data->user->last_name ?? "name"}}</a></td>
