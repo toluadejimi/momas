@@ -85,8 +85,16 @@ class LoginController extends Controller
 
             }else{
 
-                $utility_amount = Estate::where('id', Auth::user()->estate_id)->first()->total_utility_amount;
-                $duration = Estate::where('id', Auth::user()->estate_id)->first()->duration;
+                $utility_amount = Estate::where('id', Auth::user()->estate_id)->first()->total_utility_amount ?? null;
+                $duration = Estate::where('id', Auth::user()->estate_id)->first()->duration ?? null;
+
+                if($duration == null || $utility_amount == null){
+                    $message = "Estate setting incomplete, Contact support";
+                    $code = 404;
+                    return error($message, $code);
+                }
+
+
 
                 $nextDueDate = Carbon::now();
                 switch ($duration) {
@@ -100,6 +108,7 @@ class LoginController extends Controller
                         $nextDueDate->addYear();
                         break;
                     default:
+
                         $mssage = "Unknown duration '{$duration}'";
                         send_notification($mssage);
 
@@ -332,8 +341,14 @@ class LoginController extends Controller
 
             }else{
 
-                $utility_amount = Estate::where('id', Auth::user()->estate_id)->first()->total_utility_amount;
-                $duration = Estate::where('id', Auth::user()->estate_id)->first()->duration;
+                $utility_amount = Estate::where('id', Auth::user()->estate_id)->first()->total_utility_amount ?? null;
+                $duration = Estate::where('id', Auth::user()->estate_id)->first()->duration ?? null;
+
+                if($duration == null || $utility_amount == null){
+                    $message = "Estate setting incomplete, Contact support";
+                    $code = 404;
+                    return error($message, $code);
+                }
 
                 $nextDueDate = Carbon::now();
                 switch ($duration) {
