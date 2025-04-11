@@ -85,11 +85,11 @@ class LoginController extends Controller
 
             }else{
 
-                $utility_amount = Estate::where('id', Auth::user()->estate_id)->first()->total_utility_amount ?? null;
+                $utility_amount = Estate::where('id', Auth::user()->estate_id)->first()->total_utility_amount ?? 0;
                 $duration = Estate::where('id', Auth::user()->estate_id)->first()->duration ?? null;
 
-                if($duration == null || $utility_amount == null){
-                    $message = "Estate setting incomplete, Contact support";
+                if($duration == null ){
+                    $message = "Estate utility duration not set, Contact support";
                     $code = 404;
                     return error($message, $code);
                 }
@@ -341,11 +341,11 @@ class LoginController extends Controller
 
             }else{
 
-                $utility_amount = Estate::where('id', Auth::user()->estate_id)->first()->total_utility_amount ?? null;
+                $utility_amount = Estate::where('id', Auth::user()->estate_id)->first()->total_utility_amount ?? 0;
                 $duration = Estate::where('id', Auth::user()->estate_id)->first()->duration ?? null;
 
-                if($duration == null || $utility_amount == null){
-                    $message = "Estate setting incomplete, Contact support";
+                if($duration == null){
+                    $message = "Estate utility duration not set, Contact support";
                     $code = 404;
                     return error($message, $code);
                 }
