@@ -16,11 +16,12 @@ class CustomersImport implements ToModel, WithHeadingRow
 {
 
 
-    protected $id;
+    protected $id, $email;
 
-    public function __construct($id)
+    public function __construct($id, $email)
     {
         $this->id = $id;
+        $this->email = $email;
     }
 
 
@@ -37,12 +38,10 @@ class CustomersImport implements ToModel, WithHeadingRow
 
             if (Auth::user()->role == 3) {
 
-                $email = Str::random(10) . '@example.com';
-
                 return new User([
                     'first_name'   => $row['firstname'],
                     'last_name'    => $row['lastname'],
-                    'email'        => $row['email'] ?? $email,
+                    'email'        => $row['email'] ?? $this->email,
                     'address'      => $row['address'],
                     'state'        => $row['state'],
                     'phone'        => "+234".$row['phone'],
@@ -67,7 +66,7 @@ class CustomersImport implements ToModel, WithHeadingRow
 
                     'first_name'   => $row['firstname'],
                     'last_name'    => $row['lastname'],
-                    'email'        => $row['email'] ?? $email,
+                    'email'        => $row['email'] ?? $this->email,
                     'address'      => $row['address'],
                     'state'        => $row['state'],
                     'phone'        => "+234".$row['phone'],

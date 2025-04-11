@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Imports\CustomersImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -22,10 +23,10 @@ class CustomerImportController extends Controller
         }
 
 
-
+        $email = Str::random(10) . '@example.com';
 
         try {
-            Excel::import(new CustomersImport($id), $request->file('file'));
+            Excel::import(new CustomersImport($id, $email), $request->file('file'));
 
         } catch (\Exception$th) {
 
