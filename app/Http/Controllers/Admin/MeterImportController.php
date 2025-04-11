@@ -24,9 +24,7 @@ class MeterImportController extends Controller
         }
 
 
-        $request->validate([
-            'file' => 'required|mimes:csv,xlsx,xls',
-        ]);
+
 
         try {
 

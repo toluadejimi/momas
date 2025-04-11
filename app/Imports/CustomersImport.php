@@ -68,7 +68,7 @@ class CustomersImport implements ToModel, WithHeadingRow
                     'account_no'   => $row['accountno'],
                     'role'         => 2,
                     'password'     => bcrypt('123456'),
-                    'meterNo'     =>  $row['meterno'],
+                    'meterNo'    we =>  $row['meterno'],
                     'estate_name'  => $estate_name,
                     'estate_id'    => $this->id,
                     'status' => 2

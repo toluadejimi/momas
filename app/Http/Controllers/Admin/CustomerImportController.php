@@ -23,11 +23,6 @@ class CustomerImportController extends Controller
 
 
 
-        $request->validate([
-            'file' => 'required|file|mimes:csv,txt,xlsx,xls'
-        ]);
-
-
 
         try {
             Excel::import(new CustomersImport($id), $request->file('file'));
