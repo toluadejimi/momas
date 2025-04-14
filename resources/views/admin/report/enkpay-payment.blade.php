@@ -282,8 +282,8 @@
                                             <td>
                                                 @if($data->status == 2)
                                                     <span class="badge text-bg-primary">Completed</span>
-                                                @elseif($data->status == 0)
-                                                    <span class="badge text-bg-warning">Pending</span>
+{{--                                                @elseif($data->status == 0)--}}
+{{--                                                    <span class="badge text-bg-warning">Pending</span>--}}
                                                 @elseif($data->status == 5)
                                                     <span class="badge text-bg-primary">Admin Fund successful</span>
                                                 @elseif($data->status == 4)
