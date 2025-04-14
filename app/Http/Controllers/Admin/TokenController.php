@@ -254,7 +254,8 @@ class TokenController extends Controller
         if (Auth::user()->role == 0) {
 
 
-            $estate_id = Estate::where('title', $request->estate_id)->first()->id;
+
+            $estate_id = Estate::where('id', $request->estate_id)->first()->id;
             $meter = Meter::where('meterNo', $request->meterNo)->first() ?? null;
             $user = User::where('meterNo', $request->meterNo)->first() ?? null;
 
@@ -313,7 +314,7 @@ class TokenController extends Controller
         } elseif (Auth::user()->role == 3) {
 
 
-            $estate_id = Estate::where('title', $request->estate_id)->first()->id;
+            $estate_id = Estate::where('id', $request->estate_id)->first()->id;
             $meter = Meter::where('meterNo', $request->meterNo)->first() ?? null;
             $user = User::where('meterNo', $request->meterNo)->first() ?? null;
 
