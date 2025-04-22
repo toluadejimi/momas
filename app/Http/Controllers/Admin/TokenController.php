@@ -265,9 +265,7 @@ class TokenController extends Controller
             if ($meter->estate_id != $estate_id) {
                 return back()->with('error', 'Meter not does not belong to estate selected');
             }
-            if ($request->amount < 1000) {
-                return back()->with('error', 'Amount can not be less than NGN 1,000');
-            }
+
 
             if ($user == null) {
                 return back()->with('error', 'Meter has not been attached to any customer');
