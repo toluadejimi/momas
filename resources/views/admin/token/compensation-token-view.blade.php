@@ -361,7 +361,7 @@
 
                                                             <td>
                                                                 @if($data->status == 2)
-                                                                    <a href="recepit?trx_id={{$data->trx_id}}"  onclick="return confirmreprint();" class="btn btn-primary">Reprint</a>
+                                                                    <a href="recepit?trx_id={{$data->trx_id}}&type=compensation"  onclick="return confirmreprint();" class="btn btn-primary">Reprint</a>
                                                                     <script>
 
                                                                         function confirmreprint() {
@@ -801,7 +801,7 @@
 
                                                             <td>
                                                                 @if($data->status == 2)
-                                                                    <a href="recepit?trx_id={{$data->trx_id}}"  onclick="return confirmreprint();" class="btn btn-primary">Reprint</a>
+                                                                    <a href="recepit?trx_id={{$data->trx_id}}&type=compensation"  onclick="return confirmreprint();" class="btn btn-primary">Reprint</a>
                                                                     <script>
 
                                                                         function confirmreprint() {

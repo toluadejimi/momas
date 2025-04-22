@@ -2416,7 +2416,7 @@ class TokenController extends Controller
         $databody = [
             'meterType' => $meter->KRN1 ?? "STS6",
             'meterNo' => $meter->meterNo,
-            'sgc' => (int)$meter->OldSGC ?? 901102,
+            'sgc' => (int)$meter->NewSGC ?? 901102,
             'ti' => $tariff_id,
             'amount' => (int)$request->tariffPerKWatt,
         ];
@@ -2430,8 +2430,6 @@ class TokenController extends Controller
 
 
         if ($response->successful()) {
-
-
 
             $get_token = $response->json();
             $token_data = json_decode($get_token, true);
@@ -2458,6 +2456,8 @@ class TokenController extends Controller
                 $trx->amount = $request->amount;
                 $trx->unit_amount = $request->costOfUnit;
                 $trx->save();
+
+                CompensationToken::where('id', $cdt->id)->update(['token' => $token, 'status' => 2]);
 
                 return redirect("admin/recepit?trx_id=$trx->trx_id&type=compensation");
 
@@ -4115,6 +4115,37 @@ class TokenController extends Controller
                 $data['tariff_amount'] = $trx_comp->tariff_amount;
                 $data['vend_amount_kw_per_naira'] = $trx_comp->tariffPerKWatt;
                 $data['title'] = "Clear Credit Token";
+                $data['date'] = date('d-m-y h:i:s');
+                $data['meter_no'] = $trx_comp->meterNo;
+
+
+                return view('admin/recepit.recepit', $data);
+
+
+            }
+
+
+        }
+
+
+        if ($request->type == "compensation") {
+
+            $trx_comp = CompensationToken::where('trx_id', $request->trx_id)->first() ?? null;
+            $user_comp = User::where('id', $trx_comp->user_id)->first() ?? null;
+
+
+            if ($trx_comp != null) {
+
+                $data['full_name'] = $user_comp->first_name . " " . $user_comp->last_name;
+                $data['address'] = $user_comp->address . "," . $user_comp->city . "," . $user_comp->state;
+                $data['phone'] = $user_comp->phone;
+                $data['ref'] = $trx_comp->trx_id;
+                $data['token'] = $trx_comp->token;
+                $data['amount'] = $trx_comp->amount;
+                $data['vat_amount'] = $trx_comp->vatAmount;
+                $data['tariff_amount'] = $trx_comp->tariff_amount;
+                $data['vend_amount_kw_per_naira'] = $trx_comp->tariffPerKWatt;
+                $data['title'] = "Compensation Token";
                 $data['date'] = date('d-m-y h:i:s');
                 $data['meter_no'] = $trx_comp->meterNo;
 
