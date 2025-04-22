@@ -110,7 +110,7 @@
                                                                     var estate_id = $('#estate_id').val();
                                                                     var meterNo = $('#meterNo').val();
 
-                                                                    if (estate_id && meterNo) {
+                                                                    if (estate_id && meterNo.length === 11) {
                                                                         $.ajax({
                                                                             url: '/fetch-tariff', // Change this to your endpoint
                                                                             method: 'GET',

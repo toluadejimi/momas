@@ -2388,7 +2388,7 @@ class TokenController extends Controller
     {
 
         $trx_id = "COMP" . random_int(000000, 999999);
-        $estate_id = Estate::where('title', $request->estate_name)->first()->id;
+        $estate_id = $request->estate_id;
         $cdt = new CompensationToken();
         $cdt->user_id = $request->user_id;
         $cdt->trx_id = $trx_id;
@@ -2432,6 +2432,9 @@ class TokenController extends Controller
 
 
         if ($response->successful()) {
+
+
+
             $get_token = $response->json();
             $token_data = json_decode($get_token, true);
             $status = $token_data['code'] ?? null;
@@ -2487,7 +2490,7 @@ class TokenController extends Controller
                 User::where('id', Auth::id())->increment('main_wallet', $trx->amount);
 
 
-                return redirect('admin/credit-token')->with('error', $error['errors'][0]['title'] ?? $get_token->json() . " | " . json_encode($databody));
+                return redirect('admin/compensation-token')->with('error', $error['errors'][0]['title'] ?? $error . " | " . json_encode($databody));
 
             }
 
@@ -2495,7 +2498,7 @@ class TokenController extends Controller
         }
 
 
-        return redirect('admin/credit-token')->with('error', $error['errors'][0]['title'] ?? $get_token->json() . " | " . json_encode($databody));
+        return redirect('admin/compensation-token')->with('error', $error['errors'][0]['title'] ?? $error . " | " . json_encode($databody));
 
 
     }
