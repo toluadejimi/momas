@@ -112,14 +112,9 @@ class RegisterController extends Controller
 
             $usr = User::where('email', $request->email)->first() ?? null;
 
-
-            if ($usr != null) {
+            if ($usr == null) {
                 $sms_code = random_int(0000, 9999);
                 $email = $request->email;
-
-                $usrr = new User();
-                $usrr->email = $email;
-                $usrr->save();
 
                 User::where('email', $request->email)->update(['code' => $sms_code]);
                 $user = send_email_reset($email, $sms_code);
