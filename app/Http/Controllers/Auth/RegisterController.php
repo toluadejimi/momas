@@ -113,6 +113,7 @@ class RegisterController extends Controller
             $usr = User::where('email', $request->email)->first() ?? null;
 
             if ($usr == null) {
+
                 $sms_code = random_int(0000, 9999);
                 $email = $request->email;
 
@@ -129,6 +130,7 @@ class RegisterController extends Controller
                 return response()->json([
                     'status' => false,
                     'message' => "Email does not exist",
+                    'data' => $request->email | $usr,
                 ], 422);
             }
 
