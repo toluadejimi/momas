@@ -1,3 +1,4 @@
+@php use App\Models\Meter; @endphp
 @extends('layouts.main')
 @section('content')
 
@@ -31,7 +32,7 @@
                                            class="form-control"
                                            required>
                                     <input type="text" name="id" value="{{$meter->id}}"
-                                           hidden >
+                                           hidden>
 
                                 </div>
 
@@ -66,7 +67,6 @@
                                 <hr class="my-4">
 
 
-
                                 <div class="col-3">
                                     <label class="my-2">Transformer</label>
                                     <select type="text" name="TransformerID" class="form-control" required>
@@ -80,7 +80,8 @@
 
                                 <div class="col-3 mt-4">
                                     @if($meter->isDualTariff == 1)
-                                        <input type="checkbox" id="isDualTariff" checked name="isDualTariff" class="form-check-input" style="border: 10px">
+                                        <input type="checkbox" id="isDualTariff" checked name="isDualTariff"
+                                               class="form-check-input" style="border: 10px">
 
                                         <script>
                                             document.getElementById('isDualTariff').addEventListener('change', function () {
@@ -96,7 +97,8 @@
                                         </script>
 
                                     @else
-                                        <input  type="checkbox" id="isDualTariff" name="isDualTariff" class="form-check-input" style="border: 10px">
+                                        <input type="checkbox" id="isDualTariff" name="isDualTariff"
+                                               class="form-check-input" style="border: 10px">
 
                                         <script>
                                             document.getElementById('isDualTariff').addEventListener('change', function () {
@@ -116,30 +118,35 @@
 
                                 </div>
 
-                                <div class="col-3">
+
+                                <div class="col-xl-3 col-sm-12">
                                     <label class="my-2">Old SGC</label>
-                                    <input type="text" value="{{$meter->OldSGC}}" name="OldSGC" class="form-control" required>
+                                    <select name="OldSGC" class="form-control" required>
+                                        <option value="{{$meter->OldSGC}}">@if($meter->OldSGC == "999962") MOMAS Default (9***2)@else MOMAS System Nig Ltd (6***9) @endif</option>
+                                        <option value="999962">MOMAS Default (9***2)</option>
+                                        <option value="600849">MOMAS System Nig Ltd (6***9)</option>
+                                    </select>
                                 </div>
 
-                                <div class="col-3">
+
+                                <div class="col-xl-3 col-sm-12">
                                     <label class="my-2">New SGC</label>
-                                    <input type="text" value="{{$meter->NewSGC}}" name="NewSGC" class="form-control" required>
+                                    <select name="NewSGC" class="form-control" required>
+                                        <option value="{{$meter->NewSGC}}">@if($meter->NewSGC == "600849") MOMAS System Nig Ltd (6***9) @else MOMAS Default (9***2)  @endif</option>
+                                        <option value="600849">MOMAS System Nig Ltd (6***9)</option>
+                                        <option value="999962">MOMAS Default (9***2)</option>
+                                    </select>
                                 </div>
-
-
-
-
-
 
 
                                 <hr class="my-4">
 
 
-
                                 <div class="col-2" id="oldTariffDualContainer" style="display: none;">
                                     <label class="my-2">Old Tariff Dual</label>
                                     <select name="OldTariffDual" class="form-control">
-                                        <option value="{{$meter->OldTariffDualID}}">{{strtoupper($meter->OldTariffDualID)}}</option>
+                                        <option
+                                            value="{{$meter->OldTariffDualID}}">{{strtoupper($meter->OldTariffDualID)}}</option>
                                         @foreach($tariffdual as $data)
                                             <option value="{{$data->OldTariffDual}}">{{$data->title}}</option>
                                         @endforeach
@@ -152,7 +159,8 @@
                                 <div class="col-2" id="newtar" style="display: none;">
                                     <label class="my-2">New Tariff Dual ID</label>
                                     <select name="NewTariffDual" class="form-control">
-                                        <option value="{{$meter->NewTariffDualID}}">{{strtoupper($meter->NewTariffDualID)}}</option>
+                                        <option
+                                            value="{{$meter->NewTariffDualID}}">{{strtoupper($meter->NewTariffDualID)}}</option>
                                         @foreach($tariffdual as $data)
                                             <option value="{{$data->NewTariffDual}}">{{$data->title}}</option>
                                         @endforeach
@@ -161,11 +169,11 @@
                                 </div>
 
 
-
                                 <div class="col-2">
                                     <label class="my-2">New Tariff</label>
                                     <select name="NewTariffID" class="form-control">
-                                        <option value="{{$meter->NewTariffID}}">{{strtoupper($meter->NewTariffID)}}</option>
+                                        <option
+                                            value="{{$meter->NewTariffID}}">{{strtoupper($new_tariff_title)}}</option>
                                         @foreach($tariff as $data)
                                             <option value="{{$data->id}}">{{$data->title}}</option>
                                         @endforeach
@@ -175,57 +183,26 @@
                                 <div class="col-2">
                                     <label class="my-2">Old Tariff</label>
                                     <select type="text" name="OldTariffID" class="form-control" required>
-                                        <option value="{{$meter->OldTariffID}}">{{strtoupper($meter->OldTariffID)}}</option>
+                                        <option
+                                            value="{{$meter->OldTariffID}}">{{strtoupper($old_tariff_title)}}</option>
                                         @foreach($tariff as $data)
                                             <option value="{{$data->id}}">{{$data->title}} </option>
                                         @endforeach
                                     </select>
                                 </div>
 
-                                <div class="col-2 "  id="newTariffDualContainer" style="display: none;">
+                                <div class="col-2 " id="newTariffDualContainer" style="display: none;">
                                     <label class="my-2">New SGC Dual</label>
-                                    <input type="text" value="{{$meter->NewSGCDual}}" name="NewSGCDual" class="form-control" >
+                                    <input type="text" value="{{$meter->NewSGCDual}}" name="NewSGCDual"
+                                           class="form-control">
                                 </div>
 
 
                                 <div class="col-2 " id="newSGCDualContainer" style="display: none;">
                                     <label class="my-2">OLD SGC Dual</label>
-                                    <input type="text"  value="{{$meter->OldSGCDual}}" name="OldSGCDual" class="form-control">
+                                    <input type="text" value="{{$meter->OldSGCDual}}" name="OldSGCDual"
+                                           class="form-control">
                                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                                 @if($meter->isDualTariff == "on")
@@ -248,22 +225,22 @@
                                 <hr class="my-4">
 
 
-
                                 <div class="col-3">
                                     <label class="my-2">KRN1</label>
-                                    <input type="text" value="{{$meter->KRN1}}" name="KRN1" class="form-control" required>
+                                    <input type="text" value="{{$meter->KRN1}}" name="KRN1" class="form-control"
+                                           required>
                                 </div>
 
                                 <div class="col-3">
                                     <label class="my-2">KRN2</label>
-                                    <input type="text" value="{{$meter->KRN2}}" name="KRN2" class="form-control" required>
+                                    <input type="text" value="{{$meter->KRN2}}" name="KRN2" class="form-control"
+                                           required>
                                 </div>
-
 
 
                                 <div class="col-3 mt-4">
                                     @if($meter->NeedKCT == "on" || $meter->NeedKCT == 1)
-                                        <input type="checkbox"  name="NeedKCT" checked class="form-check-input"
+                                        <input type="checkbox" name="NeedKCT" checked class="form-check-input"
                                                style="border: 10px">
                                         <label class="form-check-label">Need KCT</label>
                                     @else
@@ -324,7 +301,8 @@
                                     <div class="card-header">
                                         <div class="d-flex justify-content-between">
                                             <h5 class="card-title text-black mb-0">All Transaction</h5>
-                                            <a href="/export-metertransactions?meterNo={{$meter->meterNo}}" class="btn btn-primary mb-3">Export</a>
+                                            <a href="/export-metertransactions?meterNo={{$meter->meterNo}}"
+                                               class="btn btn-primary mb-3">Export</a>
 
                                         </div>
 
@@ -358,16 +336,22 @@
 
                                                             <div class="col-xl-6">
                                                                 <div class="card">
-                                                                    <div class="modal fade" id="staticBackdrop{{$data->trx_id}}"
-                                                                         data-bs-backdrop="static" data-bs-keyboard="false"
-                                                                         tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                                                    <div class="modal fade"
+                                                                         id="staticBackdrop{{$data->trx_id}}"
+                                                                         data-bs-backdrop="static"
+                                                                         data-bs-keyboard="false"
+                                                                         tabindex="-1"
+                                                                         aria-labelledby="staticBackdropLabel"
                                                                          aria-hidden="true">
                                                                         <div class="modal-dialog modal-dialog-centered">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
                                                                                     <h1 class="modal-title fs-5"
                                                                                         id="staticBackdropLabel">{{$data->trx_id}}</h1>
-                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                    <button type="button"
+                                                                                            class="btn-close"
+                                                                                            data-bs-dismiss="modal"
+                                                                                            aria-label="Close"></button>
                                                                                 </div>
 
 
@@ -376,7 +360,8 @@
                                                                                     <div class="row">
                                                                                         <div class="col-4">
 
-                                                                                            <label>Transaction ID</label>
+                                                                                            <label>Transaction
+                                                                                                ID</label>
                                                                                             <div>{{$data->trx_id}}</div>
 
                                                                                         </div>
@@ -390,7 +375,8 @@
 
                                                                                         <div class="col-4">
                                                                                             <label>Amount</label>
-                                                                                            <div>NGN {{number_format($data->amount, 2)}}</div>
+                                                                                            <div>
+                                                                                                NGN {{number_format($data->amount, 2)}}</div>
                                                                                         </div>
 
                                                                                     </div>
@@ -401,7 +387,8 @@
 
                                                                                         @if($data->pay_type == "paystack")
                                                                                             <div class="col-4">
-                                                                                                <label>Pay Channel</label>
+                                                                                                <label>Pay
+                                                                                                    Channel</label>
                                                                                                 <div>{{"Paystack"}}</div>
                                                                                             </div>
 
@@ -423,9 +410,7 @@
                                                                                     <hr>
 
 
-
                                                                                     <div class="row">
-
 
 
                                                                                     </div>
@@ -444,13 +429,13 @@
                                                         </td>
 
 
-
-
                                                         <td>
                                                             <div>{{$data->meterNo ?? "123456"}}</div>
                                                         </td>
 
-                                                        <td><a href="view-user?id={{$data->user->first_name ?? "name"}}">{{$data->user->last_name ?? "name"}}</a></td>
+                                                        <td>
+                                                            <a href="view-user?id={{$data->user->first_name ?? "name"}}">{{$data->user->last_name ?? "name"}}</a>
+                                                        </td>
                                                         <td>{{$data->estate->title ?? "Estate"}}</td>
                                                         <td>{{number_format($data->amount, 2)}}</td>
                                                         <td>
@@ -484,15 +469,14 @@
                                 </div>
                             </div>
 
+                        </div>
                     </div>
                 </div>
+
+
             </div>
 
 
-
-        </div>
-
-
-    </div> <!-- container-fluid -->
+        </div> <!-- container-fluid -->
 
 @endsection

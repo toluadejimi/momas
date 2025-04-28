@@ -1174,6 +1174,9 @@ class MeterController extends Controller
         $data['NewTariffID'] = Tariff::where('id', $data['meter']->NewTariffID)->first()->title ?? null;
         $data['OldTariffID'] = Tariff::where('id', $data['meter']->OldTariffID)->first()->title ?? null;
         $data['tariffdual'] = Tariff::latest()->where('isDualTariff', "on")->get();
+        $data['new_tariff_title'] = Tariff::where('id', $data['meter']->NewTariffID)->first()->title ?? "No title set";
+        $data['old_tariff_title'] = Tariff::where('id', $data['meter']->OldTariffID)->first()->title ?? "No title set";
+
 
         $data['transactions'] = CreditToken::latest()->where('meterNo', $data['meter']->meterNo)->where('status', 2)->paginate(20);
 
