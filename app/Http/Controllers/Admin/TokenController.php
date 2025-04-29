@@ -4141,7 +4141,7 @@ class TokenController extends Controller
                 $data['phone'] = $user_comp->phone;
                 $data['ref'] = $trx_comp->trx_id;
                 $data['token'] = $trx_comp->token;
-                $data['amount'] = $trx_comp->amount;
+                $data['amount'] = 0;
                 $data['vat_amount'] = $trx_comp->vatAmount;
                 $data['tariff_amount'] = $trx_comp->tariff_amount;
                 $data['vend_amount_kw_per_naira'] = $trx_comp->tariffPerKWatt;
