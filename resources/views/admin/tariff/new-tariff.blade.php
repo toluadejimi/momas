@@ -87,19 +87,19 @@
 
 
 
-                                    <div class="col-xl-4 col-sm-12">
-                                        <label class="my-2">Tariff Index</label>
-                                        <select class="form-control" name="tariff_index" required>
-                                            <option value="">---Select Index-----</option>
-                                            @php
-                                                for ($i = 1; $i <= 99; $i++) {
-                                                    echo "<option value=\"$i\">$i</option>";
-                                                }
-                                            @endphp
+{{--                                    <div class="col-xl-4 col-sm-12">--}}
+{{--                                        <label class="my-2">Tariff Index</label>--}}
+{{--                                        <select class="form-control" name="tariff_index" required>--}}
+{{--                                            <option value="">---Select Index-----</option>--}}
+{{--                                            @php--}}
+{{--                                                for ($i = 1; $i <= 99; $i++) {--}}
+{{--                                                    echo "<option value=\"$i\">$i</option>";--}}
+{{--                                                }--}}
+{{--                                            @endphp--}}
 
-                                        </select>
+{{--                                        </select>--}}
 
-                                    </div>
+{{--                                    </div>--}}
 
 
 

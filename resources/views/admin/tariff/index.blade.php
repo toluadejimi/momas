@@ -92,7 +92,6 @@
                                        class="table table-striped table-bordered dt-responsive nowrap">
                                     <thead>
                                     <tr>
-                                        <th scope="col" class="cursor-pointer">TariffID</th>
                                         <th scope="col" class="cursor-pointer">Tariff Source</th>
                                         <th scope="col" class="cursor-pointer">TariffCode</th>
                                         <th scope="col" class="cursor-pointer">Estate</th>
@@ -108,7 +107,7 @@
                                     @foreach($tariffis as $data)
 
                                         <tr>
-                                            <td>{{$data->tariff_index}}</td>
+
                                             <td>{{$data->type}}</td>
                                             <td><a href="view-tariff?id={{$data->id}}">{{$data->title ?? "name"}}</a> </td>
                                             <td>{{$data->estate->title ?? "name"}}</td>

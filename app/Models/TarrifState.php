@@ -12,7 +12,7 @@ class TarrifState extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
-        'status', 'estate_id'  // Ensure estate_id is fillable
+        'status', 'estate_id', 't_index',
     ];
 
     protected $casts = [
@@ -20,7 +20,6 @@ class TarrifState extends Model implements Auditable
         'vat' => 'double',
     ];
 
-    // If needed, you can override toAudit method here to ensure estate_id is logged as part of the audit
     public function customAudit()
     {
         return $this->audit()->create([

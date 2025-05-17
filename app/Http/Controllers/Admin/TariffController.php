@@ -151,7 +151,7 @@ class TariffController extends Controller
             $tr->amount = $request->amount;
             $tr->effective_from = $request->date_from;
             $tr->effective_to = null;
-            $tr->tariff_id = $request->id;
+            $tr->t_index = $request->t_index;
             $tr->estate_id = $request->estate_id;
             $tr->vat = $request->vat;
             $tr->save();
@@ -196,6 +196,7 @@ class TariffController extends Controller
         $tr->effective_to = $request->date_to;
         $tr->tariff_id = $request->id;
         $tr->estate_id = $request->estate_id;
+        $tr->t_index = $request->t_index;
         $tr->vat = $request->vat;
         $tr->save();
 
@@ -291,12 +292,12 @@ class TariffController extends Controller
     {
 
 
-
         $ttf = TarrifState::find($request->id);
         if ($ttf) {
             $ttf->status = $request->status;
             $ttf->amount = $request->amount;
             $ttf->estate_id = $ttf->estate_id;
+            $ttf->t_index = $request->t_index;
             $ttf->save();
         }
 

@@ -526,7 +526,10 @@ class TokenController extends Controller
 
 
             $tariffAmount = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
-            $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount ?? 0;
+            $vat = TarrifState::where('tariff_id', $request->tariff_id)->first()->vat ?? 0;
+
+
+
 
 
             $percn = (2.5 / 100) * (int)$request->amount;
@@ -538,7 +541,7 @@ class TokenController extends Controller
                 'amountText' => $perc_amount,
                 'tariffAmount' => $tariffAmount,
                 'utilitiesAmount' => 0,
-                'vat' => 7.5,
+                'vat' => $vat,
             ];
 
             $vatAmount = $calculator->calculateVatAmount($params);
@@ -567,7 +570,9 @@ class TokenController extends Controller
             $data['estate_id'] = $estate_id;
             $data['estate_name'] = $request->estate_id;
             $data['tarrif_amount'] = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount;
+            $data['tarrif_index'] = TarrifState::where('tariff_id', $request->tariff_id)->first()->t_index;
             $data['credit_tokens'] = CreditToken::latest()->paginate('50');
+
             return view('admin.token.credit-token-preview', $data);
 
 
@@ -1025,6 +1030,7 @@ class TokenController extends Controller
     {
 
 
+
         $est = Estate::where('id', $request->estate_name)->first();
 
         if ($est->charge_fee_flat == null) {
@@ -1051,7 +1057,7 @@ class TokenController extends Controller
         $cdt->vat = $request->vat;
         $cdt->estate_name = Estate::where('id', $request->estate_name)->first()->title;;
         $cdt->estate_id = $estate_id;
-        $cdt->tariff_id = TarrifState::where('amount', $request->tariff_amount)->first()->tariff_id;
+        $cdt->tariff_id = $request->t_index;
         $cdt->tariff_amount = $request->tariff_amount;
         $cdt->vatAmount = $request->vatAmount;
         $cdt->costOfUnit = $request->costOfUnit;
@@ -2545,7 +2551,7 @@ class TokenController extends Controller
                 $databody = [
                     'meterType' => $meter->KRN1,
                     'meterNo' => $meter->meterNo,
-                    'sgc' => (int)$meter->OldSGC,
+                    'sgc' => (int)$meter->NewSGC,
                     'ti' => $trx->tariff_id,
                     'amount' => (int)$trx->tariffPerKWatt,
                 ];
@@ -2599,7 +2605,7 @@ class TokenController extends Controller
                             'service_type' => "meter",
                             'status' => 3,
                             'tariff_id' => $request->tariff_id,
-                            'note' => json_encode($no_kct_data) . "|" . json_encode($databody)
+                            'note' => json_encode($error['errors'][0]['title'] ?? $no_kct_response->json()) . "|" . json_encode($databody)
 
 
                         ]);

@@ -87,6 +87,7 @@
                                                                     <label class="my-2">Power Source</label>
                                                                     <select class="form-control" required
                                                                             name="tariff_id"
+
                                                                             id="tariff_id" disabled>
                                                                         <option value="">--Select Tariff--</option>
                                                                     </select>
@@ -140,7 +141,7 @@
                                                                                     tariffSelect.append('<option value="">--Select Tariff--</option>');
 
                                                                                     response.tariffs.forEach(function (tariff) {
-                                                                                        tariffSelect.append('<option value="' + tariff.id + '">' + tariff.type + '</option>');
+                                                                                        tariffSelect.append('<option value="' + tariff.id + '">' + tariff.type  + '</option>');
                                                                                     });
 
                                                                                     tariffSelect.prop('disabled', false);

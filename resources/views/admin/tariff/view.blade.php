@@ -188,9 +188,7 @@
 
                                     @foreach($tstate as $data)
 
-
                                         <div class="col-3">
-
                                             <label class="my-1">Tariff Amount</label>
                                             <a href="#" data-bs-toggle="modal"
                                                data-bs-target="#updatestate{{$data->id}}">
@@ -214,6 +212,22 @@
                                                             @csrf
 
                                                             <div class="modal-body">
+
+                                                                    <label class="my-2">Tariff Index</label>
+                                                                    <select class="form-control my-1" name="t_index" required>
+                                                                        @if($data->t_index != null)
+                                                                            <option value="">{{$data->t_index}}</option>
+                                                                        @else
+                                                                            <option value="">---Select Index-----</option>
+                                                                        @endif
+                                                                        @php
+                                                                            for ($i = 1; $i <= 99; $i++) {
+                                                                                echo "<option value=\"$i\">$i</option>";
+                                                                            }
+                                                                        @endphp
+
+                                                                    </select>
+
 
                                                                 <label class="my-1">Tariff Amount</label>
                                                                 <input type="number" class="form-control mb-3"
@@ -261,6 +275,14 @@
                                             </div>
 
 
+
+                                        </div>
+
+
+                                        <div class="col-3">
+
+                                            <label class="my-1">Tariff ID</label>
+                                            <h6>{{$data->t_index}}</h6>
 
                                         </div>
 
