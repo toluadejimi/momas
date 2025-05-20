@@ -2854,9 +2854,7 @@ class TokenController extends Controller
 
 
                     } else {
-                        $ref = Transaction::where('trx_id', $var->data->metadata->ref)->first()->trx_id;
-                        $url = url('') . "/payment?ref=$ref&status=failure";
-                        return redirect($url);
+                        return back()->with('error', "Payment not found or failed on Paystack, Please try again");
                     }
 
                 }
