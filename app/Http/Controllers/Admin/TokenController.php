@@ -2776,7 +2776,7 @@ class TokenController extends Controller
 
 
                         $databody = [
-                            'meterType' => $meter->KRN1,
+                            'meterType' => $meter->KRN2,
                             'meterNo' => $meter->meterNo,
                             'sgc' => (int)$meter->NewSGC,
                             'ti' => $trx->tariff_id,
@@ -2875,11 +2875,11 @@ class TokenController extends Controller
 
 
                         $databody = [
-                            'meterType' => $meter->KRN1,
+                            'meterType' => $meter->KRN2,
                             'meterNo' => $meter->meterNo,
                             'sgc' => (int)$meter->OldSGC,
                             'ti' => $trx->tariff_id,
-                            'amount' => $trx->tariffPerKWatt,
+                            'amount' => $trx->costOfUnit,
                         ];
                         $no_kct_response = Http::withOptions([
                             'verify' => false,
@@ -3011,11 +3011,11 @@ class TokenController extends Controller
 
                         if ($meter != null && $meter->NeedKCT == "on") {
                             $databody = [
-                                'meterType' => $meter->KRN1,
+                                'meterType' => $meter->KRN2,
                                 'meterNo' => $meterNo,
                                 'sgc' => (int)$meter->OldSGC,
                                 'ti' => $trx->tariff_id, //TRARRRIF INDEX
-                                'amount' => (float)$trx->tariffPerKWatt,
+                                'amount' => (float)$trx->costOfUnit,
                             ];
 
 
@@ -3115,7 +3115,7 @@ class TokenController extends Controller
                     'meterNo' => $meter->meterNo,
                     'sgc' => (int)$meter->OldSGC,
                     'ti' => $trx->tariff_id,
-                    'amount' => $trx->tariffPerKWatt,
+                    'amount' => $trx->costOfUnit,
                 ];
                 $no_kct_response = Http::withOptions([
                     'verify' => false,
@@ -3228,12 +3228,12 @@ class TokenController extends Controller
 
 
                 $databody = [
-                    'meterType' => $meter->KRN1,
+                    'meterType' => $meter->KRN2,
                     'meterNo' => $meter->meterNo,
                     'sgc' => (int)$meter->OldSGC,
                     'ti' => $trx->tariff_id,
                     'sbc' => 5,
-                    'amount' => (int)$trx->tariffPerKWatt,
+                    'amount' => (int)$trx->costOfUnit,
                 ];
 
 
@@ -3325,7 +3325,7 @@ class TokenController extends Controller
                     'sgc' => (int)$meter->OldSGC,
                     'ti' => $trx->tariff_id,
                     'sbc' => 5,
-                    'amount' => (int)$trx->tariffPerKWatt,
+                    'amount' => (int)$trx->costOfUnit,
                 ];
                 $no_kct_response = Http::withOptions([
                     'verify' => false,
@@ -3577,11 +3577,11 @@ class TokenController extends Controller
 
 
                 $databody = [
-                    'meterType' => $meter->KRN1,
+                    'meterType' => $meter->KRN2,
                     'meterNo' => $meter->meterNo,
                     'sgc' => (int)$meter->OldSGC,
                     'ti' => $trx->tariff_id,
-                    'amount' => (int)$trx->tariffPerKWatt,
+                    'amount' => (int)$trx->costOfUnit,
                 ];
 
 
@@ -3673,11 +3673,11 @@ class TokenController extends Controller
 
 
                 $databody = [
-                    'meterType' => $meter->KRN1,
+                    'meterType' => $meter->KRN2,
                     'meterNo' => $meter->meterNo,
                     'sgc' => (int)$meter->OldSGC,
                     'ti' => $trx->tariff_id,
-                    'amount' => $trx->tariffPerKWatt,
+                    'amount' => $trx->costOfUnit,
                 ];
                 $no_kct_response = Http::withOptions([
                     'verify' => false,
@@ -3801,11 +3801,11 @@ class TokenController extends Controller
 
 
                 $databody = [
-                    'meterType' => $meter->KRN1,
+                    'meterType' => $meter->KRN2,
                     'meterNo' => $meter->meterNo,
                     'sgc' => (int)$meter->OldSGC,
                     'ti' => $trx->tariff_id,
-                    'amount' => (int)$trx->tariffPerKWatt,
+                    'amount' => (int)$trx->costOfUnit,
                     "sbc" => 5,
                 ];
 
@@ -3898,12 +3898,12 @@ class TokenController extends Controller
 
 
                 $databody = [
-                    'meterType' => $meter->KRN1,
+                    'meterType' => $meter->KRN2,
                     'meterNo' => $meter->meterNo,
                     'sgc' => (int)$meter->OldSGC,
                     'ti' => $trx->tariff_id,
                     'sbc' => 5,
-                    'amount' => $trx->tariffPerKWatt,
+                    'amount' => $trx->costOfUnit,
                 ];
                 $no_kct_response = Http::withOptions([
                     'verify' => false,
@@ -4027,11 +4027,11 @@ class TokenController extends Controller
 
 
                 $databody = [
-                    'meterType' => $meter->KRN1,
+                    'meterType' => $meter->KRN2,
                     'meterNo' => $meter->meterNo,
                     'sgc' => (int)$meter->OldSGC,
                     'ti' => $trx->tariff_id,
-                    'amount' => (float)number_format((float)$trx->tariffPerKWatt, 2, '.', ''),
+                    'amount' => (float)number_format((float)$trx->costOfUnit, 2, '.', ''),
                     "sbc" => 1,
                 ];
 
@@ -4165,11 +4165,11 @@ class TokenController extends Controller
 
                 if ($meter != null && $meter->NeedKCT == "on") {
                     $databody = [
-                        'meterType' => $meter->KRN1,
+                        'meterType' => $meter->KRN2,
                         'meterNo' => Auth::user()->meterNo,
                         'sgc' => (int)$meter->OldSGC,
                         'ti' => $trx->tariff_id, //TRARRRIF INDEX
-                        'amount' => (int)$trx->tariffPerKWatt,
+                        'amount' => (int)$trx->costOfUnit,
                     ];
                     $response = Http::withOptions([
                         'verify' => false,
@@ -4290,7 +4290,7 @@ class TokenController extends Controller
                 $data['ref'] = $trx_comp->trx_id;
                 $data['amount'] = $trx_comp->amount_charged;
                 $data['vat_amount'] = $trx_comp->vatAmount;
-                $data['vend_amount_kw_per_naira'] = $trx_comp->tariffPerKWatt;
+                $data['vend_amount_kw_per_naira'] = $trx_comp->costOfUnit;
                 $data['tariff_amount'] = $trx_comp->tariff_amount;
                 $data['unit'] = $trx_comp->unitkwh;
                 $data['title'] = "Credit Token";
@@ -4320,7 +4320,7 @@ class TokenController extends Controller
                 $data['token'] = $trx_comp->token;
                 $data['amount'] = $trx_comp->amount;
                 $data['vat_amount'] = $trx_comp->vatAmount;
-                $data['vend_amount_kw_per_naira'] = $trx_comp->tariffPerKWatt;
+                $data['vend_amount_kw_per_naira'] = $trx_comp->costOfUnit;
                 $data['tariff_amount'] = $trx_comp->tariff_amount;
                 $data['unit'] = $trx_comp->unitkwh;
                 $data['title'] = "Clear Tamper Token";
@@ -4352,7 +4352,7 @@ class TokenController extends Controller
                 $data['amount'] = $trx_comp->amount;
                 $data['vat_amount'] = $trx_comp->vatAmount;
                 $data['tariff_amount'] = $trx_comp->tariff_amount;
-                $data['vend_amount_kw_per_naira'] = $trx_comp->tariffPerKWatt;
+                $data['vend_amount_kw_per_naira'] = $trx_comp->costOfUnit;
                 $data['title'] = "Clear Credit Token";
                 $data['date'] = date('d-m-y h:i:s');
                 $data['meter_no'] = $trx_comp->meterNo;
@@ -4383,7 +4383,7 @@ class TokenController extends Controller
                 $data['amount'] = 0;
                 $data['vat_amount'] = $trx_comp->vatAmount;
                 $data['tariff_amount'] = $trx_comp->tariff_amount;
-                $data['vend_amount_kw_per_naira'] = $trx_comp->tariffPerKWatt;
+                $data['vend_amount_kw_per_naira'] = $trx_comp->costOfUnit;
                 $data['title'] = "Compensation Token";
                 $data['date'] = date('d-m-y h:i:s');
                 $data['meter_no'] = $trx_comp->meterNo;
@@ -4409,7 +4409,7 @@ class TokenController extends Controller
             $data['token2'] = $trx->kct_token2;
             $data['amount'] = $trx->amount;
             $data['vat_amount'] = $trx->vatAmount;
-            $data['vend_amount_kw_per_naira'] = $trx->tariffPerKWatt;
+            $data['vend_amount_kw_per_naira'] = $trx->costOfUnit;
             $data['tariff_amount'] = $trx->tariff_amount;
             $data['meter_no'] = $trx->meterNo;
             $data['unit'] = $trx->unitkwh;
