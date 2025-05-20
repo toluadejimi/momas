@@ -311,6 +311,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'blockaccess']], fun
 
     Route::any('recepit', [TokenController::class, 'recepit']);
     Route::any('retry-generate-tamper-token', [TokenController::class, 'retry_generate_tamper-token']);
+    Route::any('retry-generate-credit-token', [TokenController::class, 'retry_generate_credit_token']);
 
 
 
