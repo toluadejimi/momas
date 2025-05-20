@@ -281,7 +281,7 @@ class TokenController extends Controller
                 'amountText' => $request->amount,
                 'tariffAmount' => $tariffAmount,
                 'utilitiesAmount' => 0,
-                'vat' => 7.5,
+                'vat' => $vat,
             ];
 
             $vatAmount = $calculator->calculateVatAmount($params);
