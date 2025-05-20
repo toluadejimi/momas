@@ -284,8 +284,14 @@ class TokenController extends Controller
                 'vat' => $vat,
             ];
 
-            $vatAmount = $calculator->calculateVatAmount($params);
-            $costOfUnit = $calculator->calculateCostOfUnit($params);
+            if($vat  == 0 ){
+                $vatAmount = 0;
+                $costOfUnit = $request->amount;
+            }else{
+                $vatAmount = $calculator->calculateVatAmount($params);
+                $costOfUnit = $calculator->calculateCostOfUnit($params);
+            }
+
             $tariffPerKWatt = $calculator->calculateTariffAmountPerKWatt($params);
 
             $data['vatAmount'] = $vatAmount;
