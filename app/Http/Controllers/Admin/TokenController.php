@@ -2553,7 +2553,7 @@ class TokenController extends Controller
                     'meterNo' => $meter->meterNo,
                     'sgc' => (int)$meter->NewSGC,
                     'ti' => $trx->tariff_id,
-                    'amount' => (int)$trx->tariffPerKWatt,
+                    'amount' => (int)$trx->costOfUnit,
                 ];
 
 
@@ -2650,7 +2650,7 @@ class TokenController extends Controller
                     'meterNo' => $meter->meterNo,
                     'sgc' => (int)$meter->OldSGC,
                     'ti' => $trx->tariff_id,
-                    'amount' => $trx->tariffPerKWatt,
+                    'amount' => $trx->costOfUnit,
                 ];
                 $no_kct_response = Http::withOptions([
                     'verify' => false,
