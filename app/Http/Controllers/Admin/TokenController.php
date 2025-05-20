@@ -2731,7 +2731,7 @@ class TokenController extends Controller
 
                 $fl = Setting::where('id', 1)->first();
                 $pksecret = $fl->paystack_secret;
-                $transactionId = $request->trx_id;
+                $transactionId = $get_trx->payment_ref;
 
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
