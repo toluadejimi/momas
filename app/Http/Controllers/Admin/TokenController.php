@@ -254,7 +254,6 @@ class TokenController extends Controller
         if (Auth::user()->role == 0) {
 
 
-
             $estate_id = Estate::where('id', $request->estate_id)->first()->id;
             $meter = Meter::where('meterNo', $request->meterNo)->first() ?? null;
             $user = User::where('meterNo', $request->meterNo)->first() ?? null;
@@ -306,6 +305,9 @@ class TokenController extends Controller
             $data['estate_id'] = $estate_id;
             $data['estate_name'] = $request->estate_id;
             $data['credit_tokens'] = CreditToken::latest()->paginate('50');
+            $data['tarrif_index'] = TarrifState::where('tariff_id', $request->tariff_id)->first()->t_index;
+
+
 
 
             return view('admin.token.compensation-token-view', $data);
@@ -344,7 +346,7 @@ class TokenController extends Controller
                 'amountText' => $request->amount,
                 'tariffAmount' => $tariffAmount,
                 'utilitiesAmount' => 0,
-                'vat' => 7.5,
+                'vat' => $vat,
             ];
 
             $vatAmount = $calculator->calculateVatAmount($params);
@@ -2395,6 +2397,7 @@ class TokenController extends Controller
     public function generate_compensation_meter_token(request $request)
     {
 
+
         $trx_id = "COMP" . random_int(000000, 999999);
         $estate_id = $request->estate_id;
         $cdt = new CompensationToken();
@@ -2405,7 +2408,7 @@ class TokenController extends Controller
         $cdt->vat = $request->vat;
         $cdt->estate_name = $request->estate_name;
         $cdt->estate_id = $estate_id;
-        $cdt->tariff_id = TarrifState::where('estate_id', $estate_id)->first()->tariff_id;
+        $cdt->tariff_id = $request->t_index;
         $cdt->vatAmount = $request->vatAmount;
         $cdt->costOfUnit = $request->costOfUnit;
         $cdt->tariffPerKWatt = $request->tariffPerKWatt;
@@ -2427,7 +2430,7 @@ class TokenController extends Controller
             'meterType' => $meter->KRN1 ?? "STS6",
             'meterNo' => $meter->meterNo,
             'sgc' => (int)$meter->NewSGC ?? 901102,
-            'ti' => $tariff_id,
+            'ti' => $request->t_index,
             'amount' => (int)$request->tariffPerKWatt,
         ];
 
@@ -2461,7 +2464,7 @@ class TokenController extends Controller
                 $trx->estate_id = $estate_id;
                 $trx->pay_type = null;
                 $trx->service_type = "compensation_token";
-                $trx->tariff_id = $tariff_id;
+                $trx->tariff_id = $request->t_index;
                 $trx->payment_ref = "Meter Token";
                 $trx->amount = $request->amount;
                 $trx->unit_amount = $request->costOfUnit;
@@ -2480,7 +2483,7 @@ class TokenController extends Controller
                 $trx->estate_id = $estate_id;
                 $trx->pay_type = null;
                 $trx->service_type = "compensation_token";
-                $trx->tariff_id = $tariff_id;
+                $trx->tariff_id = $request->t_index;
                 $trx->payment_ref = "Meter Token";
                 $trx->amount = $request->amount;
                 $trx->unit_amount = $request->costOfUnit;
@@ -2490,7 +2493,7 @@ class TokenController extends Controller
                     'service' => "METER PURCHASE",
                     'service_type' => "meter",
                     'status' => 3,
-                    'tariff_id' => $request->tariff_id,
+                    'tariff_id' => $request->t_index,
                     'note' => json_encode($get_token) . "|" . json_encode($databody)
 
                 ]);

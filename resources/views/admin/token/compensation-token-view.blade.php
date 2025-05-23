@@ -216,10 +216,17 @@
                                                 </div>
 
                                                 <div class="col-xl-6 col-sm-12" >
+
+
+
+
+
                                                     @if($preview == null)
 
 
                                                     @else
+
+
 
                                                         <form action="generate-compensation-meter-token" method="POST"
                                                               enctype="multipart/form-data">
@@ -248,8 +255,13 @@
                                                                     <div class="col-xl-4 my-2 col-sm-12">
                                                                         <label class="my-2">Meter No</label>
                                                                         <input required name="meterNo" value="{{$meter->meterNo}}" hidden="">
+
                                                                         <h6>{{$meter->meterNo}}</h6>
                                                                     </div>
+
+
+                                                                    <input type="text" name="t_index" value="{{$tarrif_index}}" hidden>
+
 
                                                                 </div>
 
