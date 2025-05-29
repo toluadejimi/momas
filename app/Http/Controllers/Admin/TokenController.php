@@ -365,6 +365,7 @@ class TokenController extends Controller
             $data['credit_tokens'] = CreditToken::latest()->where('estate_id', Auth::user()->estate_id)->paginate('50');
             $data['estate_id'] = Auth::user()->estate_id;
             $data['title'] = Estate::where('id', Auth::user()->estate_id)->first()->title;
+            $data['tarrif_index'] = TarrifState::where('tariff_id', $request->tariff_id)->first()->t_index;
             $data['preview'] = "on";
 
 
@@ -638,7 +639,7 @@ class TokenController extends Controller
                 'amountText' => $request->amount,
                 'tariffAmount' => $tariffAmount,
                 'utilitiesAmount' => 0,
-                'vat' => 7.5,
+                'vat' => $vat,
             ];
 
             $vatAmount = $calculator->calculateVatAmount($params);
@@ -668,6 +669,8 @@ class TokenController extends Controller
             $data['estate_name'] = $request->estate_id;
             $data['tarrif_amount'] = TarrifState::where('tariff_id', $request->tariff_id)->first()->amount;
             $data['credit_tokens'] = CreditToken::latest()->paginate('50');
+            $data['tarrif_index'] = TarrifState::where('tariff_id', $request->tariff_id)->first()->t_index;
+
 
 
             return view('admin.token.credit-token-preview', $data);
