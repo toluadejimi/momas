@@ -585,6 +585,10 @@
                                                                             <input required name="tariff_amount"
                                                                                    value="{{$tarrif_amount}}" hidden="">
 
+                                                                            <input required name="t_index"
+                                                                                   value="{{$tarrif_index}}" hidden="">
+
+
 
                                                                         </div>
 

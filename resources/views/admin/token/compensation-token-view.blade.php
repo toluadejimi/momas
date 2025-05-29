@@ -734,6 +734,9 @@
                                                                     <input required name="estate_name" value="{{$estate_name}}" hidden="">
                                                                     <input required name="amount" value="{{$amount}}" hidden="">
 
+                                                                    <input type="text" name="t_index" value="{{$tarrif_index}}" hidden>
+
+
 
 
 
