@@ -959,7 +959,7 @@ class TransactionController extends Controller
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://web.sprintpay.online/pay?amount=$amount&key=$key&ref=$trx_id&email=$email&platform=$pt",
+            CURLOPT_URL => "https://web.sprintpay.online/api/pay-api?amount=$amount&key=$key&ref=$trx_id&email=$email&platform=$pt",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
