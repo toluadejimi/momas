@@ -181,7 +181,7 @@ class TokenController extends Controller
             $data['title'] = Estate::where('id', Auth::user()->estate_id)->first()->title;
             $data['preview'] = null;
             $data['tamper_amount'] = Setting::where('id', 1)->first()->clear_tamper_fee;
-            $data['credit_tokens'] = TamperToken::latest()->where('estate_id', Auth::user()->estate_id)->paginate('50');
+            $data['tamper_tokens'] = TamperToken::latest()->where('estate_id', Auth::user()->estate_id)->paginate('50');
 
             return view('admin.token.tamper-token-view', $data);
 
