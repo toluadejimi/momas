@@ -474,7 +474,7 @@
 
 
                                         <div class="d-flex justify-content-between my-4">
-                                            <h5 class="card-title text-black mb-0">Generate Credit Token</h5>
+                                            <h5 class="card-title text-black mb-0">Generate Clear Tamper Token</h5>
                                         </div>
 
                                         <div class="col-xl-8 col-sm-12">
@@ -488,7 +488,7 @@
                                                         <div class="row">
                                                             <div class="col-xl-6 my-2 col-sm-12">
                                                                 <label class="my-2">Estate</label>
-                                                                <input class="form-control" value="{{$title}}" required name="title" id="estate_id">
+                                                                <input class="form-control" value="{{$title}}" required name="title" id="estate_id" disabled>
                                                                 <input class="form-control" value="{{$estate_id}}" hidden required name="estate_id" id="estate_id">
 
                                                             </div>
@@ -514,7 +514,7 @@
 
                                                             <div class="col-xl-6 my-2 col-sm-12">
                                                                 <label class="my-2">Amount</label>
-                                                                <input type="number" class="form-control mb-3" name="amount"
+                                                                <input type="number" disabled value="{{$tamper_amount}}" class="form-control mb-3" name="amount"
                                                                        required>
                                                             </div>
 
