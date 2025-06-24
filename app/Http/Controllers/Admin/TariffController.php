@@ -154,13 +154,14 @@ class TariffController extends Controller
             $tr->t_index = $request->t_index;
             $tr->estate_id = $request->estate_id;
             $tr->vat = $request->vat;
+            $tr->tariff_id = $request->tariff_id;
             $tr->save();
 
 
 
-            $ck_count = TarrifState::where('tariff_id', $request->id)->count();
+            $ck_count = TarrifState::where('tariff_id', $request->tariff_id)->count();
             if($ck_count == 1){
-                TarrifState::latest()->where('status', 0)->where('tariff_id', $request->id)->update(['status' => 2]);
+                TarrifState::latest()->where('status', 0)->where('tariff_id', $request->tariff_id)->update(['status' => 2]);
             }
 
             return back()->with('message', 'Tariff Added Successfully');

@@ -57,6 +57,18 @@
 
                                         <div class="modal-body">
 
+                                            <label class="my-2">Tariff Index</label>
+                                            <select class="form-control my-1" name="t_index" required>
+                                                    <option value="">---Select Index-----</option>
+                                                @php
+                                                    for ($i = 1; $i <= 99; $i++) {
+                                                        echo "<option value=\"$i\">$i</option>";
+                                                    }
+                                                @endphp
+
+                                            </select>
+
+
                                             <label class="my-1">Tariff Amount </label>
                                             <input type="text"  class="form-control mb-3" name="amount" required>
 
@@ -87,7 +99,7 @@
                                                     <input type="date" class="form-control mb-3" name="date_to"
                                                            >
 
-                                                    <input type="text" name="id" value="{{$tr->id}}" hidden>
+                                                    <input type="text" name="tariff_id" value="{{$tr->id}}" hidden>
 
 
 
