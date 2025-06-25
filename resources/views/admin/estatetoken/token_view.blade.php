@@ -338,7 +338,7 @@
                                     @foreach($token as $data)
 
                                         <tr>
-                                            <td>{{$data->user->first_name}}  {{$data->user->last_name}}</td>
+                                            <td>{{$data->user->first_name ?? "NAME"}}  {{$data->user->last_name ?? "NAME"}}</td>
                                             <td>{{$data->token}}</td>
                                             <td>{{$data->visitor}}</td>
                                             @if($data->email != null)

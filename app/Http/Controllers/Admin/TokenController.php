@@ -447,7 +447,8 @@ class TokenController extends Controller
         } elseif (Auth::user()->role == 3) {
 
 
-            $estate_id = Estate::where('title', $request->estate_id)->first()->id;
+
+            $estate_id = $request->estate_id;
             $meter = Meter::where('meterNo', $request->meterNo)->first() ?? null;
             $user = User::where('meterNo', $request->meterNo)->first() ?? null;
 
@@ -457,9 +458,7 @@ class TokenController extends Controller
             if ($meter->estate_id != $estate_id) {
                 return back()->with('error', 'Meter not does not belong to estate selected');
             }
-            if ($request->amount < 1000) {
-                return back()->with('error', 'Amount can not be less than NGN 1,000');
-            }
+
 
             if ($user == null) {
                 return back()->with('error', 'Meter has not been attached to any customer');
@@ -491,13 +490,13 @@ class TokenController extends Controller
             $data['amount'] = $request->amount;
             $data['vat'] = $vat;
             $data['estate_name'] = $request->estate_id;
-            $data['credit_tokens'] = CreditToken::latest()->where('estate_id', Auth::user()->estate_id)->paginate('50');
+            $data['credit_tokens'] = ClearcreditToken::latest()->where('estate_id', Auth::user()->estate_id)->paginate('50');
             $data['estate_id'] = Auth::user()->estate_id;
             $data['title'] = Estate::where('id', Auth::user()->estate_id)->first()->title;
             $data['preview'] = "clear_credit";
 
 
-            return view('admin.token.clear-credit-token-view', $data);
+            return view('admin.token.clear-credit-preview', $data);
 
 
         } elseif (Auth::user()->role == 4) {

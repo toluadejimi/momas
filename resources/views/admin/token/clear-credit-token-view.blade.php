@@ -384,7 +384,6 @@
                                                     @if($preview == null)
                                                         <div class="row">
                                                             <div class="col-xl-6 my-2 col-sm-12">
-                                                                <label class="my-2">Estate</label>
                                                                 <div class="col-xl-6 my-2 col-sm-12">
                                                                     <label class="my-2">Estate</label>
                                                                     <input class="form-control" value="{{$title}}" required name="title" id="estate_id">
@@ -412,7 +411,8 @@
 
                                                             <div class="col-xl-6 my-2 col-sm-12">
                                                                 <label class="my-2">Amount</label>
-                                                                <input type="number" readonly value="{{$amount}}"
+                                                                @php $cl_amount = \App\Models\Setting::where('id', 1)->first()->clear_credit_fee @endphp
+                                                                <input type="number" readonly value="{{$cl_amount}}"
                                                                        class="form-control mb-3" name="amount"
                                                                        required>
                                                             </div>
