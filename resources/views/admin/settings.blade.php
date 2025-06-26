@@ -611,9 +611,9 @@
                                             </h6>
 
                                             @if($utl != null)
-                                                @if($utl->duration != null)
+                                                @if($org->duration != null)
                                                     <h6 class="mb-0">Duration <span
-                                                            class="badge text-bg-danger">{{strtoupper($utl->duration)}}</span>
+                                                            class="badge text-bg-danger">{{strtoupper($org->duration)}}</span>
                                                     </h6>
                                                 @else
                                                     <h6 class="mb-0">Duration <span class="badge text-bg-secondary">Set Duration</span>
@@ -644,9 +644,7 @@
 
                                                 </select>
 
-                                                <input hidden name="id" value="{{$org->id ?? "id" }}"
-                                                       class="form-control"
-                                                       required>
+                                                <input hidden name="id" value="{{$org->id}}" class="form-control" >
 
                                             </div>
 
@@ -746,6 +744,9 @@
                                                                    class="form-control"
                                                                    required>
                                                         </div>
+
+
+                                                        <input name="estate_id" value="{{$org->id}}" hidden>
                                                     </div>
                                                 </div>
 

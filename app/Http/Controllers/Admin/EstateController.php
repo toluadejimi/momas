@@ -223,6 +223,7 @@ class EstateController extends Controller
     {
 
 
+
         try {
 
             $utilitiesData = json_decode($request->input('utilities_data'), true);
@@ -243,7 +244,7 @@ class EstateController extends Controller
             $utility_amount = Utitlity::where('estate_id', $request->estate_id)->sum('amount');
             Estate::where('id', $request->estate_id)->update(['total_utility_amount' => $utility_amount]);
 
-            return back()->with('message', 'Utilities updated successfully');
+            return back()->with('message', 'Utilities Saved successfully');
 
 
         } catch (\Exception $e) {
@@ -258,6 +259,7 @@ class EstateController extends Controller
 
     public function update_duration(request $request)
     {
+
 
 
         Estate::where('id', $request->id)->update([

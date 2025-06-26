@@ -382,6 +382,7 @@ class DashboardContoller extends Controller
             $data['utl'] = Utitlity::where('estate_id', Auth::user()->estate_id)->first() ?? null;
             $data['total_utility'] = Utitlity::where('estate_id', Auth::user()->estate_id)->sum('amount');
             $data['utility'] = Utitlity::where('estate_id', Auth::user()->estate_id)->get() ?? null;
+
             return view('admin/settings', $data);
 
 
@@ -399,7 +400,13 @@ class DashboardContoller extends Controller
     public function update_utility(request $request)
     {
 
+
+        dd($request->all());
         Utitlity::where('id', $request->id)->update(['title' => $request->title, 'amount' => $request->amount]);
+
+
+
+
         return back()->with('message', 'Utility Updated Successfully');
 
     }
