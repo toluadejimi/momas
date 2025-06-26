@@ -1090,7 +1090,7 @@ class MeterController extends Controller
 
             $data['meters'] = Meter::where('estate_id', Auth::user()->estate_id)->count();
             $data['meter_lists'] = Meter::orderBy('created_at', 'desc')->where('estate_id', Auth::user()->estate_id)->paginate('20');
-            $data['estate'] = Estate::where('estate_id', Auth::user()->estate_id)->get();
+            $data['estate'] = Estate::where('id', Auth::user()->estate_id)->get();
 
             return view('admin/meter/meter-lists', $data);
 
