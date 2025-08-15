@@ -1,0 +1,1191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="df462c8f-229d-4527-915f-ee2aade1fa51" name="Changes" comment="pusgggghhh">
+      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerConfigs">
+    <option name="configs">
+      <option value="$PROJECT_DIR$/../logresell/composer.json" />
+    </option>
+  </component>
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;toluadejimi&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/toluadejimi/momas.git&quot;,
+    &quot;accountId&quot;: &quot;eb90d026-0462-4bf5-99a4-4b5349a49a8a&quot;
+  }
+}</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/usr/local/Cellar/php@8.2/8.2.29/bin/php">
+    <include_path>
+      <path value="$PROJECT_DIR$/../logresell/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/fidry/cpu-core-counter" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/league/uri-interfaces" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/league/mime-type-detection" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/mockery/mockery" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/league/commonmark" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/league/flysystem-local" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/laravel/sail" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/hamcrest/hamcrest-php" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/polyfill-uuid" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/league/uri" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/league/config" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/composer" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/psr/clock" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/laravel/pail" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/laravel/prompts" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/laravel/serializable-closure" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/nunomaduro/collision" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/laravel/framework" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/nunomaduro/termwind" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/laravel/pint" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/laravel/tinker" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/laravel/breeze" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/ta-tikoma/phpunit-architecture-test" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/cli-parser" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/laracasts/flash" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/realrashid/sweet-alert" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/nette/schema" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/uid" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpunit/php-invoker" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/pestphp/pest-plugin" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpstan/phpdoc-parser" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/staabm/side-effects-detector" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/error-handler" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/brianium/paratest" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/mailer" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/pestphp/pest-plugin-laravel" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/pestphp/pest-plugin-mutate" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/jean85/pretty-package-versions" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/guzzlehttp/uri-template" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/dflydev/dot-access-data" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/voku/portable-ascii" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/ramsey/collection" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/carbonphp/carbon-doctrine-types" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/nette/utils" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/graham-campbell/result-type" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/fruitcake/php-cors" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/code-unit" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/pestphp/pest" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/clock" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/symfony/polyfill-php83" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/psy/psysh" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/dragonmantank/cron-expression" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/fakerphp/faker" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/tijsverkoyen/css-to-inline-styles" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/brick/math" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/pestphp/pest-plugin-arch" />
+      <path value="$PROJECT_DIR$/../logresell/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/nette/utils" />
+      <path value="$PROJECT_DIR$/vendor/nette/schema" />
+      <path value="$PROJECT_DIR$/vendor/bacon/bacon-qr-code" />
+      <path value="$PROJECT_DIR$/vendor/brick/math" />
+      <path value="$PROJECT_DIR$/vendor/ezyang/htmlpurifier" />
+      <path value="$PROJECT_DIR$/vendor/league/mime-type-detection" />
+      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/vendor/defuse/php-encryption" />
+      <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/vendor/psr/clock" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/vendor/voku/portable-ascii" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/psy/psysh" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/collection" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/vendor/nyholm/psr7" />
+      <path value="$PROJECT_DIR$/vendor/spatie/ignition" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-ignition" />
+      <path value="$PROJECT_DIR$/vendor/spatie/flare-client-php" />
+      <path value="$PROJECT_DIR$/vendor/spatie/backtrace" />
+      <path value="$PROJECT_DIR$/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/vendor/league/oauth2-server" />
+      <path value="$PROJECT_DIR$/vendor/league/flysystem-local" />
+      <path value="$PROJECT_DIR$/vendor/league/config" />
+      <path value="$PROJECT_DIR$/vendor/league/event" />
+      <path value="$PROJECT_DIR$/vendor/league/commonmark" />
+      <path value="$PROJECT_DIR$/vendor/league/uri-interfaces" />
+      <path value="$PROJECT_DIR$/vendor/league/uri" />
+      <path value="$PROJECT_DIR$/vendor/laravel/prompts" />
+      <path value="$PROJECT_DIR$/vendor/mockery/mockery" />
+      <path value="$PROJECT_DIR$/vendor/laravel/sanctum" />
+      <path value="$PROJECT_DIR$/vendor/laravel/sail" />
+      <path value="$PROJECT_DIR$/vendor/owen-it/laravel-auditing" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/vendor/laravel/pint" />
+      <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/vendor/dflydev/dot-access-data" />
+      <path value="$PROJECT_DIR$/vendor/laravel/passport" />
+      <path value="$PROJECT_DIR$/vendor/laravel/serializable-closure" />
+      <path value="$PROJECT_DIR$/vendor/laravel/tinker" />
+      <path value="$PROJECT_DIR$/vendor/laravel/framework" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mailer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/uid" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-invoker" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-uuid" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php83" />
+      <path value="$PROJECT_DIR$/vendor/symfony/psr-http-message-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/vendor/hamcrest/hamcrest-php" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/vendor/fakerphp/faker" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/maennchen/zipstream-php" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/complex" />
+      <path value="$PROJECT_DIR$/vendor/carbonphp/carbon-doctrine-types" />
+      <path value="$PROJECT_DIR$/vendor/fruitcake/php-cors" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/constant_time_encoding" />
+      <path value="$PROJECT_DIR$/vendor/phpoffice/phpspreadsheet" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/matrix" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/vendor/php-http/guzzle7-adapter" />
+      <path value="$PROJECT_DIR$/vendor/php-http/httplug" />
+      <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
+      <path value="$PROJECT_DIR$/vendor/lcobucci/clock" />
+      <path value="$PROJECT_DIR$/vendor/pragmarx/google2fa-qrcode" />
+      <path value="$PROJECT_DIR$/vendor/pragmarx/google2fa-laravel" />
+      <path value="$PROJECT_DIR$/vendor/php-http/promise" />
+      <path value="$PROJECT_DIR$/vendor/pragmarx/google2fa" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/cli-parser" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/vendor/phpseclib/phpseclib" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
+      <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
+      <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
+      <path value="$PROJECT_DIR$/vendor/maatwebsite/excel" />
+      <path value="$PROJECT_DIR$/vendor/simplesoftwareio/simple-qrcode" />
+      <path value="$PROJECT_DIR$/vendor/flutterwavedev/flutterwave-v3" />
+      <path value="$PROJECT_DIR$/vendor/graham-campbell/result-type" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/uri-template" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/nunomaduro/termwind" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+    </include_path>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2ftNziiA4l9EYQxRkZWaNVKWjbz" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Applications/XAMPP/xamppfiles/htdocs/momas/resources/views/admin/audit&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/admin/audit" />
+      <recent name="$PROJECT_DIR$/resources/views/admin/report" />
+      <recent name="$PROJECT_DIR$/resources/views/admin/recepit" />
+      <recent name="$PROJECT_DIR$/resources/views/admin/token" />
+      <recent name="$PROJECT_DIR$/resources/views/admin/pos" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/admin/Aduit" />
+      <recent name="$PROJECT_DIR$/resources/views/admin/recepit" />
+      <recent name="$PROJECT_DIR$/resources/views/admin" />
+      <recent name="$PROJECT_DIR$/app/Http/Controllers" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
+    <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
+      <method v="2" />
+    </configuration>
+    <configuration name="/Applications/XAMPP/xamppfiles/htdocs/project/logresell/vendor/pestphp/pest/bin/pest" type="PestRunConfigurationType">
+      <option name="pestRunnerSettings">
+        <PestRunner configuration_file="$PROJECT_DIR$/../logresell/phpunit.xml" scope="ConfigurationFile" use_alternative_configuration_file="true" />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-PS-241.18034.69" />
+        <option value="bundled-php-predefined-ba97393d7c68-48a1a656d44e-com.jetbrains.php.sharedIndexes-PS-241.18034.69" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="df462c8f-229d-4527-915f-ee2aade1fa51" name="Changes" comment="" />
+      <created>1714616680416</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1714616680416</updated>
+      <workItem from="1714616683227" duration="9571000" />
+      <workItem from="1714643203603" duration="119000" />
+      <workItem from="1714643350649" duration="25343000" />
+      <workItem from="1714719863757" duration="3050000" />
+      <workItem from="1714828352436" duration="2839000" />
+      <workItem from="1714998630386" duration="13837000" />
+      <workItem from="1715071844939" duration="3925000" />
+      <workItem from="1715256205750" duration="10302000" />
+      <workItem from="1715499617004" duration="11281000" />
+      <workItem from="1715590272665" duration="2937000" />
+      <workItem from="1715597510357" duration="9327000" />
+      <workItem from="1716049192723" duration="2932000" />
+      <workItem from="1716816663248" duration="8054000" />
+      <workItem from="1717531629021" duration="48000" />
+      <workItem from="1717699316365" duration="489000" />
+      <workItem from="1717729016338" duration="19000" />
+      <workItem from="1717738333283" duration="219000" />
+      <workItem from="1718195965348" duration="25983000" />
+      <workItem from="1718592054685" duration="437000" />
+      <workItem from="1718637220430" duration="739000" />
+      <workItem from="1719418027065" duration="1783000" />
+      <workItem from="1719435217825" duration="137000" />
+      <workItem from="1720219795597" duration="2219000" />
+      <workItem from="1720398979994" duration="598000" />
+      <workItem from="1720525169916" duration="5973000" />
+      <workItem from="1720608676417" duration="21853000" />
+      <workItem from="1720859656888" duration="10000" />
+      <workItem from="1721147637007" duration="394000" />
+      <workItem from="1721148227467" duration="5592000" />
+      <workItem from="1721210325132" duration="254000" />
+      <workItem from="1721513823959" duration="3385000" />
+      <workItem from="1722060572441" duration="2377000" />
+      <workItem from="1722064488273" duration="20386000" />
+      <workItem from="1722293478097" duration="1195000" />
+      <workItem from="1722404470348" duration="434000" />
+      <workItem from="1722413195708" duration="6595000" />
+      <workItem from="1722689173585" duration="9211000" />
+      <workItem from="1722967531934" duration="13541000" />
+      <workItem from="1723148130828" duration="4121000" />
+      <workItem from="1723266451858" duration="6843000" />
+      <workItem from="1723364061824" duration="4000" />
+      <workItem from="1723364134330" duration="69000" />
+      <workItem from="1723364300113" duration="11000" />
+      <workItem from="1723448069753" duration="9000" />
+      <workItem from="1723449167814" duration="3000" />
+      <workItem from="1723450796854" duration="2318000" />
+      <workItem from="1723787023303" duration="29000" />
+      <workItem from="1723902312432" duration="1662000" />
+      <workItem from="1723951304202" duration="1661000" />
+      <workItem from="1724287578564" duration="226000" />
+      <workItem from="1724300377407" duration="86000" />
+      <workItem from="1724420428328" duration="569000" />
+      <workItem from="1724655192105" duration="1116000" />
+      <workItem from="1724656483105" duration="20842000" />
+      <workItem from="1725342563953" duration="71000" />
+      <workItem from="1726007254351" duration="7000" />
+      <workItem from="1726559861190" duration="599000" />
+      <workItem from="1726608998987" duration="263000" />
+      <workItem from="1726766978372" duration="598000" />
+      <workItem from="1726811054752" duration="7000" />
+      <workItem from="1726847880558" duration="111000" />
+      <workItem from="1727090325088" duration="1585000" />
+      <workItem from="1727361913799" duration="179000" />
+      <workItem from="1727415532469" duration="599000" />
+      <workItem from="1727505961145" duration="53833000" />
+      <workItem from="1728751808106" duration="8798000" />
+      <workItem from="1729232607544" duration="12522000" />
+      <workItem from="1729378138324" duration="19201000" />
+      <workItem from="1730009689803" duration="981000" />
+      <workItem from="1730110965536" duration="4747000" />
+      <workItem from="1730221235748" duration="282000" />
+      <workItem from="1730385924268" duration="160759000" />
+      <workItem from="1732180625527" duration="28000" />
+      <workItem from="1732219284693" duration="57781000" />
+      <workItem from="1733031551584" duration="31400000" />
+      <workItem from="1733472083522" duration="9346000" />
+      <workItem from="1733813392729" duration="5383000" />
+      <workItem from="1733857544562" duration="8773000" />
+      <workItem from="1734079822900" duration="1978000" />
+      <workItem from="1734111340941" duration="3670000" />
+      <workItem from="1734163181281" duration="6000" />
+      <workItem from="1734164653399" duration="6448000" />
+      <workItem from="1734344175545" duration="1926000" />
+      <workItem from="1734513676450" duration="8930000" />
+      <workItem from="1734621786425" duration="592000" />
+      <workItem from="1734642225597" duration="8568000" />
+      <workItem from="1735331990723" duration="201000" />
+      <workItem from="1735500507488" duration="586000" />
+      <workItem from="1735710657225" duration="22786000" />
+      <workItem from="1736795652101" duration="451000" />
+      <workItem from="1736943449953" duration="4831000" />
+      <workItem from="1737540972759" duration="18228000" />
+      <workItem from="1737715914287" duration="30237000" />
+      <workItem from="1738265972298" duration="1652000" />
+      <workItem from="1738395788475" duration="26000" />
+      <workItem from="1738760731578" duration="23000" />
+      <workItem from="1739011048870" duration="28517000" />
+      <workItem from="1739429669769" duration="123000" />
+      <workItem from="1739532591549" duration="227000" />
+      <workItem from="1739717878260" duration="1055000" />
+      <workItem from="1739880096953" duration="31000" />
+      <workItem from="1739958625157" duration="49805000" />
+      <workItem from="1740213194628" duration="5000" />
+      <workItem from="1740213249194" duration="301000" />
+      <workItem from="1740258539426" duration="599000" />
+      <workItem from="1754374994602" duration="2931000" />
+      <workItem from="1754378155258" duration="176000" />
+      <workItem from="1754378347288" duration="7117000" />
+      <workItem from="1754391476363" duration="12042000" />
+      <workItem from="1754706722462" duration="321000" />
+      <workItem from="1754725346024" duration="75000" />
+      <workItem from="1754742652395" duration="1524000" />
+      <workItem from="1754826923252" duration="1083000" />
+      <workItem from="1755259103143" duration="1607000" />
+    </task>
+    <task id="LOCAL-00495" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739349669000</created>
+      <option name="number" value="00495" />
+      <option name="presentableId" value="LOCAL-00495" />
+      <option name="project" value="LOCAL" />
+      <updated>1739349669000</updated>
+    </task>
+    <task id="LOCAL-00496" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739350392853</created>
+      <option name="number" value="00496" />
+      <option name="presentableId" value="LOCAL-00496" />
+      <option name="project" value="LOCAL" />
+      <updated>1739350392854</updated>
+    </task>
+    <task id="LOCAL-00497" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739353001431</created>
+      <option name="number" value="00497" />
+      <option name="presentableId" value="LOCAL-00497" />
+      <option name="project" value="LOCAL" />
+      <updated>1739353001431</updated>
+    </task>
+    <task id="LOCAL-00498" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739353232931</created>
+      <option name="number" value="00498" />
+      <option name="presentableId" value="LOCAL-00498" />
+      <option name="project" value="LOCAL" />
+      <updated>1739353232931</updated>
+    </task>
+    <task id="LOCAL-00499" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739354598447</created>
+      <option name="number" value="00499" />
+      <option name="presentableId" value="LOCAL-00499" />
+      <option name="project" value="LOCAL" />
+      <updated>1739354598447</updated>
+    </task>
+    <task id="LOCAL-00500" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739356956975</created>
+      <option name="number" value="00500" />
+      <option name="presentableId" value="LOCAL-00500" />
+      <option name="project" value="LOCAL" />
+      <updated>1739356956975</updated>
+    </task>
+    <task id="LOCAL-00501" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739357028000</created>
+      <option name="number" value="00501" />
+      <option name="presentableId" value="LOCAL-00501" />
+      <option name="project" value="LOCAL" />
+      <updated>1739357028000</updated>
+    </task>
+    <task id="LOCAL-00502" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739357394024</created>
+      <option name="number" value="00502" />
+      <option name="presentableId" value="LOCAL-00502" />
+      <option name="project" value="LOCAL" />
+      <updated>1739357394024</updated>
+    </task>
+    <task id="LOCAL-00503" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739357663814</created>
+      <option name="number" value="00503" />
+      <option name="presentableId" value="LOCAL-00503" />
+      <option name="project" value="LOCAL" />
+      <updated>1739357663814</updated>
+    </task>
+    <task id="LOCAL-00504" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739532626992</created>
+      <option name="number" value="00504" />
+      <option name="presentableId" value="LOCAL-00504" />
+      <option name="project" value="LOCAL" />
+      <updated>1739532626992</updated>
+    </task>
+    <task id="LOCAL-00505" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739959979346</created>
+      <option name="number" value="00505" />
+      <option name="presentableId" value="LOCAL-00505" />
+      <option name="project" value="LOCAL" />
+      <updated>1739959979346</updated>
+    </task>
+    <task id="LOCAL-00506" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739961716513</created>
+      <option name="number" value="00506" />
+      <option name="presentableId" value="LOCAL-00506" />
+      <option name="project" value="LOCAL" />
+      <updated>1739961716513</updated>
+    </task>
+    <task id="LOCAL-00507" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739965848367</created>
+      <option name="number" value="00507" />
+      <option name="presentableId" value="LOCAL-00507" />
+      <option name="project" value="LOCAL" />
+      <updated>1739965848367</updated>
+    </task>
+    <task id="LOCAL-00508" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739969017419</created>
+      <option name="number" value="00508" />
+      <option name="presentableId" value="LOCAL-00508" />
+      <option name="project" value="LOCAL" />
+      <updated>1739969017419</updated>
+    </task>
+    <task id="LOCAL-00509" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739969079629</created>
+      <option name="number" value="00509" />
+      <option name="presentableId" value="LOCAL-00509" />
+      <option name="project" value="LOCAL" />
+      <updated>1739969079629</updated>
+    </task>
+    <task id="LOCAL-00510" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739969170552</created>
+      <option name="number" value="00510" />
+      <option name="presentableId" value="LOCAL-00510" />
+      <option name="project" value="LOCAL" />
+      <updated>1739969170552</updated>
+    </task>
+    <task id="LOCAL-00511" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739976453000</created>
+      <option name="number" value="00511" />
+      <option name="presentableId" value="LOCAL-00511" />
+      <option name="project" value="LOCAL" />
+      <updated>1739976453000</updated>
+    </task>
+    <task id="LOCAL-00512" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739978813476</created>
+      <option name="number" value="00512" />
+      <option name="presentableId" value="LOCAL-00512" />
+      <option name="project" value="LOCAL" />
+      <updated>1739978813476</updated>
+    </task>
+    <task id="LOCAL-00513" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739979242025</created>
+      <option name="number" value="00513" />
+      <option name="presentableId" value="LOCAL-00513" />
+      <option name="project" value="LOCAL" />
+      <updated>1739979242025</updated>
+    </task>
+    <task id="LOCAL-00514" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739982412995</created>
+      <option name="number" value="00514" />
+      <option name="presentableId" value="LOCAL-00514" />
+      <option name="project" value="LOCAL" />
+      <updated>1739982412995</updated>
+    </task>
+    <task id="LOCAL-00515" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739982620611</created>
+      <option name="number" value="00515" />
+      <option name="presentableId" value="LOCAL-00515" />
+      <option name="project" value="LOCAL" />
+      <updated>1739982620611</updated>
+    </task>
+    <task id="LOCAL-00516" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739987824486</created>
+      <option name="number" value="00516" />
+      <option name="presentableId" value="LOCAL-00516" />
+      <option name="project" value="LOCAL" />
+      <updated>1739987824486</updated>
+    </task>
+    <task id="LOCAL-00517" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739989713535</created>
+      <option name="number" value="00517" />
+      <option name="presentableId" value="LOCAL-00517" />
+      <option name="project" value="LOCAL" />
+      <updated>1739989713535</updated>
+    </task>
+    <task id="LOCAL-00518" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739992546329</created>
+      <option name="number" value="00518" />
+      <option name="presentableId" value="LOCAL-00518" />
+      <option name="project" value="LOCAL" />
+      <updated>1739992546329</updated>
+    </task>
+    <task id="LOCAL-00519" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739992703389</created>
+      <option name="number" value="00519" />
+      <option name="presentableId" value="LOCAL-00519" />
+      <option name="project" value="LOCAL" />
+      <updated>1739992703390</updated>
+    </task>
+    <task id="LOCAL-00520" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1739992796543</created>
+      <option name="number" value="00520" />
+      <option name="presentableId" value="LOCAL-00520" />
+      <option name="project" value="LOCAL" />
+      <updated>1739992796543</updated>
+    </task>
+    <task id="LOCAL-00521" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1740006394002</created>
+      <option name="number" value="00521" />
+      <option name="presentableId" value="LOCAL-00521" />
+      <option name="project" value="LOCAL" />
+      <updated>1740006394002</updated>
+    </task>
+    <task id="LOCAL-00522" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1740031794395</created>
+      <option name="number" value="00522" />
+      <option name="presentableId" value="LOCAL-00522" />
+      <option name="project" value="LOCAL" />
+      <updated>1740031794395</updated>
+    </task>
+    <task id="LOCAL-00523" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1740032543889</created>
+      <option name="number" value="00523" />
+      <option name="presentableId" value="LOCAL-00523" />
+      <option name="project" value="LOCAL" />
+      <updated>1740032543889</updated>
+    </task>
+    <task id="LOCAL-00524" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1740033000362</created>
+      <option name="number" value="00524" />
+      <option name="presentableId" value="LOCAL-00524" />
+      <option name="project" value="LOCAL" />
+      <updated>1740033000362</updated>
+    </task>
+    <task id="LOCAL-00525" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1740033137776</created>
+      <option name="number" value="00525" />
+      <option name="presentableId" value="LOCAL-00525" />
+      <option name="project" value="LOCAL" />
+      <updated>1740033137776</updated>
+    </task>
+    <task id="LOCAL-00526" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1740033323819</created>
+      <option name="number" value="00526" />
+      <option name="presentableId" value="LOCAL-00526" />
+      <option name="project" value="LOCAL" />
+      <updated>1740033323819</updated>
+    </task>
+    <task id="LOCAL-00527" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1740033455391</created>
+      <option name="number" value="00527" />
+      <option name="presentableId" value="LOCAL-00527" />
+      <option name="project" value="LOCAL" />
+      <updated>1740033455391</updated>
+    </task>
+    <task id="LOCAL-00528" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1740036754118</created>
+      <option name="number" value="00528" />
+      <option name="presentableId" value="LOCAL-00528" />
+      <option name="project" value="LOCAL" />
+      <updated>1740036754118</updated>
+    </task>
+    <task id="LOCAL-00529" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1740040455164</created>
+      <option name="number" value="00529" />
+      <option name="presentableId" value="LOCAL-00529" />
+      <option name="project" value="LOCAL" />
+      <updated>1740040455164</updated>
+    </task>
+    <task id="LOCAL-00530" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1740040612818</created>
+      <option name="number" value="00530" />
+      <option name="presentableId" value="LOCAL-00530" />
+      <option name="project" value="LOCAL" />
+      <updated>1740040612818</updated>
+    </task>
+    <task id="LOCAL-00531" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1740040943267</created>
+      <option name="number" value="00531" />
+      <option name="presentableId" value="LOCAL-00531" />
+      <option name="project" value="LOCAL" />
+      <updated>1740040943267</updated>
+    </task>
+    <task id="LOCAL-00532" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1740044060416</created>
+      <option name="number" value="00532" />
+      <option name="presentableId" value="LOCAL-00532" />
+      <option name="project" value="LOCAL" />
+      <updated>1740044060416</updated>
+    </task>
+    <task id="LOCAL-00533" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1740049088534</created>
+      <option name="number" value="00533" />
+      <option name="presentableId" value="LOCAL-00533" />
+      <option name="project" value="LOCAL" />
+      <updated>1740049088534</updated>
+    </task>
+    <task id="LOCAL-00534" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1740050620754</created>
+      <option name="number" value="00534" />
+      <option name="presentableId" value="LOCAL-00534" />
+      <option name="project" value="LOCAL" />
+      <updated>1740050620754</updated>
+    </task>
+    <task id="LOCAL-00535" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1740053038658</created>
+      <option name="number" value="00535" />
+      <option name="presentableId" value="LOCAL-00535" />
+      <option name="project" value="LOCAL" />
+      <updated>1740053038658</updated>
+    </task>
+    <task id="LOCAL-00536" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1740061584165</created>
+      <option name="number" value="00536" />
+      <option name="presentableId" value="LOCAL-00536" />
+      <option name="project" value="LOCAL" />
+      <updated>1740061584165</updated>
+    </task>
+    <task id="LOCAL-00537" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1740067462324</created>
+      <option name="number" value="00537" />
+      <option name="presentableId" value="LOCAL-00537" />
+      <option name="project" value="LOCAL" />
+      <updated>1740067462324</updated>
+    </task>
+    <task id="LOCAL-00538" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1740068409794</created>
+      <option name="number" value="00538" />
+      <option name="presentableId" value="LOCAL-00538" />
+      <option name="project" value="LOCAL" />
+      <updated>1740068409794</updated>
+    </task>
+    <task id="LOCAL-00539" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1740069159706</created>
+      <option name="number" value="00539" />
+      <option name="presentableId" value="LOCAL-00539" />
+      <option name="project" value="LOCAL" />
+      <updated>1740069159706</updated>
+    </task>
+    <task id="LOCAL-00540" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1754382882660</created>
+      <option name="number" value="00540" />
+      <option name="presentableId" value="LOCAL-00540" />
+      <option name="project" value="LOCAL" />
+      <updated>1754382882660</updated>
+    </task>
+    <task id="LOCAL-00541" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1754399080826</created>
+      <option name="number" value="00541" />
+      <option name="presentableId" value="LOCAL-00541" />
+      <option name="project" value="LOCAL" />
+      <updated>1754399080826</updated>
+    </task>
+    <task id="LOCAL-00542" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1754402833801</created>
+      <option name="number" value="00542" />
+      <option name="presentableId" value="LOCAL-00542" />
+      <option name="project" value="LOCAL" />
+      <updated>1754402833802</updated>
+    </task>
+    <task id="LOCAL-00543" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1755260688614</created>
+      <option name="number" value="00543" />
+      <option name="presentableId" value="LOCAL-00543" />
+      <option name="project" value="LOCAL" />
+      <updated>1755260688615</updated>
+    </task>
+    <option name="localTasksCounter" value="544" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="pusgggg" />
+    <MESSAGE value="pusgggghhh" />
+    <option name="LAST_COMMIT_MESSAGE" value="pusgggghhh" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Agents/BillsController.php</url>
+          <line>460</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\Agents\BillsController" />
+            <option name="methodName" value="buy_airtime" />
+          </properties>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Agents/BillsController.php</url>
+          <line>189</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\Agents\BillsController" />
+            <option name="methodName" value="validate_biller" />
+          </properties>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/AuthController.php</url>
+          <line>27</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\Admin\AuthController" />
+            <option name="methodName" value="login_now" />
+          </properties>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardContoller.php</url>
+          <line>199</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\Admin\DashboardContoller" />
+            <option name="methodName" value="new_customer" />
+          </properties>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardContoller.php</url>
+          <line>233</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\Admin\DashboardContoller" />
+            <option name="methodName" value="add_new_customer" />
+          </properties>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Meter/MeterController.php</url>
+          <line>831</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\Meter\MeterController" />
+            <option name="methodName" value="reprint_meter_token" />
+          </properties>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Meter/MeterController.php</url>
+          <line>898</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\Meter\MeterController" />
+            <option name="methodName" value="new_meter" />
+          </properties>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/PosController.php</url>
+          <line>24</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\PosController" />
+            <option name="methodName" value="index" />
+          </properties>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/PosController.php</url>
+          <line>642</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\PosController" />
+            <option name="methodName" value="retry_meter_token" />
+          </properties>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
+          <line>3751</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\Admin\TokenController" />
+            <option name="methodName" value="recepit" />
+          </properties>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Meter/MeterController.php</url>
+          <line>51</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\Meter\MeterController" />
+            <option name="methodName" value="searchMeter" />
+          </properties>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
+          <line>1027</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\Admin\TokenController" />
+            <option name="methodName" value="generate_credit_meter_token" />
+          </properties>
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
+          <line>1848</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\Admin\TokenController" />
+            <option name="methodName" value="generate_clear_credit_meter_token" />
+          </properties>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/layouts/main.blade.php</url>
+          <line>46</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/helpers.php</url>
+          <line>169</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/helpers.php</url>
+          <line>157</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/helpers.php</url>
+          <line>43</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Transaction/TransactionController.php</url>
+          <line>101</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/layouts/main.blade.php</url>
+          <line>535</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/admin/settings.blade.php</url>
+          <line>375</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/admin/estate/view.blade.php</url>
+          <line>652</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardContoller.php</url>
+          <line>362</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Models/Setting.php</url>
+          <line>4</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/admin/user/user-list.blade.php</url>
+          <line>13</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/admin/user/view.blade.php</url>
+          <line>1210</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Meter/MeterController.php</url>
+          <line>780</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Estate/EstateServiceController.php</url>
+          <line>190</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/admin/report/transactionreport.blade.php</url>
+          <line>8</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Meter/MeterController.php</url>
+          <line>196</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Meter/MeterController.php</url>
+          <line>637</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/PosController.php</url>
+          <line>500</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
+          <line>3637</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
+          <line>1317</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
+          <line>952</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
+          <line>497</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/admin/transformer/new-transformer.blade.php</url>
+          <line>161</line>
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/admin/transformer/new-transformer.blade.php</url>
+          <line>167</line>
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/admin/settings.blade.php</url>
+          <line>248</line>
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

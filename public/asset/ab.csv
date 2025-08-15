@@ -1,0 +1,5 @@
+meterNo,metersimno,transid,status,meterModel,accountno,isamr,model,isdualtariff,sgc,oldsgc,newsgcdual,oldsgcdual,newtariffdual,oldtariffdual,krn1,krn2,needkct,credittypeid,newtariffindex,oldtariffindex,newtariffindexdual,oldtariffindexdual
+12345678,001,1,2,demomem,demo,0,0,0,000001,0,0,0,0,0,0,STS6,STS6,gas,89,90,99,30
+04173210255,001,5,1PH,DEMO3,0,600849,600849,600849,600849,STS6,STS6,1,electricity,1,1,,,,,,,
+62310072192,002,5,3PH,LIO/01/001,1,600849,600849,600849,600849,STS6,STS6,0,electricity,1,1,2,2,,,,,
+62141285460,003,5,MD,DEMO,0,600849,600849,600849,600849,STS6,STS6,1,electricity,1,1,,,,,,,

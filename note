@@ -1,0 +1,58 @@
+   Route::get('transformer-list', [TransformerController::class, 'list_transformer']);
+    Route::get('new-transformer', [TransformerController::class, 'new_transformer']);
+    Route::post('add-new-transformer', [TransformerController::class, 'add_new_transformer']);
+    Route::get('transformer-delete', [TransformerController::class, 'delete_transformer']);
+    Route::get('edit-delete', [TransformerController::class, 'delete_transformer']);
+
+
+
+
+$feature = Feature::find(1);
+        $old_values = $feature->toArray();
+        $feature->update([
+            'momas_meter' => $request->momas_meter,
+            'other_meter' => $request->other_meter,
+            'print_token' => $request->print_token,
+            'access_token' => $request->access_token,
+            'services' => $request->services,
+            'bill_payment' => $request->bill_payment,
+            'support' => $request->support,
+            'analysis' => $request->analysis,
+        ]);
+
+        $new_values = $feature->refresh()->toArray();
+
+
+
+ $aud = new Auditlog();
+        $aud->user_id = Auth::id();
+        $aud->name = Auth::user()->first_name." ".Auth::user()->_name;
+        $aud->user_id = Auth::id();
+        $aud->old_values = json_encode($old_values);
+        $aud->new_values = json_encode($new_values);
+        $aud->action = "Feature Update";
+        $aud->save();
+
+
+
+  @if(Auth::user()->role == 0)
+        @elseif(Auth::user()->role == 1)
+        @elseif(Auth::user()->role == 2)
+        @elseif(Auth::user()->role == 3)
+        @elseif(Auth::user()->role == 4)
+        @elseif(Auth::user()->role == 5)
+        @else
+        @endif
+
+
+
+                if(Auth::user()->role == 0)
+                elseif(Auth::user()->role == 1)
+                elseif(Auth::user()->role == 2)
+                elseif(Auth::user()->role == 3)
+                elseif(Auth::user()->role == 4)
+                elseif(Auth::user()->role == 5)
+
+
+
+
