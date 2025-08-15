@@ -148,11 +148,11 @@ class MeterController extends Controller
         $tariffVats = TarrifState::whereIn('tariff_id', $tariffs->pluck('id'))->where('status', 2)
             ->pluck('tariff_id', 'vat');
 
+
         $tariffs->transform(function ($tariffs) use ($tariffAmounts, $tariffVats) {
-            $vat = TarrifState::where('estate_id', $user_info->estate_id)->where('status', 1)->first()->vat ?? 0;
 
             $tariffs->amount = $tariffAmounts[$tariffs->id] ?? null;
-            $tariffs->vat = $vat;
+            $tariffs->vat = $tariffVats;
             return $tariffs;
         });
 
