@@ -175,8 +175,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'blockaccess']], fun
     Route::post('estate-update-utilities', [EstateController::class, 'estate_update_utilities']);
     Route::post('update-duration', [EstateController::class, 'update_duration']);
     Route::get('estate-service', [EstateServiceController::class, 'index']);
+    Route::get('profession-delete', [EstateServiceController::class, 'profession_delete']);
+    Route::get('profession-deactivate', [EstateServiceController::class, 'profession_deactivate']);
+    Route::get('profession-activate', [EstateServiceController::class, 'profession_activate']);
+
+
+
+
+
+
     Route::get('view-service', [EstateServiceController::class, 'view_service']);
     Route::post('add-new-service-list', [EstateServiceController::class, 'add_new_service']);
+    Route::post('add-new-proffession', [EstateServiceController::class, 'add_new_profession']);
     Route::post('service-update', [EstateServiceController::class, 'service_update']);
     Route::get('delete-comment', [EstateServiceController::class, 'delete_comment']);
     Route::get('service-delete', [EstateServiceController::class, 'delete_service']);

@@ -17,7 +17,53 @@ use Illuminate\Support\Facades\Auth;
 
 class EstateServiceController extends Controller
 {
-    public function index(request $request)
+
+
+    public function add_new_profession(request $request)
+    {
+        $request->validate([
+            'title' => 'required'
+        ]);
+
+        $ser =  new Service();
+        $ser->service_title = $request->title;
+        $ser->status = 2;
+        $ser->save();
+
+        return back()->with('message', 'Service has been added');
+
+    }
+
+
+
+
+    public function profession_delete(request $request)
+    {
+
+        Service::where('id', $request->id)->delete();
+        return back()->with('message', 'Service has been deleted');
+
+
+    }
+
+    public function profession_deactivate(request $request)
+    {
+
+        Service::where('id', $request->id)->update(['status' => 0]);
+        return back()->with('message', 'Service has been updated successfully');
+
+
+    }
+
+    public function profession_activate(request $request)
+    {
+
+        Service::where('id', $request->id)->update(['status' => 2]);
+        return back()->with('message', 'Service has been updated successfully');
+
+
+    }
+        public function index(request $request)
     {
 
 
@@ -28,6 +74,7 @@ class EstateServiceController extends Controller
             $data['service_count'] = EstateService::count();
             $data['estate_id'] = Auth::user()->estate_id;
             $data['prof_services'] = Service::all();
+            $data['prof_service'] = Service::latest()->paginate(20);
             $data['estate'] = Estate::all();
 
 

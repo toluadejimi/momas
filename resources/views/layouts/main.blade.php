@@ -19,6 +19,8 @@
 
     <link href="{{url('')}}/public/asset/ass/css/icons.min.css" rel="stylesheet" type="text/css"/>
 
+
+
     <style>
         .search-result {
             border: 1px solid #ccc;
@@ -44,6 +46,9 @@
 
 <!-- body start -->
 <body data-menu-color="light" data-sidebar="default">
+
+
+
 
 <!-- Begin page -->
 <div id="app-layout">
@@ -546,6 +551,8 @@
     <div class="content-page">
 
         @yield('content')
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 
         <!-- Footer Start -->
         <footer class="footer">
