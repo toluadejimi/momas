@@ -180,6 +180,14 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
                                 <div class="modal-body">
+                                    <label class="my-2">Select Estate</label>
+                                    <select class="form-control mb-3" name="service" required>
+                                        <option value="" disabled selected>Select a Estate</option>
+                                        @foreach($estate as $data)
+                                            <option value="{{ $data->id }}">{{ $data->title }}</option>
+                                        @endforeach
+                                    </select>
+
                                     <label class="my-2">Select Service</label>
                                     <select class="form-control mb-3" name="service" required>
                                         <option value="" disabled selected>Select a job</option>
