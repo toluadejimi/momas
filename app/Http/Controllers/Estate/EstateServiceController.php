@@ -95,6 +95,9 @@ class EstateServiceController extends Controller
             $data['service_count'] = EstateService::where('estate_id', Auth::user()->estate_id)->count();
             $data['estate_id'] = Auth::user()->estate_id;
             $data['prof_services'] = Service::all();
+            $data['prof_service'] = Service::latest()->paginate(20);
+
+            $data['estate_services'] = EstateService::where('estate_id', Auth::user()->estate_id)->paginate(20);
 
 
 

@@ -1,3 +1,4 @@
+@php use App\Models\Estate; @endphp
 @extends('layouts.main')
 @section('content')
 
@@ -248,8 +249,10 @@
                                                                 <input value="{{$data->id}}" hidden="" name="id" required>
 
                                                                 <label class="my-1">Vat %</label>
+
+                                                                @php $vatt = Estate::where('id', $data->estate_id)->first()->vat ?? 0 @endphp
                                                                 <input type="number" class="form-control mb-3"
-                                                                       value="{{$data->vat}}" name="vat" readonly>
+                                                                       value="{{$vatt}}" name="vat" readonly>
 
 
                                                                 <input type="text" name="estate_id" value="{{$data->estate_id}}" hidden>
