@@ -201,6 +201,8 @@
                                                                 <input required name="estate_name" value="{{$estate_name}}" hidden="">
                                                                 <input required name="amount" value="{{$amount}}" hidden="">
                                                                 <input required name="tariff_amount" value="{{$tarrif_amount}}" hidden="">
+                                                                <input required name="order_type" value="kct" hidden="">
+
 
 
 
@@ -232,16 +234,18 @@
                                                             <input required name="tariff_amount" value="{{$tarrif_amount}}" hidden="">
                                                             <input required name="pay_type" value="vend" hidden="">
 
+                                                            <hr>
+
+
+                                                            <div class="col-xl-12 my-4 d-flex justify-content-start col-sm-12">
+                                                                <button type="submit" class="btn btn-primary">Vend Now</button>
+                                                            </div>
+
+
 
                                                         @endif
 
 
-                                                        <hr>
-
-
-                                                        <div class="col-xl-12 my-4 d-flex justify-content-start col-sm-12">
-                                                            <button type="submit" class="btn btn-primary">Vend Now</button>
-                                                        </div>
 
 
 
@@ -660,6 +664,7 @@
                                                                 <input required name="estate_name" value="{{$estate_name}}" hidden="">
                                                                 <input required name="amount" value="{{$amount}}" hidden="">
                                                                 <input required name="tariff_amount" value="{{$tarrif_amount}}" hidden="">
+                                                                <input required name="order_type" value="kct" hidden="">
 
 
 
@@ -691,16 +696,17 @@
                                                             <input required name="tariff_amount" value="{{$tarrif_amount}}" hidden="">
                                                             <input required name="pay_type" value="vend" hidden="">
 
+                                                            <hr>
+
+
+                                                            <div class="col-xl-12 my-4 d-flex justify-content-start col-sm-12">
+                                                                <button type="submit" class="btn btn-primary">Vend Now</button>
+                                                            </div>
 
                                                         @endif
 
 
-                                                        <hr>
 
-
-                                                        <div class="col-xl-12 my-4 d-flex justify-content-start col-sm-12">
-                                                            <button type="submit" class="btn btn-primary">Vend Now</button>
-                                                        </div>
 
 
 

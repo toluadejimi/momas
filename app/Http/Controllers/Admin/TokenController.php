@@ -1832,13 +1832,23 @@ class TokenController extends Controller
                 $trx_id = "TRX" . random_int(0000000, 9999999);
                 $email = Auth::user()->email;
 
+                if($request->order_type === "kct"){
+
+                    $split_code = null;
+
+                }else{
+
+                    $split_code = $est->paystack_subaccount;
+
+                }
+
 
                 $databody = array(
                     "amount" => $request->amount * 100,
                     "email" => $email,
                     "ref" => $trx_id,
                     'callback_url' => url('') . "/admin/paystack-check-kct",
-                    'split_code' => $est->paystack_subaccount,
+                    'split_code' => $split_code,
                     'metadata' => ["ref" => $trx_id],
                 );
 
@@ -1865,6 +1875,14 @@ class TokenController extends Controller
                 curl_close($curl);
                 $var = json_decode($var);
                 $status = $var->status;
+
+
+
+
+                if($status == false){
+
+                    return redirect('admin/kct-token')->with('error', $var->message);
+                }
 
 
                 if ($status == true) {
