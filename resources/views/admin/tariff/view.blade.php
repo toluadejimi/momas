@@ -201,6 +201,12 @@
 
                                     @foreach($tstate as $data)
 
+
+                                        <div class="col-3">
+                                            <label class="my-1">ID/N</label>
+                                            <h6>{{$data->id}}</h6>
+                                        </div>
+
                                         <div class="col-3">
                                             <label class="my-1">Tariff Amount</label>
                                             <a href="#" data-bs-toggle="modal"
