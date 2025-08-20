@@ -1096,9 +1096,6 @@ class TransactionController extends Controller
                 ])->sum('amount') ?? 0;
 
 
-
-                dd('hello');
-
                 return view('admin.report.transactionreport', $data);
 
             }
