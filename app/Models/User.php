@@ -147,6 +147,11 @@ class User extends Authenticatable
         return $this->hasMany(TamperToken::class);
     }
 
+    public function clear_credit_token()
+    {
+        return $this->hasMany(ClearcreditToken::class);
+    }
+
     public function audit()
     {
         return $this->hasMany(Audit::class);

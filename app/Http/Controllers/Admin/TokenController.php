@@ -1462,8 +1462,6 @@ class TokenController extends Controller
                 $flkey['flutterwave_public'] = $fl->flutterwave_public;
                 $paystackkey = $fl->paystack_secret;
                 $pkkey['paystack_public'] = $fl->paystack_public;
-
-                $trx_id = "TRX" . random_int(0000000, 9999999);
                 $email = Auth::user()->email;
 
 
@@ -1828,8 +1826,6 @@ class TokenController extends Controller
                 $flkey['flutterwave_public'] = $fl->flutterwave_public;
                 $paystackkey = $fl->paystack_secret;
                 $pkkey['paystack_public'] = $fl->paystack_public;
-
-                $trx_id = "TRX" . random_int(0000000, 9999999);
                 $email = Auth::user()->email;
 
                 if($request->order_type === "kct"){
@@ -2287,8 +2283,6 @@ class TokenController extends Controller
                 $flkey['flutterwave_public'] = $fl->flutterwave_public;
                 $paystackkey = $fl->paystack_secret;
                 $pkkey['paystack_public'] = $fl->paystack_public;
-
-                $trx_id = "TRX" . random_int(0000000, 9999999);
                 $email = Auth::user()->email;
 
 
@@ -3021,6 +3015,7 @@ class TokenController extends Controller
         if ($ck_transaction == null) {
 
             if ($status == 'success') {
+
 
                 $meterNo = KctToken::where('trx_id', $var->data->metadata->ref)->first()->meterNo;
                 $meter = Meter::where('meterNo', $meterNo)->first();

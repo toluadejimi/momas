@@ -523,15 +523,19 @@
 
                                     </div>
                                     <hr>
+
+
                                     <div class="card-body">
                                         <table id="datatable-buttons"
                                                class="table table-striped table-bordered dt-responsive nowrap">
                                             <thead>
                                             <tr>
                                                 <th scope="col" class="cursor-pointer">Customer Name</th>
-                                                <th scope="col" class="cursor-pointer">Estate</th>
                                                 <th scope="col" class="cursor-pointer">Meter Number</th>
+                                                <th scope="col" class="cursor-pointer">Estate</th>
                                                 <th scope="col" class="cursor-pointer">Amount</th>
+                                                <th scope="col" class="cursor-pointer">Tariff Index</th>
+                                                <th scope="col" class="cursor-pointer desc">Unit</th>
                                                 <th scope="col" class="cursor-pointer desc">Status</th>
                                                 <th scope="col" class="cursor-pointer desc">Date/Time</th>
                                                 <th scope="col" class="cursor-pointer desc">Action</th>
@@ -546,25 +550,13 @@
 
                                                 <tr>
                                                     <td>
-                                                        @php
-                                                            $user = User::where('id', $data->user_id)->first();
-                                                        @endphp
-                                                        <a href="view-user?id={{$data->user_id}}">{{$user->last_name ?? "name"}} {{$user->first_name ?? "name"}}</a>
-
+                                                        <a href="view-user?id={{$data->id}}">{{$data->user->last_name ?? "Name"}} {{$data->user->first_name ?? "Name"}}</a>
                                                     </td>
-
-                                                    <td>
-
-                                                        @php
-                                                            $estate = Estate::where('id', $data->estate_id)->first();
-                                                        @endphp
-                                                        {{$estate->title ?? "name"}}
-                                                        {{$data->estate_id ?? "name"}}
-
-                                                    </td>
-
                                                     <td>{{$data->meterNo}}</a> </td>
+                                                    <td>{{$data->estate->title ?? "name"}}</td>
                                                     <td>{{number_format($data->amount, 2)}}</td>
+                                                    <td>{{$data->tariff_id}}</td>
+                                                    <td>{{$data->unitkwh}}kw/N</td>
                                                     <td>
                                                         @if($data->status == 2)
                                                             <span class="badge text-bg-primary">Successful</span>
@@ -622,6 +614,8 @@
                                             </tfoot>
                                         </table><!-- end table -->
                                     </div>
+
+
                                 </div>
 
                             </div>
