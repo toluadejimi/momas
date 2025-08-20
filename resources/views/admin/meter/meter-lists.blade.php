@@ -518,6 +518,10 @@
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <h5 class="card-title text-black mb-0">Latest Meter</h5>
+                                    <button id="exportBtn" class="btn btn-primary">Export to Excel</button>
+
+
+
                                     {{--                                    <div class="justify-content-end">--}}
                                     {{--                                        <div class="justify-content-end">--}}
                                     {{--                                            <a href="#" class="btn btn-primary text-white " data-bs-toggle="modal"--}}
@@ -532,7 +536,7 @@
                             </div>
 
                             <div class="card-body">
-                                <table class="table table-striped table-bordered dt-responsive nowrap">
+                                <table id="exportTable"  class="table table-striped table-bordered dt-responsive nowrap">
                                     <thead>
                                     <tr>
                                         <th scope="col" class="cursor-pointer">Meter No</th>
@@ -542,10 +546,10 @@
                                         <th scope="col" class="cursor-pointer">Status</th>
                                         <th scope="col" class="cursor-pointer">Date Added</th>
                                         @if(Auth::user()->role == 0)
-                                            <th scope="col" class="cursor-pointer desc">Action</th>
+                                            <th  scope="col" class="cursor-pointer desc skip-row">Action</th>
                                         @endif
 
-                                        <th scope="col" class="cursor-pointer desc">Action</th>
+                                        <th scope="col" class="cursor-pointer desc skip-row">Action</th>
 
 
                                     </tr>
@@ -576,7 +580,7 @@
                                             <td>{{$data->created_at}}</td>
 
                                             @if(Auth::user()->role == 0)
-                                                <td><a href="meter-delete?id={{$data->id}}"
+                                                <td class="skip-row"><a href="meter-delete?id={{$data->id}}"
                                                        onclick="return confirmDelete();"
                                                        class="btn btn-danger">Delete</a></td>
                                                 <script>
@@ -587,7 +591,7 @@
                                             @endif
 
                                             @if($data->status == 2)
-                                                <td><a href="meter-deactivate?id={{$data->id}}"
+                                                <td class="skip-row"><a href="meter-deactivate?id={{$data->id}}"
                                                        onclick="return confirmupdate();" class="btn btn-warning">Deactivate
                                                         Meter</a>
 
@@ -601,7 +605,7 @@
                                                 </td>
                                             @else
 
-                                                <td><a href="meter-activate?id={{$data->id}}"
+                                                <td class="skip-row"><a href="meter-activate?id={{$data->id}}"
                                                        onclick="return confirmupdate();" class="btn btn-primary">Activate
                                                         Meter</a>
 
@@ -635,6 +639,24 @@
 
 
             </div>
+
+
+            <script>
+                document.getElementById('exportBtn').addEventListener('click', function() {
+
+                    var table = document.getElementById('exportTable').cloneNode(true);
+
+
+                    var rows = table.querySelectorAll('.skip-row');
+                    rows.forEach(row => row.remove());
+
+
+                    var wb = XLSX.utils.table_to_book(table, { sheet: "All Meters" });
+
+
+                    XLSX.writeFile(wb, "all_meters.xlsx");
+                });
+            </script>
 
 
         </div>

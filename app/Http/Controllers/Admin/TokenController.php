@@ -2329,8 +2329,6 @@ class TokenController extends Controller
                     $trx->payment_ref = $var->data->access_code ?? null;
                     $trx->service_type = "credit_token";
                     $trx->save();
-
-
                     return redirect()->away($var->data->authorization_url);
 
                 }

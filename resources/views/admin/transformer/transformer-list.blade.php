@@ -223,7 +223,15 @@
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <h5 class="card-title text-black mb-0">Latest Transformer</h5>
-                                    <a href="new-transformer" class="btn btn-primary text-white justify-content-end">Add new</a>
+
+                                    <div class="justify-content-end">
+                                        <a href="new-transformer" class="btn btn-primary text-white justify-content-end">Add new</a>
+                                        <button id="exportBtn" class="btn btn-primary">Export to Excel</button>
+
+
+                                    </div>
+
+
 
                                 </div>
 
@@ -232,7 +240,7 @@
 
                             <div class="card-body">
                                 <table id="datatable-buttons"
-                                       class="table table-striped table-bordered dt-responsive nowrap">
+                                       class="table table-striped table-bordered dt-responsive nowrap exportTable">
                                     <thead>
                                     <tr>
                                         <th scope="col" class="cursor-pointer">Title</th>
@@ -241,7 +249,7 @@
                                         <th scope="col" class="cursor-pointer">Estate</th>
                                         <th scope="col" class="cursor-pointer">Capacity</th>
                                         <th scope="col" class="cursor-pointer desc">Date Registered</th>
-                                        <th scope="col" class="cursor-pointer desc">Action</th>
+                                        <th scope="col" class="cursor-pointer desc skip-row">Action</th>
 
                                     </tr>
                                     </thead>
@@ -257,7 +265,7 @@
                                             <td>{{$data->estate ?? "Estate"}}</td>
                                             <td>{{$data->Capacity ?? "Capacity"}} KVA</td>
                                             <td>{{$data->created_at}}</td>
-                                            <td><a href="transformer-delete?id={{$data->id}}" onclick="return confirmDelete();" class="btn btn-danger">Delete</a>
+                                            <td class="skip-row"><a href="transformer-delete?id={{$data->id}}" onclick="return confirmDelete();" class="btn btn-danger">Delete</a>
 
                                                 <script>
                                                     function confirmDelete() {
@@ -288,6 +296,25 @@
 
 
             </div>
+
+
+            <script>
+                document.getElementById('exportBtn').addEventListener('click', function() {
+                    // Select the table using its class
+                    var table = document.querySelector('.exportTable'); // selects the first table with class 'exportTable'
+
+                    var rows = table.querySelectorAll('.skip-row');
+                    rows.forEach(row => row.remove());
+
+
+                    var wb = XLSX.utils.table_to_book(table, { sheet: "All Transformer" });
+
+                    // Download Excel file
+                    XLSX.writeFile(wb, "Transformer List.xlsx");
+                });
+            </script>
+
+
 
 
         </div>

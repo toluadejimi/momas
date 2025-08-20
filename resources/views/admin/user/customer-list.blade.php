@@ -401,12 +401,14 @@
 
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
-                                    <h5 class="card-title text-black mb-0">Latest Transaction</h5>
+                                    <h5 class="card-title text-black mb-0">Latest Users</h5>
                                     <div class="justify-content-end">
                                         <div class="justify-content-end">
                                             <a href="#" class="btn btn-primary text-white " data-bs-toggle="modal"
                                                 data-bs-target="#staticBackdrop">Import Bulk Customers</a>
                                             <a href="new-customer" class="btn btn-primary text-white">Add new</a>
+                                            <button id="exportBtn" class="btn btn-primary">Export to Excel</button>
+
                                         </div>
                                     </div>
 
@@ -418,7 +420,7 @@
 
                             <div class="card-body">
                                 <table id="datatable-buttons"
-                                    class="table table-striped table-bordered dt-responsive nowrap">
+                                       class="table table-striped table-bordered dt-responsive nowrap exportTable">
                                     <thead>
                                         <tr>
                                             <th scope="col" class="cursor-pointer">First Name</th>
@@ -488,6 +490,19 @@
                         </div>
 
                     </div>
+
+                    <script>
+                        document.getElementById('exportBtn').addEventListener('click', function() {
+                            // Select the table using its class
+                            var table = document.querySelector('.exportTable'); // selects the first table with class 'exportTable'
+
+                            // Convert to workbook
+                            var wb = XLSX.utils.table_to_book(table, { sheet: "All Users" });
+
+                            // Download Excel file
+                            XLSX.writeFile(wb, "Users List.xlsx");
+                        });
+                    </script>
                 </div>
 
 

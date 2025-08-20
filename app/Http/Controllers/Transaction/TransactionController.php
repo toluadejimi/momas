@@ -775,6 +775,7 @@ class TransactionController extends Controller
         if (Auth::user()->role == 0) {
 
             $data['transactions'] = Transaction::latest()->paginate('20');
+            $data['alltransactions'] = Transaction::latest()->get();
             $data['total'] = Transaction::where('status', 2)->sum('amount');
             $data['estate'] = Estate::all();
 
@@ -789,7 +790,8 @@ class TransactionController extends Controller
         } elseif
         (Auth::user()->role == 3) {
 
-            $data['transactions'] = Transaction::latest()->where('estate_id', Auth::user()->estate_id)->paginate('20');
+            $data['transactions'] = Transaction::latest()->where('estate_id', Auth::user()->estate_id)->paginate('50');
+            $data['alltransactions'] = Transaction::latest()->where('estate_id', Auth::user()->estate_id)->get();
             $data['total'] = Transaction::where('status', 2)->where('estate_id', Auth::user()->estate_id)->sum('amount');
 
             return view('admin.report.transactionreport', $data);
@@ -829,6 +831,13 @@ class TransactionController extends Controller
                     ->take(50000)
                     ->paginate(50);
 
+
+                $data['alltransactions'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->latest()
+                    ->where('status', 2)
+                    ->take(50000)
+                    ->get();
+
                 $data['total'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
                     ->where('status', 2)
                     ->sum('amount') ?? 0;
@@ -859,6 +868,12 @@ class TransactionController extends Controller
                         ->take(50000)
                         ->paginate(50);
 
+                    $data['alltransactions'] = Transaction::
+                    latest()
+                        ->where('status', 2)
+                        ->take(50000)
+                        ->get();
+
                     $data['total'] = Transaction::where('status', 2)->sum('amount') ?? 0;
 
 
@@ -870,6 +885,12 @@ class TransactionController extends Controller
                     ->where('status', 2)
                     ->take(50000)
                     ->paginate(50);
+
+                $data['alltransactions'] = Transaction::where('estate_id', $estate_id)
+                    ->latest()
+                    ->where('status', 2)
+                    ->take(50000)
+                    ->get();
 
                 $data['total'] = Transaction::where('estate_id', $estate_id)->where('status', 2)
                     ->sum('amount') ?? 0;
@@ -890,6 +911,12 @@ class TransactionController extends Controller
                         ->take(50000)
                         ->paginate(50);
 
+                    $data['alltransactions'] = Transaction::
+                    latest()
+                        ->where('status', 2)
+                        ->take(50000)
+                        ->get();
+
                     $data['total'] = Transaction::where('status', 2)->sum('amount') ?? 0;
 
 
@@ -901,6 +928,12 @@ class TransactionController extends Controller
                     ->where('status', 2)
                     ->take(50000)
                     ->paginate(50);
+
+                $data['alltransactions'] = Transaction::where('estate_id', $estate_id)
+                    ->latest()
+                    ->where('status', 2)
+                    ->take(50000)
+                    ->get();
 
                 $data['total'] = Transaction::where('estate_id', $estate_id)
                     ->where('status', 2)
@@ -922,6 +955,13 @@ class TransactionController extends Controller
                     ->where('service_type', $transaction_type)
                     ->paginate(50);
 
+                $data['alltransactions'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->latest()
+                    ->where('status', 2)
+                    ->take(50000)
+                    ->where('service_type', $transaction_type)
+                    ->get();
+
                 $data['total'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
                     ->where('service_type', $transaction_type)
                     ->where('status', 2)
@@ -940,6 +980,13 @@ class TransactionController extends Controller
                     'status' => $status,
                     'service_type' => $transaction_type,
                 ])->paginate('50') ?? null;
+
+
+                $data['alltransactions'] = Transaction::latest()->take(50000)->whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])->
+                where([
+                    'status' => $status,
+                    'service_type' => $transaction_type,
+                ])->get() ?? null;
 
 
                 $data['total'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])->
@@ -961,6 +1008,8 @@ class TransactionController extends Controller
 
         if (Auth::user()->role == 3) {
 
+
+
             $rrn = $request->rrn;
             $startofday = $request->from;
             $endofday = $request->to;
@@ -974,6 +1023,12 @@ class TransactionController extends Controller
                     ->where('estate_id', Auth::user()->estate_id)
                     ->take(50000)
                     ->paginate(50);
+
+
+                $data['alltransactions'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->latest()
+                    ->where('estate_id', Auth::user()->estate_id)
+                    ->get();
 
                 $data['total'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
                     ->where('estate_id', Auth::user()->estate_id)
@@ -993,6 +1048,14 @@ class TransactionController extends Controller
                         'service_type' => $transaction_type,
                         'estate_id' => Auth::user()->estate_id
                     ])->paginate('50') ?? null;
+
+
+                $data['alltransactions'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
+                    ->where([
+                        'status' => $status,
+                        'service_type' => $transaction_type,
+                        'estate_id' => Auth::user()->estate_id
+                    ])->get() ?? null;
 
                 $data['total'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])
                     ->where([
@@ -1016,6 +1079,14 @@ class TransactionController extends Controller
                 ])->paginate('50') ?? null;
 
 
+                $data['alltransactions'] = Transaction::latest()->take(50000)->whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])->
+                where([
+                    'status' => $status,
+                    'service_type' => $transaction_type,
+                    'estate_id' => Auth::user()->estate_id
+                ])->get();
+
+
                 $data['total'] = Transaction::whereBetween('created_at', [$startofday . ' 00:00:00', $endofday . ' 23:59:59'])->
                 where([
                     'status' => $status,
@@ -1024,6 +1095,9 @@ class TransactionController extends Controller
 
                 ])->sum('amount') ?? 0;
 
+
+
+                dd('hello');
 
                 return view('admin.report.transactionreport', $data);
 

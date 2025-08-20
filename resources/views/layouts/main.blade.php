@@ -21,6 +21,8 @@
 
 
 
+
+
     <style>
         .search-result {
             border: 1px solid #ccc;
@@ -635,6 +637,7 @@
 
 <!-- App js-->
 <script src="{{url('')}}/public/asset/ass/js/app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 
 </body>

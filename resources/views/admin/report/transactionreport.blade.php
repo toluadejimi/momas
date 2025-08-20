@@ -1,3 +1,4 @@
+@php use App\Models\Meter; @endphp
 @extends('layouts.main')
 @section('content')
 
@@ -555,6 +556,8 @@
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <h5 class="card-title text-black mb-0">All Transaction</h5>
+                                    <button id="exportBtn" class="btn btn-primary">Export to Excel</button>
+
 
                                 </div>
 
@@ -568,6 +571,7 @@
                                         <tr>
                                             <th scope="col" class="cursor-pointer">Trx ID</th>
                                             <th scope="col" class="cursor-pointer">Customer</th>
+                                            <th scope="col" class="cursor-pointer">Meter No</th>
                                             <th scope="col" class="cursor-pointer">Amount</th>
                                             <th scope="col" class="cursor-pointer">Type</th>
                                             <th scope="col" class="cursor-pointer">Status</th>
@@ -584,13 +588,16 @@
                                             <tr>
                                                 <td>{{$data->trx_id}}</td>
                                                 <td><a href="view-user?id={{$data->user->first_name ?? "Name"}}">{{$data->user->last_name ?? "Name"}}</a></td>
+                                                @php $meterNo = Meter::where('user_id', $data->user->id)->first()->meterNo ?? "meter" @endphp
+                                                <td>{{$meterNo}}</td>
                                                 <td>{{number_format($data->amount, 2)}}</td>
-                                                <td>{{$data->service}}</td>
+                                                <td>{{$data->service_type}}</td>
+
                                                 <td>
                                                     @if($data->status == 2)
                                                         <span class="badge text-bg-primary">Approved</span>
-                                                    @elseif($data->status == 0)
-                                                        <span class="badge text-bg-dark">Pending</span>
+                                                    @elseif($data->status == 0 || $data->status == 4)
+                                                        <span class="badge text-bg-warning">Pending</span>
                                                     @elseif($data->status == 3)
                                                         <span class="badge text-bg-dark">Refunded</span>
                                                     @endif
@@ -615,6 +622,61 @@
                                 </div>
                             </div>
 
+
+                            <table id="exportTable" style="display:none;">
+                                <thead>
+                                <tr>
+                                    <th scope="col" class="cursor-pointer">Trx ID</th>
+                                    <th scope="col" class="cursor-pointer">Customer</th>
+                                    <th scope="col" class="cursor-pointer">Meter No</th>
+                                    <th scope="col" class="cursor-pointer">Amount</th>
+                                    <th scope="col" class="cursor-pointer">Type</th>
+                                    <th scope="col" class="cursor-pointer">Status</th>
+                                    <th scope="col" class="cursor-pointer desc">Date</th>
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+
+                                @foreach($alltransactions as $data)
+
+                                    <tr>
+                                        <td>{{$data->trx_id}}</td>
+                                        <td><a href="view-user?id={{$data->user->first_name ?? "Name"}}">{{$data->user->last_name ?? "Name"}}</a></td>
+                                        @php $meterNo = Meter::where('user_id', $data->user->id)->first()->meterNo ?? "meter" @endphp
+                                        <td>{{$meterNo}}</td>
+                                        <td>{{number_format($data->amount, 2)}}</td>
+                                        <td>{{$data->service_type}}</td>
+
+                                        <td>
+                                            @if($data->status == 2)
+                                                <span class="badge text-bg-primary">Approved</span>
+                                            @elseif($data->status == 0 || $data->status == 4)
+                                                <span class="badge text-bg-warning">Pending</span>
+                                            @elseif($data->status == 3)
+                                                <span class="badge text-bg-dark">Refunded</span>
+                                            @endif
+
+                                        </td>
+                                        <td>{{$data->created_at}}</td>
+
+                                    </tr>
+
+                                @endforeach
+
+
+                                </tbody><!-- end tbody -->
+
+                                <tfoot>
+
+                                {{ $transactions->links() }}
+
+
+                                </tfoot>
+                            </table>
+
                         </div>
                     </div>
 
@@ -623,6 +685,21 @@
 
 
             </div> <!-- container-fluid -->
+
+
+            <script>
+                document.getElementById('exportBtn').addEventListener('click', function() {
+                    // Select hidden table
+                    var table = document.getElementById('exportTable');
+
+                    // Convert to workbook
+                    var wb = XLSX.utils.table_to_book(table, { sheet: "All Transactions" });
+
+                    // Download Excel file
+                    XLSX.writeFile(wb, "all_transactions.xlsx");
+                });
+            </script>
+
 
         </div>
     @elseif(Auth::user()->role == 4)
