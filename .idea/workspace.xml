@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="df462c8f-229d-4527-915f-ee2aade1fa51" name="Changes" comment="pusgggghhh">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Estate/EstateServiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Estate/EstateServiceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/estate/service-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/estate/service-list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/main.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -373,9 +369,6 @@
       <option name="pestRunnerSettings">
         <PestRunner configuration_file="$PROJECT_DIR$/../logresell/phpunit.xml" scope="ConfigurationFile" use_alternative_configuration_file="true" />
       </option>
-      <option name="runnerSettings">
-        <PhpTestRunnerSettings configuration_file="$PROJECT_DIR$/../logresell/phpunit.xml" scope="ConfigurationFile" use_alternative_configuration_file="true" />
-      </option>
       <method v="2" />
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
@@ -528,55 +521,9 @@
       <workItem from="1754742652395" duration="1524000" />
       <workItem from="1754826923252" duration="1083000" />
       <workItem from="1755259103143" duration="3337000" />
-      <workItem from="1755341109830" duration="1656000" />
-    </task>
-    <task id="LOCAL-00495" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1739349669000</created>
-      <option name="number" value="00495" />
-      <option name="presentableId" value="LOCAL-00495" />
-      <option name="project" value="LOCAL" />
-      <updated>1739349669000</updated>
-    </task>
-    <task id="LOCAL-00496" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1739350392853</created>
-      <option name="number" value="00496" />
-      <option name="presentableId" value="LOCAL-00496" />
-      <option name="project" value="LOCAL" />
-      <updated>1739350392854</updated>
-    </task>
-    <task id="LOCAL-00497" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1739353001431</created>
-      <option name="number" value="00497" />
-      <option name="presentableId" value="LOCAL-00497" />
-      <option name="project" value="LOCAL" />
-      <updated>1739353001431</updated>
-    </task>
-    <task id="LOCAL-00498" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1739353232931</created>
-      <option name="number" value="00498" />
-      <option name="presentableId" value="LOCAL-00498" />
-      <option name="project" value="LOCAL" />
-      <updated>1739353232931</updated>
-    </task>
-    <task id="LOCAL-00499" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1739354598447</created>
-      <option name="number" value="00499" />
-      <option name="presentableId" value="LOCAL-00499" />
-      <option name="project" value="LOCAL" />
-      <updated>1739354598447</updated>
-    </task>
-    <task id="LOCAL-00500" summary="pusgggghhh">
-      <option name="closed" value="true" />
-      <created>1739356956975</created>
-      <option name="number" value="00500" />
-      <option name="presentableId" value="LOCAL-00500" />
-      <option name="project" value="LOCAL" />
-      <updated>1739356956975</updated>
+      <workItem from="1755341109830" duration="20960000" />
+      <workItem from="1755783174049" duration="4114000" />
+      <workItem from="1756030541971" duration="1975000" />
     </task>
     <task id="LOCAL-00501" summary="pusgggghhh">
       <option name="closed" value="true" />
@@ -922,7 +869,55 @@
       <option name="project" value="LOCAL" />
       <updated>1755260688615</updated>
     </task>
-    <option name="localTasksCounter" value="544" />
+    <task id="LOCAL-00544" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1755343022969</created>
+      <option name="number" value="00544" />
+      <option name="presentableId" value="LOCAL-00544" />
+      <option name="project" value="LOCAL" />
+      <updated>1755343022970</updated>
+    </task>
+    <task id="LOCAL-00545" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1755343296728</created>
+      <option name="number" value="00545" />
+      <option name="presentableId" value="LOCAL-00545" />
+      <option name="project" value="LOCAL" />
+      <updated>1755343296728</updated>
+    </task>
+    <task id="LOCAL-00546" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1755530337170</created>
+      <option name="number" value="00546" />
+      <option name="presentableId" value="LOCAL-00546" />
+      <option name="project" value="LOCAL" />
+      <updated>1755530337171</updated>
+    </task>
+    <task id="LOCAL-00547" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1755532373990</created>
+      <option name="number" value="00547" />
+      <option name="presentableId" value="LOCAL-00547" />
+      <option name="project" value="LOCAL" />
+      <updated>1755532373990</updated>
+    </task>
+    <task id="LOCAL-00548" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1755679447922</created>
+      <option name="number" value="00548" />
+      <option name="presentableId" value="LOCAL-00548" />
+      <option name="project" value="LOCAL" />
+      <updated>1755679447922</updated>
+    </task>
+    <task id="LOCAL-00549" summary="pusgggghhh">
+      <option name="closed" value="true" />
+      <created>1755699898318</created>
+      <option name="number" value="00549" />
+      <option name="presentableId" value="LOCAL-00549" />
+      <option name="project" value="LOCAL" />
+      <updated>1755699898318</updated>
+    </task>
+    <option name="localTasksCounter" value="550" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1033,7 +1028,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
-          <line>3751</line>
+          <line>3763</line>
           <properties>
             <option name="className" value="\App\Http\Controllers\Admin\TokenController" />
             <option name="methodName" value="recepit" />
@@ -1051,7 +1046,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
-          <line>1027</line>
+          <line>1028</line>
           <properties>
             <option name="className" value="\App\Http\Controllers\Admin\TokenController" />
             <option name="methodName" value="generate_credit_meter_token" />
@@ -1060,7 +1055,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
-          <line>1848</line>
+          <line>1855</line>
           <properties>
             <option name="className" value="\App\Http\Controllers\Admin\TokenController" />
             <option name="methodName" value="generate_clear_credit_meter_token" />
@@ -1069,7 +1064,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/layouts/main.blade.php</url>
-          <line>51</line>
+          <line>53</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -1094,7 +1089,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/layouts/main.blade.php</url>
-          <line>540</line>
+          <line>542</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -1134,12 +1129,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Estate/EstateServiceController.php</url>
-          <line>237</line>
+          <line>240</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/admin/report/transactionreport.blade.php</url>
-          <line>8</line>
+          <line>9</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -1159,17 +1154,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
-          <line>3637</line>
+          <line>3649</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
-          <line>1317</line>
+          <line>1318</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/TokenController.php</url>
-          <line>952</line>
+          <line>953</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">

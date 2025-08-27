@@ -1,5 +1,5 @@
 {
-    "name": "laravel/laravel",
+    "name": "jimmy/momas-project",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
     "keywords": [
@@ -29,6 +29,7 @@
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
+        "phpdocumentor/reflection-docblock": "^5.6",
         "phpunit/phpunit": "^10.1",
         "spatie/laravel-ignition": "^2.0"
     },
